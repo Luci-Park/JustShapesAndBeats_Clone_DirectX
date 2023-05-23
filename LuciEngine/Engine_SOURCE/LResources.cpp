@@ -1,7 +1,7 @@
-#include "yaResources.h"
+#include "LResources.h"
 
 
-namespace ya
+namespace lu
 {
 	std::map<std::wstring, Resource*> Resources::mResources;
 

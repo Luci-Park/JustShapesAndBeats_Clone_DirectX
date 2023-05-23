@@ -57,7 +57,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LResource.h">
       <Filter>Resource</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)yaResources.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)LResources.h">
       <Filter>Resource\Resources</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)LGraphics.h">
@@ -86,7 +86,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LResource.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)yaResources.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)LResources.cpp">
       <Filter>Resource\Resources</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LGraphicDevice_Dx11.cpp">

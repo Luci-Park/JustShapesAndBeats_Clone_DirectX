@@ -1,7 +1,7 @@
 #pragma once
-#include "yaResource.h"
+#include "LResource.h"
 
-namespace ya
+namespace lu
 {
 	class Resources
 	{
