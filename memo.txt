@@ -241,4 +241,27 @@ Swap Chain
 - 다키스트 던전 괜춘
 - brain melt down - 3D
 - cat quest - 3D
-- 
+
+5/24
+Nivida PhysX
+ -> cmake 통해서
+이걸 써서 만들면 퀄리티는 좋을 텐데. 
+쓸까 했는데 공부할 것이 없다. wrapping이 너무 잘 되어 있다.
+
+지금까진 RAM에만 그렸다.
+CPU와 RAM GPU
+
+rendering target = gpu에서 만들어짐
+view = context처럼 간접적으로 접근할 수 있게 하는것.
+rendering target은 실행할 수 있는 것이 없다. 
+
+삼각형 그리기
+
+정규화 되어 있는 것 => 중앙이 
+(-1, 1)				(1, 1)
+
+
+		(0, 0)
+
+
+(-1, -1)				(-1, 1)
