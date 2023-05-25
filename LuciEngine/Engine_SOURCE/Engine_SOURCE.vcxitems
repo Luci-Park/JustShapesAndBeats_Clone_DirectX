@@ -22,6 +22,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LGraphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LMath.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LuciEngine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LResources.h" />
@@ -33,6 +34,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LGraphicDevice_Dx11.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LResources.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LTime.cpp" />

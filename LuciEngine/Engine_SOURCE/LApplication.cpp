@@ -1,5 +1,7 @@
 #include "LApplication.h"
-
+#include "LInput.h"
+#include "LTime.h"
+#include "LRenderer.h"
 
 namespace lu
 {
@@ -25,10 +27,15 @@ namespace lu
 
 	void Application::Initialize()
 	{
+		Time::Initiailize();
+		Input::Initialize();
+		renderer::Initialize();
 	}
 
 	void Application::Update()
 	{
+		Time::Update();
+		Input::Update();
 	}
 
 	void Application::LateUpdate()
@@ -37,6 +44,7 @@ namespace lu
 
 	void Application::Render()
 	{
+		Time::Render();
 		graphicDevice->Draw();
 	}
 
@@ -49,6 +57,7 @@ namespace lu
 			mHeight = height;
 
 			graphicDevice = std::make_unique<lu::graphics::GraphicDevice_Dx11>();
+			lu::graphics::GetDevice() = graphicDevice.get();
 		}
 
 		RECT rt = { 0, 0, (LONG)width , (LONG)height };

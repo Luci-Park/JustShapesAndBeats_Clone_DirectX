@@ -66,6 +66,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LGraphicDevice_Dx11.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LRenderer.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp">
@@ -90,6 +93,9 @@
       <Filter>Resource\Resources</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LGraphicDevice_Dx11.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LRenderer.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
   </ItemGroup>

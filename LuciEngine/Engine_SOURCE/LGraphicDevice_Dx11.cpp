@@ -1,5 +1,6 @@
 #include "LGraphicDevice_Dx11.h"
 #include "LApplication.h"
+#include "LRenderer.h"
 
 extern lu::Application application;
 namespace lu::graphics
@@ -7,6 +8,16 @@ namespace lu::graphics
 
 	GraphicDevice_Dx11::GraphicDevice_Dx11()
 	{
+		/*
+		* 순서
+		* 1. graphic device, context 생성
+		* 2. 화면 렌더링 도와주는 swapchain 생성
+		* 3. rendertarget, view 생성
+		* 4. 깊이 버퍼, 깊이 버퍼 뷰 생성
+		* 5. 렌더 타겟 초기화(화면 지우기)
+		* 6. present 함수로 렌더 타겟에 있는 텍스쳐를 모니터에 그려준다.
+		*/
+
 		//Device, Context 생성
 		HWND hWnd = application.GetHwnd();
 		UINT deviceFlag = D3D11_CREATE_DEVICE_DEBUG;//이게 있어야 디버깅 가능.
@@ -96,6 +107,38 @@ namespace lu::graphics
 
 		if (FAILED(pFactory->CreateSwapChain(mDevice.Get(), &dxgiDesc, mSwapChain.GetAddressOf())))
 			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateBuffer(ID3D11Buffer** buffer, D3D11_BUFFER_DESC* desc, D3D11_SUBRESOURCE_DATA* data)
+	{
+		if (FAILED(mDevice->CreateBuffer(desc, data, buffer)))
+			return false;
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateShader()
+	{
+		ID3DBlob* vsBlob = nullptr; // vs = vertex
+		std::filesystem::path shaderPath = std::filesystem::current_path().parent_path();
+		shaderPath += L"\\Shader_SOURCE\\";
+
+		std::filesystem::path vsPath(shaderPath.c_str());
+		vsPath += L"TriangleVS.hlsl";
+
+		D3DCompileFromFile(vsPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
+			, "main", "vs_5_0", 0, 0, &lu::renderer::triangleVSBlob, &lu::renderer::errorBlob);
+
+		if (lu::renderer::errorBlob)
+		{
+			OutputDebugStringA((char*)lu::renderer::errorBlob->GetBufferPointer());
+			lu::renderer::errorBlob->Release();
+		}
+
+		mDevice->CreateVertexShader(lu::renderer::triangleVSBlob->GetBufferPointer()
+			, lu::renderer::triangleVSBlob->GetBufferSize()
+			, nullptr, &lu::renderer::triangleVSShader);
 
 		return true;
 	}
