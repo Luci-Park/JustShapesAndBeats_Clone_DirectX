@@ -1,7 +1,7 @@
 #pragma once
 #include "LuciEngine.h"
 
-namespace ya
+namespace lu
 {
 	class Entity
 	{

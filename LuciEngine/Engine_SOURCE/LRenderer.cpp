@@ -3,17 +3,23 @@ namespace lu::renderer
 {
 	Vertex vertexes[3] = {};
 
+	//Input Layout = vertex info
+	ID3D11InputLayout* triangleLayout = nullptr;
+
 	//Vertex Buffer
 	ID3D11Buffer* triangleBuffer = nullptr;
 
 	//error blob => returns error from shader, because the compiler doesn't
 	ID3DBlob* errorBlob = nullptr;
 
-	//VertexShader Code -> Binary Code
+	//VertexShader Code -> Binary Code, hold in blob
 	ID3DBlob* triangleVSBlob = nullptr;
 
 	//vertex shader
 	ID3D11VertexShader* triangleVSShader = nullptr;
+
+	//pixel shader code -> binary code
+	ID3DBlob* trianglePSBlob = nullptr;
 
 	//Pixel shader code ->Binary code
 	ID3D11PixelShader* trianglePSShader = nullptr;
@@ -43,13 +49,13 @@ namespace lu::renderer
 
 	void Initialize()
 	{
-		vertexes[0].pos = Vector3(0.0f, 0.5f, 1.0f);
+		vertexes[0].pos = Vector3(0.0f, 0.5f, 0.0f);
 		vertexes[0].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
 
-		vertexes[1].pos = Vector3(0.5f, -0.5f, 1.0f);
+		vertexes[1].pos = Vector3(0.5f, -0.5f, 0.0f);
 		vertexes[1].color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
 
-		vertexes[2].pos = Vector3(-0.5f, -0.5f, 1.0f);
+		vertexes[2].pos = Vector3(-0.5f, -0.5f, 0.0f);
 		vertexes[2].color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
 
 		SetupState();

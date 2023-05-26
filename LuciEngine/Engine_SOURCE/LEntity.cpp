@@ -1,7 +1,7 @@
 #include "LEntity.h"
 
 
-namespace ya
+namespace lu
 {
 	Entity::Entity()
 		: mName(L"")

@@ -1,4 +1,4 @@
-
+//VS = vertexshader
 struct VSIn
 {
     float3 Pos : POSITION;

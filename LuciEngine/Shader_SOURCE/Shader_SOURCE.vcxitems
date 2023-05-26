@@ -14,6 +14,7 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="$(MSBuildThisFileDirectory)TrianglePS.hlsl" />
     <FxCompile Include="$(MSBuildThisFileDirectory)TriangleVS.hlsl" />
   </ItemGroup>
 </Project>
