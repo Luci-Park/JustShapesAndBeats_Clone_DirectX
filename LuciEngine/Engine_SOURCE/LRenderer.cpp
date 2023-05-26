@@ -33,7 +33,7 @@ namespace lu::renderer
 	{
 		D3D11_BUFFER_DESC triangleDesc = {};
 		triangleDesc.Usage = D3D11_USAGE_DYNAMIC;
-		triangleDesc.ByteWidth = sizeof(Vertex) * 3;
+		triangleDesc.ByteWidth = sizeof(Vertex) * 3; // 점 3개
 		triangleDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER;
 		triangleDesc.CPUAccessFlags = D3D11_CPU_ACCESS_FLAG::D3D11_CPU_ACCESS_WRITE;
 
@@ -49,6 +49,7 @@ namespace lu::renderer
 
 	void Initialize()
 	{
+		//vertex정보 생성
 		vertexes[0].pos = Vector3(0.0f, 0.5f, 0.0f);
 		vertexes[0].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
 

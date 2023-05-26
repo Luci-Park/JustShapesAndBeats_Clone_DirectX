@@ -147,6 +147,7 @@ namespace lu::graphics
 
 	bool GraphicDevice_Dx11::CreateShader()
 	{
+		//GetShaderPath
 		std::filesystem::path shaderPath
 			= std::filesystem::current_path().parent_path();
 		shaderPath += L"\\Shader_SOURCE\\";
@@ -154,6 +155,7 @@ namespace lu::graphics
 		std::filesystem::path vsPath(shaderPath.c_str());
 		vsPath += L"TriangleVS.hlsl";
 
+		//compile vertex shader
 		D3DCompileFromFile(vsPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
 			, "main", "vs_5_0", 0, 0, &lu::renderer::triangleVSBlob, &lu::renderer::errorBlob);
 
@@ -162,11 +164,12 @@ namespace lu::graphics
 			OutputDebugStringA((char*)lu::renderer::errorBlob->GetBufferPointer());
 			lu::renderer::errorBlob->Release();
 		}
-
+		// create shader from code
 		mDevice->CreateVertexShader(lu::renderer::triangleVSBlob->GetBufferPointer()
 			, lu::renderer::triangleVSBlob->GetBufferSize()
 			, nullptr, &lu::renderer::triangleVSShader);
 
+		//Get pixel shader
 		std::filesystem::path psPath(shaderPath.c_str());
 		psPath += L"TrianglePS.hlsl";
 
@@ -185,16 +188,19 @@ namespace lu::graphics
 
 
 		// Input layout 정점 구조 정보를 넘겨줘야한다.
+		// element의 설명 => 구조당
 		D3D11_INPUT_ELEMENT_DESC arrLayout[2] = {};
 
 		arrLayout[0].AlignedByteOffset = 0;
-		arrLayout[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;
+		// data type of the element data
+		// DXGI_FORMAT_R32G32B32_FLOAT: A four-component, 128-bit floating-point format that supports 32 bits per channel including alpha
+		arrLayout[0].Format = DXGI_FORMAT_R32G32B32_FLOAT; 
 		arrLayout[0].InputSlot = 0;
 		arrLayout[0].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 		arrLayout[0].SemanticName = "POSITION";
 		arrLayout[0].SemanticIndex = 0;
 
-		arrLayout[1].AlignedByteOffset = 12;
+		arrLayout[1].AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
 		arrLayout[1].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
 		arrLayout[1].InputSlot = 0;
 		arrLayout[1].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
