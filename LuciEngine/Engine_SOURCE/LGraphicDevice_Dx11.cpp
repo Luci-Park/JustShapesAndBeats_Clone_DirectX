@@ -154,8 +154,9 @@ namespace lu::graphics
 
 		std::filesystem::path vsPath(shaderPath.c_str());
 		vsPath += L"TriangleVS.hlsl";
-
-		//compile vertex shader
+		
+		// compile vertex shader
+		// try compile, if ok create shader from code
 		D3DCompileFromFile(vsPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
 			, "main", "vs_5_0", 0, 0, &lu::renderer::triangleVSBlob, &lu::renderer::errorBlob);
 

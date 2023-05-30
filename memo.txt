@@ -283,3 +283,49 @@ vertex buffer -> vertex shader
 interpolation~
 반시계방향으로 그릴 시 뒤집혔다 판단, rasterizing하여 뒷면은 제거된다.
 숙제: 네모 그려오기
+
+5/30
+for generalization
+GraphicDevice_Dx11
+	1) CreateShader
+		- Create Vertex Shader
+			=> Compile part -> 따로 떼어내도 되지 않나.
+			=> mDevice-> CreateVertexShader
+				필요 parameter)
+					- vsblob
+					- vsshader => 저장 위치
+		- Create Pixel Shader
+			=> compile part도 따로 떼어내어도
+			=> mDevice -> CreatePixelShader
+				필요 parameter)
+					- PSBlob
+					- psshader => 저장 위치
+		- input layout 생성
+			- mDevice -> CreateInputLayout
+				필요 parameter
+					- D3D11_INPUT_ELEMENT_DESC arrLayout
+					- ID3D11InputLayout inputLayout = 저장 위치
+
+	2) Draw
+		필요 외부 parameter)
+			- UINT vertexSize
+
+			- void IASetVertexBuffers(
+ 				[in]           UINT         StartSlot, // the starting input slot for binding the vertex buffers.
+				[in]           UINT         NumBuffers, / numberofvertexes
+				[in, optional] ID3D11Buffer * const *ppVertexBuffers, // vertexbuffer
+				[in, optional] const UINT   *pStrides, // strides between each element in the vertex buffer -> attribute skip 같은 거 할 때 사용.
+				[in, optional] const UINT   *pOffsets // offset만큼 skip하고 그 이후 부터 읽기 시작함. 
+			);
+
+			- void IASetInputLayout(
+  				[in, optional] ID3D11InputLayout *pInputLayout
+			);
+		
+			- void IASetPrimitiveTopology(
+  				[in] D3D11_PRIMITIVE_TOPOLOGY Topology
+			);
+
+			- mContext->VSSetShader(renderer::triangleVSShader, 0, 0);
+			- mContext->PSSetShader(renderer::trianglePSShader, 0, 0);
+			- mContext->Draw(3, 0);
