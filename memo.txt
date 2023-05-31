@@ -357,5 +357,7 @@ packing rules for constant variables
 shader stage?
 ConstantBuffer -> need mapping.
 => buffer에서 정보를 mapping하고 memcpy하여 GPU로 전달.
-
+DrawIndexed = 인덱스 버퍼.
 숙제 ) input class로 삼각형 움직이게 하기.
+todo) calculation, pipeline review, what do I do, check it out.
+
