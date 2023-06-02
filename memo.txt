@@ -431,10 +431,68 @@ std::weak_ptr<>
 	3D Model -> Vertex Shader -> Rasterizer -> Pixel Shader -> Output
   also
 	Input Assembler -> Vertex Shader -> Hull Shader -> Tessellator -> Domain Shader -> Geometry Shader -> Rasterizer -> Pixel Shader -> Output Merger
-
+	[Input Assembler]
+		- 정점 데이터 처리 단계. Vertex Buffer와 Index Buffer를 넘기는 단계이다.
+		- Input Assembler에서 정점들을 읽어서 삼각형과 같은 도형으로 조립함.
+	[Vertex Shader]
+		- IASetxxxBuffer를 통해 데이터를 받아오고 이로 도형 생성.
+		- 이때 도형은 Local Space에서 Clip Space까지 이동한다.
+	[Hull Shader]
+		- 폴리곤을 어떤 방식으로 분할할지 결정하는 단계.
+		- Control Points, Constant Data를 병렬로 처리함.
+	[Tessellator]
+		- Hull Shader에 따라 폴리곤 분할
+	[Domain Shader]
+		- Tessellator에서 나뉘어진 폴리곤을 받아 구성 정점들의 공간 정보를 조정
+	[Geometric Shader]
+		- Mesh 다루기
+	[Rasterizer]
+		- 정점 정보를 화면에 송출하기 위해 변형시키는 단계.
+	[Pixel Shader]
+		- 렌더링 대상 픽셀들의 색 계산
+	[Output Merge]
+		- 화면에 렌더링.
 - HLSL : high-level shader language from also Microsoft
 	used for Vertex/Pixel Shaders.
 
 - Buffer
 	- for the GPU to access vertex information, we need buffers = ID3D11Buffer
-	- Indices and Index Buffers
+	- Index Buffers
+		: store index numbers for each triangle.
+	- Buffer Creation Process
+		1) Create Buffer Description 
+			= D3D11_BUFFER_DESC
+			- .BindFlags에서 Buffer종류를 지칭.
+		2) specify the data to initialize the buffer 
+			= D3D11_SUBRESOURCE_DATA
+			- .pSysMem = array
+		3) Create Buffer
+			= CreateBuffer(Description, Data, Buffer)
+		4) Bind it to pipeline 
+			= IASetIndexBuffer//다른 종류도 IASetxxxBuffer로 되어 있음.
+
+- Transformation
+	- World Transform (translations, rotations, scaling done here)
+	- View Transform = Camera Space
+	- Projection Transform = geometry perspective to clip space. 
+
+	계산은 homogenous space에서 하나 결과적으론 non-homogenous좌표계인 screen에서  정의된다.
+	Direct3D 행렬은 4x4 homogenous matrix = D3DMATRIX
+	
+	- Transform Pipeline
+		Model Space -(* Mworld)-> World Space -(* Mview)-> Camera Space 
+		-(* Mproj)-> Projection Space -(* Mclip)-> Clipping Space 
+		-(*Mvs)-> Homogeneous Screen Space -(/ W)> Screen Space
+		=> SetTransform(D3DTRANSFORMSTATE_XXX, matrix) 로 계산
+
+- Drawing
+	- define vertex and pixel shaders and submit geometry to the rendering pipeline for drawing.
+	1) #include <d3d9.h>
+	2) screen prepare, swap chain 등등
+	3) CreateVertexBuffer
+
+
+
+6/2 [수업]
+- 게임프로그래밍 전문가..?
+- Mesh, Shader => 드디어 분리하기 시작. 내가 그래서 미리 안했지 ㄹㅇㅋㅋ
