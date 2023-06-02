@@ -422,3 +422,13 @@ std::weak_ptr<>
 단점) 느리다. 여러 번 참조를 통해 움직이기 때문.
 
 12일에 쉼.
+
+6/2 [내꺼]
+- DirectX = set of APIs for graphic rendering. made by Microsoft
+	- 그 외에 input, sound, 영상 등에 대한 API도 포함되어 있다.
+- Initialization: graphic device를 통하는 ID3D11DeviceContext
+- Graphics Pipeline:
+	3D Model -> Vertex Shader -> Rasterizer -> Pixel Shader -> Output
+- HLSL : high-level shader language from also Microsoft
+	used for Vertex/Pixel Shaders.
+
