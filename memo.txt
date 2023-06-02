@@ -429,6 +429,12 @@ std::weak_ptr<>
 - Initialization: graphic device를 통하는 ID3D11DeviceContext
 - Graphics Pipeline:
 	3D Model -> Vertex Shader -> Rasterizer -> Pixel Shader -> Output
+  also
+	Input Assembler -> Vertex Shader -> Hull Shader -> Tessellator -> Domain Shader -> Geometry Shader -> Rasterizer -> Pixel Shader -> Output Merger
+
 - HLSL : high-level shader language from also Microsoft
 	used for Vertex/Pixel Shaders.
 
+- Buffer
+	- for the GPU to access vertex information, we need buffers = ID3D11Buffer
+	- Indices and Index Buffers
