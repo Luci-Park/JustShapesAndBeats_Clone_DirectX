@@ -14,6 +14,8 @@ namespace lu::renderer
 	extern Vertex vertexes[];
 	extern ID3D11InputLayout* triangleLayout;
 	extern ID3D11Buffer* triangleBuffer; //vertex buffer
+	extern ID3D11Buffer* triangleIdxBuffer;
+	extern ID3D11Buffer* triangleConstantBuffer;
 	extern ID3DBlob* errorBlob;
 	//vertex shader
 	//shader코드가 blob에저장되어서 옮긴다.
@@ -23,5 +25,6 @@ namespace lu::renderer
 	extern ID3D11PixelShader* trianglePSShader;
 
 	void Initialize();
+	void Release();
 }
 

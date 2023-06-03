@@ -361,3 +361,138 @@ DrawIndexed = 인덱스 버퍼.
 숙제 ) input class로 삼각형 움직이게 하기.
 todo) calculation, pipeline review, what do I do, check it out.
 
+6/1
+법적 유급휴가
+
+공휴일(빨간날)
+
+연차(유급휴가)
+5일 연속으로 근무하면 하루치 임금(주휴수당)
+근로자의날 근무를 할 수 있으나 1.5배 + 하루치 임금 = 2.5배를 받아야 한다. 퇴사 할 때 노동청 가라.
+
+추석, 설날, 공휴일 등등 무급 휴가
+
+포괄 임금제 = 내가 받을 야근수당을 연봉에 + 시키는 것.
+게임 업계특성상 야근을 할수 밖에 없으니 기본급이 높은 곳으로 가야 한다.
+
+[직장인 초년차의 실수]
+- 계약서 잘 안 읽음.
+- 가져가도 되냐 물어봄
+	- 대기업은 협상안됨. 테이블 있으니까
+- 노무사 사무실에 가서 물어보자.
+- 성과금 정기적으로 나오는 가.
+
+퇴직금 - DB형, DC형
+- DC - 떼먹는거 방지용.
+- 연봉상승포이 빠르면 DB가 좋고
+- 연봉상승률이 느리지만 오래 다닐거면 DB -> 국외 주식으로. 미국으로.
+
+나스닥 100 snp 500 꾸준히 사모으세요. 퇴직할 때 꺼내세요.
+
+--
+Release
+
+포인터의 단점
+1. 가독성이 떨어지고 사용하기가 번거롭다.
+2. 중간에 포인터 값을 바꾸거나 하면 프로그램이 오류가 생길 수 있다 = 조심해서 사용해야 한다.
+3. 메모리 해제를 프로그래머가 직접 해줘야 한다.(C#은 알아서 함)
+
+스마트 포인터)
+동작하는 템플릿 클래스 객체. 사용하지 않는 메모리를 자동으로 해제해준다.
+#include <memory>
+종류:
+std::unique_ptr<>
+//오직 하나의 객체만 소유할 수 있도록 만든 스마트 포인터.
+
+std::shared_ptr<> -> 제일 많이 씀.
+: 하나의 특정 객체를 참조하는 스마트 포인터가 총 몇 개인지를 체크하는 스마트 포인터.
+여러 포인터가 하나의 객체를 참조할 때, 하나의 포인터에서 delete하면 다른 포인터는 dangling이 되어 버린다.
+해제는 맨 마지막 포인터가 해제 될 때만 해제 되게 하는 것.
+Control Block을 하나 만들어서 이를 공유하는 방식으로 shared 개수를 파악한다.
+주의점)
+make_shared를 통해 만드는 것이 좋다. 주소값을 통해 전달된다면 자기가 객체를 첫번째로 소유하는 것처럼 행동하며 
+이를 여러번 반복하면 control block이 여러가지가 생겨 sharedPointer를 쓰는 의미가 없어진다.
+
+문제) 서로가 서로를 가리키고 있을 때(순환 참조) = shared_ptr를 멤버변수로 지닌 객체들이 서로를 가리킬 때
+=>서로 파괴 안됨. -> 참조횟수가 줄어들지 않아서.
+리소스는 shared_ptr로 하면 좋지 않을까 하는 느낌적 느낌. 나중에 바꿀 거임.
+
+std::weak_ptr<>
+위 문제를 해결하기 위해 나타난 해결책. 트리 구조로 되어 있다.
+단점) 느리다. 여러 번 참조를 통해 움직이기 때문.
+
+12일에 쉼.
+
+6/2 [내꺼]
+- DirectX = set of APIs for graphic rendering. made by Microsoft
+	- 그 외에 input, sound, 영상 등에 대한 API도 포함되어 있다.
+- Initialization: graphic device를 통하는 ID3D11DeviceContext
+- Graphics Pipeline:
+	3D Model -> Vertex Shader -> Rasterizer -> Pixel Shader -> Output
+  also
+	Input Assembler -> Vertex Shader -> Hull Shader -> Tessellator -> Domain Shader -> Geometry Shader -> Rasterizer -> Pixel Shader -> Output Merger
+	[Input Assembler]
+		- 정점 데이터 처리 단계. Vertex Buffer와 Index Buffer를 넘기는 단계이다.
+		- Input Assembler에서 정점들을 읽어서 삼각형과 같은 도형으로 조립함.
+	[Vertex Shader]
+		- IASetxxxBuffer를 통해 데이터를 받아오고 이로 도형 생성.
+		- 이때 도형은 Local Space에서 Clip Space까지 이동한다.
+	[Hull Shader]
+		- 폴리곤을 어떤 방식으로 분할할지 결정하는 단계.
+		- Control Points, Constant Data를 병렬로 처리함.
+	[Tessellator]
+		- Hull Shader에 따라 폴리곤 분할
+	[Domain Shader]
+		- Tessellator에서 나뉘어진 폴리곤을 받아 구성 정점들의 공간 정보를 조정
+	[Geometric Shader]
+		- Mesh 다루기
+	[Rasterizer]
+		- 정점 정보를 화면에 송출하기 위해 변형시키는 단계.
+	[Pixel Shader]
+		- 렌더링 대상 픽셀들의 색 계산
+	[Output Merge]
+		- 화면에 렌더링.
+- HLSL : high-level shader language from also Microsoft
+	used for Vertex/Pixel Shaders.
+
+- Buffer
+	- for the GPU to access vertex information, we need buffers = ID3D11Buffer
+	- Index Buffers
+		: store index numbers for each triangle.
+	- Buffer Creation Process
+		1) Create Buffer Description 
+			= D3D11_BUFFER_DESC
+			- .BindFlags에서 Buffer종류를 지칭.
+		2) specify the data to initialize the buffer 
+			= D3D11_SUBRESOURCE_DATA
+			- .pSysMem = array
+		3) Create Buffer
+			= CreateBuffer(Description, Data, Buffer)
+		4) Bind it to pipeline 
+			= IASetIndexBuffer//다른 종류도 IASetxxxBuffer로 되어 있음.
+
+- Transformation
+	- World Transform (translations, rotations, scaling done here)
+	- View Transform = Camera Space
+	- Projection Transform = geometry perspective to clip space. 
+
+	계산은 homogenous space에서 하나 결과적으론 non-homogenous좌표계인 screen에서  정의된다.
+	Direct3D 행렬은 4x4 homogenous matrix = D3DMATRIX
+	
+	- Transform Pipeline
+		Model Space -(* Mworld)-> World Space -(* Mview)-> Camera Space 
+		-(* Mproj)-> Projection Space -(* Mclip)-> Clipping Space 
+		-(*Mvs)-> Homogeneous Screen Space -(/ W)> Screen Space
+		=> SetTransform(D3DTRANSFORMSTATE_XXX, matrix) 로 계산
+
+- Drawing
+	- define vertex and pixel shaders and submit geometry to the rendering pipeline for drawing.
+	1) #include <d3d9.h>
+	2) screen prepare, swap chain 등등
+	3) CreateVertexBuffer
+
+
+
+6/2 [수업]
+- 게임프로그래밍 전문가..?
+- Mesh, Shader => 드디어 분리하기 시작. 내가 그래서 미리 안했지 ㄹㅇㅋㅋ
