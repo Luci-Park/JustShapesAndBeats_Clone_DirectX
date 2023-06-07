@@ -2,67 +2,20 @@
 Since 5/15 ~
 
 ## Week 1(5/15 ~ 5/20)
-
-### 라이브러리
-다른 프로그램에서 사용할 수 있게 만들어지는 서브루틴 혹은 함수들의 집합 파일.
-재사용이 필요한 기능이 반복적인 코드 작성을 하지 않고 언제든지 필요한 곳에서 호출하여 사용한다는 목적을 가지고 만들어진다.
-보통 컴파일 된 형태인 `object code` 형태로 존재하며 미리 컴파일 되어 있기 때문에 컴파일 시간도 줄어든다.
-#### 동적 라이브러리(xxx.dll)
-런타임에 연결되는 라이브러리. 런타임에 실행 파일과 라이브러리가 메모리에 위치 될 때 모듈의 주소로 가서 필요한 것만 들고 오는 방식. 즉 하나의 메모리 영역에 올려두고 여러 프로그램이 나누어 사용하는 라이브러리.
-##### 장점
-- 메모리 절약
-- 프로그램에 한 번 올려진 메모리를 공유하므로 사용 공간 자체가 적다.
-- 프로그램 실행 중간에 패치가 가능하다.
-##### 단점
-- 프로그램의 외부의존도가 높아진다.
-- 공유 라이브러리를 메모리에 올리려면 찾고 검색하는데 시간이 걸리므로 성능 저하가 생긴다.
-- 안정성이 떨어지는 경우가 있다(dll hell)
-
-#### 정적 라이브러리(xxx.lib)
-- 컴파일 때 연결하는 라이브러리. 컴파일하는 과정에서 내가 작성한 라이브러리 코드들이 포함이되며 라이브러리 코드가 바뀌면 별도의 패치가 다시 필요해진다.
-##### 장점
-- 한번 완성되면 안정적으로 프로그램 사용이 가능하다.
-- 컴파일시 필요한 라이브러리를 프로그램 내에 적재하기 때문에 앱을 안정적으로 활용할 수 있게 된다.
-- 런타임시 외부를 참조할 필요가 없기 때문에 속도에서 장점이 있다.
-##### 단점
-- 라이브러리 변경 시 모든 프로그램을 처음부터 다시 빌드하여 새로운 버전으로 배포를 진행해줘야 한다.
-#### C++ 라이브러리 연결하는 법
-#### Header(.h)
-속성 -> C++ -> 일반 -> 추가포함 디렉토리에 폴더 경로 추가
-#### 동적 라이브러리(.dll)
-1. 프로젝트 폴더와 같은 경로에 둔다.
-2. 디버깅 -> 환경에 dll 폴더 위치를 적용한다.
-#### 정적 라이브러리(.lib)
-1. 링커 -> 일반 -> 추가 라이브러리 에 파일 경로 추가
-2. 링커 -> 입력 -> 추가 종속성 에 사용하는 lib 파일명 추가
-#### vcpkg
-라이브러리 관리 프로그램
-`vcpkg integreate install` 하고 후에 #include로 사용.
-
-### Shader
-GPU에 데이터를 그리는 방법을 알려줌. 셰이더는 두 가지 유형이 있으며 화면에 무언가를 그릴 때 두 가지 모두 정의해야 함.
-- Vertex Shader
-
-    모든 Vertex 위치를 Model Matrix에서 View Matrix -> Projection Matrix로 변환하는 작업을 함. Matrix 변환 과정에서 임의로 변형이 가능함.
-
-- Fragment Shader(Pixel Shader)
-
-    Vertex로 이루어진 도형의 각 조각(픽셀)이 어떤 색상으로 그려질지를 정의. 정의되지 않는 오브젝트는 검정색으로 정의됨.
-    색은 interpolation 데이터, UV 좌표(텍스쳐), Normal Mapping 등을 통해서 결정된다.
-
-### 렌더링 파이프라인
-3D 모델 데이터를 2차원 모니터에 투영하는 프로세스.
-directX 11 기준으로 아래와 같다.
-#### Input Assembler
-
-#### Vertex Shader
-#### Hull Shader
-#### Tessellator
-#### Domain Shader
-#### Geometry Shader
-#### Rasterizer Stage
-#### Pixel Shader
-#### Output Merge
+- 라이브러리 이론
+- Directx 11 import
+- Shader 이론 
+- Rendering Pipeline 이론
 ## Week 2(5/21 ~ 5/27)
-
+- `GraphicDevice_Dx11` class
+- Rendering target
+- Swap Chain
+- Coding Shaders
+- Creating and Binding Buffers
+- Drawing a triangle
 ## Week 3(5/28 ~ 6/3)
+- Smart Pointers
+
+## Week 4(6/4 ~ 6/10)
+- 6/3 ~ 6/6 : rest(Happy Independence Day)
+- Code Generalization

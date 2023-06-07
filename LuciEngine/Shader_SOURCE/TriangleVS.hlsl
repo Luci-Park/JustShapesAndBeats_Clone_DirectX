@@ -11,6 +11,9 @@ struct VSOut
     float4 Color : COLOR;
 };
 
+//cbuffer = constant buffer
+//buffer slot 0에 있는 놈을 transform이라 이름 짓겠다.
+//해당 buffer에는 float4짜리가 하나 있을 예정이다
 cbuffer Transform : register(b0)
 {
     float4 Pos;
