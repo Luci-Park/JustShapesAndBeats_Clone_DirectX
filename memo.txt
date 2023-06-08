@@ -569,3 +569,17 @@ GPU에 데이터를 그리는 방법을 알려줌. 셰이더는 두 가지 유�
 
 ### 렌더링 파이프라인
 3D 모델 데이터를 2차원 모니터에 투영하는 프로세스.
+
+directX 11 기준으로 아래와 같다.
+Input Assembler -> Vertex Shader -> Hull Shader -> Tessellator -> Domain Shader -> Geometry Shader -> Rasterizer Stage -> Pixel Shader -> Output Merge
+
+[수업]
+generalization 계에속~
+클래스에 묶기~
+WinAPI 컴뷁
+
+ECS = Entity Component System
+	- 기존 컴포넌트 - 조각조각(new라서 연속적이지 못한 메모리 방식)
+	- 청크로 분리, 필요한 것만 돌리는 방식. => 연속적으로 하여 더 빠르게 iterate가능하게. 
+	- 캐쉬 적중률 업
+	[NDC] 유나타 ECS & Job System 분석 및 적용 -> 유니티는 현재 고치는 중이올시다.
