@@ -1,4 +1,5 @@
 #include "LScene.h"
+#include "LGameObject.h"
 namespace lu
 {
 	Scene::Scene()
@@ -12,6 +13,7 @@ namespace lu
 	void Scene::Initialize()
 	{
 		// 여기서 초기 게임 맵데이터를 세팅해줘야 한다.
+		mGameObjects.push_back(new GameObject());
 	}
 
 	void Scene::Update()
