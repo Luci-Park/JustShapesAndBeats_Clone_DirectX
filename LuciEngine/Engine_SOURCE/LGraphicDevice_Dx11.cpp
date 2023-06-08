@@ -319,16 +319,6 @@ namespace lu::graphics
 
 		BindViewPort(&mViewPort);
 		mContext->OMSetRenderTargets(1, mRenderTargetView.GetAddressOf(), mDepthStencilView.Get());
-
-		renderer::mesh->BindBuffer();
-		mContext->IASetInputLayout(renderer::shader->GetInputLayout());
-
-		renderer::shader->Binds();
-
-		mContext->DrawIndexed(renderer::mesh->GetIndexCount(), 0, 0);
-
-		// 레더타겟에 있는 이미지를 화면에 그려준다
-		mSwapChain->Present(0, 0);
 	}
 
 	void GraphicDevice_Dx11::Present()
