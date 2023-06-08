@@ -293,6 +293,11 @@ namespace lu::graphics
 		mContext->CSSetConstantBuffers((UINT)type, 1, &buffer);
 	}
 
+	void GraphicDevice_Dx11::DrawIndexed(UINT IndexCount, UINT StartIndexLocation, INT BaseVertexLocation)
+	{
+		mContext->DrawIndexed(IndexCount, StartIndexLocation, BaseVertexLocation);
+	}
+
 	void GraphicDevice_Dx11::Draw()
 	{
 		//clear screen
@@ -323,6 +328,11 @@ namespace lu::graphics
 		mContext->DrawIndexed(renderer::mesh->GetIndexCount(), 0, 0);
 
 		// 레더타겟에 있는 이미지를 화면에 그려준다
+		mSwapChain->Present(0, 0);
+	}
+
+	void GraphicDevice_Dx11::Present()
+	{
 		mSwapChain->Present(0, 0);
 	}
 
