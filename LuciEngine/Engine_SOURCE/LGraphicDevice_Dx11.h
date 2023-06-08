@@ -2,11 +2,6 @@
 #include "LuciEngine.h"
 #include "LGraphics.h"
 
-#include <d3d11.h>
-#include <d3dcompiler.h>
-
-#pragma comment(lib, "d3d11.lib")
-#pragma comment(lib, "d3dcompiler.lib")
 
 namespace lu::graphics
 {
@@ -16,13 +11,24 @@ namespace lu::graphics
 		GraphicDevice_Dx11();
 		~GraphicDevice_Dx11();
 
+		//Ready Device
 		bool CreateSwapChain(const DXGI_SWAP_CHAIN_DESC* desc, HWND hWnd);
-		bool CreateBuffer(ID3D11Buffer** buffer, D3D11_BUFFER_DESC* desc, D3D11_SUBRESOURCE_DATA* data);
-
-		bool CreateShader();
+		void BindViewPort(D3D11_VIEWPORT* viewPort);
 
 		bool CreateTexture(const D3D11_TEXTURE2D_DESC* desc, void* data);
-		void BindViewPort(D3D11_VIEWPORT* viewPort);
+		bool CreateInputLayout(const D3D11_INPUT_ELEMENT_DESC* pInputElementDesc, UINT elementNum, ID3DBlob* byteCode, ID3D11InputLayout** ppInputLayout);
+		bool CreateBuffer(ID3D11Buffer** buffer, D3D11_BUFFER_DESC* desc, D3D11_SUBRESOURCE_DATA* data);
+		bool CompileFromFile(const std::wstring& fileName, const std::string& funcName, const std::string& version, ID3DBlob** ppCode);
+		bool CreateVertexShader(const void* pShaderByteCode, SIZE_T bytecodeLength, ID3D11VertexShader** ppVertexShader);
+		bool CreatePixelShader(const void* pShaderByteCode, SIZE_T bytecodeLength, ID3D11PixelShader** ppPixelShader);
+
+		// after creation, you need to bind it to the rendering pipeline
+		void BindInputLayout(ID3D11InputLayout* pInputLayout);
+		void BindPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY topology);
+		void BindVertexBuffer(ID3D11Buffer* const* ppVertexBuffers, UINT StartSlot, const UINT* pStrides, const UINT* pOffsets);
+		void BindIndexBuffer(ID3D11Buffer* pIndexBuffer, DXGI_FORMAT format, UINT offset);
+		void BindVertexShader(ID3D11VertexShader* pVertexShader);
+		void BindPixelShader(ID3D11PixelShader* pPixelShader);
 
 		void SetConstantBuffer(ID3D11Buffer* buffer, void* data, UINT size);
 		void BindConstantBuffer(eShaderStage stage, eCBType type, ID3D11Buffer* buffer);

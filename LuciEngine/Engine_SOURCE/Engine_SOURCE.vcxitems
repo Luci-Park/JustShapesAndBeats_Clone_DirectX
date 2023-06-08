@@ -16,13 +16,16 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LConstantBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LEnums.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LGraphicDevice_Dx11.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LGraphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LMath.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LuciEngine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LResources.h" />
@@ -30,13 +33,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LGraphicDevice_Dx11.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LResources.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LTime.cpp" />
   </ItemGroup>
   <ItemGroup>
