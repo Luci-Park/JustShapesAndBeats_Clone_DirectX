@@ -1,7 +1,7 @@
 #include "LRenderer.h"
 namespace lu::renderer
 {
-	Vertex vertexes[4] = {};
+	std::vector<Vertex> vertices = {};
 	Mesh* mesh = nullptr;
 	Shader* shader = nullptr;
 	ConstantBuffer* constantBuffer = nullptr;
@@ -33,7 +33,7 @@ namespace lu::renderer
 	{
 		// Vertex Buffer
 		mesh = new Mesh();
-		mesh->CreateVertexBuffer(vertexes, 4);
+		mesh->CreateVertexBuffer(vertices.data(), vertices.size());
 
 		std::vector<UINT> indexes = {};
 		indexes.push_back(0);
@@ -63,17 +63,17 @@ namespace lu::renderer
 
 	void Initialize()
 	{
-		vertexes[0].pos = Vector3(-0.5f, 0.5f, 0.0f);
-		vertexes[0].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+		vertices[0].pos = Vector3(-0.5f, 0.5f, 0.0f);
+		vertices[0].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
 
-		vertexes[1].pos = Vector3(0.5f, 0.5f, 0.0f);
-		vertexes[1].color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+		vertices[1].pos = Vector3(0.5f, 0.5f, 0.0f);
+		vertices[1].color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
 
-		vertexes[2].pos = Vector3(0.5f, -0.5f, 0.0f);
-		vertexes[2].color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+		vertices[2].pos = Vector3(0.5f, -0.5f, 0.0f);
+		vertices[2].color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
 
-		vertexes[3].pos = Vector3(-0.5f, -0.5f, 0.0f);
-		vertexes[3].color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+		vertices[3].pos = Vector3(-0.5f, -0.5f, 0.0f);
+		vertices[3].color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
 
 		LoadBuffer();
 		LoadShader();

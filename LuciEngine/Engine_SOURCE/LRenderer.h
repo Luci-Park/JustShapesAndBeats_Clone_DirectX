@@ -14,7 +14,7 @@ namespace lu::renderer
 		Vector4 color;
 	};
 
-	extern Vertex vertexes[];
+	extern std::vector<Vertex> vertices;
 	extern Mesh* mesh;
 	extern Shader* shader;
 	extern ConstantBuffer* constantBuffer;
