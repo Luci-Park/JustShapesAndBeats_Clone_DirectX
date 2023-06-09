@@ -35,15 +35,16 @@ namespace lu::renderer
 		mesh = new Mesh();
 		mesh->CreateVertexBuffer(vertices.data(), vertices.size());
 
-		std::vector<UINT> indexes = {};
-		indexes.push_back(0);
-		indexes.push_back(1);
-		indexes.push_back(2);
+		int segments = vertices.size() - 1;
+		std::vector<UINT> indices;
 
-		indexes.push_back(0);
-		indexes.push_back(2);
-		indexes.push_back(3);
-		mesh->CreateIndexBuffer(indexes.data(), indexes.size());
+		for (int i = 0; i < segments; ++i)
+		{
+			indices.push_back(segments);
+			indices.push_back((i + 1) % segments);
+			indices.push_back((i) % segments);
+		}
+		mesh->CreateIndexBuffer(indices.data(), indices.size());
 
 		// Constant Buffer
 		constantBuffer = new ConstantBuffer(eCBType::Transform);
@@ -63,17 +64,25 @@ namespace lu::renderer
 
 	void Initialize()
 	{
-		vertices[0].pos = Vector3(-0.5f, 0.5f, 0.0f);
-		vertices[0].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+		Vector4 color(GetRandomInt(0, 255) / 255.0f, GetRandomInt(0, 255) / 255.0f, GetRandomInt(0, 255) / 255.0f, 1.0f);
+		int segments = 30;
 
-		vertices[1].pos = Vector3(0.5f, 0.5f, 0.0f);
-		vertices[1].color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+		float angleIncrement = std::numbers::pi * 2 / segments;
+		float angle = 0.0f;
 
-		vertices[2].pos = Vector3(0.5f, -0.5f, 0.0f);
-		vertices[2].color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+		vertices.resize(segments + 1);
 
-		vertices[3].pos = Vector3(-0.5f, -0.5f, 0.0f);
-		vertices[3].color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+
+		for (int i = 0; i <= segments; i++, angle += angleIncrement)
+		{
+			float x = cos(angle);
+			float y = sin(angle);
+
+			vertices[i].pos = Vector3(x, y, 0.0f);
+			vertices[i].color = color;
+		}
+		vertices[segments].pos = Vector3::Zero;
+		vertices[segments].color = color;
 
 		LoadBuffer();
 		LoadShader();

@@ -6,7 +6,7 @@ namespace lu
 {
 	Scene::Scene()
 		: mTimer(0)
-		, mSpawnTime(15.0f)
+		, mSpawnTime(2.0f)
 	{
 	}
 	Scene::~Scene()

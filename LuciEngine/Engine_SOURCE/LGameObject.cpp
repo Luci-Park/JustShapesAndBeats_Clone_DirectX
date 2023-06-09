@@ -29,7 +29,6 @@ namespace lu
 
 	void GameObject::LateUpdate()
 	{
-
 	}
 
 	void GameObject::Render()

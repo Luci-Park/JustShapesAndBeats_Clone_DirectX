@@ -18,11 +18,6 @@ namespace lu
 		Vector2 GetPos() { return mPos; }
 		void AddMass() { mMass++; }
 	private:
-		void SetVertices();
-		void LoadBuffer();
-		void LoadShader();
-		void SetUpState();
-
 		void Move();
 		Vector2 GetInput();
 
@@ -30,11 +25,6 @@ namespace lu
 		void UpdateConst();
 
 	private:
-		std::vector<renderer::Vertex> mVertices;
-		Mesh* mMesh;
-		Shader* mShader;
-		ConstantBuffer* mConstantBuffer;
-		
 		Vector2 mPos;
 		float mRadius;
 		int mMass;

@@ -17,19 +17,9 @@ namespace lu
 		virtual void Render();
 
 	private:
-		void SetVertices();
-		void LoadBuffer();
-		void LoadShader();
-		void SetUpState();
-		
 		bool DoesCollideWithPlayer();
 	
 	private:
-		std::vector<renderer::Vertex> mVertices;
-		Mesh* mMesh;
-		Shader* mShader;
-		ConstantBuffer* mConstantBuffer;
-
 		Vector2 mPos;
 		const float mRadius = 0.03f;
 	};
