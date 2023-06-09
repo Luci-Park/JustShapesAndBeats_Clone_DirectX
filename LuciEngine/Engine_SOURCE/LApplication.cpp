@@ -39,6 +39,8 @@ namespace lu
 	{
 		Time::Update();
 		Input::Update();
+
+		mScene->Update();
 	}
 
 	void Application::LateUpdate()

@@ -43,6 +43,9 @@
     <Filter Include="GameObject\Component\Script">
       <UniqueIdentifier>{f483a6a3-c2dd-4699-856f-73563d910391}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Agario">
+      <UniqueIdentifier>{4b616616-98dd-4eda-bc5f-b28f24b8802b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -111,6 +114,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LComponent.h">
       <Filter>GameObject\Component</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LPlayer.h">
+      <Filter>Agario</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp">
@@ -166,6 +172,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LComponent.cpp">
       <Filter>GameObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LPlayer.cpp">
+      <Filter>Agario</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
