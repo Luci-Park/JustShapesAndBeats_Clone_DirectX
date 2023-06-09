@@ -22,7 +22,9 @@ namespace lu
 		virtual void LateUpdate();
 		virtual void Render();
 
-	private:
+		eState GetState() { return mState; }
+
+	protected:
 		eState mState;
 		//std::vector<Component*> mComponents;
 		//int y;

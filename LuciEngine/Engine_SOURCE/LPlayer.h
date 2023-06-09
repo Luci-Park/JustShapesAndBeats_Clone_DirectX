@@ -13,13 +13,21 @@ namespace lu
 		virtual void Update();
 		virtual void LateUpdate();
 		virtual void Render();
+
+		float GetRadius() { return mRadius; }
+		Vector2 GetPos() { return mPos; }
+		void AddMass() { mMass++; }
 	private:
 		void SetVertices();
 		void LoadBuffer();
 		void LoadShader();
 		void SetUpState();
 
+		void Move();
 		Vector2 GetInput();
+
+		void CheckMass();
+		void UpdateConst();
 
 	private:
 		std::vector<renderer::Vertex> mVertices;
@@ -29,6 +37,7 @@ namespace lu
 		
 		Vector2 mPos;
 		float mRadius;
+		int mMass;
 	};
 }
 

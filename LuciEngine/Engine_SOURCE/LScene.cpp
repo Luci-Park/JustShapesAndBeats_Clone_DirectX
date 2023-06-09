@@ -1,9 +1,12 @@
 #include "LScene.h"
 #include "LPlayer.h"
 #include "LFood.h"
+#include "LTime.h"
 namespace lu
 {
 	Scene::Scene()
+		: mTimer(0)
+		, mSpawnTime(15.0f)
 	{
 	}
 	Scene::~Scene()
@@ -14,21 +17,38 @@ namespace lu
 	void Scene::Initialize()
 	{
 		// 여기서 초기 게임 맵데이터를 세팅해줘야 한다.
-		mGameObjects.push_back(new Player());
-		//for (int i = 0; i < 10; i++)
-		//	mGameObjects.push_back(new Food());
+		player = new Player();
+		mGameObjects.push_back(player);
+		for (int i = 0; i < 10; i++)
+			mGameObjects.push_back(new Food());
 		for (GameObject* gameObj : mGameObjects)
 		{
 			gameObj->Initialize();
-
 		}	
 	}
 
 	void Scene::Update()
 	{
-		for (GameObject* gameObj : mGameObjects)
+		for (auto it = mGameObjects.begin(); it != mGameObjects.end();)
 		{
-			gameObj->Update();
+			GameObject* gameObj = *it;
+			if (gameObj->GetState() == GameObject::eState::Dead)
+			{
+				delete gameObj;
+				it = mGameObjects.erase(it);
+			}
+			else
+			{
+				gameObj->Update();
+				++it;
+			}
+		}
+		
+		mTimer += Time::DeltaTime();
+		if (mTimer >= mSpawnTime)
+		{
+			mTimer -= mSpawnTime;
+			mGameObjects.push_back(new Food());
 		}
 	}
 

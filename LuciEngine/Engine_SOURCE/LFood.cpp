@@ -24,6 +24,11 @@ namespace lu
 	}
 	void Food::Update()
 	{
+		if (DoesCollideWithPlayer())
+		{
+			player->AddMass();
+			mState = Dead;
+		}
 	}
 	void Food::LateUpdate()
 	{
@@ -109,5 +114,13 @@ namespace lu
 
 
 		GetDevice()->CreateInputLayout(arrLayout, 2, mShader->GetVSCode(), mShader->GetInputLayoutAddressOf());
+	}
+	bool Food::DoesCollideWithPlayer()
+	{
+		Vector2 playerPos = player->GetPos();
+		float playerRadius = player->GetRadius();
+		float distance = Vector2::DistanceSquared(mPos, playerPos);
+		float thresholdSq = playerRadius * playerRadius;
+		return distance < thresholdSq;
 	}
 }

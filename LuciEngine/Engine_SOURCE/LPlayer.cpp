@@ -8,7 +8,8 @@ namespace lu
 		, mShader(nullptr)
 		, mConstantBuffer(nullptr)
 		, mPos(Vector2::Zero)
-		, mRadius(0.1f)
+		, mRadius(0.05f)
+		, mMass(0)
 	{
 	}
 	Player::~Player()
@@ -26,17 +27,9 @@ namespace lu
 	}
 	void Player::Update()
 	{
-		float moveSpeed = 0.6f;
-		Vector2 dir = GetInput();
-		mPos += dir * moveSpeed * Time::DeltaTime();
-
-		Vector4 pos;
-		pos.x = mPos.x;
-		pos.y = mPos.y;
-		pos.z = 0;
-		pos.w = mRadius;
-		mConstantBuffer->SetData(&pos);
-		mConstantBuffer->Bind(eShaderStage::VS);
+		Move();
+		CheckMass();
+		UpdateConst();
 	}
 	void Player::LateUpdate()
 	{
@@ -118,6 +111,12 @@ namespace lu
 
 		GetDevice()->CreateInputLayout(arrLayout, 2, mShader->GetVSCode(), mShader->GetInputLayoutAddressOf());
 	}
+	void Player::Move()
+	{
+		float moveSpeed = 0.6f;
+		Vector2 dir = GetInput();
+		mPos += dir * moveSpeed * Time::DeltaTime();
+	}
 	Vector2 Player::GetInput()
 	{
 		Vector2 input = Vector2::Zero;
@@ -141,5 +140,20 @@ namespace lu
 			input = Vector2::Down;
 		}
 		return input;
+	}
+	void Player::CheckMass()
+	{
+		if (Input::GetKeyDown(eKeyCode::Q))
+			mMass++;
+	}
+	void Player::UpdateConst()
+	{
+		Vector4 pos;
+		pos.x = mPos.x;
+		pos.y = mPos.y;
+		pos.z = 0;
+		pos.w = mRadius + mMass * 0.005;
+		mConstantBuffer->SetData(&pos);
+		mConstantBuffer->Bind(eShaderStage::VS);
 	}
 }

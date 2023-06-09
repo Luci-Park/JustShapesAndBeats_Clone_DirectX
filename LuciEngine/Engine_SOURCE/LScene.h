@@ -1,9 +1,10 @@
 #pragma once
 #include "LEntity.h"
 #include "LGameObject.h"
-
+#include "LPlayer.h"
 namespace lu
 {
+	Player* player;
 	class Scene : public Entity
 	{
 	public:
@@ -17,6 +18,8 @@ namespace lu
 
 	private:
 		std::vector<GameObject*> mGameObjects;
+		float mTimer;
+		float mSpawnTime;
 	};
 }
 

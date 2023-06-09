@@ -1,9 +1,10 @@
 #pragma once
 #include "LGameObject.h"
 #include "LRenderer.h"
-
+#include "LPlayer.h"
 namespace lu
 {
+	extern Player* player;
 	class Food : public GameObject
 	{
 	public:
@@ -20,7 +21,9 @@ namespace lu
 		void LoadBuffer();
 		void LoadShader();
 		void SetUpState();
-
+		
+		bool DoesCollideWithPlayer();
+	
 	private:
 		std::vector<renderer::Vertex> mVertices;
 		Mesh* mMesh;
@@ -28,7 +31,7 @@ namespace lu
 		ConstantBuffer* mConstantBuffer;
 
 		Vector2 mPos;
-		const float mRadius = 0.05f;
+		const float mRadius = 0.03f;
 	};
 }
 
