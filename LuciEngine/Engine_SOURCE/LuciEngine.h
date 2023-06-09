@@ -1,7 +1,12 @@
 #pragma once
-#include <string>
-#include <Windows.h>
+#include <windows.h>
+#include <wingdi.h>
+#include <stdlib.h>
+#include <malloc.h>
+#include <memory.h>
+#include <tchar.h>
 #include <assert.h>
+#include <string>
 
 #include <vector> // 배열
 #include <list> //링크드리스트 
@@ -11,13 +16,27 @@
 #include <functional> // 함수 포인터
 
 #include <cmath> //수학
+#include <numbers>
 #include <algorithm> //정렬 알고리즘
 #include <limits> //부동 소수점 표현 및 반올림과 관련된 클래스 템플릿 numeric_limits 및 두 개의 열거형을 정의합니다.
 #include <memory> //메모리 관련된 라이브러리
 #include <filesystem> // 파일입출력 편하게 도와주는 라이브러리
 #include <wrl.h>
+#include <random>
 
 #include "CommonInclude.h"
 #include "LEnums.h"
 #include "LMath.h"
 
+
+#pragma comment(lib, "Msimg32.lib")
+
+int GetRandomInt(int min, int max)
+{
+	if (min >= max) return min;
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> distrib(min, max);
+	int randomNumber = distrib(gen);
+	return randomNumber;
+}

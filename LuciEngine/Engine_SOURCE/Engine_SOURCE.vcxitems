@@ -20,6 +20,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LConstantBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LEnums.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LFood.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LGraphicDevice_Dx11.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LGraphics.h" />
@@ -43,6 +44,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LEntity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LFood.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LGraphicDevice_Dx11.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LInput.cpp" />

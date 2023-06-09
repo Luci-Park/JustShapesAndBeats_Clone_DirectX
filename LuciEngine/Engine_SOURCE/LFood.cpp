@@ -1,66 +1,53 @@
-#include "LPlayer.h"
-#include "LInput.h"
-#include "LTime.h"
+#include "LFood.h"
+#include "LApplication.h"
+
+extern lu::Application application;
 namespace lu
 {
-	Player::Player()
+	Food::Food()
 		: mMesh(nullptr)
 		, mShader(nullptr)
 		, mConstantBuffer(nullptr)
-		, mPos(Vector2::Zero)
-		, mRadius(0.1f)
+	{
+		mPos.x = (GetRandomInt(0, application.GetWidth()) - (application.GetWidth() * 0.5)) / (application.GetWidth() * 0.5);
+		mPos.y = (GetRandomInt(0, application.GetHeight()) - (application.GetHeight() * 0.5)) / (application.GetHeight() * 0.5);
+	}
+	Food::~Food()
 	{
 	}
-	Player::~Player()
-	{
-		delete mMesh;
-		delete mShader;
-		delete mConstantBuffer;
-	}
-	void Player::Initialize()
+	void Food::Initialize()
 	{
 		SetVertices();
 		LoadBuffer();
 		LoadShader();
 		SetUpState();
 	}
-	void Player::Update()
-	{
-		float moveSpeed = 0.6f;
-		Vector2 dir = GetInput();
-		mPos += dir * moveSpeed * Time::DeltaTime();
-
-		Vector4 pos;
-		pos.x = mPos.x;
-		pos.y = mPos.y;
-		pos.z = 0;
-		pos.w = mRadius;
-		mConstantBuffer->SetData(&pos);
-		mConstantBuffer->Bind(eShaderStage::VS);
-	}
-	void Player::LateUpdate()
+	void Food::Update()
 	{
 	}
-	void Player::Render()
+	void Food::LateUpdate()
+	{
+	}
+	void Food::Render()
 	{
 		mMesh->BindBuffer();
 		mShader->Binds();
 		GetDevice()->DrawIndexed(mMesh->GetIndexCount(), 0, 0);
 	}
-	void Player::SetVertices()
+	void Food::SetVertices()
 	{
 		Vector4 color(GetRandomInt(0, 255) / 255.0f, GetRandomInt(0, 255) / 255.0f, GetRandomInt(0, 255) / 255.0f, 1.0f);
 		int segments = 30;
 
 		float angleIncrement = std::numbers::pi * 2 / segments;
 		float angle = 0.0f;
-		
+
 		mVertices.resize(segments + 1);
 
 		for (int i = 0; i <= segments; i++, angle += angleIncrement)
 		{
-			float x = cos(angle);
-			float y = sin(angle);
+			float x = mRadius * cos(angle);
+			float y = mRadius * sin(angle);
 
 			mVertices[i].pos = Vector3(x, y, 0.0f);
 			mVertices[i].color = color;
@@ -68,7 +55,7 @@ namespace lu
 		mVertices[segments].pos = Vector3::Zero;
 		mVertices[segments].color = color;
 	}
-	void Player::LoadBuffer()
+	void Food::LoadBuffer()
 	{
 		mMesh = new Mesh();
 		mMesh->CreateVertexBuffer(mVertices.data(), mVertices.size());
@@ -87,17 +74,22 @@ namespace lu
 		mConstantBuffer = new ConstantBuffer(eCBType::Transform);
 		mConstantBuffer->Create(sizeof(Vector4));
 
-		Vector4 pos(0.0f, 0.0f, 0.0f, mRadius);
+		Vector4 pos;
+		pos.x = mPos.x;
+		pos.y = mPos.y;
+		pos.z = 0;
+		pos.w = 1.0;
+		
 		mConstantBuffer->SetData(&pos);
 		mConstantBuffer->Bind(eShaderStage::VS);
 	}
-	void Player::LoadShader()
+	void Food::LoadShader()
 	{
 		mShader = new Shader();
 		mShader->Create(eShaderStage::VS, L"TriangleVS.hlsl", "main");
 		mShader->Create(eShaderStage::PS, L"TrianglePS.hlsl", "main");
 	}
-	void Player::SetUpState()
+	void Food::SetUpState()
 	{
 		D3D11_INPUT_ELEMENT_DESC arrLayout[2] = {};
 
@@ -117,29 +109,5 @@ namespace lu
 
 
 		GetDevice()->CreateInputLayout(arrLayout, 2, mShader->GetVSCode(), mShader->GetInputLayoutAddressOf());
-	}
-	Vector2 Player::GetInput()
-	{
-		Vector2 input = Vector2::Zero;
-		if (Input::GetKey(eKeyCode::LEFT))
-		{
-			input = Vector2::Left;
-		}
-
-		if (Input::GetKey(eKeyCode::RIGHT))
-		{
-			input = Vector2::Right;
-		}
-
-		if (Input::GetKey(eKeyCode::UP))
-		{
-			input = Vector2::Up;
-		}
-
-		if (Input::GetKey(eKeyCode::DOWN))
-		{
-			input = Vector2::Down;
-		}
-		return input;
 	}
 }

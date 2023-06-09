@@ -1,5 +1,6 @@
 #include "LScene.h"
 #include "LPlayer.h"
+#include "LFood.h"
 namespace lu
 {
 	Scene::Scene()
@@ -13,10 +14,14 @@ namespace lu
 	void Scene::Initialize()
 	{
 		// 여기서 초기 게임 맵데이터를 세팅해줘야 한다.
-		Player* player = new Player();
-		player->Initialize();
-		mGameObjects.push_back(player);
+		mGameObjects.push_back(new Player());
+		//for (int i = 0; i < 10; i++)
+		//	mGameObjects.push_back(new Food());
+		for (GameObject* gameObj : mGameObjects)
+		{
+			gameObj->Initialize();
 
+		}	
 	}
 
 	void Scene::Update()

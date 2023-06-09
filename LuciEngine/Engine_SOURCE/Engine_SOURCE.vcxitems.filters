@@ -117,6 +117,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LPlayer.h">
       <Filter>Agario</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LFood.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp">
@@ -176,6 +177,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LPlayer.cpp">
       <Filter>Agario</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LFood.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)LMath.inl">
