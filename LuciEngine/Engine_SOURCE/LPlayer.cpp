@@ -8,6 +8,7 @@ namespace lu
 		, mRadius(0.05f)
 		, mMass(0)
 	{
+		mData.color = Vector4(GetRandomInt(0, 255) / 255.0f, GetRandomInt(0, 255) / 255.0f, GetRandomInt(0, 255) / 255.0f, 1.0f);
 	}
 	Player::~Player()
 	{
@@ -65,12 +66,11 @@ namespace lu
 	}
 	void Player::UpdateConst()
 	{
-		Vector4 pos;
-		pos.x = mPos.x;
-		pos.y = mPos.y;
-		pos.z = 0;
-		pos.w = mRadius + mMass * 0.005;
-		renderer::constantBuffer->SetData(&pos);
+		mData.pos.x = mPos.x;
+		mData.pos.y = mPos.y;
+		mData.pos.z = 0;
+		mData.pos.w = mRadius + mMass * 0.005;
+		renderer::constantBuffer->SetData(&mData);
 		renderer::constantBuffer->Bind(eShaderStage::VS);
 	}
 }

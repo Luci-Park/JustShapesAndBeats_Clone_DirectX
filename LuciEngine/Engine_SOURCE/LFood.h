@@ -20,6 +20,7 @@ namespace lu
 		bool DoesCollideWithPlayer();
 	
 	private:
+		renderer::ConstData mData;
 		Vector2 mPos;
 		const float mRadius = 0.03f;
 	};

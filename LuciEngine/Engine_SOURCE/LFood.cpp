@@ -5,9 +5,14 @@ extern lu::Application application;
 namespace lu
 {
 	Food::Food()
-	{
+	{		
 		mPos.x = (GetRandomInt(0, application.GetWidth()) - (application.GetWidth() * 0.5)) / (application.GetWidth() * 0.5);
 		mPos.y = (GetRandomInt(0, application.GetHeight()) - (application.GetHeight() * 0.5)) / (application.GetHeight() * 0.5);
+		mData.pos.x = mPos.x;
+		mData.pos.y = mPos.y;
+		mData.pos.z = 0;
+		mData.pos.w = mRadius;
+		mData.color = Vector4(GetRandomInt(0, 255) / 255.0f, GetRandomInt(0, 255) / 255.0f, GetRandomInt(0, 255) / 255.0f, 1.0f);
 	}
 	Food::~Food()
 	{
@@ -28,12 +33,7 @@ namespace lu
 	}
 	void Food::Render()
 	{
-		Vector4 pos;
-		pos.x = mPos.x;
-		pos.y = mPos.y;
-		pos.z = 0;
-		pos.w = mRadius;
-		renderer::constantBuffer->SetData(&pos);
+		renderer::constantBuffer->SetData(&mData);
 		renderer::constantBuffer->Bind(eShaderStage::VS);
 		GameObject::Render();
 	}

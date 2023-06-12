@@ -25,6 +25,7 @@ namespace lu
 		void UpdateConst();
 
 	private:
+		renderer::ConstData mData;
 		Vector2 mPos;
 		float mRadius;
 		int mMass;

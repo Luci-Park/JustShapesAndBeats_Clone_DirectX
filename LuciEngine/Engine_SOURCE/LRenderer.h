@@ -14,6 +14,12 @@ namespace lu::renderer
 		Vector4 color;
 	};
 
+	struct ConstData
+	{
+		Vector4 pos;
+		Vector4 color;
+	};
+
 	extern std::vector<Vertex> vertices;
 	extern Mesh* mesh;
 	extern Shader* shader;
