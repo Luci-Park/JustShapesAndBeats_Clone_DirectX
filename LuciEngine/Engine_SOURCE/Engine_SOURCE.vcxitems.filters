@@ -111,6 +111,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LComponent.h">
       <Filter>GameObject\Component</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LPlayScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp">
@@ -167,6 +168,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LComponent.cpp">
       <Filter>GameObject\Component</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LPlayScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)LMath.inl">

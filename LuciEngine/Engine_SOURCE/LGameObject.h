@@ -22,11 +22,37 @@ namespace lu
 		virtual void LateUpdate();
 		virtual void Render();
 
+		template <typename T>
+		T* GetComponent()
+		{
+			T* component;
+			for (int i = 0; i < mComponents.size(); i++)
+			{
+				component = dynamic_cast<T*>(mComponents[i]);
+				if (component != nullptr)
+					return mComponents[i];
+			}
+			return nullptr;
+		}
+
+		template <typename T>
+		T* AddComponent()
+		{
+			T* comp = GetComponent<T>();
+			if (comp != nullptr) return comp;
+			
+			comp = new T();
+			Component* buff = dynamic_cast<Component*>(comp); //upcast
+			if (buff == nullptr)
+				return nullptr;
+			mComponents.push_back(buff);
+
+			return comp;
+		}
+
 	private:
 		eState mState;
-		//std::vector<Component*> mComponents;
-		//int y;
-		//int x;
+		std::vector<Component*> mComponents;
 	};
 }
 

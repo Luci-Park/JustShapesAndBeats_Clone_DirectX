@@ -11,25 +11,32 @@ namespace lu
 
 	void Scene::Initialize()
 	{
-		// 여기서 초기 게임 맵데이터를 세팅해줘야 한다.
+		for (int i = 0; i < mLayers.size(); i++)
+		{
+			mLayers[i]->Initialize();
+		}
 	}
 
 	void Scene::Update()
 	{
-		for (GameObject* gameObj : mGameObjects)
+		for (int i = 0; i < mLayers.size(); i++)
 		{
-			gameObj->Update();
+			mLayers[i]->Update();
 		}
 	}
 
 	void Scene::LateUpdate()
 	{
+		for (int i = 0; i < mLayers.size(); i++)
+		{
+			mLayers[i]->Update();
+		}
 	}
 	void Scene::Render()
 	{
-		for (GameObject* gameObj : mGameObjects)
+		for (int i = 0; i < mLayers.size(); i++)
 		{
-			gameObj->Render();
+			mLayers[i]->Render();
 		}
 	}
 }

@@ -2,6 +2,7 @@
 #include "LInput.h"
 #include "LTime.h"
 #include "LRenderer.h"
+#include "LSceneManager.h"
 
 namespace lu
 {
@@ -30,26 +31,26 @@ namespace lu
 		Time::Initiailize();
 		Input::Initialize();
 		renderer::Initialize();
-
-		mScene = new Scene();
-		mScene->Initialize();
+		SceneManager::Initialize();
 	}
 
 	void Application::Update()
 	{
 		Time::Update();
 		Input::Update();
+		SceneManager::Update();
 	}
 
 	void Application::LateUpdate()
 	{
+		SceneManager::LateUpdate();
 	}
 
 	void Application::Render()
 	{
 		Time::Render();
 		graphicDevice->Draw();
-		mScene->Render();
+		SceneManager::Render();
 		graphicDevice->Present();
 	}
 

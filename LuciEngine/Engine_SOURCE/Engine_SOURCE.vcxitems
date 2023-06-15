@@ -27,6 +27,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LMesh.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LPlayScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LSceneManager.h" />
@@ -48,6 +49,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LMesh.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LPlayScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LResources.cpp" />

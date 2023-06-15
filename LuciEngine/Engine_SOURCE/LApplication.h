@@ -1,7 +1,6 @@
 #pragma once
 #include "LuciEngine.h"
 #include "LGraphicDevice_Dx11.h"
-#include "LScene.h"
 
 namespace lu
 {
@@ -33,7 +32,5 @@ namespace lu
 		HWND mHwnd;
 		UINT mWidth;
 		UINT mHeight;
-
-		Scene* mScene;
 	};
 }

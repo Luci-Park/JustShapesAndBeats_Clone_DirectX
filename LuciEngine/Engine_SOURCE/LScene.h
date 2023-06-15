@@ -1,7 +1,6 @@
 #pragma once
 #include "LEntity.h"
-#include "LGameObject.h"
-
+#include "LLayer.h"
 namespace lu
 {
 	class Scene : public Entity
@@ -16,7 +15,7 @@ namespace lu
 		virtual void Render();
 
 	private:
-		std::vector<GameObject*> mGameObjects;
+		std::vector<Layer*> mLayers;
 	};
 }
 
