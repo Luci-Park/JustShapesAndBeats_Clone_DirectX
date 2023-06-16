@@ -1,12 +1,14 @@
 #include "LGameObject.h"
 #include "LRenderer.h"
 #include "LGraphicDevice_Dx11.h"
+#include "LTransform.h"
 
 namespace lu
 {
 	GameObject::GameObject()
 		: mState(eState::Active)
 	{
+		AddComponent<Transform>();
 	}
 
 	GameObject::~GameObject()
@@ -19,21 +21,29 @@ namespace lu
 
 	void GameObject::Update()
 	{
-		// 공 움직임 구현
-
-
-
-		// 렌더
-
+		for (int i = 0; i < mComponents.size(); i++)
+		{
+			if (mComponents[i] != nullptr)
+				mComponents[i]->Update();
+		}
 	}
 
 	void GameObject::LateUpdate()
 	{
-
+		for (int i = 0; i < mComponents.size(); i++)
+		{
+			if (mComponents[i] != nullptr)
+				mComponents[i]->LateUpdate();
+		}
 	}
 
 	void GameObject::Render()
 	{
+		for (int i = 0; i < mComponents.size(); i++)
+		{
+			if (mComponents[i] != nullptr)
+				mComponents[i]->Render();
+		}
 	}
 
 }

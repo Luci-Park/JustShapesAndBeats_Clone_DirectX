@@ -1,18 +1,24 @@
 #pragma once
-#include "LScene.h"
+#include "LComponent.h"
+#include "LMesh.h"
+#include "LShader.h"
 
 namespace lu
 {
-	class PlayScene : public Scene
+	class MeshRenderer : public Component
 	{
 	public:
-		PlayScene();
-		virtual ~PlayScene();
+		MeshRenderer();
+		~MeshRenderer();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void LateUpdate() override;
 		virtual void Render() override;
+
+	private:
+		MeshRenderer* mMesh;
+		Shader* mShader;
 	};
 }
 

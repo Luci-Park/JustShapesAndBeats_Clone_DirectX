@@ -43,6 +43,12 @@
     <Filter Include="GameObject\Component\Script">
       <UniqueIdentifier>{f483a6a3-c2dd-4699-856f-73563d910391}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\Base">
+      <UniqueIdentifier>{194e3497-cdb6-4e2d-b4a6-dc5193b73c25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Manager">
+      <UniqueIdentifier>{5a803639-a522-410e-bc29-96928fe085b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -96,12 +102,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LLayer.h">
       <Filter>Scene\Layer</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LSceneManager.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)LGameObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
@@ -112,6 +112,18 @@
       <Filter>GameObject\Component</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)LPlayScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LTransform.h">
+      <Filter>GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LMeshRenderer.h">
+      <Filter>GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LSceneManager.h">
+      <Filter>Scene\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LScene.h">
+      <Filter>Scene\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp">
@@ -153,12 +165,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LLayer.cpp">
       <Filter>Scene\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LSceneManager.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LGameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
@@ -169,6 +175,18 @@
       <Filter>GameObject\Component</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LPlayScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LTransform.cpp">
+      <Filter>GameObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LMeshRenderer.cpp">
+      <Filter>GameObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LSceneManager.cpp">
+      <Filter>Scene\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LScene.cpp">
+      <Filter>Scene\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)LMath.inl">

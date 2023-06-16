@@ -16,7 +16,7 @@ struct VSOut
 //해당 buffer에는 float4짜리가 하나 있을 예정이다
 cbuffer Transform : register(b0)
 {
-    float4 Pos;
+    float4 Position;
 }
 
 VSOut main(VSIn In)
@@ -24,7 +24,8 @@ VSOut main(VSIn In)
     VSOut Out = (VSOut)0.0f;
 
     Out.Pos = float4(In.Pos, 1.0f);
-    Out.Pos.x += Pos.x;
+    Out.Pos.x += Position.x;
+    Out.Pos.y += Position.y;
     
     Out.Color = In.Color;
 

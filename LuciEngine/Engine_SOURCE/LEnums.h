@@ -5,9 +5,17 @@ namespace lu::enums
 	{
 		None,
 		Transform,
-		Mesh,
+		MeshRenderer,
 		Particle,
 		Script,
+		End
+	};
+
+	enum class eLayerType
+	{
+		Player,
+		Monster,
+		UI,
 		End
 	};
 }

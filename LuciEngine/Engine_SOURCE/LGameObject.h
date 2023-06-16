@@ -30,7 +30,7 @@ namespace lu
 			{
 				component = dynamic_cast<T*>(mComponents[i]);
 				if (component != nullptr)
-					return mComponents[i];
+					return component;
 			}
 			return nullptr;
 		}
@@ -46,6 +46,7 @@ namespace lu
 			if (buff == nullptr)
 				return nullptr;
 			mComponents.push_back(buff);
+			comp->SetOwner(this);
 
 			return comp;
 		}

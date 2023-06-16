@@ -49,9 +49,6 @@ namespace lu::renderer
 		constantBuffer = new ConstantBuffer(eCBType::Transform);
 		constantBuffer->Create(sizeof(Vector4));
 
-		Vector4 pos(0.0f, 0.0f, 0.0f, 1.0f);
-		constantBuffer->SetData(&pos);
-		constantBuffer->Bind(eShaderStage::VS);
 	}
 
 	void LoadShader()

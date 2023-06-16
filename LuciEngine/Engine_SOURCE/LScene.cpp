@@ -3,6 +3,7 @@ namespace lu
 {
 	Scene::Scene()
 	{
+		mLayers.resize((int)lu::enums::eLayerType::End);
 	}
 	Scene::~Scene()
 	{
@@ -13,7 +14,7 @@ namespace lu
 	{
 		for (int i = 0; i < mLayers.size(); i++)
 		{
-			mLayers[i]->Initialize();
+			mLayers[i].Initialize();
 		}
 	}
 
@@ -21,7 +22,7 @@ namespace lu
 	{
 		for (int i = 0; i < mLayers.size(); i++)
 		{
-			mLayers[i]->Update();
+			mLayers[i].Update();
 		}
 	}
 
@@ -29,14 +30,18 @@ namespace lu
 	{
 		for (int i = 0; i < mLayers.size(); i++)
 		{
-			mLayers[i]->Update();
+			mLayers[i].Update();
 		}
 	}
 	void Scene::Render()
 	{
 		for (int i = 0; i < mLayers.size(); i++)
 		{
-			mLayers[i]->Render();
+			mLayers[i].Render();
 		}
+	}
+	void Scene::AddGameObject(eLayerType type, GameObject* gameObj)
+	{
+		mLayers[(int)type].AddGameObject(gameObj);
 	}
 }

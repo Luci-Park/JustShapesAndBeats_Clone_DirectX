@@ -35,6 +35,8 @@ namespace lu::graphics
 		void BindsConstantBuffer(eShaderStage stage, eCBType type, ID3D11Buffer* buffer);
 		
 		void DrawIndexed(UINT IndexCount, UINT StartIndexLocation, INT BaseVertexLocation);
+		void ClearTarget();
+		void UpdateViewPort();
 		void Draw();
 		void Present();
 

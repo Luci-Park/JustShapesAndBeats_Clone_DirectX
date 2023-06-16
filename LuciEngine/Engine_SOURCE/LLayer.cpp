@@ -35,4 +35,8 @@ namespace lu
 			mGameObjects[i]->Render();
 		}
 	}
+	void Layer::AddGameObject(GameObject* gameobj)
+	{
+		mGameObjects.push_back(gameobj);
+	}
 }

@@ -4,10 +4,12 @@
 namespace lu
 {
 	using namespace lu::enums;
+	using namespace lu::math;
+	class GameObject;
 	class Component : public Entity
 	{
 	public:
-		Component();
+		Component(eComponentType type);
 		~Component();
 
 		virtual void Initialize();
@@ -15,8 +17,12 @@ namespace lu
 		virtual void LateUpdate();
 		virtual void Render();
 
+		GameObject* GetOwner() { return mOwner; }
+		void SetOwner(GameObject* owner) { mOwner = owner; }
+
 	private:
 		const eComponentType mType;
+		GameObject* mOwner;
 	};
 }
 

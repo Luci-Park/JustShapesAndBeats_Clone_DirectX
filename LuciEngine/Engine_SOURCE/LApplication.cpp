@@ -49,7 +49,8 @@ namespace lu
 	void Application::Render()
 	{
 		Time::Render();
-		graphicDevice->Draw();
+		graphicDevice->ClearTarget();
+		graphicDevice->UpdateViewPort(); 
 		SceneManager::Render();
 		graphicDevice->Present();
 	}
