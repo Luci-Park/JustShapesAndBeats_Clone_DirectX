@@ -1,4 +1,6 @@
 #include "LRenderer.h"
+#include "LResources.h"
+#include "LTexture.h"
 namespace lu::renderer
 {
 	Vertex vertexes[4] = {};
@@ -9,7 +11,7 @@ namespace lu::renderer
 	void SetupState()
 	{
 		// Input layout 정점 구조 정보를 넘겨줘야한다.
-		D3D11_INPUT_ELEMENT_DESC arrLayout[2] = {};
+		D3D11_INPUT_ELEMENT_DESC arrLayout[3] = {};
 
 		arrLayout[0].AlignedByteOffset = 0;
 		arrLayout[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;
@@ -25,8 +27,15 @@ namespace lu::renderer
 		arrLayout[1].SemanticName = "COLOR";
 		arrLayout[1].SemanticIndex = 0;
 
+		arrLayout[2].AlignedByteOffset = 28;
+		arrLayout[2].Format = DXGI_FORMAT_R32G32_FLOAT;
+		arrLayout[2].InputSlot = 0;
+		arrLayout[2].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+		arrLayout[2].SemanticName = "TEXCOORD";
+		arrLayout[2].SemanticIndex = 0;
 
-		GetDevice()->CreateInputLayout(arrLayout, 2	, shader->GetVSCode(), shader->GetInputLayoutAddressOf());
+
+		GetDevice()->CreateInputLayout(arrLayout, 3, shader->GetVSCode(), shader->GetInputLayoutAddressOf());
 	}
 
 	void LoadBuffer()
@@ -62,19 +71,26 @@ namespace lu::renderer
 	{
 		vertexes[0].pos = Vector3(-0.5f, 0.5f, 0.0f);
 		vertexes[0].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+		vertexes[0].uv = Vector2(0.0f, 0.0f);
 
 		vertexes[1].pos = Vector3(0.5f, 0.5f, 0.0f);
 		vertexes[1].color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+		vertexes[1].uv = Vector2(1.0f, 0.0f);
 
 		vertexes[2].pos = Vector3(0.5f, -0.5f, 0.0f);
 		vertexes[2].color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+		vertexes[2].uv = Vector2(1.0f, 1.0f);
 
 		vertexes[3].pos = Vector3(-0.5f, -0.5f, 0.0f);
 		vertexes[3].color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+		vertexes[3].uv = Vector2(0.0f, 1.0f);
 
 		LoadBuffer();
 		LoadShader();
 		SetupState();
+
+		Texture* texture = Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
+		texture->BindShader(eShaderStage::PS, 0);
 	}
 	void Release()
 	{

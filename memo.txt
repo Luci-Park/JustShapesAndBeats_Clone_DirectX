@@ -591,3 +591,13 @@ Topology bind를 빼먹어서 안됨. 근데 왜 딴 컴에선 되징 대체 머
 
 clean code는 완전히 옳지는 않다. 프로젝트 규모에 따라 다르다.
 게임 오브젝트에 쉐이더 붙이기.
+
+6/19
+- 내부 함수가 있지만 너무 제한적이다.
+- Microsoft / DirectXText = 마소에서 만든 텍스쳐 라이브러리, internal로선 제공해주지 않는다.
+- 정적 라이브러리 : 디버그로 한 번 릴리즈로 한번 빌드
+- Shader Resource = 셰이더 전용 뷰
+- Texture2D : register(b0)
+- texture에서 texture 크기가 다르면 interplation으로 처리 - 이걸 해주는게 sampler
+=> UV 좌표
+

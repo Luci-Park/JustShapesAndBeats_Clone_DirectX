@@ -3,6 +3,7 @@
 namespace lu
 {
 	Scene* SceneManager::mActiveScene = nullptr;
+	std::map<std::wstring, Scene*> SceneManager::mScenes;
 	void SceneManager::Initialize()
 	{
 		mActiveScene = new PlayScene();
@@ -22,5 +23,15 @@ namespace lu
 	{
 		if (mActiveScene != nullptr)
 			mActiveScene->Render();
+	}
+	Scene* SceneManager::LoadScene(std::wstring name)
+	{
+		auto it = mScenes.find(name);
+		if (it == mScenes.end())
+			return nullptr;
+		mActiveScene->OnExit();
+		mActiveScene = it->second;
+		mActiveScene->OnEnter();
+		return it->second;
 	}
 }

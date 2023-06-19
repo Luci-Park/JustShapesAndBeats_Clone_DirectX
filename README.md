@@ -19,3 +19,7 @@ Since 5/15 ~
 ## Week 4(6/4 ~ 6/10)
 - 6/3 ~ 6/6 : rest(Happy Independence Day)
 - Code Generalization
+
+## Week 5(6/11 ~ 6/17)
+
+## Week 6(6/18 ~ 6/24)

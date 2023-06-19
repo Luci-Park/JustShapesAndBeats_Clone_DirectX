@@ -124,6 +124,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LScene.h">
       <Filter>Scene\Base</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LTexture.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp">
@@ -186,6 +189,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LScene.cpp">
       <Filter>Scene\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LTexture.cpp">
+      <Filter>Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
