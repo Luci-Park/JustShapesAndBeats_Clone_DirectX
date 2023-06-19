@@ -600,4 +600,5 @@ clean code는 완전히 옳지는 않다. 프로젝트 규모에 따라 다르�
 - Texture2D : register(b0)
 - texture에서 texture 크기가 다르면 interplation으로 처리 - 이걸 해주는게 sampler
 => UV 좌표
+	- 좌표를 임의로 늘릴 순 있지만 픽셀 데이터를 추출할 때는 반드시 0 ~ 1 범위로 맞춰야 한다.
 
