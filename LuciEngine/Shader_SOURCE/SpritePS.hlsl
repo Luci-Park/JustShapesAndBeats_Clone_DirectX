@@ -1,4 +1,4 @@
-//PS = Pixel Shader
+
 struct VSIn
 {
     float3 Pos : POSITION;
@@ -13,15 +13,17 @@ struct VSOut
     float2 UV : TEXCOORD;
 };
 
-Texture2D Tex : register(t0); //t = texture buffer
-SamplerState pointSampler : register(s0); // s = samplers
-SamplerState anisotrophicSampler : register(s1); // s = samplers
+Texture2D Tex : register(t0);
+
+SamplerState pointSampler : register(s0);
+SamplerState anisotropicSampler : register(s1);
+
 
 float4 main(VSOut In) : SV_TARGET
 {
     //return In.Color;
     float4 color = (float)0.0f;
-    color = Tex.Sample(pointSampler, In.UV);
+    color = Tex.Sample(anisotropicSampler, In.UV);
 
     return color;
 }

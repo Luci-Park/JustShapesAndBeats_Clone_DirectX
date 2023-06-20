@@ -29,7 +29,7 @@ namespace lu
 	}
 	void Transform::BindConstantBuffer()
 	{
-		lu::graphics::ConstantBuffer* cb = renderer::constantBuffer;
+		lu::graphics::ConstantBuffer* cb = renderer::constantBuffer[(UINT)eCBType::Transform];
 		Vector4 position(mWorldPos.x, mWorldPos.y, mWorldPos.x, 1.0f);
 		cb->SetData(&position);
 		cb->Bind(eShaderStage::VS);

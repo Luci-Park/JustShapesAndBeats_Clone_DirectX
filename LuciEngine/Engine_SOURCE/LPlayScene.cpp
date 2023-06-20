@@ -1,5 +1,6 @@
 #include "LPlayScene.h"
 #include "LMeshRenderer.h"
+#include "LResources.h"
 namespace lu
 {
 	PlayScene::PlayScene()
@@ -13,7 +14,9 @@ namespace lu
 		Scene::Initialize();
 		GameObject* player = new GameObject();
 		AddGameObject(eLayerType::Player, player);
-		player->AddComponent<MeshRenderer>();
+		MeshRenderer* mr = player->AddComponent<MeshRenderer>();
+		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial"));
 	}
 	void PlayScene::Update()
 	{

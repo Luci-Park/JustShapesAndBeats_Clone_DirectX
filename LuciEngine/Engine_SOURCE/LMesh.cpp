@@ -3,7 +3,8 @@
 namespace lu
 {
 	Mesh::Mesh()
-		: mVertexBuffer(nullptr)
+		: Resource(lu::enums::eResourceType::Mesh)
+		, mVertexBuffer(nullptr)
 		, mIndexBuffer(nullptr)
 		, mVBDesc {}
 		, mIBDesc {}
@@ -55,5 +56,9 @@ namespace lu
 
 		GetDevice()->BindVertexBuffer(mVertexBuffer.GetAddressOf(), 0, &stride, &offset);
 		GetDevice()->BindIndexBuffer(mIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+	}
+	void Mesh::Render()
+	{
+		GetDevice()->DrawIndexed(mIndexCount, 0, 0);
 	}
 }

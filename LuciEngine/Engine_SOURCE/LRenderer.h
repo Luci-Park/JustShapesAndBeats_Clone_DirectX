@@ -16,9 +16,7 @@ namespace lu::renderer
 	};
 
 	extern Vertex vertexes[];
-	extern Mesh* mesh;
-	extern Shader* shader;
-	extern ConstantBuffer* constantBuffer;
+	extern ConstantBuffer* constantBuffer[(UINT)eCBType::End];
 
 	void Initialize();
 	void Release();

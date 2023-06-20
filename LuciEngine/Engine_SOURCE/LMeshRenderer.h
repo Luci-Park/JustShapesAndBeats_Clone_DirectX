@@ -1,7 +1,7 @@
 #pragma once
 #include "LComponent.h"
 #include "LMesh.h"
-#include "LShader.h"
+#include "LMaterial.h"
 
 namespace lu
 {
@@ -16,9 +16,12 @@ namespace lu
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
+		void SetMesh(Mesh* mesh) { mMesh = mesh; }
+		void SetMaterial(Material* material) { mMaterial = material; }
+
 	private:
-		MeshRenderer* mMesh;
-		Shader* mShader;
+		Mesh* mMesh;
+		Material* mMaterial;
 	};
 }
 

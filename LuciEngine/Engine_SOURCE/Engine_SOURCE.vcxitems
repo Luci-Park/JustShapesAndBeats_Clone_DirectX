@@ -25,6 +25,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LGraphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LMaterial.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LMeshRenderer.h" />
@@ -50,6 +51,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LGraphicDevice_Dx11.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LMaterial.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LMeshRenderer.cpp" />

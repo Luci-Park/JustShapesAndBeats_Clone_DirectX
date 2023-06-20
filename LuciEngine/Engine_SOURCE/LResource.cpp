@@ -3,7 +3,8 @@
 
 namespace lu
 {
-	Resource::Resource()
+	Resource::Resource(const enums::eResourceType type)
+		: mType(type)
 	{
 
 	}

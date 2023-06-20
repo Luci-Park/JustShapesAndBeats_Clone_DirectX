@@ -1,12 +1,12 @@
 #include "LRenderer.h"
 #include "LResources.h"
 #include "LTexture.h"
+#include "LMaterial.h"
+
 namespace lu::renderer
 {
 	Vertex vertexes[4] = {};
-	Mesh* mesh = nullptr;
-	Shader* shader = nullptr;
-	ConstantBuffer* constantBuffer = nullptr;
+	ConstantBuffer* constantBuffer[(UINT)eCBType::End] = {};
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> samplerState[(UINT)eSamplerType::End] = {};
 
 	void SetupState()
@@ -35,8 +35,12 @@ namespace lu::renderer
 		arrLayout[2].SemanticName = "TEXCOORD";
 		arrLayout[2].SemanticIndex = 0;
 
-
+		Shader* shader = Resources::Find<Shader>(L"TriangleShader");
 		GetDevice()->CreateInputLayout(arrLayout, 3, shader->GetVSCode(), shader->GetInputLayoutAddressOf());
+		
+		shader = Resources::Find<Shader>(L"SpriteShader");
+		GetDevice()->CreateInputLayout(arrLayout, 3, shader->GetVSCode(), shader->GetInputLayoutAddressOf());
+
 
 		//Sampler State
 		D3D11_SAMPLER_DESC desc = {};
@@ -55,7 +59,8 @@ namespace lu::renderer
 	void LoadBuffer()
 	{
 		// Vertex Buffer
-		mesh = new Mesh();
+		Mesh* mesh = new Mesh();
+		Resources::Insert(L"RectMesh", mesh);
 		mesh->CreateVertexBuffer(vertexes, 4);
 
 		std::vector<UINT> indexes = {};
@@ -69,16 +74,29 @@ namespace lu::renderer
 		mesh->CreateIndexBuffer(indexes.data(), indexes.size());
 
 		// Constant Buffer
-		constantBuffer = new ConstantBuffer(eCBType::Transform);
-		constantBuffer->Create(sizeof(Vector4));
-
+		constantBuffer[(UINT)eCBType::Transform] = new ConstantBuffer(eCBType::Transform);
+		constantBuffer[(UINT)eCBType::Transform]->Create(sizeof(Vector4));
 	}
 
 	void LoadShader()
 	{
-		shader = new Shader();
+		Shader* shader = new Shader();
 		shader->Create(eShaderStage::VS, L"TriangleVS.hlsl", "main");
 		shader->Create(eShaderStage::PS, L"TrianglePS.hlsl", "main");
+		Resources::Insert(L"TriangleShader", shader);
+
+		Shader* spriteShader = new Shader();
+		spriteShader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
+		spriteShader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
+		Resources::Insert(L"SpriteShader", spriteShader);
+
+		Texture* texture = Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
+
+		Material* spriteMateiral = new Material();
+		spriteMateiral->SetShader(spriteShader);
+		spriteMateiral->SetTexture(texture);
+		Resources::Insert(L"SpriteMaterial", spriteMateiral);
+
 	}
 
 	void Initialize()
@@ -108,8 +126,13 @@ namespace lu::renderer
 	}
 	void Release()
 	{
-		delete mesh;
-		delete shader;
-		delete constantBuffer;
+		for (int i = 0; i < (UINT)eCBType::End; ++i)
+		{
+			if (constantBuffer[i] != nullptr)
+			{
+				delete constantBuffer[i];
+				constantBuffer[i] = nullptr;
+			}
+		}
 	}
 }

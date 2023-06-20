@@ -22,6 +22,7 @@ namespace lu::graphics
 	enum class eCBType
 	{
 		Transform,
+		Material,
 		End
 	};
 
