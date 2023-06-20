@@ -3,7 +3,7 @@
 #include "LTime.h"
 #include "LRenderer.h"
 #include "LSceneManager.h"
-
+#include "LResources.h"
 namespace lu
 {
 	Application::Application()
@@ -53,6 +53,13 @@ namespace lu
 		graphicDevice->UpdateViewPort(); 
 		SceneManager::Render();
 		graphicDevice->Present();
+	}
+
+	void Application::Release()
+	{
+		renderer::Release();
+		Resources::Release();
+		SceneManager::Release();		
 	}
 
 	void Application::SetWindow(HWND hwnd, UINT width, UINT height)

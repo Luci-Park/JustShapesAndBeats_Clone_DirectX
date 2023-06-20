@@ -6,6 +6,14 @@ namespace lu
 	}
 	Layer::~Layer()
 	{
+		for (int i = 0; i < mGameObjects.size(); i++)
+		{
+			if (mGameObjects[i] != nullptr)
+			{
+				delete mGameObjects[i];
+				mGameObjects[i] = nullptr;
+			}
+		}
 	}
 	void Layer::Initialize()
 	{

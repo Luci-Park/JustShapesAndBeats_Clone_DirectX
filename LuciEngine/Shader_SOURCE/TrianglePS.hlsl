@@ -14,13 +14,14 @@ struct VSOut
 };
 
 Texture2D smileTexture : register(t0); //t = texture buffer
-SamplerState samplerState : register(s0); // s = samplers
+SamplerState pointSampler : register(s0); // s = samplers
+SamplerState anisotrophicSampler : register(s1); // s = samplers
 
 float4 main(VSOut In) : SV_TARGET
 {
     //return In.Color;
     float4 color = (float)0.0f;
-    color = smileTexture.Sample(samplerState, In.UV);
+    color = smileTexture.Sample(pointSampler, In.UV);
 
     return color;
 }

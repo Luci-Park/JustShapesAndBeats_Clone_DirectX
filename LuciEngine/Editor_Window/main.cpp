@@ -4,7 +4,6 @@
 #include "framework.h"
 #include "Editor_Window.h"
 #include "LApplication.h"
-#include "LRenderer.h"
 
 lu::Application application;
 
@@ -64,7 +63,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             application.Run();
         }
     }
-    lu::renderer::Release();
+    application.Release();
     return (int) msg.wParam;
 }
 

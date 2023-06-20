@@ -16,13 +16,20 @@ namespace lu::graphics
 		GS, //Geometry shader
 		PS, //Pixel Shader
 		CS, //Compute Shader
-		None
+		End
 	};
 
 	enum class eCBType
 	{
 		Transform,
-		None
+		End
+	};
+
+	enum class eSamplerType
+	{
+		Point,
+		Anisotropic,
+		End
 	};
 
 	struct GpuBuffer

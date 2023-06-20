@@ -13,6 +13,14 @@ namespace lu
 
 	GameObject::~GameObject()
 	{
+		for (int i = 0; i < mComponents.size(); i++)
+		{
+			if (mComponents[i] != nullptr)
+			{
+				delete mComponents[i];
+				mComponents[i] = nullptr;
+			}
+		}
 	}
 
 	void GameObject::Initialize()

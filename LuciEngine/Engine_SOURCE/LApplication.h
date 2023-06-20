@@ -16,6 +16,7 @@ namespace lu
 		void Update();
 		void LateUpdate();
 		void Render();
+		void Release();
 
 		void SetWindow(HWND hwnd, UINT width, UINT height);
 

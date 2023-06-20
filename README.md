@@ -21,5 +21,10 @@ Since 5/15 ~
 - Code Generalization
 
 ## Week 5(6/11 ~ 6/17)
+- Texture to shader
+- Create Sampler
 
 ## Week 6(6/18 ~ 6/24)
+- Sampler added
+    - Point
+    - Anisotropic

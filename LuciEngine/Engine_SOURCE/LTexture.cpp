@@ -34,6 +34,7 @@ namespace lu::graphics
 				return S_FALSE;
 		}
 
+		//Shader는 shaderview를 통해 접근한다.
 		CreateShaderResourceView
 		(
 			GetDevice()->GetID3D11Device()

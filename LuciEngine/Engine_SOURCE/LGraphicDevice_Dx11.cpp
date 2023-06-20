@@ -216,6 +216,13 @@ namespace lu::graphics
 		return true;
 	}
 
+	bool GraphicDevice_Dx11::CreateSampler(const D3D11_SAMPLER_DESC* pSamplerDesc, ID3D11SamplerState** ppSamplerState)
+	{
+		if(FAILED(mDevice->CreateSamplerState(pSamplerDesc, ppSamplerState)))
+			return false;
+		return true;
+	}
+
 	void GraphicDevice_Dx11::BindInputLayout(ID3D11InputLayout* pInputLayout)
 	{
 		mContext->IASetInputLayout(pInputLayout);
@@ -239,6 +246,35 @@ namespace lu::graphics
 	void GraphicDevice_Dx11::BindVertexShader(ID3D11VertexShader* pVertexShader)
 	{
 		mContext->VSSetShader(pVertexShader, 0, 0);
+	}
+
+	void GraphicDevice_Dx11::BindSampler(eShaderStage stage, UINT startSlot, ID3D11SamplerState** ppSamplers)
+	{
+		switch (stage)
+		{
+		case eShaderStage::VS:
+			mContext->VSSetSamplers(startSlot, 1, ppSamplers);
+			break;
+		case eShaderStage::HS:
+			mContext->HSSetSamplers(startSlot, 1, ppSamplers);
+			break;
+		case eShaderStage::DS:
+			mContext->DSSetSamplers(startSlot, 1, ppSamplers);
+			break;
+		case eShaderStage::GS:
+			mContext->GSSetSamplers(startSlot, 1, ppSamplers);
+			break;
+		case eShaderStage::PS:
+			mContext->PSSetSamplers(startSlot, 1, ppSamplers);
+			break;
+		case eShaderStage::CS:
+			mContext->CSSetSamplers(startSlot, 1, ppSamplers);
+			break;
+		case eShaderStage::End:
+			break;
+		default:
+			break;
+		}
 	}
 
 	void GraphicDevice_Dx11::BindPixelShader(ID3D11PixelShader* pPixelShader)
@@ -276,7 +312,7 @@ namespace lu::graphics
 		case eShaderStage::CS:
 			mContext->CSSetConstantBuffers((UINT)type, 1, &buffer);
 			break;
-		case eShaderStage::None:
+		case eShaderStage::End:
 			break;
 		default:
 			break;
@@ -320,7 +356,7 @@ namespace lu::graphics
 			mContext->CSSetShaderResources(startSlot, 1, ppSRV);
 			break;
 
-		case eShaderStage::None:
+		case eShaderStage::End:
 			break;
 		default:
 			break;
