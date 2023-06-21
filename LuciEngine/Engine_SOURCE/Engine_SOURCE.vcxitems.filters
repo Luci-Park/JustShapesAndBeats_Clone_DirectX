@@ -130,6 +130,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LMaterial.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LCameraScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp">
@@ -199,6 +200,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LMaterial.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LCameraScript.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)LMath.inl">

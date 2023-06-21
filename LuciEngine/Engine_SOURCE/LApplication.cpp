@@ -58,7 +58,6 @@ namespace lu
 	void Application::Release()
 	{
 		renderer::Release();
-		Resources::Release();
 		SceneManager::Release();		
 	}
 

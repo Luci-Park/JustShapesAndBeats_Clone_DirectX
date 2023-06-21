@@ -3,6 +3,6 @@
 
 namespace lu
 {
-	std::map<std::wstring, Resource*> Resources::mResources;
+	std::map<std::wstring, std::shared_ptr<Resource>> Resources::mResources;
 
 }

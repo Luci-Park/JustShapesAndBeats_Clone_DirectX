@@ -15,13 +15,13 @@ struct VSOut
 
 Texture2D Tex : register(t0); //t = texture buffer
 SamplerState pointSampler : register(s0); // s = samplers
-SamplerState anisotrophicSampler : register(s1); // s = samplers
+SamplerState anisotropicSampler : register(s1); // s = samplers
 
 float4 main(VSOut In) : SV_TARGET
 {
     //return In.Color;
     float4 color = (float)0.0f;
-    color = Tex.Sample(pointSampler, In.UV);
+    color = Tex.Sample(anisotropicSampler, In.UV);
 
     return color;
 }

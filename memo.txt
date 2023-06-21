@@ -592,13 +592,41 @@ Topology bind를 빼먹어서 안됨. 근데 왜 딴 컴에선 되징 대체 머
 clean code는 완전히 옳지는 않다. 프로젝트 규모에 따라 다르다.
 게임 오브젝트에 쉐이더 붙이기.
 
-6/19
+6/16
 - 내부 함수가 있지만 너무 제한적이다.
 - Microsoft / DirectXText = 마소에서 만든 텍스쳐 라이브러리, internal로선 제공해주지 않는다.
 - 정적 라이브러리 : 디버그로 한 번 릴리즈로 한번 빌드
 - Shader Resource = 셰이더 전용 뷰
 - Texture2D : register(b0)
-- texture에서 texture 크기가 다르면 interplation으로 처리 - 이걸 해주는게 sampler
+- sampler : 목표 크기랑 기존 크기가 다르면 interpolation으로 처리 
 => UV 좌표
 	- 좌표를 임의로 늘릴 순 있지만 픽셀 데이터를 추출할 때는 반드시 0 ~ 1 범위로 맞춰야 한다.
+
+6/19
+근데 보간을 하면 안된다! 원본 파일으로 나와야 돼
+1) 릭 처리
+2) 샘플러 처리 - anti-aliasing으로 계단 삭제
+	- point = 점 그대로 적용
+	- Anisotropic
+	- filtering 기능도 샘플러에서 가능
+
+MeshRenderer -> material -> Shader + Mesh
+- material은 render pass라고도 한다.
+3) AudioClip, listener, AudioSource = (3D sound)
+
+-filtering
+	- anisotropic(AF)
+https://blog.naver.com/sorkelf/40169951915
+https://www.3dgep.com/texturing-lighting-directx-11/
+
+6/20
+게임 오브젝트는 Component과 함께 Script도 있어야 한다.
+돌릴 땐 컴포넌트 먼저 그 다음 스크립트
+결국 알아서 가는 것.
+
+수학
+- pdf파일은 모든 점을 벡터로 저장하고 있다.
+- 벡터가 헷갈리는 이유 : 중심이 다르기 때문
+- 내적
+- 행렬
 

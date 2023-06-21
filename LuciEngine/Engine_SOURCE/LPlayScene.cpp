@@ -1,6 +1,7 @@
 #include "LPlayScene.h"
 #include "LMeshRenderer.h"
 #include "LResources.h"
+#include "LCameraScript.h"
 namespace lu
 {
 	PlayScene::PlayScene()
@@ -17,6 +18,8 @@ namespace lu
 		MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial"));
+		
+		player->AddComponent<CameraScript>();
 	}
 	void PlayScene::Update()
 	{

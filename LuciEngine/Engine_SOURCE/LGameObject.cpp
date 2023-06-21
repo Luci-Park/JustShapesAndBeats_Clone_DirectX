@@ -21,10 +21,28 @@ namespace lu
 				mComponents[i] = nullptr;
 			}
 		}
+		for (int i = 0; i < mScripts.size(); i++)
+		{
+			if (mScripts[i] != nullptr)
+			{
+				delete mScripts[i];
+				mScripts[i] = nullptr;
+			}
+		}
 	}
 
 	void GameObject::Initialize()
 	{
+		for (int i = 0; i < mComponents.size(); i++)
+		{
+			if (mComponents[i] != nullptr)
+				mComponents[i]->Initialize();
+		}
+		for (int i = 0; i < mScripts.size(); i++)
+		{
+			if (mScripts[i] != nullptr)
+				mScripts[i]->Initialize();
+		}
 	}
 
 	void GameObject::Update()
@@ -33,6 +51,11 @@ namespace lu
 		{
 			if (mComponents[i] != nullptr)
 				mComponents[i]->Update();
+		}
+		for (int i = 0; i < mScripts.size(); i++)
+		{
+			if (mScripts[i] != nullptr)
+				mScripts[i]->Update();
 		}
 	}
 
@@ -43,6 +66,11 @@ namespace lu
 			if (mComponents[i] != nullptr)
 				mComponents[i]->LateUpdate();
 		}
+		for (int i = 0; i < mScripts.size(); i++)
+		{
+			if (mScripts[i] != nullptr)
+				mScripts[i]->LateUpdate();
+		}
 	}
 
 	void GameObject::Render()
@@ -51,6 +79,11 @@ namespace lu
 		{
 			if (mComponents[i] != nullptr)
 				mComponents[i]->Render();
+		}
+		for (int i = 0; i < mScripts.size(); i++)
+		{
+			if (mScripts[i] != nullptr)
+				mScripts[i]->Render();
 		}
 	}
 
