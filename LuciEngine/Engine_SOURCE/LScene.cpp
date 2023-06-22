@@ -30,7 +30,7 @@ namespace lu
 	{
 		for (int i = 0; i < mLayers.size(); i++)
 		{
-			mLayers[i].Update();
+			mLayers[i].LateUpdate();
 		}
 	}
 	void Scene::Render()

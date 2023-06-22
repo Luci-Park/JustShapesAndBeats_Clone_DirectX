@@ -15,6 +15,13 @@ namespace lu::renderer
 		Vector2 uv;
 	};
 
+	CBUFFER(TransformCB, CBSLOT_TRANSFORM)
+	{
+		Matrix mWorld;
+		Matrix mView;
+		Matrix mProjection;
+	};
+
 	extern Vertex vertexes[];
 	extern ConstantBuffer* constantBuffer[(UINT)eCBType::End];
 

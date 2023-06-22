@@ -8,6 +8,8 @@ namespace lu
 		:Component(eComponentType::Transform)
 		, mLocalPos(Vector3::Zero)
 		, mWorldPos(Vector3::Zero)
+		, mLocalRot(Vector3::Zero)
+		, mWorldRot(Vector3::Zero)
 		, mLocalScale(Vector3::One)
 		, mWorldScale(Vector3::One)
 		, mParent(this)
@@ -24,14 +26,35 @@ namespace lu
 		CalculateWorldPos();
 		CalculateWorldScale();
 	}
+	void Transform::LateUpdate()
+	{
+		mWorld = Matrix::Identity;
+		Matrix scale = Matrix::CreateScale(mWorldScale);
+
+		Matrix rotation = Matrix::CreateRotationX(mWorldRot.x);
+		rotation *= Matrix::CreateRotationY(mWorldRot.y);
+		rotation *= Matrix::CreateRotationZ(mWorldRot.z);
+
+		Matrix position;
+		position.Translation(mWorldPos);
+
+		mWorld = scale * rotation * position;
+
+		mUp = Vector3::TransformNormal(Vector3::Up, rotation);
+		mForward = Vector3::TransformNormal(Vector3::Forward, rotation);
+		mRight = Vector3::TransformNormal(Vector3::Right, rotation);
+
+
+	}
 	void Transform::Render()
 	{
 	}
 	void Transform::BindConstantBuffer()
 	{
+		renderer::TransformCB trCB = {};
+		trCB.mWorld = mWorld;
 		lu::graphics::ConstantBuffer* cb = renderer::constantBuffer[(UINT)eCBType::Transform];
-		Vector4 position(mWorldPos.x, mWorldPos.y, mWorldPos.x, 1.0f);
-		cb->SetData(&position);
+		cb->SetData(&trCB);
 		cb->Bind(eShaderStage::VS);
 	}
 	void Transform::SetParent(Transform* parent)
@@ -71,6 +94,12 @@ namespace lu
 			mLocalPos = mWorldPos - mParent->GetPos();
 		else
 			mLocalPos = mWorldPos;
+	}
+	void Transform::CalcluateWorldRot()
+	{
+	}
+	void Transform::CalculateLocalRot()
+	{
 	}
 	void Transform::CalculateWorldScale()
 	{

@@ -2,6 +2,7 @@
 #include "LMeshRenderer.h"
 #include "LResources.h"
 #include "LCameraScript.h"
+#include "LTransform.h"
 namespace lu
 {
 	PlayScene::PlayScene()
@@ -20,6 +21,9 @@ namespace lu
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial"));
 		
 		player->AddComponent<CameraScript>();
+
+		Transform* tr = player->GetComponent<Transform>();
+		tr->SetPos(Vector3(0.5f, 0.5f, 0.5f));
 	}
 	void PlayScene::Update()
 	{
