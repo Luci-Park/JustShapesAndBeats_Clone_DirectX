@@ -13,7 +13,7 @@ struct VSOut
     float2 UV : TEXCOORD;
 };
 
-Texture2D Tex : register(t0);
+Texture2D _MainTex : register(t0);
 
 SamplerState pointSampler : register(s0);
 SamplerState anisotropicSampler : register(s1);
@@ -21,9 +21,8 @@ SamplerState anisotropicSampler : register(s1);
 
 float4 main(VSOut In) : SV_TARGET
 {
-    //return In.Color;
     float4 color = (float)0.0f;
-    color = Tex.Sample(anisotropicSampler, In.UV);
+    color = _MainTex.Sample(anisotropicSampler, In.UV);
 
     return color;
 }

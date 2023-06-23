@@ -29,5 +29,7 @@ namespace lu
 		mMesh->BindBuffer();
 		mMaterial->Binds();
 		mMesh->Render();
+
+		mMaterial->Clear();
 	}
 }
