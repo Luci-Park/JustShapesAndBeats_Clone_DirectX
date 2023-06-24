@@ -90,12 +90,24 @@ namespace lu::renderer
 		spriteShader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
 		Resources::Insert(L"SpriteShader", spriteShader);
 
-		std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
+		{
+			std::shared_ptr<Texture> texture
+				= Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
 
-		std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
-		spriteMaterial->SetShader(spriteShader);
-		spriteMaterial->SetTexture(texture);
-		Resources::Insert(L"SpriteMaterial", spriteMaterial);
+			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+			spriteMateiral->SetShader(spriteShader);
+			spriteMateiral->SetTexture(texture);
+			Resources::Insert(L"SpriteMaterial", spriteMateiral);
+		}
+
+		{
+			std::shared_ptr<Texture> texture
+				= Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
+			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
+			spriteMateiral->SetShader(spriteShader);
+			spriteMateiral->SetTexture(texture);
+			Resources::Insert(L"SpriteMaterial02", spriteMateiral);
+		}
 
 	}
 

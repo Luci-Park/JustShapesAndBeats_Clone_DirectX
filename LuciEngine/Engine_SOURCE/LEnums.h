@@ -5,6 +5,7 @@ namespace lu::enums
 	{
 		None,
 		Transform,
+		Camera,
 		MeshRenderer,
 		Particle,
 		Script,

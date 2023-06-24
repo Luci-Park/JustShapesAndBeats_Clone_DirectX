@@ -1,6 +1,7 @@
 #include "LTransform.h"
 #include "LRenderer.h"
 #include "LConstantBuffer.h"
+#include "LCamera.h"
 
 namespace lu
 {
@@ -53,6 +54,9 @@ namespace lu
 	{
 		renderer::TransformCB trCB = {};
 		trCB.mWorld = mWorld;
+		trCB.mView = Camera::GetViewMatrix();
+		trCB.mProjection = Camera::GetProjectionMatrix();
+
 		lu::graphics::ConstantBuffer* cb = renderer::constantBuffer[(UINT)eCBType::Transform];
 		cb->SetData(&trCB);
 		cb->Bind(eShaderStage::VS);
