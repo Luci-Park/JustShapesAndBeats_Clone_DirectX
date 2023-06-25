@@ -653,3 +653,16 @@ lookat 함수
 라디안 값
 숙제 : 씬과 배경 정리.
 이번 주 숙제: 음악 종류 정하기 / 씬 종류 정하기
+
+6/24
+Scene
+1) 사각형 번쩍
+2) tutorial
+3) overworld - move
+4) dubwoofer - purple
+5) cool friends - black - 
+6) try this
+7) trangle 정화
+8) 흡수
+8) annhilate
+
