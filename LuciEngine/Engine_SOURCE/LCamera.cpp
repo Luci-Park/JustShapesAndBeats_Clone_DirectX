@@ -72,7 +72,7 @@ namespace lu
 			height *= orthorgraphicratio;
 
 			//LH = left handed
-			mProjection = Matrix::CreateOrthographicLH(width, height, mNear, mFar);
+			mProjection = Matrix::CreateOrthographicLH(width, height, mNear,     mFar);
 		}
 		else
 		{

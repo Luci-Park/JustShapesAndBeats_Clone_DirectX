@@ -1,4 +1,5 @@
 #include "LShader.h"
+#include "LRenderer.h"
 
 namespace lu
 {
@@ -6,6 +7,9 @@ namespace lu
 		: Resource(enums::eResourceType::Shader)
 		, mInputLayout(nullptr)
 		, mTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
+		, mRSType(eRSType::SolidBack)
+		, mDSType(eDSType::Less)
+		, mBSType(eBSType::AlphaBlend)
 	{
 	}
 	Shader::~Shader()
@@ -45,5 +49,13 @@ namespace lu
 
 		GetDevice()->BindVertexShader(mVS.Get());
 		GetDevice()->BindPixelShader(mPS.Get());
+
+		Microsoft::WRL::ComPtr<ID3D11RasterizerState> rsState = renderer::rasterizerStates[(UINT)mRSType];
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> dsState = renderer::depthStencilStates[(UINT)mDSType];
+		Microsoft::WRL::ComPtr<ID3D11BlendState> bsState = renderer::blendStates[(UINT)mBSType];
+
+		GetDevice()->BindRasterizeState(rsState.Get());
+		GetDevice()->BindDepthStencilState(dsState.Get());
+		GetDevice()->BindBlendState(bsState.Get());
 	}
 }

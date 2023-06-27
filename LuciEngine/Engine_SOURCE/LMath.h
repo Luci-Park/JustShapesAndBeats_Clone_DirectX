@@ -1,7 +1,7 @@
 #pragma once
 #include "LuciEngine.h"
 #include <math.h>
-
+#define PI 3.141592
 
 //https://github.com/microsoft/DirectXMath
 #if __has_include("DirectXMath.h")
@@ -981,4 +981,5 @@ namespace lu::math
     };
 
 #include "LMath.inl"
+
 }

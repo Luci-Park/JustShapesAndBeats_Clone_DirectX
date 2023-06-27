@@ -49,6 +49,27 @@
     <Filter Include="Scene\Manager">
       <UniqueIdentifier>{5a803639-a522-410e-bc29-96928fe085b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_JSAB">
+      <UniqueIdentifier>{2b9e0e4f-58f9-4dc9-8f8f-9f6b0991f178}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_JSAB\Scene">
+      <UniqueIdentifier>{a7fce894-db34-4378-a3bb-81b7d89c9a03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{ddb31c4b-019c-4c6b-984c-db7534d99671}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_JSAB\Graphics">
+      <UniqueIdentifier>{5db22934-dc11-41c3-9642-50201f569c76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_JSAB\GameObjects">
+      <UniqueIdentifier>{1b0a0036-2151-46d6-8cc2-4b242d0501fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_JSAB\GameObjects\Background">
+      <UniqueIdentifier>{143bcc40-6535-47cb-a53d-dde5dc483fcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_JSAB\GameObjects\Bullets">
+      <UniqueIdentifier>{6b7eaf25-b69b-495d-85d2-54f8573c266d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -130,8 +151,48 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LMaterial.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LCameraScript.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)LCamera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CoolFriendsScene.h">
+      <Filter>_JSAB\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)DubwooferScene.h">
+      <Filter>_JSAB\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MenuScene.h">
+      <Filter>_JSAB\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)OverworldScene.h">
+      <Filter>_JSAB\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)AnnhilateScene.h">
+      <Filter>_JSAB\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)TutorialScene.h">
+      <Filter>_JSAB\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)TryThisScene.h">
+      <Filter>_JSAB\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LCamera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LCameraScript.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)JSABRenderer.h">
+      <Filter>_JSAB\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)JSABScenes.h">
+      <Filter>_JSAB\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)BackgroundObject.h">
+      <Filter>_JSAB\GameObjects\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)BackgroundScript.h">
+      <Filter>_JSAB\GameObjects\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Bullet.h">
+      <Filter>_JSAB\GameObjects\Bullets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp">
@@ -201,8 +262,45 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LMaterial.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LCameraScript.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)LCamera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CoolFriendsScene.cpp">
+      <Filter>_JSAB\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)DubwooferScene.cpp">
+      <Filter>_JSAB\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MenuScene.cpp">
+      <Filter>_JSAB\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)OverworldScene.cpp">
+      <Filter>_JSAB\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)AnnhilateScene.cpp">
+      <Filter>_JSAB\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)TryThisScene.cpp">
+      <Filter>_JSAB\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)TutorialScene.cpp">
+      <Filter>_JSAB\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LCamera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LCameraScript.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)JSABRenderer.cpp">
+      <Filter>_JSAB\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)BackgroundObject.cpp">
+      <Filter>_JSAB\GameObjects\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)BackgroundScript.cpp">
+      <Filter>_JSAB\GameObjects\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Bullet.cpp">
+      <Filter>_JSAB\GameObjects\Bullets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)LMath.inl">

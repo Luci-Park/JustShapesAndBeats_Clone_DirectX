@@ -24,6 +24,7 @@ namespace lu::graphics
 		End
 	};
 
+	//ConstantBuffer : buffers to send to GPU via shader
 	enum class eCBType
 	{
 		Transform,
@@ -31,10 +32,42 @@ namespace lu::graphics
 		End
 	};
 
+	//Sampler : if the image size and target size is different, how will you add or delete the pixels?
+	//Minification, Magnification, MipMap
 	enum class eSamplerType
 	{
-		Point,
-		Anisotropic,
+		Point, //as pixel = point to point
+		Anisotropic, // more smooth.
+		End
+	};
+
+	// RasterizerState
+	// fillmode : how wil you fill the area?
+	// cullmode : which parts will you not show?
+	// frontcounterclockwise : which is the front and back?
+	enum class eRSType 
+	{
+		SolidBack,//cull back
+		SolidFront, // cull front
+		SolidNone, // no cull
+		WireframeNone, // wireframe + no cull
+		End
+	};
+
+	enum class eDSType //DepthStencil
+	{
+		Less,
+		Greater,
+		NoWrite,
+		None,
+		End
+	};
+
+	enum class eBSType //BendState
+	{
+		Default,
+		AlphaBlend,
+		OneOne,
 		End
 	};
 

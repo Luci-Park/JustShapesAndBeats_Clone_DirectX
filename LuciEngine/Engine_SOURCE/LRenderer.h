@@ -24,6 +24,11 @@ namespace lu::renderer
 
 	extern Vertex vertexes[];
 	extern ConstantBuffer* constantBuffer[(UINT)eCBType::End];
+	
+	extern Microsoft::WRL::ComPtr<ID3D11SamplerState>samplerStates[];
+	extern Microsoft::WRL::ComPtr<ID3D11RasterizerState>rasterizerStates[];
+	extern Microsoft::WRL::ComPtr<ID3D11DepthStencilState>depthStencilStates[];
+	extern Microsoft::WRL::ComPtr<ID3D11BlendState> blendStates[];
 
 	void Initialize();
 	void Release();

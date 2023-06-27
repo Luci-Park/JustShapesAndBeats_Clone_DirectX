@@ -13,7 +13,6 @@ namespace lu::graphics
 
 		//Ready Device
 		bool CreateSwapChain(const DXGI_SWAP_CHAIN_DESC* desc, HWND hWnd);
-		void BindViewPort(D3D11_VIEWPORT* viewPort);
 
 		bool CreateTexture(const D3D11_TEXTURE2D_DESC* desc, void* data);
 		bool CreateInputLayout(const D3D11_INPUT_ELEMENT_DESC* pInputElementDesc, UINT elementNum, ID3DBlob* byteCode, ID3D11InputLayout** ppInputLayout);
@@ -21,7 +20,10 @@ namespace lu::graphics
 		bool CompileFromFile(const std::wstring& fileName, const std::string& funcName, const std::string& version, ID3DBlob** ppCode);
 		bool CreateVertexShader(const void* pShaderByteCode, SIZE_T bytecodeLength, ID3D11VertexShader** ppVertexShader);
 		bool CreatePixelShader(const void* pShaderByteCode, SIZE_T bytecodeLength, ID3D11PixelShader** ppPixelShader);
-		bool CreateSampler(const D3D11_SAMPLER_DESC* pSamplerDesc, ID3D11SamplerState** ppSamplerState);
+		bool CreateSamplerState(const D3D11_SAMPLER_DESC* pSamplerDesc, ID3D11SamplerState** ppSamplerState);
+		bool CreateRasterizeState(const D3D11_RASTERIZER_DESC* pRasterizerDesc, ID3D11RasterizerState** ppRasterizerState);
+		bool CreateDepthStencilState(const D3D11_DEPTH_STENCIL_DESC* pDepthStencilDesc, ID3D11DepthStencilState** ppDepthStencilState);
+		bool CreateBlendState(const D3D11_BLEND_DESC* pBlendStateDesc, ID3D11BlendState** ppBlendState);
 
 		// after creation, you need to bind it to the rendering pipeline
 		void BindInputLayout(ID3D11InputLayout* pInputLayout);
@@ -29,14 +31,19 @@ namespace lu::graphics
 		void BindVertexBuffer(ID3D11Buffer* const* ppVertexBuffers, UINT StartSlot, const UINT* pStrides, const UINT* pOffsets);
 		void BindIndexBuffer(ID3D11Buffer* pIndexBuffer, DXGI_FORMAT format, UINT offset);
 		void BindVertexShader(ID3D11VertexShader* pVertexShader);
-		void BindSampler(eShaderStage stage, UINT startSlot, ID3D11SamplerState** ppSamplers);
 		void BindPixelShader(ID3D11PixelShader* pPixelShader);
+		void BindShaderResource(eShaderStage stage, UINT startSlot, ID3D11ShaderResourceView** ppSRV);
+		void BindSampler(eShaderStage stage, UINT startSlot, ID3D11SamplerState** ppSamplers);
 
 		void SetConstantBuffer(ID3D11Buffer* buffer, void* data, UINT size);
 		void BindConstantBuffer(eShaderStage stage, eCBType type, ID3D11Buffer* buffer);
 		void BindsConstantBuffer(eShaderStage stage, eCBType type, ID3D11Buffer* buffer);
-		void BindShaderResource(eShaderStage stage, UINT startSlot, ID3D11ShaderResourceView** ppSRV);
-		
+
+		void BindViewPort(D3D11_VIEWPORT* viewPort);
+		void BindRasterizeState(ID3D11RasterizerState* pRasterizerState);
+		void BindDepthStencilState(ID3D11DepthStencilState* pDepthStencilState);
+		void BindBlendState(ID3D11BlendState* pBlendState);
+
 		void DrawIndexed(UINT IndexCount, UINT StartIndexLocation, INT BaseVertexLocation);
 		void ClearTarget();
 		void UpdateViewPort();

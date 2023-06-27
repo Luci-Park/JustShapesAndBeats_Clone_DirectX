@@ -1,21 +1,17 @@
 #pragma once
 #include "LScene.h"
 
-namespace lu
+namespace lu::JSAB
 {
-	class lu::JSAB::BackgroundScript;
-	class PlayScene : public Scene
+	class AnnhilateScene : public Scene
 	{
 	public:
-		PlayScene();
-		virtual ~PlayScene();
+		AnnhilateScene();
+		virtual ~AnnhilateScene();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void LateUpdate() override;
 		virtual void Render() override;
-	private:
-		lu::JSAB::BackgroundScript* bs;
 	};
 }
-

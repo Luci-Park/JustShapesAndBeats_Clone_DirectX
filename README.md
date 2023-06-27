@@ -31,3 +31,7 @@ Since 5/15 ~
 - Material Created
 - Material, Mesh, Texture as components
 - Camera Projection
+
+## Week 7(6/25 ~ 7/1)
+- background
+- SceneCreation

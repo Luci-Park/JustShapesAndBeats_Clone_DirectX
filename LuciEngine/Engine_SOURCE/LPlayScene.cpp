@@ -4,6 +4,9 @@
 #include "LCameraScript.h"
 #include "LTransform.h"
 #include "LCamera.h"
+#include "BackgroundObject.h"
+#include "BackgroundScript.h"
+#include "LInput.h"
 namespace lu
 {
 	PlayScene::PlayScene()
@@ -20,7 +23,7 @@ namespace lu
 			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial"));
-			player->GetComponent<Transform>()->SetPos(Vector3(0.0f, 0.0f, 0.0f));
+			player->GetComponent<Transform>()->SetPos(Vector3(0.0f, 0.0f, 1.0f));
 			//player->AddComponent<CameraScript>();
 		}
 
@@ -30,10 +33,10 @@ namespace lu
 			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial02"));
-			player->GetComponent<Transform>()->SetPos(Vector3(2.0f, 0.0f, 0.0f));
+			player->GetComponent<Transform>()->SetPos(Vector3(0.2f, 0.0f, 0.0f));
 			//player->AddComponent<CameraScript>();
 		}
-
+	 
 		//Main Camera
 		GameObject* camera = new GameObject();
 		AddGameObject(eLayerType::Player, camera);
@@ -41,15 +44,21 @@ namespace lu
 		Camera* cameraComp = camera->AddComponent<Camera>();
 		camera->AddComponent<CameraScript>();
 
-		//GameObject* player2 = new GameObject();
-		//AddGameObject(eLayerType::Player, player2);
-		//player2->AddComponent<MeshRenderer>();
-
-		//Transform* tr = player->GetComponent<Transform>();
-		//tr->SetPos(Vector3(0.5f, 0.5f, 0.0f));
+	/*
+		lu::JSAB::BackgroundObject* bg = new lu::JSAB::BackgroundObject;
+		AddGameObject(eLayerType::Background, bg);
+		bs = bg->AddComponent<JSAB::BackgroundScript>();
+		Scene::Initialize();
+		bs->SetMaterial(JSAB::BackgroundScript::Backgrounds::ANNIHILATE);*/
+	
 	}
 	void PlayScene::Update()
 	{
+		if (Input::GetKeyDown(eKeyCode::Q))
+		{
+			int r = GetRandomInt(0, (int)(JSAB::BackgroundScript::Backgrounds::END)-1);
+			bs->SetMaterial(r);
+		}
 		Scene::Update();
 	}
 	void PlayScene::LateUpdate()

@@ -20,4 +20,14 @@
 #include "CommonInclude.h"
 #include "LEnums.h"
 #include "LMath.h"
+#include <random>
 
+int GetRandomInt(int min, int max)
+{
+    if (min >= max) return min;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(min, max);
+    int randomNumber = distrib(gen);
+    return randomNumber;
+}
