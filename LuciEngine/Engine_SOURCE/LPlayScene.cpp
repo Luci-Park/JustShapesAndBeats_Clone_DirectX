@@ -44,12 +44,11 @@ namespace lu
 		Camera* cameraComp = camera->AddComponent<Camera>();
 		camera->AddComponent<CameraScript>();
 
-	/*
 		lu::JSAB::BackgroundObject* bg = new lu::JSAB::BackgroundObject;
 		AddGameObject(eLayerType::Background, bg);
 		bs = bg->AddComponent<JSAB::BackgroundScript>();
 		Scene::Initialize();
-		bs->SetMaterial(JSAB::BackgroundScript::Backgrounds::ANNIHILATE);*/
+		bs->SetMaterial(JSAB::BackgroundScript::Backgrounds::ANNIHILATE);
 	
 	}
 	void PlayScene::Update()

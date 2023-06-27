@@ -683,3 +683,13 @@ Scene
 - z가 커질 수록 카메라와 멀어진다. 깊이 버퍼로 보는 거지
 
 => 비율 맞추는 법을 찾아봐야겠어.
+2217 : 262
+
+6/27
+- UI 카메라 = 아마 움직이지 않을 것.
+- 다 못만들면 추가하지 않을 것.
+
+1) 카메라 다 돌아주면서 계산해야 한다. = renderer.render에서
+2) camera rendering mode
+3) 만드는 순서 - mOpague -> cutout -> transparent
+=> mask 가 애초에 비교해서 만드는 거라 transparent가 제일 나중에 해야 투명도가 적용된다.

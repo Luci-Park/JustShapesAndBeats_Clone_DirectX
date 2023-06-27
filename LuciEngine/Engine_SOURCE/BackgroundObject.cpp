@@ -15,7 +15,7 @@ namespace lu::JSAB
 	{
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		GetComponent<Transform>()->SetPos(Vector3(0, 0, 0));
+		GetComponent<Transform>()->SetPos(Vector3(0, 0, 10));
 		AddComponent<BackgroundScript>();
 		GameObject::Initialize();
 	}

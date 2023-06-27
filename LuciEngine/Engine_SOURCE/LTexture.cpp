@@ -45,6 +45,8 @@ namespace lu::graphics
 			, mSRV.GetAddressOf()
 		);
 		mSRV->GetResource((ID3D11Resource**)mTexture.GetAddressOf());
+		mWidth = mImage.GetMetadata().width;
+		mHeight = mImage.GetMetadata().height;
 
 		return S_OK;
 	}
