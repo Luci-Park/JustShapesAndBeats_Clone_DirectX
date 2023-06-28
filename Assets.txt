@@ -1,0 +1,21 @@
+- blue square
+- transparent blue square particles
+- dash circle effects
+- end triangle
+- end triangle circler
+- end rings
+- rings hit
+- more square transitions
+- 8 point bullet
+- white circle = flash
+- circle bullets(small)
+- 4 point bullet
+- bar bullet
+- dashed circle = prepare
+
+----
+overworld
+- dotted line
+- dots
+- entry point
+- song panel
