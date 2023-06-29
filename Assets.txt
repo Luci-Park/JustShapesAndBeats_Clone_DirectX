@@ -1,10 +1,10 @@
-- blue square
+v blue square
 - transparent blue square particles
 - dash circle effects
 - end triangle
 - end triangle circler
 - end rings
-- rings hit
+- hit rings effect
 - more square transitions
 - 8 point bullet
 - white circle = flash
@@ -17,5 +17,51 @@
 overworld
 - dotted line
 - dots
-- entry point
-- song panel
+- entry point(blue)
+- entry point(red)
+- line(red)
+- dotted line(red)
+- song panel(blue)
+- song panel(red)
+-----
+Dubwoofer
+- water particles(transparent stuff)
+- water
+- thicker water
+- thicker water particles
+- red triangle = big + small = small flashes then falls
+- rectangles
+- white flash
+-----------
+Cool Friends
+- bar
+- red rectangle
+- belt
+- gear
+- small saw
+- bar
+- white circle
+------------
+Try This
+- scope
+- bar
+- prep circle
+- alarm
+- gear
+- circle
+- square
+- large jar
+- star 
+---------------
+Annihilate
+- face
+- tears(both end rounded)
+- spikes(holes)
+- broken spikes
+- bug face
+- boss face
+- boss eyes
+- circle with holes
+- bar
+- spikes(no holes)
+---------------
