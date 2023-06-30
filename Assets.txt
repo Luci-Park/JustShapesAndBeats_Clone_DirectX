@@ -1,61 +1,61 @@
 v blue square
 - transparent blue square particles
-- dash circle effects
-- end triangle
-- end triangle circler
-- end rings
-- hit rings effect
+v dash circle effects
+v end triangle
+v end triangle circler
+v end rings
+v hit rings effect
 - more square transitions
-- 8 point bullet
-- white circle = flash
-- circle bullets(small)
-- 4 point bullet
-- bar bullet
-- dashed circle = prepare
+v 8 point bullet
+v white circle = flash
+v circle bullets(small)
+v 4 point bullet
+v bar bullet
+v dashed circle = prepare
 
 ----
 overworld
-- dotted line
-- dots
-- entry point(blue)
-- entry point(red)
-- line(red)
-- dotted line(red)
-- song panel(blue)
-- song panel(red)
+v dotted line
+v dots
+v entry point(blue)
+v entry point(red)
+v line(red)
+v dotted line(red) => 그냥 그렇게 쓰자..
+v song panel(blue)
+v song panel(red)
 -----
 Dubwoofer
 - water particles(transparent stuff)
-- water
+v water
 - thicker water
 - thicker water particles
-- red triangle = big + small = small flashes then falls
+v red triangle = big + small = small flashes then falls
 - rectangles
 - white flash
 -----------
 Cool Friends
-- bar
-- red rectangle
+v bar
+v red rectangle
 - belt
-- gear
-- small saw
-- bar
-- white circle
+v gear
+v small saw
+v bar
+v white circle
 ------------
 Try This
-- scope
-- bar
-- prep circle
-- alarm
-- gear
-- circle
-- square
-- large jar
-- star 
+v scope
+v bar
+v prep circle
+v alarm
+v gear
+v circle
+v square
+v large jar
+v star 
 ---------------
 Annihilate
-- face
-- tears(both end rounded)
+v face
+v tears(both end rounded)
 - spikes(holes)
 - broken spikes
 - bug face
