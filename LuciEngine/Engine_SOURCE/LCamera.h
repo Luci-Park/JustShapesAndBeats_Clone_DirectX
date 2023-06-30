@@ -33,10 +33,15 @@ namespace lu
 		void EnableLayerMasks() { mLayerMask.set(); }
 		void DisableLayerMasks() { mLayerMask.reset(); }
 
-		void SortGameObjects();
+		void AlphaSortGameObjects();
+		void ZDepthSortTransparentGameObjects();
+		void CategorizeAlphaBlendGameObjects(const std::vector<GameObject*> gameObjects);
 		void RenderOpaque();
 		void RenderCutOut();
 		void RenderTransparent();
+
+		void EnableDepthStencilState();
+		void DisableDepthStencilState();
 
 	private:
 		static Matrix View;
