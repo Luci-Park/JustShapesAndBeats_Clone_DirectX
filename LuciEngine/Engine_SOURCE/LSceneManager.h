@@ -15,6 +15,21 @@ namespace lu
 		static Scene* GetActiveScene() { return mActiveScene; }
 		static Scene* LoadScene(std::wstring name);
 
+		template <typename T>
+		static bool CreateScene(std::wstring name)
+		{
+			T* scene = new T();
+			auto it = mScenes.find(name);
+
+			if (it != mScenes.end())
+				return false;
+
+			mScenes.insert(std::make_pair(name, scene));
+			mActiveScene = scene;
+			scene->Initialize();
+			return true;
+		}
+
 	private:
 		static Scene* mActiveScene;
 		static std::map<std::wstring, Scene*> mScenes;

@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="JSAB.cpp" />
-    <ClCompile Include="LoadScenes.cpp">
+    <ClCompile Include="LoadScenes.h">
       <Filter>Contents\Load</Filter>
     </ClCompile>
     <ClCompile Include="CameraScript.cpp">
@@ -11,6 +11,37 @@
     <ClCompile Include="LPlayScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="AnnhilateScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CoolFriendsScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="DubwooferScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="OverworldScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TryThisScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="BackgroundObject.cpp">
+      <Filter>Contents\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="BackgroundScript.cpp">
+      <Filter>Contents\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="JSABRenderer.cpp">
+      <Filter>Contents\Load</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -20,6 +51,37 @@
     <ClInclude Include="LPlayScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="AnnhilateScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CoolFriendsScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="DubwooferScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="OverworldScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TryThisScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundObject.h">
+      <Filter>Contents\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundScript.h">
+      <Filter>Contents\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="JSABRenderer.h">
+      <Filter>Contents\Load</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -33,6 +95,9 @@
     </Filter>
     <Filter Include="Contents\Scripts">
       <UniqueIdentifier>{50cf42d5-dd94-4d43-8e8d-4da76e95dd5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Background">
+      <UniqueIdentifier>{0d4b3305-a180-4535-a185-a204a6175fcb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

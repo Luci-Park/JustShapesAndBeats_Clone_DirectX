@@ -4,6 +4,7 @@
 #include "LShader.h"
 #include "LMesh.h"
 #include "LConstantBuffer.h"
+#include "LCamera.h"
 
 using namespace lu::math;
 namespace lu::renderer
@@ -29,8 +30,11 @@ namespace lu::renderer
 	extern Microsoft::WRL::ComPtr<ID3D11RasterizerState>rasterizerStates[];
 	extern Microsoft::WRL::ComPtr<ID3D11DepthStencilState>depthStencilStates[];
 	extern Microsoft::WRL::ComPtr<ID3D11BlendState> blendStates[];
+	
+	extern std::vector<lu::Camera*> cameras;
 
 	void Initialize();
+	void Render();
 	void Release();
 }
 

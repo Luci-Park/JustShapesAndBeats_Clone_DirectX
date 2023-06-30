@@ -15,6 +15,10 @@ namespace lu
 		virtual void Render();
 
 		void AddGameObject(GameObject* gameobj);
+		const std::vector<GameObject*> GetGameObjects()
+		{
+			return mGameObjects;
+		}
 
 	private:
 		std::vector<GameObject*> mGameObjects;

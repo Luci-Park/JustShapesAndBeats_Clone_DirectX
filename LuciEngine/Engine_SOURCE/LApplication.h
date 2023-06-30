@@ -25,7 +25,6 @@ namespace lu
 		HWND GetHwnd() { return mHwnd; }
 
 	private:
-		bool mbInitialize = false;
 		// 오로지 한개의 객체만 만들수 있는 스마트 포인터
 		std::unique_ptr<lu::graphics::GraphicDevice_Dx11> graphicDevice;
 

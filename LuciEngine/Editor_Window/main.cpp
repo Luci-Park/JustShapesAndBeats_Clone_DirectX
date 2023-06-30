@@ -3,11 +3,19 @@
 
 #include "framework.h"
 #include "Editor_Window.h"
-#include "LApplication.h"
+#include "Engine_SOURCE/LApplication.h"
+#ifdef _DEBUG
+#pragma comment(lib, "..\\x64\\Debug\\JSAB.lib")
+#else
+#pragma comment(lib, "..\\x64\\Release\\JSAB.lib")
+#endif
 
+#include "..\\JSAB\\LoadScenes.h"
 lu::Application application;
 
 #define MAX_LOADSTRING 100
+#define WIDTH 1600
+#define HEIGHT 900
 
 // 전역 변수:
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
@@ -110,18 +118,19 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, 1600, 900, nullptr, nullptr, hInstance, nullptr);
+      CW_USEDEFAULT, 0, WIDTH, HEIGHT, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
       return FALSE;
    }
 
-   application.SetWindow(hWnd, 1600, 900);
+   application.SetWindow(hWnd, WIDTH, HEIGHT);
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
    application.Initialize();
+   lu::JSAB::InitializeScenes();
 
    return TRUE;
 }

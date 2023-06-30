@@ -693,3 +693,9 @@ Scene
 2) camera rendering mode
 3) 만드는 순서 - mOpague -> cutout -> transparent
 => mask 가 애초에 비교해서 만드는 거라 transparent가 제일 나중에 해야 투명도가 적용된다.
+
+6/30
+- 반투명한 거끼리 할 땐 z값이 앞에 있는 거 부터 해야 뒤에 있는 놈이 그 색을 받아서 변한다.
+- 불투명한 것들끼리 다 그린 다음에 처리하자.
+
+- 부모 자식 관계

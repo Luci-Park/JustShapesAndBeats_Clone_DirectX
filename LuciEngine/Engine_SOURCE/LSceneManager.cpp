@@ -5,12 +5,6 @@ namespace lu
 	std::map<std::wstring, Scene*> SceneManager::mScenes;
 	void SceneManager::Initialize()
 	{
-
-		for (auto it = mScenes.begin(); it != mScenes.end(); it++)
-		{
-			it->second->Initialize();
-		}
-		LoadScene(L"Play");
 	}
 	void SceneManager::Update()
 	{

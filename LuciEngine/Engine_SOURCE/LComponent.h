@@ -1,6 +1,5 @@
 #pragma once
 #include "LEntity.h"
-#include "LGameObject.h"
 namespace lu
 {
 	using namespace lu::enums;

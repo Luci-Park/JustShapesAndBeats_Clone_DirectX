@@ -11,6 +11,7 @@
 #include <functional> // 함수 포인터
 
 #include <cmath> //수학
+#include <random>
 #include <algorithm> //정렬 알고리즘
 #include <limits> //부동 소수점 표현 및 반올림과 관련된 클래스 템플릿 numeric_limits 및 두 개의 열거형을 정의합니다.
 #include <memory> //메모리 관련된 라이브러리
@@ -20,14 +21,3 @@
 #include "CommonInclude.h"
 #include "LEnums.h"
 #include "LMath.h"
-#include <random>
-
-int GetRandomInt(int min, int max)
-{
-    if (min >= max) return min;
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distrib(min, max);
-    int randomNumber = distrib(gen);
-    return randomNumber;
-}

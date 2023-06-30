@@ -979,7 +979,6 @@ namespace lu::math
 #endif
         static RECT __cdecl ComputeTitleSafeArea(UINT backBufferWidth, UINT backBufferHeight) noexcept;
     };
-
 #include "LMath.inl"
 
 }

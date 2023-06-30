@@ -35,3 +35,10 @@ Since 5/15 ~
 ## Week 7(6/25 ~ 7/1)
 - background
 - SceneCreation
+- camera
+    - layermask
+    - alpha blending
+    - z depth
+- transform parent, child relationship
+- 순환참조를 하면 구문 오류가 난다.
+- Unity error = 헤더 파일을 중복 include 했을 때 가능성이 높다.

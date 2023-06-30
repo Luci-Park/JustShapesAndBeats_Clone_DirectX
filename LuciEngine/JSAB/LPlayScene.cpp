@@ -1,4 +1,6 @@
 #include "LPlayScene.h"
+#include "LPlayScene.h"
+#include "LPlayScene.h"
 #include "LTransform.h"
 #include "LMeshRenderer.h"
 #include "LResources.h"
@@ -45,7 +47,7 @@ namespace lu
 			AddGameObject(eLayerType::Player, camera);
 			camera->GetComponent<Transform>()->SetPos(Vector3(0.0f, 0.0f, -10.0f));
 			Camera* cameraComp = camera->AddComponent<Camera>();
-			//cameraComp->TurnLayerMask(eLayerType::UI, false);
+			cameraComp->TurnLayerMask(eLayerType::UI, false);
 			camera->AddComponent<CameraScript>();
 		}
 
@@ -55,16 +57,9 @@ namespace lu
 			AddGameObject(eLayerType::Player, camera);
 			camera->GetComponent<Transform>()->SetPos(Vector3(0.0f, 0.0f, -10.0f));
 			Camera* cameraComp = camera->AddComponent<Camera>();
-			//cameraComp->TurnLayerMask(eLayerType::Player, false);
+			cameraComp->TurnLayerMask(eLayerType::Player, false);
 			//camera->AddComponent<CameraScript>();
 		}
-
-		//GameObject* player2 = new GameObject();
-		//AddGameObject(eLayerType::Player, player2);
-		//player2->AddComponent<MeshRenderer>();
-
-		//Transform* tr = player->GetComponent<Transform>();
-		//tr->SetPosition(Vector3(0.5f, 0.5f, 0.0f));
 	}
 
 	void PlayScene::Update()

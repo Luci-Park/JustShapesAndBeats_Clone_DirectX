@@ -13,6 +13,8 @@ namespace lu::renderer
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthStencilStates[(UINT)eDSType::End] = {};
 	Microsoft::WRL::ComPtr<ID3D11BlendState> blendStates[(UINT)eBSType::End] = {};
 
+	std::vector<lu::Camera*> cameras = {};
+
 	void SetupState()
 	{
 #pragma region Input Layout
@@ -171,19 +173,20 @@ namespace lu::renderer
 			std::shared_ptr<Texture> texture
 				= Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
 
-			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
-			spriteMateiral->SetShader(Resources::Find<Shader>(L"SpriteShader"));
-			spriteMateiral->SetTexture(texture);
-			Resources::Insert(L"SpriteMaterial", spriteMateiral);
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(Resources::Find<Shader>(L"SpriteShader"));
+			spriteMaterial->SetTexture(texture);
+			Resources::Insert(L"SpriteMaterial", spriteMaterial);
 		}
 
 		{
 			std::shared_ptr<Texture> texture
 				= Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
-			std::shared_ptr<Material> spriteMateiral = std::make_shared<Material>();
-			spriteMateiral->SetShader(spriteShader);
-			spriteMateiral->SetTexture(texture);
-			Resources::Insert(L"SpriteMaterial02", spriteMateiral);
+			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
+			spriteMaterial->SetShader(spriteShader);
+			spriteMaterial->SetTexture(texture);
+			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"SpriteMaterial02", spriteMaterial);
 		}
 
 	}
@@ -209,6 +212,15 @@ namespace lu::renderer
 		LoadBuffer();
 		LoadShader();
 		SetupState();
+	}
+	void Render()
+	{
+		for (int i = 0; i < cameras.size(); ++i)
+		{
+			if (cameras[i] != nullptr)
+				cameras[i]->Render();
+		}
+		cameras.clear();
 	}
 	void Release()
 	{

@@ -153,15 +153,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AnnhilateScene.h" />
+    <ClInclude Include="BackgroundObject.h" />
+    <ClInclude Include="BackgroundScript.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="CameraScript.h" />
+    <ClInclude Include="CoolFriendsScene.h" />
+    <ClInclude Include="DubwooferScene.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="JSABRenderer.h" />
     <ClInclude Include="LPlayScene.h" />
+    <ClInclude Include="MenuScene.h" />
+    <ClInclude Include="OverworldScene.h" />
+    <ClInclude Include="TryThisScene.h" />
+    <ClInclude Include="TutorialScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnnhilateScene.cpp" />
+    <ClCompile Include="BackgroundObject.cpp" />
+    <ClCompile Include="BackgroundScript.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CameraScript.cpp" />
-    <ClCompile Include="LoadScenes.cpp" />
+    <ClCompile Include="CoolFriendsScene.cpp" />
+    <ClCompile Include="DubwooferScene.cpp" />
+    <ClCompile Include="JSABRenderer.cpp" />
+    <ClCompile Include="LoadScenes.h" />
     <ClCompile Include="LPlayScene.cpp" />
     <ClCompile Include="JSAB.cpp" />
+    <ClCompile Include="MenuScene.cpp" />
+    <ClCompile Include="OverworldScene.cpp" />
+    <ClCompile Include="TryThisScene.cpp" />
+    <ClCompile Include="TutorialScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Update="C:\Users\user\Documents\_Quve17\Luci\Coding\AssortRock\Win2DX\LuciEngine\Engine_SOURCE\LMath.inl">

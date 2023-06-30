@@ -2,13 +2,16 @@
 #include "LTransform.h"
 #include "LGameObject.h"
 #include "LApplication.h"
-
+#include "LRenderer.h"
+#include "LSceneManager.h"
+#include "LScene.h"
+#include "LMeshRenderer.h"
 extern lu::Application application;
 
 namespace lu
 {
-	Matrix Camera::mView = Matrix::Identity;
-	Matrix Camera::mProjection = Matrix::Identity;
+	Matrix Camera::View = Matrix::Identity;
+	Matrix Camera::Projection = Matrix::Identity;
 
 	Camera::Camera()
 		: Component(eComponentType::Camera)
@@ -17,7 +20,14 @@ namespace lu
 		, mNear(1.0f)
 		, mFar(100.0f)
 		, mSize(5.0f)
+		, mLayerMask{}
+		, mOpaqueGameObjects{}
+		, mCutOutGameObjects{}
+		, mTransparentGameObjects{}
+		, mView(Matrix::Identity)
+		, mProjection(Matrix::Identity)
 	{
+		EnableLayerMasks();
 	}
 	Camera::~Camera()
 	{
@@ -32,9 +42,18 @@ namespace lu
 	{
 		CreateViewMatrix();
 		CreateProjectionMatrix(mType);
+		RegisterCameraInRenderer();
 	}
 	void Camera::Render()
 	{
+		View = mView;
+		Projection = mProjection;
+
+		SortGameObjects();
+
+		RenderOpaque();
+		RenderCutOut();
+		RenderTransparent();
 	}
 	bool Camera::CreateViewMatrix()
 	{
@@ -79,5 +98,77 @@ namespace lu
 			mProjection = Matrix::CreatePerspectiveFieldOfViewLH(XM_2PI / 6.0f, mAspectRatio, mNear, mFar);
 		}
 		return true;
+	}
+	void Camera::RegisterCameraInRenderer()
+	{
+		renderer::cameras.push_back(this);
+	}
+	void Camera::TurnLayerMask(eLayerType type, bool enable)
+	{
+		mLayerMask.set((UINT)type, enable);
+	}
+	void Camera::SortGameObjects()
+	{
+		mOpaqueGameObjects.clear();
+		mCutOutGameObjects.clear();
+		mTransparentGameObjects.clear();
+
+		Scene* scene = SceneManager::GetActiveScene();
+		for (int i = 0; i < (UINT)eLayerType::End; i++)
+		{
+			if (mLayerMask[i] == true)
+			{
+				Layer& layer = scene->GetLayer((eLayerType)i);
+				const std::vector<GameObject*> gameObjs = layer.GetGameObjects();
+
+				for (int i = 0; i < gameObjs.size(); i++)
+				{
+					MeshRenderer* mr = gameObjs[i]->GetComponent <MeshRenderer>();
+					if (mr == nullptr)
+						continue;
+
+					std::shared_ptr<Material> mat = mr->GetMaterial();
+					eRenderingMode mode = mat->GetRenderingMode();
+					switch (mode)
+					{
+					case lu::graphics::eRenderingMode::Opaque:
+						mOpaqueGameObjects.push_back(gameObjs[i]);
+						break;
+					case lu::graphics::eRenderingMode::CutOut:
+						mCutOutGameObjects.push_back(gameObjs[i]);
+						break;
+					case lu::graphics::eRenderingMode::Transparent:
+						mTransparentGameObjects.push_back(gameObjs[i]);
+						break;
+					default:
+						break;
+					}
+				}
+			}
+		}
+	}
+	void Camera::RenderOpaque()
+	{
+		for (int i = 0; i < mOpaqueGameObjects.size(); ++i)
+		{
+			if (mOpaqueGameObjects[i] != nullptr)
+				mOpaqueGameObjects[i]->Render();
+		}
+	}
+	void Camera::RenderCutOut()
+	{
+		for (int i = 0; i < mCutOutGameObjects.size(); ++i)
+		{
+			if (mCutOutGameObjects[i] != nullptr)
+				mCutOutGameObjects[i]->Render();
+		}
+	}
+	void Camera::RenderTransparent()
+	{
+		for (int i = 0; i < mTransparentGameObjects.size(); ++i)
+		{
+			if (mTransparentGameObjects[i] != nullptr)
+				mTransparentGameObjects[i]->Render();
+		}
 	}
 }
