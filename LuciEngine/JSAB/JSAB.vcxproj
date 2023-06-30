@@ -24,7 +24,7 @@
     <ProjectGuid>{75e637f6-8e03-4459-b01b-0edc06f8761f}</ProjectGuid>
     <RootNamespace>YamYamEngine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>ZEngine</ProjectName>
+    <ProjectName>JSAB</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -153,10 +153,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CameraScript.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="LPlayScene.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ZEngine.cpp" />
+    <ClCompile Include="CameraScript.cpp" />
+    <ClCompile Include="LoadScenes.cpp" />
+    <ClCompile Include="LPlayScene.cpp" />
+    <ClCompile Include="JSAB.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Update="C:\Users\user\Documents\_Quve17\Luci\Coding\AssortRock\Win2DX\LuciEngine\Engine_SOURCE\LMath.inl">

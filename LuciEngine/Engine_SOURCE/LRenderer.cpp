@@ -2,7 +2,6 @@
 #include "LResources.h"
 #include "LTexture.h"
 #include "LMaterial.h"
-#include "JSABRenderer.h"
 
 namespace lu::renderer
 {
@@ -210,12 +209,6 @@ namespace lu::renderer
 		LoadBuffer();
 		LoadShader();
 		SetupState();
-
-		lu::JSAB::InitializeGraphics();
-
-		//std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
-		//texture = Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
-		//texture->BindShader(eShaderStage::PS, 0);
 	}
 	void Release()
 	{

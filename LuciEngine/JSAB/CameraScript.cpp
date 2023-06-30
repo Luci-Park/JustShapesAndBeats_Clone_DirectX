@@ -1,4 +1,4 @@
-#include "LCameraScript.h"
+#include "CameraScript.h"
 #include "LTransform.h"
 #include "LGameObject.h"
 #include "LTime.h"
@@ -10,6 +10,7 @@ namespace lu
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector3 pos = tr->GetPos();
+
 
 		if (Input::GetKey(eKeyCode::W))
 		{
@@ -41,5 +42,6 @@ namespace lu
 			pos.y += 5.0f * Time::DeltaTime();
 			tr->SetPos(pos);
 		}
+
 	}
 }

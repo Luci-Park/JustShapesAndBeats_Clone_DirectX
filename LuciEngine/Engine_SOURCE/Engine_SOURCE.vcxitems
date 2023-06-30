@@ -14,20 +14,11 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Bullet.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)JSABRenderer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)JSABScenes.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)AnnhilateScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LApplication.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)BackgroundObject.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)BackgroundScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LCamera.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)LCameraScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LConstantBuffer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)CoolFriendsScene.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)DubwooferScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LEnums.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LGameObject.h" />
@@ -37,11 +28,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LMaterial.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LMath.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)MenuScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LMeshRenderer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)OverworldScene.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)LPlayScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LSceneManager.h" />
@@ -49,26 +37,16 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LTransform.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)TryThisScene.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)TutorialScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LuciEngine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LResources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LTime.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Bullet.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)JSABRenderer.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)AnnhilateScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LApplication.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)BackgroundObject.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)BackgroundScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LCamera.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)LCameraScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LConstantBuffer.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)CoolFriendsScene.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)DubwooferScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LGraphicDevice_Dx11.cpp" />
@@ -76,11 +54,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LMaterial.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)MenuScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LMeshRenderer.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)OverworldScene.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)LPlayScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LResources.cpp" />
@@ -91,8 +66,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LTransform.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)TryThisScene.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)TutorialScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)LMath.inl" />

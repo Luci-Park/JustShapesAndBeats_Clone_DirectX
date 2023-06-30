@@ -49,26 +49,38 @@
     <Filter Include="Scene\Manager">
       <UniqueIdentifier>{5a803639-a522-410e-bc29-96928fe085b0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="_JSAB">
-      <UniqueIdentifier>{2b9e0e4f-58f9-4dc9-8f8f-9f6b0991f178}</UniqueIdentifier>
+    <Filter Include="GameObject\Component\Base">
+      <UniqueIdentifier>{1a9c8ff6-ad58-4f92-8ee8-d386c25d08bb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="_JSAB\Scene">
-      <UniqueIdentifier>{a7fce894-db34-4378-a3bb-81b7d89c9a03}</UniqueIdentifier>
+    <Filter Include="GameObject\Component\MeshRenderer">
+      <UniqueIdentifier>{61c8fc2d-1e46-4ad2-b5d3-8de1d4b822bc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Camera">
+    <Filter Include="GameObject\Component\Transform">
+      <UniqueIdentifier>{55996d61-a31c-4e57-b578-f1704be186ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Camera">
       <UniqueIdentifier>{ddb31c4b-019c-4c6b-984c-db7534d99671}</UniqueIdentifier>
     </Filter>
-    <Filter Include="_JSAB\Graphics">
-      <UniqueIdentifier>{5db22934-dc11-41c3-9642-50201f569c76}</UniqueIdentifier>
+    <Filter Include="Graphics\ConstantBuffer">
+      <UniqueIdentifier>{d1b6ff1a-29d1-418f-9ebb-5163150a2375}</UniqueIdentifier>
     </Filter>
-    <Filter Include="_JSAB\GameObjects">
-      <UniqueIdentifier>{1b0a0036-2151-46d6-8cc2-4b242d0501fb}</UniqueIdentifier>
+    <Filter Include="Graphics\GraphicDevice">
+      <UniqueIdentifier>{932279ed-66e7-4fb0-95ee-8d0190012a62}</UniqueIdentifier>
     </Filter>
-    <Filter Include="_JSAB\GameObjects\Background">
-      <UniqueIdentifier>{143bcc40-6535-47cb-a53d-dde5dc483fcc}</UniqueIdentifier>
+    <Filter Include="Graphics\Renderer">
+      <UniqueIdentifier>{4bedeab2-0557-44bc-84e0-7f06a650e785}</UniqueIdentifier>
     </Filter>
-    <Filter Include="_JSAB\GameObjects\Bullets">
-      <UniqueIdentifier>{6b7eaf25-b69b-495d-85d2-54f8573c266d}</UniqueIdentifier>
+    <Filter Include="Resource\Material">
+      <UniqueIdentifier>{8b1815f3-eaad-42d1-a9dc-05d57eaa7809}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Mesh">
+      <UniqueIdentifier>{fc593087-c45e-4794-81dd-f8876d0b7537}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Shader">
+      <UniqueIdentifier>{62ca3647-4e7a-4084-9843-a9aa60a573b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Texture">
+      <UniqueIdentifier>{8a48a0d5-950d-4e79-8cd3-e2d12dea67a4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -105,39 +117,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LGraphics.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LGraphicDevice_Dx11.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LRenderer.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LMesh.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LShader.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LConstantBuffer.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)LLayer.h">
       <Filter>Scene\Layer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)LGameObject.h">
       <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LScript.h">
-      <Filter>GameObject\Component\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LComponent.h">
-      <Filter>GameObject\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LPlayScene.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)LTransform.h">
-      <Filter>GameObject\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LMeshRenderer.h">
-      <Filter>GameObject\Component</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)LSceneManager.h">
       <Filter>Scene\Manager</Filter>
@@ -145,53 +129,41 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LScene.h">
       <Filter>Scene\Base</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LTexture.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LCamera.h">
+      <Filter>GameObject\Component\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LComponent.h">
+      <Filter>GameObject\Component\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LMeshRenderer.h">
+      <Filter>GameObject\Component\MeshRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LScript.h">
+      <Filter>GameObject\Component\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LTransform.h">
+      <Filter>GameObject\Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LConstantBuffer.h">
+      <Filter>Graphics\ConstantBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LGraphicDevice_Dx11.h">
+      <Filter>Graphics\GraphicDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LRenderer.h">
+      <Filter>Graphics\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)LMaterial.h">
-      <Filter>Graphics</Filter>
+      <Filter>Resource\Material</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CoolFriendsScene.h">
-      <Filter>_JSAB\Scene</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LMesh.h">
+      <Filter>Resource\Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)DubwooferScene.h">
-      <Filter>_JSAB\Scene</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LTexture.h">
+      <Filter>Resource\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MenuScene.h">
-      <Filter>_JSAB\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)OverworldScene.h">
-      <Filter>_JSAB\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)AnnhilateScene.h">
-      <Filter>_JSAB\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)TutorialScene.h">
-      <Filter>_JSAB\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)TryThisScene.h">
-      <Filter>_JSAB\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LCamera.h">
-      <Filter>Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LCameraScript.h">
-      <Filter>Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)JSABRenderer.h">
-      <Filter>_JSAB\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)JSABScenes.h">
-      <Filter>_JSAB\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)BackgroundObject.h">
-      <Filter>_JSAB\GameObjects\Background</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)BackgroundScript.h">
-      <Filter>_JSAB\GameObjects\Background</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Bullet.h">
-      <Filter>_JSAB\GameObjects\Bullets</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LShader.h">
+      <Filter>Resource\Shader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -216,39 +188,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LResources.cpp">
       <Filter>Resource\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LGraphicDevice_Dx11.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LRenderer.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LMesh.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LShader.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LConstantBuffer.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LLayer.cpp">
       <Filter>Scene\Layer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LGameObject.cpp">
       <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LScript.cpp">
-      <Filter>GameObject\Component\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LComponent.cpp">
-      <Filter>GameObject\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LPlayScene.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)LTransform.cpp">
-      <Filter>GameObject\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LMeshRenderer.cpp">
-      <Filter>GameObject\Component</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LSceneManager.cpp">
       <Filter>Scene\Manager</Filter>
@@ -256,50 +200,41 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LScene.cpp">
       <Filter>Scene\Base</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LTexture.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LCamera.cpp">
+      <Filter>GameObject\Component\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LComponent.cpp">
+      <Filter>GameObject\Component\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LMeshRenderer.cpp">
+      <Filter>GameObject\Component\MeshRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LScript.cpp">
+      <Filter>GameObject\Component\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LTransform.cpp">
+      <Filter>GameObject\Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LConstantBuffer.cpp">
+      <Filter>Graphics\ConstantBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LGraphicDevice_Dx11.cpp">
+      <Filter>Graphics\GraphicDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LRenderer.cpp">
+      <Filter>Graphics\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMaterial.cpp">
-      <Filter>Graphics</Filter>
+      <Filter>Resource\Material</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)CoolFriendsScene.cpp">
-      <Filter>_JSAB\Scene</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LMesh.cpp">
+      <Filter>Resource\Mesh</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)DubwooferScene.cpp">
-      <Filter>_JSAB\Scene</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LTexture.cpp">
+      <Filter>Resource\Texture</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MenuScene.cpp">
-      <Filter>_JSAB\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)OverworldScene.cpp">
-      <Filter>_JSAB\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)AnnhilateScene.cpp">
-      <Filter>_JSAB\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)TryThisScene.cpp">
-      <Filter>_JSAB\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)TutorialScene.cpp">
-      <Filter>_JSAB\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LCamera.cpp">
-      <Filter>Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LCameraScript.cpp">
-      <Filter>Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)JSABRenderer.cpp">
-      <Filter>_JSAB\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)BackgroundObject.cpp">
-      <Filter>_JSAB\GameObjects\Background</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)BackgroundScript.cpp">
-      <Filter>_JSAB\GameObjects\Background</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Bullet.cpp">
-      <Filter>_JSAB\GameObjects\Bullets</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LShader.cpp">
+      <Filter>Resource\Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
