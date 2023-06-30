@@ -1,5 +1,5 @@
 #pragma once
-#include "LScript.h"
+#include <LScript.h>
 
 namespace lu
 {
@@ -7,7 +7,8 @@ namespace lu
 	{
 	public:
 		virtual void Update() override;
+
 	private:
+
 	};
 }
-

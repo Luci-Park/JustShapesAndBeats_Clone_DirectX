@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="JSAB.cpp" />
+    <ClCompile Include="LoadScenes.cpp">
+      <Filter>Contents\Load</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraScript.cpp">
+      <Filter>Contents\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="LPlayScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="CameraScript.h">
+      <Filter>Contents\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="LPlayScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{aa626dde-8919-4829-940d-aed1ffec7606}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Load">
+      <UniqueIdentifier>{d56c7989-6404-413b-bbe8-66091196284d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene">
+      <UniqueIdentifier>{2ece5e94-2beb-4579-8ff7-7b56ddd12fa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scripts">
+      <UniqueIdentifier>{50cf42d5-dd94-4d43-8e8d-4da76e95dd5c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

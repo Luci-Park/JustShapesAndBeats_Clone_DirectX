@@ -1,9 +1,8 @@
 #pragma once
-#include "LScene.h"
+#include <LScene.h>
 
 namespace lu
 {
-	class lu::JSAB::BackgroundScript;
 	class PlayScene : public Scene
 	{
 	public:
@@ -14,8 +13,10 @@ namespace lu
 		virtual void Update() override;
 		virtual void LateUpdate() override;
 		virtual void Render() override;
+
 	private:
-		lu::JSAB::BackgroundScript* bs;
+
 	};
 }
+
 
