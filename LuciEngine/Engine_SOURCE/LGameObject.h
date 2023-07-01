@@ -4,6 +4,7 @@
 #include "LScript.h"
 namespace lu
 {
+	class Transform;
 	class GameObject : public Entity
 	{
 	public:
@@ -15,6 +16,7 @@ namespace lu
 		};
 
 		GameObject();
+		GameObject(Transform* parent);
 		virtual ~GameObject();
 
 		virtual void Initialize();
@@ -61,6 +63,8 @@ namespace lu
 			return comp;
 		}
 
+	public:
+		Transform* mTransform;
 	private:
 		eState mState;
 		std::vector<Component*> mComponents;

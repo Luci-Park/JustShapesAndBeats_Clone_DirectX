@@ -8,7 +8,12 @@ namespace lu
 	GameObject::GameObject()
 		: mState(eState::Active)
 	{
-		AddComponent<Transform>();
+		mTransform = AddComponent<Transform>();
+	}
+
+	GameObject::GameObject(Transform* parent)
+	{
+		mTransform->SetParent(parent);
 	}
 
 	GameObject::~GameObject()

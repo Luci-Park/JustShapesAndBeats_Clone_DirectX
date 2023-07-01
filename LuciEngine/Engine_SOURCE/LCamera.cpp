@@ -15,8 +15,8 @@ namespace lu
 
 	bool CompareZSort(GameObject* a, GameObject* b)
 	{
-		if (a->GetComponent<Transform>()->GetPos().z
-			< b->GetComponent<Transform>()->GetPos().z)
+		if (a->GetComponent<Transform>()->GetPosition().z
+			< b->GetComponent<Transform>()->GetPosition().z)
 			return false;
 		return true;
 	}
@@ -70,7 +70,7 @@ namespace lu
 	bool Camera::CreateViewMatrix()
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
-		Vector3 pos = tr->GetPos();
+		Vector3 pos = tr->GetPosition();
 
 		//Translate
 		mView = Matrix::Identity;

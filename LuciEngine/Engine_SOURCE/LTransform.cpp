@@ -7,12 +7,9 @@ namespace lu
 {
 	Transform::Transform()
 		:Component(eComponentType::Transform)
-		, mLocalPos(Vector3::Zero)
-		, mWorldPos(Vector3::Zero)
-		, mLocalRot(Vector3::Zero)
-		, mWorldRot(Vector3::Zero)
-		, mLocalScale(Vector3::One)
-		, mWorldScale(Vector3::One)
+		, mPosition(Vector3::Zero)
+		, mRotation(Vector3::Zero)
+		, mScale(Vector3::One)
 		, mParent(this)
 	{
 	}
@@ -24,20 +21,20 @@ namespace lu
 	}
 	void Transform::Update()
 	{
-		CalculateWorldPos();
-		CalculateWorldScale();
 	}
 	void Transform::LateUpdate()
 	{
 		mWorld = Matrix::Identity;
-		Matrix scale = Matrix::CreateScale(mWorldScale);
 
-		Matrix rotation = Matrix::CreateRotationX(mWorldRot.x);
-		rotation *= Matrix::CreateRotationY(mWorldRot.y);
-		rotation *= Matrix::CreateRotationZ(mWorldRot.z);
+		Matrix scale = Matrix::CreateScale(mScale);
+
+		Matrix rotation;
+		rotation = Matrix::CreateRotationX(mRotation.x);
+		rotation *= Matrix::CreateRotationY(mRotation.y);
+		rotation *= Matrix::CreateRotationZ(mRotation.z);
 
 		Matrix position;
-		position.Translation(mWorldPos);
+		position.Translation(mPosition);
 
 		mWorld = scale * rotation * position;
 
@@ -45,7 +42,10 @@ namespace lu
 		mForward = Vector3::TransformNormal(Vector3::Forward, rotation);
 		mRight = Vector3::TransformNormal(Vector3::Right, rotation);
 
-
+		if (mParent)
+		{
+			mWorld *= mParent->mWorld;
+		}
 	}
 	void Transform::Render()
 	{
@@ -69,8 +69,6 @@ namespace lu
 		}
 		mParent = parent;
 		parent->SetChildren(this);
-		CalculateWorldPos();
-		CalculateWorldScale();
 	}
 	void Transform::SetChildren(Transform* child)
 	{
@@ -84,49 +82,5 @@ namespace lu
 		{
 			mChildren.erase(it);
 		}
-	}
-	void Transform::CalculateWorldPos()
-	{
-		if (mParent != nullptr && mParent != this)
-			mWorldPos = mLocalPos + mParent->GetPos();
-		else
-			mWorldPos = mLocalPos;
-	}
-	void Transform::CalculateLocalPos()
-	{
-		if (mParent != nullptr && mParent != this)
-			mLocalPos = mWorldPos - mParent->GetPos();
-		else
-			mLocalPos = mWorldPos;
-	}
-	void Transform::CalcluateWorldRot()
-	{
-	}
-	void Transform::CalculateLocalRot()
-	{
-	}
-	void Transform::CalculateWorldScale()
-	{
-		if (mParent != nullptr && mParent != this)
-		{
-			Vector3 parentScale = mParent->GetScale();
-			mWorldScale.x = mLocalScale.x * parentScale.x;
-			mWorldScale.y = mLocalScale.y * parentScale.y;
-			mWorldScale.z = mLocalScale.y * parentScale.y;
-		}
-		else
-			mWorldScale = mLocalScale;
-	}
-	void Transform::CalculateLocalScale()
-	{
-		if (mParent != nullptr && mParent != this)
-		{
-			Vector3 parentScale = mParent->GetScale();
-			mLocalScale.x = parentScale.y == 0 ? 0 : mWorldScale.x / parentScale.x;
-			mLocalScale.y = parentScale.y == 0 ? 0 : mWorldScale.y / parentScale.y;
-			mLocalScale.z = parentScale.z == 0 ? 0 : mWorldScale.z / parentScale.z;
-		}
-		else
-			mLocalScale = mWorldScale;
 	}
 }
