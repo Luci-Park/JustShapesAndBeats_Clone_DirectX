@@ -6,35 +6,8 @@
 namespace lu::JSAB
 {
 	void LoadBackground()
-	{
-		D3D11_INPUT_ELEMENT_DESC arrLayout[3] = {};
-		#pragma region  inputlayout
-		arrLayout[0].AlignedByteOffset = 0;
-		arrLayout[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;
-		arrLayout[0].InputSlot = 0;
-		arrLayout[0].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-		arrLayout[0].SemanticName = "POSITION";
-		arrLayout[0].SemanticIndex = 0;
-
-		arrLayout[1].AlignedByteOffset = 12;
-		arrLayout[1].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-		arrLayout[1].InputSlot = 0;
-		arrLayout[1].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-		arrLayout[1].SemanticName = "COLOR";
-		arrLayout[1].SemanticIndex = 0;
-
-		arrLayout[2].AlignedByteOffset = 28;
-		arrLayout[2].Format = DXGI_FORMAT_R32G32_FLOAT;
-		arrLayout[2].InputSlot = 0;
-		arrLayout[2].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-		arrLayout[2].SemanticName = "TEXCOORD";
-		arrLayout[2].SemanticIndex = 0;
-#pragma endregion
-		std::shared_ptr<Shader> shader = std::make_shared<Shader>();
-		shader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
-		shader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
-		Resources::Insert(L"BackgroundShader", shader);
-		GetDevice()->CreateInputLayout(arrLayout, 3, shader->GetVSCode(), shader->GetInputLayoutAddressOf());
+	{		
+		std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
 
 		std::wstring folderPath = L"..\\..\\Assets\\Texture\\Background\\";
 		std::vector<std::wstring> imgs = {

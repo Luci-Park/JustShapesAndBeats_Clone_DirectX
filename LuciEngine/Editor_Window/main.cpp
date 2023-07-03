@@ -15,8 +15,8 @@
 lu::Application application;
 
 #define MAX_LOADSTRING 100
-#define WIDTH 1600
-#define HEIGHT 900
+#define WIDTH 1280
+#define HEIGHT 720
 
 // 전역 변수:
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
@@ -134,8 +134,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    UpdateWindow(hWnd);
 
    application.Initialize();
-   lu::JSAB::InitializeScenes();
    lu::JSAB::InitializeGraphics();
+   lu::JSAB::InitializeScenes();
 
    return TRUE;
 }

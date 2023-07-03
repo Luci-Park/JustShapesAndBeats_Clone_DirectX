@@ -35,6 +35,7 @@ namespace lu::JSAB
 			}
 		}
 		mMeshRenderer = GetOwner()->GetComponent<MeshRenderer>();
+		mMeshRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 	}
 	void BackgroundScript::SetBackground(Backgrounds type)
 	{
