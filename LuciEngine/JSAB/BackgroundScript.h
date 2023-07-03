@@ -27,8 +27,8 @@ namespace lu::JSAB
 		virtual ~BackgroundScript();
 
 		virtual void Initialize() override;
-		void SetMaterial(Backgrounds type);
-		void SetMaterial(int type);
+		void SetBackground(Backgrounds type);
+		void SetBackground(int type);
 	private:
 		lu::MeshRenderer* mMeshRenderer;
 	};

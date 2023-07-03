@@ -31,8 +31,8 @@ namespace lu::JSAB
 		arrLayout[2].SemanticIndex = 0;
 #pragma endregion
 		std::shared_ptr<Shader> shader = std::make_shared<Shader>();
-		shader->Create(eShaderStage::VS, L"BackgroundVS.hlsl", "main");
-		shader->Create(eShaderStage::PS, L"BackgroundPS.hlsl", "main");
+		shader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
+		shader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
 		Resources::Insert(L"BackgroundShader", shader);
 		GetDevice()->CreateInputLayout(arrLayout, 3, shader->GetVSCode(), shader->GetInputLayoutAddressOf());
 

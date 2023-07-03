@@ -2,6 +2,7 @@
 #include "LGameObject.h"
 namespace lu::JSAB
 {
+	class BackgroundScript;
 	class BackgroundObject : public GameObject
 	{
 	public:
@@ -13,6 +14,8 @@ namespace lu::JSAB
 		virtual void LateUpdate();
 		virtual void Render();
 
+	private:
+		BackgroundScript* mBackground;
 	};
 }
 

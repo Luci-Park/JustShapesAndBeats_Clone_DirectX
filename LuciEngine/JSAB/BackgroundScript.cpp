@@ -1,6 +1,7 @@
 #include "BackgroundScript.h"
 #include "LMaterial.h"
 #include "LResources.h"
+#include "LGameObject.h"
 namespace lu::JSAB
 {
 	std::vector<std::shared_ptr<Material>> BackgroundScript::_backgrounds = {};
@@ -35,11 +36,13 @@ namespace lu::JSAB
 		}
 		mMeshRenderer = GetOwner()->GetComponent<MeshRenderer>();
 	}
-	void BackgroundScript::SetMaterial(Backgrounds type)
+	void BackgroundScript::SetBackground(Backgrounds type)
 	{
+		if (type >= Backgrounds::END)
+			type = Backgrounds::BLACK;
 		mMeshRenderer->SetMaterial(_backgrounds[(int)type]);
 	}
-	void BackgroundScript::SetMaterial(int type)
+	void BackgroundScript::SetBackground(int type)
 	{
 		if (type < 0 || type >= (int)Backgrounds::END)
 			type = 0;

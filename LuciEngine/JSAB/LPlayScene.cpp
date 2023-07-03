@@ -1,6 +1,4 @@
 #include "LPlayScene.h"
-#include "LPlayScene.h"
-#include "LPlayScene.h"
 #include "LTransform.h"
 #include "LMeshRenderer.h"
 #include "LResources.h"
@@ -8,6 +6,7 @@
 #include "CameraScript.h"
 #include "LCamera.h"
 #include "LSceneManager.h"
+#include "BackgroundObject.h"
 
 namespace lu
 {
@@ -68,6 +67,10 @@ namespace lu
 			player->GetComponent<Transform>()->SetPosition(Vector3(0.2f, 0.0f, 0.0f));
 			//player->AddComponent<CameraScript>();
 		}
+		{
+			JSAB::BackgroundObject* bg = new JSAB::BackgroundObject();
+			AddGameObject(eLayerType::UI, bg);
+		}
 
 		//Main Camera
 		{
@@ -83,7 +86,7 @@ namespace lu
 		{
 			GameObject* camera = new GameObject();
 			AddGameObject(eLayerType::Player, camera);
-			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -50.0f));
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TurnLayerMask(eLayerType::Player, false);
 			//camera->AddComponent<CameraScript>();
@@ -95,6 +98,7 @@ namespace lu
 
 		//Transform* tr = player->GetComponent<Transform>();
 		//tr->SetPosition(Vector3(0.5f, 0.5f, 0.0f));
+		Scene::Initialize();
 	}
 
 	void PlayScene::Update()

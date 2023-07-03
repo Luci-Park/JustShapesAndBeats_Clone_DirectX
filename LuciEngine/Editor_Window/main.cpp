@@ -11,6 +11,7 @@
 #endif
 
 #include "..\\JSAB\\LoadScenes.h"
+#include "..\\JSAB\\JSABRenderer.h"
 lu::Application application;
 
 #define MAX_LOADSTRING 100
@@ -33,6 +34,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_ LPWSTR    lpCmdLine,
                      _In_ int       nCmdShow)
 {
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    //_CrtSetBreakAlloc(1780)
+
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
@@ -117,7 +121,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW & ~WS_MAXIMIZEBOX & ~WS_THICKFRAME,
       CW_USEDEFAULT, 0, WIDTH, HEIGHT, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
@@ -131,6 +135,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    application.Initialize();
    lu::JSAB::InitializeScenes();
+   lu::JSAB::InitializeGraphics();
 
    return TRUE;
 }

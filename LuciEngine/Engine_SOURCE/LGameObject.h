@@ -2,9 +2,9 @@
 #include "LEntity.h"
 #include "LComponent.h"
 #include "LScript.h"
+#include "LTransform.h"
 namespace lu
 {
-	class Transform;
 	class GameObject : public Entity
 	{
 	public:

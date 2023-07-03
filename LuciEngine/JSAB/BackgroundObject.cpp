@@ -2,7 +2,9 @@
 #include "BackgroundScript.h"
 #include "LMeshRenderer.h"
 #include "LResources.h"
-#include "LTransform.h"
+#include "LApplication.h"
+
+extern lu::Application application;
 namespace lu::JSAB
 {
 	BackgroundObject::BackgroundObject()
@@ -15,9 +17,11 @@ namespace lu::JSAB
 	{
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		GetComponent<Transform>()->SetPosition(Vector3(0, 0, 10));
-		AddComponent<BackgroundScript>();
+		mTransform->SetPosition(Vector3(0, 0, 10));
+		mTransform->SetScale(Vector3(application.GetWidth(), application.GetHeight(), 0.0f));
+		mBackground = AddComponent<BackgroundScript>();
 		GameObject::Initialize();
+		mBackground->SetBackground(BackgroundScript::Backgrounds::PINK);
 	}
 	void BackgroundObject::Update()
 	{
