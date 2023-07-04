@@ -20,7 +20,7 @@ namespace lu::JSAB
 			END
 		};
 	private:
-		static std::vector<std::shared_ptr<Material>> _backgrounds;
+		static std::vector<std::shared_ptr<Texture>> _backgrounds;
 
 	public:
 		BackgroundScript();

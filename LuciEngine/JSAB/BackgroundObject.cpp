@@ -13,24 +13,23 @@ namespace lu::JSAB
 	}
 	void BackgroundObject::Initialize()
 	{
+		mTransform->SetPosition(Vector3(0, 0, 10));		
+		mTransform->SetScale(Vector3(8, 6, 1));
+		
+		std::shared_ptr<Material> mat = Resources::Find<Material>(L"BackgroundMat");
+		if (mat == nullptr)
+		{
+			mat = std::make_shared<Material>();
+			mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
+			Resources::Insert(L"BackgroundMat", mat);
+		}
+
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
-		mTransform->SetPosition(Vector3(0, 0, 10));
-		mTransform->SetScale(Vector3(2.55, 1.9, 1));
+		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		mr->SetMaterial(mat);
+
 		mBackground = AddComponent<BackgroundScript>();
 		GameObject::Initialize();
-		mBackground->SetBackground(BackgroundScript::Backgrounds::SKYBLUE);
-	}
-	void BackgroundObject::Update()
-	{
-		GameObject::Update();
-
-	}
-	void BackgroundObject::LateUpdate()
-	{
-		GameObject::LateUpdate();
-	}
-	void BackgroundObject::Render()
-	{
-		GameObject::Render();
+		mBackground->SetBackground(BackgroundScript::Backgrounds::ANNIHILATE);
 	}
 }

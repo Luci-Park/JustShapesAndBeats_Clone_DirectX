@@ -14,6 +14,7 @@ namespace lu::JSAB
 	{
 		//SceneManager::CreateScene<PlayScene>(L"PlayScene");
 		SceneManager::CreateScene<MenuScene>(L"MenuScene");
+		//SceneManager::LoadScene(L"PlayScene");
 		SceneManager::LoadScene(L"MenuScene");
 	}
 }

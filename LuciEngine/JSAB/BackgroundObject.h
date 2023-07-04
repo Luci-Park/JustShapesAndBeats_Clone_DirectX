@@ -9,10 +9,7 @@ namespace lu::JSAB
 		BackgroundObject();
 		virtual ~BackgroundObject();
 
-		virtual void Initialize();
-		virtual void Update();
-		virtual void LateUpdate();
-		virtual void Render();
+		virtual void Initialize() override;
 
 	private:
 		BackgroundScript* mBackground;

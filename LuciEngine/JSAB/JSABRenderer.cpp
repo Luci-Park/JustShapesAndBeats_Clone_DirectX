@@ -26,17 +26,24 @@ namespace lu::JSAB
 		for (int i = 0; i < imgs.size(); i++)
 		{
 			std::wstring filepath = folderPath + imgs[i] + L".png";
-			std::wstring matName = imgs[i] + L"_mat";
 			std::shared_ptr<Texture> tex = Resources::Load<Texture>(imgs[i], filepath);
+		}
+	}
 
-			std::shared_ptr<Material> mat = std::make_shared<Material>();
-			mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
-			mat->SetTexture(tex);
-			Resources::Insert(matName, mat);
+	void LoadPlayer()
+	{
+		std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
+		std::wstring folderPath = L"..\\..\\Assets\\Texture\\Player\\Player\\";
+		std::wstring img = L"player";
+		for (int i = 1; i <= 77; i++)
+		{
+			std::wstring filename = folderPath + img + std::to_wstring(i) + L".png";
+			Resources::Load<Texture>(img + std::to_wstring(i), filename);
 		}
 	}
 	void InitializeGraphics()
 	{
 		LoadBackground();
+		LoadPlayer();
 	}
 }

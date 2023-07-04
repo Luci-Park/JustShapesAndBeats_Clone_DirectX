@@ -4,7 +4,7 @@
 #include "LGameObject.h"
 namespace lu::JSAB
 {
-	std::vector<std::shared_ptr<Material>> BackgroundScript::_backgrounds = {};
+	std::vector<std::shared_ptr<Texture>> BackgroundScript::_backgrounds = {};
 	BackgroundScript::BackgroundScript()
 	{
 	}
@@ -31,22 +31,22 @@ namespace lu::JSAB
 			_backgrounds.resize(imgs.size());
 			for (int i = 0; i < imgs.size(); i++)
 			{
-				_backgrounds[i] = Resources::Find<Material>(imgs[i] + L"_mat");
+				_backgrounds[i] = Resources::Find<Texture>(imgs[i]);
 			}
 		}
+
 		mMeshRenderer = GetOwner()->GetComponent<MeshRenderer>();
-		mMeshRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 	}
 	void BackgroundScript::SetBackground(Backgrounds type)
 	{
 		if (type >= Backgrounds::END)
 			type = Backgrounds::BLACK;
-		mMeshRenderer->SetMaterial(_backgrounds[(int)type]);
+		mMeshRenderer->GetMaterial()->SetTexture(_backgrounds[(int)type]);
 	}
 	void BackgroundScript::SetBackground(int type)
 	{
 		if (type < 0 || type >= (int)Backgrounds::END)
 			type = 0;
-		mMeshRenderer->SetMaterial(_backgrounds[type]);
+		mMeshRenderer->GetMaterial()->SetTexture(_backgrounds[type]);
 	}
 }

@@ -27,7 +27,7 @@ namespace lu
 		, mAspectRatio(1.0f)
 		, mNear(1.0f)
 		, mFar(100.0f)
-		, mSize(10.0f)
+		, mSize(100.0f)
 		, mLayerMask{}
 		, mOpaqueGameObjects{}
 		, mCutOutGameObjects{}
@@ -103,7 +103,7 @@ namespace lu
 			height *= orthorgraphicratio;
 
 			//LH = left handed
-			mProjection = Matrix::CreateOrthographicLH(width, height, mNear,     mFar);
+			mProjection = Matrix::CreateOrthographicLH(width, height, mNear, mFar);
 		}
 		else
 		{

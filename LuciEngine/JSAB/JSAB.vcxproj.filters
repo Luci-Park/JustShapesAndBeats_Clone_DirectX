@@ -42,6 +42,12 @@
       <Filter>Contents\Load</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Player.cpp">
+      <Filter>Contents\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObject.cpp">
+      <Filter>Contents\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -82,6 +88,12 @@
       <Filter>Contents\Load</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="PlayerObject.h">
+      <Filter>Contents\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Contents\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -98,6 +110,9 @@
     </Filter>
     <Filter Include="Contents\Background">
       <UniqueIdentifier>{0d4b3305-a180-4535-a185-a204a6175fcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Player">
+      <UniqueIdentifier>{47ed1ab3-0204-4cfb-a7d3-7870e2d41e05}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
