@@ -3,47 +3,33 @@
 #include "LTexture.h"
 #include "LMaterial.h"
 #include "LShader.h"
+
+#include <iostream>
+#include <filesystem>
+
+namespace fs = std::filesystem;
+
 namespace lu::JSAB
 {
-	void LoadBackground()
-	{		
-		std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
-
-		std::wstring folderPath = L"..\\..\\Assets\\Texture\\Background\\";
-		std::vector<std::wstring> imgs = {
-			L"black_background",
-			L"darkblue_background",
-			L"green_background",
-			L"grey_background",
-			L"turquoise_background",
-			L"pink_background",
-			L"purple_background",
-			L"skyblue_background",
-			L"white_background",
-			L"annihilate_background"
-		};
-
-		for (int i = 0; i < imgs.size(); i++)
-		{
-			std::wstring filepath = folderPath + imgs[i] + L".png";
-			std::shared_ptr<Texture> tex = Resources::Load<Texture>(imgs[i], filepath);
-		}
-	}
-
-	void LoadPlayer()
+	void LoadImgs(const fs::path& directory)
 	{
-		std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
-		std::wstring folderPath = L"..\\..\\Assets\\Texture\\Player\\Player\\";
-		std::wstring img = L"player";
-		for (int i = 1; i <= 77; i++)
+		for (auto& dir : fs::directory_iterator(directory))
 		{
-			std::wstring filename = folderPath + img + std::to_wstring(i) + L".png";
-			Resources::Load<Texture>(img + std::to_wstring(i), filename);
+			if (fs::is_directory(dir))
+			{
+				LoadImgs(dir.path());
+			}
+			else if (fs::is_regular_file(dir))
+			{
+				std::wstring filepath = dir.path().filename().wstring();
+				std::wstring filename = dir.path().stem().wstring();
+				Resources::Load<Texture>(filename, filepath);
+			}
 		}
 	}
 	void InitializeGraphics()
 	{
-		LoadBackground();
-		LoadPlayer();
+		const fs::path root = "..\\..\\Assets\\Texture";
+		LoadImgs(root);
 	}
 }

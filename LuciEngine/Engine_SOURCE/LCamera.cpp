@@ -27,7 +27,7 @@ namespace lu
 		, mAspectRatio(1.0f)
 		, mNear(1.0f)
 		, mFar(100.0f)
-		, mSize(100.0f)
+		, mSize(1.0f)
 		, mLayerMask{}
 		, mOpaqueGameObjects{}
 		, mCutOutGameObjects{}
