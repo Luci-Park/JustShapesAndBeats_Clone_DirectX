@@ -7,6 +7,8 @@ namespace lu::JSAB
 	{
 	public:
 		enum class Backgrounds {
+			TITLE,
+			TITLEGREEN,
 			BLACK,
 			DARKBLUE,
 			GREEN,

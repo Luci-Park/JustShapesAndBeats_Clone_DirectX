@@ -1,5 +1,6 @@
 #pragma once
 #include "LGameObject.h"
+#include "BackgroundScript.h"
 namespace lu::JSAB
 {
 	class BackgroundScript;
@@ -10,6 +11,7 @@ namespace lu::JSAB
 		virtual ~BackgroundObject();
 
 		virtual void Initialize() override;
+		void SetBackground(BackgroundScript::Backgrounds bg);
 
 	private:
 		BackgroundScript* mBackground;

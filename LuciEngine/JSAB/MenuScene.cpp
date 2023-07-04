@@ -14,8 +14,8 @@ namespace lu::JSAB
 	}
 	void MenuScene::Initialize()
 	{
-		AddGameObject(eLayerType::Player, new PlayerObject());
-		AddGameObject(eLayerType::UI, new BackgroundObject());
+		BackgroundObject* bg = new BackgroundObject();
+		AddGameObject(eLayerType::UI, bg);
 		//Main Camera
 		{
 			GameObject* camera = new GameObject();
@@ -36,6 +36,7 @@ namespace lu::JSAB
 		}
 
 		Scene::Initialize();
+		bg->SetBackground(BackgroundScript::Backgrounds::TITLE);
 	}
 	void MenuScene::Update()
 	{

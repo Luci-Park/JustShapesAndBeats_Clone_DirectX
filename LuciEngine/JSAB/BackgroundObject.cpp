@@ -1,5 +1,4 @@
 #include "BackgroundObject.h"
-#include "BackgroundScript.h"
 #include "LMeshRenderer.h"
 #include "LResources.h"
 
@@ -30,6 +29,9 @@ namespace lu::JSAB
 
 		mBackground = AddComponent<BackgroundScript>();
 		GameObject::Initialize();
-		mBackground->SetBackground(BackgroundScript::Backgrounds::ANNIHILATE);
+	}
+	void BackgroundObject::SetBackground(BackgroundScript::Backgrounds bg)
+	{
+		mBackground->SetBackground(bg);
 	}
 }
