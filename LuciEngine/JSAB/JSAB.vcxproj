@@ -164,6 +164,7 @@
     <ClInclude Include="JSABRenderer.h" />
     <ClInclude Include="LPlayScene.h" />
     <ClInclude Include="MenuScene.h" />
+    <ClInclude Include="OpeningUIObjects.h" />
     <ClInclude Include="OverworldScene.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerObject.h" />
@@ -183,6 +184,7 @@
     <ClCompile Include="LPlayScene.cpp" />
     <ClCompile Include="JSAB.cpp" />
     <ClCompile Include="MenuScene.cpp" />
+    <ClCompile Include="OpeningUIObjects.cpp" />
     <ClCompile Include="OverworldScene.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerObject.cpp" />

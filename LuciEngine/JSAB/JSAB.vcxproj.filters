@@ -48,6 +48,9 @@
     <ClCompile Include="MenuScene.cpp">
       <Filter>Contents\MainMenu\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="OpeningUIObjects.cpp">
+      <Filter>Contents\MainMenu\UIs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -93,6 +96,9 @@
     </ClInclude>
     <ClInclude Include="MenuScene.h">
       <Filter>Contents\MainMenu\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="OpeningUIObjects.h">
+      <Filter>Contents\MainMenu\UIs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
