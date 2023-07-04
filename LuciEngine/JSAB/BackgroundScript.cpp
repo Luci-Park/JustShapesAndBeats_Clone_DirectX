@@ -16,8 +16,6 @@ namespace lu::JSAB
 		if (_backgrounds.empty())
 		{
 			std::vector<std::wstring> imgs = {
-				L"Title_Background",
-				L"Title_Background_Transparent",
 				L"black_background",
 				L"darkblue_background",
 				L"green_background",

@@ -27,7 +27,8 @@ namespace lu
 
 		bool CreateViewMatrix();
 		bool CreateProjectionMatrix(eProjectionType type);
-		void RegisterCameraInRenderer();
+		void RegisterCameraInRenderer()
+			;
 		void TurnLayerMask(eLayerType type, bool enable = true);
 		void EnableLayerMasks() { mLayerMask.set(); }
 		void DisableLayerMasks() { mLayerMask.reset(); }
