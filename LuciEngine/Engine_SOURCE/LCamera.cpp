@@ -96,6 +96,7 @@ namespace lu
 		float height = rect.bottom - rect.top;
 		mAspectRatio = width / height;
 
+		if (width == 0 || height == 0) return false;
 		if (type == eProjectionType::OrthoGraphic)
 		{
 			float orthorgraphicratio = mSize / 1000.0f;

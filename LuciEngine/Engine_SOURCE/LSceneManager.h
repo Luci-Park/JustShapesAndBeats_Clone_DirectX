@@ -13,6 +13,7 @@ namespace lu
 		static void Release();
 
 		static Scene* GetActiveScene() { return mActiveScene; }
+		static Scene* GetScene(std::wstring name);
 		static Scene* LoadScene(std::wstring name);
 
 		template <typename T>

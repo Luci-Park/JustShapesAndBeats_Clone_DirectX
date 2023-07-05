@@ -431,7 +431,10 @@
             "c:\\users\\dream\\documents\\github\\directx2d\\luciengine\\engine_source\\lgameobject.h",
             "c:\\users\\dream\\documents\\github\\directx2d\\luciengine\\engine_source\\lcomponent.h",
             "c:\\users\\dream\\documents\\github\\directx2d\\luciengine\\engine_source\\lscript.h",
-            "c:\\users\\dream\\documents\\github\\directx2d\\luciengine\\jsab\\lplayscene.h"
+            "c:\\users\\dream\\documents\\github\\directx2d\\luciengine\\engine_source\\ltransform.h",
+            "c:\\users\\dream\\documents\\github\\directx2d\\luciengine\\jsab\\lplayscene.h",
+            "c:\\users\\dream\\documents\\github\\directx2d\\luciengine\\jsab\\titlescene.h",
+            "c:\\users\\dream\\documents\\github\\directx2d\\luciengine\\jsab\\menuscene.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

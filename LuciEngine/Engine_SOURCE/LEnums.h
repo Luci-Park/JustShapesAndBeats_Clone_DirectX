@@ -17,6 +17,7 @@ namespace lu::enums
 		Player,
 		Bullet,
 		UI,
+		Camera,
 		End
 	};
 

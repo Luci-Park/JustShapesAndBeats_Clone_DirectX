@@ -5,8 +5,9 @@ namespace lu::JSAB::Menu
 {
 	class MenuScene : public Scene
 	{
-		MenuScene(){}
-		virtual ~MenuScene(){}
+	public:
+		MenuScene() {}
+		virtual ~MenuScene() {}
 
 		virtual void Initialize() override;
 		virtual void Update() override;

@@ -6,15 +6,19 @@ namespace lu::JSAB::Menu
 {
 	void MenuButtonObject::Initialize()
 	{
-		std::shared_ptr<Material> mat = Resources::Find<Material>(L"MenuBeatMat");
-		mat->SetTexture(Resources::Find<Texture>(L"Menu_Tag"));
-		mat->SetRenderingMode(eRenderingMode::CutOut);
-		MeshRenderer* mr = AddComponent<MeshRenderer>();
-		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mr->SetMaterial(mat);
-
-		float height = 13;
-		mTransform->SetPosition(Vector3(45, 0, 2));
-		mTransform->SetScale(Vector3(height, height, 1));
+		GameObject* tag, sideTag;
+		{
+			std::shared_ptr<Material> mat = Resources::Find<Material>(L"MenuBeatMat");
+			auto tex = Resources::Find<Texture>(L"Menu_Tag_Story_OnPoint");
+			mat->SetTexture(tex);
+			mat->SetRenderingMode(eRenderingMode::CutOut);
+			MeshRenderer* mr = tag->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(mat);
+			tag->mTransform->SetPosition(Vector3(90, 90, 2));
+			tag->mTransform->SetScale(Vector3(50, 17, 1));
+			tag->mTransform->SetParent(mTransform);
+		}
+		GameObject::Initialize();
 	}
 }

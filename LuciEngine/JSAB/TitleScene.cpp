@@ -20,17 +20,17 @@ namespace lu::JSAB::Title
 		AddGameObject(eLayerType::UI, bg);
 		//AddGameObject(eLayerType::UI, new PlayerObject());
 		
-	/*	AddGameObject(eLayerType::UI, new ShapesObject());
+		AddGameObject(eLayerType::UI, new ShapesObject());
 		AddGameObject(eLayerType::UI, new AndObject());
 		AddGameObject(eLayerType::UI, new BeatsObject());
-		AddGameObject(eLayerType::UI, new LightCircleObject());*/
+		AddGameObject(eLayerType::UI, new LightCircleObject());
 
 		AddGameObject(eLayerType::UI, new Menu::TitleObject());
 
 		//Camera
 		{
 			GameObject* camera = new GameObject();
-			AddGameObject(eLayerType::Player, camera);
+			AddGameObject(eLayerType::Camera, camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			for (int i = 0; i < (UINT)eLayerType::End; i++)

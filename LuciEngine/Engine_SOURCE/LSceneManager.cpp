@@ -32,6 +32,14 @@ namespace lu
 		}
 	}
 
+	Scene* SceneManager::GetScene(std::wstring name)
+	{
+		auto it = mScenes.find(name);
+		if (it == mScenes.end())
+			return nullptr;
+		else return it->second;
+	}
+
 	Scene* SceneManager::LoadScene(std::wstring name)
 	{
 		auto it = mScenes.find(name);
