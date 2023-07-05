@@ -15,7 +15,7 @@ namespace lu::enums
 	enum class eLayerType
 	{
 		Player,
-		Monster,
+		Bullet,
 		UI,
 		End
 	};

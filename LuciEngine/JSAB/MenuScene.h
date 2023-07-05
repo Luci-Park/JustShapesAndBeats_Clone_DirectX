@@ -1,13 +1,12 @@
 #pragma once
-
 #include "..\Engine_SOURCE\LScene.h"
-namespace lu::JSAB::MainMenu
+
+namespace lu::JSAB::Menu
 {
 	class MenuScene : public Scene
 	{
-	public:
-		MenuScene();
-		virtual ~MenuScene();
+		MenuScene(){}
+		virtual ~MenuScene(){}
 
 		virtual void Initialize() override;
 		virtual void Update() override;

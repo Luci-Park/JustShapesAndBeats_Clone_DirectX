@@ -45,11 +45,20 @@
     <ClCompile Include="PlayerObject.cpp">
       <Filter>Contents\Player</Filter>
     </ClCompile>
-    <ClCompile Include="MenuScene.cpp">
-      <Filter>Contents\MainMenu\Scene</Filter>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Contents\Title\Scene</Filter>
     </ClCompile>
     <ClCompile Include="OpeningUIObjects.cpp">
-      <Filter>Contents\MainMenu\UIs</Filter>
+      <Filter>Contents\Title\UIs</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleObject.cpp">
+      <Filter>Contents\Title\UIs</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuScene.cpp">
+      <Filter>Contents\Title\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuButtonObject.cpp">
+      <Filter>Contents\Title\UIs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -94,11 +103,20 @@
     <ClInclude Include="Player.h">
       <Filter>Contents\Player</Filter>
     </ClInclude>
-    <ClInclude Include="MenuScene.h">
-      <Filter>Contents\MainMenu\Scene</Filter>
+    <ClInclude Include="TitleScene.h">
+      <Filter>Contents\Title\Scene</Filter>
     </ClInclude>
     <ClInclude Include="OpeningUIObjects.h">
-      <Filter>Contents\MainMenu\UIs</Filter>
+      <Filter>Contents\Title\UIs</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleObject.h">
+      <Filter>Contents\Title\UIs</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuScene.h">
+      <Filter>Contents\Title\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuButtonObject.h">
+      <Filter>Contents\Title\UIs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -120,16 +138,16 @@
     <Filter Include="Contents\Player">
       <UniqueIdentifier>{47ed1ab3-0204-4cfb-a7d3-7870e2d41e05}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\MainMenu">
+    <Filter Include="Contents\Title">
       <UniqueIdentifier>{3a3123e0-4a96-482c-8c82-fe9d3e48f546}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\MainMenu\Scene">
+    <Filter Include="Contents\Title\Scene">
       <UniqueIdentifier>{0262d4c1-070e-4254-b141-0c1bf5498695}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\MainMenu\UIs">
+    <Filter Include="Contents\Title\UIs">
       <UniqueIdentifier>{c9d45362-4870-4773-a869-e7e077680a40}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\MainMenu\OpeningAnimation">
+    <Filter Include="Contents\Title\OpeningAnimation">
       <UniqueIdentifier>{1f52ea33-f941-478c-a5c1-538d32bfa56f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

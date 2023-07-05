@@ -1,7 +1,7 @@
 #pragma once
 #include "LGameObject.h"
 
-namespace lu::JSAB::MainMenu
+namespace lu::JSAB::Title
 {
 	class ShapesObject : public GameObject
 	{
@@ -33,11 +33,6 @@ namespace lu::JSAB::MainMenu
 		LightCircleObject(){}
 		virtual ~LightCircleObject(){}
 		virtual void Initialize() override;
-	};
-
-	class LightObject : public GameObject
-	{
-
 	};
 }
 

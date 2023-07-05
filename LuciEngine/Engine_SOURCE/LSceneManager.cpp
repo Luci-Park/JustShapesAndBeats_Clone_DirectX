@@ -5,6 +5,7 @@ namespace lu
 	std::map<std::wstring, Scene*> SceneManager::mScenes;
 	void SceneManager::Initialize()
 	{
+
 	}
 	void SceneManager::Update()
 	{
