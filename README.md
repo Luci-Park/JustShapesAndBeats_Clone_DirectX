@@ -42,3 +42,6 @@ Since 5/15 ~
 - transform parent, child relationship
 - 순환참조를 하면 구문 오류가 난다.
 - Unity error = 헤더 파일을 중복 include 했을 때 가능성이 높다.
+
+##Week 8(7/2 ~ 7/8)
+- Object Scaling + Placement
