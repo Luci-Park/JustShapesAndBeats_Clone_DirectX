@@ -3,8 +3,9 @@
 #include "LCamera.h"
 #include "CameraScript.h"
 #include "BackgroundObject.h"
+#include "OpeningUIObjects.h"
 
-namespace lu::JSAB
+namespace lu::JSAB::MainMenu
 {
 	MenuScene::MenuScene()
 	{
@@ -16,16 +17,13 @@ namespace lu::JSAB
 	{
 		BackgroundObject* bg = new BackgroundObject();
 		AddGameObject(eLayerType::UI, bg);
-		//Main Camera
-		{
-			GameObject* camera = new GameObject();
-			AddGameObject(eLayerType::Player, camera);
-			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
-			Camera* cameraComp = camera->AddComponent<Camera>();
-			cameraComp->TurnLayerMask(eLayerType::UI, false);
-			camera->AddComponent<CameraScript>();
-		}
-		//UI Camera
+		//AddGameObject(eLayerType::UI, new PlayerObject());
+		
+		AddGameObject(eLayerType::UI, new ShapesObject());
+		AddGameObject(eLayerType::UI, new AndObject());
+		AddGameObject(eLayerType::UI, new BeatsObject());
+
+		//Camera
 		{
 			GameObject* camera = new GameObject();
 			AddGameObject(eLayerType::Player, camera);
@@ -36,6 +34,7 @@ namespace lu::JSAB
 		}
 
 		Scene::Initialize();
+
 		bg->SetBackground(BackgroundScript::Backgrounds::TITLE);
 	}
 	void MenuScene::Update()

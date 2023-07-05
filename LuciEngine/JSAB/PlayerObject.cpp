@@ -26,6 +26,8 @@ namespace lu::JSAB
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(mat);
 
+		mTransform->SetScale(Vector3(10, 10, 1));
+
 		GameObject::Initialize();
 	}
 }

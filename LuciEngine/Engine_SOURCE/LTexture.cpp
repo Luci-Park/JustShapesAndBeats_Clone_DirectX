@@ -47,7 +47,7 @@ namespace lu::graphics
 		mSRV->GetResource((ID3D11Resource**)mTexture.GetAddressOf());
 		mWidth = mImage.GetMetadata().width;
 		mHeight = mImage.GetMetadata().height;
-
+		mRatio = static_cast<double>(mWidth) / mHeight;
 		return S_OK;
 	}
 	

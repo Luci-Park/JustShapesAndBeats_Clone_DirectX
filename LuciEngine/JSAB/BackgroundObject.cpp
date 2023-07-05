@@ -13,7 +13,7 @@ namespace lu::JSAB
 	void BackgroundObject::Initialize()
 	{
 		mTransform->SetPosition(Vector3(0, 0, 10));		
-		mTransform->SetScale(Vector3(8, 6, 1));
+		mTransform->SetScale(Vector3(80, 60, 1));
 		
 		std::shared_ptr<Material> mat = Resources::Find<Material>(L"BackgroundMat");
 		if (mat == nullptr)

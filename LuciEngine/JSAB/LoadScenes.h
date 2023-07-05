@@ -13,7 +13,7 @@ namespace lu::JSAB
 	void InitializeScenes()
 	{
 		//SceneManager::CreateScene<PlayScene>(L"PlayScene");
-		SceneManager::CreateScene<MenuScene>(L"MenuScene");
+		SceneManager::CreateScene<MainMenu::MenuScene>(L"MenuScene");
 		//SceneManager::LoadScene(L"PlayScene");
 		SceneManager::LoadScene(L"MenuScene");
 	}
