@@ -6,6 +6,8 @@ namespace lu::JSAB::Menu
 {
 	void MenuButtonObject::Initialize()
 	{
+		float height = 80.0f;
+		float y = 200;
 		{
 			GameObject* tag = new GameObject();
 			std::shared_ptr<Material> mat = Resources::Find<Material>(L"Story_Tag");
@@ -21,8 +23,9 @@ namespace lu::JSAB::Menu
 			MeshRenderer* mr = tag->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(mat);
-			tag->mTransform->SetPosition(Vector3(90, 90, 2));
-			tag->mTransform->SetScale(Vector3(50, 17, 1));
+			tag->mTransform->SetPosition(Vector3(1000, y, 2));
+			float width = mat->GetTexture()->GetRatioWidth(height);
+			tag->mTransform->SetScale(Vector3(width, height, 1));
 			tag->mTransform->SetParent(mTransform);
 			SceneManager::GetActiveScene()->AddGameObject(eLayerType::UI, tag);
 		}
@@ -34,7 +37,7 @@ namespace lu::JSAB::Menu
 			{
 				mat = std::make_shared<Material>();
 				mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
-				mat->SetTexture(Resources::Find<Texture>(L"Story_SideTag"));
+				mat->SetTexture(Resources::Find<Texture>(L"Menu_SideTag_Story_OnPoint"));
 				Resources::Insert(L"Story_Tag", mat);
 				mat->SetRenderingMode(eRenderingMode::Transparent);
 			}
@@ -42,8 +45,9 @@ namespace lu::JSAB::Menu
 			MeshRenderer* mr = tag->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(mat);
-			tag->mTransform->SetPosition(Vector3(80, 90, 2));
-			tag->mTransform->SetScale(Vector3(10, 17, 1));
+			float width = mat->GetTexture()->GetRatioWidth(height);
+			tag->mTransform->SetScale(Vector3(width, height, 1));
+			tag->mTransform->SetPosition(Vector3(280, y, 1));
 			tag->mTransform->SetParent(mTransform);
 
 			SceneManager::GetActiveScene()->AddGameObject(eLayerType::UI, tag);

@@ -702,3 +702,7 @@ Scene
 
 7/5
 grid object => 아이템 확인
+
+7/6
+격자 완성 중
+object delete

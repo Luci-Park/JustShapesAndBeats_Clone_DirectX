@@ -21,7 +21,7 @@ namespace lu::JSAB::Menu
 		mr->SetMaterial(mat);
 
 		Vector3 scale = mat->GetTexture()->GetSize();
-		mTransform->SetScale(scale);
+		mTransform->SetScale(scale * 0.5);
 
 		GameObject::Initialize();
 	}

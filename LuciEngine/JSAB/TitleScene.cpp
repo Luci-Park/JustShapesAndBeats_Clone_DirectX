@@ -25,7 +25,7 @@ namespace lu::JSAB::Title
 		AddGameObject(eLayerType::UI, new BeatsObject());
 		AddGameObject(eLayerType::UI, new LightCircleObject());
 
-		//AddGameObject(eLayerType::UI, new Menu::TitleObject());
+		AddGameObject(eLayerType::UI, new Menu::TitleObject());
 
 		//Camera
 		{

@@ -1,13 +1,14 @@
 #pragma once
-#include "LScene.h"
+#include "..\Engine_SOURCE\LScene.h"
 
-namespace lu::JSAB
+
+namespace lu::JSAB::Tutorial
 {
 	class TutorialScene : public Scene
 	{
 	public:
-		TutorialScene();
-		virtual ~TutorialScene();
+		TutorialScene(){}
+		virtual ~TutorialScene(){}
 
 		virtual void Initialize() override;
 		virtual void Update() override;

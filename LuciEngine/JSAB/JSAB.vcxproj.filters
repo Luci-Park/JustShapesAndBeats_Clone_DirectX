@@ -26,9 +26,6 @@
     <ClCompile Include="TryThisScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="TutorialScene.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="BackgroundObject.cpp">
       <Filter>Contents\Background</Filter>
     </ClCompile>
@@ -60,6 +57,9 @@
     <ClCompile Include="MenuButtonObject.cpp">
       <Filter>Contents\Title\UIs</Filter>
     </ClCompile>
+    <ClCompile Include="TutorialScene.cpp">
+      <Filter>Contents\Tutorial</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -82,9 +82,6 @@
       <Filter>Contents\Scene</Filter>
     </ClInclude>
     <ClInclude Include="TryThisScene.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="TutorialScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
     <ClInclude Include="BackgroundObject.h">
@@ -118,6 +115,9 @@
     <ClInclude Include="MenuButtonObject.h">
       <Filter>Contents\Title\UIs</Filter>
     </ClInclude>
+    <ClInclude Include="TutorialScene.h">
+      <Filter>Contents\Tutorial</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -149,6 +149,9 @@
     </Filter>
     <Filter Include="Contents\Title\OpeningAnimation">
       <UniqueIdentifier>{1f52ea33-f941-478c-a5c1-538d32bfa56f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Tutorial">
+      <UniqueIdentifier>{7cf01eb1-5ee9-40c9-b20b-13a6609da5f9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
