@@ -11,10 +11,6 @@ namespace lu::JSAB
 		virtual ~BackgroundObject();
 
 		virtual void Initialize() override;
-		void SetBackground(BackgroundScript::Backgrounds bg);
-
-	private:
-		BackgroundScript* mBackground;
 	};
 }
 

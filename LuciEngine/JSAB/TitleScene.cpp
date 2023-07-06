@@ -25,7 +25,7 @@ namespace lu::JSAB::Title
 		AddGameObject(eLayerType::UI, new BeatsObject());
 		AddGameObject(eLayerType::UI, new LightCircleObject());
 
-		AddGameObject(eLayerType::UI, new Menu::TitleObject());
+		//AddGameObject(eLayerType::UI, new Menu::TitleObject());
 
 		//Camera
 		{
@@ -42,8 +42,8 @@ namespace lu::JSAB::Title
 		}
 
 		Scene::Initialize();
+		mbgs = bg->GetComponent<BackgroundScript>();
 
-		bg->SetBackground(BackgroundScript::Backgrounds::TITLE);
 	}
 	void TitleScene::Update()
 	{
@@ -56,5 +56,10 @@ namespace lu::JSAB::Title
 	void TitleScene::Render()
 	{
 		Scene::Render();
+	}
+	void TitleScene::OnEnter()
+	{
+		mbgs->SetBackground(BackgroundScript::Backgrounds::TITLE);
+		Scene::OnEnter();
 	}
 }

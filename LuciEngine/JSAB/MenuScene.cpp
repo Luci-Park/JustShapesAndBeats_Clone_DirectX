@@ -29,7 +29,6 @@ namespace lu::JSAB::Menu
 		Scene::Initialize();
 		
 		title->mTransform->SetPosition(Vector3(-60, 0, 0));
-		bg->SetBackground(BackgroundScript::Backgrounds::SKYBLUE);
 	}
 	void MenuScene::Update()
 	{

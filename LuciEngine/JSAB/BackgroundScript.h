@@ -1,6 +1,6 @@
 #pragma once
-#include "LScript.h"
-#include "LMeshRenderer.h"
+#include "..\\Engine_SOURCE\LScript.h"
+#include "..\\Engine_SOURCE\LMeshRenderer.h"
 namespace lu::JSAB
 {
 	class BackgroundScript : public Script

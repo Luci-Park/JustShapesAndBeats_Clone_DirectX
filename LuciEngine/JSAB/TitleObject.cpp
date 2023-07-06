@@ -20,7 +20,7 @@ namespace lu::JSAB::Menu
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(mat);
 
-		Vector3 scale = Vector3(45, 34, 1);
+		Vector3 scale = mat->GetTexture()->GetSize();
 		mTransform->SetScale(scale);
 
 		GameObject::Initialize();

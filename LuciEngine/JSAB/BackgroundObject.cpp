@@ -27,13 +27,10 @@ namespace lu::JSAB
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(mat);
 
-		mBackground = AddComponent<BackgroundScript>();
+		AddComponent<BackgroundScript>();
+
 		GameObject::Initialize();
 		mTransform->SetPosition(Vector3(0, 0, 10));		
 		mTransform->SetScale(Vector3(application.GetWidth(), application.GetHeight(), 1));
-	}
-	void BackgroundObject::SetBackground(BackgroundScript::Backgrounds bg)
-	{
-		mBackground->SetBackground(bg);
 	}
 }
