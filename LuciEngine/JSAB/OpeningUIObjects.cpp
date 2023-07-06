@@ -20,9 +20,9 @@ namespace lu::JSAB::Title
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(mat);
 
-		float height = 13;
+		Vector3 scale = mat->GetTexture()->GetSize();
 		mTransform->SetPosition(Vector3(-45, 0, 2));
-		mTransform->SetScale(Vector3(height + 1, height, 1));
+		mTransform->SetScale(Vector3(scale.x, scale.y, 1));
 	}
 	
 	void AndObject::Initialize()
@@ -41,10 +41,9 @@ namespace lu::JSAB::Title
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(mat);
 
-		float height = 13;
+		Vector3 scale = mat->GetTexture()->GetSize();
 		mTransform->SetPosition(Vector3(0, 0, 2));
-
-		mTransform->SetScale(Vector3(height, height, 1));
+		mTransform->SetScale(Vector3(scale.x, scale.y, 1));
 	}
 	
 	void BeatsObject::Initialize()
@@ -63,9 +62,9 @@ namespace lu::JSAB::Title
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(mat);
 
-		float height = 13;
+		Vector3 scale = mat->GetTexture()->GetSize();
 		mTransform->SetPosition(Vector3(45, 0, 2));
-		mTransform->SetScale(Vector3(height, height, 1));
+		mTransform->SetScale(Vector3(scale.x, scale.y, 1));
 	}
 
 	void LightCircleObject::Initialize()

@@ -23,14 +23,15 @@ namespace lu::graphics
 		void BindShader(eShaderStage stage, UINT startSlot);
 		void Clear();
 
-		size_t GetWidth() { return mWidth; }
-		size_t GetHeight() { return mHeight; }
+		size_t GetWidth() { return mSize.x; }
+		size_t GetHeight() { return mSize.y; }
+		Vector3 GetSize() { return mSize; }
 		double GetRatioHeight(float width) { return width / mRatio; }
 		double GetRatioWidth(float height) { return height * mRatio; }
 
 	private:
 		ScratchImage mImage; // original image
-		size_t mWidth, mHeight;
+		Vector3 mSize;
 		double mRatio;
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> mTexture;
 		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> mSRV;

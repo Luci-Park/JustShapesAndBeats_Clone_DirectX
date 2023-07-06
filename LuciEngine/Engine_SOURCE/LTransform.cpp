@@ -42,7 +42,7 @@ namespace lu
 		mForward = Vector3::TransformNormal(Vector3::Forward, rotation);
 		mRight = Vector3::TransformNormal(Vector3::Right, rotation);
 
-		if (mParent)
+		if (mParent && mParent != this)
 		{
 			mWorld *= mParent->mWorld;
 		}

@@ -8,6 +8,7 @@ namespace lu::graphics
 		, mTexture(nullptr)
 		, mSRV(nullptr)
 		, mDesc{}
+		, mSize(1,1,1)
 	{
 	}
 	Texture::~Texture()
@@ -45,9 +46,9 @@ namespace lu::graphics
 			, mSRV.GetAddressOf()
 		);
 		mSRV->GetResource((ID3D11Resource**)mTexture.GetAddressOf());
-		mWidth = mImage.GetMetadata().width;
-		mHeight = mImage.GetMetadata().height;
-		mRatio = static_cast<double>(mWidth) / mHeight;
+		mSize.x = mImage.GetMetadata().width;
+		mSize.y = mImage.GetMetadata().height;
+		mRatio = static_cast<double>(mSize.x) / mSize.y;
 		return S_OK;
 	}
 	

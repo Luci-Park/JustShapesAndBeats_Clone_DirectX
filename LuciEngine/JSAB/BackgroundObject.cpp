@@ -1,6 +1,9 @@
 #include "BackgroundObject.h"
 #include "LMeshRenderer.h"
 #include "LResources.h"
+#include "LApplication.h"
+
+extern lu::Application application;
 
 namespace lu::JSAB
 {
@@ -11,10 +14,7 @@ namespace lu::JSAB
 	{
 	}
 	void BackgroundObject::Initialize()
-	{
-		mTransform->SetPosition(Vector3(0, 0, 10));		
-		mTransform->SetScale(Vector3(80, 60, 1));
-		
+	{		
 		std::shared_ptr<Material> mat = Resources::Find<Material>(L"BackgroundMat");
 		if (mat == nullptr)
 		{
@@ -29,6 +29,8 @@ namespace lu::JSAB
 
 		mBackground = AddComponent<BackgroundScript>();
 		GameObject::Initialize();
+		mTransform->SetPosition(Vector3(0, 0, 10));		
+		mTransform->SetScale(Vector3(application.GetWidth(), application.GetHeight(), 1));
 	}
 	void BackgroundObject::SetBackground(BackgroundScript::Backgrounds bg)
 	{

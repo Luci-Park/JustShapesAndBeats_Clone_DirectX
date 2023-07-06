@@ -26,6 +26,7 @@ namespace lu
 				return false;
 
 			mScenes.insert(std::make_pair(name, scene));
+			mActiveScene = scene;
 			scene->Initialize();
 			return true;
 		}
