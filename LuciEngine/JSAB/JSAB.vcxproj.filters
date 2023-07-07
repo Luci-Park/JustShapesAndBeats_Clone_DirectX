@@ -60,6 +60,9 @@
     <ClCompile Include="TutorialScene.cpp">
       <Filter>Contents\Tutorial</Filter>
     </ClCompile>
+    <ClCompile Include="TriangleObject.cpp">
+      <Filter>Contents\Triangle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -118,6 +121,9 @@
     <ClInclude Include="TutorialScene.h">
       <Filter>Contents\Tutorial</Filter>
     </ClInclude>
+    <ClInclude Include="TriangleObject.h">
+      <Filter>Contents\Triangle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -152,6 +158,9 @@
     </Filter>
     <Filter Include="Contents\Tutorial">
       <UniqueIdentifier>{7cf01eb1-5ee9-40c9-b20b-13a6609da5f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Triangle">
+      <UniqueIdentifier>{96c9b033-a0f2-4da5-9b47-3a6878c8c1dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

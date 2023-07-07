@@ -21,3 +21,5 @@
 #include "CommonInclude.h"
 #include "LEnums.h"
 #include "LMath.h"
+
+#define PI 3.141592

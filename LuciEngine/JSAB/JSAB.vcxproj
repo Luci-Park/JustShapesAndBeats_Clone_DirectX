@@ -171,6 +171,7 @@
     <ClInclude Include="OverworldScene.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerObject.h" />
+    <ClInclude Include="TriangleObject.h" />
     <ClInclude Include="TryThisScene.h" />
     <ClInclude Include="TutorialScene.h" />
   </ItemGroup>
@@ -194,6 +195,7 @@
     <ClCompile Include="OverworldScene.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
+    <ClCompile Include="TriangleObject.cpp" />
     <ClCompile Include="TryThisScene.cpp" />
     <ClCompile Include="TutorialScene.cpp" />
   </ItemGroup>

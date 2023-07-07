@@ -11,8 +11,8 @@ namespace lu
 		enum eState
 		{
 			Active,
-			Paused,
-			Dead,
+			InActive,
+			Destory,
 		};
 
 		GameObject();
@@ -63,6 +63,7 @@ namespace lu
 			return comp;
 		}
 
+		eState GetState() { return mState; }
 	public:
 		Transform* mTransform;
 	private:

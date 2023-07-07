@@ -26,21 +26,24 @@ namespace lu
 	{
 		for (int i = 0; i < mGameObjects.size(); i++)
 		{
-			mGameObjects[i]->Update();
+			if(mGameObjects[i] && mGameObjects[i]->GetState() == GameObject::eState::Active)
+				mGameObjects[i]->Update();
 		}
 	}
 	void Layer::LateUpdate()
 	{
 		for (int i = 0; i < mGameObjects.size(); i++)
 		{
-			mGameObjects[i]->LateUpdate();
+			if (mGameObjects[i] && mGameObjects[i]->GetState() == GameObject::eState::Active)
+				mGameObjects[i]->LateUpdate();
 		}
 	}
 	void Layer::Render()
 	{
 		for (int i = 0; i < mGameObjects.size(); i++)
 		{
-			mGameObjects[i]->Render();
+			if (mGameObjects[i] && mGameObjects[i]->GetState() == GameObject::eState::Active)
+				mGameObjects[i]->Render();
 		}
 	}
 	void Layer::AddGameObject(GameObject* gameobj)

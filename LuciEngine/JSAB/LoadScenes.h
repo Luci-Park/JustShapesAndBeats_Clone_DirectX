@@ -3,6 +3,7 @@
 #include "LPlayScene.h"
 #include "TitleScene.h"
 #include "MenuScene.h"
+#include "TutorialScene.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "..\\x64\\Debug\\JSAB.lib")
@@ -16,7 +17,7 @@ namespace lu::JSAB
 		SceneManager::CreateScene<PlayScene>(L"PlayScene");
 		SceneManager::CreateScene<Title::TitleScene>(L"TitleScene");
 		SceneManager::CreateScene<Menu::MenuScene>(L"MenuScene");
-
-		SceneManager::LoadScene(L"MenuScene");
+		SceneManager::CreateScene<Tutorial::TutorialScene>(L"TutorialScene");
+		SceneManager::LoadScene(L"TutorialScene");
 	}
 }

@@ -48,15 +48,12 @@ namespace lu
 
 	void Application::Render()
 	{
-		if (mWidth != 0 && mHeight != 0)
-		{
-			Time::Render();
-			graphicDevice->ClearTarget();
-			graphicDevice->UpdateViewPort();
-
-			renderer::Render();
-			graphicDevice->Present();
-		}
+		Time::Render();
+		graphicDevice->ClearTarget();
+		graphicDevice->UpdateViewPort();
+		
+		renderer::Render();
+		graphicDevice->Present();
 	}
 
 	void Application::Release()

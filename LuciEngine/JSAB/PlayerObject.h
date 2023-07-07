@@ -11,5 +11,17 @@ namespace lu::JSAB
 
 		virtual void Initialize() override;
 	};
+
+	class Pieces : public GameObject
+	{
+	public:
+		Pieces(){}
+		virtual ~Pieces(){}
+
+		virtual void Initialize() override;
+
+	private:
+		GameObject* CreateLight(Vector3 pos, float rotation);
+	};
 }
 
