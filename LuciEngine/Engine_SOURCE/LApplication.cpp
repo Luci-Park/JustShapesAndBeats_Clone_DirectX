@@ -24,6 +24,7 @@ namespace lu
 		Update();
 		LateUpdate();
 		Render();
+		Destroy();
 	}
 
 	void Application::Initialize()
@@ -54,6 +55,11 @@ namespace lu
 		
 		renderer::Render();
 		graphicDevice->Present();
+	}
+
+	void Application::Destroy()
+	{
+		SceneManager::Destroy();
 	}
 
 	void Application::Release()

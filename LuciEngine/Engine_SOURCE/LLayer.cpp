@@ -46,6 +46,21 @@ namespace lu
 				mGameObjects[i]->Render();
 		}
 	}
+	void Layer::Destroy()
+	{
+		for (auto it = mGameObjects.begin(); it != mGameObjects.end(); )
+		{
+			if ((*it)->GetState() == GameObject::eState::Destory)
+			{
+				auto iter = mGameObjects.erase(it);
+				delete *iter;
+			}
+			else
+			{
+				it++;
+			}
+		}
+	}
 	void Layer::AddGameObject(GameObject* gameobj)
 	{
 		mGameObjects.push_back(gameobj);

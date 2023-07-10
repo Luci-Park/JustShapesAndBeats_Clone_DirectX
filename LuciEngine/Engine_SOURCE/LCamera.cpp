@@ -150,7 +150,9 @@ namespace lu
 	{
 		for (int i =0; i < gameObjects.size(); i++)
 		{
-			//렌더러 컴포넌트가 없다면?
+			if (gameObjects[i]->GetState() != GameObject::Active)
+				continue;
+
 			MeshRenderer* mr
 				= gameObjects[i]->GetComponent<MeshRenderer>();
 			if (mr == nullptr)

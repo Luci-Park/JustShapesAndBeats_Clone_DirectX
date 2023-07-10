@@ -22,6 +22,12 @@ namespace lu
 		if (mActiveScene != nullptr)
 			mActiveScene->Render();
 	}
+
+	void SceneManager::Destroy()
+	{
+		if (mActiveScene != nullptr)
+			mActiveScene->Destroy();
+	}
 	
 	void SceneManager::Release()
 	{

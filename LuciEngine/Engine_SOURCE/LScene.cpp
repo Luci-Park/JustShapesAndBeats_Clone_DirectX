@@ -40,6 +40,13 @@ namespace lu
 			mLayers[i].Render();
 		}
 	}
+	void Scene::Destroy()
+	{
+		for (int i = 0; i < mLayers.size(); i++)
+		{
+			mLayers[i].Destroy();
+		}
+	}
 	void Scene::OnEnter()
 	{
 	}
