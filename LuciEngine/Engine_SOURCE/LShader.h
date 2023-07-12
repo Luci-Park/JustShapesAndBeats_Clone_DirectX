@@ -23,6 +23,7 @@ namespace lu
 		void SetRSState(eRSType type){mRSType = type;}
 		void SetDSState(eDSType type){mDSType = type;}
 		void SetBSState(eBSType type){mBSType = type;}
+		void SetTopology(D3D11_PRIMITIVE_TOPOLOGY topology) { mTopology = topology; }
 	private:
 		ID3D11InputLayout* mInputLayout;
 		D3D11_PRIMITIVE_TOPOLOGY mTopology;

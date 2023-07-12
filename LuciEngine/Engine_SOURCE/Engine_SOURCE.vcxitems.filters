@@ -46,9 +46,6 @@
     <Filter Include="Scene\Base">
       <UniqueIdentifier>{194e3497-cdb6-4e2d-b4a6-dc5193b73c25}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene\Manager">
-      <UniqueIdentifier>{5a803639-a522-410e-bc29-96928fe085b0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Component\Base">
       <UniqueIdentifier>{1a9c8ff6-ad58-4f92-8ee8-d386c25d08bb}</UniqueIdentifier>
     </Filter>
@@ -81,6 +78,12 @@
     </Filter>
     <Filter Include="Resource\Texture">
       <UniqueIdentifier>{8a48a0d5-950d-4e79-8cd3-e2d12dea67a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Collider">
+      <UniqueIdentifier>{af020d85-d1ec-4860-9475-51ea75cb608c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{5a803639-a522-410e-bc29-96928fe085b0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -124,7 +127,7 @@
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)LSceneManager.h">
-      <Filter>Scene\Manager</Filter>
+      <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)LScene.h">
       <Filter>Scene\Base</Filter>
@@ -165,6 +168,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LShader.h">
       <Filter>Resource\Shader</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LCollider2D.h">
+      <Filter>GameObject\Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LCollisionManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp">
@@ -195,7 +204,7 @@
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LSceneManager.cpp">
-      <Filter>Scene\Manager</Filter>
+      <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LScene.cpp">
       <Filter>Scene\Base</Filter>
@@ -235,6 +244,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LShader.cpp">
       <Filter>Resource\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LCollider2D.cpp">
+      <Filter>GameObject\Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LCollisionManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

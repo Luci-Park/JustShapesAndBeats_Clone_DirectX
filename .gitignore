@@ -400,3 +400,4 @@ FodyWeavers.xsd
 #exclusion
 !LuciEngine/x64/Debug/JSAB.lib
 !LuciEngine/x64/Release/JSAB.lib
+!LuciEngine/Extern/*

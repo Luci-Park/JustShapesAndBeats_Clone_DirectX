@@ -5,9 +5,11 @@ namespace lu::enums
 	{
 		None,
 		Transform,
-		Camera,
+		Collider2D,
 		MeshRenderer,
+		Mesh,
 		Particle,
+		Camera,
 		Script,
 		End
 	};
@@ -29,4 +31,14 @@ namespace lu::enums
 		Mesh,
 		End
 	};
+
+	enum class eColliderType
+	{
+		Rect,
+		Circle,
+		Sphere,
+		Cube,
+		End
+	};
+
 }
