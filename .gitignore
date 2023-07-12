@@ -396,3 +396,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+#exclusion
+!LuciEngine/x64/Debug/JSAB.lib
+!LuciEngine/x64/Release/JSAB.lib
