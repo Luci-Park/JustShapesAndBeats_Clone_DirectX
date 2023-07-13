@@ -1,10 +1,14 @@
 #include "TransformWidget.h"
 #include "..\\Engine_SOURCE\\LGameObject.h"
 #include "..\\Engine_SOURCE\\LInput.h"
+#include "..\\Engine_SOURCE\\LTime.h"
 
 namespace gui
 {
 	TransformWidget::TransformWidget()
+		: fMoveSpeed(30.0f)
+		, fRotateSpeed(PI/180 * 4)
+		, fScaleSpeed(30.0f)
 	{
 	}
 	TransformWidget::~TransformWidget()
@@ -22,51 +26,54 @@ namespace gui
 		//wasd = move
 		//qe = rotate
 		//rf = scale
-		if (lu::Input::GetKeyDown(lu::eKeyCode::W))
+		if (lu::Input::GetKey(lu::eKeyCode::W))
 		{
-			position.y--;
+			position.y += fMoveSpeed * lu::Time::DeltaTime();
 		}
-		if (lu::Input::GetKeyDown(lu::eKeyCode::A))
+		if (lu::Input::GetKey(lu::eKeyCode::A))
 		{
-			position.x--;
-		}
-
-		if (lu::Input::GetKeyDown(lu::eKeyCode::S))
-		{
-			position.y++;
+			position.x -= fMoveSpeed * lu::Time::DeltaTime();
 		}
 
-		if (lu::Input::GetKeyDown(lu::eKeyCode::D))
+		if (lu::Input::GetKey(lu::eKeyCode::S))
 		{
-			position.y--;
+			position.y -= fMoveSpeed * lu::Time::DeltaTime();
 		}
 
-		if (lu::Input::GetKeyDown(lu::eKeyCode::Q))
+		if (lu::Input::GetKey(lu::eKeyCode::D))
 		{
-			rotation.z -= PI / 180;
+			position.x += fMoveSpeed * lu::Time::DeltaTime();
 		}
 
-		if (lu::Input::GetKeyDown(lu::eKeyCode::E))
+		if (lu::Input::GetKey(lu::eKeyCode::Q))
 		{
-			rotation.z += PI / 180;
+			rotation.z += fRotateSpeed * lu::Time::DeltaTime();
 		}
 
-		if (lu::Input::GetKeyDown(lu::eKeyCode::R))
+		if (lu::Input::GetKey(lu::eKeyCode::E))
 		{
-			scale.x--;
-			scale.y--;
+			rotation.z -= fRotateSpeed * lu::Time::DeltaTime();
 		}
 
-		if (lu::Input::GetKeyDown(lu::eKeyCode::F))
+		if (lu::Input::GetKey(lu::eKeyCode::R))
 		{
-			scale.x++;
-			scale.y++;
+			scale.x -= fScaleSpeed * lu::Time::DeltaTime();
+			scale.y -= fScaleSpeed * lu::Time::DeltaTime();
+		}
+
+		if (lu::Input::GetKey(lu::eKeyCode::F))
+		{
+			scale.x += fScaleSpeed * lu::Time::DeltaTime();
+			scale.y += fScaleSpeed * lu::Time::DeltaTime();
 		}
 		mTransform->SetPosition(position);
 		mTransform->SetRotation(rotation);
 		mTransform->SetScale(scale);
 		if (lu::Input::GetKeyDown(lu::eKeyCode::ENTER))
 		{
+			OutputDebugStringA(std::format("position : {}, {}, {}\n", position.x, position.y, position.z).c_str());
+			OutputDebugStringA(std::format("rotation : {}, {}, {}\n", rotation.x, rotation.y, rotation.z).c_str());
+			OutputDebugStringA(std::format("scale : {}, {}, {}\n", scale.x, scale.y, scale.z).c_str());
 		}
 	}
 }

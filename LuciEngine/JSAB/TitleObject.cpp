@@ -1,6 +1,7 @@
 #include "TitleObject.h"
 #include "LMeshRenderer.h"
 #include "LResources.h"
+#include "..\\Editor_SOURCE\\TransformWidget.h"
 
 namespace lu::JSAB::Menu
 {
@@ -22,6 +23,8 @@ namespace lu::JSAB::Menu
 
 		Vector3 scale = mat->GetTexture()->GetSize();
 		mTransform->SetScale(scale * 0.5);
+
+		AddComponent<gui::TransformWidget>();
 
 		GameObject::Initialize();
 	}

@@ -14,6 +14,9 @@ namespace gui
 
 	private:
 		lu::Transform* mTransform;
+		float fMoveSpeed;
+		float fRotateSpeed;
+		float fScaleSpeed;
 	};
 }
 

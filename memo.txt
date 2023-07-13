@@ -706,3 +706,10 @@ grid object => 아이템 확인
 7/6
 격자 완성 중
 object delete
+
+7/13
+- 프레임드랍?
+- grid 맨 앞으로 가져오기
+- anti-aliasing
+- 회전 충돌의 문제
+- 축 분리 정리 숙제

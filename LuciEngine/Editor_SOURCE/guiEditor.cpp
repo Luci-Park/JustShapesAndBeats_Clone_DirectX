@@ -69,9 +69,9 @@ namespace gui
 	}
 	void Editor::Render()
 	{
-		//Microsoft::WRL::ComPtr<ID3D11DepthStencilState> ds
-		//	= renderer::depthStencilStates[(UINT)ya::graphics::eDSType::Less];
-		//ya::graphics::GetDevice()->BindDepthStencilState(ds.Get());
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> ds
+			= lu::renderer::depthStencilStates[(UINT)lu::graphics::eDSType::Less];
+		lu::graphics::GetDevice()->BindDepthStencilState(ds.Get());
 
 		for (EditorObject* obj : mEditorObjects)
 		{
@@ -83,6 +83,7 @@ namespace gui
 		{
 			DebugRender(mesh);
 		}
+		lu::renderer::debugMeshes.clear();
 	}
 	void Editor::Release()
 	{
