@@ -5,6 +5,7 @@
 #include "BackgroundObject.h"
 #include "OpeningUIObjects.h"
 #include "TitleObject.h"
+#include "LRenderer.h"
 
 namespace lu::JSAB::Title
 {

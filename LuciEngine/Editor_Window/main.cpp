@@ -71,6 +71,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                 TranslateMessage(&msg);
                 DispatchMessage(&msg);
             }
+            if (WM_KEYDOWN == msg.message)
+            {
+                if(msg.wParam == VK_BACK)
+                    bUseEditor = !bUseEditor;
+            }
         }
         else
         {

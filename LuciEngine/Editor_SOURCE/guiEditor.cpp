@@ -34,6 +34,7 @@ namespace gui
 
 		EditorObject* grid = new EditorObject();
 		grid->SetName(L"Grid");
+		grid->mTransform->SetPosition(0.0f, 0.0f, -5.0);
 
 		mr = grid->AddComponent<lu::MeshRenderer>();
 		mr->SetMesh(lu::Resources::Find<lu::Mesh>(L"RectMesh"));
