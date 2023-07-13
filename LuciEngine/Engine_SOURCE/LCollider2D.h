@@ -16,10 +16,14 @@ namespace lu
 		virtual void Render() override;
 
 		void SetType(eColliderType type) { mType = type; }
+		void SetSize(Vector2 size) { mSize = size; }
+		void SetCenter(Vector2 size) { mCenter = size; }
 
 	private:
 		eColliderType mType;
 		Transform* mTransform;
+
+		Vector3 mPosition;
 		Vector2 mSize;
 		Vector2 mCenter;
 	};

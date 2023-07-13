@@ -10,6 +10,7 @@
 #define CBUFFER(name, slot) static const int CB_GETBINDSLOT(name) = slot; struct alignas(16) name 
 
 #define CBSLOT_TRANSFORM		0
+#define CBSLOT_GRID				2
 //#define CBSLOT_PARTICLE			1
 namespace lu::graphics
 {
@@ -29,6 +30,7 @@ namespace lu::graphics
 	{
 		Transform,
 		Material,
+		Grid,
 		End
 	};
 
@@ -91,5 +93,17 @@ namespace lu::graphics
 
 		}
 		virtual ~GpuBuffer() = default;
+	};
+
+	struct DebugMesh
+	{
+		enums::eColliderType type;
+		math::Vector3 position;
+		math::Vector3 rotation;
+		math::Vector3 scale;
+
+		float radius;
+		float duration;
+		float time;
 	};
 }

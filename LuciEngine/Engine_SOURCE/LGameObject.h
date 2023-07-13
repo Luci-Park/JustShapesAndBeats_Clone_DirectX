@@ -64,6 +64,7 @@ namespace lu
 		}
 
 		eState GetState() { return mState; }
+		void SetState(eState state) { mState = state; }
 	public:
 		Transform* mTransform;
 	private:

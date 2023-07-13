@@ -14,6 +14,7 @@ namespace lu
 	GameObject::GameObject(Transform* parent)
 	{
 		mTransform->SetParent(parent);
+		mTransform = AddComponent<Transform>();
 	}
 
 	GameObject::~GameObject()

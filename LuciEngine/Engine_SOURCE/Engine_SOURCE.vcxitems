@@ -32,6 +32,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LMeshRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LSceneManager.h" />

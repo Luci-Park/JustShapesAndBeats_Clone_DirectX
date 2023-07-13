@@ -3,21 +3,24 @@
 
 #include "framework.h"
 #include "Editor_Window.h"
+
 #include "Engine_SOURCE/LApplication.h"
+#include "Editor_SOURCE/guiEditor.h"
+#include "..\\JSAB\\LoadScenes.h"
+#include "..\\JSAB\\JSABRenderer.h"
 #ifdef _DEBUG
 #pragma comment(lib, "..\\x64\\Debug\\JSAB.lib")
 #else
 #pragma comment(lib, "..\\x64\\Release\\JSAB.lib")
 #endif
 
-#include "..\\JSAB\\LoadScenes.h"
-#include "..\\JSAB\\JSABRenderer.h"
 lu::Application application;
 
 #define MAX_LOADSTRING 100
 #define WIDTH 1280
 #define HEIGHT 720
 
+bool bUseEditor = true;
 // 전역 변수:
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
@@ -73,9 +76,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         {
             // 여기서 게임 로직이 돌아가야한다.
             application.Run();
+            if(bUseEditor)
+                gui::Editor::Run();
+            application.Present();
         }
     }
     application.Release();
+    gui::Editor::Release();
     return (int) msg.wParam;
 }
 
@@ -136,6 +143,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    application.Initialize();
    lu::JSAB::InitializeGraphics();
    lu::JSAB::InitializeScenes();
+   gui::Editor::Initialize();
 
    return TRUE;
 }

@@ -85,6 +85,9 @@
     <Filter Include="Manager">
       <UniqueIdentifier>{5a803639-a522-410e-bc29-96928fe085b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common\Object">
+      <UniqueIdentifier>{29fd954a-ba4c-4df2-8fae-2d4a89eccae5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -173,6 +176,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)LCollisionManager.h">
       <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LObject.h">
+      <Filter>Common\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

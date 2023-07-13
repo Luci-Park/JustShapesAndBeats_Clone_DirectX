@@ -23,7 +23,13 @@ namespace lu::renderer
 		Matrix mProjection;
 	};
 
-	extern Vertex vertexes[];
+	CBUFFER(GridCB, CBSLOT_GRID)
+	{
+		Vector4 CameraPosition;
+		Vector2 CameraScale;
+		Vector2 Resolution;
+	};
+
 	extern ConstantBuffer* constantBuffer[(UINT)eCBType::End];
 	
 	extern Microsoft::WRL::ComPtr<ID3D11SamplerState>samplerStates[];
@@ -31,10 +37,14 @@ namespace lu::renderer
 	extern Microsoft::WRL::ComPtr<ID3D11DepthStencilState>depthStencilStates[];
 	extern Microsoft::WRL::ComPtr<ID3D11BlendState> blendStates[];
 	
+	extern lu::Camera* mainCamera;
 	extern std::vector<lu::Camera*> cameras;
+	extern std::vector<DebugMesh>debugMeshes;
 
 	void Initialize();
 	void Render();
 	void Release();
+
+	void PushDebugMeshAttribute(DebugMesh mesh);
 }
 

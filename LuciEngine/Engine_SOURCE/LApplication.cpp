@@ -54,6 +54,10 @@ namespace lu
 		graphicDevice->UpdateViewPort();
 		
 		renderer::Render();
+	}
+
+	void Application::Present()
+	{
 		graphicDevice->Present();
 	}
 

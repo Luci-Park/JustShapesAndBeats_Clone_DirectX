@@ -5,7 +5,6 @@
 
 namespace lu::renderer
 {
-	Vertex vertexes[4] = {};
 	ConstantBuffer* constantBuffer[(UINT)eCBType::End] = {};
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> samplerStates[(UINT)eSamplerType::End] = {};
 
@@ -13,7 +12,9 @@ namespace lu::renderer
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthStencilStates[(UINT)eDSType::End] = {};
 	Microsoft::WRL::ComPtr<ID3D11BlendState> blendStates[(UINT)eBSType::End] = {};
 
+	Camera* mainCamera = nullptr;
 	std::vector<lu::Camera*> cameras = {};
+	std::vector<DebugMesh> debugMeshes;
 
 	void SetupState()
 	{
@@ -46,7 +47,15 @@ namespace lu::renderer
 		
 		shader = Resources::Find<Shader>(L"SpriteShader");
 		GetDevice()->CreateInputLayout(arrLayout, 3, shader->GetVSCode(), shader->GetInputLayoutAddressOf());
+
+		shader = Resources::Find<Shader>(L"GridShader");
+		GetDevice()->CreateInputLayout(arrLayout, 3, shader->GetVSCode(), shader->GetInputLayoutAddressOf());
+
+		shader = Resources::Find<Shader>(L"DebugShader");
+		GetDevice()->CreateInputLayout(arrLayout, 3, shader->GetVSCode(), shader->GetInputLayoutAddressOf());
 #pragma endregion
+
+
 #pragma region Sampler State
 		D3D11_SAMPLER_DESC sd = {};
 		sd.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
@@ -60,6 +69,7 @@ namespace lu::renderer
 		GetDevice()->CreateSamplerState(&sd, samplerStates[(UINT)eSamplerType::Anisotropic].GetAddressOf());
 		GetDevice()->BindSampler(eShaderStage::PS, 1, samplerStates[(UINT)eSamplerType::Anisotropic].GetAddressOf());
 #pragma endregion
+
 #pragma region Rasterizer State
 		D3D11_RASTERIZER_DESC rd = {};
 		rd.FillMode = D3D11_FILL_SOLID;
@@ -78,6 +88,7 @@ namespace lu::renderer
 		rd.CullMode = D3D11_CULL_NONE;
 		GetDevice()->CreateRasterizeState(&rd, rasterizerStates[(UINT)eRSType::WireframeNone].GetAddressOf());
 #pragma endregion
+
 #pragma region Depth Stencil State
 		D3D11_DEPTH_STENCIL_DESC dsd = {};
 		dsd.DepthEnable = true; //깊이 테스트를 하는 가?
@@ -104,6 +115,7 @@ namespace lu::renderer
 		dsd.StencilEnable = false;
 		GetDevice()->CreateDepthStencilState(&dsd, depthStencilStates[(UINT)eDSType::None].GetAddressOf());
 #pragma endregion
+
 #pragma region Blend State
 		D3D11_BLEND_DESC bd = {};
 		blendStates[(UINT)eBSType::Default] = nullptr;
@@ -134,15 +146,35 @@ namespace lu::renderer
 		GetDevice()->CreateBlendState(&bd, blendStates[(UINT)eBSType::OneOne].GetAddressOf());
 #pragma endregion
 	}
-
-	void LoadBuffer()
+	void LoadMesh()
 	{
+		std::vector<Vertex> vertexes = {};
+		std::vector<UINT> indexes = {};
+
+		//RECT
+		vertexes.resize(4);
+		vertexes[0].pos = Vector3(-0.5f, 0.5f, 0.0f);
+		vertexes[0].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+		vertexes[0].uv = Vector2(0.0f, 0.0f);
+
+		vertexes[1].pos = Vector3(0.5f, 0.5f, 0.0f);
+		vertexes[1].color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+		vertexes[1].uv = Vector2(1.0f, 0.0f);
+
+		vertexes[2].pos = Vector3(0.5f, -0.5f, 0.0f);
+		vertexes[2].color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+		vertexes[2].uv = Vector2(1.0f, 1.0f);
+
+		vertexes[3].pos = Vector3(-0.5f, -0.5f, 0.0f);
+		vertexes[3].color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+		vertexes[3].uv = Vector2(0.0f, 1.0f);
+
 		// Vertex Buffer
 		std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
 		Resources::Insert(L"RectMesh", mesh);
-		mesh->CreateVertexBuffer(vertexes, 4);
 
-		std::vector<UINT> indexes = {};
+		mesh->CreateVertexBuffer(vertexes.data(), vertexes.size());
+
 		indexes.push_back(0);
 		indexes.push_back(1);
 		indexes.push_back(2);
@@ -152,10 +184,59 @@ namespace lu::renderer
 		indexes.push_back(3);
 		mesh->CreateIndexBuffer(indexes.data(), indexes.size());
 
+
+
+		// Rect Debug Mesh
+		std::shared_ptr<Mesh> rectDebug = std::make_shared<Mesh>();
+		Resources::Insert(L"DebugRect", rectDebug);
+		rectDebug->CreateVertexBuffer(vertexes.data(), vertexes.size());
+		rectDebug->CreateIndexBuffer(indexes.data(), indexes.size());
+
+		// Circle Debug Mesh
+		vertexes.clear();
+		indexes.clear();
+
+		Vertex center = {};
+		center.pos = Vector3(0.0f, 0.0f, 0.0f);
+		center.color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+		vertexes.push_back(center);
+
+		int iSlice = 40;
+		float fRadius = 0.5f;
+		float fTheta = XM_2PI / (float)iSlice;
+
+		for (int i = 0; i < iSlice; ++i)
+		{
+			center.pos = Vector3(fRadius * cosf(fTheta * (float)i)
+				, fRadius * sinf(fTheta * (float)i)
+				, 0.0f);
+			center.color = Vector4(0.0f, 1.0f, 0.0f, 1.f);
+			vertexes.push_back(center);
+		}
+		for (int i = 0; i < vertexes.size() - 2; ++i)
+		{
+			indexes.push_back(i + 1);
+		}
+		indexes.push_back(1);
+
+		std::shared_ptr<Mesh> circleDebug = std::make_shared<Mesh>();
+		Resources::Insert(L"DebugCircle", circleDebug);
+		circleDebug->CreateVertexBuffer(vertexes.data(), vertexes.size());
+		circleDebug->CreateIndexBuffer(indexes.data(), indexes.size());
+	}
+
+
+	void LoadBuffer()
+	{
 		// Constant Buffer
 		constantBuffer[(UINT)eCBType::Transform] = new ConstantBuffer(eCBType::Transform);
 		constantBuffer[(UINT)eCBType::Transform]->Create(sizeof(TransformCB));
+
+		// Grid Buffer
+		constantBuffer[(UINT)eCBType::Grid] = new ConstantBuffer(eCBType::Grid);
+		constantBuffer[(UINT)eCBType::Grid]->Create(sizeof(TransformCB));
 	}
+
 
 	void LoadShader()
 	{
@@ -169,68 +250,92 @@ namespace lu::renderer
 		spriteShader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
 		Resources::Insert(L"SpriteShader", spriteShader);
 
-		{
-			std::shared_ptr<Texture> texture
-				= Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
+		std::shared_ptr<Shader> gridShader = std::make_shared<Shader>();
+		gridShader->Create(eShaderStage::VS, L"GridVS.hlsl", "main");
+		gridShader->Create(eShaderStage::PS, L"GridPS.hlsl", "main");
+		Resources::Insert(L"GridShader", gridShader);
 
-			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
-			spriteMaterial->SetShader(Resources::Find<Shader>(L"SpriteShader"));
-			spriteMaterial->SetTexture(texture);
-			Resources::Insert(L"SpriteMaterial", spriteMaterial);
-		}
+		std::shared_ptr<Shader> debugShader = std::make_shared<Shader>();
+		debugShader->Create(eShaderStage::VS, L"DebugVS.hlsl", "main");
+		debugShader->Create(eShaderStage::PS, L"DebugPS.hlsl", "main");
+		debugShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_LINESTRIP);
+		debugShader->SetRSState(eRSType::SolidNone);
+		//debugShader->SetDSState(eDSType::NoWrite);
+		Resources::Insert(L"DebugShader", debugShader);
+	}
 
-		{
-			std::shared_ptr<Texture> texture
-				= Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
-			std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
-			spriteMaterial->SetShader(spriteShader);
-			spriteMaterial->SetTexture(texture);
-			spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
-			Resources::Insert(L"SpriteMaterial02", spriteMaterial);
-		}
+	void LoadMaterial()
+	{
+		std::shared_ptr<Shader> spriteShader
+			= Resources::Find<Shader>(L"SpriteShader");
 
+
+		std::shared_ptr<Texture> texture
+			= Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
+
+		std::shared_ptr<Material> material = std::make_shared<Material>();
+		material->SetShader(spriteShader);
+		material->SetTexture(texture);
+		Resources::Insert(L"SpriteMaterial", material);
+
+		texture = Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
+		material = std::make_shared<Material>();
+		material->SetShader(spriteShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"SpriteMaterial02", material);
+
+		std::shared_ptr<Shader> gridShader
+			= Resources::Find<Shader>(L"GridShader");
+
+		material = std::make_shared<Material>();
+		material->SetShader(gridShader);
+		Resources::Insert(L"GridMaterial", material);
+
+		std::shared_ptr<Shader> debugShader
+			= Resources::Find<Shader>(L"DebugShader");
+
+		material = std::make_shared<Material>();
+		material->SetShader(debugShader);
+		Resources::Insert(L"DebugMaterial", material);
 	}
 
 	void Initialize()
 	{
-		vertexes[0].pos = Vector3(-1.0f, 1.0f, 0.0f);
-		vertexes[0].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-		vertexes[0].uv = Vector2(0.0f, 0.0f);
-
-		vertexes[1].pos = Vector3(1.0f, 1.0f, 0.0f);
-		vertexes[1].color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
-		vertexes[1].uv = Vector2(1.0f, 0.0f);
-
-		vertexes[2].pos = Vector3(1.0f, -1.0f, 0.0f);
-		vertexes[2].color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
-		vertexes[2].uv = Vector2(1.0f, 1.0f);
-
-		vertexes[3].pos = Vector3(-1.0f, -1.0f, 0.0f);
-		vertexes[3].color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
-		vertexes[3].uv = Vector2(0.0f, 1.0f);
-
+		LoadMesh();
 		LoadBuffer();
 		LoadShader();
 		SetupState();
+		LoadMaterial();
 	}
+
+	void PushDebugMeshAttribute(DebugMesh mesh)
+	{
+		debugMeshes.push_back(mesh);
+	}
+
 	void Render()
 	{
-		for (int i = 0; i < cameras.size(); ++i)
+		for (Camera* cam : cameras)
 		{
-			if (cameras[i] != nullptr)
-				cameras[i]->Render();
+			if (cam == nullptr)
+				continue;
+
+			cam->Render();
 		}
+
 		cameras.clear();
 	}
+
 	void Release()
 	{
-		for (int i = 0; i < (UINT)eCBType::End; ++i)
+		for (ConstantBuffer* buff : constantBuffer)
 		{
-			if (constantBuffer[i] != nullptr)
-			{
-				delete constantBuffer[i];
-				constantBuffer[i] = nullptr;
-			}
+			if (buff == nullptr)
+				continue;
+
+			delete buff;
+			buff = nullptr;
 		}
 	}
 }

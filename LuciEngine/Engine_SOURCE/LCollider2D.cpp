@@ -1,4 +1,6 @@
 #include "LCollider2D.h"
+#include "LGameObject.h"
+#include "LRenderer.h"
 
 namespace lu
 {
@@ -21,6 +23,25 @@ namespace lu
 	}
 	void Collider2D::LateUpdate()
 	{
+		Transform* tr = GetOwner()->GetComponent<Transform>();
+
+		Vector3 scale = tr->GetScale();
+		scale.x *= mSize.x;
+		scale.y *= mSize.y;
+
+		Vector3 pos = tr->GetPosition();
+		pos.x += mCenter.x;
+		pos.y += mCenter.y;
+
+		mPosition = pos;
+
+		graphics::DebugMesh mesh = {};
+		mesh.position = pos;
+		mesh.scale = scale;
+		mesh.rotation = tr->GetRotation();
+		mesh.type = mType;
+
+		renderer::PushDebugMeshAttribute(mesh);
 	}
 	void Collider2D::Render()
 	{
