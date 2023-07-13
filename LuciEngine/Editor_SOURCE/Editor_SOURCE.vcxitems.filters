@@ -1,3 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)GridScript.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)guiDebugObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)guiEditorObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)guiWidget.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)guiEditor.cpp">
+      <Filter>Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)TransformWidget.cpp">
+      <Filter>Transform</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)GridScript.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)guiDebugObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)guiEditorObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)guiWidget.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)guiEditor.h">
+      <Filter>Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)TransformWidget.h">
+      <Filter>Transform</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Editor">
+      <UniqueIdentifier>{69239c04-d54c-42f0-988f-e1ead2ccd691}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Transform">
+      <UniqueIdentifier>{0e02d2a7-0380-4aae-972a-82257c867788}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
 </Project>

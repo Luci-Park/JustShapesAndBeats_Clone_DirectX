@@ -19,6 +19,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)guiEditor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)guiEditorObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)guiWidget.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)TransformWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)GridScript.cpp" />
@@ -26,5 +27,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)guiEditor.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)guiEditorObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)guiWidget.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)TransformWidget.cpp" />
   </ItemGroup>
 </Project>
