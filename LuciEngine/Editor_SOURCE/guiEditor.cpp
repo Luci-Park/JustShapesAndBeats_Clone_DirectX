@@ -69,10 +69,6 @@ namespace gui
 	}
 	void Editor::Render()
 	{
-		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> ds
-			= lu::renderer::depthStencilStates[(UINT)lu::graphics::eDSType::Less];
-		lu::graphics::GetDevice()->BindDepthStencilState(ds.Get());
-
 		for (EditorObject* obj : mEditorObjects)
 		{
 			obj->Render();

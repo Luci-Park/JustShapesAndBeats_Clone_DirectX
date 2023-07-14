@@ -20,7 +20,7 @@ namespace lu::enums
 		Bullet,
 		UI,
 		Camera,
-		End
+		End 
 	};
 
 	enum class eResourceType

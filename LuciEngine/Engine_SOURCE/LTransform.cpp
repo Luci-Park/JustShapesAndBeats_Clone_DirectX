@@ -10,11 +10,15 @@ namespace lu
 		, mPosition(Vector3::Zero)
 		, mRotation(Vector3::Zero)
 		, mScale(Vector3::One)
-		, mParent(this)
+		, mParent(nullptr)
 	{
 	}
 	Transform::~Transform()
 	{
+		if (mParent != nullptr && mParent != this)
+		{
+			mParent->RemoveChildren(this);
+		}
 	}
 	void Transform::Initialize()
 	{
@@ -66,9 +70,9 @@ namespace lu
 		if (mParent != nullptr && mParent != this && mParent != parent)
 		{
 			mParent->RemoveChildren(this);
+			mParent = parent;
+			parent->SetChildren(this);
 		}
-		mParent = parent;
-		parent->SetChildren(this);
 	}
 	void Transform::SetChildren(Transform* child)
 	{

@@ -34,6 +34,8 @@ namespace lu
 
 		void SetParent(Transform* parent);
 		void SetChildren(Transform* child);
+		const std::vector<Transform*>& GetChildren() { return mChildren; }
+
 		void RemoveChildren(Transform* child);
 	private:
 		Vector3 mPosition;

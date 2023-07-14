@@ -64,7 +64,9 @@ namespace lu
 		}
 
 		eState GetState() { return mState; }
-		void SetState(eState state) { mState = state; }
+		void SetState(eState state);
+
+		const std::vector<Script*>& GetScripts() { return mScripts; }
 	public:
 		Transform* mTransform;
 	private:

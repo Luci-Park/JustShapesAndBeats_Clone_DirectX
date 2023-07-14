@@ -93,4 +93,14 @@ namespace lu
 		}
 	}
 
+	void GameObject::SetState(eState state)
+	{
+		mState = state;
+		const std::vector<Transform*>& children = mTransform->GetChildren();
+		for (int i = 0; i < children.size(); i++)
+		{
+			children[i]->GetOwner()->SetState(state);
+		}
+	}
+
 }
