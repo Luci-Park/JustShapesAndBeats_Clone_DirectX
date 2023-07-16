@@ -24,6 +24,11 @@ namespace lu
 		void SetCenter(Vector2 size) { mCenter = size; }
 
 		UINT GetColliderID() { return mColliderID; }
+
+		eColliderType GetType() { return mType; }
+		Vector2 GetSize() { return mSize; }
+		Vector2 GetCenter() { return mCenter; }
+
 	private:
 		static UINT mColliderNumber;
 		UINT mColliderID;
