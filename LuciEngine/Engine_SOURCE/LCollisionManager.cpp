@@ -102,7 +102,10 @@ namespace lu
 	bool CollisionManager::Intersect(Collider2D* left, Collider2D* right)
 	{
 		std::set<Vector3> normals;
-		if(left.)
+		if (left->GetType() == eColliderType::Rect)
+		{
+
+		}
 		// 네모 네모 충돌
 		// 분리축 이론
 
