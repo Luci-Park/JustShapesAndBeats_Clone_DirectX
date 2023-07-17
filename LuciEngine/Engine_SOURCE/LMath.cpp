@@ -240,4 +240,14 @@ namespace lu::math
 
 		return rct;
 	}
+	Vector2 RotateVector(const Vector2& vector, float angle)
+	{
+		float cosTheta = cos(angle);
+		float sinTheta = sin(angle);
+		Vector2 result;
+		result.x = vector.x * cosTheta - vector.y * sinTheta;
+		result.y = vector.x * sinTheta + vector.y * cosTheta;
+
+		return result;
+	}
 }

@@ -37,11 +37,12 @@ namespace lu
 		pos.y += mCenter.y;
 
 		mPosition = pos;
+		mRotation = tr->GetRotation();
 
 		graphics::DebugMesh mesh = {};
 		mesh.position = pos;
 		mesh.scale = scale;
-		mesh.rotation = tr->GetRotation();
+		mesh.rotation = mRotation;
 		mesh.type = mType;
 
 		renderer::PushDebugMeshAttribute(mesh);

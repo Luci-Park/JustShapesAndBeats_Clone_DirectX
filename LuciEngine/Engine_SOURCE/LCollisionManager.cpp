@@ -46,7 +46,7 @@ namespace lu
 				if (rights[i]->GetState() != GameObject::eState::Active) continue;
 
 				Collider2D* rightCol = rights[i]->GetComponent<Collider2D>();
-				if (rightCol == nullptr) continue;
+				if (rightCol == nullptr || leftCol == rightCol) continue;
 
 				ColliderCollision(leftCol, rightCol);
 			}
@@ -101,19 +101,41 @@ namespace lu
 
 	bool CollisionManager::Intersect(Collider2D* left, Collider2D* right)
 	{
-		std::set<Vector3> normals;
+		Vector2 dist{ left->GetCenter() - right->GetCenter() };
+		std::set<Vector2> normals;
 		if (left->GetType() == eColliderType::Rect)
 		{
-
+			Vector2 topLeft, topRight, bottomRight, bottomLeft;
+			GetColliderCorners(left, topLeft, topRight, bottomRight, bottomLeft);
+			normals.insert((topLeft - topRight) * 0.5f);
+			normals.insert((topRight - bottomRight) * 0.5f);
 		}
-		// 네모 네모 충돌
-		// 분리축 이론
+		if (right->GetType() == eColliderType::Rect)
+		{
+			Vector2 topLeft, topRight, bottomRight, bottomLeft;
+			GetColliderCorners(right, topLeft, topRight, bottomRight, bottomLeft);
+			normals.insert((topLeft - topRight) * 0.5f);
+			normals.insert((topRight - bottomRight) * 0.5f);
+		}
 
-		// To do... (숙제)
-		// 분리축이 어렵다 하시는분들은
-		// 원 - 원 충돌
+		for (auto it = normals.begin(); it != normals.end(); ++it)
+		{
+			Vector2 u;
+			it->Normalize(u);
+			
+			float sum = 0.f;
+			for (auto iter = normals.begin(); iter != normals.end(); ++iter)
+			{
+				sum += abs(u.Dot(*iter));
+			}
+			float distance = abs(u.Dot(dist));
+			if (distance >= sum)
+			{
+				return false;
+			}
+		}
 
-		return false;
+		return true;
 	}
 
 	void CollisionManager::SetLayer(eLayerType left, eLayerType right, bool enable)
@@ -143,5 +165,26 @@ namespace lu
 		mMatrix->reset();
 		mCollisionMap.clear();
 	}
+
+	void CollisionManager::GetColliderCorners(Collider2D* collider, Vector2& topLeft, Vector2& topRight, Vector2& bottomRight, Vector2& bottomLeft)
+	{
+		Vector2 halfSize = collider->GetSize() * 0.5f;
+
+		Vector2 topLeftOffset = { -halfSize.x, halfSize.y };
+		Vector2 topRightOffset = { halfSize.x, halfSize.y };
+		Vector2 bottomRightOffset = { halfSize.x, -halfSize.y };
+		Vector2 bottomLeftOffset = { -halfSize.x, -halfSize.y };
+
+		topLeft = collider->GetCenter();
+		topRight = collider->GetCenter();
+		bottomLeft = collider->GetCenter();
+		bottomRight = collider->GetCenter();
+
+		topLeft += RotateVector(topLeftOffset, collider->GetRotation().z);
+		topRight += RotateVector(topRightOffset, collider->GetRotation().z);
+		bottomLeft += RotateVector(bottomLeftOffset, collider->GetRotation().z);
+		bottomRight += RotateVector(bottomRightOffset, collider->GetRotation().z);
+	}
+
 
 }

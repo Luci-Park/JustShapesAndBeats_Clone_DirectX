@@ -204,6 +204,8 @@ namespace lu::math
     Vector2 operator/ (const Vector2& V, float S) noexcept;
     Vector2 operator* (float S, const Vector2& V) noexcept;
 
+    Vector2 RotateVector(const Vector2& vector, float angle);
+
     //------------------------------------------------------------------------------
     // 3D vector
     struct Vector3 : public XMFLOAT3

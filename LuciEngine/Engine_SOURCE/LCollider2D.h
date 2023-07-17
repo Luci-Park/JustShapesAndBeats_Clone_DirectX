@@ -28,7 +28,7 @@ namespace lu
 		eColliderType GetType() { return mType; }
 		Vector2 GetSize() { return mSize; }
 		Vector2 GetCenter() { return mCenter; }
-
+		Vector3 GetRotation() { return mRotation; }
 	private:
 		static UINT mColliderNumber;
 		UINT mColliderID;
@@ -38,6 +38,7 @@ namespace lu
 		Vector3 mPosition;
 		Vector2 mSize;
 		Vector2 mCenter;
+		Vector3 mRotation;
 	};
 }
 
