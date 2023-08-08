@@ -1,7 +1,6 @@
 #include "TitleScene.h"
 #include "PlayerObject.h"
 #include "LCamera.h"
-#include "CameraScript.h"
 #include "BackgroundObject.h"
 #include "OpeningUIObjects.h"
 #include "TitleObject.h"

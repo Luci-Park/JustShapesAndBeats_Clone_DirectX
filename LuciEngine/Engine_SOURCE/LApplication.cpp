@@ -4,6 +4,7 @@
 #include "LRenderer.h"
 #include "LSceneManager.h"
 #include "LResources.h"
+#include "LCollisionManager.h"
 namespace lu
 {
 	Application::Application()
@@ -39,6 +40,7 @@ namespace lu
 	{
 		Time::Update();
 		Input::Update();
+		CollisionManager::Update();
 		SceneManager::Update();
 	}
 

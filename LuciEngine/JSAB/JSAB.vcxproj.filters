@@ -5,12 +5,6 @@
     <ClCompile Include="LoadScenes.h">
       <Filter>Contents\Load</Filter>
     </ClCompile>
-    <ClCompile Include="CameraScript.cpp">
-      <Filter>Contents\Scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="LPlayScene.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="AnnhilateScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
@@ -43,35 +37,42 @@
       <Filter>Contents\Player</Filter>
     </ClCompile>
     <ClCompile Include="TitleScene.cpp">
-      <Filter>Contents\Title\Scene</Filter>
+      <Filter>Contents\Scene\Title\Scene</Filter>
     </ClCompile>
     <ClCompile Include="OpeningUIObjects.cpp">
-      <Filter>Contents\Title\UIs</Filter>
+      <Filter>Contents\Scene\Title\UIs</Filter>
     </ClCompile>
     <ClCompile Include="TitleObject.cpp">
-      <Filter>Contents\Title\UIs</Filter>
+      <Filter>Contents\Scene\Title\UIs</Filter>
     </ClCompile>
     <ClCompile Include="MenuScene.cpp">
-      <Filter>Contents\Title\Scene</Filter>
+      <Filter>Contents\Scene\Title\Scene</Filter>
     </ClCompile>
     <ClCompile Include="MenuButtonObject.cpp">
-      <Filter>Contents\Title\UIs</Filter>
-    </ClCompile>
-    <ClCompile Include="TutorialScene.cpp">
-      <Filter>Contents\Tutorial</Filter>
+      <Filter>Contents\Scene\Title\UIs</Filter>
     </ClCompile>
     <ClCompile Include="TriangleObject.cpp">
       <Filter>Contents\Triangle</Filter>
     </ClCompile>
+    <ClCompile Include="TutorialScene.cpp">
+      <Filter>Contents\Scene\Tutorial\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="EightSideBullet.cpp" />
+    <ClCompile Include="yaCameraScript.cpp">
+      <Filter>EngineTesters</Filter>
+    </ClCompile>
+    <ClCompile Include="yaGridScript.cpp">
+      <Filter>EngineTesters</Filter>
+    </ClCompile>
+    <ClCompile Include="yaPlayerScript.cpp">
+      <Filter>EngineTesters</Filter>
+    </ClCompile>
+    <ClCompile Include="yaPlayScene.cpp">
+      <Filter>EngineTesters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
-    <ClInclude Include="CameraScript.h">
-      <Filter>Contents\Scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="LPlayScene.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="AnnhilateScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
@@ -104,25 +105,38 @@
       <Filter>Contents\Player</Filter>
     </ClInclude>
     <ClInclude Include="TitleScene.h">
-      <Filter>Contents\Title\Scene</Filter>
+      <Filter>Contents\Scene\Title\Scene</Filter>
     </ClInclude>
     <ClInclude Include="OpeningUIObjects.h">
-      <Filter>Contents\Title\UIs</Filter>
+      <Filter>Contents\Scene\Title\UIs</Filter>
     </ClInclude>
     <ClInclude Include="TitleObject.h">
-      <Filter>Contents\Title\UIs</Filter>
+      <Filter>Contents\Scene\Title\UIs</Filter>
     </ClInclude>
     <ClInclude Include="MenuScene.h">
-      <Filter>Contents\Title\Scene</Filter>
+      <Filter>Contents\Scene\Title\Scene</Filter>
     </ClInclude>
     <ClInclude Include="MenuButtonObject.h">
-      <Filter>Contents\Title\UIs</Filter>
-    </ClInclude>
-    <ClInclude Include="TutorialScene.h">
-      <Filter>Contents\Tutorial</Filter>
+      <Filter>Contents\Scene\Title\UIs</Filter>
     </ClInclude>
     <ClInclude Include="TriangleObject.h">
       <Filter>Contents\Triangle</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialScene.h">
+      <Filter>Contents\Scene\Tutorial\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="EightSideBullet.h" />
+    <ClInclude Include="yaPlayerScript.h">
+      <Filter>EngineTesters</Filter>
+    </ClInclude>
+    <ClInclude Include="yaCameraScript.h">
+      <Filter>EngineTesters</Filter>
+    </ClInclude>
+    <ClInclude Include="yaGridScript.h">
+      <Filter>EngineTesters</Filter>
+    </ClInclude>
+    <ClInclude Include="yaPlayScene.h">
+      <Filter>EngineTesters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -144,23 +158,32 @@
     <Filter Include="Contents\Player">
       <UniqueIdentifier>{47ed1ab3-0204-4cfb-a7d3-7870e2d41e05}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Title">
-      <UniqueIdentifier>{3a3123e0-4a96-482c-8c82-fe9d3e48f546}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Title\Scene">
-      <UniqueIdentifier>{0262d4c1-070e-4254-b141-0c1bf5498695}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Title\UIs">
-      <UniqueIdentifier>{c9d45362-4870-4773-a869-e7e077680a40}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Title\OpeningAnimation">
-      <UniqueIdentifier>{1f52ea33-f941-478c-a5c1-538d32bfa56f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Tutorial">
-      <UniqueIdentifier>{7cf01eb1-5ee9-40c9-b20b-13a6609da5f9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Triangle">
       <UniqueIdentifier>{96c9b033-a0f2-4da5-9b47-3a6878c8c1dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Tutorial">
+      <UniqueIdentifier>{7cf01eb1-5ee9-40c9-b20b-13a6609da5f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Title">
+      <UniqueIdentifier>{3a3123e0-4a96-482c-8c82-fe9d3e48f546}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Title\Scene">
+      <UniqueIdentifier>{0262d4c1-070e-4254-b141-0c1bf5498695}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Title\UIs">
+      <UniqueIdentifier>{c9d45362-4870-4773-a869-e7e077680a40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Title\OpeningAnimation">
+      <UniqueIdentifier>{1f52ea33-f941-478c-a5c1-538d32bfa56f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Tutorial\Scene">
+      <UniqueIdentifier>{e583f8ff-8653-465a-89a8-05937618ecd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Tutorial\Object">
+      <UniqueIdentifier>{a99235cb-c668-4d9d-8f4d-d78158ce8435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineTesters">
+      <UniqueIdentifier>{89c1cf6b-235f-4192-bec8-7e6260ac1f60}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

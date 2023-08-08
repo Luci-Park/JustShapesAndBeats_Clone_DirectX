@@ -33,10 +33,14 @@ namespace lu
 		Vector3 Up() { return mUp; }
 
 		void SetParent(Transform* parent);
+		Transform* GetParent() { return mParent; }
+
 		void SetChildren(Transform* child);
 		const std::vector<Transform*>& GetChildren() { return mChildren; }
 
 		void RemoveChildren(Transform* child);
+
+		Matrix& GetMatrix() { return mWorld; }
 	private:
 		Vector3 mPosition;
 		Vector3 mRotation;

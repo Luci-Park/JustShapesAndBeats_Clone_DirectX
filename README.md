@@ -46,6 +46,9 @@ Since 5/15 ~
 ## Week 8(7/2 ~ 7/8)
 - Object Scaling + Placement
 
-## Week9(7/9 ~ 7/15)
+## Week 9(7/9 ~ 7/15)
 - Collision
 - Debug Renderer
+
+## Week 10 (7/16 ~ 7/22)
+- 

@@ -23,7 +23,7 @@ namespace lu::JSAB::Menu
 			MeshRenderer* mr = tag->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(mat);
-			tag->mTransform->SetPosition(Vector3(1000, y, 2));
+			tag->mTransform->SetPosition(Vector3(548.55865, y, 2));
 			float width = mat->GetTexture()->GetRatioWidth(height);
 			tag->mTransform->SetScale(Vector3(width, height, 1));
 			tag->mTransform->SetParent(mTransform);
@@ -47,7 +47,7 @@ namespace lu::JSAB::Menu
 			mr->SetMaterial(mat);
 			float width = mat->GetTexture()->GetRatioWidth(height);
 			tag->mTransform->SetScale(Vector3(width, height, 1));
-			tag->mTransform->SetPosition(Vector3(280, y, 1));
+			tag->mTransform->SetPosition(Vector3(187.80876, y, 1));
 			tag->mTransform->SetParent(mTransform);
 
 			SceneManager::GetActiveScene()->AddGameObject(eLayerType::UI, tag);

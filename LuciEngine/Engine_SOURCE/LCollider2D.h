@@ -39,6 +39,8 @@ namespace lu
 		Vector2 mSize;
 		Vector2 mCenter;
 		Vector3 mRotation;
+
+		graphics::DebugMesh mDebugMesh;
 	};
 }
 

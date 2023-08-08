@@ -21,7 +21,7 @@ namespace lu
 		{
 			for (UINT row = 0; row < (UINT)eLayerType::End; row++)
 			{
-				if (mMatrix[row] == true)
+				if (mMatrix[column][row] == true)
 					LayerCollision((eLayerType)column, (eLayerType)row);
 			}
 		}
@@ -79,6 +79,7 @@ namespace lu
 				//최초 충돌
 				left->OnCollisionEnter(right);
 				right->OnCollisionEnter(left);
+				iter->second = true;
 			}
 			else
 			{
@@ -95,46 +96,66 @@ namespace lu
 				// 충돌하고 있다가 나갈떄
 				left->OnCollisionExit(right);
 				right->OnCollisionExit(left);
+				iter->second = false;
 			}
 		}
 	}
 
 	bool CollisionManager::Intersect(Collider2D* left, Collider2D* right)
 	{
-		Vector2 dist{ left->GetCenter() - right->GetCenter() };
-		std::set<Vector2> normals;
-		if (left->GetType() == eColliderType::Rect)
+		Vector3 arrLocalPos[4] =
 		{
-			Vector2 topLeft, topRight, bottomRight, bottomLeft;
-			GetColliderCorners(left, topLeft, topRight, bottomRight, bottomLeft);
-			normals.insert((topLeft - topRight) * 0.5f);
-			normals.insert((topRight - bottomRight) * 0.5f);
-		}
-		if (right->GetType() == eColliderType::Rect)
-		{
-			Vector2 topLeft, topRight, bottomRight, bottomLeft;
-			GetColliderCorners(right, topLeft, topRight, bottomRight, bottomLeft);
-			normals.insert((topLeft - topRight) * 0.5f);
-			normals.insert((topRight - bottomRight) * 0.5f);
-		}
+			Vector3{-0.5f, 0.5f, 0.0f},
+			Vector3{0.5f, 0.5f, 0.0f},
+			Vector3{0.5f, -0.5f, 0.0f},
+			Vector3{-0.5f, -0.5f, 0.0f}
+		};
 
-		for (auto it = normals.begin(); it != normals.end(); ++it)
+		Transform* leftTr = left->GetOwner()->mTransform;
+		Transform* rightTr = right->GetOwner()->mTransform;
+
+		Matrix leftMatrix = leftTr->GetMatrix();
+		Matrix rightMatrix = rightTr->GetMatrix();
+
+		Vector3 Axis[4] = {};
+
+		Vector3 leftScale = Vector3(left->GetSize().x, left->GetSize().y, 1.0f);
+		Matrix finalLeft = Matrix::CreateScale(leftScale);
+		finalLeft *= leftMatrix;
+
+		Vector3 rightScale = Vector3(right->GetSize().x, right->GetSize().y, 1.0f);
+		Matrix finalRight = Matrix::CreateScale(rightScale);
+		finalRight *= rightMatrix;
+
+		Axis[0] = Vector3::Transform(arrLocalPos[1], finalLeft);
+		Axis[1] = Vector3::Transform(arrLocalPos[3], finalLeft);
+		Axis[2] = Vector3::Transform(arrLocalPos[1], finalRight);
+		Axis[3] = Vector3::Transform(arrLocalPos[3], finalRight);
+
+		Axis[0] -= Vector3::Transform(arrLocalPos[0], finalLeft);
+		Axis[1] -= Vector3::Transform(arrLocalPos[0], finalLeft);
+		Axis[2] -= Vector3::Transform(arrLocalPos[0], finalRight);
+		Axis[3] -= Vector3::Transform(arrLocalPos[0], finalRight);
+
+		for (size_t i = 0; i < 4; i++)
+			Axis[i].z = 0.0f;
+
+		Vector3 vc = leftTr->GetPosition() - rightTr->GetPosition();
+		vc.z = 0.0f;
+
+		Vector3 centerDir = vc;
+		for (size_t i = 0; i < 4; i++)
 		{
-			Vector2 u;
-			it->Normalize(u);
-			
-			float sum = 0.f;
-			for (auto iter = normals.begin(); iter != normals.end(); ++iter)
+			Vector3 vA = Axis[i];
+
+			float projDistance = 0.0f;
+			for (size_t j = 0; j < 4; j++)
 			{
-				sum += abs(u.Dot(*iter));
+				projDistance += fabsf(Axis[j].Dot(vA) / 2.0f);
 			}
-			float distance = abs(u.Dot(dist));
-			if (distance >= sum)
-			{
+			if (projDistance < fabsf(centerDir.Dot(vA)))
 				return false;
-			}
 		}
-
 		return true;
 	}
 
@@ -164,26 +185,6 @@ namespace lu
 	{
 		mMatrix->reset();
 		mCollisionMap.clear();
-	}
-
-	void CollisionManager::GetColliderCorners(Collider2D* collider, Vector2& topLeft, Vector2& topRight, Vector2& bottomRight, Vector2& bottomLeft)
-	{
-		Vector2 halfSize = collider->GetSize() * 0.5f;
-
-		Vector2 topLeftOffset = { -halfSize.x, halfSize.y };
-		Vector2 topRightOffset = { halfSize.x, halfSize.y };
-		Vector2 bottomRightOffset = { halfSize.x, -halfSize.y };
-		Vector2 bottomLeftOffset = { -halfSize.x, -halfSize.y };
-
-		topLeft = collider->GetCenter();
-		topRight = collider->GetCenter();
-		bottomLeft = collider->GetCenter();
-		bottomRight = collider->GetCenter();
-
-		topLeft += RotateVector(topLeftOffset, collider->GetRotation().z);
-		topRight += RotateVector(topRightOffset, collider->GetRotation().z);
-		bottomLeft += RotateVector(bottomLeftOffset, collider->GetRotation().z);
-		bottomRight += RotateVector(bottomRightOffset, collider->GetRotation().z);
 	}
 
 

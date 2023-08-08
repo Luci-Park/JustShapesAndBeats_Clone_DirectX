@@ -1,4 +1,5 @@
-#include "CameraScript.h"
+#include "yaPlayerScript.h"
+#include "yaCameraScript.h"
 #include "LTransform.h"
 #include "LGameObject.h"
 #include "LTime.h"
@@ -6,42 +7,30 @@
 
 namespace lu
 {
-	void CameraScript::Update()
+	void PlayerScript::Update()
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector3 pos = tr->GetPosition();
-
-
-		if (Input::GetKey(eKeyCode::W))
-		{
-			pos.z += 5.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
-		}
-		else if (Input::GetKey(eKeyCode::S))
-		{
-			pos.z -= 5.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
-		}
-		else if (Input::GetKey(eKeyCode::A))
+		
+		if (Input::GetKey(eKeyCode::LEFT))
 		{
 			pos.x -= 5.0f * Time::DeltaTime();
 			tr->SetPosition(pos);
 		}
-		else if (Input::GetKey(eKeyCode::D))
+		else if (Input::GetKey(eKeyCode::RIGHT))
 		{
 			pos.x += 5.0f * Time::DeltaTime();
 			tr->SetPosition(pos);
 		}
-		else if (Input::GetKey(eKeyCode::Q))
+		else if (Input::GetKey(eKeyCode::DOWN))
 		{
 			pos.y -= 5.0f * Time::DeltaTime();
 			tr->SetPosition(pos);
 		}
-		else if (Input::GetKey(eKeyCode::E))
+		else if (Input::GetKey(eKeyCode::UP))
 		{
 			pos.y += 5.0f * Time::DeltaTime();
 			tr->SetPosition(pos);
 		}
-
 	}
 }

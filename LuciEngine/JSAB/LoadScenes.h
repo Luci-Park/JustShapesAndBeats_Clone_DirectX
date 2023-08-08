@@ -1,6 +1,6 @@
 #pragma once
 #include "..\\Engine_SOURCE\LSceneManager.h"
-#include "LPlayScene.h"
+#include "yaPlayScene.h"
 #include "TitleScene.h"
 #include "MenuScene.h"
 #include "TutorialScene.h"
@@ -18,6 +18,6 @@ namespace lu::JSAB
 		SceneManager::CreateScene<Title::TitleScene>(L"TitleScene");
 		SceneManager::CreateScene<Menu::MenuScene>(L"MenuScene");
 		SceneManager::CreateScene<Tutorial::TutorialScene>(L"TutorialScene");
-		SceneManager::LoadScene(L"TitleScene");
+		SceneManager::LoadScene(L"PlayScene");
 	}
 }

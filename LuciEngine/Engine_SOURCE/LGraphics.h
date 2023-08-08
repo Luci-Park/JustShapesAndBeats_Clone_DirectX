@@ -102,6 +102,8 @@ namespace lu::graphics
 		math::Vector3 rotation;
 		math::Vector3 scale;
 
+		math::Vector3 color;
+
 		float radius;
 		float duration;
 		float time;

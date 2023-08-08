@@ -28,7 +28,7 @@ namespace lu::JSAB::Menu
 		}
 		Scene::Initialize();
 		
-		title->mTransform->SetPosition(Vector3(-600, 0, 0));
+		title->mTransform->SetPosition(Vector3(-281, 0, 0));
 	}
 	void MenuScene::Update()
 	{

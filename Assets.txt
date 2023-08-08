@@ -1,67 +1,7 @@
-v blue square
-- transparent blue square particles
-v dash circle effects
-v end triangle
-v end triangle circler
-v end rings
-v hit rings effect
-- more square transitions
-v 8 point bullet
-v white circle = flash
-v circle bullets(small)
-v 4 point bullet
-v bar bullet
-v dashed circle = prepare
+[Tutorial]
+Step 1
+scale = 42
+pos = -51 / 41 / 230 / -230
 
-----
-overworld
-v dotted line
-v dots
-v entry point(blue)
-v entry point(red)
-v line(red)
-v dotted line(red) => 그냥 그렇게 쓰자..
-v song panel(blue)
-v song panel(red)
------
-Dubwoofer
-- water particles(transparent stuff)
-v water
-- thicker water
-- thicker water particles
-v red triangle = big + small = small flashes then falls
-- rectangles
-- white flash
------------
-Cool Friends
-v bar
-v red rectangle
-- belt
-v gear
-v small saw
-v bar
-v white circle
-------------
-Try This
-v scope
-v bar
-v prep circle
-v alarm
-v gear
-v circle
-v square
-v large jar
-v star 
----------------
-Annihilate
-v face
-v tears(both end rounded)
-- spikes(holes)
-- broken spikes
-- bug face
-- boss face
-- boss eyes
-- circle with holes
-- bar
-- spikes(no holes)
----------------
+Step2
+pos = 

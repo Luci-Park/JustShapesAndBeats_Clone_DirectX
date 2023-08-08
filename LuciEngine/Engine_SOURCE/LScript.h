@@ -2,6 +2,7 @@
 #include "LComponent.h"
 namespace lu
 {
+	class Collider2D;
 	class Script : public Component
 	{
 	public:
