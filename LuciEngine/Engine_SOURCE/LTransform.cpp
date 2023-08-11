@@ -64,7 +64,7 @@ namespace lu
 	}
 	void Transform::SetParent(Transform* parent)
 	{
-		if (mParent != this)
+		if (mParent && mParent != this)
 			mParent->RemoveChildren(this);
 		mParent = parent;
 		mParent->AddChildren(this);
@@ -87,7 +87,7 @@ namespace lu
 
 	void Transform::CalculateWorldPosition()
 	{
-		if (mParent != nullptr && mParent != this)
+		if (mParent && mParent != this)
 			mPosition = mParent->GetPosition() + mLocalPosition;
 		else
 			mPosition = mLocalPosition;
@@ -96,7 +96,7 @@ namespace lu
 
 	void Transform::CalculateWorldRotation()
 	{
-		if (mParent != nullptr && mParent != this)
+		if (mParent && mParent != this)
 		{
 			Matrix parentRotation = Matrix::CreateFromQuaternion(mParent->GetRotation());
 			Matrix localRotation = Matrix::CreateFromQuaternion(mLocalRotation);
@@ -110,7 +110,7 @@ namespace lu
 
 	void Transform::CalculateWorldScale()
 	{
-		if (mParent != this && mParent != nullptr)
+		if (mParent && mParent != this)
 		{
 			Vector3 parentScale = mParent->GetScale();
 			mScale.x = mLocalScale.x * parentScale.x;
@@ -122,7 +122,7 @@ namespace lu
 
 	void Transform::CalculateLocalPosition()
 	{
-		if (mParent != nullptr && mParent != this)
+		if (mParent && mParent != this)
 			mLocalPosition = mParent->GetPosition() - mPosition;
 		else
 			mLocalPosition = mPosition;
@@ -130,7 +130,7 @@ namespace lu
 
 	void Transform::CalculateLocalRotation()
 	{
-		if (mParent != nullptr && mParent != this)
+		if (mParent && mParent != this)
 		{
 			Quaternion parentInverse = XMQuaternionConjugate(mParent->GetRotation());
 			mLocalRotation = XMQuaternionMultiply(parentInverse, mRotation);
@@ -141,7 +141,7 @@ namespace lu
 
 	void Transform::CalculateLocalScale()
 	{
-		if (mParent != this && mParent != nullptr)
+		if (mParent && mParent != this)
 		{
 			Vector3 parentScale = mParent->GetScale();
 			mLocalScale.x = parentScale.y == 0 ? 0 : mScale.x / parentScale.x;
