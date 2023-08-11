@@ -8,7 +8,10 @@ namespace lu::JSAB::Tutorial
 	void TutorialScene::Initialize()
 	{
 		AddGameObject(eLayerType::Player, new PlayerObject());
-		//AddGameObject(eLayerType::Player, new Pieces());
+		
+		GameObject* pieces = new Pieces;
+		pieces->AddComponent<gui::TransformWidget>();
+		AddGameObject(eLayerType::Player, pieces);
 		EightSideBullet* bullet1, *bullet2, *bullet3, *bullet4;
 		bullet1 = new EightSideBullet();
 		bullet1->mTransform->SetPosition(Vector3(500, -51, 0));

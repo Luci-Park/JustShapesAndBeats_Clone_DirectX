@@ -5,6 +5,7 @@
 #include "OpeningUIObjects.h"
 #include "TitleObject.h"
 #include "LRenderer.h"
+#include "..\\Editor_SOURCE\\TransformWidget.h"
 
 namespace lu::JSAB::Title
 {
@@ -23,7 +24,8 @@ namespace lu::JSAB::Title
 		AddGameObject(eLayerType::UI, new ShapesObject());
 		AddGameObject(eLayerType::UI, new AndObject());
 		AddGameObject(eLayerType::UI, new BeatsObject());
-		AddGameObject(eLayerType::UI, new LightCircleObject());
+		GameObject* lightcircle = new LightCircleObject();
+		AddGameObject(eLayerType::UI, lightcircle);
 
 		AddGameObject(eLayerType::UI, new Menu::TitleObject());
 

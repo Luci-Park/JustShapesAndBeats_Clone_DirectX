@@ -92,7 +92,7 @@ namespace lu::JSAB
 		Vector3 scale = Vector3(mat->GetTexture()->GetRatioWidth(1000), 1000, 1);
 		light->mTransform->SetScale(scale);
 		light->mTransform->SetPosition(pos);
-		light->mTransform->SetRotation(Vector3(0.0f, 0.0f, rotation));
+		light->mTransform->SetRotation(Quaternion::CreateFromAxisAngle(Vector3::Forward, rotation));
 
 		return light;
 	}

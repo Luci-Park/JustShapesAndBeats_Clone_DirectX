@@ -99,7 +99,7 @@ namespace lu::graphics
 	{
 		enums::eColliderType type;
 		math::Vector3 position;
-		math::Vector3 rotation;
+		math::Quaternion rotation;
 		math::Vector3 scale;
 
 		math::Vector3 color;

@@ -6,9 +6,9 @@
 namespace gui
 {
 	TransformWidget::TransformWidget()
-		: fMoveSpeed(30.0f)
-		, fRotateSpeed(PI/180 * 4)
-		, fScaleSpeed(30.0f)
+		: fMoveSpeed(100.0f)
+		, fRotateSpeed(PI/180 * 10)
+		, fScaleSpeed(100.0f)
 	{
 	}
 	TransformWidget::~TransformWidget()
@@ -21,8 +21,10 @@ namespace gui
 	void TransformWidget::Update()
 	{
 		lu::math::Vector3 position = mTransform->GetPosition();
-		lu::math::Vector3 rotation = mTransform->GetRotation();
+		lu::math::Quaternion quaternion = mTransform->GetRotation();
 		lu::math::Vector3 scale = mTransform->GetScale();
+		lu::math::Vector3 rotation = quaternion.ToEuler();
+
 		//wasd = move
 		//qe = rotate
 		//rf = scale
@@ -67,7 +69,7 @@ namespace gui
 			scale.y += fScaleSpeed * lu::Time::DeltaTime();
 		}
 		mTransform->SetPosition(position);
-		mTransform->SetRotation(rotation);
+		mTransform->SetRotation(lu::math::Quaternion::CreateFromYawPitchRoll(rotation));
 		mTransform->SetScale(scale);
 		if (lu::Input::GetKeyDown(lu::eKeyCode::ENTER))
 		{
