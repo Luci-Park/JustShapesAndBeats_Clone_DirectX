@@ -1,3 +1,5 @@
+#pragma once
+
 #include "LLayer.h"
 #include "LGameObject.h"
 #include "LScene.h"

@@ -12,6 +12,7 @@
 #include "LObject.h"
 #include "yaPlayerScript.h"
 #include "LCollisionManager.h"
+#include "..\\Editor_SOURCE\\TransformWidget.h"
 
 namespace lu
 {
@@ -42,6 +43,25 @@ namespace lu
 
 			player->GetComponent<Transform>()->SetPosition(Vector3(-2.0f, 0.0f, 1.0001f));
 			player->GetComponent<Transform>()->SetRotation(Quaternion::CreateFromAxisAngle(Vector3::Forward, degree));
+			player->AddComponent<gui::TransformWidget>();
+
+			GameObject* child
+				= object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::Player);
+
+			child->SetName(L"Zelda");
+			child->mTransform->SetParent(player->mTransform);
+
+			cd = child->AddComponent<Collider2D>();
+			cd->SetSize(Vector2(1.2f, 1.2f));
+
+			mr = child->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial02"));
+
+			degree = pi / 8.0f;
+
+			child->GetComponent<Transform>()->SetLocalPosition(Vector3(-2.0f, 0.0f, 1.0001f));
+			//child->GetComponent<Transform>()->SetLocalRotation(Quaternion::CreateFromAxisAngle(Vector3::Forward, degree));
 		}
 
 		{
@@ -52,7 +72,7 @@ namespace lu
 			mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial02"));
 			player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
 			Collider2D* cd = player->AddComponent<Collider2D>();
-			player->AddComponent<PlayerScript>();
+			//player->AddComponent<PlayerScript>();
 		}
 
 		//Main Camera
@@ -64,7 +84,7 @@ namespace lu
 			cameraComp = camera->AddComponent<Camera>();
 			cameraComp->SetSize(5.0f);
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
-			camera->AddComponent<CameraScript>();
+			//camera->AddComponent<CameraScript>();
 			renderer::cameras.push_back(cameraComp);
 			renderer::mainCamera = cameraComp;
 		}
