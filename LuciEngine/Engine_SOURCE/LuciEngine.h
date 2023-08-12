@@ -8,6 +8,7 @@
 #include <map> // 2진트리
 #include <bitset> // 비트 배열 편하게 사용해주는 라이브러리
 #include <set> // 해시 테이블
+#include <unordered_set>
 #include <functional> // 함수 포인터
 
 #include <cmath> //수학

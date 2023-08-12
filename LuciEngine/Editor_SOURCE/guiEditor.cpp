@@ -19,24 +19,36 @@ namespace gui
 	{
 		mDebugObjects.resize((UINT)lu::enums::eColliderType::End);
 
-		std::shared_ptr<lu::Mesh> mesh
-			= lu::Resources::Find<lu::Mesh>(L"DebugRect");
-		std::shared_ptr<lu::Material> material
-			= lu::Resources::Find<lu::Material>(L"DebugMaterial");
+		{
+			std::shared_ptr<lu::Mesh> mesh
+				= lu::Resources::Find<lu::Mesh>(L"DebugRect");
+			std::shared_ptr<lu::Material> material
+				= lu::Resources::Find<lu::Material>(L"DebugMaterial");
 
-		mDebugObjects[(UINT)lu::enums::eColliderType::Rect] = new DebugObject();
-		mDebugObjects[(UINT)lu::enums::eColliderType::Rect]->AddComponent<lu::Transform>();
-		lu::MeshRenderer* mr
-			= mDebugObjects[(UINT)lu::enums::eColliderType::Rect]->AddComponent<lu::MeshRenderer>();
-		mr->SetMaterial(material);
-		mr->SetMesh(mesh);
+			mDebugObjects[(UINT)lu::enums::eColliderType::Rect] = new DebugObject();
+			mDebugObjects[(UINT)lu::enums::eColliderType::Rect]->AddComponent<lu::Transform>();
+			lu::MeshRenderer* mr
+				= mDebugObjects[(UINT)lu::enums::eColliderType::Rect]->AddComponent<lu::MeshRenderer>();
+			mr->SetMaterial(material);
+			mr->SetMesh(mesh);
+		}
+		{
+			std::shared_ptr<lu::Mesh> mesh
+				= lu::Resources::Find<lu::Mesh>(L"DebugCircle");
+			std::shared_ptr<lu::Material> material
+				= lu::Resources::Find<lu::Material>(L"DebugMaterial");
 
-
+			mDebugObjects[(UINT)lu::enums::eColliderType::Circle] = new DebugObject();
+			mDebugObjects[(UINT)lu::enums::eColliderType::Circle]->AddComponent<lu::Transform>();
+			lu::MeshRenderer* mr = mDebugObjects[(UINT)lu::enums::eColliderType::Circle]->AddComponent<lu::MeshRenderer>();
+			mr->SetMaterial(material);
+			mr->SetMesh(mesh);
+		}
 		EditorObject* grid = new EditorObject();
 		grid->SetName(L"Grid");
 		grid->mTransform->SetPosition(0.0f, 0.0f, -5.0);
 
-		mr = grid->AddComponent<lu::MeshRenderer>();
+		lu::MeshRenderer* mr = grid->AddComponent<lu::MeshRenderer>();
 		mr->SetMesh(lu::Resources::Find<lu::Mesh>(L"RectMesh"));
 		mr->SetMaterial(lu::Resources::Find<lu::Material>(L"GridMaterial"));
 		GridScript* gridSc = grid->AddComponent<GridScript>();

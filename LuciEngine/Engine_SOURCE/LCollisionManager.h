@@ -1,6 +1,7 @@
 #pragma once
 #include "LuciEngine.h"
 #include <LMath.h>
+using namespace lu::math;
 
 namespace lu
 {
@@ -30,7 +31,8 @@ namespace lu
 		static void SetLayer(eLayerType left, eLayerType right, bool enable);
 		static void Clear();
 	private:
-		static void GetColliderCorners(Collider2D* collider, Vector2& topLeft, Vector2& topRight, Vector2& bottomRight, Vector2& bottomLeft);
+		static void GetRectMinMax(Collider2D* col, Vector2 axis, float& min, float& max);
+		static void GetCircleMinMax(Collider2D* col, Vector2 axis, float& min, float& max);
 	private:
 
 		static std::bitset<LAYER_MAX> mMatrix[LAYER_MAX];

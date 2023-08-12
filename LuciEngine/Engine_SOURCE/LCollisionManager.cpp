@@ -103,57 +103,61 @@ namespace lu
 
 	bool CollisionManager::Intersect(Collider2D* left, Collider2D* right)
 	{
-		Vector3 arrLocalPos[4] =
+		if (left->GetType() == eColliderType::Circle && right->GetType() == eColliderType::Circle)
 		{
-			Vector3{-0.5f, 0.5f, 0.0f},
-			Vector3{0.5f, 0.5f, 0.0f},
-			Vector3{0.5f, -0.5f, 0.0f},
-			Vector3{-0.5f, -0.5f, 0.0f}
-		};
-
-		Transform* leftTr = left->GetOwner()->mTransform;
-		Transform* rightTr = right->GetOwner()->mTransform;
-
-		Matrix leftMatrix = leftTr->GetMatrix();
-		Matrix rightMatrix = rightTr->GetMatrix();
-
-		Vector3 Axis[4] = {};
-
-		Vector3 leftScale = Vector3(left->GetSize().x, left->GetSize().y, 1.0f);
-		Matrix finalLeft = Matrix::CreateScale(leftScale);
-		finalLeft *= leftMatrix;
-
-		Vector3 rightScale = Vector3(right->GetSize().x, right->GetSize().y, 1.0f);
-		Matrix finalRight = Matrix::CreateScale(rightScale);
-		finalRight *= rightMatrix;
-
-		Axis[0] = Vector3::Transform(arrLocalPos[1], finalLeft);
-		Axis[1] = Vector3::Transform(arrLocalPos[3], finalLeft);
-		Axis[2] = Vector3::Transform(arrLocalPos[1], finalRight);
-		Axis[3] = Vector3::Transform(arrLocalPos[3], finalRight);
-
-		Axis[0] -= Vector3::Transform(arrLocalPos[0], finalLeft);
-		Axis[1] -= Vector3::Transform(arrLocalPos[0], finalLeft);
-		Axis[2] -= Vector3::Transform(arrLocalPos[0], finalRight);
-		Axis[3] -= Vector3::Transform(arrLocalPos[0], finalRight);
-
-		for (size_t i = 0; i < 4; i++)
-			Axis[i].z = 0.0f;
-
-		Vector3 vc = leftTr->GetPosition() - rightTr->GetPosition();
-		vc.z = 0.0f;
-
-		Vector3 centerDir = vc;
-		for (size_t i = 0; i < 4; i++)
+			float centerDistanceSqr = Vector2::DistanceSquared(left->GetCenter(), right->GetCenter());
+			float radiusDistanceSqr = (left->GetSize().x + right->GetSize().x) * 0.5f;
+			radiusDistanceSqr *= radiusDistanceSqr;
+			if (radiusDistanceSqr < centerDistanceSqr)
+				return false;
+			return true;
+		}
+		std::vector<Vector2> axis;
+		if (left->GetType() == eColliderType::Circle)
 		{
-			Vector3 vA = Axis[i];
+			Vector2 acrossAxis = left->GetCenter() - right->GetCenter();
+			acrossAxis.Normalize();
+			axis.push_back(acrossAxis);
+		}
+		else if (left->GetType() == eColliderType::Rect)
+		{
+			Vector2 upA, rightA;
+			upA.x = left->GetOwner()->mTransform->Up().x;
+			upA.y = left->GetOwner()->mTransform->Up().y;
 
-			float projDistance = 0.0f;
-			for (size_t j = 0; j < 4; j++)
-			{
-				projDistance += fabsf(Axis[j].Dot(vA) / 2.0f);
-			}
-			if (projDistance < fabsf(centerDir.Dot(vA)))
+			rightA.x = left->GetOwner()->mTransform->Right().x;
+			rightA.y = left->GetOwner()->mTransform->Right().y;
+
+			axis.push_back(upA);
+			axis.push_back(rightA);
+		}
+		if (right->GetType() == eColliderType::Circle)
+		{
+			Vector2 acrossAxis = left->GetCenter() - right->GetCenter();
+			acrossAxis.Normalize();
+			axis.push_back(acrossAxis);
+		}
+		else if (right->GetType() == eColliderType::Rect)
+		{
+			Vector2 upA, rightA;
+			upA.x = right->GetOwner()->mTransform->Up().x;
+			upA.y = right->GetOwner()->mTransform->Up().y;
+
+			rightA.x = right->GetOwner()->mTransform->Right().x;
+			rightA.y = right->GetOwner()->mTransform->Right().y;
+
+			axis.push_back(upA);
+			axis.push_back(rightA);
+		}
+		for (auto ax = axis.begin(); ax != axis.end(); ax++)
+		{
+			float leftmin, leftmax, rightmin, rightmax;
+			if (left->GetType() == eColliderType::Rect) GetRectMinMax(left, *ax, leftmin, leftmax);
+			else if (left->GetType() == eColliderType::Circle) GetCircleMinMax(left, *ax, leftmin, leftmax);
+
+			if (right->GetType() == eColliderType::Rect) GetRectMinMax(right, *ax, rightmin, rightmax);
+			else if (right->GetType() == eColliderType::Circle) GetCircleMinMax(right, *ax, rightmin, rightmax);
+			if (leftmin > rightmax || rightmin > leftmax)
 				return false;
 		}
 		return true;
@@ -185,6 +189,42 @@ namespace lu
 	{
 		mMatrix->reset();
 		mCollisionMap.clear();
+	}
+
+	void CollisionManager::GetRectMinMax(Collider2D* col, Vector2 axis, float& min, float& max)
+	{
+		Vector2 center = col->GetCenter();
+		Vector2 halfSize = col->GetSize() * 0.5;
+		Matrix rotation = Matrix::CreateFromQuaternion(col->GetRotation());
+		Vector2 localCorners[4] = {
+			{-halfSize.x, -halfSize.y},
+			{-halfSize.x, halfSize.y},
+			{halfSize.x, -halfSize.y},
+			{halfSize.x, halfSize.y},
+		};
+		for (int i = 0; i < 4; ++i) {
+			DirectX::XMVECTOR localCorner = DirectX::XMLoadFloat2(&localCorners[i]);
+			DirectX::XMVECTOR rotatedCorner = DirectX::XMVector2Transform(localCorner, rotation);
+			rotatedCorner = DirectX::XMVectorAdd(DirectX::XMLoadFloat2(&center), rotatedCorner);
+			float dot = axis.Dot(rotatedCorner);
+			if (i == 0)
+			{
+				min = dot;
+				max = min;
+			}
+			else
+			{
+				if (min > dot) min = dot;
+				if (max < dot) max = dot;
+			}
+		}
+	}
+
+	void CollisionManager::GetCircleMinMax(Collider2D* col, Vector2 axis, float& min, float& max)
+	{
+		float center = axis.Dot(col->GetCenter());
+		min = center - col->GetSize().x * 0.5;
+		max = center + col->GetSize().x * 0.5;
 	}
 
 
