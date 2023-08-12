@@ -137,10 +137,11 @@ namespace gui
 
 		// main camera
 		lu::Camera* mainCamara = lu::renderer::mainCamera;
-
-		lu::Camera::SetGpuViewMatrix(mainCamara->GetViewMatrix());
-		lu::Camera::SetGpuProjectionMatrix(mainCamara->GetProjectionMatrix());
-
+		if (mainCamara != nullptr)
+		{
+			lu::Camera::SetGpuViewMatrix(mainCamara->GetViewMatrix());
+			lu::Camera::SetGpuProjectionMatrix(mainCamara->GetProjectionMatrix());
+		}
 		debugObj->Render();
 	}
 }

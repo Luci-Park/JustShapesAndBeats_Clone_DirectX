@@ -320,14 +320,14 @@ namespace lu::renderer
 
 	void Render()
 	{
-		for (Camera* cam : cameras)
+		for (int i =0; i < cameras.size(); i++)
 		{
-			if (cam == nullptr)
+			if (cameras[i] == nullptr)
 				continue;
 
-			cam->Render();
+			cameras[i]->Render();
 		}
-
+		mainCamera = cameras.size() > 0 ? cameras[0] : nullptr;
 		cameras.clear();
 	}
 

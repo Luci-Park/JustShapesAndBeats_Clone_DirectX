@@ -10,6 +10,7 @@ namespace lu
 		, mTransform(nullptr)
 		, mSize(Vector2::One)
 		, mCenter(Vector2::Zero)
+		, mType(eColliderType::Rect)
 	{
 		mColliderNumber++;
 		mColliderID = mColliderNumber;
@@ -20,25 +21,23 @@ namespace lu
 	}
 	void Collider2D::Initialize()
 	{
-		mTransform = GetOwner()->GetComponent<Transform>();
+		mTransform = GetOwner()->mTransform;
 	}
 	void Collider2D::Update()
 	{
 	}
 	void Collider2D::LateUpdate()
 	{
-		Transform* tr = GetOwner()->GetComponent<Transform>();
-
-		Vector3 scale = tr->GetScale();
+		Vector3 scale = mTransform->GetScale();
 		scale.x *= mSize.x;
 		scale.y *= mSize.y;
 
-		Vector3 pos = tr->GetPosition();
+		Vector3 pos = mTransform->GetPosition();
 		pos.x += mCenter.x;
 		pos.y += mCenter.y;
 
 		mPosition = pos;
-		mRotation = tr->GetRotation();
+		mRotation = mTransform->GetRotation();
 
 		mDebugMesh.position = pos;
 		mDebugMesh.scale = scale;

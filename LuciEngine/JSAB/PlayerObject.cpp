@@ -29,6 +29,7 @@ namespace lu::JSAB
 		mr->SetMaterial(mat);
 		mTransform->SetScale(Vector3(22.3, 22.3, 1));
 		AddComponent<Player>();
+		AddComponent<Collider2D>();
 		GameObject::Initialize();
 	}
 	void Pieces::Initialize()
