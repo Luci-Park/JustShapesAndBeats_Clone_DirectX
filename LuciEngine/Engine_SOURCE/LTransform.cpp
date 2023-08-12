@@ -28,25 +28,7 @@ namespace lu
 	}
 	void Transform::LateUpdate()
 	{
-		mWorld = Matrix::Identity;
-
-		Matrix scale = Matrix::CreateScale(mLocalScale);
-
-		Matrix rotation = Matrix::CreateFromQuaternion(mLocalRotation);
-
-		Matrix position;
-		position.Translation(mLocalPosition);
-
-		mWorld = scale * rotation * position;
-
-		if (mParent && mParent != this)
-		{
-			mWorld *= mParent->mWorld;
-		}
-
-		mUp = Vector3::TransformNormal(Vector3::Up, rotation);
-		mForward = Vector3::TransformNormal(Vector3::Forward, rotation);
-		mRight = Vector3::TransformNormal(Vector3::Right, rotation);
+		UpdateMatrix();
 	}
 	void Transform::Render()
 	{
@@ -92,6 +74,7 @@ namespace lu
 		else
 			mPosition = mLocalPosition;
 
+		UpdateMatrix();
 	}
 
 	void Transform::CalculateWorldRotation()
@@ -106,6 +89,8 @@ namespace lu
 		}
 		else
 			mRotation = mLocalRotation;
+
+		UpdateMatrix();
 	}
 
 	void Transform::CalculateWorldScale()
@@ -118,6 +103,8 @@ namespace lu
 		}
 		else
 			mScale = mLocalScale;
+
+		UpdateMatrix();
 	}
 
 	void Transform::CalculateLocalPosition()
@@ -126,6 +113,8 @@ namespace lu
 			mLocalPosition = mParent->GetPosition() - mPosition;
 		else
 			mLocalPosition = mPosition;
+
+		UpdateMatrix();
 	}
 
 	void Transform::CalculateLocalRotation()
@@ -137,6 +126,8 @@ namespace lu
 		}
 		else
 			mLocalRotation = mRotation;
+
+		UpdateMatrix();
 	}
 
 	void Transform::CalculateLocalScale()
@@ -150,6 +141,31 @@ namespace lu
 		}
 		else
 			mLocalScale = mScale;
+
+		UpdateMatrix();
+	}
+
+	void Transform::UpdateMatrix()
+	{
+		mWorld = Matrix::Identity;
+
+		Matrix scale = Matrix::CreateScale(mLocalScale);
+
+		Matrix rotation = Matrix::CreateFromQuaternion(mLocalRotation);
+
+		Matrix position;
+		position.Translation(mLocalPosition);
+
+		mWorld = scale * rotation * position;
+
+		if (mParent && mParent != this)
+		{
+			mWorld *= mParent->mWorld;
+		}
+
+		mUp = Vector3::TransformNormal(Vector3::Up, rotation);
+		mForward = Vector3::TransformNormal(Vector3::Forward, rotation);
+		mRight = Vector3::TransformNormal(Vector3::Right, rotation);
 	}
 
 }

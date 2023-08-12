@@ -57,6 +57,8 @@ namespace lu
 		void CalculateLocalPosition();
 		void CalculateLocalRotation();
 		void CalculateLocalScale();
+
+		void UpdateMatrix();
 	private:
 		Vector3 mPosition;
 		Quaternion mRotation;

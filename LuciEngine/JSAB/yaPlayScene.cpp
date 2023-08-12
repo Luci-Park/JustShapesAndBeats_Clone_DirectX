@@ -33,7 +33,7 @@ namespace lu
 
 			Collider2D* cd = player->AddComponent<Collider2D>();
 			cd->SetSize(Vector2(1.2f, 1.2f));
-			cd->SetType(eColliderType::Circle);
+			cd->SetType(eColliderType::Rect);
 
 			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -71,7 +71,7 @@ namespace lu
 			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial02"));
-			player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
+			player->GetComponent<Transform>()->SetPosition(Vector3(1.0f, 1.0f, 1.0f));
 			Collider2D* cd = player->AddComponent<Collider2D>();
 			cd->SetType(eColliderType::Circle);
 			player->AddComponent<PlayerScript>();
