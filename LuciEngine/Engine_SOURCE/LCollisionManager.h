@@ -31,8 +31,8 @@ namespace lu
 		static void SetLayer(eLayerType left, eLayerType right, bool enable);
 		static void Clear();
 	private:
-		static void GetRectMinMax(Collider2D* col, Vector2 axis, float& min, float& max);
-		static void GetCircleMinMax(Collider2D* col, Vector2 axis, float& min, float& max);
+		static void GetRectMinMax(Vector2 center, Vector2 size, Quaternion rotation, Vector2 axis, float& min, float& max);
+		static void GetCircleMinMax(Vector2 center, Vector2 size, Vector2 axis, float& min, float& max);
 	private:
 
 		static std::bitset<LAYER_MAX> mMatrix[LAYER_MAX];
