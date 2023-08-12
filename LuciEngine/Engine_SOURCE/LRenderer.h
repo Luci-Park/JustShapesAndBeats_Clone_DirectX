@@ -29,6 +29,10 @@ namespace lu::renderer
 		Vector2 CameraScale;
 		Vector2 Resolution;
 	};
+	CBUFFER(MaterialCB, CBSLOT_MATERIAL)
+	{
+		lu::math::Color Color;
+	};
 
 	extern ConstantBuffer* constantBuffer[(UINT)eCBType::End];
 	

@@ -7,11 +7,16 @@ cbuffer Transform : register(b0)
 	row_major matrix ProjectionMatrix;
 }
 
-cbuffer Grid : register(b2)
+cbuffer Grid : register(b1)
 {
 	float4 CameraPosition;
 	float2 CameraScale;
 	float2 Resolution;
+}
+
+cbuffer Material : register(b2)
+{
+	float4 Color;
 }
 
 Texture2D albedoTexture : register(t0);

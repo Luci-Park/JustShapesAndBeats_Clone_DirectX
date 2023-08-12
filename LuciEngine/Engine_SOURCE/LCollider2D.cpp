@@ -13,6 +13,7 @@ namespace lu
 	{
 		mColliderNumber++;
 		mColliderID = mColliderNumber;
+		mDebugMesh.color = Color::red;
 	}
 	Collider2D::~Collider2D()
 	{
@@ -54,7 +55,7 @@ namespace lu
 		const std::vector<Script*>& scripts = GetOwner()->GetScripts();
 		for (int i = 0; i < scripts.size(); i++)
 			scripts[i]->OnCollisionEnter(other);
-		mDebugMesh.color = Vector3(0, 1, 0);
+		mDebugMesh.color = Color::green;
 	}
 	void Collider2D::OnCollisionStay(Collider2D* other)
 	{
@@ -62,7 +63,7 @@ namespace lu
 		for (int i = 0; i < scripts.size(); i++)
 			scripts[i]->OnCollisionStay(other);
 
-		mDebugMesh.color = Vector3(0, 1, 0);
+		mDebugMesh.color = Color::green;
 	}
 	void Collider2D::OnCollisionExit(Collider2D* other)
 	{
@@ -70,6 +71,6 @@ namespace lu
 		for (int i = 0; i < scripts.size(); i++)
 			scripts[i]->OnCollisionExit(other);
 
-		mDebugMesh.color = Vector3(1, 0, 0);
+		mDebugMesh.color = Color::red;
 	}
 }

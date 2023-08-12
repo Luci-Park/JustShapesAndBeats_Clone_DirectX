@@ -235,6 +235,10 @@ namespace lu::renderer
 		// Grid Buffer
 		constantBuffer[(UINT)eCBType::Grid] = new ConstantBuffer(eCBType::Grid);
 		constantBuffer[(UINT)eCBType::Grid]->Create(sizeof(TransformCB));
+
+		//material Buffer
+		constantBuffer[(UINT)eCBType::Material] = new ConstantBuffer(eCBType::Material);
+		constantBuffer[(UINT)eCBType::Material]->Create(sizeof(MaterialCB));
 	}
 
 

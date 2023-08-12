@@ -132,9 +132,10 @@ namespace gui
 
 		tr->LateUpdate();
 
-		/*ya::MeshRenderer * mr
-			= debugObj->GetComponent<ya::MeshRenderer>();*/
-			// main camera
+		lu::MeshRenderer* mr = debugObj->GetComponent<lu::MeshRenderer>();
+		mr->GetMaterial()->SetColor(mesh.color);
+
+		// main camera
 		lu::Camera* mainCamara = lu::renderer::mainCamera;
 
 		lu::Camera::SetGpuViewMatrix(mainCamara->GetViewMatrix());

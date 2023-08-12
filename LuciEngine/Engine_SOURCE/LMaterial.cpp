@@ -1,4 +1,6 @@
 #include "LMaterial.h"
+#include "LRenderer.h"
+#include "LConstantBuffer.h"
 namespace lu::graphics
 {
 	Material::Material()
@@ -21,6 +23,13 @@ namespace lu::graphics
 			mTexture->BindShader(eShaderStage::PS, 0);
 		if(mShader)
 			mShader->Binds();
+
+		renderer::MaterialCB mCB = {};
+		mCB.Color = mColor;
+
+		lu::graphics::ConstantBuffer* cb = renderer::constantBuffer[(UINT)eCBType::Material];
+		cb->SetData(&mCB);
+		cb->Bind(eShaderStage::PS);
 	}
 	void Material::Clear()
 	{

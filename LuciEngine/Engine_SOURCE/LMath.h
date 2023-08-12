@@ -854,6 +854,13 @@ namespace lu::math
 
         static void Lerp(const Color& c1, const Color& c2, float t, Color& result) noexcept;
         static Color Lerp(const Color& c1, const Color& c2, float t) noexcept;
+
+        static const Color red;
+        static const Color green;
+        static const Color blue;
+        static const Color white;
+        static const Color black;
+        static const Color clear;
     };
 
     // Binary operators
