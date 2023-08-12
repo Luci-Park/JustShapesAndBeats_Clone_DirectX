@@ -2,6 +2,7 @@
 #include "..\\Engine_SOURCE\\LGameObject.h"
 #include "..\\Engine_SOURCE\\LInput.h"
 #include "..\\Engine_SOURCE\\LTime.h"
+#include "..\\Engine_SOURCE\\LTransform.h"
 
 namespace gui
 {
@@ -14,15 +15,12 @@ namespace gui
 	TransformWidget::~TransformWidget()
 	{
 	}
-	void TransformWidget::Initialize()
-	{
-		mTransform = GetOwner()->mTransform;
-	}
 	void TransformWidget::Update()
-	{
-		lu::math::Vector3 position = mTransform->GetPosition();
-		lu::math::Quaternion quaternion = mTransform->GetRotation();
-		lu::math::Vector3 scale = mTransform->GetScale();
+	{	
+		lu::Transform* tr = GetOwner()->mTransform;
+		lu::math::Vector3 position = tr->GetPosition();
+		lu::math::Quaternion quaternion = tr->GetRotation();
+		lu::math::Vector3 scale = tr->GetScale();
 		lu::math::Vector3 rotation = quaternion.ToEuler();
 
 		//wasd = move
@@ -68,9 +66,9 @@ namespace gui
 			scale.x += fScaleSpeed * lu::Time::DeltaTime();
 			scale.y += fScaleSpeed * lu::Time::DeltaTime();
 		}
-		mTransform->SetPosition(position);
-		mTransform->SetRotation(lu::math::Quaternion::CreateFromYawPitchRoll(rotation));
-		mTransform->SetScale(scale);
+		tr->SetPosition(position);
+		tr->SetRotation(lu::math::Quaternion::CreateFromYawPitchRoll(rotation));
+		tr->SetScale(scale);
 		if (lu::Input::GetKeyDown(lu::eKeyCode::ENTER))
 		{
 			OutputDebugStringA(std::format("position : {}, {}, {}\n", position.x, position.y, position.z).c_str());

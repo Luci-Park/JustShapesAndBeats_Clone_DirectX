@@ -2,6 +2,7 @@
 #include "LMeshRenderer.h"
 #include "LResources.h"
 #include "LSceneManager.h"
+#include "Player.h"
 
 namespace lu::JSAB
 {
@@ -27,7 +28,7 @@ namespace lu::JSAB
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(mat);
 		mTransform->SetScale(Vector3(22.3, 22.3, 1));
-
+		AddComponent<Player>();
 		GameObject::Initialize();
 	}
 	void Pieces::Initialize()

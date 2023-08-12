@@ -1,6 +1,5 @@
 #pragma once
 #include "..\\Engine_SOURCE\\LScript.h"
-#include "..\\Engine_SOURCE\\LTransform.h"
 namespace gui
 {
 	class TransformWidget : public lu::Script
@@ -9,11 +8,9 @@ namespace gui
 		TransformWidget();
 		~TransformWidget();
 
-		virtual void Initialize() override;
 		virtual void Update() override;
 
 	private:
-		lu::Transform* mTransform;
 		float fMoveSpeed;
 		float fRotateSpeed;
 		float fScaleSpeed;

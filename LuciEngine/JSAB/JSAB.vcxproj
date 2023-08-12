@@ -162,6 +162,7 @@
     <ClInclude Include="EightSideBullet.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="JSABRenderer.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="yaPlayScene.h" />
     <ClInclude Include="MenuButtonObject.h" />
     <ClInclude Include="MenuScene.h" />
@@ -169,7 +170,6 @@
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="OpeningUIObjects.h" />
     <ClInclude Include="OverworldScene.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="TriangleObject.h" />
     <ClInclude Include="TryThisScene.h" />
@@ -188,6 +188,7 @@
     <ClCompile Include="EightSideBullet.cpp" />
     <ClCompile Include="JSABRenderer.cpp" />
     <ClCompile Include="LoadScenes.h" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="yaPlayScene.cpp" />
     <ClCompile Include="JSAB.cpp" />
     <ClCompile Include="MenuButtonObject.cpp" />
@@ -196,7 +197,6 @@
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="OpeningUIObjects.cpp" />
     <ClCompile Include="OverworldScene.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="TriangleObject.cpp" />
     <ClCompile Include="TryThisScene.cpp" />

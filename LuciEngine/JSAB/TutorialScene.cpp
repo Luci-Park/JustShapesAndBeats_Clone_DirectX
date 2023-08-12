@@ -9,7 +9,7 @@ namespace lu::JSAB::Tutorial
 	{
 		AddGameObject(eLayerType::Player, new PlayerObject());
 		
-		GameObject* pieces = new Pieces;
+		/*GameObject* pieces = new Pieces;
 		pieces->AddComponent<gui::TransformWidget>();
 		AddGameObject(eLayerType::Player, pieces);
 		EightSideBullet* bullet1, *bullet2, *bullet3, *bullet4;
@@ -32,7 +32,7 @@ namespace lu::JSAB::Tutorial
 		bullet4->mTransform->SetPosition(Vector3(500, -230, 0));
 		bullet4->mTransform->SetScale(Vector3(42, 42, 1));
 		AddGameObject(eLayerType::Bullet, bullet4);
-		
+		*/
 
 
 		//Camera
