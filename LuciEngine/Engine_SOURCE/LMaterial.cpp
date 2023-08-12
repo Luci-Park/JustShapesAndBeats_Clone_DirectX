@@ -7,7 +7,7 @@ namespace lu::graphics
 		: Resource(lu::enums::eResourceType::Material)
 		, mShader(nullptr)
 		, mTexture(nullptr)
-		, mColor(Color::white)
+		, mTint(Color::white)
 		, mMode(eRenderingMode::Opaque)
 	{
 	}
@@ -25,12 +25,7 @@ namespace lu::graphics
 		if(mShader)
 			mShader->Binds();
 
-		renderer::MaterialCB mCB = {};
-		mCB.Color = mColor;
-
-		lu::graphics::ConstantBuffer* cb = renderer::constantBuffer[(UINT)eCBType::Material];
-		cb->SetData(&mCB);
-		cb->Bind(eShaderStage::PS);
+		
 	}
 	void Material::Clear()
 	{

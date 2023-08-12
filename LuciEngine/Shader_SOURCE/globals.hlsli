@@ -16,7 +16,10 @@ cbuffer Grid : register(b1)
 
 cbuffer Material : register(b2)
 {
+	float4 Tint;
 	float4 Color;
+	float padding[1];
+	float Interpolation;
 }
 
 Texture2D albedoTexture : register(t0);

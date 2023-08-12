@@ -18,11 +18,12 @@ float4 main(VSOut In) : SV_TARGET
 {
     float4 color = (float4)0.0f;
     color = albedoTexture.Sample(anisotropicSampler, In.UV);
-    color.x *= Color.x;
-    color.y *= Color.y;
-    color.z *= Color.z;
-    color.w *= Color.w;
+    color.x *= Tint.x;
+    color.y *= Tint.y;
+    color.z *= Tint.z;
+    color.w *= Tint.w;
     color = saturate(color);
+    color = lerp(color, Color, Interpolation);
     if (color.a <= 0.0f)
         discard;
 

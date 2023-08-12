@@ -11,7 +11,7 @@
 
 #define CBSLOT_TRANSFORM		0
 #define CBSLOT_GRID				1
-#define CBSLOT_MATERIAL			2
+#define CBSLOT_MESHRENDERER		2
 namespace lu::graphics
 {
 	enum class eShaderStage
@@ -30,7 +30,7 @@ namespace lu::graphics
 	{
 		Transform,
 		Grid,
-		Material,
+		MeshRenderer,
 		End
 	};
 

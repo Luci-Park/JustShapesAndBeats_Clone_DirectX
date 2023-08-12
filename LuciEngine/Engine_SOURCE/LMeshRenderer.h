@@ -21,10 +21,16 @@ namespace lu
 		std::shared_ptr<Mesh> GetMesh(){ return mMesh; }
 		std::shared_ptr<Material> GetMaterial(){ return mMaterial; }
 
+		void SetColor(Color color) { mColor = color; }
+		void UseColor(bool use) { mInterpolation = use ? 1 : 0; }
+		Color GetColor() { return mColor; }
+		void SetInterpolation(float interpolation) { mInterpolation = std::clamp(interpolation, 0.f, 1.f); }
 
 	private:
 	 	std::shared_ptr<Mesh> mMesh;
 		std::shared_ptr<Material> mMaterial;
+		Color mColor;
+		float mInterpolation;
 	};
 }
 

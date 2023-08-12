@@ -36,9 +36,9 @@ namespace lu
 	void Transform::BindConstantBuffer()
 	{
 		renderer::TransformCB trCB = {};
-		trCB.mWorld = mWorld;
-		trCB.mView = Camera::GetGpuViewMatrix();
-		trCB.mProjection = Camera::GetGpuProjectionMatrix();
+		trCB.world = world;
+		trCB.view = Camera::GetGpuViewMatrix();
+		trCB.projection = Camera::GetGpuProjectionMatrix();
 
 		lu::graphics::ConstantBuffer* cb = renderer::constantBuffer[(UINT)eCBType::Transform];
 		cb->SetData(&trCB);
@@ -147,7 +147,7 @@ namespace lu
 
 	void Transform::UpdateMatrix()
 	{
-		mWorld = Matrix::Identity;
+		world = Matrix::Identity;
 
 		Matrix scale = Matrix::CreateScale(mLocalScale);
 
@@ -156,11 +156,11 @@ namespace lu
 		Matrix position;
 		position.Translation(mLocalPosition);
 
-		mWorld = scale * rotation * position;
+		world = scale * rotation * position;
 
 		if (mParent && mParent != this)
 		{
-			mWorld *= mParent->mWorld;
+			world *= mParent->world;
 		}
 
 		mUp = Vector3::TransformNormal(Vector3::Up, rotation);

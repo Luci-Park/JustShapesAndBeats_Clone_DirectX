@@ -18,10 +18,10 @@ namespace lu::graphics
 
 		std::shared_ptr<Shader> GetShader() { return mShader; }
 		std::shared_ptr<Texture> GetTexture() { return mTexture; }
-		Color GetColor() { return mColor; }
+		Color GetTint() { return mTint; }
 		void SetShader(std::shared_ptr<Shader> shader) { mShader = shader; }
 		void SetTexture(std::shared_ptr<Texture> texture) { mTexture = texture; }
-		void SetColor(Color color) { mColor = color; }
+		void SetTint(Color color) { mTint = color; }
 		void SetRenderingMode(eRenderingMode mode) { mMode = mode; }
 		eRenderingMode GetRenderingMode() { return mMode; }
 
@@ -31,7 +31,7 @@ namespace lu::graphics
 		std::shared_ptr<Texture> mTexture;
 
 		eRenderingMode mMode;
-		Color mColor;
+		Color mTint;
 	};
 }
 

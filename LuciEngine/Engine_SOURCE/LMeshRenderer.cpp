@@ -7,6 +7,8 @@ namespace lu
 {
 	MeshRenderer::MeshRenderer()
 		: Component(eComponentType::MeshRenderer)
+		, mColor(Color::white)
+		, mInterpolation(0)
 	{
 	}
 	MeshRenderer::~MeshRenderer()
@@ -28,8 +30,18 @@ namespace lu
 
 		mMesh->BindBuffer();
 		mMaterial->Binds();
-		mMesh->Render();
 
+		renderer::MeshRendererCB mCB = {};
+		mCB.tint = mMaterial->GetTint();
+		mCB.color = mColor;
+		mCB.interpolation = mInterpolation;
+		lu::graphics::ConstantBuffer* cb = renderer::constantBuffer[(UINT)eCBType::MeshRenderer];
+		cb->SetData(&mCB);
+		cb->Bind(eShaderStage::PS);
+				
+		mMesh->Render();
+		
 		mMaterial->Clear();
+
 	}
 }

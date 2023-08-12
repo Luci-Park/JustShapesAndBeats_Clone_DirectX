@@ -48,7 +48,7 @@ namespace lu
 
 		void RemoveChildren(Transform* child);
 
-		Matrix& GetMatrix() { return mWorld; }
+		Matrix& GetMatrix() { return world; }
 	private:
 		void CalculateWorldPosition();
 		void CalculateWorldRotation();
@@ -72,7 +72,7 @@ namespace lu
 		Vector3 mForward;
 		Vector3 mRight;
 
-		Matrix mWorld;
+		Matrix world;
 		Transform* mParent;
 		std::vector<Transform*> mChildren;
 	};

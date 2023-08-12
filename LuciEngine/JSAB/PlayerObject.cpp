@@ -27,6 +27,8 @@ namespace lu::JSAB
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(mat);
+		mr->SetColor(Color::red);
+		mr->SetInterpolation(0.f);
 		mTransform->SetScale(Vector3(22.3, 22.3, 1));
 		AddComponent<Player>();
 		AddComponent<Collider2D>();

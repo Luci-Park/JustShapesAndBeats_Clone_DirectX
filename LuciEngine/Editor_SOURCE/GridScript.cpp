@@ -49,9 +49,9 @@ namespace gui
 			= lu::renderer::constantBuffer[(int)lu::graphics::eCBType::Grid];
 
 		lu::renderer::GridCB data;
-		data.CameraPosition = Vector4(pos.x, pos.y, pos.z, 1.0f);
-		data.Resolution = resolution;
-		data.CameraScale = Vector2(scale, scale);
+		data.cameraPosition = Vector4(pos.x, pos.y, pos.z, 1.0f);
+		data.resolution = resolution;
+		data.cameraScale = Vector2(scale, scale);
 
 		cb->SetData(&data);
 		cb->Bind(lu::graphics::eShaderStage::VS);

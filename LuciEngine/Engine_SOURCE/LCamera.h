@@ -48,14 +48,14 @@ namespace lu
 		float GetSize() { return mSize; }
 		void SetSize(float size) { mSize = size; }
 
-		Matrix& GetViewMatrix() { return mView; }
-		Matrix& GetProjectionMatrix() { return mProjection; }
+		Matrix& GetViewMatrix() { return view; }
+		Matrix& GetProjectionMatrix() { return projection; }
 	private:
 		static Matrix View;
 		static Matrix Projection;
 
-		Matrix mView;
-		Matrix mProjection;
+		Matrix view;
+		Matrix projection;
 
 		eProjectionType mType;
 		float mAspectRatio;

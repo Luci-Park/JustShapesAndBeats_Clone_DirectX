@@ -44,17 +44,19 @@ namespace gui
 			mr->SetMaterial(material);
 			mr->SetMesh(mesh);
 		}
-		EditorObject* grid = new EditorObject();
-		grid->SetName(L"Grid");
-		grid->mTransform->SetPosition(0.0f, 0.0f, -5.0);
+		/*{
+			EditorObject* grid = new EditorObject();
+			grid->SetName(L"Grid");
+			grid->mTransform->SetPosition(0.0f, 0.0f, -5.0);
 
-		lu::MeshRenderer* mr = grid->AddComponent<lu::MeshRenderer>();
-		mr->SetMesh(lu::Resources::Find<lu::Mesh>(L"RectMesh"));
-		mr->SetMaterial(lu::Resources::Find<lu::Material>(L"GridMaterial"));
-		GridScript* gridSc = grid->AddComponent<GridScript>();
-		gridSc->SetCamera(lu::renderer::cameras[0]);
+			lu::MeshRenderer* mr = grid->AddComponent<lu::MeshRenderer>();
+			mr->SetMesh(lu::Resources::Find<lu::Mesh>(L"RectMesh"));
+			mr->SetMaterial(lu::Resources::Find<lu::Material>(L"GridMaterial"));
+			GridScript* gridSc = grid->AddComponent<GridScript>();
+			gridSc->SetCamera(lu::renderer::cameras[0]);
 
-		mEditorObjects.push_back(grid);
+			mEditorObjects.push_back(grid);
+		}*/
 
 	}
 	void Editor::Run()
@@ -133,7 +135,7 @@ namespace gui
 		tr->LateUpdate();
 
 		lu::MeshRenderer* mr = debugObj->GetComponent<lu::MeshRenderer>();
-		mr->GetMaterial()->SetColor(mesh.color);
+		mr->SetColor(mesh.color);
 
 		// main camera
 		lu::Camera* mainCamara = lu::renderer::mainCamera;

@@ -32,8 +32,8 @@ namespace lu
 		, mOpaqueGameObjects{}
 		, mCutOutGameObjects{}
 		, mTransparentGameObjects{}
-		, mView(Matrix::Identity)
-		, mProjection(Matrix::Identity)
+		, view(Matrix::Identity)
+		, projection(Matrix::Identity)
 	{
 		EnableLayerMasks();
 	}
@@ -54,8 +54,8 @@ namespace lu
 	}
 	void Camera::Render()
 	{
-		View = mView;
-		Projection = mProjection;
+		View = view;
+		Projection = projection;
 
 		AlphaSortGameObjects();
 		ZDepthSortTransparentGameObjects();
@@ -73,8 +73,8 @@ namespace lu
 		Vector3 pos = tr->GetPosition();
 
 		//Translate
-		mView = Matrix::Identity;
-		mView *= Matrix::CreateTranslation(-pos);
+		view = Matrix::Identity;
+		view *= Matrix::CreateTranslation(-pos);
 
 		//Rotation
 		Vector3 up = tr->Up();
@@ -85,7 +85,7 @@ namespace lu
 		viewRotate._11 = right.x;	viewRotate._12 = up.x; viewRotate._13 = foward.x;
 		viewRotate._21 = right.y;	viewRotate._22 = up.y; viewRotate._23 = foward.y;
 		viewRotate._31 = right.z;	viewRotate._32 = up.z; viewRotate._33 = foward.z;
-		mView *= viewRotate;
+		view *= viewRotate;
 		return true;
 	}
 	bool Camera::CreateProjectionMatrix(eProjectionType type)
@@ -104,11 +104,11 @@ namespace lu
 			height *= orthorgraphicratio;
 
 			//LH = left handed
-			mProjection = Matrix::CreateOrthographicLH(width, height, mNear, mFar);
+			projection = Matrix::CreateOrthographicLH(width, height, mNear, mFar);
 		}
 		else
 		{
-			mProjection = Matrix::CreatePerspectiveFieldOfViewLH(XM_2PI / 6.0f, mAspectRatio, mNear, mFar);
+			projection = Matrix::CreatePerspectiveFieldOfViewLH(XM_2PI / 6.0f, mAspectRatio, mNear, mFar);
 		}
 		return true;
 	}

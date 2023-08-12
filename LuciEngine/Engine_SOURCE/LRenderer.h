@@ -18,20 +18,23 @@ namespace lu::renderer
 
 	CBUFFER(TransformCB, CBSLOT_TRANSFORM)
 	{
-		Matrix mWorld;
-		Matrix mView;
-		Matrix mProjection;
+		Matrix world;
+		Matrix view;
+		Matrix projection;
 	};
 
 	CBUFFER(GridCB, CBSLOT_GRID)
 	{
-		Vector4 CameraPosition;
-		Vector2 CameraScale;
-		Vector2 Resolution;
+		Vector4 cameraPosition;
+		Vector2 cameraScale;
+		Vector2 resolution;
 	};
-	CBUFFER(MaterialCB, CBSLOT_MATERIAL)
+	CBUFFER(MeshRendererCB, CBSLOT_MESHRENDERER)
 	{
-		lu::math::Color Color;
+		lu::math::Color tint;
+		lu::math::Color color;
+		float padding[1];
+		float interpolation; // 0 uses original, 1 uses Color;
 	};
 
 	extern ConstantBuffer* constantBuffer[(UINT)eCBType::End];
