@@ -71,6 +71,7 @@ namespace lu
 			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial02"));
+			mr->GetMaterial()->SetColor(Color::green);
 			player->GetComponent<Transform>()->SetPosition(Vector3(1.0f, 1.0f, 1.0f));
 			Collider2D* cd = player->AddComponent<Collider2D>();
 			cd->SetType(eColliderType::Circle);

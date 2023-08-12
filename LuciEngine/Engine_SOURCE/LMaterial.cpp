@@ -7,6 +7,7 @@ namespace lu::graphics
 		: Resource(lu::enums::eResourceType::Material)
 		, mShader(nullptr)
 		, mTexture(nullptr)
+		, mColor(Color::white)
 		, mMode(eRenderingMode::Opaque)
 	{
 	}
