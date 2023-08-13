@@ -30,8 +30,9 @@ namespace lu::JSAB
 		mr->SetColor(Color::red);
 		mr->SetInterpolation(0.f);
 		mTransform->SetScale(Vector3(22.3, 22.3, 1));
-		AddComponent<Player>();
 		AddComponent<Collider2D>();
+
+		AddComponent<Player>();
 		GameObject::Initialize();
 	}
 	void Pieces::Initialize()

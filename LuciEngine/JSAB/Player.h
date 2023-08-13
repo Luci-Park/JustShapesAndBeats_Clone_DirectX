@@ -3,6 +3,7 @@
 namespace lu::JSAB
 {
 	class lu::Transform;
+	class lu::Collider2D;
 	class Player : public Script
 	{
 	public:
@@ -13,19 +14,27 @@ namespace lu::JSAB
 	private:
 		void MoveRotate(Quaternion rotation);
 		void MoveScale(Vector3 scale);
+
 		//void DashScale();
 
 		Vector3 GetInputDir();
 		Quaternion GetRotation(Vector3 moveDir);
 		Vector3 GetMoveScale(Vector3 direction);
+
 	private:
+		float mMoveSpeed;
+		float mDashSpeed;
+		float mDashTimer;
+		float mDashDuration;
+
+		bool mIsDashing;
 		Vector3 mOrgScale;
 		Vector3 mMoveScale;
 		Vector3 mDashScale;
-		float mMoveSpeed;
-		float mRotateSpeed;
 		Vector3 mMoveDir;
+		Vector3 mDashDir;
 		lu::Transform* mTr;
+		lu::Collider2D* mCr;
 	};
 }
 

@@ -3,29 +3,54 @@
 #include "LGameObject.h"
 #include "LTransform.h"
 #include "LTime.h"
+#include "LCollider2D.h"
 namespace lu::JSAB
 {
 	Player::Player()
 		: mMoveSpeed(280.0f)
+		, mDashSpeed(1120.0f)
+		, mDashTimer(0.0f)
+		, mDashDuration(0.1f)
 		, mMoveDir(Vector3::Zero)
+		, mIsDashing(false)
 	{
 	}
 	void Player::Initialize()
 	{
 		mTr = GetOwner()->mTransform;
+		mCr = GetOwner()->GetComponent<Collider2D>();
 		mOrgScale = mTr->GetScale();
-		mMoveScale = { mOrgScale.x * 0.7f, mOrgScale.y * 1.3f };
+		mMoveScale = { mOrgScale.x * 0.7f, mOrgScale.y * 1.3f, 1.f };
+		mDashScale = { mOrgScale.x * 0.5f, mOrgScale.y * 2.f, 1.f };
 	}
 	void Player::Update()
 	{
 		Vector3 moveDir = GetInputDir();
-		if (!Input::GetKeyDown(eKeyCode::SPACE))
+		if (Input::GetKeyDown(eKeyCode::SPACE) && !mIsDashing)
 		{
+			mIsDashing = true;
+			mDashTimer = 0.f;
+			mDashDir = moveDir == Vector3::Zero ? Vector3::Right : moveDir;
+		}
+
+		if (!mIsDashing)
+		{
+			mCr->SetState(eState::Active);
 			mTr->SetPosition(mTr->GetPosition() + moveDir * mMoveSpeed * Time::DeltaTime());
 			MoveRotate(GetRotation(moveDir));
 			MoveScale(GetMoveScale(moveDir));
-			//mTr->SetScale(GetMoveScale(mMoveDir));
 		}
+		else
+		{
+			mDashTimer += Time::DeltaTime();
+			if (mDashTimer > mDashDuration) mIsDashing = false;
+
+			mCr->SetState(eState::InActive);
+			mTr->SetPosition(mTr->GetPosition() + mDashDir * mDashSpeed * Time::DeltaTime());
+			MoveRotate(GetRotation(moveDir));
+			mTr->SetScale(mDashScale);
+		}
+
 	}
 	void Player::MoveRotate(Quaternion rotation)
 	{

@@ -37,30 +37,16 @@ namespace lu
 		}
 	}
 
-	void GameObject::Initialize()
-	{
-		for (int i = 0; i < mComponents.size(); i++)
-		{
-			if (mComponents[i] != nullptr)
-				mComponents[i]->Initialize();
-		}
-		for (int i = 0; i < mScripts.size(); i++)
-		{
-			if (mScripts[i] != nullptr)
-				mScripts[i]->Initialize();
-		}
-	}
-
 	void GameObject::Update()
 	{
 		for (int i = 0; i < mComponents.size(); i++)
 		{
-			if (mComponents[i] != nullptr)
+			if (mComponents[i] != nullptr && mComponents[i]->GetState() == eState::Active)
 				mComponents[i]->Update();
 		}
 		for (int i = 0; i < mScripts.size(); i++)
 		{
-			if (mScripts[i] != nullptr)
+			if (mScripts[i] != nullptr && mScripts[i]->GetState() == eState::Active)
 				mScripts[i]->Update();
 		}
 	}
@@ -69,12 +55,12 @@ namespace lu
 	{
 		for (int i = 0; i < mComponents.size(); i++)
 		{
-			if (mComponents[i] != nullptr)
+			if (mComponents[i] != nullptr && mComponents[i]->GetState() == eState::Active)
 				mComponents[i]->LateUpdate();
 		}
 		for (int i = 0; i < mScripts.size(); i++)
 		{
-			if (mScripts[i] != nullptr)
+			if (mScripts[i] != nullptr && mScripts[i]->GetState() == eState::Active)
 				mScripts[i]->LateUpdate();
 		}
 	}
@@ -83,12 +69,12 @@ namespace lu
 	{
 		for (int i = 0; i < mComponents.size(); i++)
 		{
-			if (mComponents[i] != nullptr)
+			if (mComponents[i] != nullptr && mComponents[i]->GetState() == eState::Active)
 				mComponents[i]->Render();
 		}
 		for (int i = 0; i < mScripts.size(); i++)
 		{
-			if (mScripts[i] != nullptr)
+			if (mScripts[i] != nullptr && mScripts[i]->GetState() == eState::Active)
 				mScripts[i]->Render();
 		}
 	}

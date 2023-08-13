@@ -8,18 +8,12 @@ namespace lu
 	class GameObject : public Entity
 	{
 	public:
-		enum eState
-		{
-			Active,
-			InActive,
-			Destory,
-		};
 
 		GameObject();
 		GameObject(Transform* parent);
 		virtual ~GameObject();
 
-		virtual void Initialize();
+		virtual void Initialize() {}
 		virtual void Update();
 		virtual void LateUpdate();
 		virtual void Render();
@@ -59,12 +53,12 @@ namespace lu
 			else
 				mScripts.push_back(script);
 			comp->SetOwner(this);
+			comp->Initialize();
 
 			return comp;
 		}
 
-		eState GetState() { return mState; }
-		void SetState(eState state);
+		virtual void SetState(eState state);
 
 		const std::vector<Script*>& GetScripts() { return mScripts; }
 	public:
