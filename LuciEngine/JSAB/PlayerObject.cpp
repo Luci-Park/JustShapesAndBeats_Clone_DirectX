@@ -3,6 +3,7 @@
 #include "LResources.h"
 #include "LSceneManager.h"
 #include "Player.h"
+#include "LObject.h"
 
 namespace lu::JSAB
 {
@@ -14,8 +15,34 @@ namespace lu::JSAB
 	}
 	void PlayerObject::Initialize()
 	{
+		SetName(L"Player");
+		std::shared_ptr<Material> mat = CreatePlayerMat();
+		MeshRenderer* mr = AddComponent<MeshRenderer>();
+		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		mr->SetMaterial(mat);
+		mTransform->SetScale(Vector3(22.3, 22.3, 1));
+		AddComponent<Collider2D>();
+
+		Player* script = AddComponent<Player>();
+
+		{
+			GameObject* dashoutline = object::Instantiate<GameObject>(mTransform, eLayerType::Player);
+			dashoutline->SetName(L"PlayerOutline");
+			dashoutline->mTransform->SetLocalScale({ 1.5f, 1.5f, 1.f });
+			std::shared_ptr<Material> outlinemat = CreateDashOutlineMat();
+			MeshRenderer* outlinemr = dashoutline->AddComponent<MeshRenderer>();
+			outlinemr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			outlinemr->SetMaterial(outlinemat);
+			outlinemr->SetColor(Color::white);
+			outlinemr->UseColor(true);
+			dashoutline->SetState(eState::InActive);
+			script->SetDashOutline(dashoutline);
+		}
+	}
+	std::shared_ptr<Material> PlayerObject::CreatePlayerMat()
+	{
 		std::shared_ptr<Material> mat = Resources::Find<Material>(L"PlayerMat");
-		if (mat == nullptr)
+		if (!mat)
 		{
 			mat = std::make_shared<Material>();
 			mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
@@ -23,17 +50,33 @@ namespace lu::JSAB
 			mat->SetRenderingMode(eRenderingMode::CutOut);
 			Resources::Insert(L"PlayerMat", mat);
 		}
-
-		MeshRenderer* mr = AddComponent<MeshRenderer>();
-		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mr->SetMaterial(mat);
-		mr->SetColor(Color::red);
-		mr->SetInterpolation(0.f);
-		mTransform->SetScale(Vector3(22.3, 22.3, 1));
-		AddComponent<Collider2D>();
-
-		AddComponent<Player>();
-		GameObject::Initialize();
+		return mat;
+	}
+	std::shared_ptr<lu::Material> PlayerObject::CreateDashOutlineMat()
+	{
+		std::shared_ptr<Material> mat = Resources::Find<Material>(L"DashOutlineMat");
+		if (!mat)
+		{
+			mat = std::make_shared<Material>();
+			mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
+			mat->SetTexture(Resources::Find<Texture>(L"player1"));
+			mat->SetRenderingMode(eRenderingMode::CutOut);
+			Resources::Insert(L"DashOutlineMat", mat);
+		}
+		return mat;
+	}
+	std::shared_ptr<lu::Material> PlayerObject::CreateDashEffectMat()
+	{
+		std::shared_ptr<Material> mat = Resources::Find<Material>(L"DashEffectMat");
+		if (!mat)
+		{
+			mat = std::make_shared<Material>();
+			mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
+			mat->SetTexture(Resources::Find<Texture>(L"Dash"));
+			mat->SetRenderingMode(eRenderingMode::CutOut);
+			Resources::Insert(L"DashEffectMat", mat);
+		}
+		return mat;
 	}
 	void Pieces::Initialize()
 	{

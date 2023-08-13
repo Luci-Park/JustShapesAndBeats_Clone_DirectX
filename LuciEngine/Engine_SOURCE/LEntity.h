@@ -22,10 +22,10 @@ namespace lu
 
 		virtual eState GetState() { return mState; }
 		virtual void SetState(eState state) { mState = state; }
-
+	protected:
+		eState mState;
 	private:
 		std::wstring mName;
 		UINT64 mColliderID;
-		eState mState;
 	};
 }

@@ -11,6 +11,9 @@ namespace lu::JSAB
 		virtual ~Player() {};
 		virtual void Initialize() override;
 		virtual void Update() override;
+
+		void SetDashOutline(GameObject* outline) { mDashOutline = outline; }
+		void SetDashEffect(GameObject* effect) { mDashEffect = effect; }
 	private:
 		void MoveRotate(Quaternion rotation);
 		void MoveScale(Vector3 scale);
@@ -28,13 +31,19 @@ namespace lu::JSAB
 		float mDashDuration;
 
 		bool mIsDashing;
+		
 		Vector3 mOrgScale;
 		Vector3 mMoveScale;
 		Vector3 mDashScale;
 		Vector3 mMoveDir;
 		Vector3 mDashDir;
+		
 		lu::Transform* mTr;
 		lu::Collider2D* mCr;
+
+		GameObject* mDashOutline;
+		GameObject* mDashEffect;
+
 	};
 }
 

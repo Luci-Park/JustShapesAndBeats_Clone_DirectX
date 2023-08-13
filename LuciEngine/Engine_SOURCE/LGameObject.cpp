@@ -6,7 +6,6 @@
 namespace lu
 {
 	GameObject::GameObject()
-		: mState(eState::Active)
 	{
 		mTransform = AddComponent<Transform>();
 	}
@@ -81,7 +80,7 @@ namespace lu
 
 	void GameObject::SetState(eState state)
 	{
-		mState = state;
+		Entity::mState = state;
 		const std::vector<Transform*>& children = mTransform->GetChildren();
 		for (int i = 0; i < children.size(); i++)
 		{

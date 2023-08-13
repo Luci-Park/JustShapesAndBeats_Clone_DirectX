@@ -1,6 +1,7 @@
 #pragma once
 #include "..\\Engine_SOURCE\\LGameObject.h"
 
+class lu::graphics::Material;
 namespace lu::JSAB
 {
 	class PlayerObject : public GameObject
@@ -10,6 +11,10 @@ namespace lu::JSAB
 		virtual ~PlayerObject();
 
 		virtual void Initialize() override;
+	private:
+		std::shared_ptr<lu::graphics::Material> CreatePlayerMat();
+		std::shared_ptr<lu::graphics::Material> CreateDashOutlineMat();
+		std::shared_ptr<lu::graphics::Material> CreateDashEffectMat();
 	};
 
 	class Pieces : public GameObject

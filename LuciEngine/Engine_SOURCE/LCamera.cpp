@@ -150,12 +150,12 @@ namespace lu
 	{
 		for (int i =0; i < gameObjects.size(); i++)
 		{
-			if (gameObjects[i]->GetState() != GameObject::Active)
+			if (gameObjects[i]->GetState() != eState::Active)
 				continue;
 
 			MeshRenderer* mr
 				= gameObjects[i]->GetComponent<MeshRenderer>();
-			if (mr == nullptr)
+			if (mr == nullptr || mr->GetState() != eState::Active)
 				continue;
 
 			std::shared_ptr<Material> mat = mr->GetMaterial();

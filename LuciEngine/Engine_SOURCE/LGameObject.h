@@ -64,7 +64,6 @@ namespace lu
 	public:
 		Transform* mTransform;
 	private:
-		eState mState;
 		std::vector<Component*> mComponents;
 		std::vector<Script*> mScripts;
 	};
