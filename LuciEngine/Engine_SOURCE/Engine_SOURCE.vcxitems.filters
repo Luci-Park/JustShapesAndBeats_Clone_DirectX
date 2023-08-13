@@ -88,6 +88,12 @@
     <Filter Include="Common\Object">
       <UniqueIdentifier>{29fd954a-ba4c-4df2-8fae-2d4a89eccae5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Component\Animator">
+      <UniqueIdentifier>{ecf02678-d589-4f2d-8687-5bf463e75d33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Animation">
+      <UniqueIdentifier>{4c96bfe5-729d-45a0-87e5-6783b3c48369}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -125,9 +131,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)LLayer.h">
       <Filter>Scene\Layer</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LGameObject.h">
-      <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)LSceneManager.h">
       <Filter>Manager</Filter>
@@ -180,6 +183,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LObject.h">
       <Filter>Common\Object</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LGameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LAnimator.h">
+      <Filter>GameObject\Component\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LAnimation.h">
+      <Filter>Resource\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp">
@@ -205,9 +217,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LLayer.cpp">
       <Filter>Scene\Layer</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LGameObject.cpp">
-      <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LSceneManager.cpp">
       <Filter>Manager</Filter>
@@ -256,6 +265,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LCollisionManager.cpp">
       <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LGameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LAnimator.cpp">
+      <Filter>GameObject\Component\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LAnimation.cpp">
+      <Filter>Resource\Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

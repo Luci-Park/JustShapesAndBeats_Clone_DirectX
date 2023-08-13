@@ -15,6 +15,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LAnimation.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LCollider2D.h" />
@@ -46,6 +48,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LTime.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LAnimation.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LCollider2D.cpp" />
