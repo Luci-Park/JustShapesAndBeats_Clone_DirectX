@@ -11,9 +11,41 @@ namespace lu
 	class Animation : public Resource
 	{
 	public:
-		enum class eAnimationType;
-		struct KeyFrame;
-		struct Timeline;
+		enum class eAnimationType
+		{
+			TrPosition, TrScale, TrRotation, TrLocalPosition, TrLocalScale, TrLocalRotation,
+			CdCenter, CdSize, CdActive,
+			MrTexture, MrColor, MrInterpolation, MrTint, MrActive,
+			ScFunc,
+			End
+		};
+		struct KeyFrame
+		{
+			float timestamp;
+			union
+			{
+				std::function<void()>func;
+				std::shared_ptr<graphics::Texture> textureValue;
+				math::Color colorValue;
+				math::Vector3 vector3Value;
+				math::Vector2 vector2Value;
+				math::Quaternion quatValue;
+				float floatValue;
+				bool boolValue;
+			}; 
+			bool operator<(const KeyFrame& other) const
+			{
+				return timestamp < other.timestamp;
+			}
+		};
+
+		struct Timeline
+		{
+			int currIndex = 0;
+			std::vector<KeyFrame> keyframes;
+			bool IsComplete() { return currIndex >= keyframes.size(); }
+		};
+
 	public:
 		Animation(GameObject* owner);
 		~Animation();
@@ -25,8 +57,6 @@ namespace lu
 		
 		void Reset();
 		bool IsComplete() { return mbComplete; }
-
-		void AddKeyFrame(eAnimationType type, KeyFrame keyFrame);
 	private:
 		void AnimTrPos(Timeline* timeline);
 		void AnimTrScale(Timeline* timeline);
@@ -49,48 +79,11 @@ namespace lu
 		float mDuration;
 		bool mbComplete;
 		std::vector<Timeline*> mTimelines;
-		std::vector<std::function<void(Timeline* timeline)>> mAnimFunctions;
+		std::vector<std::function<void(Timeline* timeline)>> animFunctions;
 		Animator* mAni;
 		Transform* mTr;
 		Collider2D* mCd;
 		MeshRenderer* mMr;
-
-
-		enum class eAnimationType
-		{
-			TrPosition, TrScale, TrRotation, TrLocalPosition, TrLocalScale, TrLocalRotation,
-			CdCenter, CdSize, CdActive,
-			MrTexture, MrColor, MrInterpolation, MrTint, MrActive,
-			ScFunc,
-			End
-		};
-		struct KeyFrame
-		{
-			float timestamp;
-			union
-			{
-				std::function<void()>func;
-				std::shared_ptr<graphics::Texture> textureValue;
-				math::Color colorValue;
-				math::Vector3 vector3Value;
-				math::Vector2 vector2Value;
-				math::Quaternion quatValue;
-				float floatValue;
-				bool boolValue;
-			};
-			bool operator<(const KeyFrame& other) const
-			{
-				return timestamp < other.timestamp;
-			}
-		};
-
-		struct Timeline
-		{
-			int currIndex = 0;
-			std::vector<KeyFrame> keyframes;
-			bool IsComplete() { return currIndex >= keyframes.size(); }
-		};
 	};
-
 }
 
