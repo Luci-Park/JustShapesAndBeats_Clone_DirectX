@@ -58,6 +58,19 @@ namespace lu
 		mTime = 0.0f;
 		mbComplete = false;
 	}
+	void Animation::AddKeyFrame(eAnimationType type, KeyFrame keyFrame)
+	{
+		Timeline* timeline;
+		if (mTimelines[(UINT)type] == nullptr)
+		{
+			timeline = new Timeline();
+			mTimelines[(UINT)type] = std::move(timeline);
+		}
+		else timeline = mTimelines[(UINT)type];
+		if (keyFrame.timestamp > mDuration) mDuration = keyFrame.timestamp;
+		timeline->keyframes.push_back(keyFrame);
+		std::sort(timeline->keyframes.begin(), timeline->keyframes.end());
+	}
 	void Animation::AnimTrPos(Timeline* timeline)
 	{
 		if (timeline->currIndex == 0)
