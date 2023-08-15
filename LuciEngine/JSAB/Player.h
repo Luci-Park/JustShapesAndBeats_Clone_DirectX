@@ -14,6 +14,7 @@ namespace lu::JSAB
 
 		void SetDashOutline(GameObject* outline) { mDashOutline = outline; }
 		void SetDashEffect(GameObject* effect) { mDashEffect = effect; }
+		void ScriptTest();
 	private:
 		void MoveRotate(Quaternion rotation);
 		void MoveScale(Vector3 scale);

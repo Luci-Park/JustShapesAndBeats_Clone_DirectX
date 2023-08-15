@@ -11,9 +11,51 @@ namespace lu
 	class Animation : public Resource
 	{
 	public:
-		enum class eAnimationType;
-		struct KeyFrame;
-		struct Timeline;
+
+		enum class eAnimationType
+		{
+			TrPosition, TrScale, TrRotation, TrLocalPosition, TrLocalScale, TrLocalRotation,
+			CdCenter, CdSize, CdActive,
+			MrTexture, MrColor, MrInterpolation, MrTint, MrActive,
+			ScFunc,
+			End
+		};
+		struct KeyFrame
+		{
+			KeyFrame() {}
+			~KeyFrame() {}
+			KeyFrame(const KeyFrame& other)
+				: timestamp(other.timestamp){}
+			float timestamp;
+			union
+			{
+				std::function<void()>func;
+				std::shared_ptr<graphics::Texture> textureValue;
+				math::Color colorValue;
+				math::Vector3 vector3Value;
+				math::Vector2 vector2Value;
+				math::Quaternion quatValue;
+				float floatValue;
+				bool boolValue;
+			};
+			bool operator<(const KeyFrame& other) const
+			{
+				return timestamp < other.timestamp;
+			}
+			KeyFrame& operator=(const KeyFrame& other) {
+				if (this != &other) {
+					timestamp = other.timestamp;
+				}
+				return *this;
+			}
+		};
+
+		struct Timeline
+		{
+			int currIndex = 0;
+			std::vector<KeyFrame> keyframes;
+			bool IsComplete() { return currIndex >= keyframes.size(); }
+		};
 	public:
 		Animation(GameObject* owner);
 		~Animation();
@@ -56,50 +98,6 @@ namespace lu
 		MeshRenderer* mMr;
 
 
-		enum class eAnimationType
-		{
-			TrPosition, TrScale, TrRotation, TrLocalPosition, TrLocalScale, TrLocalRotation,
-			CdCenter, CdSize, CdActive,
-			MrTexture, MrColor, MrInterpolation, MrTint, MrActive,
-			ScFunc,
-			End
-		};
-		struct KeyFrame
-		{
-			KeyFrame(){}
-			~KeyFrame(){}
-			KeyFrame(const KeyFrame& other)
-				: timestamp(other.timestamp), func(other.func) {}
-			float timestamp;
-			union
-			{
-				std::function<void()>func;
-				std::shared_ptr<graphics::Texture> textureValue;
-				math::Color colorValue;
-				math::Vector3 vector3Value;
-				math::Vector2 vector2Value;
-				math::Quaternion quatValue;
-				float floatValue;
-				bool boolValue;
-			};
-			bool operator<(const KeyFrame& other) const
-			{
-				return timestamp < other.timestamp;
-			}
-			KeyFrame& operator=(const KeyFrame& other) {
-				if (this != &other) {
-					timestamp = other.timestamp;
-				}
-				return *this;
-			}
-		};
-
-		struct Timeline
-		{
-			int currIndex = 0;
-			std::vector<KeyFrame> keyframes;
-			bool IsComplete() { return currIndex >= keyframes.size(); }
-		};
 	};
 
 }

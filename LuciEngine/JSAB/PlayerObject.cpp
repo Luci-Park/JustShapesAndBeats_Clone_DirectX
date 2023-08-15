@@ -4,7 +4,8 @@
 #include "LSceneManager.h"
 #include "Player.h"
 #include "LObject.h"
-
+#include "LAnimator.h"
+#include "LAnimation.h"
 namespace lu::JSAB
 {
 	PlayerObject::PlayerObject()
@@ -38,6 +39,7 @@ namespace lu::JSAB
 			dashoutline->SetState(eState::InActive);
 			script->SetDashOutline(dashoutline);
 		}
+		AddAnimation();
 	}
 	std::shared_ptr<Material> PlayerObject::CreatePlayerMat()
 	{
@@ -78,8 +80,33 @@ namespace lu::JSAB
 		}
 		return mat;
 	}
-	void PlayerObject::AddAnimation(GameObject* target)
+	void PlayerObject::AddAnimation()
 	{
+		Animator* anim = AddComponent<Animator>();
+		Animation* animation = anim->CreateAnimation(L"Dash");
+		{
+			lu::Animation::KeyFrame keyFrame;
+			keyFrame.timestamp = 0; keyFrame.vector2Value = Vector2{ 1, 1 };
+			animation->AddKeyFrame(Animation::eAnimationType::CdSize, keyFrame);
+
+			keyFrame.timestamp = 3; keyFrame.vector2Value = Vector2{ 4, 4 };
+			animation->AddKeyFrame(Animation::eAnimationType::CdSize, keyFrame);
+
+			keyFrame.timestamp = 0; keyFrame.vector2Value = Vector2{ 0, 0 };
+			animation->AddKeyFrame(Animation::eAnimationType::CdCenter, keyFrame);
+
+			keyFrame.timestamp = 3; keyFrame.vector2Value = Vector2{ 400, 400 };
+			animation->AddKeyFrame(Animation::eAnimationType::CdCenter, keyFrame);
+
+			keyFrame.timestamp = 3.1; keyFrame.boolValue = false;
+			animation->AddKeyFrame(Animation::eAnimationType::CdActive, keyFrame);
+			keyFrame.timestamp = 4; keyFrame.boolValue = true;
+			animation->AddKeyFrame(Animation::eAnimationType::CdActive, keyFrame);
+
+			keyFrame.timestamp = 3.2; keyFrame.func = [this]() {this->GetComponent<Player>()->ScriptTest(); };
+		}
+
+		anim->PlayAnimation(L"Dash", true);
 	}
 	void Pieces::Initialize()
 	{
