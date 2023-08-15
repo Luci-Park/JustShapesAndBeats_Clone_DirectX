@@ -55,10 +55,6 @@ namespace lu::JSAB
 		}
 
 	}
-	void Player::ScriptTest()
-	{
-		mTr->SetPosition({ 400, 400, 1 });
-	}
 	void Player::MoveRotate(Quaternion rotation)
 	{
 		static Quaternion originalRotation;

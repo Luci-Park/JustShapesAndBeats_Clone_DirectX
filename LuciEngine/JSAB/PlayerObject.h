@@ -14,7 +14,7 @@ namespace lu::JSAB
 		std::shared_ptr<lu::graphics::Material> CreatePlayerMat();
 		std::shared_ptr<lu::graphics::Material> CreateDashOutlineMat();
 		std::shared_ptr<lu::graphics::Material> CreateDashEffectMat();
-		void AddAnimation();
+		void AddAnimation(GameObject* target);
 	};
 
 	class Pieces : public GameObject
