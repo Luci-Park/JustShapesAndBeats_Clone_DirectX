@@ -14,7 +14,7 @@ namespace lu
 		enum class eAnimationType
 		{
 			TrPosition, TrScale, TrRotation, TrLocalPosition, TrLocalScale, TrLocalRotation,
-			CdCenter, CdSize, CdRotation, CdActive,
+			CdCenter, CdSize, CdActive,
 			MrTexture, MrColor, MrInterpolation, MrTint, MrActive,
 			ScFunc,
 			End
@@ -32,7 +32,7 @@ namespace lu
 				math::Quaternion quatValue;
 				float floatValue;
 				bool boolValue;
-			};
+			}; 
 			bool operator<(const KeyFrame& other) const
 			{
 				return timestamp < other.timestamp;
@@ -66,13 +66,12 @@ namespace lu
 		void AnimTrLocRot(Timeline* timeline);
 		void AnimCdCenter(Timeline* timeline);
 		void AnimCdSize(Timeline* timeline);
-		void AnimCdRotation(Timeline* timeline);
 		void AnimCdActive(Timeline* timeline);
 		void AnimMrText(Timeline* timeline);
 		void AnimMrColor(Timeline* timeline);
 		void AnimMrColorpolation(Timeline* timeline);
 		void AnimMrTint(Timeline* timeline);
-		void AnimTrActive(Timeline* timeline);
+		void AnimMrActive(Timeline* timeline);
 		void AnimScFunc(Timeline* timeline);
 		void SetAnimationFunctions();
 	private:
