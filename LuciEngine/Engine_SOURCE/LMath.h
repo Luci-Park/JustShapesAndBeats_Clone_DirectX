@@ -21,15 +21,12 @@ using namespace DirectX::PackedVector;
 namespace lu::math
 {
     struct Vector2;
+    struct Vector3;
     struct Vector4;
     struct Matrix;
     struct Quaternion;
     struct Plane;
 
-    float floatLerp(float startValue, float endValue, float t)
-    {
-        return startValue + t * (endValue - startValue);
-    }
     //------------------------------------------------------------------------------
     // 2D rectangle
     struct Rectangle

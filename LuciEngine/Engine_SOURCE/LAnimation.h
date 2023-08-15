@@ -66,6 +66,10 @@ namespace lu
 		};
 		struct KeyFrame
 		{
+			KeyFrame(){}
+			~KeyFrame(){}
+			KeyFrame(const KeyFrame& other)
+				: timestamp(other.timestamp), func(other.func) {}
 			float timestamp;
 			union
 			{
@@ -81,6 +85,12 @@ namespace lu
 			bool operator<(const KeyFrame& other) const
 			{
 				return timestamp < other.timestamp;
+			}
+			KeyFrame& operator=(const KeyFrame& other) {
+				if (this != &other) {
+					timestamp = other.timestamp;
+				}
+				return *this;
 			}
 		};
 

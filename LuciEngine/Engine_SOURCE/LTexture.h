@@ -13,6 +13,7 @@
 
 namespace lu::graphics
 {
+	using namespace lu::math;
 	class Texture : public Resource
 	{
 	public:
