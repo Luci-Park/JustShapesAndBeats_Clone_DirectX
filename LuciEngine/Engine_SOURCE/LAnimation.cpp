@@ -247,7 +247,7 @@ namespace lu
 			KeyFrame* prev = &timeline->keyframes[timeline->currIndex - 1];
 			KeyFrame* next = &timeline->keyframes[timeline->currIndex];
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
-			mMr->SetInterpolation(prev->floatValue + t*(next->floatValue - prev->floatValue));
+			mMr->SetInterpolation(math::floatLerp(prev->floatValue, next->floatValue, t));
 		}
 	}
 	void Animation::AnimMrTint(Timeline* timeline)

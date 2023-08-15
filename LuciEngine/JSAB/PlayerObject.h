@@ -1,6 +1,7 @@
 #pragma once
 #include "..\\Engine_SOURCE\\LGameObject.h"
-#include "..\\Engine_SOURCE\\LMaterial.h"
+
+class lu::graphics::Material;
 namespace lu::JSAB
 {
 	class PlayerObject : public GameObject
@@ -14,7 +15,6 @@ namespace lu::JSAB
 		std::shared_ptr<lu::graphics::Material> CreatePlayerMat();
 		std::shared_ptr<lu::graphics::Material> CreateDashOutlineMat();
 		std::shared_ptr<lu::graphics::Material> CreateDashEffectMat();
-		void AddAnimation(GameObject* target);
 	};
 
 	class Pieces : public GameObject

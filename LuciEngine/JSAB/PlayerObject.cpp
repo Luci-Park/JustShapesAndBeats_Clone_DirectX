@@ -78,9 +78,6 @@ namespace lu::JSAB
 		}
 		return mat;
 	}
-	void PlayerObject::AddAnimation(GameObject* target)
-	{
-	}
 	void Pieces::Initialize()
 	{
 		float point = 80;

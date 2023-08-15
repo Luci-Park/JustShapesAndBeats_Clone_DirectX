@@ -35,17 +35,6 @@ namespace lu
 	void Animator::Render()
 	{
 	}
-	Animation* Animator::CreateAnimation(const std::wstring& name)
-	{
-		Animation* animation = FindAnimation(name);
-		if (animation == nullptr)
-		{
-			animation = new Animation(GetOwner());
-			animation->SetKey(name);
-			mAnimations.insert({ name, animation });
-		}
-		return animation;
-	}
 	Animation* Animator::FindAnimation(const std::wstring& name)
 	{
 		std::map<std::wstring, Animation*>::iterator iter
