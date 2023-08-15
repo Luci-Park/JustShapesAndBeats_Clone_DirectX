@@ -192,6 +192,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LAnimation.h">
       <Filter>Resource\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LTimeline.h">
+      <Filter>Resource\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp">
@@ -273,6 +276,9 @@
       <Filter>GameObject\Component\Animator</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LAnimation.cpp">
+      <Filter>Resource\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LTimeline.cpp">
       <Filter>Resource\Animation</Filter>
     </ClCompile>
   </ItemGroup>
