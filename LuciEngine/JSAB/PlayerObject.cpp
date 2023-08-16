@@ -22,7 +22,7 @@ namespace lu::JSAB
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(mat);
 		mTransform->SetScale(Vector3(22.3, 22.3, 1));
-		AddComponent<Collider2D>();
+		auto cd = AddComponent<Collider2D>();
 
 		Player* script = AddComponent<Player>();
 
@@ -36,10 +36,10 @@ namespace lu::JSAB
 			outlinemr->SetMaterial(outlinemat);
 			outlinemr->SetColor(Color::white);
 			outlinemr->UseColor(true);
-			dashoutline->SetState(eState::InActive);
+			//dashoutline->SetState(eState::InActive);
 			script->SetDashOutline(dashoutline);
+			dashoutline->AddComponent<AnimationTester>();
 		}
-		AddAnimation();
 	}
 	std::shared_ptr<Material> PlayerObject::CreatePlayerMat()
 	{
@@ -79,38 +79,6 @@ namespace lu::JSAB
 			Resources::Insert(L"DashEffectMat", mat);
 		}
 		return mat;
-	}
-	void PlayerObject::AddAnimation()
-	{
-		Animator* anim = AddComponent<Animator>();
-		Animation* animation = anim->CreateAnimation(L"Dash");
-		{
-			lu::Animation::KeyFrame keyFrame;
-			keyFrame.type = Animation::eAnimationType::CdSize;
-			keyFrame.timestamp = 0; keyFrame.vector2Value = Vector2{ 1, 1 };
-			animation->AddKeyFrame(keyFrame);
-
-			keyFrame.timestamp = 3; keyFrame.vector2Value = Vector2{ 4, 4 };
-			animation->AddKeyFrame(keyFrame);
-
-			keyFrame.type = Animation::eAnimationType::CdCenter;
-			keyFrame.timestamp = 0; keyFrame.vector2Value = Vector2{ 0, 0 };
-			animation->AddKeyFrame(keyFrame);
-
-			keyFrame.timestamp = 3; keyFrame.vector2Value = Vector2{ 400, 400 };
-			animation->AddKeyFrame(keyFrame);
-
-			keyFrame.type = Animation::eAnimationType::CdActive;
-			keyFrame.timestamp = 2.1; keyFrame.boolValue = false;
-			animation->AddKeyFrame(keyFrame);
-			keyFrame.timestamp = 4; keyFrame.boolValue = true;
-			animation->AddKeyFrame(keyFrame);
-
-			keyFrame.type = Animation::eAnimationType::ScFunc;
-			//keyFrame.timestamp = 3.2; keyFrame.func = std::bind(&Player::ScriptTest, GetComponent<Player>());
-		}
-
-		anim->PlayAnimation(L"Dash", true);
 	}
 	void Pieces::Initialize()
 	{

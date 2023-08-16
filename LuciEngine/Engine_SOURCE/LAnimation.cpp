@@ -239,24 +239,32 @@ namespace lu
 	}
 	void Animation::AnimMrText(Timeline* timeline)
 	{
-		KeyFrame* keyframe = &timeline->keyframes[timeline->currIndex];
-		if (mTime >= keyframe->timestamp)
+		if (timeline->keyframes[timeline->currIndex].timestamp < mTime)
 		{
-			mMr->GetMaterial()->SetTexture(keyframe->textureValue);
-			timeline->currIndex++;
+			KeyFrame* keyframe = &timeline->keyframes[timeline->currIndex];
+			if (mTime >= keyframe->timestamp)
+			{
+				mMr->GetMaterial()->SetTexture(keyframe->textureValue);
+				timeline->currIndex++;
+			}
 		}
 	}
 	void Animation::AnimMrColor(Timeline* timeline)
 	{
-		KeyFrame* keyframe = &timeline->keyframes[timeline->currIndex];
-		if (mTime >= keyframe->timestamp)
+		if (timeline->keyframes[timeline->currIndex].timestamp < mTime)
 		{
-			mMr->SetColor(keyframe->colorValue);
-			timeline->currIndex++;
+			KeyFrame* keyframe = &timeline->keyframes[timeline->currIndex];
+			if (mTime >= keyframe->timestamp)
+			{
+				mMr->SetColor(keyframe->colorValue);
+				timeline->currIndex++;
+			}
 		}
 	}
 	void Animation::AnimMrColorpolation(Timeline* timeline)
 	{
+		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
 			KeyFrame* keyframe = &timeline->keyframes[0];
@@ -273,6 +281,8 @@ namespace lu
 	}
 	void Animation::AnimMrTint(Timeline* timeline)
 	{
+		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
 			KeyFrame* keyframe = &timeline->keyframes[0];
@@ -289,20 +299,26 @@ namespace lu
 	}
 	void Animation::AnimMrActive(Timeline* timeline)
 	{
-		KeyFrame* keyframe = &timeline->keyframes[timeline->currIndex];
-		if (mTime >= keyframe->timestamp)
+		if (timeline->keyframes[timeline->currIndex].timestamp < mTime)
 		{
-			mMr->SetActive(keyframe->boolValue);
-			timeline->currIndex++;
+			KeyFrame* keyframe = &timeline->keyframes[timeline->currIndex];
+			if (mTime >= keyframe->timestamp)
+			{
+				mMr->SetActive(keyframe->boolValue);
+				timeline->currIndex++;
+			}
 		}
 	}
 	void Animation::AnimScFunc(Timeline* timeline)
 	{
-		KeyFrame* keyframe = &timeline->keyframes[timeline->currIndex];
-		if (mTime >= keyframe->timestamp)
+		if (timeline->keyframes[timeline->currIndex].timestamp < mTime)
 		{
-			keyframe->func();
-			timeline->currIndex++;
+			KeyFrame* keyframe = &timeline->keyframes[timeline->currIndex];
+			if (mTime >= keyframe->timestamp)
+			{
+				keyframe->func();
+				timeline->currIndex++;
+			}
 		}
 	}
 	void Animation::SetAnimationFunctions()

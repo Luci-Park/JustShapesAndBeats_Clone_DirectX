@@ -25,6 +25,7 @@ namespace lu::JSAB
 	}
 	void Player::Update()
 	{
+		mCr->SetActive(false);
 		Vector3 moveDir = GetInputDir();
 		if (Input::GetKeyDown(eKeyCode::SPACE) && !mIsDashing)
 		{
@@ -46,8 +47,8 @@ namespace lu::JSAB
 			mDashTimer += Time::DeltaTime();
 			if (mDashTimer > mDashDuration) mIsDashing = false;
 
-			mCr->SetState(eState::InActive);
-			mDashOutline->SetState(eState::Active);
+			//mCr->SetState(eState::InActive);
+			//mDashOutline->SetState(eState::Active);
 
 			mTr->SetPosition(mTr->GetPosition() + mDashDir * mDashSpeed * Time::DeltaTime());
 			MoveRotate(GetRotation(mDashDir));
@@ -143,5 +144,45 @@ namespace lu::JSAB
 			radian = PI;
 
 		return Quaternion::CreateFromAxisAngle(Vector3::Forward, radian);
+	}
+
+#include "LMeshRenderer.h"
+#include "LAnimation.h"
+#include "LAnimator.h"
+#include "LResources.h"
+#include "LTexture.h"
+	void AnimationTester::Initialize()
+	{
+		mTr = GetOwner()->mTransform;
+		mMr = GetOwner()->GetComponent<lu::MeshRenderer>();
+		mCd = GetOwner()->AddComponent<Collider2D>();
+		lu::Animator* animator = GetOwner()->AddComponent<lu::Animator>();
+		lu::Animation* animation = animator->CreateAnimation(L"Default");
+
+		lu::Animation::KeyFrame keyFrame;
+
+		//keyFrame.type = lu::Animation::eAnimationType::TrPosition;
+		//keyFrame.timestamp = 0; keyFrame.vector3Value = Vector3{ 0, 0, 0 };
+		//animation->AddKeyFrame(keyFrame);
+
+		//keyFrame.timestamp = 3; keyFrame.vector3Value = Vector3{ 100, 100, 0 };
+		//animation->AddKeyFrame(keyFrame);
+
+		/*keyFrame.type = lu::Animation::eAnimationType::TrRotation;
+		keyFrame.timestamp = 1; keyFrame.quatValue = Quaternion::Identity;
+		animation->AddKeyFrame(keyFrame);
+		keyFrame.timestamp = 4; keyFrame.quatValue = Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 1.5f);
+		animation->AddKeyFrame(keyFrame);*/
+		keyFrame.type = lu::Animation::eAnimationType::MrTexture;
+		keyFrame.timestamp = 0; keyFrame.textureValue = lu::Resources::Find<lu::graphics::Texture>(L"player1");
+		animation->AddKeyFrame(keyFrame);
+		keyFrame.timestamp = 1; keyFrame.textureValue = lu::Resources::Find<lu::graphics::Texture>(L"player24");
+		animation->AddKeyFrame(keyFrame);
+		keyFrame.timestamp = 2; keyFrame.textureValue = lu::Resources::Find<lu::graphics::Texture>(L"player43");
+		animation->AddKeyFrame(keyFrame);
+		keyFrame.timestamp = 3; keyFrame.textureValue = lu::Resources::Find<lu::graphics::Texture>(L"player64");
+		animation->AddKeyFrame(keyFrame);
+
+		animator->PlayAnimation(L"Default", true);
 	}
 }

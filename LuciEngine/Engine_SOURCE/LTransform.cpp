@@ -73,8 +73,6 @@ namespace lu
 			mPosition = mParent->GetPosition() + mLocalPosition;
 		else
 			mPosition = mLocalPosition;
-
-		UpdateMatrix();
 	}
 
 	void Transform::CalculateWorldRotation()
@@ -89,8 +87,6 @@ namespace lu
 		}
 		else
 			mRotation = mLocalRotation;
-
-		UpdateMatrix();
 	}
 
 	void Transform::CalculateWorldScale()
@@ -103,8 +99,6 @@ namespace lu
 		}
 		else
 			mScale = mLocalScale;
-
-		UpdateMatrix();
 	}
 
 	void Transform::CalculateLocalPosition()
@@ -148,6 +142,9 @@ namespace lu
 	void Transform::UpdateMatrix()
 	{
 		world = Matrix::Identity;
+		CalculateWorldPosition();
+		CalculateWorldRotation();
+		CalculateWorldScale();
 
 		Matrix scale = Matrix::CreateScale(mLocalScale);
 

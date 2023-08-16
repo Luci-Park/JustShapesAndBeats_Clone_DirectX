@@ -46,5 +46,17 @@ namespace lu::JSAB
 		GameObject* mDashEffect;
 
 	};
+	class lu::MeshRenderer;
+	class AnimationTester : public Script
+	{
+	public:
+		AnimationTester(){}
+		~AnimationTester(){}
+
+		void Initialize();
+		Transform* mTr;
+		Collider2D* mCd;
+		lu::MeshRenderer* mMr;
+	};
 }
 
