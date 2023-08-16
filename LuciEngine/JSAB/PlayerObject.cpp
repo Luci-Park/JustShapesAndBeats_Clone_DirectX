@@ -19,10 +19,12 @@ namespace lu::JSAB
 		SetName(L"Player");
 		std::shared_ptr<Material> mat = CreatePlayerMat();
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
+		mr->SetActive(false);
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(mat);
+		
 		mTransform->SetScale(Vector3(22.3, 22.3, 1));
-		auto cd = AddComponent<Collider2D>();
+		AddComponent<Collider2D>();
 
 		Player* script = AddComponent<Player>();
 

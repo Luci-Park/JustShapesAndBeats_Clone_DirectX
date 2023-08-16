@@ -161,12 +161,13 @@ namespace lu::JSAB
 
 		lu::Animation::KeyFrame keyFrame;
 
-		//keyFrame.type = lu::Animation::eAnimationType::TrPosition;
-		//keyFrame.timestamp = 0; keyFrame.vector3Value = Vector3{ 0, 0, 0 };
-		//animation->AddKeyFrame(keyFrame);
+		mTr->SetLocalPosition(Vector3::Up * 100);
+	
+		keyFrame.timestamp = 0; keyFrame.vector3Value = Vector3{ 0, 0, 0 };
+		animation->AddKeyFrame(keyFrame);
 
-		//keyFrame.timestamp = 3; keyFrame.vector3Value = Vector3{ 100, 100, 0 };
-		//animation->AddKeyFrame(keyFrame);
+		keyFrame.timestamp = 3; keyFrame.vector3Value = Vector3{ 100, 100, 0 };
+		animation->AddKeyFrame(keyFrame);
 
 		/*keyFrame.type = lu::Animation::eAnimationType::TrRotation;
 		keyFrame.timestamp = 1; keyFrame.quatValue = Quaternion::Identity;
@@ -184,24 +185,6 @@ namespace lu::JSAB
 		//keyFrame.timestamp = 3; keyFrame.textureValue = lu::Resources::Find<lu::graphics::Texture>(L"player64");
 		//animation->AddKeyFrame(keyFrame);
 
-		keyFrame.type = lu::Animation::eAnimationType::MrInterpolation;
-		keyFrame.timestamp = 0; keyFrame.floatValue = 1.0f;
-		animation->AddKeyFrame(keyFrame);
-		keyFrame.type = lu::Animation::eAnimationType::MrInterpolation;
-		keyFrame.timestamp = 1; keyFrame.floatValue = 0.0f;
-		animation->AddKeyFrame(keyFrame);
-
-		keyFrame.type = lu::Animation::eAnimationType::MrTint;
-		keyFrame.timestamp = 1; keyFrame.colorValue = math::Color(1, 0, 0, 1);
-		animation->AddKeyFrame(keyFrame);
-		keyFrame.timestamp = 2; keyFrame.colorValue = math::Color(0, 1, 0, 0.75);
-		animation->AddKeyFrame(keyFrame);
-		keyFrame.timestamp = 3; keyFrame.colorValue = math::Color(0, 0, 1, 0.5);
-		animation->AddKeyFrame(keyFrame);
-		keyFrame.timestamp = 4; keyFrame.colorValue = math::Color(1, 1, 1, 0.25);
-		animation->AddKeyFrame(keyFrame);
-		keyFrame.timestamp = 5; keyFrame.colorValue = math::Color(1, 1, 1, 1);
-		animation->AddKeyFrame(keyFrame);
 		animator->PlayAnimation(L"Default", true);
 	}
 }

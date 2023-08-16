@@ -57,7 +57,7 @@ namespace lu
 					floatValue = other.floatValue;
 					break;
 				case eAnimationType::ScFunc:
-					//func = std::bind(other.func);
+					func = std::bind(other.func);
 					break;
 				default:
 					assert(false);
