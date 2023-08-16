@@ -63,12 +63,12 @@ namespace lu
 	void Animation::AddKeyFrame(KeyFrame keyframe)
 	{
 		Timeline* timeline;
-		if (mTimelines[(UINT)keyframe.type] == nullptr)
+		if (mTimelines[(UINT)keyframe.GetType()] == nullptr)
 		{
 			timeline = new Timeline();
-			mTimelines[(UINT)keyframe.type] = std::move(timeline);
+			mTimelines[(UINT)keyframe.GetType()] = std::move(timeline);
 		}
-		else timeline = mTimelines[(UINT)keyframe.type];
+		else timeline = mTimelines[(UINT)keyframe.GetType()];
 		if (keyframe.timestamp > mDuration) mDuration = keyframe.timestamp;
 		timeline->keyframes.push_back(keyframe);
 		std::sort(timeline->keyframes.begin(), timeline->keyframes.end());

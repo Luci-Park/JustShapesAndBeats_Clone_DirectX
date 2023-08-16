@@ -3,6 +3,7 @@
 #include "LTexture.h"
 namespace lu
 {
+	using namespace lu::math;
 	class GameObject;
 	class Transform;
 	class Collider2D;
@@ -22,10 +23,39 @@ namespace lu
 		};
 		struct KeyFrame
 		{
-			KeyFrame() {}
+		public:
+			KeyFrame(){}
 			~KeyFrame() {}
 			KeyFrame(const KeyFrame& other)
 				: timestamp(other.timestamp), type(other.type){
+				CopyKeyFrame(other);
+			}
+			float timestamp;
+			union
+			{
+				std::function<void()>func;
+				std::shared_ptr<graphics::Texture> textureValue;
+				math::Color colorValue;
+				math::Vector3 vector3Value;
+				math::Vector2 vector2Value;
+				math::Quaternion quatValue;
+				float floatValue;
+				bool boolValue;
+			};
+			bool operator<(const KeyFrame& other) const
+			{
+				return timestamp < other.timestamp;
+			}
+			KeyFrame& operator=(const KeyFrame& other) {
+				if (this != &other) {
+					timestamp = other.timestamp;
+					type = other.type;
+					CopyKeyFrame(other);
+				}
+				return *this;
+			}
+			void CopyKeyFrame(const KeyFrame& other)
+			{
 				switch (type)
 				{
 				case eAnimationType::TrPosition:
@@ -57,73 +87,63 @@ namespace lu
 					floatValue = other.floatValue;
 					break;
 				case eAnimationType::ScFunc:
-					func = std::bind(other.func);
+					func = other.func;
 					break;
 				default:
 					assert(false);
 				}
-			}
-			float timestamp;
-			eAnimationType type;
-			union
-			{
-				std::function<void()>func;
-				std::shared_ptr<graphics::Texture> textureValue;
-				math::Color colorValue;
-				math::Vector3 vector3Value;
-				math::Vector2 vector2Value;
-				math::Quaternion quatValue;
-				float floatValue;
-				bool boolValue;
-			};
-			bool operator<(const KeyFrame& other) const
-			{
-				return timestamp < other.timestamp;
-			}
-			KeyFrame& operator=(const KeyFrame& other) {
-				if (this != &other) {
-					timestamp = other.timestamp;
-					type = other.type;
-					switch (type)
-					{
-					case eAnimationType::TrPosition:
-					case eAnimationType::TrScale:
-					case eAnimationType::TrLocalPosition:
-					case eAnimationType::TrLocalScale:
-						vector3Value = other.vector3Value;
-						break;
-					case eAnimationType::TrRotation:
-					case eAnimationType::TrLocalRotation:
-						quatValue = other.quatValue;
-						break;
-					case eAnimationType::CdCenter:
-					case eAnimationType::CdSize:
-						vector2Value = other.vector2Value;
-						break;
-					case eAnimationType::CdActive:
-					case eAnimationType::MrActive:
-						boolValue = other.boolValue;
-						break;
-					case eAnimationType::MrTexture:
-						textureValue = other.textureValue;
-						break;
-					case eAnimationType::MrColor:
-					case eAnimationType::MrTint:
-						colorValue = other.colorValue;
-						break;
-					case eAnimationType::MrInterpolation:
-						floatValue = other.floatValue;
-						break;
-					case eAnimationType::ScFunc:
-						func = other.func;
-						break;
-					default:
-						assert(false);
-					}
 
-				}
-				return *this;
 			}
+
+			void SetType(eAnimationType type)
+			{
+				this->type = type;
+				switch (type)
+				{
+				case eAnimationType::TrPosition:
+				case eAnimationType::TrLocalPosition:
+					vector3Value = Vector3::Zero;
+					break;
+				case eAnimationType::TrScale:
+				case eAnimationType::TrLocalScale:
+					vector3Value = Vector3::One;
+					break;
+				case eAnimationType::TrRotation:
+				case eAnimationType::TrLocalRotation:
+					quatValue = Quaternion::Identity;
+					break;
+				case eAnimationType::CdCenter:
+					vector2Value = Vector2::Zero;
+					break;
+				case eAnimationType::CdSize:
+					vector2Value = Vector2::One;
+					break;
+				case eAnimationType::CdActive:
+				case eAnimationType::MrActive:
+					boolValue = true;
+					break;
+				case eAnimationType::MrTexture:
+					textureValue = nullptr;
+					break;
+				case eAnimationType::MrColor:
+				case eAnimationType::MrTint:
+					colorValue = Color::white;
+					break;
+				case eAnimationType::MrInterpolation:
+					floatValue = 0.0f;
+					break;
+				case eAnimationType::ScFunc:
+					func = nullptr;
+					break;
+				default:
+					assert(false);
+				}
+
+			}
+			eAnimationType GetType() { return type; }
+			private:
+				eAnimationType type;
+
 		};
 
 		struct Timeline
