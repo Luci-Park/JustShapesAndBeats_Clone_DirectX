@@ -4,6 +4,8 @@
 #include "LTransform.h"
 #include "LTime.h"
 #include "LCollider2D.h"
+#include "LResources.h"
+#include "LMeshRenderer.h"
 namespace lu::JSAB
 {
 	Player::Player()
@@ -13,6 +15,8 @@ namespace lu::JSAB
 		, mDashDuration(0.1f)
 		, mMoveDir(Vector3::Zero)
 		, mIsDashing(false)
+		, mMaxHealth(4)
+		, mCurrHealth(mMaxHealth)
 	{
 	}
 	void Player::Initialize()
@@ -22,6 +26,11 @@ namespace lu::JSAB
 		mOrgScale = mTr->GetScale();
 		mMoveScale = { mOrgScale.x * 0.7f, mOrgScale.y * 1.3f, 1.f };
 		mDashScale = { mOrgScale.x * 0.5f, mOrgScale.y * 2.f, 1.f };
+		
+		lifeTextures[3] = Resources::Find<lu::graphics::Texture>(L"player1");
+		lifeTextures[2] = Resources::Find<lu::graphics::Texture>(L"player22");
+		lifeTextures[1] = Resources::Find<lu::graphics::Texture>(L"player41");
+		lifeTextures[0] = Resources::Find<lu::graphics::Texture>(L"player61");
 	}
 	void Player::Update()
 	{
@@ -115,6 +124,12 @@ namespace lu::JSAB
 		{
 			return mMoveScale;
 		}
+	}
+	void Player::OnDamage()
+	{
+		mCurrHealth--;
+		if (mCurrHealth > 0)
+			mMr->GetMaterial()->SetTexture(lifeTextures[mCurrHealth - 1]);
 	}
 	Vector3 Player::GetInputDir()
 	{

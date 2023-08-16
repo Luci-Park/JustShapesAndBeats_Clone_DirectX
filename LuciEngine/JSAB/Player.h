@@ -1,9 +1,11 @@
 #pragma once
 #include <LScript.h>
+#include "LTexture.h"
 namespace lu::JSAB
 {
 	class lu::Transform;
 	class lu::Collider2D;
+	class lu::MeshRenderer;
 	class Player : public Script
 	{
 	public:
@@ -24,6 +26,8 @@ namespace lu::JSAB
 		Quaternion GetRotation(Vector3 moveDir);
 		Vector3 GetMoveScale(Vector3 direction);
 
+		void OnDamage();
+
 	private:
 		float mMoveSpeed;
 		float mDashSpeed;
@@ -40,10 +44,13 @@ namespace lu::JSAB
 		
 		lu::Transform* mTr;
 		lu::Collider2D* mCr;
+		lu::MeshRenderer* mMr;
 
 		GameObject* mDashOutline;
 		GameObject* mDashEffect;
 
+		std::shared_ptr<lu::graphics::Texture> lifeTextures[4];
+		int mMaxHealth, mCurrHealth;
 	};
 }
 
