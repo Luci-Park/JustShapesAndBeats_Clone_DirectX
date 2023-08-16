@@ -159,33 +159,24 @@ namespace lu::JSAB
 		lu::Animator* animator = GetOwner()->AddComponent<lu::Animator>();
 		lu::Animation* animation = animator->CreateAnimation(L"Default");
 
+		//animation->AddPositionKey(0, { 0, 0, 0 });
+		//animation->AddPositionKey(3, { 100, 100, 0 });
+		animation->AddRotationKey(1, Quaternion::Identity);
+		animation->AddRotationKey(4, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 1.5f));
+		/*animation->AddScaleKey(0, { 30, 30, 1 });
+		animation->AddScaleKey(4, { 100, 100, 1 });
+		animation->AddColliderActiveKey(0, false);
+		animation->AddColliderActiveKey(1, true);
+		animation->AddColliderCenterKey(2, { 0, 0 });
+		animation->AddColliderCenterKey(4, { -200, -200 });
+		animation->AddColliderSizeKey(1, { 1, 1 });
+		animation->AddColliderSizeKey(5, { 3, 3 });*/
 
-		//mTr->SetLocalPosition(Vector3::Up * 100);
-
-		//keyFrame.type = lu::Animation::eAnimationType::TrLocalPosition;
-		//keyFrame.timestamp = 0; keyFrame.vector3Value = Vector3{ 0, 0, 0 };
-		//animation->AddKeyFrame(keyFrame);
-
-		//keyFrame.timestamp = 3; keyFrame.vector3Value = Vector3{ 100, 100, 0 };
-		//animation->AddKeyFrame(keyFrame);
-
-		/*keyFrame.type = lu::Animation::eAnimationType::TrRotation;
-		keyFrame.timestamp = 1; keyFrame.quatValue = Quaternion::Identity;
-		animation->AddKeyFrame(keyFrame);
-		keyFrame.timestamp = 4; keyFrame.quatValue = Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 1.5f);
-		animation->AddKeyFrame(keyFrame);*/
-
-		lu::Animation::TextureKey keyFrame;
-		keyFrame.type = lu::Animation::eAnimationType::MrTexture;
-		keyFrame.timestamp = 0; 
-		keyFrame.value = lu::Resources::Find<lu::graphics::Texture>(L"player1");
-		animation->AddKeyFrame(keyFrame);
-		keyFrame.timestamp = 1; keyFrame.value = lu::Resources::Find<lu::graphics::Texture>(L"player24");
-		animation->AddKeyFrame(keyFrame);
-		keyFrame.timestamp = 2; keyFrame.value = lu::Resources::Find<lu::graphics::Texture>(L"player43");
-		animation->AddKeyFrame(keyFrame);
-		keyFrame.timestamp = 3; keyFrame.value = lu::Resources::Find<lu::graphics::Texture>(L"player64");
-		animation->AddKeyFrame(keyFrame);
+		animation->AddTextureKey(0, lu::Resources::Find<lu::graphics::Texture>(L"player1"));
+		animation->AddTextureKey(1, lu::Resources::Find<lu::graphics::Texture>(L"player24"));
+		animation->AddTextureKey(2, lu::Resources::Find<lu::graphics::Texture>(L"player43"));
+		animation->AddTextureKey(3, lu::Resources::Find<lu::graphics::Texture>(L"player64"));
+		animation->AddTextureKey(4, lu::Resources::Find<lu::graphics::Texture>(L"player1"));
 
 		animator->PlayAnimation(L"Default", true);
 	}

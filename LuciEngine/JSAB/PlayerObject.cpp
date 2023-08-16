@@ -37,7 +37,7 @@ namespace lu::JSAB
 			outlinemr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			outlinemr->SetMaterial(outlinemat);
 			outlinemr->SetColor(Color::white);
-			outlinemr->UseColor(true);
+			//outlinemr->UseColor(true);
 			//dashoutline->SetState(eState::InActive);
 			script->SetDashOutline(dashoutline);
 			dashoutline->AddComponent<AnimationTester>();

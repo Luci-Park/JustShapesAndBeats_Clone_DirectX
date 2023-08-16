@@ -68,8 +68,17 @@ namespace lu
 
 		struct Timeline
 		{
+			~Timeline()
+			{
+				for(int i =0; i < keyframes.size(); i++)
+					if (keyframes[i])
+					{
+						delete keyframes[i];
+						keyframes[i] = nullptr;
+					}
+			}
 			int currIndex = 0;
-			std::vector<KeyFrame> keyframes;
+			std::vector<KeyFrame*> keyframes;
 			bool IsComplete() { return currIndex >= keyframes.size(); }
 			void Reset() { currIndex = 0; }
 		};
@@ -85,8 +94,24 @@ namespace lu
 		void Reset();
 		bool IsComplete() { return mbComplete; }
 
-		void AddKeyFrame(KeyFrame keyframe);
+		void AddPositionKey(float timestamp, Vector3 vector3);
+		void AddScaleKey(float timestamp, Vector3 vector3);
+		void AddRotationKey(float timestamp, Quaternion quaternion);
+		void AddLocalPositionKey(float timestamp, Vector3 vector3);
+		void AddLocalScaleKey(float timestamp, Vector3 vector3);
+		void AddLocalRotationKey(float timestamp, Quaternion quaternion);
+		void AddColliderCenterKey(float timestamp, Vector2 vector2);
+		void AddColliderSizeKey(float timestamp, Vector2 vector2);
+		void AddColliderActiveKey(float timestamp, bool active);
+		void AddTextureKey(float timestamp, std::shared_ptr<graphics::Texture> texture);
+		void AddColorKey(float timestamp, Color color);
+		void AddInterpolationKey(float timestamp, float interpolation);
+		void AddTintKey(float timestamp, Color color);
+		void AddRendererActiveKey(float timestamp, bool active);
+		void AddFunctionKey(float timestamp, std::function<void()> function);
 	private:
+		Timeline* GetTimlineOfType(eAnimationType type);
+
 		void AnimTrPos(Timeline* timeline);
 		void AnimTrScale(Timeline* timeline);
 		void AnimTrRot(Timeline* timeline);

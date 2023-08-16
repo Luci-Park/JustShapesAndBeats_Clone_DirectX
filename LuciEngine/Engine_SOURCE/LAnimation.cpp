@@ -60,22 +60,170 @@ namespace lu
 				mTimelines[i]->Reset();
 		}
 	}
-	void Animation::AddKeyFrame(KeyFrame keyframe)
+
+	void Animation::AddPositionKey(float timestamp, Vector3 vector3)
 	{
-		Timeline* timeline;
-		if (mTimelines[(UINT)keyframe.type] == nullptr)
-		{
-			timeline = new Timeline();
-			mTimelines[(UINT)keyframe.type] = std::move(timeline);
-		}
-		else timeline = mTimelines[(UINT)keyframe.type];
-		if (keyframe.timestamp > mDuration) mDuration = keyframe.timestamp;
-		timeline->keyframes.push_back(keyframe);
-		std::sort(timeline->keyframes.begin(), timeline->keyframes.end());
+		Timeline* timeline = GetTimlineOfType(eAnimationType::TrPosition);
+		if (timestamp > mDuration)
+			mDuration = timestamp;
+		Vector3Key* key = new Vector3Key();
+		key->timestamp = timestamp;
+		key->value = vector3;
+		timeline->keyframes.push_back(key);
+	}
+	void Animation::AddScaleKey(float timestamp, Vector3 vector3)
+	{
+		Timeline* timeline = GetTimlineOfType(eAnimationType::TrScale);
+		if (timestamp > mDuration)
+			mDuration = timestamp;
+		Vector3Key* key = new Vector3Key();
+		key->timestamp = timestamp;
+		key->value = vector3;
+		timeline->keyframes.push_back(key);
+	}
+	void Animation::AddRotationKey(float timestamp, Quaternion quaternion)
+	{
+		Timeline* timeline = GetTimlineOfType(eAnimationType::TrRotation);
+		if (timestamp > mDuration)
+			mDuration = timestamp;
+		QuaternionKey* key = new QuaternionKey();
+		key->timestamp = timestamp;
+		key->value = quaternion;
+		timeline->keyframes.push_back(key);
+	}
+	void Animation::AddLocalPositionKey(float timestamp, Vector3 vector3)
+	{
+		Timeline* timeline = GetTimlineOfType(eAnimationType::TrLocalPosition);
+		if (timestamp > mDuration)
+			mDuration = timestamp;
+		Vector3Key* key = new Vector3Key();
+		key->timestamp = timestamp;
+		key->value = vector3;
+		timeline->keyframes.push_back(key);
+	}
+	void Animation::AddLocalScaleKey(float timestamp, Vector3 vector3)
+	{
+		Timeline* timeline = GetTimlineOfType(eAnimationType::TrLocalScale);
+		if (timestamp > mDuration)
+			mDuration = timestamp;
+		Vector3Key* key = new Vector3Key();
+		key->timestamp = timestamp;
+		key->value = vector3;
+		timeline->keyframes.push_back(key);
+	}
+	void Animation::AddLocalRotationKey(float timestamp, Quaternion quaternion)
+	{
+		Timeline* timeline = GetTimlineOfType(eAnimationType::TrLocalRotation);
+		if (timestamp > mDuration)
+			mDuration = timestamp;
+		QuaternionKey* key = new QuaternionKey();
+		key->timestamp = timestamp;
+		key->value = quaternion;
+		timeline->keyframes.push_back(key);
+	}
+	void Animation::AddColliderCenterKey(float timestamp, Vector2 vector2)
+	{
+		Timeline* timeline = GetTimlineOfType(eAnimationType::CdCenter);
+		if (timestamp > mDuration)
+			mDuration = timestamp;
+		Vector2Key* key = new Vector2Key();
+		key->timestamp = timestamp;
+		key->value = vector2;
+		timeline->keyframes.push_back(key);
+	}
+	void Animation::AddColliderSizeKey(float timestamp, Vector2 vector2)
+	{
+		Timeline* timeline = GetTimlineOfType(eAnimationType::CdSize);
+		if (timestamp > mDuration)
+			mDuration = timestamp;
+		Vector2Key* key = new Vector2Key();
+		key->timestamp = timestamp;
+		key->value = vector2;
+		timeline->keyframes.push_back(key);
+	}
+	void Animation::AddColliderActiveKey(float timestamp, bool active)
+	{
+		Timeline* timeline = GetTimlineOfType(eAnimationType::CdActive);
+		if (timestamp > mDuration)
+			mDuration = timestamp;
+		BoolKey* key = new BoolKey();
+		key->timestamp = timestamp;
+		key->value = active;
+		timeline->keyframes.push_back(key);
+	}
+	
+	void Animation::AddTextureKey(float timestamp, std::shared_ptr<graphics::Texture> texture)
+	{		
+		Timeline* timeline = GetTimlineOfType(eAnimationType::MrTexture);
+		if (timestamp > mDuration)
+			mDuration = timestamp;
+		TextureKey* key = new TextureKey();
+		key->timestamp = timestamp;
+		key->value = texture;
+		timeline->keyframes.push_back(key);
+	}
+	void Animation::AddColorKey(float timestamp, Color color)
+	{
+		Timeline* timeline = GetTimlineOfType(eAnimationType::MrColor);
+		if (timestamp > mDuration)
+			mDuration = timestamp;
+		ColorKey* key = new ColorKey();
+		key->timestamp = timestamp;
+		key->value = color;
+		timeline->keyframes.push_back(key);
+	}
+	void Animation::AddInterpolationKey(float timestamp, float interpolation)
+	{
+		Timeline* timeline = GetTimlineOfType(eAnimationType::MrInterpolation);
+		if (timestamp > mDuration)
+			mDuration = timestamp;
+		FloatKey* key = new FloatKey();
+		key->timestamp = timestamp;
+		key->value = interpolation;
+		timeline->keyframes.push_back(key);
+	}
+	void Animation::AddTintKey(float timestamp, Color color)
+	{
+		Timeline* timeline = GetTimlineOfType(eAnimationType::MrTint);
+		if (timestamp > mDuration)
+			mDuration = timestamp;
+		ColorKey* key = new ColorKey();
+		key->timestamp = timestamp;
+		key->value = color;
+		timeline->keyframes.push_back(key);
+	}
+	void Animation::AddRendererActiveKey(float timestamp, bool active)
+	{
+		Timeline* timeline = GetTimlineOfType(eAnimationType::MrActive);
+		if (timestamp > mDuration)
+			mDuration = timestamp;
+		BoolKey* key = new BoolKey();
+		key->timestamp = timestamp;
+		key->value = active;
+		timeline->keyframes.push_back(key);
+	}
+	void Animation::AddFunctionKey(float timestamp, std::function<void()> function)
+	{
+		Timeline* timeline = GetTimlineOfType(eAnimationType::ScFunc);
+		if (timestamp > mDuration)
+			mDuration = timestamp;
+		FuncKey* key = new FuncKey();
+		key->timestamp = timestamp;
+		key->value = function;
+		timeline->keyframes.push_back(key);
+
+	}
+
+	Animation::Timeline* Animation::GetTimlineOfType(eAnimationType type)
+	{
+		if (mTimelines[(UINT)type] == nullptr)
+			mTimelines[(UINT)type] = new Timeline();
+
+		return mTimelines[(UINT)type];
 	}
 	void Animation::AnimTrPos(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime) timeline->currIndex++;
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
@@ -94,7 +242,7 @@ namespace lu
 	}
 	void Animation::AnimTrScale(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime) timeline->currIndex++;
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
@@ -113,7 +261,7 @@ namespace lu
 	}
 	void Animation::AnimTrRot(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime) timeline->currIndex++;
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
@@ -132,7 +280,7 @@ namespace lu
 	}
 	void Animation::AnimTrLocPos(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime) timeline->currIndex++;
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
@@ -151,7 +299,7 @@ namespace lu
 	}
 	void Animation::AnimTrLocScale(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime) timeline->currIndex++;
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
@@ -170,7 +318,7 @@ namespace lu
 	}
 	void Animation::AnimTrLocRot(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime) timeline->currIndex++;
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
@@ -190,7 +338,7 @@ namespace lu
 	}
 	void Animation::AnimCdCenter(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime) timeline->currIndex++;
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
@@ -209,7 +357,7 @@ namespace lu
 	}
 	void Animation::AnimCdSize(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime) timeline->currIndex++;
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
@@ -228,7 +376,7 @@ namespace lu
 	}
 	void Animation::AnimCdActive(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex].timestamp < mTime)
+		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime)
 		{
 			BoolKey* keyframe = (BoolKey*) & timeline->keyframes[timeline->currIndex];
 			if (mTime >= keyframe->timestamp)
@@ -240,10 +388,9 @@ namespace lu
 	}
 	void Animation::AnimMrText(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex].timestamp < mTime)
+		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime)
 		{
-			KeyFrame* baseKeyFrame = &timeline->keyframes[timeline->currIndex];
-			TextureKey* textureKey = dynamic_cast<TextureKey*>(baseKeyFrame);
+			TextureKey* textureKey = dynamic_cast<TextureKey*>(timeline->keyframes[timeline->currIndex]);
 			if (mTime >= textureKey->timestamp)
 			{
 				mMr->GetMaterial()->SetTexture(textureKey->value);
@@ -253,7 +400,7 @@ namespace lu
 	}
 	void Animation::AnimMrColor(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex].timestamp < mTime)
+		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime)
 		{
 			ColorKey* keyframe = (ColorKey*) & timeline->keyframes[timeline->currIndex];
 			if (mTime >= keyframe->timestamp)
@@ -265,7 +412,7 @@ namespace lu
 	}
 	void Animation::AnimMrColorpolation(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime) timeline->currIndex++;
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
@@ -283,7 +430,7 @@ namespace lu
 	}
 	void Animation::AnimMrTint(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime) timeline->currIndex++;
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
@@ -301,7 +448,7 @@ namespace lu
 	}
 	void Animation::AnimMrActive(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex].timestamp < mTime)
+		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime)
 		{
 			BoolKey* keyframe = (BoolKey*)&timeline->keyframes[timeline->currIndex];
 			if (mTime >= keyframe->timestamp)
@@ -313,7 +460,7 @@ namespace lu
 	}
 	void Animation::AnimScFunc(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex].timestamp < mTime)
+		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime)
 		{
 			FuncKey* keyframe = (FuncKey*) & timeline->keyframes[timeline->currIndex];
 			if (mTime >= keyframe->timestamp)
