@@ -227,14 +227,14 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			Vector3Key* keyframe = (Vector3Key*)&timeline->keyframes[0];
+			Vector3Key* keyframe = dynamic_cast<Vector3Key*>(timeline->keyframes[0]);
 			if (keyframe->timestamp >= mTime)
 				mTr->SetPosition(keyframe->value);
 		}
 		else
 		{
-			Vector3Key* prev = (Vector3Key*) & timeline->keyframes[timeline->currIndex - 1];
-			Vector3Key* next = (Vector3Key*) & timeline->keyframes[timeline->currIndex];
+			Vector3Key* prev = dynamic_cast<Vector3Key*>(timeline->keyframes[timeline->currIndex - 1]);
+			Vector3Key* next = dynamic_cast<Vector3Key*>(timeline->keyframes[timeline->currIndex]);
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
 			Vector3 pos = Vector3::Lerp(prev->value, next->value, t);
 			mTr->SetPosition(pos);
@@ -246,14 +246,14 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			Vector3Key* keyframe = (Vector3Key*) & timeline->keyframes[0];
+			Vector3Key* keyframe = dynamic_cast<Vector3Key*>(timeline->keyframes[0]);
 			if (keyframe->timestamp >= mTime)
 				mTr->SetScale(keyframe->value);
 		}
 		else
 		{
-			Vector3Key* prev = (Vector3Key*) & timeline->keyframes[timeline->currIndex - 1];
-			Vector3Key* next = (Vector3Key*) & timeline->keyframes[timeline->currIndex];
+			Vector3Key* prev = dynamic_cast<Vector3Key*>(timeline->keyframes[timeline->currIndex - 1]);
+			Vector3Key* next = dynamic_cast<Vector3Key*>(timeline->keyframes[timeline->currIndex]);
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
 			Vector3 pos = Vector3::Lerp(prev->value, next->value, t);
 			mTr->SetScale(pos);
@@ -265,14 +265,15 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			QuaternionKey* keyframe = (QuaternionKey*) & timeline->keyframes[0];
+			QuaternionKey* keyframe = dynamic_cast<QuaternionKey*>(timeline->keyframes[0]);
 			if (keyframe->timestamp >= mTime)
 				mTr->SetRotation(keyframe->value);
+			assert(keyframe->value == Quaternion::Identity);
 		}
 		else
 		{
-			QuaternionKey* prev = (QuaternionKey*)& timeline->keyframes[timeline->currIndex - 1];
-			QuaternionKey* next = (QuaternionKey*)&timeline->keyframes[timeline->currIndex];
+			QuaternionKey* prev = dynamic_cast<QuaternionKey*>(timeline->keyframes[timeline->currIndex - 1]);
+			QuaternionKey* next = dynamic_cast<QuaternionKey*>(timeline->keyframes[timeline->currIndex]);
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
 			Quaternion rot = Quaternion::Lerp(prev->value, next->value, t);
 			mTr->SetRotation(rot);
@@ -284,14 +285,14 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			Vector3Key* keyframe = (Vector3Key*) & timeline->keyframes[0];
+			Vector3Key* keyframe = dynamic_cast<Vector3Key*>(timeline->keyframes[0]);
 			if (keyframe->timestamp >= mTime)
 				mTr->SetLocalPosition(keyframe->value);
 		}
 		else
 		{
-			Vector3Key* prev = (Vector3Key*)&timeline->keyframes[timeline->currIndex - 1];
-			Vector3Key* next = (Vector3Key*)&timeline->keyframes[timeline->currIndex];
+			Vector3Key* prev = dynamic_cast<Vector3Key*>(timeline->keyframes[timeline->currIndex - 1]);
+			Vector3Key* next = dynamic_cast<Vector3Key*>(timeline->keyframes[timeline->currIndex]);
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
 			Vector3 pos = Vector3::Lerp(prev->value, next->value, t);
 			mTr->SetLocalPosition(pos);
@@ -303,14 +304,14 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			Vector3Key* keyframe = (Vector3Key*)&timeline->keyframes[0];
+			Vector3Key* keyframe = dynamic_cast<Vector3Key*>(timeline->keyframes[0]);
 			if (keyframe->timestamp >= mTime)
 				mTr->SetLocalScale(keyframe->value);
 		}
 		else
 		{
-			Vector3Key* prev = (Vector3Key*)&timeline->keyframes[timeline->currIndex - 1];
-			Vector3Key* next = (Vector3Key*)&timeline->keyframes[timeline->currIndex];
+			Vector3Key* prev = dynamic_cast<Vector3Key*>(timeline->keyframes[timeline->currIndex - 1]);
+			Vector3Key* next = dynamic_cast<Vector3Key*>(timeline->keyframes[timeline->currIndex]);
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
 			Vector3 pos = Vector3::Lerp(prev->value, next->value, t);
 			mTr->SetLocalScale(pos);
@@ -322,15 +323,15 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			QuaternionKey* keyframe = (QuaternionKey*) & timeline->keyframes[0];
+			QuaternionKey* keyframe = dynamic_cast<QuaternionKey*>(timeline->keyframes[0]);
 			if (keyframe->timestamp >= mTime)
 				mTr->SetLocalRotation(keyframe->value);
 		}
 		else
 		{
 
-			QuaternionKey* prev = (QuaternionKey*)&timeline->keyframes[timeline->currIndex - 1];
-			QuaternionKey* next = (QuaternionKey*)&timeline->keyframes[timeline->currIndex];
+			QuaternionKey* prev = dynamic_cast<QuaternionKey*>(timeline->keyframes[timeline->currIndex - 1]);
+			QuaternionKey* next = dynamic_cast<QuaternionKey*>(timeline->keyframes[timeline->currIndex]);
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
 			Quaternion rot = Quaternion::Lerp(prev->value, next->value, t);
 			mTr->SetLocalRotation(rot);
@@ -342,14 +343,14 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			Vector2Key* keyframe = (Vector2Key*) & timeline->keyframes[0];
+			Vector2Key* keyframe = dynamic_cast<Vector2Key*>(timeline->keyframes[0]);
 			if (keyframe->timestamp >= mTime)
 				mCd->SetCenter(keyframe->value);
 		}
 		else
 		{
-			Vector2Key* prev = (Vector2Key*)& timeline->keyframes[timeline->currIndex - 1];
-			Vector2Key* next = (Vector2Key*)&timeline->keyframes[timeline->currIndex];
+			Vector2Key* prev = dynamic_cast<Vector2Key*>(timeline->keyframes[timeline->currIndex - 1]);
+			Vector2Key* next = dynamic_cast<Vector2Key*>(timeline->keyframes[timeline->currIndex]);
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
 			Vector2 pos = Vector2::Lerp(prev->value, next->value, t);
 			mCd->SetCenter(pos);
@@ -361,14 +362,14 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			Vector2Key* keyframe = (Vector2Key*) & timeline->keyframes[0];
+			Vector2Key* keyframe = dynamic_cast<Vector2Key*>(timeline->keyframes[0]);
 			if (keyframe->timestamp >= mTime)
 				mCd->SetSize(keyframe->value);
 		}
 		else
 		{
-			Vector2Key* prev = (Vector2Key*)&timeline->keyframes[timeline->currIndex - 1];
-			Vector2Key* next = (Vector2Key*)&timeline->keyframes[timeline->currIndex];
+			Vector2Key* prev = dynamic_cast<Vector2Key*>(timeline->keyframes[timeline->currIndex - 1]);
+			Vector2Key* next = dynamic_cast<Vector2Key*>(timeline->keyframes[timeline->currIndex]);
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
 			Vector2 pos = Vector2::Lerp(prev->value, next->value, t);
 			mCd->SetSize(pos);
@@ -378,7 +379,7 @@ namespace lu
 	{
 		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime)
 		{
-			BoolKey* keyframe = (BoolKey*) & timeline->keyframes[timeline->currIndex];
+			BoolKey* keyframe = dynamic_cast<BoolKey*>(timeline->keyframes[timeline->currIndex]);
 			if (mTime >= keyframe->timestamp)
 			{
 				mCd->SetActive(keyframe->value);
@@ -450,7 +451,7 @@ namespace lu
 	{
 		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime)
 		{
-			BoolKey* keyframe = (BoolKey*)&timeline->keyframes[timeline->currIndex];
+			BoolKey* keyframe = dynamic_cast<BoolKey*>(timeline->keyframes[timeline->currIndex]);
 			if (mTime >= keyframe->timestamp)
 			{
 				mMr->SetActive(keyframe->value);

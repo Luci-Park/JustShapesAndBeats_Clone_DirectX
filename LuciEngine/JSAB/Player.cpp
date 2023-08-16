@@ -159,18 +159,18 @@ namespace lu::JSAB
 		lu::Animator* animator = GetOwner()->AddComponent<lu::Animator>();
 		lu::Animation* animation = animator->CreateAnimation(L"Default");
 
-		//animation->AddPositionKey(0, { 0, 0, 0 });
-		//animation->AddPositionKey(3, { 100, 100, 0 });
+		animation->AddPositionKey(0, { 0, 0, 0 });
+		animation->AddPositionKey(3, { 100, 100, 0 });
 		animation->AddRotationKey(1, Quaternion::Identity);
 		animation->AddRotationKey(4, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 1.5f));
-		/*animation->AddScaleKey(0, { 30, 30, 1 });
+		animation->AddScaleKey(0, { 30, 30, 1 });
 		animation->AddScaleKey(4, { 100, 100, 1 });
 		animation->AddColliderActiveKey(0, false);
 		animation->AddColliderActiveKey(1, true);
 		animation->AddColliderCenterKey(2, { 0, 0 });
 		animation->AddColliderCenterKey(4, { -200, -200 });
 		animation->AddColliderSizeKey(1, { 1, 1 });
-		animation->AddColliderSizeKey(5, { 3, 3 });*/
+		animation->AddColliderSizeKey(5, { 3, 3 });
 
 		animation->AddTextureKey(0, lu::Resources::Find<lu::graphics::Texture>(L"player1"));
 		animation->AddTextureKey(1, lu::Resources::Find<lu::graphics::Texture>(L"player24"));
