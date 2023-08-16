@@ -161,13 +161,14 @@ namespace lu::JSAB
 
 		lu::Animation::KeyFrame keyFrame;
 
-		mTr->SetLocalPosition(Vector3::Up * 100);
-	
-		keyFrame.timestamp = 0; keyFrame.vector3Value = Vector3{ 0, 0, 0 };
-		animation->AddKeyFrame(keyFrame);
+		//mTr->SetLocalPosition(Vector3::Up * 100);
 
-		keyFrame.timestamp = 3; keyFrame.vector3Value = Vector3{ 100, 100, 0 };
-		animation->AddKeyFrame(keyFrame);
+		//keyFrame.type = lu::Animation::eAnimationType::TrLocalPosition;
+		//keyFrame.timestamp = 0; keyFrame.vector3Value = Vector3{ 0, 0, 0 };
+		//animation->AddKeyFrame(keyFrame);
+
+		//keyFrame.timestamp = 3; keyFrame.vector3Value = Vector3{ 100, 100, 0 };
+		//animation->AddKeyFrame(keyFrame);
 
 		/*keyFrame.type = lu::Animation::eAnimationType::TrRotation;
 		keyFrame.timestamp = 1; keyFrame.quatValue = Quaternion::Identity;
