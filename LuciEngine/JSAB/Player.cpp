@@ -159,7 +159,6 @@ namespace lu::JSAB
 		lu::Animator* animator = GetOwner()->AddComponent<lu::Animator>();
 		lu::Animation* animation = animator->CreateAnimation(L"Default");
 
-		lu::Animation::KeyFrame keyFrame;
 
 		//mTr->SetLocalPosition(Vector3::Up * 100);
 
@@ -176,15 +175,16 @@ namespace lu::JSAB
 		keyFrame.timestamp = 4; keyFrame.quatValue = Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 1.5f);
 		animation->AddKeyFrame(keyFrame);*/
 
-		keyFrame.SetType(lu::Animation::eAnimationType::MrTexture);
+		lu::Animation::TextureKey keyFrame;
+		keyFrame.type = lu::Animation::eAnimationType::MrTexture;
 		keyFrame.timestamp = 0; 
-		keyFrame.textureValue = lu::Resources::Find<lu::graphics::Texture>(L"player1");
+		keyFrame.value = lu::Resources::Find<lu::graphics::Texture>(L"player1");
 		animation->AddKeyFrame(keyFrame);
-		keyFrame.timestamp = 1; keyFrame.textureValue = lu::Resources::Find<lu::graphics::Texture>(L"player24");
+		keyFrame.timestamp = 1; keyFrame.value = lu::Resources::Find<lu::graphics::Texture>(L"player24");
 		animation->AddKeyFrame(keyFrame);
-		keyFrame.timestamp = 2; keyFrame.textureValue = lu::Resources::Find<lu::graphics::Texture>(L"player43");
+		keyFrame.timestamp = 2; keyFrame.value = lu::Resources::Find<lu::graphics::Texture>(L"player43");
 		animation->AddKeyFrame(keyFrame);
-		keyFrame.timestamp = 3; keyFrame.textureValue = lu::Resources::Find<lu::graphics::Texture>(L"player64");
+		keyFrame.timestamp = 3; keyFrame.value = lu::Resources::Find<lu::graphics::Texture>(L"player64");
 		animation->AddKeyFrame(keyFrame);
 
 		animator->PlayAnimation(L"Default", true);

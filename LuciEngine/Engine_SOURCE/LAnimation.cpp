@@ -63,12 +63,12 @@ namespace lu
 	void Animation::AddKeyFrame(KeyFrame keyframe)
 	{
 		Timeline* timeline;
-		if (mTimelines[(UINT)keyframe.GetType()] == nullptr)
+		if (mTimelines[(UINT)keyframe.type] == nullptr)
 		{
 			timeline = new Timeline();
-			mTimelines[(UINT)keyframe.GetType()] = std::move(timeline);
+			mTimelines[(UINT)keyframe.type] = std::move(timeline);
 		}
-		else timeline = mTimelines[(UINT)keyframe.GetType()];
+		else timeline = mTimelines[(UINT)keyframe.type];
 		if (keyframe.timestamp > mDuration) mDuration = keyframe.timestamp;
 		timeline->keyframes.push_back(keyframe);
 		std::sort(timeline->keyframes.begin(), timeline->keyframes.end());
@@ -79,16 +79,16 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			KeyFrame* keyframe = &timeline->keyframes[0];
+			Vector3Key* keyframe = (Vector3Key*)&timeline->keyframes[0];
 			if (keyframe->timestamp >= mTime)
-				mTr->SetPosition(keyframe->vector3Value);
+				mTr->SetPosition(keyframe->value);
 		}
 		else
 		{
-			KeyFrame* prev = &timeline->keyframes[timeline->currIndex - 1];
-			KeyFrame* next = &timeline->keyframes[timeline->currIndex];
+			Vector3Key* prev = (Vector3Key*) & timeline->keyframes[timeline->currIndex - 1];
+			Vector3Key* next = (Vector3Key*) & timeline->keyframes[timeline->currIndex];
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
-			Vector3 pos = Vector3::Lerp(prev->vector3Value, next->vector3Value, t);
+			Vector3 pos = Vector3::Lerp(prev->value, next->value, t);
 			mTr->SetPosition(pos);
 		}
 	}
@@ -98,16 +98,16 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			KeyFrame* keyframe = &timeline->keyframes[0];
+			Vector3Key* keyframe = (Vector3Key*) & timeline->keyframes[0];
 			if (keyframe->timestamp >= mTime)
-				mTr->SetScale(keyframe->vector3Value);
+				mTr->SetScale(keyframe->value);
 		}
 		else
 		{
-			KeyFrame* prev = &timeline->keyframes[timeline->currIndex - 1];
-			KeyFrame* next = &timeline->keyframes[timeline->currIndex];
+			Vector3Key* prev = (Vector3Key*) & timeline->keyframes[timeline->currIndex - 1];
+			Vector3Key* next = (Vector3Key*) & timeline->keyframes[timeline->currIndex];
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
-			Vector3 pos = Vector3::Lerp(prev->vector3Value, next->vector3Value, t);
+			Vector3 pos = Vector3::Lerp(prev->value, next->value, t);
 			mTr->SetScale(pos);
 		}
 	}
@@ -117,16 +117,16 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			KeyFrame* keyframe = &timeline->keyframes[0];
+			QuaternionKey* keyframe = (QuaternionKey*) & timeline->keyframes[0];
 			if (keyframe->timestamp >= mTime)
-				mTr->SetRotation(keyframe->quatValue);
+				mTr->SetRotation(keyframe->value);
 		}
 		else
 		{
-			KeyFrame* prev = &timeline->keyframes[timeline->currIndex - 1];
-			KeyFrame* next = &timeline->keyframes[timeline->currIndex];
+			QuaternionKey* prev = (QuaternionKey*)& timeline->keyframes[timeline->currIndex - 1];
+			QuaternionKey* next = (QuaternionKey*)&timeline->keyframes[timeline->currIndex];
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
-			Quaternion rot = Quaternion::Lerp(prev->quatValue, next->quatValue, t);
+			Quaternion rot = Quaternion::Lerp(prev->value, next->value, t);
 			mTr->SetRotation(rot);
 		}
 	}
@@ -136,16 +136,16 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			KeyFrame* keyframe = &timeline->keyframes[0];
+			Vector3Key* keyframe = (Vector3Key*) & timeline->keyframes[0];
 			if (keyframe->timestamp >= mTime)
-				mTr->SetLocalPosition(keyframe->vector3Value);
+				mTr->SetLocalPosition(keyframe->value);
 		}
 		else
 		{
-			KeyFrame* prev = &timeline->keyframes[timeline->currIndex - 1];
-			KeyFrame* next = &timeline->keyframes[timeline->currIndex];
+			Vector3Key* prev = (Vector3Key*)&timeline->keyframes[timeline->currIndex - 1];
+			Vector3Key* next = (Vector3Key*)&timeline->keyframes[timeline->currIndex];
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
-			Vector3 pos = Vector3::Lerp(prev->vector3Value, next->vector3Value, t);
+			Vector3 pos = Vector3::Lerp(prev->value, next->value, t);
 			mTr->SetLocalPosition(pos);
 		}
 	}
@@ -155,16 +155,16 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			KeyFrame* keyframe = &timeline->keyframes[0];
+			Vector3Key* keyframe = (Vector3Key*)&timeline->keyframes[0];
 			if (keyframe->timestamp >= mTime)
-				mTr->SetLocalScale(keyframe->vector3Value);
+				mTr->SetLocalScale(keyframe->value);
 		}
 		else
 		{
-			KeyFrame* prev = &timeline->keyframes[timeline->currIndex - 1];
-			KeyFrame* next = &timeline->keyframes[timeline->currIndex];
+			Vector3Key* prev = (Vector3Key*)&timeline->keyframes[timeline->currIndex - 1];
+			Vector3Key* next = (Vector3Key*)&timeline->keyframes[timeline->currIndex];
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
-			Vector3 pos = Vector3::Lerp(prev->vector3Value, next->vector3Value, t);
+			Vector3 pos = Vector3::Lerp(prev->value, next->value, t);
 			mTr->SetLocalScale(pos);
 		}
 	}
@@ -174,16 +174,17 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			KeyFrame* keyframe = &timeline->keyframes[0];
+			QuaternionKey* keyframe = (QuaternionKey*) & timeline->keyframes[0];
 			if (keyframe->timestamp >= mTime)
-				mTr->SetLocalRotation(keyframe->quatValue);
+				mTr->SetLocalRotation(keyframe->value);
 		}
 		else
 		{
-			KeyFrame* prev = &timeline->keyframes[timeline->currIndex - 1];
-			KeyFrame* next = &timeline->keyframes[timeline->currIndex];
+
+			QuaternionKey* prev = (QuaternionKey*)&timeline->keyframes[timeline->currIndex - 1];
+			QuaternionKey* next = (QuaternionKey*)&timeline->keyframes[timeline->currIndex];
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
-			Quaternion rot = Quaternion::Lerp(prev->quatValue, next->quatValue, t);
+			Quaternion rot = Quaternion::Lerp(prev->value, next->value, t);
 			mTr->SetLocalRotation(rot);
 		}
 	}
@@ -193,16 +194,16 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			KeyFrame* keyframe = &timeline->keyframes[0];
+			Vector2Key* keyframe = (Vector2Key*) & timeline->keyframes[0];
 			if (keyframe->timestamp >= mTime)
-				mCd->SetCenter(keyframe->vector2Value);
+				mCd->SetCenter(keyframe->value);
 		}
 		else
 		{
-			KeyFrame* prev = &timeline->keyframes[timeline->currIndex - 1];
-			KeyFrame* next = &timeline->keyframes[timeline->currIndex];
+			Vector2Key* prev = (Vector2Key*)& timeline->keyframes[timeline->currIndex - 1];
+			Vector2Key* next = (Vector2Key*)&timeline->keyframes[timeline->currIndex];
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
-			Vector2 pos = Vector2::Lerp(prev->vector2Value, next->vector2Value, t);
+			Vector2 pos = Vector2::Lerp(prev->value, next->value, t);
 			mCd->SetCenter(pos);
 		}
 	}
@@ -212,16 +213,16 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			KeyFrame* keyframe = &timeline->keyframes[0];
+			Vector2Key* keyframe = (Vector2Key*) & timeline->keyframes[0];
 			if (keyframe->timestamp >= mTime)
-				mCd->SetSize(keyframe->vector2Value);
+				mCd->SetSize(keyframe->value);
 		}
 		else
 		{
-			KeyFrame* prev = &timeline->keyframes[timeline->currIndex - 1];
-			KeyFrame* next = &timeline->keyframes[timeline->currIndex];
+			Vector2Key* prev = (Vector2Key*)&timeline->keyframes[timeline->currIndex - 1];
+			Vector2Key* next = (Vector2Key*)&timeline->keyframes[timeline->currIndex];
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
-			Vector2 pos = Vector2::Lerp(prev->vector2Value, next->vector2Value, t);
+			Vector2 pos = Vector2::Lerp(prev->value, next->value, t);
 			mCd->SetSize(pos);
 		}
 	}
@@ -229,10 +230,10 @@ namespace lu
 	{
 		if (timeline->keyframes[timeline->currIndex].timestamp < mTime)
 		{
-			KeyFrame* keyframe = &timeline->keyframes[timeline->currIndex];
+			BoolKey* keyframe = (BoolKey*) & timeline->keyframes[timeline->currIndex];
 			if (mTime >= keyframe->timestamp)
 			{
-				mCd->SetActive(keyframe->boolValue);
+				mCd->SetActive(keyframe->value);
 				timeline->currIndex++;
 			}
 		}
@@ -241,10 +242,11 @@ namespace lu
 	{
 		if (timeline->keyframes[timeline->currIndex].timestamp < mTime)
 		{
-			KeyFrame* keyframe = &timeline->keyframes[timeline->currIndex];
-			if (mTime >= keyframe->timestamp)
+			KeyFrame* baseKeyFrame = &timeline->keyframes[timeline->currIndex];
+			TextureKey* textureKey = dynamic_cast<TextureKey*>(baseKeyFrame);
+			if (mTime >= textureKey->timestamp)
 			{
-				mMr->GetMaterial()->SetTexture(keyframe->textureValue);
+				mMr->GetMaterial()->SetTexture(textureKey->value);
 				timeline->currIndex++;
 			}
 		}
@@ -253,10 +255,10 @@ namespace lu
 	{
 		if (timeline->keyframes[timeline->currIndex].timestamp < mTime)
 		{
-			KeyFrame* keyframe = &timeline->keyframes[timeline->currIndex];
+			ColorKey* keyframe = (ColorKey*) & timeline->keyframes[timeline->currIndex];
 			if (mTime >= keyframe->timestamp)
 			{
-				mMr->SetColor(keyframe->colorValue);
+				mMr->SetColor(keyframe->value);
 				timeline->currIndex++;
 			}
 		}
@@ -267,16 +269,16 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			KeyFrame* keyframe = &timeline->keyframes[0];
+			FloatKey* keyframe = (FloatKey*) & timeline->keyframes[0];
 			if (keyframe->timestamp >= mTime)
-				mMr->SetInterpolation(keyframe->floatValue);
+				mMr->SetInterpolation(keyframe->value);
 		}
 		else
 		{
-			KeyFrame* prev = &timeline->keyframes[timeline->currIndex - 1];
-			KeyFrame* next = &timeline->keyframes[timeline->currIndex];
+			FloatKey* prev = (FloatKey*) & timeline->keyframes[timeline->currIndex - 1];
+			FloatKey* next = (FloatKey*) & timeline->keyframes[timeline->currIndex];
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
-			mMr->SetInterpolation(prev->floatValue + t*(next->floatValue - prev->floatValue));
+			mMr->SetInterpolation(prev->value + t*(next->value - prev->value));
 		}
 	}
 	void Animation::AnimMrTint(Timeline* timeline)
@@ -285,26 +287,26 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			KeyFrame* keyframe = &timeline->keyframes[0];
+			ColorKey* keyframe = (ColorKey*) & timeline->keyframes[0];
 			if (keyframe->timestamp >= mTime)
-				mMr->GetMaterial()->SetTint(keyframe->colorValue);
+				mMr->GetMaterial()->SetTint(keyframe->value);
 		}
 		else
 		{
-			KeyFrame* prev = &timeline->keyframes[timeline->currIndex - 1];
-			KeyFrame* next = &timeline->keyframes[timeline->currIndex];
+			ColorKey* prev = (ColorKey*)&timeline->keyframes[timeline->currIndex - 1];
+			ColorKey* next = (ColorKey*)&timeline->keyframes[timeline->currIndex];
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
-			mMr->GetMaterial()->SetTint(Color::Lerp(prev->colorValue, next->colorValue, t));
+			mMr->GetMaterial()->SetTint(Color::Lerp(prev->value, next->value, t));
 		}
 	}
 	void Animation::AnimMrActive(Timeline* timeline)
 	{
 		if (timeline->keyframes[timeline->currIndex].timestamp < mTime)
 		{
-			KeyFrame* keyframe = &timeline->keyframes[timeline->currIndex];
+			BoolKey* keyframe = (BoolKey*)&timeline->keyframes[timeline->currIndex];
 			if (mTime >= keyframe->timestamp)
 			{
-				mMr->SetActive(keyframe->boolValue);
+				mMr->SetActive(keyframe->value);
 				timeline->currIndex++;
 			}
 		}
@@ -313,10 +315,10 @@ namespace lu
 	{
 		if (timeline->keyframes[timeline->currIndex].timestamp < mTime)
 		{
-			KeyFrame* keyframe = &timeline->keyframes[timeline->currIndex];
+			FuncKey* keyframe = (FuncKey*) & timeline->keyframes[timeline->currIndex];
 			if (mTime >= keyframe->timestamp)
 			{
-				keyframe->func();
+				keyframe->value();
 				timeline->currIndex++;
 			}
 		}
