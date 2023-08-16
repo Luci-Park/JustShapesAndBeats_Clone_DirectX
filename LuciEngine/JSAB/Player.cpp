@@ -173,16 +173,35 @@ namespace lu::JSAB
 		animation->AddKeyFrame(keyFrame);
 		keyFrame.timestamp = 4; keyFrame.quatValue = Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 1.5f);
 		animation->AddKeyFrame(keyFrame);*/
-		keyFrame.type = lu::Animation::eAnimationType::MrTexture;
-		keyFrame.timestamp = 0; keyFrame.textureValue = lu::Resources::Find<lu::graphics::Texture>(L"player1");
+
+		//keyFrame.type = lu::Animation::eAnimationType::MrTexture;
+		//keyFrame.timestamp = 0; keyFrame.textureValue = lu::Resources::Find<lu::graphics::Texture>(L"player1");
+		//animation->AddKeyFrame(keyFrame);
+		//keyFrame.timestamp = 1; keyFrame.textureValue = lu::Resources::Find<lu::graphics::Texture>(L"player24");
+		//animation->AddKeyFrame(keyFrame);
+		//keyFrame.timestamp = 2; keyFrame.textureValue = lu::Resources::Find<lu::graphics::Texture>(L"player43");
+		//animation->AddKeyFrame(keyFrame);
+		//keyFrame.timestamp = 3; keyFrame.textureValue = lu::Resources::Find<lu::graphics::Texture>(L"player64");
+		//animation->AddKeyFrame(keyFrame);
+
+		keyFrame.type = lu::Animation::eAnimationType::MrInterpolation;
+		keyFrame.timestamp = 0; keyFrame.floatValue = 1.0f;
 		animation->AddKeyFrame(keyFrame);
-		keyFrame.timestamp = 1; keyFrame.textureValue = lu::Resources::Find<lu::graphics::Texture>(L"player24");
-		animation->AddKeyFrame(keyFrame);
-		keyFrame.timestamp = 2; keyFrame.textureValue = lu::Resources::Find<lu::graphics::Texture>(L"player43");
-		animation->AddKeyFrame(keyFrame);
-		keyFrame.timestamp = 3; keyFrame.textureValue = lu::Resources::Find<lu::graphics::Texture>(L"player64");
+		keyFrame.type = lu::Animation::eAnimationType::MrInterpolation;
+		keyFrame.timestamp = 1; keyFrame.floatValue = 0.0f;
 		animation->AddKeyFrame(keyFrame);
 
+		keyFrame.type = lu::Animation::eAnimationType::MrTint;
+		keyFrame.timestamp = 1; keyFrame.colorValue = math::Color(1, 0, 0, 1);
+		animation->AddKeyFrame(keyFrame);
+		keyFrame.timestamp = 2; keyFrame.colorValue = math::Color(0, 1, 0, 0.75);
+		animation->AddKeyFrame(keyFrame);
+		keyFrame.timestamp = 3; keyFrame.colorValue = math::Color(0, 0, 1, 0.5);
+		animation->AddKeyFrame(keyFrame);
+		keyFrame.timestamp = 4; keyFrame.colorValue = math::Color(1, 1, 1, 0.25);
+		animation->AddKeyFrame(keyFrame);
+		keyFrame.timestamp = 5; keyFrame.colorValue = math::Color(1, 1, 1, 1);
+		animation->AddKeyFrame(keyFrame);
 		animator->PlayAnimation(L"Default", true);
 	}
 }
