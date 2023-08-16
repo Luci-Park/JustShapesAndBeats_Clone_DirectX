@@ -21,7 +21,9 @@ namespace lu
 		UINT64 GetID() { return mColliderID; }
 
 		virtual eState GetState() { return mState; }
-		virtual void SetState(eState state) { mState = state; }
+		virtual void SetState(eState state) { 
+			mState = state; }
+		void SetActive(bool active);
 	protected:
 		eState mState;
 	private:

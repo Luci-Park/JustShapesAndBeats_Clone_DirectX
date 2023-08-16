@@ -723,3 +723,5 @@ object delete
 - 같은 material 을 할 때는 Instancing이면 충분.
 - shader에선 같은 것임을 어떻게 알까 => use instance id
 - 이제 이를 compute shader로 tracking 하는것.
+8/16
+노이즈를 통해 랜덤을 만드는 것.

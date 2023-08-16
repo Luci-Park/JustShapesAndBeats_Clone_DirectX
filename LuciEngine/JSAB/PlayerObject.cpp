@@ -18,8 +18,10 @@ namespace lu::JSAB
 		SetName(L"Player");
 		std::shared_ptr<Material> mat = CreatePlayerMat();
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
+		mr->SetActive(false);
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(mat);
+		
 		mTransform->SetScale(Vector3(22.3, 22.3, 1));
 		AddComponent<Collider2D>();
 
@@ -34,9 +36,10 @@ namespace lu::JSAB
 			outlinemr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			outlinemr->SetMaterial(outlinemat);
 			outlinemr->SetColor(Color::white);
-			outlinemr->UseColor(true);
-			dashoutline->SetState(eState::InActive);
+			//outlinemr->UseColor(true);
+			//dashoutline->SetState(eState::InActive);
 			script->SetDashOutline(dashoutline);
+			dashoutline->AddComponent<AnimationTester>();
 		}
 	}
 	std::shared_ptr<Material> PlayerObject::CreatePlayerMat()

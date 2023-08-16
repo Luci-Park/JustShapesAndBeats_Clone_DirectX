@@ -34,6 +34,7 @@ namespace lu::JSAB
 	}
 	void Player::Update()
 	{
+		mCr->SetActive(false);
 		Vector3 moveDir = GetInputDir();
 		if (Input::GetKeyDown(eKeyCode::SPACE) && !mIsDashing)
 		{
@@ -44,8 +45,8 @@ namespace lu::JSAB
 
 		if (!mIsDashing)
 		{
-			mCr->SetState(eState::Active);
-			mDashOutline->SetState(eState::InActive);
+			//mCr->SetState(eState::Active);
+			//mDashOutline->SetState(eState::InActive);
 			mTr->SetPosition(mTr->GetPosition() + moveDir * mMoveSpeed * Time::DeltaTime());
 			MoveRotate(GetRotation(moveDir));
 			MoveScale(GetMoveScale(moveDir));
@@ -55,14 +56,13 @@ namespace lu::JSAB
 			mDashTimer += Time::DeltaTime();
 			if (mDashTimer > mDashDuration) mIsDashing = false;
 
-			mCr->SetState(eState::InActive);
-			mDashOutline->SetState(eState::Active);
+			//mCr->SetState(eState::InActive);
+			//mDashOutline->SetState(eState::Active);
 
 			mTr->SetPosition(mTr->GetPosition() + mDashDir * mDashSpeed * Time::DeltaTime());
 			MoveRotate(GetRotation(mDashDir));
 			mTr->SetScale(mDashScale);
 		}
-
 	}
 	void Player::MoveRotate(Quaternion rotation)
 	{
@@ -155,5 +155,40 @@ namespace lu::JSAB
 			radian = PI;
 
 		return Quaternion::CreateFromAxisAngle(Vector3::Forward, radian);
+	}
+
+#include "LMeshRenderer.h"
+#include "LAnimation.h"
+#include "LAnimator.h"
+#include "LResources.h"
+#include "LTexture.h"
+	void AnimationTester::Initialize()
+	{
+		mTr = GetOwner()->mTransform;
+		mMr = GetOwner()->GetComponent<lu::MeshRenderer>();
+		mCd = GetOwner()->AddComponent<Collider2D>();
+		lu::Animator* animator = GetOwner()->AddComponent<lu::Animator>();
+		lu::Animation* animation = animator->CreateAnimation(L"Default");
+
+		animation->AddPositionKey(0, { 0, 0, 0 });
+		animation->AddPositionKey(3, { 100, 100, 0 });
+		animation->AddRotationKey(1, Quaternion::Identity);
+		animation->AddRotationKey(4, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 1.5f));
+		animation->AddScaleKey(0, { 30, 30, 1 });
+		animation->AddScaleKey(4, { 100, 100, 1 });
+		animation->AddColliderActiveKey(0, false);
+		animation->AddColliderActiveKey(1, true);
+		animation->AddColliderCenterKey(2, { 0, 0 });
+		animation->AddColliderCenterKey(4, { -200, -200 });
+		animation->AddColliderSizeKey(1, { 1, 1 });
+		animation->AddColliderSizeKey(5, { 3, 3 });
+
+		animation->AddTextureKey(0, lu::Resources::Find<lu::graphics::Texture>(L"player1"));
+		animation->AddTextureKey(1, lu::Resources::Find<lu::graphics::Texture>(L"player24"));
+		animation->AddTextureKey(2, lu::Resources::Find<lu::graphics::Texture>(L"player43"));
+		animation->AddTextureKey(3, lu::Resources::Find<lu::graphics::Texture>(L"player64"));
+		animation->AddTextureKey(4, lu::Resources::Find<lu::graphics::Texture>(L"player1"));
+
+		animator->PlayAnimation(L"Default", true);
 	}
 }

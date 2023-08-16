@@ -52,5 +52,17 @@ namespace lu::JSAB
 		std::shared_ptr<lu::graphics::Texture> lifeTextures[4];
 		int mMaxHealth, mCurrHealth;
 	};
+	class lu::MeshRenderer;
+	class AnimationTester : public Script
+	{
+	public:
+		AnimationTester(){}
+		~AnimationTester(){}
+
+		void Initialize();
+		Transform* mTr;
+		Collider2D* mCd;
+		lu::MeshRenderer* mMr;
+	};
 }
 

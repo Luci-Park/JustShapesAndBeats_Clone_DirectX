@@ -73,8 +73,6 @@ namespace lu
 			mPosition = mParent->GetPosition() + mLocalPosition;
 		else
 			mPosition = mLocalPosition;
-
-		UpdateMatrix();
 	}
 
 	void Transform::CalculateWorldRotation()
@@ -89,8 +87,6 @@ namespace lu
 		}
 		else
 			mRotation = mLocalRotation;
-
-		UpdateMatrix();
 	}
 
 	void Transform::CalculateWorldScale()
@@ -103,14 +99,12 @@ namespace lu
 		}
 		else
 			mScale = mLocalScale;
-
-		UpdateMatrix();
 	}
 
 	void Transform::CalculateLocalPosition()
 	{
 		if (mParent && mParent != this)
-			mLocalPosition = mParent->GetPosition() - mPosition;
+			mLocalPosition = mPosition - mParent->GetPosition();
 		else
 			mLocalPosition = mPosition;
 
@@ -148,20 +142,18 @@ namespace lu
 	void Transform::UpdateMatrix()
 	{
 		world = Matrix::Identity;
+		CalculateWorldPosition();
+		CalculateWorldRotation();
+		CalculateWorldScale();
 
-		Matrix scale = Matrix::CreateScale(mLocalScale);
+		Matrix scale = Matrix::CreateScale(mScale);
 
-		Matrix rotation = Matrix::CreateFromQuaternion(mLocalRotation);
+		Matrix rotation = Matrix::CreateFromQuaternion(mRotation);
 
 		Matrix position;
-		position.Translation(mLocalPosition);
+		position.Translation(mPosition);
 
 		world = scale * rotation * position;
-
-		if (mParent && mParent != this)
-		{
-			world *= mParent->world;
-		}
 
 		mUp = Vector3::TransformNormal(Vector3::Up, rotation);
 		mForward = Vector3::TransformNormal(Vector3::Forward, rotation);
