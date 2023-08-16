@@ -42,27 +42,11 @@ namespace lu
 		{
 			TextureKey():value(nullptr){}
 			std::shared_ptr<graphics::Texture> value;
-
-			TextureKey& operator=(const TextureKey& other) {
-				value = other.value;
-			}
 		};
-		struct ColorKey : KeyFrame
-		{
-			Color value;
-		};
-		struct QuaternionKey : KeyFrame
-		{
-			Quaternion value;
-		};
-		struct Vector3Key : KeyFrame
-		{
-			Vector3 value;
-		};
-		struct Vector2Key : KeyFrame
-		{
-			Vector2 value;
-		};
+		struct ColorKey : KeyFrame { Color value; };
+		struct QuaternionKey : KeyFrame	{ Quaternion value;};
+		struct Vector3Key : KeyFrame { Vector3 value;};
+		struct Vector2Key : KeyFrame { Vector2 value;};
 		struct FloatKey : KeyFrame { float value; };
 		struct BoolKey : KeyFrame { bool value; };
 
@@ -81,6 +65,7 @@ namespace lu
 			std::vector<KeyFrame*> keyframes;
 			bool IsComplete() { return currIndex >= keyframes.size(); }
 			void Reset() { currIndex = 0; }
+			void SortKeyframes() { std::sort(keyframes.begin(), keyframes.end()); }
 		};
 	public:
 		Animation(GameObject* owner);
