@@ -35,8 +35,8 @@ namespace lu::JSAB
 
 		if (!mIsDashing)
 		{
-			mCr->SetState(eState::Active);
-			mDashOutline->SetState(eState::InActive);
+			//mCr->SetState(eState::Active);
+			//mDashOutline->SetState(eState::InActive);
 			mTr->SetPosition(mTr->GetPosition() + moveDir * mMoveSpeed * Time::DeltaTime());
 			MoveRotate(GetRotation(moveDir));
 			MoveScale(GetMoveScale(moveDir));
@@ -53,7 +53,6 @@ namespace lu::JSAB
 			MoveRotate(GetRotation(mDashDir));
 			mTr->SetScale(mDashScale);
 		}
-
 	}
 	void Player::ScriptTest()
 	{

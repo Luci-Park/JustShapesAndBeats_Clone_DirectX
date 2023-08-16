@@ -25,8 +25,46 @@ namespace lu
 			KeyFrame() {}
 			~KeyFrame() {}
 			KeyFrame(const KeyFrame& other)
-				: timestamp(other.timestamp){}
+				: timestamp(other.timestamp), type(other.type){
+				switch (type)
+				{
+				case eAnimationType::TrPosition:
+				case eAnimationType::TrScale:
+				case eAnimationType::TrLocalPosition:
+				case eAnimationType::TrLocalScale:
+					vector3Value = other.vector3Value;
+					break;
+				case eAnimationType::TrRotation:
+				case eAnimationType::TrLocalRotation:
+					quatValue = other.quatValue;
+					break;
+				case eAnimationType::CdCenter:
+				case eAnimationType::CdSize:
+					vector2Value = other.vector2Value;
+					break;
+				case eAnimationType::CdActive:
+				case eAnimationType::MrActive:
+					boolValue = other.boolValue;
+					break;
+				case eAnimationType::MrTexture:
+					textureValue = other.textureValue;
+					break;
+				case eAnimationType::MrColor:
+				case eAnimationType::MrTint:
+					colorValue = other.colorValue;
+					break;
+				case eAnimationType::MrInterpolation:
+					floatValue = other.floatValue;
+					break;
+				case eAnimationType::ScFunc:
+					//func = std::bind(other.func);
+					break;
+				default:
+					assert(false);
+				}
+			}
 			float timestamp;
+			eAnimationType type;
 			union
 			{
 				std::function<void()>func;
@@ -45,6 +83,44 @@ namespace lu
 			KeyFrame& operator=(const KeyFrame& other) {
 				if (this != &other) {
 					timestamp = other.timestamp;
+					type = other.type;
+					switch (type)
+					{
+					case eAnimationType::TrPosition:
+					case eAnimationType::TrScale:
+					case eAnimationType::TrLocalPosition:
+					case eAnimationType::TrLocalScale:
+						vector3Value = other.vector3Value;
+						break;
+					case eAnimationType::TrRotation:
+					case eAnimationType::TrLocalRotation:
+						quatValue = other.quatValue;
+						break;
+					case eAnimationType::CdCenter:
+					case eAnimationType::CdSize:
+						vector2Value = other.vector2Value;
+						break;
+					case eAnimationType::CdActive:
+					case eAnimationType::MrActive:
+						boolValue = other.boolValue;
+						break;
+					case eAnimationType::MrTexture:
+						textureValue = other.textureValue;
+						break;
+					case eAnimationType::MrColor:
+					case eAnimationType::MrTint:
+						colorValue = other.colorValue;
+						break;
+					case eAnimationType::MrInterpolation:
+						floatValue = other.floatValue;
+						break;
+					case eAnimationType::ScFunc:
+						func = other.func;
+						break;
+					default:
+						assert(false);
+					}
+
 				}
 				return *this;
 			}
@@ -55,6 +131,7 @@ namespace lu
 			int currIndex = 0;
 			std::vector<KeyFrame> keyframes;
 			bool IsComplete() { return currIndex >= keyframes.size(); }
+			void Reset() { currIndex = 0; }
 		};
 	public:
 		Animation(GameObject* owner);
@@ -68,7 +145,7 @@ namespace lu
 		void Reset();
 		bool IsComplete() { return mbComplete; }
 
-		void AddKeyFrame(eAnimationType type, KeyFrame keyFrame);
+		void AddKeyFrame(KeyFrame keyframe);
 	private:
 		void AnimTrPos(Timeline* timeline);
 		void AnimTrScale(Timeline* timeline);

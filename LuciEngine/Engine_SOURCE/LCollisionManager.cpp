@@ -39,7 +39,7 @@ namespace lu
 			if (lefts[i]->GetState() != GameObject::eState::Active) continue;
 
 			Collider2D* leftCol = lefts[i]->GetComponent<Collider2D>();
-			if (leftCol == nullptr)	continue;
+			if (leftCol == nullptr || leftCol->GetState() != Entity::eState::Active) continue;
 
 			for (int j = 0; j < rights.size(); ++j)
 			{

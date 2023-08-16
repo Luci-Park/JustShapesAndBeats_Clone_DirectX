@@ -40,9 +40,6 @@ namespace lu
 			Timeline* timeline = mTimelines[i];
 			if (timeline == nullptr) continue;
 			if (timeline->IsComplete()) continue;
-			if (timeline->keyframes[timeline->currIndex].timestamp < mTime)
-				timeline->currIndex++;
-			if (timeline->IsComplete()) continue;
 			mAnimFunctions[i](timeline);			
 		}
 		if (mTime > mDuration)
@@ -57,22 +54,29 @@ namespace lu
 	{
 		mTime = 0.0f;
 		mbComplete = false;
+		for (int i = 0; i < (UINT)eAnimationType::End; i++)
+		{
+			if(mTimelines[i])
+				mTimelines[i]->Reset();
+		}
 	}
-	void Animation::AddKeyFrame(eAnimationType type, KeyFrame keyFrame)
+	void Animation::AddKeyFrame(KeyFrame keyframe)
 	{
 		Timeline* timeline;
-		if (mTimelines[(UINT)type] == nullptr)
+		if (mTimelines[(UINT)keyframe.type] == nullptr)
 		{
 			timeline = new Timeline();
-			mTimelines[(UINT)type] = std::move(timeline);
+			mTimelines[(UINT)keyframe.type] = std::move(timeline);
 		}
-		else timeline = mTimelines[(UINT)type];
-		if (keyFrame.timestamp > mDuration) mDuration = keyFrame.timestamp;
-		timeline->keyframes.push_back(keyFrame);
+		else timeline = mTimelines[(UINT)keyframe.type];
+		if (keyframe.timestamp > mDuration) mDuration = keyframe.timestamp;
+		timeline->keyframes.push_back(keyframe);
 		std::sort(timeline->keyframes.begin(), timeline->keyframes.end());
 	}
 	void Animation::AnimTrPos(Timeline* timeline)
 	{
+		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
 			KeyFrame* keyframe = &timeline->keyframes[0];
@@ -90,6 +94,8 @@ namespace lu
 	}
 	void Animation::AnimTrScale(Timeline* timeline)
 	{
+		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
 			KeyFrame* keyframe = &timeline->keyframes[0];
@@ -107,6 +113,8 @@ namespace lu
 	}
 	void Animation::AnimTrRot(Timeline* timeline)
 	{
+		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
 			KeyFrame* keyframe = &timeline->keyframes[0];
@@ -124,6 +132,8 @@ namespace lu
 	}
 	void Animation::AnimTrLocPos(Timeline* timeline)
 	{
+		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
 			KeyFrame* keyframe = &timeline->keyframes[0];
@@ -141,6 +151,8 @@ namespace lu
 	}
 	void Animation::AnimTrLocScale(Timeline* timeline)
 	{
+		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
 			KeyFrame* keyframe = &timeline->keyframes[0];
@@ -158,6 +170,8 @@ namespace lu
 	}
 	void Animation::AnimTrLocRot(Timeline* timeline)
 	{
+		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
 			KeyFrame* keyframe = &timeline->keyframes[0];
@@ -175,6 +189,8 @@ namespace lu
 	}
 	void Animation::AnimCdCenter(Timeline* timeline)
 	{
+		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
 			KeyFrame* keyframe = &timeline->keyframes[0];
@@ -192,6 +208,8 @@ namespace lu
 	}
 	void Animation::AnimCdSize(Timeline* timeline)
 	{
+		if (timeline->keyframes[timeline->currIndex].timestamp < mTime) timeline->currIndex++;
+		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
 			KeyFrame* keyframe = &timeline->keyframes[0];
@@ -209,11 +227,14 @@ namespace lu
 	}
 	void Animation::AnimCdActive(Timeline* timeline)
 	{
-		KeyFrame* keyframe = &timeline->keyframes[timeline->currIndex];
-		if (mTime >= keyframe->timestamp)
+		if (timeline->keyframes[timeline->currIndex].timestamp < mTime)
 		{
-			mCd->SetActive(keyframe->boolValue);
-			timeline->currIndex++;
+			KeyFrame* keyframe = &timeline->keyframes[timeline->currIndex];
+			if (mTime >= keyframe->timestamp)
+			{
+				mCd->SetActive(keyframe->boolValue);
+				timeline->currIndex++;
+			}
 		}
 	}
 	void Animation::AnimMrText(Timeline* timeline)

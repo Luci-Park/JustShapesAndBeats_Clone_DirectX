@@ -86,24 +86,28 @@ namespace lu::JSAB
 		Animation* animation = anim->CreateAnimation(L"Dash");
 		{
 			lu::Animation::KeyFrame keyFrame;
+			keyFrame.type = Animation::eAnimationType::CdSize;
 			keyFrame.timestamp = 0; keyFrame.vector2Value = Vector2{ 1, 1 };
-			animation->AddKeyFrame(Animation::eAnimationType::CdSize, keyFrame);
+			animation->AddKeyFrame(keyFrame);
 
 			keyFrame.timestamp = 3; keyFrame.vector2Value = Vector2{ 4, 4 };
-			animation->AddKeyFrame(Animation::eAnimationType::CdSize, keyFrame);
+			animation->AddKeyFrame(keyFrame);
 
+			keyFrame.type = Animation::eAnimationType::CdCenter;
 			keyFrame.timestamp = 0; keyFrame.vector2Value = Vector2{ 0, 0 };
-			animation->AddKeyFrame(Animation::eAnimationType::CdCenter, keyFrame);
+			animation->AddKeyFrame(keyFrame);
 
 			keyFrame.timestamp = 3; keyFrame.vector2Value = Vector2{ 400, 400 };
-			animation->AddKeyFrame(Animation::eAnimationType::CdCenter, keyFrame);
+			animation->AddKeyFrame(keyFrame);
 
-			keyFrame.timestamp = 3.1; keyFrame.boolValue = false;
-			animation->AddKeyFrame(Animation::eAnimationType::CdActive, keyFrame);
+			keyFrame.type = Animation::eAnimationType::CdActive;
+			keyFrame.timestamp = 2.1; keyFrame.boolValue = false;
+			animation->AddKeyFrame(keyFrame);
 			keyFrame.timestamp = 4; keyFrame.boolValue = true;
-			animation->AddKeyFrame(Animation::eAnimationType::CdActive, keyFrame);
+			animation->AddKeyFrame(keyFrame);
 
-			keyFrame.timestamp = 3.2; keyFrame.func = [this]() {this->GetComponent<Player>()->ScriptTest(); };
+			keyFrame.type = Animation::eAnimationType::ScFunc;
+			//keyFrame.timestamp = 3.2; keyFrame.func = std::bind(&Player::ScriptTest, GetComponent<Player>());
 		}
 
 		anim->PlayAnimation(L"Dash", true);

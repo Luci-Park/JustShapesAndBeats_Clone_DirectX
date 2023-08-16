@@ -86,6 +86,8 @@ namespace lu
 		{
 			children[i]->GetOwner()->SetState(state);
 		}
+		for (int i = 0; i < mComponents.size(); i++)
+			mComponents[i]->SetState(state);
 	}
 
 }
