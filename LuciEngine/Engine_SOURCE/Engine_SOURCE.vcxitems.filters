@@ -192,7 +192,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LAnimation.h">
       <Filter>Resource\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LComputeShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp">
@@ -276,7 +275,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LAnimation.cpp">
       <Filter>Resource\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LComputeShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)LMath.inl">

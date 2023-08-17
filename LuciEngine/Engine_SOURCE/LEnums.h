@@ -28,7 +28,6 @@ namespace lu::enums
 	{
 		Texture,
 		Shader,
-		ComputeShader,
 		Material,
 		Mesh,
 		Animation,
