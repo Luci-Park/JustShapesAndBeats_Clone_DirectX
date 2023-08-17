@@ -25,13 +25,13 @@ namespace lu::graphics
 
 		size_t GetWidth() { return mSize.x; }
 		size_t GetHeight() { return mSize.y; }
-		Vector3 GetSize() { return mSize; }
+		math::Vector3 GetSize() { return mSize; }
 		double GetRatioHeight(float width) { return width / mRatio; }
 		double GetRatioWidth(float height) { return height * mRatio; }
 
 	private:
 		ScratchImage mImage; // original image
-		Vector3 mSize;
+		math::Vector3 mSize;
 		double mRatio;
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> mTexture;
 		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> mSRV;

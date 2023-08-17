@@ -1,13 +1,30 @@
+
 #include "LAnimation.h"
+#include "LTime.h"
+#include "LGameObject.h"
+#include "LTransform.h"
+#include "LCollider2D.h"
+#include "LMeshRenderer.h"
 
 namespace lu
 {
-	Animation::Animation()
+	Animation::Animation(GameObject* owner)
 		:Resource(enums::eResourceType::Animation)
 	{
+		mTr = owner->mTransform;
+		mCd = owner->GetComponent<Collider2D>();
+		mMr = owner->GetComponent<MeshRenderer>();
+		mTimelines = std::vector<Timeline*>((UINT)eAnimationType::End);
+		SetAnimationFunctions();
 	}
 	Animation::~Animation()
 	{
+		for (int i = 0; i < mTimelines.size(); i++)
+			if (mTimelines[i])
+			{
+				delete mTimelines[i];
+				mTimelines[i] = nullptr;
+			}
 	}
 	void Animation::Update()
 	{

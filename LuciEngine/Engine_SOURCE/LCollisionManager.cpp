@@ -36,7 +36,7 @@ namespace lu
 
 		for (int i = 0; i < lefts.size(); ++i)
 		{
-			if (lefts[i]->GetState() != GameObject::eState::Active) continue;
+			if (lefts[i]->GetState() != Entity::eState::Active) continue;
 
 			Collider2D* leftCol = lefts[i]->GetComponent<Collider2D>();
 			if (leftCol == nullptr || leftCol->GetState() != Entity::eState::Active) continue;
@@ -46,7 +46,8 @@ namespace lu
 				if (rights[i]->GetState() != GameObject::eState::Active) continue;
 
 				Collider2D* rightCol = rights[i]->GetComponent<Collider2D>();
-				if (rightCol == nullptr || leftCol == rightCol) continue;
+				if (rightCol == nullptr || rightCol->GetState() != Entity::eState::Active
+					|| leftCol == rightCol) continue;
 
 				ColliderCollision(leftCol, rightCol);
 			}

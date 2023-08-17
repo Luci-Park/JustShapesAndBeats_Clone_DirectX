@@ -1,5 +1,6 @@
 #pragma once
 #include "LResource.h"
+#include "LTexture.h"
 namespace lu
 {
 	using namespace lu::math;
@@ -7,6 +8,7 @@ namespace lu
 	class Transform;
 	class Collider2D;
 	class Animator;
+	class MeshRenderer;
 	class Animation : public Resource
 	{
 	public:
@@ -112,8 +114,14 @@ namespace lu
 		void AnimScFunc(Timeline* timeline);
 		void SetAnimationFunctions();
 	private:
-		Animator* mAnimator;
+		std::vector<Timeline*>mTimelines;
+		std::vector < std::function<void(Timeline*)>> mAnimFunctions;
+
+		Transform* mTr;
+		Collider2D* mCd;
+		MeshRenderer* mMr;
 		float mTime;
+		float mDuration;
 		bool mbComplete;
 	};
 }

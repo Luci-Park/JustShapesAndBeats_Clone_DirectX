@@ -14,6 +14,7 @@ namespace lu
 		virtual void LateUpdate();
 		virtual void Render();
 
+		Animation* CreateAnimation(const std::wstring& name);
 		Animation* FindAnimation(const std::wstring& name);
 		void PlayAnimation(const std::wstring& name, bool loop);
 	private:

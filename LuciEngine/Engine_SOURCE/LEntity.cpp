@@ -15,4 +15,9 @@ namespace lu
 	{
 	}
 
+	void Entity::SetActive(bool active)
+	{
+		SetState(active ? eState::Active : eState::InActive);
+	}
+
 }
