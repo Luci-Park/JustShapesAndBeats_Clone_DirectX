@@ -7,6 +7,12 @@
     <Filter Include="VS">
       <UniqueIdentifier>{4a269590-3d52-47b7-8f6a-c7b3901c120a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CS">
+      <UniqueIdentifier>{0cb36d6c-c9cc-46a8-bf7c-f8d6dca26be7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GS">
+      <UniqueIdentifier>{8f3a5382-1def-4796-b43a-44230dcc3743}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="$(MSBuildThisFileDirectory)TriangleVS.hlsl">
@@ -32,6 +38,9 @@
     </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)GridVS.hlsl">
       <Filter>VS</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)ParticleCS.hlsl">
+      <Filter>CS</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
