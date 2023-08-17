@@ -94,9 +94,6 @@
     <Filter Include="Resource\Animation">
       <UniqueIdentifier>{4c96bfe5-729d-45a0-87e5-6783b3c48369}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics\StructedBuffer">
-      <UniqueIdentifier>{b597123f-2610-44c9-bb2b-13bd2cadb844}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -195,12 +192,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LAnimation.h">
       <Filter>Resource\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LStructedBuffer.h">
-      <Filter>Graphics\StructedBuffer</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LComputeShader.h">
-      <Filter>Resource\Shader</Filter>
-    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LComputeShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp">
@@ -284,12 +276,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LAnimation.cpp">
       <Filter>Resource\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LStructedBuffer.cpp">
-      <Filter>Graphics\StructedBuffer</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LComputeShader.cpp">
-      <Filter>Resource\Shader</Filter>
-    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LComputeShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)LMath.inl">

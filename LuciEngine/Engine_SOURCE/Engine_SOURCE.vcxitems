@@ -41,7 +41,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LSceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LShader.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)LStructedBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LTransform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LuciEngine.h" />
@@ -75,7 +74,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LSceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LShader.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)LStructedBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LTransform.cpp" />
