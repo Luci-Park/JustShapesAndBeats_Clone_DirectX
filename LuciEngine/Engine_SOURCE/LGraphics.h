@@ -81,16 +81,6 @@ namespace lu::graphics
 		End,
 	};
 
-	enum class eViewType //리소스 뷰 = vertiex, pixel, constant, stream 을 제외한 연결지점은 resource view를 통해서 연결한다.
-	{
-		None,
-		RTV, //Render Target View 
-		DSV, //Depth Stencil View
-		SRV, //Shader Resource View = 셰이더 안에서 읽고 사용할 수는 있지만 기록하지 못하는 자료. 모든 셰이더 단계에서 사용 가능
-		UAV, // Unordered Access View  = 픽셀 셰이더, 계산 셰이더, scatter 연산 가능.
-		End
-	};
-
 	struct GpuBuffer
 	{
 		Microsoft::WRL::ComPtr<ID3D11Buffer> buffer;
