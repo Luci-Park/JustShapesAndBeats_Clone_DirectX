@@ -34,7 +34,6 @@ namespace lu::JSAB
 	}
 	void Player::Update()
 	{
-		mCr->SetActive(false);
 		Vector3 moveDir = GetInputDir();
 		if (Input::GetKeyDown(eKeyCode::SPACE) && !mIsDashing)
 		{
@@ -45,8 +44,8 @@ namespace lu::JSAB
 
 		if (!mIsDashing)
 		{
-			//mCr->SetState(eState::Active);
-			//mDashOutline->SetState(eState::InActive);
+			mCr->SetState(eState::Active);
+			mDashOutline->SetState(eState::InActive);
 			mTr->SetPosition(mTr->GetPosition() + moveDir * mMoveSpeed * Time::DeltaTime());
 			MoveRotate(GetRotation(moveDir));
 			MoveScale(GetMoveScale(moveDir));
@@ -56,8 +55,8 @@ namespace lu::JSAB
 			mDashTimer += Time::DeltaTime();
 			if (mDashTimer > mDashDuration) mIsDashing = false;
 
-			//mCr->SetState(eState::InActive);
-			//mDashOutline->SetState(eState::Active);
+			mCr->SetState(eState::InActive);
+			mDashOutline->SetState(eState::Active);
 
 			mTr->SetPosition(mTr->GetPosition() + mDashDir * mDashSpeed * Time::DeltaTime());
 			MoveRotate(GetRotation(mDashDir));

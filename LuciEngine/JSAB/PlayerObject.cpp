@@ -4,7 +4,7 @@
 #include "LSceneManager.h"
 #include "Player.h"
 #include "LObject.h"
-
+#include "LParticleSystem.h"
 namespace lu::JSAB
 {
 	PlayerObject::PlayerObject()
@@ -18,7 +18,6 @@ namespace lu::JSAB
 		SetName(L"Player");
 		std::shared_ptr<Material> mat = CreatePlayerMat();
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
-		mr->SetActive(false);
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(mat);
 		
@@ -36,10 +35,17 @@ namespace lu::JSAB
 			outlinemr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			outlinemr->SetMaterial(outlinemat);
 			outlinemr->SetColor(Color::white);
-			//outlinemr->UseColor(true);
-			//dashoutline->SetState(eState::InActive);
+			outlinemr->UseColor(true);
+			dashoutline->SetState(eState::InActive);
 			script->SetDashOutline(dashoutline);
-			dashoutline->AddComponent<AnimationTester>();
+		}
+		{
+			GameObject* particle = object::Instantiate<GameObject>(eLayerType::Player);
+			particle->SetName(L"Particle");
+			ParticleSystem* ps = particle->AddComponent<ParticleSystem>();
+			particle->mTransform->SetPosition({ 0.0f, 0.0f, 1.0f });
+			particle->mTransform->SetScale({ 0.2, 0.2, 0.2 });
+
 		}
 	}
 	std::shared_ptr<Material> PlayerObject::CreatePlayerMat()
