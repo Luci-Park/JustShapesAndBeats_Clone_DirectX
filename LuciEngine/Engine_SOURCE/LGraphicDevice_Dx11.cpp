@@ -8,23 +8,8 @@ namespace lu::graphics
 
 	GraphicDevice_Dx11::GraphicDevice_Dx11()
 	{
-		/*
-		* 순서
-		* 1. graphic device, context 생성
-		* 2. 화면 렌더링 도와주는 swapchain 생성
-		* 3. rendertarget, view 생성
-		* 4. 깊이 버퍼, 깊이 버퍼 뷰 생성
-		* 5. 렌더 타겟 초기화(화면 지우기)
-		* 6. present 함수로 렌더 타겟에 있는 텍스쳐를 모니터에 그려준다.
-		*/
-
-		//Device, Context 생성
 		HWND hWnd = application.GetHwnd();
-		UINT deviceFlag = D3D11_CREATE_DEVICE_DEBUG;//이게 있어야 디버깅 가능.
-
-		//feature level = GPU 기능의 level
-		// 이 프로그램을 사용하기 위해서는 최소한 이 정도의 기능을 가지고 있어야 한다.
-		// Direct3D를 초기화 할 때 응용프로그램은 지정한 feature level까지 지원을 하는지 확인하고 그렇지 않다면 장치 초기화를 실패하게 한다.
+		UINT deviceFlag = D3D11_CREATE_DEVICE_DEBUG;
 		D3D_FEATURE_LEVEL featureLevel = (D3D_FEATURE_LEVEL)0;
 
 		D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr
@@ -33,7 +18,6 @@ namespace lu::graphics
 			, mDevice.GetAddressOf(), &featureLevel
 			, mContext.GetAddressOf());
 
-		//SwapChain
 		DXGI_SWAP_CHAIN_DESC swapChainDesc = {};
 		swapChainDesc.BufferCount = 2;
 		swapChainDesc.BufferDesc.Width = application.GetWidth();
@@ -41,31 +25,34 @@ namespace lu::graphics
 
 		if (!CreateSwapChain(&swapChainDesc, hWnd))
 			return;
-		
+
 		mRenderTarget = std::make_shared<Texture>();
 		mDepthStencil = std::make_shared<Texture>();
 
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> renderTarget = nullptr;
-
-		//get rendertarget by swapchain
-		if(FAILED(mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)renderTarget.GetAddressOf())))
+		if (FAILED(mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D)
+			, (void**)renderTarget.GetAddressOf())))
 			return;
+		mRenderTarget->SetTexture(renderTarget);
 
 		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> renderTargetView = nullptr;
-		//Create RenderTarget View
-		CreateRenderTargetView((ID3D11Resource*)renderTargetView.Get(), nullptr, renderTargetView.GetAddressOf());
+		mDevice->CreateRenderTargetView((ID3D11Resource*)mRenderTarget->GetTexture().Get()
+			, nullptr, renderTargetView.GetAddressOf());
 		mRenderTarget->SetRTV(renderTargetView);
 
 		D3D11_TEXTURE2D_DESC depthStencilDesc = {};
 		depthStencilDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL;
 		depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
 		depthStencilDesc.CPUAccessFlags = 0;
+
 		depthStencilDesc.Format = DXGI_FORMAT::DXGI_FORMAT_D24_UNORM_S8_UINT;
 		depthStencilDesc.Width = application.GetWidth();
 		depthStencilDesc.Height = application.GetHeight();
 		depthStencilDesc.ArraySize = 1;
+
 		depthStencilDesc.SampleDesc.Count = 1;
 		depthStencilDesc.SampleDesc.Quality = 0;
+
 		depthStencilDesc.MipLevels = 0;
 		depthStencilDesc.MiscFlags = 0;
 
@@ -78,10 +65,9 @@ namespace lu::graphics
 		if (!CreateDepthStencilView(depthStencilBuffer.Get(), nullptr, mDepthStencilView.GetAddressOf()))
 			return;
 		mDepthStencil->SetDSV(mDepthStencilView);
-		
+
 		RECT winRect = {};
 		GetClientRect(hWnd, &winRect);
-
 		mViewPort =
 		{
 			0.0f, 0.0f
@@ -91,7 +77,7 @@ namespace lu::graphics
 		};
 
 		BindViewPort(&mViewPort);
-		mContext->OMSetRenderTargets(1, mRenderTarget->GetRTV().GetAddressOf(), mDepthStencilView.Get());
+		mContext->OMSetRenderTargets(1, mRenderTarget->GetRTV().GetAddressOf(), mDepthStencil->GetDSV().Get());
 	}
 
 	GraphicDevice_Dx11::~GraphicDevice_Dx11()
