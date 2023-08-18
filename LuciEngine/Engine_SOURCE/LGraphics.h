@@ -12,6 +12,8 @@
 #define CBSLOT_TRANSFORM		0
 #define CBSLOT_GRID				1
 #define CBSLOT_MESHRENDERER		2
+#define CBSLOT_PARTICLESYSTEM	3
+#define	CBSLOT_NOISE			4
 namespace lu::graphics
 {
 	enum class eShaderStage
@@ -117,5 +119,21 @@ namespace lu::graphics
 		float radius;
 		float duration;
 		float time;
+	};
+
+	struct Particle
+	{
+		math::Vector4 position;
+		math::Vector4 direction;
+
+		float endTime;
+		float time;
+		float speed;
+		UINT active;
+	};
+
+	struct ParticleShared
+	{
+		UINT sharedActiveCount;
 	};
 }

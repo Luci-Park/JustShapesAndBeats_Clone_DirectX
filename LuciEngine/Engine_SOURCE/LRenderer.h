@@ -37,6 +37,19 @@ namespace lu::renderer
 		float interpolation; // 0 uses original, 1 uses Color;
 	};
 
+	CBUFFER(ParticleSystemCB, CBSLOT_PARTICLESYSTEM)
+	{
+		UINT elementCount;
+		float elapsedTime;
+		float deltaTime;
+		int padd2;
+	};
+
+	CBUFFER(NoiseCB, CBSLOT_NOISE)
+	{
+		Vector4 size;
+	};
+
 	extern ConstantBuffer* constantBuffer[(UINT)eCBType::End];
 	
 	extern Microsoft::WRL::ComPtr<ID3D11SamplerState>samplerStates[];
