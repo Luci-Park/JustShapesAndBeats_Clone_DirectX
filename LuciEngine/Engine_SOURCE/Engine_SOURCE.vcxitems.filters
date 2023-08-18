@@ -198,6 +198,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LStructedBuffer.h">
       <Filter>Graphics\StructedBuffer</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LComputeShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LParticleShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LParticleSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp">
@@ -284,6 +287,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LStructedBuffer.cpp">
       <Filter>Graphics\StructedBuffer</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LComputeShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LParticleShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LParticleSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)LMath.inl">
