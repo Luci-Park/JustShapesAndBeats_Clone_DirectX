@@ -48,6 +48,8 @@ namespace lu
 	}
 	ParticleSystem::~ParticleSystem()
 	{
+		delete mSharedBuffer;
+		delete mBuffer;
 	}
 	void ParticleSystem::Initialize()
 	{
