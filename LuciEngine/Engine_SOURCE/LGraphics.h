@@ -81,6 +81,16 @@ namespace lu::graphics
 		End,
 	};
 
+	enum class eResourceViewType
+	{
+		None,
+		RTV, //render target view = provides write access to a texture or a portion of a texture. => specify the final output. used for color buffers
+		DSV, // depth stencil view = provides read-write access to depth and stencil buffers of a texture. stores information about the depths of each pixel in the scene
+		SRV, // shader resource view = a readonly access to a texture, can be used to access texture data for calcualations, sampling, and other operations. color maps, normal maps, height maps etc.
+		UAV,// unordered access view = provides a read-write access to a texture or a portion of a texture within a compute shader. used for general-purpose computing tasks. good for compute shaders.
+		End
+	};
+
 	struct GpuBuffer
 	{
 		Microsoft::WRL::ComPtr<ID3D11Buffer> buffer;
