@@ -164,6 +164,9 @@ namespace lu::renderer
 		mesh->CreateIndexBuffer(indicies.data(), indicies.size());
 		Resources::Insert(L"PointMesh", mesh);
 
+		verticies.clear();
+		indicies.clear();
+
 		//RECT
 		verticies.resize(4);
 		verticies[0].pos = Vector3(-0.5f, 0.5f, 0.0f);
