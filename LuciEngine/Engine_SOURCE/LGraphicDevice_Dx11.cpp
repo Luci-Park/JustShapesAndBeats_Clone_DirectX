@@ -47,8 +47,7 @@ namespace lu::graphics
 		, (void**)mRenderTarget.GetAddressOf())))
 			return;
 		//Create RenderTarget View
-		mDevice->CreateRenderTargetView((ID3D11Resource*)mRenderTarget.Get()
-			, nullptr, mRenderTargetView.GetAddressOf());
+		CreateRenderTargetView((ID3D11Resource*)mRenderTarget.Get(), nullptr, mRenderTargetView.GetAddressOf());
 
 		D3D11_TEXTURE2D_DESC depthStencilDesc = {};
 		depthStencilDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL;
@@ -64,7 +63,7 @@ namespace lu::graphics
 		depthStencilDesc.MiscFlags = 0;
 
 		D3D11_SUBRESOURCE_DATA data;
-		if (!CreateTexture(&depthStencilDesc, &data))
+		if (!CreateTexture2D(&depthStencilDesc, &data))
 			return;
 		
 		RECT winRect = {};
@@ -158,7 +157,12 @@ namespace lu::graphics
 		mContext->OMSetBlendState(pBlendState, nullptr, 0xffffffff);
 	}
 
-	bool GraphicDevice_Dx11::CreateTexture(const D3D11_TEXTURE2D_DESC* desc, void* data)
+	void GraphicDevice_Dx11::CopyResource(ID3D11Resource* pDstResource, ID3D11Resource* pSrcResource)
+	{
+		mContext->CopyResource(pDstResource, pSrcResource);
+	}
+
+	bool GraphicDevice_Dx11::CreateTexture2D(const D3D11_TEXTURE2D_DESC* desc, void* data)
 	{
 		D3D11_TEXTURE2D_DESC dxgiDesc = {};
 		dxgiDesc.BindFlags = desc->BindFlags;
@@ -178,8 +182,8 @@ namespace lu::graphics
 
 		if (FAILED(mDevice->CreateTexture2D(&dxgiDesc, nullptr, mDepthStencilBuffer.ReleaseAndGetAddressOf())))
 			return false;
-
-		if (FAILED(mDevice->CreateDepthStencilView(mDepthStencilBuffer.Get(), nullptr, mDepthStencilView.GetAddressOf())))
+		
+		if(!CreateDepthStencilView(mDepthStencilBuffer.Get(), nullptr, mDepthStencilView.GetAddressOf()))
 			return false;
 
 		return true;
@@ -224,10 +228,26 @@ namespace lu::graphics
 		return true;
 	}
 
+	bool GraphicDevice_Dx11::CreateGeometryShader(const void* pShaderBytecode, SIZE_T BytecodeLength, ID3D11GeometryShader** ppGeometryShader)
+	{
+		if (FAILED(mDevice->CreateGeometryShader(pShaderBytecode, BytecodeLength, nullptr, ppGeometryShader)))
+			return false;
+
+		return true;
+	}
+
 	bool GraphicDevice_Dx11::CreatePixelShader(const void* pShaderByteCode, SIZE_T bytecodeLength, ID3D11PixelShader** ppPixelShader)
 	{
 		if(FAILED(mDevice->CreatePixelShader(pShaderByteCode, bytecodeLength, nullptr, ppPixelShader)))
 			return false;
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateComputeShader(const void* pShaderBytecode, SIZE_T BytecodeLength, ID3D11ComputeShader** ppComputeShader)
+	{
+		if (FAILED(mDevice->CreateComputeShader(pShaderBytecode, BytecodeLength, nullptr, ppComputeShader)))
+			return false;
+
 		return true;
 	}
 
@@ -259,6 +279,38 @@ namespace lu::graphics
 		return true;
 	}
 
+	bool GraphicDevice_Dx11::CreateDepthStencilView(ID3D11Resource* pResource, const D3D11_DEPTH_STENCIL_VIEW_DESC* pDesc, ID3D11DepthStencilView** ppDepthStencilView)
+	{
+		if (FAILED(mDevice->CreateDepthStencilView(pResource, pDesc, ppDepthStencilView)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateShaderResourceView(ID3D11Resource* pResource, const D3D11_SHADER_RESOURCE_VIEW_DESC* pDesc, ID3D11ShaderResourceView** ppSRView)
+	{
+		if (FAILED(mDevice->CreateShaderResourceView(pResource, pDesc, ppSRView)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateRenderTargetView(ID3D11Resource* pResource, const D3D11_RENDER_TARGET_VIEW_DESC* pDesc, ID3D11RenderTargetView** ppRTView)
+	{
+		if (FAILED(mDevice->CreateRenderTargetView(pResource, pDesc, ppRTView)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateUnordedAccessView(ID3D11Resource* pResource, const D3D11_UNORDERED_ACCESS_VIEW_DESC* pDesc, ID3D11UnorderedAccessView** ppUAView)
+	{
+		if (FAILED(mDevice->CreateUnorderedAccessView(pResource, pDesc, ppUAView)))
+			return false;
+
+		return true;
+	}
+
 	void GraphicDevice_Dx11::BindInputLayout(ID3D11InputLayout* pInputLayout)
 	{
 		mContext->IASetInputLayout(pInputLayout);
@@ -282,6 +334,21 @@ namespace lu::graphics
 	void GraphicDevice_Dx11::BindVertexShader(ID3D11VertexShader* pVertexShader)
 	{
 		mContext->VSSetShader(pVertexShader, 0, 0);
+	}
+
+	void GraphicDevice_Dx11::BindHullShader(ID3D11HullShader* pHullShader)
+	{
+		mContext->HSSetShader(pHullShader, 0, 0);
+	}
+
+	void GraphicDevice_Dx11::BindDomainShader(ID3D11DomainShader* pDomainShader)
+	{
+		mContext->DSSetShader(pDomainShader, 0, 0);
+	}
+
+	void GraphicDevice_Dx11::BindGeometryShader(ID3D11GeometryShader* pGeometryShader)
+	{
+		mContext->GSSetShader(pGeometryShader, 0, 0);
 	}
 
 	void GraphicDevice_Dx11::BindSampler(eShaderStage stage, UINT startSlot, ID3D11SamplerState** ppSamplers)
@@ -316,6 +383,16 @@ namespace lu::graphics
 	void GraphicDevice_Dx11::BindPixelShader(ID3D11PixelShader* pPixelShader)
 	{
 		mContext->PSSetShader(pPixelShader, 0, 0);
+	}
+
+	void GraphicDevice_Dx11::BindComputeShader(ID3D11ComputeShader* pComputeShader)
+	{
+		mContext->CSSetShader(pComputeShader, 0, 0);
+	}
+
+	void GraphicDevice_Dx11::Dispatch(UINT ThreadGroupCountX, UINT ThreadGroupCountY, UINT ThreadGroupCountZ)
+	{
+		mContext->Dispatch(ThreadGroupCountX, ThreadGroupCountY, ThreadGroupCountZ);
 	}
 
 	void GraphicDevice_Dx11::SetConstantBuffer(ID3D11Buffer* buffer, void* data, UINT size)
@@ -365,6 +442,14 @@ namespace lu::graphics
 		mContext->CSSetConstantBuffers((UINT)type, 1, &buffer);
 	}
 
+	void GraphicDevice_Dx11::BindBuffer(ID3D11Buffer* buffer, void* data, UINT size)
+	{
+		D3D11_MAPPED_SUBRESOURCE sub = {};
+		mContext->Map(buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &sub);
+		memcpy(sub.pData, data, size);
+		mContext->Unmap(buffer, 0);
+	}
+
 	void GraphicDevice_Dx11::BindShaderResource(eShaderStage stage, UINT startSlot, ID3D11ShaderResourceView** ppSRV)
 	{
 		switch (stage)
@@ -397,6 +482,11 @@ namespace lu::graphics
 		default:
 			break;
 		}
+	}
+
+	void GraphicDevice_Dx11::BindUnorderedAccess(UINT slot, ID3D11UnorderedAccessView** ppUnorderedAccessViews, const UINT* pUAVInitialCounts)
+	{
+		mContext->CSSetUnorderedAccessViews(slot, 1, ppUnorderedAccessViews, pUAVInitialCounts);
 	}
 
 	void GraphicDevice_Dx11::DrawIndexed(UINT IndexCount, UINT StartIndexLocation, INT BaseVertexLocation)
