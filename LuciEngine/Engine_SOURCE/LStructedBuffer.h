@@ -17,6 +17,7 @@ namespace lu::graphics
 		void Clear();
 
 		UINT GetSize() { return mSize; }
+		UINT GetStride() { return mStride; }
 	private:
 		Microsoft::WRL::ComPtr<ID3D11Buffer> mReadBuffer;
 		Microsoft::WRL::ComPtr<ID3D11Buffer> mWriteBuffer;

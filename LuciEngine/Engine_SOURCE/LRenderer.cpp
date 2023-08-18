@@ -2,6 +2,7 @@
 #include "LResources.h"
 #include "LTexture.h"
 #include "LMaterial.h"
+#include "LParticleShader.h"
 
 namespace lu::renderer
 {
@@ -52,6 +53,9 @@ namespace lu::renderer
 		GetDevice()->CreateInputLayout(arrLayout, 3, shader->GetVSCode(), shader->GetInputLayoutAddressOf());
 
 		shader = Resources::Find<Shader>(L"DebugShader");
+		GetDevice()->CreateInputLayout(arrLayout, 3, shader->GetVSCode(), shader->GetInputLayoutAddressOf());
+
+		shader = Resources::Find<Shader>(L"ParticleShader");
 		GetDevice()->CreateInputLayout(arrLayout, 3, shader->GetVSCode(), shader->GetInputLayoutAddressOf());
 #pragma endregion
 
@@ -148,58 +152,67 @@ namespace lu::renderer
 	}
 	void LoadMesh()
 	{
-		std::vector<Vertex> vertexes = {};
-		std::vector<UINT> indexes = {};
+		std::vector<Vertex> verticies = {};
+		std::vector<UINT> indicies = {};
+
+		Vertex v = {};
+		v.pos = Vector3(0.0f, 0.0f, 0.0f);
+		verticies.push_back(v);
+		indicies.push_back(0);
+		std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
+		mesh->CreateVertexBuffer(verticies.data(), verticies.size());
+		mesh->CreateIndexBuffer(indicies.data(), indicies.size());
+		Resources::Insert(L"PointMesh", mesh);
 
 		//RECT
-		vertexes.resize(4);
-		vertexes[0].pos = Vector3(-0.5f, 0.5f, 0.0f);
-		vertexes[0].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-		vertexes[0].uv = Vector2(0.0f, 0.0f);
+		verticies.resize(4);
+		verticies[0].pos = Vector3(-0.5f, 0.5f, 0.0f);
+		verticies[0].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+		verticies[0].uv = Vector2(0.0f, 0.0f);
 
-		vertexes[1].pos = Vector3(0.5f, 0.5f, 0.0f);
-		vertexes[1].color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
-		vertexes[1].uv = Vector2(1.0f, 0.0f);
+		verticies[1].pos = Vector3(0.5f, 0.5f, 0.0f);
+		verticies[1].color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+		verticies[1].uv = Vector2(1.0f, 0.0f);
 
-		vertexes[2].pos = Vector3(0.5f, -0.5f, 0.0f);
-		vertexes[2].color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
-		vertexes[2].uv = Vector2(1.0f, 1.0f);
+		verticies[2].pos = Vector3(0.5f, -0.5f, 0.0f);
+		verticies[2].color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+		verticies[2].uv = Vector2(1.0f, 1.0f);
 
-		vertexes[3].pos = Vector3(-0.5f, -0.5f, 0.0f);
-		vertexes[3].color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
-		vertexes[3].uv = Vector2(0.0f, 1.0f);
+		verticies[3].pos = Vector3(-0.5f, -0.5f, 0.0f);
+		verticies[3].color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+		verticies[3].uv = Vector2(0.0f, 1.0f);
 
 		// Vertex Buffer
 		std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
 		Resources::Insert(L"RectMesh", mesh);
 
-		mesh->CreateVertexBuffer(vertexes.data(), vertexes.size());
+		mesh->CreateVertexBuffer(verticies.data(), verticies.size());
 
-		indexes.push_back(0);
-		indexes.push_back(1);
-		indexes.push_back(2);
+		indicies.push_back(0);
+		indicies.push_back(1);
+		indicies.push_back(2);
 
-		indexes.push_back(0);
-		indexes.push_back(2);
-		indexes.push_back(3);
-		mesh->CreateIndexBuffer(indexes.data(), indexes.size());
+		indicies.push_back(0);
+		indicies.push_back(2);
+		indicies.push_back(3);
+		mesh->CreateIndexBuffer(indicies.data(), indicies.size());
 
 
 
 		// Rect Debug Mesh
 		std::shared_ptr<Mesh> rectDebug = std::make_shared<Mesh>();
 		Resources::Insert(L"DebugRect", rectDebug);
-		rectDebug->CreateVertexBuffer(vertexes.data(), vertexes.size());
-		rectDebug->CreateIndexBuffer(indexes.data(), indexes.size());
+		rectDebug->CreateVertexBuffer(verticies.data(), verticies.size());
+		rectDebug->CreateIndexBuffer(indicies.data(), indicies.size());
 
 		// Circle Debug Mesh
-		vertexes.clear();
-		indexes.clear();
+		verticies.clear();
+		indicies.clear();
 
 		Vertex center = {};
 		center.pos = Vector3(0.0f, 0.0f, 0.0f);
 		center.color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
-		vertexes.push_back(center);
+		verticies.push_back(center);
 
 		int iSlice = 40;
 		float fRadius = 0.5f;
@@ -211,18 +224,18 @@ namespace lu::renderer
 				, fRadius * sinf(fTheta * (float)i)
 				, 0.0f);
 			center.color = Vector4(0.0f, 1.0f, 0.0f, 1.f);
-			vertexes.push_back(center);
+			verticies.push_back(center);
 		}
-		for (int i = 0; i < vertexes.size() - 2; ++i)
+		for (int i = 0; i < verticies.size() - 2; ++i)
 		{
-			indexes.push_back(i + 1);
+			indicies.push_back(i + 1);
 		}
-		indexes.push_back(1);
+		indicies.push_back(1);
 
 		std::shared_ptr<Mesh> circleDebug = std::make_shared<Mesh>();
 		Resources::Insert(L"DebugCircle", circleDebug);
-		circleDebug->CreateVertexBuffer(vertexes.data(), vertexes.size());
-		circleDebug->CreateIndexBuffer(indexes.data(), indexes.size());
+		circleDebug->CreateVertexBuffer(verticies.data(), verticies.size());
+		circleDebug->CreateIndexBuffer(indicies.data(), indicies.size());
 	}
 
 
@@ -236,9 +249,17 @@ namespace lu::renderer
 		constantBuffer[(UINT)eCBType::Grid] = new ConstantBuffer(eCBType::Grid);
 		constantBuffer[(UINT)eCBType::Grid]->Create(sizeof(TransformCB));
 
-		//meshrenderer Buffer
+		//Meshrenderer Buffer
 		constantBuffer[(UINT)eCBType::MeshRenderer] = new ConstantBuffer(eCBType::MeshRenderer);
 		constantBuffer[(UINT)eCBType::MeshRenderer]->Create(sizeof(MeshRendererCB));
+
+		//Particle Buffer
+		constantBuffer[(UINT)eCBType::ParticleSystem] = new ConstantBuffer(eCBType::ParticleSystem);
+		constantBuffer[(UINT)eCBType::ParticleSystem]->Create(sizeof(ParticleSystemCB));
+
+		//Noise Buffer
+		constantBuffer[(UINT)eCBType::Noise] = new ConstantBuffer(eCBType::Noise);
+		constantBuffer[(UINT)eCBType::Noise]->Create(sizeof(NoiseCB));
 	}
 
 
@@ -264,8 +285,33 @@ namespace lu::renderer
 		debugShader->Create(eShaderStage::PS, L"DebugPS.hlsl", "main");
 		debugShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		debugShader->SetRSState(eRSType::WireframeNone);
-		//debugShader->SetDSState(eDSType::NoWrite);
 		Resources::Insert(L"DebugShader", debugShader);
+
+		//particleSystem compute shader
+		std::shared_ptr<ParticleShader> psShader = std::make_shared<ParticleShader>();
+		psShader->Create(L"ParticleCS.hlsl", "main");
+		Resources::Insert(L"ParticleSystemShader", psShader);
+
+		//particel shader
+		std::shared_ptr<Shader> particleShader = std::make_shared<Shader>();
+		particleShader->Create(eShaderStage::VS, L"ParticleVS.hlsl", "main");
+		particleShader->Create(eShaderStage::GS, L"ParticleGS.hlsl", "main");
+		particleShader->Create(eShaderStage::PS, L"ParticlePS.hlsl", "main");
+		particleShader->SetRSState(eRSType::SolidNone);
+		particleShader->SetDSState(eDSType::NoWrite);
+		particleShader->SetBSState(eBSType::AlphaBlend);
+		particleShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_POINTLIST);
+		Resources::Insert(L"ParticleShader", particleShader);
+	}
+
+	void LoadTexture()
+	{
+		std::shared_ptr<Texture> particle = std::make_shared<Texture>();
+		Resources::Load<Texture>(L"CartoonSmoke", L"..\\Resources\\particle\\CartoonSmoke.png");
+
+		Resources::Load<Texture>(L"Noise01", L"..\\Resources\\noise\\noise_01.png");
+		Resources::Load<Texture>(L"Noise02", L"..\\Resources\\noise\\noise_02.png");
+		Resources::Load<Texture>(L"Noise03", L"..\\Resources\\noise\\noise_03.png");
 	}
 
 	void LoadMaterial()
@@ -289,19 +335,23 @@ namespace lu::renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SpriteMaterial02", material);
 
-		std::shared_ptr<Shader> gridShader
-			= Resources::Find<Shader>(L"GridShader");
+		std::shared_ptr<Shader> gridShader = Resources::Find<Shader>(L"GridShader");
 
 		material = std::make_shared<Material>();
 		material->SetShader(gridShader);
 		Resources::Insert(L"GridMaterial", material);
 
-		std::shared_ptr<Shader> debugShader
-			= Resources::Find<Shader>(L"DebugShader");
+		std::shared_ptr<Shader> debugShader	= Resources::Find<Shader>(L"DebugShader");
 
 		material = std::make_shared<Material>();
 		material->SetShader(debugShader);
 		Resources::Insert(L"DebugMaterial", material);
+
+		std::shared_ptr<Shader> particleShader = Resources::Find<Shader>(L"ParticleShader");
+		material = std::make_shared<Material>();
+		material->SetShader(particleShader);
+		Resources::Insert(L"ParticleMaterial", material);
+		material->SetTexture(Resources::Find<Texture>(L"CartoonSmoke"));
 	}
 
 	void Initialize()
@@ -310,6 +360,7 @@ namespace lu::renderer
 		LoadBuffer();
 		LoadShader();
 		SetupState();
+		LoadTexture();
 		LoadMaterial();
 	}
 

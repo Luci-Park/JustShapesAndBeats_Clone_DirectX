@@ -33,6 +33,8 @@ namespace lu::graphics
 		Transform,
 		Grid,
 		MeshRenderer,
+		ParticleSystem,
+		Noise,
 		End
 	};
 

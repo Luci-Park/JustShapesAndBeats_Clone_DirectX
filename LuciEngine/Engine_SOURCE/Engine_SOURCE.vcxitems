@@ -36,6 +36,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LMeshRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LParticleShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LParticleSystem.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LSceneManager.h" />
@@ -68,6 +70,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LMeshRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LParticleShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LParticleSystem.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LResources.cpp" />
