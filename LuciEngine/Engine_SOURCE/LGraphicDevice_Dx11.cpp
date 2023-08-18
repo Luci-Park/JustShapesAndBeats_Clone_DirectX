@@ -47,8 +47,7 @@ namespace lu::graphics
 		, (void**)mRenderTarget.GetAddressOf())))
 			return;
 		//Create RenderTarget View
-		mDevice->CreateRenderTargetView((ID3D11Resource*)mRenderTarget.Get()
-			, nullptr, mRenderTargetView.GetAddressOf());
+		CreateRenderTargetView((ID3D11Resource*)mRenderTarget.Get(), nullptr, mRenderTargetView.GetAddressOf());
 
 		D3D11_TEXTURE2D_DESC depthStencilDesc = {};
 		depthStencilDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL;
@@ -64,7 +63,7 @@ namespace lu::graphics
 		depthStencilDesc.MiscFlags = 0;
 
 		D3D11_SUBRESOURCE_DATA data;
-		if (!CreateTexture(&depthStencilDesc, &data))
+		if (!CreateTexture2D(&depthStencilDesc, &data))
 			return;
 		
 		RECT winRect = {};
@@ -158,7 +157,7 @@ namespace lu::graphics
 		mContext->OMSetBlendState(pBlendState, nullptr, 0xffffffff);
 	}
 
-	bool GraphicDevice_Dx11::CreateTexture(const D3D11_TEXTURE2D_DESC* desc, void* data)
+	bool GraphicDevice_Dx11::CreateTexture2D(const D3D11_TEXTURE2D_DESC* desc, void* data)
 	{
 		D3D11_TEXTURE2D_DESC dxgiDesc = {};
 		dxgiDesc.BindFlags = desc->BindFlags;
@@ -178,8 +177,8 @@ namespace lu::graphics
 
 		if (FAILED(mDevice->CreateTexture2D(&dxgiDesc, nullptr, mDepthStencilBuffer.ReleaseAndGetAddressOf())))
 			return false;
-
-		if (FAILED(mDevice->CreateDepthStencilView(mDepthStencilBuffer.Get(), nullptr, mDepthStencilView.GetAddressOf())))
+		
+		if(!CreateDepthStencilView(mDepthStencilBuffer.Get(), nullptr, mDepthStencilView.GetAddressOf()))
 			return false;
 
 		return true;
@@ -224,10 +223,26 @@ namespace lu::graphics
 		return true;
 	}
 
+	bool GraphicDevice_Dx11::CreateGeometryShader(const void* pShaderBytecode, SIZE_T BytecodeLength, ID3D11GeometryShader** ppGeometryShader)
+	{
+		if (FAILED(mDevice->CreateGeometryShader(pShaderBytecode, BytecodeLength, nullptr, ppGeometryShader)))
+			return false;
+
+		return true;
+	}
+
 	bool GraphicDevice_Dx11::CreatePixelShader(const void* pShaderByteCode, SIZE_T bytecodeLength, ID3D11PixelShader** ppPixelShader)
 	{
 		if(FAILED(mDevice->CreatePixelShader(pShaderByteCode, bytecodeLength, nullptr, ppPixelShader)))
 			return false;
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateComputeShader(const void* pShaderBytecode, SIZE_T BytecodeLength, ID3D11ComputeShader** ppComputeShader)
+	{
+		if (FAILED(mDevice->CreateComputeShader(pShaderBytecode, BytecodeLength, nullptr, ppComputeShader)))
+			return false;
+
 		return true;
 	}
 
@@ -256,6 +271,38 @@ namespace lu::graphics
 	{
 		if (FAILED(mDevice->CreateBlendState(pBlendStateDesc, ppBlendState)))
 			return false;
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateDepthStencilView(ID3D11Resource* pResource, const D3D11_DEPTH_STENCIL_VIEW_DESC* pDesc, ID3D11DepthStencilView** ppDepthStencilView)
+	{
+		if (FAILED(mDevice->CreateDepthStencilView(pResource, pDesc, ppDepthStencilView)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateShaderResourceView(ID3D11Resource* pResource, const D3D11_SHADER_RESOURCE_VIEW_DESC* pDesc, ID3D11ShaderResourceView** ppSRView)
+	{
+		if (FAILED(mDevice->CreateShaderResourceView(pResource, pDesc, ppSRView)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateRenderTargetView(ID3D11Resource* pResource, const D3D11_RENDER_TARGET_VIEW_DESC* pDesc, ID3D11RenderTargetView** ppRTView)
+	{
+		if (FAILED(mDevice->CreateRenderTargetView(pResource, pDesc, ppRTView)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateUnordedAccessView(ID3D11Resource* pResource, const D3D11_UNORDERED_ACCESS_VIEW_DESC* pDesc, ID3D11UnorderedAccessView** ppUAView)
+	{
+		if (FAILED(mDevice->CreateUnorderedAccessView(pResource, pDesc, ppUAView)))
+			return false;
+
 		return true;
 	}
 
