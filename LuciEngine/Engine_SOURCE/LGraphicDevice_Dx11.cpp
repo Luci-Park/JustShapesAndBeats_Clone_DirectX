@@ -41,13 +41,20 @@ namespace lu::graphics
 
 		if (!CreateSwapChain(&swapChainDesc, hWnd))
 			return;
+		
+		mRenderTarget = std::make_shared<Texture>();
+		mDepthStencil = std::make_shared<Texture>();
+
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> renderTarget = nullptr;
 
 		//get rendertarget by swapchain
-		if(FAILED(mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D)
-		, (void**)mRenderTarget.GetAddressOf())))
+		if(FAILED(mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)renderTarget.GetAddressOf())))
 			return;
+
+		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> renderTargetView = nullptr;
 		//Create RenderTarget View
-		CreateRenderTargetView((ID3D11Resource*)mRenderTarget.Get(), nullptr, mRenderTargetView.GetAddressOf());
+		CreateRenderTargetView((ID3D11Resource*)renderTargetView.Get(), nullptr, renderTargetView.GetAddressOf());
+		mRenderTarget->SetRTV(renderTargetView);
 
 		D3D11_TEXTURE2D_DESC depthStencilDesc = {};
 		depthStencilDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL;
@@ -62,24 +69,18 @@ namespace lu::graphics
 		depthStencilDesc.MipLevels = 0;
 		depthStencilDesc.MiscFlags = 0;
 
-		D3D11_SUBRESOURCE_DATA data;
-		if (!CreateTexture2D(&depthStencilDesc, &data))
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> depthStencilBuffer = nullptr;
+		if (!CreateTexture2D(&depthStencilDesc, nullptr, depthStencilBuffer.GetAddressOf()))
 			return;
+		mDepthStencil->SetTexture(depthStencilBuffer);
+
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> mDepthStencilView = nullptr;
+		if (!CreateDepthStencilView(depthStencilBuffer.Get(), nullptr, mDepthStencilView.GetAddressOf()))
+			return;
+		mDepthStencil->SetDSV(mDepthStencilView);
 		
 		RECT winRect = {};
 		GetClientRect(hWnd, &winRect);
-
-		/*
-		* typedef struct D3D11_VIEWPORT
-		* {
-		*	FLOAT TopLeftX;
-		*	FLOAT TopLeftY;
-		*	FLOAT Width;
-		*	FLOAT Height;
-		*	FLOAT MinDepth;
-		*	FLOAT MaxDepth;
-		* }
-		*/
 
 		mViewPort =
 		{
@@ -90,7 +91,7 @@ namespace lu::graphics
 		};
 
 		BindViewPort(&mViewPort);
-		mContext->OMSetRenderTargets(1, mRenderTargetView.GetAddressOf(), mDepthStencilView.Get());
+		mContext->OMSetRenderTargets(1, mRenderTarget->GetRTV().GetAddressOf(), mDepthStencilView.Get());
 	}
 
 	GraphicDevice_Dx11::~GraphicDevice_Dx11()
@@ -136,62 +137,18 @@ namespace lu::graphics
 
 		return true;
 	}
-
-	void GraphicDevice_Dx11::BindViewPort(D3D11_VIEWPORT* viewPort)
+	
+	bool GraphicDevice_Dx11::CreateTexture2D(const D3D11_TEXTURE2D_DESC* desc, void* data, ID3D11Texture2D** ppTexture2D)
 	{
-		mContext->RSSetViewports(1, viewPort);
-	}
-
-	void GraphicDevice_Dx11::BindRasterizeState(ID3D11RasterizerState* pRasterizerState)
-	{
-		mContext->RSSetState(pRasterizerState);
-	}
-
-	void GraphicDevice_Dx11::BindDepthStencilState(ID3D11DepthStencilState* pDepthStencilState)
-	{
-		mContext->OMSetDepthStencilState(pDepthStencilState, 0);
-	}
-
-	void GraphicDevice_Dx11::BindBlendState(ID3D11BlendState* pBlendState)
-	{
-		mContext->OMSetBlendState(pBlendState, nullptr, 0xffffffff);
-	}
-
-	void GraphicDevice_Dx11::CopyResource(ID3D11Resource* pDstResource, ID3D11Resource* pSrcResource)
-	{
-		mContext->CopyResource(pDstResource, pSrcResource);
-	}
-
-	bool GraphicDevice_Dx11::CreateTexture2D(const D3D11_TEXTURE2D_DESC* desc, void* data)
-	{
-		D3D11_TEXTURE2D_DESC dxgiDesc = {};
-		dxgiDesc.BindFlags = desc->BindFlags;
-		dxgiDesc.Usage = desc->Usage;
-		dxgiDesc.CPUAccessFlags = 0;
-
-		dxgiDesc.Format = desc->Format;
-		dxgiDesc.Width = desc->Width;
-		dxgiDesc.Height = desc->Height;
-		dxgiDesc.ArraySize = desc->ArraySize;
-
-		dxgiDesc.SampleDesc.Count = desc->SampleDesc.Count;
-		dxgiDesc.SampleDesc.Quality = 0;
-
-		dxgiDesc.MipLevels = desc->MipLevels;
-		dxgiDesc.MiscFlags = desc->MiscFlags;
-
-		if (FAILED(mDevice->CreateTexture2D(&dxgiDesc, nullptr, mDepthStencilBuffer.ReleaseAndGetAddressOf())))
-			return false;
-		
-		if(!CreateDepthStencilView(mDepthStencilBuffer.Get(), nullptr, mDepthStencilView.GetAddressOf()))
+		if (FAILED(mDevice->CreateTexture2D(desc, nullptr, ppTexture2D)))
 			return false;
 
 		return true;
 	}
-
+	
 	bool GraphicDevice_Dx11::CreateInputLayout(const D3D11_INPUT_ELEMENT_DESC* pInputElementDesc, UINT elementNum, ID3DBlob* byteCode, ID3D11InputLayout** ppInputLayout)
 	{
-		if(FAILED(mDevice->CreateInputLayout(pInputElementDesc, elementNum
+		if (FAILED(mDevice->CreateInputLayout(pInputElementDesc, elementNum
 			, byteCode->GetBufferPointer(), byteCode->GetBufferSize()
 			, ppInputLayout)))
 			return false;
@@ -223,7 +180,7 @@ namespace lu::graphics
 
 	bool GraphicDevice_Dx11::CreateVertexShader(const void* pShaderByteCode, SIZE_T bytecodeLength, ID3D11VertexShader** ppVertexShader)
 	{
-		if(FAILED(mDevice->CreateVertexShader(pShaderByteCode, bytecodeLength, nullptr, ppVertexShader)))
+		if (FAILED(mDevice->CreateVertexShader(pShaderByteCode, bytecodeLength, nullptr, ppVertexShader)))
 			return false;
 		return true;
 	}
@@ -238,7 +195,7 @@ namespace lu::graphics
 
 	bool GraphicDevice_Dx11::CreatePixelShader(const void* pShaderByteCode, SIZE_T bytecodeLength, ID3D11PixelShader** ppPixelShader)
 	{
-		if(FAILED(mDevice->CreatePixelShader(pShaderByteCode, bytecodeLength, nullptr, ppPixelShader)))
+		if (FAILED(mDevice->CreatePixelShader(pShaderByteCode, bytecodeLength, nullptr, ppPixelShader)))
 			return false;
 		return true;
 	}
@@ -253,14 +210,14 @@ namespace lu::graphics
 
 	bool GraphicDevice_Dx11::CreateSamplerState(const D3D11_SAMPLER_DESC* pSamplerDesc, ID3D11SamplerState** ppSamplerState)
 	{
-		if(FAILED(mDevice->CreateSamplerState(pSamplerDesc, ppSamplerState)))
+		if (FAILED(mDevice->CreateSamplerState(pSamplerDesc, ppSamplerState)))
 			return false;
 		return true;
 	}
 
 	bool GraphicDevice_Dx11::CreateRasterizeState(const D3D11_RASTERIZER_DESC* pRasterizerDesc, ID3D11RasterizerState** ppRasterizerState)
 	{
-		if(FAILED(mDevice->CreateRasterizerState(pRasterizerDesc, ppRasterizerState)))
+		if (FAILED(mDevice->CreateRasterizerState(pRasterizerDesc, ppRasterizerState)))
 			return false;
 		return true;
 	}
@@ -351,35 +308,6 @@ namespace lu::graphics
 		mContext->GSSetShader(pGeometryShader, 0, 0);
 	}
 
-	void GraphicDevice_Dx11::BindSampler(eShaderStage stage, UINT startSlot, ID3D11SamplerState** ppSamplers)
-	{
-		switch (stage)
-		{
-		case eShaderStage::VS:
-			mContext->VSSetSamplers(startSlot, 1, ppSamplers);
-			break;
-		case eShaderStage::HS:
-			mContext->HSSetSamplers(startSlot, 1, ppSamplers);
-			break;
-		case eShaderStage::DS:
-			mContext->DSSetSamplers(startSlot, 1, ppSamplers);
-			break;
-		case eShaderStage::GS:
-			mContext->GSSetSamplers(startSlot, 1, ppSamplers);
-			break;
-		case eShaderStage::PS:
-			mContext->PSSetSamplers(startSlot, 1, ppSamplers);
-			break;
-		case eShaderStage::CS:
-			mContext->CSSetSamplers(startSlot, 1, ppSamplers);
-			break;
-		case eShaderStage::End:
-			break;
-		default:
-			break;
-		}
-	}
-
 	void GraphicDevice_Dx11::BindPixelShader(ID3D11PixelShader* pPixelShader)
 	{
 		mContext->PSSetShader(pPixelShader, 0, 0);
@@ -394,7 +322,46 @@ namespace lu::graphics
 	{
 		mContext->Dispatch(ThreadGroupCountX, ThreadGroupCountY, ThreadGroupCountZ);
 	}
+	
+	void GraphicDevice_Dx11::BindShaderResource(eShaderStage stage, UINT startSlot, ID3D11ShaderResourceView** ppSRV)
+	{
+		switch (stage)
+		{
+		case eShaderStage::VS:
+			mContext->VSSetShaderResources(startSlot, 1, ppSRV);
+			break;
+		case eShaderStage::HS:
+			mContext->HSSetShaderResources(startSlot, 1, ppSRV);
+			break;
 
+		case eShaderStage::DS:
+			mContext->DSSetShaderResources(startSlot, 1, ppSRV);
+			break;
+
+		case eShaderStage::GS:
+			mContext->GSSetShaderResources(startSlot, 1, ppSRV);
+			break;
+
+		case eShaderStage::PS:
+			mContext->PSSetShaderResources(startSlot, 1, ppSRV);
+			break;
+
+		case eShaderStage::CS:
+			mContext->CSSetShaderResources(startSlot, 1, ppSRV);
+			break;
+
+		case eShaderStage::End:
+			break;
+		default:
+			break;
+		}
+	}
+
+	void GraphicDevice_Dx11::BindUnorderedAccess(UINT slot, ID3D11UnorderedAccessView** ppUnorderedAccessViews, const UINT* pUAVInitialCounts)
+	{
+		mContext->CSSetUnorderedAccessViews(slot, 1, ppUnorderedAccessViews, pUAVInitialCounts);
+	}
+	
 	void GraphicDevice_Dx11::SetConstantBuffer(ID3D11Buffer* buffer, void* data, UINT size)
 	{
 		D3D11_MAPPED_SUBRESOURCE subRes = {};
@@ -450,33 +417,28 @@ namespace lu::graphics
 		mContext->Unmap(buffer, 0);
 	}
 
-	void GraphicDevice_Dx11::BindShaderResource(eShaderStage stage, UINT startSlot, ID3D11ShaderResourceView** ppSRV)
+	void GraphicDevice_Dx11::BindSampler(eShaderStage stage, UINT startSlot, ID3D11SamplerState** ppSamplers)
 	{
 		switch (stage)
 		{
 		case eShaderStage::VS:
-			mContext->VSSetShaderResources(startSlot, 1, ppSRV);
+			mContext->VSSetSamplers(startSlot, 1, ppSamplers);
 			break;
 		case eShaderStage::HS:
-			mContext->HSSetShaderResources(startSlot, 1, ppSRV);
+			mContext->HSSetSamplers(startSlot, 1, ppSamplers);
 			break;
-
 		case eShaderStage::DS:
-			mContext->DSSetShaderResources(startSlot, 1, ppSRV);
+			mContext->DSSetSamplers(startSlot, 1, ppSamplers);
 			break;
-
 		case eShaderStage::GS:
-			mContext->GSSetShaderResources(startSlot, 1, ppSRV);
+			mContext->GSSetSamplers(startSlot, 1, ppSamplers);
 			break;
-
 		case eShaderStage::PS:
-			mContext->PSSetShaderResources(startSlot, 1, ppSRV);
+			mContext->PSSetSamplers(startSlot, 1, ppSamplers);
 			break;
-
 		case eShaderStage::CS:
-			mContext->CSSetShaderResources(startSlot, 1, ppSRV);
+			mContext->CSSetSamplers(startSlot, 1, ppSamplers);
 			break;
-
 		case eShaderStage::End:
 			break;
 		default:
@@ -484,11 +446,33 @@ namespace lu::graphics
 		}
 	}
 
-	void GraphicDevice_Dx11::BindUnorderedAccess(UINT slot, ID3D11UnorderedAccessView** ppUnorderedAccessViews, const UINT* pUAVInitialCounts)
+
+	void GraphicDevice_Dx11::BindViewPort(D3D11_VIEWPORT* viewPort)
 	{
-		mContext->CSSetUnorderedAccessViews(slot, 1, ppUnorderedAccessViews, pUAVInitialCounts);
+		mContext->RSSetViewports(1, viewPort);
 	}
 
+	void GraphicDevice_Dx11::BindRasterizeState(ID3D11RasterizerState* pRasterizerState)
+	{
+		mContext->RSSetState(pRasterizerState);
+	}
+
+	void GraphicDevice_Dx11::BindDepthStencilState(ID3D11DepthStencilState* pDepthStencilState)
+	{
+		mContext->OMSetDepthStencilState(pDepthStencilState, 0);
+	}
+
+	void GraphicDevice_Dx11::BindBlendState(ID3D11BlendState* pBlendState)
+	{
+		mContext->OMSetBlendState(pBlendState, nullptr, 0xffffffff);
+	}
+
+	void GraphicDevice_Dx11::CopyResource(ID3D11Resource* pDstResource, ID3D11Resource* pSrcResource)
+	{
+		mContext->CopyResource(pDstResource, pSrcResource);
+	}
+
+	
 	void GraphicDevice_Dx11::DrawIndexed(UINT IndexCount, UINT StartIndexLocation, INT BaseVertexLocation)
 	{
 		mContext->DrawIndexed(IndexCount, StartIndexLocation, BaseVertexLocation);
@@ -503,9 +487,9 @@ namespace lu::graphics
 	{
 		//clear screen
 		FLOAT bgColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
-		mContext->ClearRenderTargetView(mRenderTargetView.Get(), bgColor);
-		mContext->ClearDepthStencilView(mDepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0.0f);
-		mContext->OMSetRenderTargets(1, mRenderTargetView.GetAddressOf(), mDepthStencilView.Get());
+		mContext->ClearRenderTargetView(mRenderTarget->GetRTV().Get(), bgColor);
+		mContext->ClearDepthStencilView(mDepthStencil->GetDSV().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0.0f);
+		mContext->OMSetRenderTargets(1, mRenderTarget->GetRTV().GetAddressOf(), mDepthStencil->GetDSV().Get());
 	}
 
 	void GraphicDevice_Dx11::UpdateViewPort()

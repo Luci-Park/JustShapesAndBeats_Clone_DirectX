@@ -372,6 +372,30 @@ namespace lu::renderer
 		debugMeshes.push_back(mesh);
 	}
 
+	void BindNoiseTexture()
+	{
+		std::shared_ptr<Texture> texture
+			= Resources::Find<Texture>(L"Noise01");
+
+		texture->BindShaderResource(eShaderStage::VS, 15);
+		texture->BindShaderResource(eShaderStage::HS, 15);
+		texture->BindShaderResource(eShaderStage::DS, 15);
+		texture->BindShaderResource(eShaderStage::GS, 15);
+		texture->BindShaderResource(eShaderStage::PS, 15);
+		texture->BindShaderResource(eShaderStage::CS, 15);
+
+		ConstantBuffer* cb = constantBuffer[(UINT)eCBType::Noise];
+		NoiseCB data = {};
+		data.size.x = texture->GetWidth();
+		data.size.y = texture->GetHeight();
+
+		cb->SetData(&data);
+		cb->Bind(eShaderStage::VS);
+		cb->Bind(eShaderStage::GS);
+		cb->Bind(eShaderStage::PS);
+		cb->Bind(eShaderStage::CS);
+	}
+
 	void Render()
 	{
 		for (int i =0; i < cameras.size(); i++)

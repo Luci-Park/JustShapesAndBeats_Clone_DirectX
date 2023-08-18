@@ -1,7 +1,7 @@
 #pragma once
 #include "LuciEngine.h"
 #include "LGraphics.h"
-
+#include "LTexture.h"
 
 namespace lu::graphics
 {
@@ -13,7 +13,7 @@ namespace lu::graphics
 
 		//Ready Device
 		bool CreateSwapChain(const DXGI_SWAP_CHAIN_DESC* desc, HWND hWnd);
-		bool CreateTexture2D(const D3D11_TEXTURE2D_DESC* desc, void* data);
+		bool CreateTexture2D(const D3D11_TEXTURE2D_DESC* desc, void* data, ID3D11Texture2D** ppTexture2D);
 		bool CreateInputLayout(const D3D11_INPUT_ELEMENT_DESC* pInputElementDesc, UINT elementNum, ID3DBlob* byteCode, ID3D11InputLayout** ppInputLayout);
 		bool CreateBuffer(ID3D11Buffer** buffer, D3D11_BUFFER_DESC* desc, D3D11_SUBRESOURCE_DATA* data);
 		bool CompileFromFile(const std::wstring& fileName, const std::string& funcName, const std::string& version, ID3DBlob** ppCode);
@@ -73,27 +73,10 @@ namespace lu::graphics
 		ID3D11Device* GetID3D11Device() { return mDevice.Get(); }
 
 	private:
-		// 실제 그래픽카드 하드웨어 객체
-		Microsoft::WRL::ComPtr<ID3D11Device> mDevice; 
-		
-
-		//  dx11에서 직접적으로 디바이스객체 접근하지않고
-		// 이객체를 이용하여 명령을 내린다.
-		Microsoft::WRL::ComPtr<ID3D11DeviceContext> mContext; 
-		
-		// 최종적으로 그려질 텍스처(도화지)
-		Microsoft::WRL::ComPtr<ID3D11Texture2D> mRenderTarget;
-
-		// 렌더타겟에 직접접근하지 않고 레더타겟뷰를 통해서 접근한다.
-		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> mRenderTargetView;
-
-		// 깊이버퍼
-		Microsoft::WRL::ComPtr<ID3D11Texture2D> mDepthStencilBuffer;
-
-		// 깊이버퍼에 접근할수 있는 뷰
-		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> mDepthStencilView;
-
-		// 더블버퍼링 작업을 진행해주는 swapChain
+		Microsoft::WRL::ComPtr<ID3D11Device> mDevice;
+		Microsoft::WRL::ComPtr<ID3D11DeviceContext> mContext;
+		std::shared_ptr<graphics::Texture> mRenderTarget;
+		std::shared_ptr<graphics::Texture> mDepthStencil;
 		Microsoft::WRL::ComPtr<IDXGISwapChain> mSwapChain;
 
 		D3D11_VIEWPORT mViewPort;
