@@ -63,6 +63,8 @@ namespace lu::graphics
 		void CopyResource(ID3D11Resource* pDstResource, ID3D11Resource* pSrcResource);
 
 		void DrawIndexed(UINT IndexCount, UINT StartIndexLocation, INT BaseVertexLocation);
+		void DrawIndexedInstanced(UINT IndexCountPerInstance, UINT InstanceCount
+			, UINT StartIndexLocation, INT BaseVertexLocation, UINT StartInstanceLocation);
 		void ClearTarget();
 		void UpdateViewPort();
 		void Draw();

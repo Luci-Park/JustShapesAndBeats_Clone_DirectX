@@ -18,6 +18,7 @@ namespace lu
 
 		void BindBuffer();
 		void Render();
+		void RenderInstanced(UINT startIndexLocation);
 
 		UINT GetIndexCount() { return mIndexCount; }
 

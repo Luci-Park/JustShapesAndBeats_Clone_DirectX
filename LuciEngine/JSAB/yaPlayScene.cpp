@@ -13,6 +13,7 @@
 #include "yaPlayerScript.h"
 #include "LCollisionManager.h"
 #include "..\\Editor_SOURCE\\TransformWidget.h"
+#include "LParticleSystem.h"
 
 namespace lu
 {
@@ -77,7 +78,17 @@ namespace lu
 			cd->SetType(eColliderType::Circle);
 			player->AddComponent<PlayerScript>();
 		}
-
+		{
+			GameObject* player = new GameObject();
+			player->SetName(L"Particle");
+			AddGameObject(eLayerType::Bullet, player);
+			ParticleSystem* mr = player->AddComponent<ParticleSystem>();
+			player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
+			player->GetComponent<Transform>()->SetScale(Vector3(0.2f, 0.2f, 0.2f));
+			//Collider2D* cd = player->AddComponent<Collider2D>();
+			//cd->SetSize(Vector2(1.2f, 1.2f));
+			//player->AddComponent<PlayerScript>();
+		}
 		//Main Camera
 		Camera* cameraComp = nullptr;
 		{

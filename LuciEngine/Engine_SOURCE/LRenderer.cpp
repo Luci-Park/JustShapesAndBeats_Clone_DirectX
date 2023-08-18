@@ -183,7 +183,7 @@ namespace lu::renderer
 		verticies[3].uv = Vector2(0.0f, 1.0f);
 
 		// Vertex Buffer
-		std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
+		mesh = std::make_shared<Mesh>();
 		Resources::Insert(L"RectMesh", mesh);
 
 		mesh->CreateVertexBuffer(verticies.data(), verticies.size());

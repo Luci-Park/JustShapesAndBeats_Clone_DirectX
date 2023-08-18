@@ -13,6 +13,11 @@ namespace lu
 	public:
 		ParticleSystem();
 		~ParticleSystem();
+
+		virtual void Initialize() override;
+		virtual void Update() override;
+		virtual void LateUpdate() override;
+		virtual void Render() override;
 	private:
 		graphics::StructedBuffer* mBuffer;
 		graphics::StructedBuffer* mSharedBuffer;
