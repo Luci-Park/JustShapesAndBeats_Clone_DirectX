@@ -350,11 +350,16 @@ namespace lu::renderer
 		material->SetShader(debugShader);
 		Resources::Insert(L"DebugMaterial", material);
 
-		std::shared_ptr<Shader> particleShader = Resources::Find<Shader>(L"ParticleShader");
+		std::shared_ptr<Shader> particleShader
+			= Resources::Find<Shader>(L"ParticleShader");
 		material = std::make_shared<Material>();
 		material->SetShader(particleShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+
+		std::shared_ptr<Texture> particleTexx
+			= Resources::Find<Texture>(L"CartoonSmoke");
+		material->SetTexture(particleTexx);
 		Resources::Insert(L"ParticleMaterial", material);
-		material->SetTexture(Resources::Find<Texture>(L"CartoonSmoke"));
 	}
 
 	void Initialize()
