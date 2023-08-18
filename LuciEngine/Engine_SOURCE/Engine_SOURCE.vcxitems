@@ -22,6 +22,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LCollider2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LCollisionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LComputeShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LConstantBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LEnums.h" />
@@ -56,6 +57,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LCollider2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LCollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LComputeShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LGameObject.cpp" />

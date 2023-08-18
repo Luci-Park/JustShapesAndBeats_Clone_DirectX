@@ -31,6 +31,7 @@ namespace lu::enums
 		Material,
 		Mesh,
 		Animation,
+		ComputeShader,
 		End
 	};
 
