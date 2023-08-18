@@ -371,18 +371,17 @@ namespace lu::renderer
 	{
 		debugMeshes.push_back(mesh);
 	}
-
 	void BindNoiseTexture()
 	{
 		std::shared_ptr<Texture> texture
 			= Resources::Find<Texture>(L"Noise01");
 
-		texture->BindShaderResource(eShaderStage::VS, 15);
-		texture->BindShaderResource(eShaderStage::HS, 15);
-		texture->BindShaderResource(eShaderStage::DS, 15);
-		texture->BindShaderResource(eShaderStage::GS, 15);
-		texture->BindShaderResource(eShaderStage::PS, 15);
-		texture->BindShaderResource(eShaderStage::CS, 15);
+		texture->BindShaderResource(eShaderStage::VS, TEXSLOT_NOISE);
+		texture->BindShaderResource(eShaderStage::HS, TEXSLOT_NOISE);
+		texture->BindShaderResource(eShaderStage::DS, TEXSLOT_NOISE);
+		texture->BindShaderResource(eShaderStage::GS, TEXSLOT_NOISE);
+		texture->BindShaderResource(eShaderStage::PS, TEXSLOT_NOISE);
+		texture->BindShaderResource(eShaderStage::CS, TEXSLOT_NOISE);
 
 		ConstantBuffer* cb = constantBuffer[(UINT)eCBType::Noise];
 		NoiseCB data = {};
@@ -398,6 +397,7 @@ namespace lu::renderer
 
 	void Render()
 	{
+		BindNoiseTexture();
 		for (int i =0; i < cameras.size(); i++)
 		{
 			if (cameras[i] == nullptr)
@@ -408,6 +408,7 @@ namespace lu::renderer
 		mainCamera = cameras.size() > 0 ? cameras[0] : nullptr;
 		cameras.clear();
 	}
+
 
 	void Release()
 	{

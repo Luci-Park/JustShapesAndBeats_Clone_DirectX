@@ -6,6 +6,7 @@
 #include "LConstantBuffer.h"
 #include "LCamera.h"
 
+#define TEXSLOT_NOISE	15
 using namespace lu::math;
 namespace lu::renderer
 {
