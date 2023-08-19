@@ -97,6 +97,21 @@
     <Filter Include="Graphics\StructedBuffer">
       <UniqueIdentifier>{1b938c80-8201-4cf2-b194-cd922ca4f46a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\AudioClip">
+      <UniqueIdentifier>{12c636a3-d3d8-4e59-830d-81c76380936e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\AudioSource">
+      <UniqueIdentifier>{5479d47f-eda3-4301-9fb6-b6682799591f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\AudioListener">
+      <UniqueIdentifier>{e925c884-5714-454b-bbd3-dfce575bb57c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Font">
+      <UniqueIdentifier>{7d12d7d3-3674-4293-a761-cb4942b45cd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{5b970508-06e2-4014-94f6-76c19ed0cad7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -198,9 +213,30 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LStructedBuffer.h">
       <Filter>Graphics\StructedBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LComputeShader.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)LParticleShader.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)LParticleSystem.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LFmod.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LAudioClip.h">
+      <Filter>Resource\AudioClip</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LComputeShader.h">
+      <Filter>Resource\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LParticleShader.h">
+      <Filter>Resource\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LParticleSystem.h">
+      <Filter>GameObject\Component\MeshRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LAudioSource.h">
+      <Filter>GameObject\Component\AudioSource</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LAudioListener.h">
+      <Filter>GameObject\Component\AudioListener</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LFontWrapper.h">
+      <Filter>Font</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp">
@@ -287,9 +323,30 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LStructedBuffer.cpp">
       <Filter>Graphics\StructedBuffer</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LComputeShader.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)LParticleShader.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)LParticleSystem.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LFmod.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LAudioClip.cpp">
+      <Filter>Resource\AudioClip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LComputeShader.cpp">
+      <Filter>Resource\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LParticleShader.cpp">
+      <Filter>Resource\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LParticleSystem.cpp">
+      <Filter>GameObject\Component\MeshRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LAudioSource.cpp">
+      <Filter>GameObject\Component\AudioSource</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LAudioListener.cpp">
+      <Filter>GameObject\Component\AudioListener</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LFontWrapper.cpp">
+      <Filter>Font</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)LMath.inl">

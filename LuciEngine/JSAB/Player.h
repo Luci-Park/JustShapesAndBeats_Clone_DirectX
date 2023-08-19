@@ -1,6 +1,9 @@
 #pragma once
 #include <LScript.h>
-#include "LTexture.h"
+namespace lu::graphics
+{
+	class Texture;
+}
 namespace lu::JSAB
 {
 	class lu::Transform;
@@ -49,7 +52,7 @@ namespace lu::JSAB
 		GameObject* mDashOutline;
 		GameObject* mDashEffect;
 
-		std::shared_ptr<lu::graphics::Texture> lifeTextures[4];
+		std::shared_ptr<graphics::Texture> lifeTextures[4];
 		int mMaxHealth, mCurrHealth;
 	};
 	class lu::MeshRenderer;

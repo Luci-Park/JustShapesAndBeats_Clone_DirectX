@@ -14,6 +14,9 @@
 #include "LCollisionManager.h"
 #include "..\\Editor_SOURCE\\TransformWidget.h"
 #include "LParticleSystem.h"
+#include "LAudioListener.h"
+#include "LAudioClip.h"
+#include "LAudioSource.h"
 
 namespace lu
 {
@@ -62,8 +65,7 @@ namespace lu
 
 			degree = pi / 8.0f;
 
-			child->GetComponent<Transform>()->SetLocalPosition(Vector3(-2.0f, 0.0f, 1.0001f));
-			//child->GetComponent<Transform>()->SetLocalRotation(Quaternion::CreateFromAxisAngle(Vector3::Forward, degree));
+			child->GetComponent<Transform>()->SetLocalPosition(Vector3(-0.5f, 0.0f, 1.0001f));
 		}
 
 		{
@@ -77,6 +79,10 @@ namespace lu
 			Collider2D* cd = player->AddComponent<Collider2D>();
 			cd->SetType(eColliderType::Circle);
 			player->AddComponent<PlayerScript>();
+
+			AudioSource* as = player->AddComponent<AudioSource>();
+			as->SetClip(Resources::Load<AudioClip>(L"TestSound", L"..\\Resources\\Sound\\0.mp3"));
+			as->Play();
 		}
 		{
 			GameObject* player = new GameObject();
@@ -101,6 +107,9 @@ namespace lu
 			//camera->AddComponent<CameraScript>();
 			renderer::cameras.push_back(cameraComp);
 			renderer::mainCamera = cameraComp;
+
+
+			camera->AddComponent<AudioListener>();
 		}
 
 		//UI Camera

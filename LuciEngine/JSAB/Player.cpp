@@ -6,6 +6,7 @@
 #include "LCollider2D.h"
 #include "LResources.h"
 #include "LMeshRenderer.h"
+#include "LTexture.h"
 namespace lu::JSAB
 {
 	Player::Player()
@@ -27,10 +28,10 @@ namespace lu::JSAB
 		mMoveScale = { mOrgScale.x * 0.7f, mOrgScale.y * 1.3f, 1.f };
 		mDashScale = { mOrgScale.x * 0.5f, mOrgScale.y * 2.f, 1.f };
 		
-		lifeTextures[3] = Resources::Find<lu::graphics::Texture>(L"player1");
-		lifeTextures[2] = Resources::Find<lu::graphics::Texture>(L"player22");
-		lifeTextures[1] = Resources::Find<lu::graphics::Texture>(L"player41");
-		lifeTextures[0] = Resources::Find<lu::graphics::Texture>(L"player61");
+		lifeTextures[3] = Resources::Find<graphics::Texture>(L"player1");
+		lifeTextures[2] = Resources::Find<graphics::Texture>(L"player22");
+		lifeTextures[1] = Resources::Find<graphics::Texture>(L"player41");
+		lifeTextures[0] = Resources::Find<graphics::Texture>(L"player61");
 	}
 	void Player::Update()
 	{
@@ -182,11 +183,11 @@ namespace lu::JSAB
 		animation->AddColliderSizeKey(1, { 1, 1 });
 		animation->AddColliderSizeKey(5, { 3, 3 });
 
-		animation->AddTextureKey(0, lu::Resources::Find<lu::graphics::Texture>(L"player1"));
-		animation->AddTextureKey(1, lu::Resources::Find<lu::graphics::Texture>(L"player24"));
-		animation->AddTextureKey(2, lu::Resources::Find<lu::graphics::Texture>(L"player43"));
-		animation->AddTextureKey(3, lu::Resources::Find<lu::graphics::Texture>(L"player64"));
-		animation->AddTextureKey(4, lu::Resources::Find<lu::graphics::Texture>(L"player1"));
+		animation->AddTextureKey(0, Resources::Find<graphics::Texture>(L"player1"));
+		animation->AddTextureKey(1, Resources::Find<graphics::Texture>(L"player24"));
+		animation->AddTextureKey(2, Resources::Find<graphics::Texture>(L"player43"));
+		animation->AddTextureKey(3, Resources::Find<graphics::Texture>(L"player64"));
+		animation->AddTextureKey(4, Resources::Find<graphics::Texture>(L"player1"));
 
 		animator->PlayAnimation(L"Default", true);
 	}

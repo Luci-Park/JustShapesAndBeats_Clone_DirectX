@@ -5,6 +5,8 @@
 #include "LSceneManager.h"
 #include "LResources.h"
 #include "LCollisionManager.h"
+#include "LFmod.h"
+#include "LFontWrapper.h"
 namespace lu
 {
 	Application::Application()
@@ -32,6 +34,9 @@ namespace lu
 	{
 		Time::Initiailize();
 		Input::Initialize();
+		Fmod::Initialize();
+		FontWrapper::Initialize();
+
 		renderer::Initialize();
 		SceneManager::Initialize();
 	}
@@ -51,9 +56,11 @@ namespace lu
 
 	void Application::Render()
 	{
-		Time::Render();
 		graphicDevice->ClearTarget();
 		graphicDevice->UpdateViewPort();
+
+		Time::Render();
+		//FontWrapper::DrawFont(L"TEXT", 10.f, 30.f, 20, FONT_RGBA(255, 0, 255, 255));
 		
 		renderer::Render();
 	}
@@ -72,6 +79,8 @@ namespace lu
 	{
 		renderer::Release();
 		SceneManager::Release();		
+		Fmod::Release();
+		FontWrapper::Release();
 	}
 
 	void Application::SetWindow(HWND hwnd, UINT width, UINT height)
