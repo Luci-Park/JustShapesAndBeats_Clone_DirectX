@@ -11,13 +11,15 @@
 namespace lu::JSAB
 {
 	Player::Player()
-		: mMoveSpeed(280)
+		: mMoveSpeed(330)
 		, mDashSpeed(1120.0f)
-		, mDashDuration(0.1f)
+		, mDashDuration(.1f)
+		, mDashCoolDuration(.2f)
+		, mTimer(0.0f)
 		, mMoveDir(Vector3::Zero)
 		, mMaxHealth(4)
 		, mCurrHealth(mMaxHealth)
-		, mbDashing(false)
+		, mDashState(eDashState::Idle)
 	{
 	}
 	void Player::Initialize()
@@ -35,19 +37,18 @@ namespace lu::JSAB
 	}
 	void Player::Update()
 	{
-	
+		CountTimer();
 		Vector3 moveDir = GetInputDir();
-		mDashTimer += Time::DeltaTime();
-	  	if (Input::GetKeyDown(eKeyCode::SPACE) && !mbDashing)
+	  	if (Input::GetKeyDown(eKeyCode::SPACE) && mDashState == eDashState::Idle)
 		{
-			mbDashing = true;
-			mDashTimer = 0.f;
+			mDashState = eDashState::Dashing;
+			mTimer = 0.f;
 			mDashDir = moveDir == Vector3::Zero ? Vector3::Right : moveDir;
 			mDashBurst->mTransform->SetPosition(mTr->GetPosition());
 			mDashBurstAnim->PlayAnimation(L"Burst", false);
 		}
 	
-		if (!mbDashing)
+		if (mDashState != eDashState::Dashing)
 		{
 			mCr->SetState(eState::Active);
 			mDashOutline->SetState(eState::InActive);
@@ -57,7 +58,11 @@ namespace lu::JSAB
 		}
 		else
 		{
-			if (mDashTimer > mDashDuration) mbDashing = false;
+			if (mTimer > mDashDuration)
+			{
+				mDashState = eDashState::CoolDown;
+				mTimer = 0.0f;
+			}
 			mCr->SetState(eState::InActive);
 			mDashOutline->SetState(eState::Active);
 
@@ -118,6 +123,13 @@ namespace lu::JSAB
 		{
 			mTr->SetScale(scale);
 		}
+	}
+
+	void Player::CountTimer()
+	{
+		mTimer += Time::DeltaTime();
+		if (mDashState == eDashState::CoolDown && mTimer > mDashCoolDuration)
+			mDashState = eDashState::Idle;
 	}
 
 	Vector3 Player::GetMoveScale(Vector3 direction)
