@@ -1,5 +1,5 @@
 #include "TutorialScene.h"
-#include "PlayerObject.h"
+#include "PlayerPrefab.h"
 #include "LCamera.h"
 #include "..\\Editor_SOURCE\\TransformWidget.h"
 #include "EightSideBullet.h"
@@ -7,7 +7,7 @@ namespace lu::JSAB::Tutorial
 {
 	void TutorialScene::Initialize()
 	{
-		AddGameObject(eLayerType::Player, new PlayerObject());
+		AddGameObject(eLayerType::Player, new PlayerPrefab());
 		
 		/*GameObject* pieces = new Pieces;
 		pieces->AddComponent<gui::TransformWidget>();

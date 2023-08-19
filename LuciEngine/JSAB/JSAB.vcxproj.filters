@@ -30,7 +30,7 @@
       <Filter>Contents\Load</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="PlayerObject.cpp">
+    <ClCompile Include="PlayerPrefab.cpp">
       <Filter>Contents\Player</Filter>
     </ClCompile>
     <ClCompile Include="TitleScene.cpp">
@@ -98,7 +98,7 @@
       <Filter>Contents\Load</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="PlayerObject.h">
+    <ClInclude Include="PlayerPrefab.h">
       <Filter>Contents\Player</Filter>
     </ClInclude>
     <ClInclude Include="TitleScene.h">

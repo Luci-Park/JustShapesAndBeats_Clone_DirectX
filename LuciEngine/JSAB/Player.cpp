@@ -7,17 +7,17 @@
 #include "LResources.h"
 #include "LMeshRenderer.h"
 #include "LTexture.h"
+#include "LAnimator.h"
 namespace lu::JSAB
 {
 	Player::Player()
-		: mMoveSpeed(280.0f)
+		: mMoveSpeed(280)
 		, mDashSpeed(1120.0f)
-		, mDashTimer(0.0f)
 		, mDashDuration(0.1f)
 		, mMoveDir(Vector3::Zero)
-		, mIsDashing(false)
 		, mMaxHealth(4)
 		, mCurrHealth(mMaxHealth)
+		, mbDashing(false)
 	{
 	}
 	void Player::Initialize()
@@ -35,15 +35,19 @@ namespace lu::JSAB
 	}
 	void Player::Update()
 	{
+	
 		Vector3 moveDir = GetInputDir();
-		if (Input::GetKeyDown(eKeyCode::SPACE) && !mIsDashing)
+		mDashTimer += Time::DeltaTime();
+	  	if (Input::GetKeyDown(eKeyCode::SPACE) && !mbDashing)
 		{
-			mIsDashing = true;
+			mbDashing = true;
 			mDashTimer = 0.f;
 			mDashDir = moveDir == Vector3::Zero ? Vector3::Right : moveDir;
+			mDashBurst->mTransform->SetPosition(mTr->GetPosition());
+			mDashBurstAnim->PlayAnimation(L"Burst", false);
 		}
-
-		if (!mIsDashing)
+	
+		if (!mbDashing)
 		{
 			mCr->SetState(eState::Active);
 			mDashOutline->SetState(eState::InActive);
@@ -53,9 +57,7 @@ namespace lu::JSAB
 		}
 		else
 		{
-			mDashTimer += Time::DeltaTime();
-			if (mDashTimer > mDashDuration) mIsDashing = false;
-
+			if (mDashTimer > mDashDuration) mbDashing = false;
 			mCr->SetState(eState::InActive);
 			mDashOutline->SetState(eState::Active);
 
@@ -63,6 +65,11 @@ namespace lu::JSAB
 			MoveRotate(GetRotation(mDashDir));
 			mTr->SetScale(mDashScale);
 		}
+	}
+	void Player::SetDashBurst(GameObject* burst)
+	{
+		mDashBurst = burst;
+		mDashBurstAnim = mDashBurst->GetComponent<Animator>();
 	}
 	void Player::MoveRotate(Quaternion rotation)
 	{
@@ -112,6 +119,7 @@ namespace lu::JSAB
 			mTr->SetScale(scale);
 		}
 	}
+
 	Vector3 Player::GetMoveScale(Vector3 direction)
 	{
 		static Vector3 prevDir = Vector3::Zero;
@@ -156,39 +164,39 @@ namespace lu::JSAB
 
 		return Quaternion::CreateFromAxisAngle(Vector3::Forward, radian);
 	}
-
-#include "LMeshRenderer.h"
-#include "LAnimation.h"
-#include "LAnimator.h"
-#include "LResources.h"
-#include "LTexture.h"
-	void AnimationTester::Initialize()
-	{
-		mTr = GetOwner()->mTransform;
-		mMr = GetOwner()->GetComponent<lu::MeshRenderer>();
-		mCd = GetOwner()->AddComponent<Collider2D>();
-		lu::Animator* animator = GetOwner()->AddComponent<lu::Animator>();
-		lu::Animation* animation = animator->CreateAnimation(L"Default");
-
-		animation->AddPositionKey(0, { 0, 0, 0 });
-		animation->AddPositionKey(3, { 100, 100, 0 });
-		animation->AddRotationKey(1, Quaternion::Identity);
-		animation->AddRotationKey(4, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 1.5f));
-		animation->AddScaleKey(0, { 30, 30, 1 });
-		animation->AddScaleKey(4, { 100, 100, 1 });
-		animation->AddColliderActiveKey(0, false);
-		animation->AddColliderActiveKey(1, true);
-		animation->AddColliderCenterKey(2, { 0, 0 });
-		animation->AddColliderCenterKey(4, { -200, -200 });
-		animation->AddColliderSizeKey(1, { 1, 1 });
-		animation->AddColliderSizeKey(5, { 3, 3 });
-
-		animation->AddTextureKey(0, Resources::Find<graphics::Texture>(L"player1"));
-		animation->AddTextureKey(1, Resources::Find<graphics::Texture>(L"player24"));
-		animation->AddTextureKey(2, Resources::Find<graphics::Texture>(L"player43"));
-		animation->AddTextureKey(3, Resources::Find<graphics::Texture>(L"player64"));
-		animation->AddTextureKey(4, Resources::Find<graphics::Texture>(L"player1"));
-
-		animator->PlayAnimation(L"Default", true);
-	}
+//
+//#include "LMeshRenderer.h"
+//#include "LAnimation.h"
+//#include "LAnimator.h"
+//#include "LResources.h"
+//#include "LTexture.h"
+//	void AnimationTester::Initialize()
+//	{
+//		mTr = GetOwner()->mTransform;
+//		mMr = GetOwner()->GetComponent<lu::MeshRenderer>();
+//		mCd = GetOwner()->AddComponent<Collider2D>();
+//		lu::Animator* animator = GetOwner()->AddComponent<lu::Animator>();
+//		lu::Animation* animation = animator->CreateAnimation(L"Default");
+//
+//		animation->AddPositionKey(0, { 0, 0, 0 });
+//		animation->AddPositionKey(3, { 100, 100, 0 });
+//		animation->AddRotationKey(1, Quaternion::Identity);
+//		animation->AddRotationKey(4, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 1.5f));
+//		animation->AddScaleKey(0, { 30, 30, 1 });
+//		animation->AddScaleKey(4, { 100, 100, 1 });
+//		animation->AddColliderActiveKey(0, false);
+//		animation->AddColliderActiveKey(1, true);
+//		animation->AddColliderCenterKey(2, { 0, 0 });
+//		animation->AddColliderCenterKey(4, { -200, -200 });
+//		animation->AddColliderSizeKey(1, { 1, 1 });
+//		animation->AddColliderSizeKey(5, { 3, 3 });
+//
+//		animation->AddTextureKey(0, Resources::Find<graphics::Texture>(L"player1"));
+//		animation->AddTextureKey(1, Resources::Find<graphics::Texture>(L"player24"));
+//		animation->AddTextureKey(2, Resources::Find<graphics::Texture>(L"player43"));
+//		animation->AddTextureKey(3, Resources::Find<graphics::Texture>(L"player64"));
+//		animation->AddTextureKey(4, Resources::Find<graphics::Texture>(L"player1"));
+//
+//		animator->PlayAnimation(L"Default", true);
+//	}
 }

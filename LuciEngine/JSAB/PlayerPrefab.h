@@ -1,20 +1,23 @@
 #pragma once
 #include "..\\Engine_SOURCE\\LGameObject.h"
 
-class lu::graphics::Material;
+namespace lu::graphics
+{
+	class Material;
+}
 namespace lu::JSAB
 {
-	class PlayerObject : public GameObject
+	class PlayerPrefab : public GameObject
 	{
 	public:
-		PlayerObject();
-		virtual ~PlayerObject();
+		PlayerPrefab();
+		virtual ~PlayerPrefab();
 
 		virtual void Initialize() override;
 	private:
-		std::shared_ptr<lu::graphics::Material> CreatePlayerMat();
-		std::shared_ptr<lu::graphics::Material> CreateDashOutlineMat();
-		std::shared_ptr<lu::graphics::Material> CreateDashEffectMat();
+		std::shared_ptr<graphics::Material> CreatePlayerMat();
+		std::shared_ptr<graphics::Material> CreateDashOutlineMat();
+		std::shared_ptr<graphics::Material> CreateDashEffectMat();
 	};
 
 	class Pieces : public GameObject

@@ -1,18 +1,20 @@
-#include "PlayerObject.h"
+#include "PlayerPrefab.h"
 #include "LMeshRenderer.h"
 #include "LResources.h"
 #include "LSceneManager.h"
 #include "Player.h"
 #include "LObject.h"
+#include "LAnimation.h"
+#include "LAnimator.h"
 namespace lu::JSAB
 {
-	PlayerObject::PlayerObject()
+	PlayerPrefab::PlayerPrefab()
 	{
 	}
-	PlayerObject::~PlayerObject()
+	PlayerPrefab::~PlayerPrefab()
 	{
 	}
-	void PlayerObject::Initialize()
+	void PlayerPrefab::Initialize()
 	{
 		SetName(L"Player");
 		std::shared_ptr<Material> mat = CreatePlayerMat();
@@ -38,8 +40,33 @@ namespace lu::JSAB
 			dashoutline->SetState(eState::InActive);
 			script->SetDashOutline(dashoutline);
 		}
+		{
+			GameObject* dashBurst = object::Instantiate<GameObject>(eLayerType::Player);
+			dashBurst->SetName(L"PlayerBurst");
+			dashBurst->mTransform->SetScale({ 22.3* 4, 22.3 * 4, 1 });
+			std::shared_ptr<Material> mat = std::make_shared<Material>();
+			mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
+			mat->SetTint({0, 1, 1, 1});
+			MeshRenderer* mr = dashBurst->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(mat);
+			mr->SetActive(false);
+			Animator* ani = dashBurst->AddComponent<Animator>();
+			Animation* anim = ani->CreateAnimation(L"Burst");
+			float duration = 0.2f;
+			float startTime = 0;
+			float burstStep = 0.2 * 0.2;
+			anim->AddRendererActiveKey(0, true);
+			anim->AddTextureKey(0, Resources::Find<Texture>(L"Burst1"));
+			anim->AddTextureKey(0 + burstStep * 0.5, Resources::Find<Texture>(L"Burst2"));
+			anim->AddTextureKey(0 + burstStep, Resources::Find<Texture>(L"Burst3"));
+			anim->AddTextureKey(0 + burstStep * 0.5, Resources::Find<Texture>(L"Burst4"));
+			anim->AddTextureKey(duration - burstStep, Resources::Find<Texture>(L"Burst5"));
+			anim->AddRendererActiveKey(duration, false);
+			script->SetDashBurst(dashBurst);
+		}
 	}
-	std::shared_ptr<Material> PlayerObject::CreatePlayerMat()
+	std::shared_ptr<Material> PlayerPrefab::CreatePlayerMat()
 	{
 		std::shared_ptr<Material> mat = Resources::Find<Material>(L"PlayerMat");
 		if (!mat)
@@ -52,7 +79,7 @@ namespace lu::JSAB
 		}
 		return mat;
 	}
-	std::shared_ptr<lu::Material> PlayerObject::CreateDashOutlineMat()
+	std::shared_ptr<lu::Material> PlayerPrefab::CreateDashOutlineMat()
 	{
 		std::shared_ptr<Material> mat = Resources::Find<Material>(L"DashOutlineMat");
 		if (!mat)
@@ -65,7 +92,7 @@ namespace lu::JSAB
 		}
 		return mat;
 	}
-	std::shared_ptr<lu::Material> PlayerObject::CreateDashEffectMat()
+	std::shared_ptr<lu::Material> PlayerPrefab::CreateDashEffectMat()
 	{
 		std::shared_ptr<Material> mat = Resources::Find<Material>(L"DashEffectMat");
 		if (!mat)

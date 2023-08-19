@@ -1,8 +1,8 @@
 #pragma once
 #include "..\Engine_SOURCE\LScene.h"
-
 namespace lu
 {
+	class AudioSource;
 	class PlayScene : public Scene
 	{
 	public:
@@ -15,7 +15,7 @@ namespace lu
 		virtual void Render() override;
 
 	private:
-
+		AudioSource* as;
 	};
 }
 

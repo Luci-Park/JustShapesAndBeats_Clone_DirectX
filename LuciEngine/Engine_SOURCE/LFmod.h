@@ -21,9 +21,11 @@ namespace lu
 	public:
 		static void Initialize();
 		static bool CreateSound(const std::string& path, FMOD::Sound** sound);
-		static void SoundPlay(FMOD::Sound* sound, FMOD::Channel** channel);
+		static void Play(FMOD::Sound* sound, FMOD::Channel** channel);
 		static void Set3DListenerAttributes(const Vector3* pos, const Vector3* vel, const Vector3* forward, const Vector3* up);
 		static void Release();
+
+		static void Update();
 
 	private:
 		static FMOD::Studio::System* mSystem;

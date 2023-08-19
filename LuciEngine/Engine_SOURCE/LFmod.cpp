@@ -21,7 +21,7 @@ namespace lu
 
 		return true;
 	}
-	void Fmod::SoundPlay(FMOD::Sound* sound, FMOD::Channel** channel)
+	void Fmod::Play(FMOD::Sound* sound, FMOD::Channel** channel)
 	{
 		mCoreSystem->playSound(sound, 0, false, channel);
 	}
@@ -38,5 +38,9 @@ namespace lu
 	{
 		mSystem->release();
 		mSystem = nullptr;
+	}
+	void Fmod::Update()
+	{
+		mCoreSystem->update();
 	}
 }

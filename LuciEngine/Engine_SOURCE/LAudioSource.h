@@ -16,8 +16,13 @@ namespace lu
 		virtual void Render() override;
 
 		void Play();
+		void Play(bool loop);
+		void PlayReversed();
+		void Pause();
+		void UnPause();
 		void Stop();
 		void SetLoop(bool loop);
+		void SetPosition(double position_sec);
 		void SetClip(std::shared_ptr<AudioClip> clip) { mAudioClip = clip; }
 		std::shared_ptr<AudioClip> GetClip() { return mAudioClip; }
 		void Is3D(bool is3d) { this->is3D = is3D; }

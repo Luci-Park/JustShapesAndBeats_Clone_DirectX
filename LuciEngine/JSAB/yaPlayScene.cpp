@@ -17,6 +17,7 @@
 #include "LAudioListener.h"
 #include "LAudioClip.h"
 #include "LAudioSource.h"
+#include "LInput.h"
 
 namespace lu
 {
@@ -80,9 +81,11 @@ namespace lu
 			cd->SetType(eColliderType::Circle);
 			player->AddComponent<PlayerScript>();
 
-			AudioSource* as = player->AddComponent<AudioSource>();
-			as->SetClip(Resources::Load<AudioClip>(L"TestSound", L"..\\Resources\\Sound\\0.mp3"));
+			as = player->AddComponent<AudioSource>();
+			as->SetClip(Resources::Load<AudioClip>(L"TestSound", L"..\\..\\Assets\\AudioClips\\GameMusic\\mus_corrupted.wav"));
 			as->Play();
+			as->SetPosition(14.617);
+			//as->PlayReversed();
 		}
 		{
 			GameObject* player = new GameObject();
@@ -127,6 +130,8 @@ namespace lu
 
 	void PlayScene::Update()
 	{
+		if (Input::GetKeyDown(eKeyCode::SPACE))
+			as->SetPosition(14.619);
 		Scene::Update();
 	}
 

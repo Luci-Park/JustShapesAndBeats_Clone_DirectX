@@ -43,6 +43,27 @@ namespace lu
 		mAudioClip->Play();
 	}
 
+	void AudioSource::Play(bool loop)
+	{
+		mAudioClip->SetLoop(loop);
+		mAudioClip->Play();
+	}
+
+	void AudioSource::PlayReversed()
+	{
+		mAudioClip->PlayReversed();
+	}
+
+	void AudioSource::Pause()
+	{
+		mAudioClip->Pause(true);
+	}
+
+	void AudioSource::UnPause()
+	{
+		mAudioClip->Pause(false);
+	}
+
 	void AudioSource::Stop()
 	{
 		mAudioClip->Stop();
@@ -51,5 +72,10 @@ namespace lu
 	void AudioSource::SetLoop(bool loop)
 	{
 		mAudioClip->SetLoop(loop);
+	}
+	void AudioSource::SetPosition(double position_sec)
+	{
+		int position_ms = static_cast<int>(round(position_sec * 1000));
+		mAudioClip->SetPosition(position_ms);
 	}
 }
