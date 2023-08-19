@@ -9,7 +9,7 @@ namespace lu::JSAB::Tutorial
 	void TutorialScene::Initialize()
 	{
 		AddGameObject(eLayerType::Player, new PlayerPrefab());
-		AddGameObject(eLayerType::Player, new TrianglePrefab());
+		AddGameObject(eLayerType::Bullet, new TrianglePrefab());
 		/*GameObject* pieces = new Pieces;
 		pieces->AddComponent<gui::TransformWidget>();
 		AddGameObject(eLayerType::Player, pieces);
