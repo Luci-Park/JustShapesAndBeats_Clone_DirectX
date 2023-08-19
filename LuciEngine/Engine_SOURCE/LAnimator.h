@@ -1,8 +1,8 @@
 #pragma once
 #include "LComponent.h"
+#include "LAnimation.h"
 namespace lu
 {
-	class Animation;
 	class Animator : public Component
 	{
 	public:

@@ -48,9 +48,6 @@
     <ClCompile Include="MenuButtonObject.cpp">
       <Filter>Contents\Scene\Title\UIs</Filter>
     </ClCompile>
-    <ClCompile Include="TriangleObject.cpp">
-      <Filter>Contents\Triangle</Filter>
-    </ClCompile>
     <ClCompile Include="TutorialScene.cpp">
       <Filter>Contents\Scene\Tutorial\Scene</Filter>
     </ClCompile>
@@ -69,6 +66,9 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Contents\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="LTrianglePrefab.cpp">
+      <Filter>Contents\Triangle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,9 +116,6 @@
     <ClInclude Include="MenuButtonObject.h">
       <Filter>Contents\Scene\Title\UIs</Filter>
     </ClInclude>
-    <ClInclude Include="TriangleObject.h">
-      <Filter>Contents\Triangle</Filter>
-    </ClInclude>
     <ClInclude Include="TutorialScene.h">
       <Filter>Contents\Scene\Tutorial\Scene</Filter>
     </ClInclude>
@@ -137,6 +134,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Contents\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="LTrianglePrefab.h">
+      <Filter>Contents\Triangle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

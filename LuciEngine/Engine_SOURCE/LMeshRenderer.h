@@ -16,15 +16,15 @@ namespace lu
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-		void SetMesh(std::shared_ptr<Mesh> mesh) { mMesh = mesh; }
-		void SetMaterial(std::shared_ptr<Material> material){ mMaterial = material; }
+		MeshRenderer* SetMesh(std::shared_ptr<Mesh> mesh) { mMesh = mesh; return this; }
+		MeshRenderer* SetMaterial(std::shared_ptr<Material> material) { mMaterial = material; return this; }
 		std::shared_ptr<Mesh> GetMesh(){ return mMesh; }
 		std::shared_ptr<Material> GetMaterial(){ return mMaterial; }
 
-		void SetColor(Color color) { mColor = color; }
+		MeshRenderer* SetColor(Color color) { mColor = color; return this; }
 		void UseColor(bool use) { mInterpolation = use ? 1 : 0; }
 		Color GetColor() { return mColor; }
-		void SetInterpolation(float interpolation) { mInterpolation = std::clamp(interpolation, 0.f, 1.f); }
+		MeshRenderer* SetInterpolation(float interpolation) { mInterpolation = std::clamp(interpolation, 0.f, 1.f); return this; }
 
 	private:
 	 	std::shared_ptr<Mesh> mMesh;

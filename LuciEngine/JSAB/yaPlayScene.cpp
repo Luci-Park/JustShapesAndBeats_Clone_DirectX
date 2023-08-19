@@ -81,10 +81,10 @@ namespace lu
 			cd->SetType(eColliderType::Circle);
 			player->AddComponent<PlayerScript>();
 
-			as = player->AddComponent<AudioSource>();
+			/*as = player->AddComponent<AudioSource>();
 			as->SetClip(Resources::Load<AudioClip>(L"TestSound", L"..\\..\\Assets\\AudioClips\\GameMusic\\mus_corrupted.wav"));
 			as->Play();
-			as->SetPosition(14.617);
+			as->SetPosition(14.617);*/
 			//as->PlayReversed();
 		}
 		{

@@ -4,7 +4,6 @@
 #include "LSceneManager.h"
 #include "Player.h"
 #include "LObject.h"
-#include "LAnimation.h"
 #include "LAnimator.h"
 namespace lu::JSAB
 {

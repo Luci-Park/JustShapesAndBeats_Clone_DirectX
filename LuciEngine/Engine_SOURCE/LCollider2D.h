@@ -19,9 +19,9 @@ namespace lu
 		void OnCollisionStay(Collider2D* other);
 		void OnCollisionExit(Collider2D* other);
 
-		void SetType(eColliderType type) { mType = type; }
-		void SetSize(Vector2 size) { mSize = size; }
-		void SetCenter(Vector2 size) { mCenter = size; }
+		Collider2D* SetType(eColliderType type) { mType = type; return this; }
+		Collider2D* SetSize(Vector2 size) { mSize = size; return this; }
+		Collider2D* SetCenter(Vector2 size) { mCenter = size; return this; }
 
 		UINT GetColliderID() { return mColliderID; }
 

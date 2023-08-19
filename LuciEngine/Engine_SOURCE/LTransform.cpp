@@ -9,10 +9,10 @@ namespace lu
 	Transform::Transform()
 		:Component(eComponentType::Transform)
 		, mPosition(Vector3::Zero)
-		, mRotation(Vector3::Zero)
+		, mRotation(Quaternion::Identity)
 		, mScale(Vector3::One)
 		, mLocalPosition(Vector3::Zero)
-		, mLocalRotation(Vector3::Zero)
+		, mLocalRotation(Quaternion::Identity)
 		, mLocalScale(Vector3::One)
 		, mParent(this)
 	{

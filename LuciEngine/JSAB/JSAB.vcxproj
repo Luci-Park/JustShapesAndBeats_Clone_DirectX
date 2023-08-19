@@ -162,6 +162,7 @@
     <ClInclude Include="EightSideBullet.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="JSABRenderer.h" />
+    <ClInclude Include="LTrianglePrefab.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="yaPlayScene.h" />
     <ClInclude Include="MenuButtonObject.h" />
@@ -171,7 +172,6 @@
     <ClInclude Include="OpeningUIObjects.h" />
     <ClInclude Include="OverworldScene.h" />
     <ClInclude Include="PlayerPrefab.h" />
-    <ClInclude Include="TriangleObject.h" />
     <ClInclude Include="TryThisScene.h" />
     <ClInclude Include="TutorialScene.h" />
     <ClInclude Include="yaCameraScript.h" />
@@ -188,6 +188,7 @@
     <ClCompile Include="EightSideBullet.cpp" />
     <ClCompile Include="JSABRenderer.cpp" />
     <ClCompile Include="LoadScenes.h" />
+    <ClCompile Include="LTrianglePrefab.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="yaPlayScene.cpp" />
     <ClCompile Include="JSAB.cpp" />
@@ -198,7 +199,6 @@
     <ClCompile Include="OpeningUIObjects.cpp" />
     <ClCompile Include="OverworldScene.cpp" />
     <ClCompile Include="PlayerPrefab.cpp" />
-    <ClCompile Include="TriangleObject.cpp" />
     <ClCompile Include="TryThisScene.cpp" />
     <ClCompile Include="TutorialScene.cpp" />
     <ClCompile Include="yaCameraScript.cpp" />
