@@ -156,11 +156,11 @@
     <ClInclude Include="AnnhilateScene.h" />
     <ClInclude Include="BackgroundObject.h" />
     <ClInclude Include="BackgroundScript.h" />
-    <ClInclude Include="Bullet.h" />
     <ClInclude Include="CoolFriendsScene.h" />
     <ClInclude Include="DubwooferScene.h" />
-    <ClInclude Include="EightSideBullet.h" />
+    <ClInclude Include="EightSideBulletPrefabs.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="GeneralEffects.h" />
     <ClInclude Include="JSABRenderer.h" />
     <ClInclude Include="LTrianglePrefab.h" />
     <ClInclude Include="Player.h" />
@@ -182,10 +182,10 @@
     <ClCompile Include="AnnhilateScene.cpp" />
     <ClCompile Include="BackgroundObject.cpp" />
     <ClCompile Include="BackgroundScript.cpp" />
-    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CoolFriendsScene.cpp" />
     <ClCompile Include="DubwooferScene.cpp" />
-    <ClCompile Include="EightSideBullet.cpp" />
+    <ClCompile Include="EightSideBulletPrefabs.cpp" />
+    <ClCompile Include="GeneralEffects.cpp" />
     <ClCompile Include="JSABRenderer.cpp" />
     <ClCompile Include="LoadScenes.h" />
     <ClCompile Include="LTrianglePrefab.cpp" />

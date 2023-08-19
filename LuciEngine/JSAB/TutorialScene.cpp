@@ -3,13 +3,14 @@
 #include "LTrianglePrefab.h"
 #include "LCamera.h"
 #include "..\\Editor_SOURCE\\TransformWidget.h"
-#include "EightSideBullet.h"
+#include "EightSideBulletPrefabs.h"
 namespace lu::JSAB::Tutorial
 {
 	void TutorialScene::Initialize()
 	{
 		AddGameObject(eLayerType::Player, new PlayerPrefab());
 		AddGameObject(eLayerType::Bullet, new TrianglePrefab());
+		AddGameObject(eLayerType::Bullet, new TutorialEightBullets());
 		/*GameObject* pieces = new Pieces;
 		pieces->AddComponent<gui::TransformWidget>();
 		AddGameObject(eLayerType::Player, pieces);

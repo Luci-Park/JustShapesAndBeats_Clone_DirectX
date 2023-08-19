@@ -402,7 +402,7 @@ namespace lu
 	{
 		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime)
 		{
-			ColorKey* keyframe = (ColorKey*) & timeline->keyframes[timeline->currIndex];
+			ColorKey* keyframe = dynamic_cast<ColorKey*>(timeline->keyframes[timeline->currIndex]);
 			if (mTime >= keyframe->timestamp)
 			{
 				mMr->SetColor(keyframe->value);
@@ -416,14 +416,14 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			FloatKey* keyframe = (FloatKey*) & timeline->keyframes[0];
+			FloatKey* keyframe = dynamic_cast<FloatKey*>(timeline->keyframes[0]);
 			if (keyframe->timestamp >= mTime)
 				mMr->SetInterpolation(keyframe->value);
 		}
 		else
 		{
-			FloatKey* prev = (FloatKey*) & timeline->keyframes[timeline->currIndex - 1];
-			FloatKey* next = (FloatKey*) & timeline->keyframes[timeline->currIndex];
+			FloatKey* prev = dynamic_cast<FloatKey*>(timeline->keyframes[timeline->currIndex - 1]);
+			FloatKey* next = dynamic_cast<FloatKey*>(timeline->keyframes[timeline->currIndex]);
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
 			mMr->SetInterpolation(prev->value + t*(next->value - prev->value));
 		}
@@ -434,14 +434,14 @@ namespace lu
 		if (timeline->IsComplete())return;
 		if (timeline->currIndex == 0)
 		{
-			ColorKey* keyframe = (ColorKey*) & timeline->keyframes[0];
+			ColorKey* keyframe = dynamic_cast<ColorKey*>(timeline->keyframes[0]);
 			if (keyframe->timestamp >= mTime)
 				mMr->GetMaterial()->SetTint(keyframe->value);
 		}
 		else
 		{
-			ColorKey* prev = (ColorKey*)&timeline->keyframes[timeline->currIndex - 1];
-			ColorKey* next = (ColorKey*)&timeline->keyframes[timeline->currIndex];
+			ColorKey* prev = dynamic_cast<ColorKey*>(timeline->keyframes[timeline->currIndex - 1]);
+			ColorKey* next = dynamic_cast<ColorKey*>(timeline->keyframes[timeline->currIndex]);
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
 			mMr->GetMaterial()->SetTint(Color::Lerp(prev->value, next->value, t));
 		}

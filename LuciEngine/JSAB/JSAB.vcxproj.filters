@@ -29,7 +29,6 @@
     <ClCompile Include="JSABRenderer.cpp">
       <Filter>Contents\Load</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="PlayerPrefab.cpp">
       <Filter>Contents\Player</Filter>
     </ClCompile>
@@ -51,7 +50,6 @@
     <ClCompile Include="TutorialScene.cpp">
       <Filter>Contents\Scene\Tutorial\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="EightSideBullet.cpp" />
     <ClCompile Include="yaCameraScript.cpp">
       <Filter>EngineTesters</Filter>
     </ClCompile>
@@ -69,6 +67,12 @@
     </ClCompile>
     <ClCompile Include="LTrianglePrefab.cpp">
       <Filter>Contents\Triangle</Filter>
+    </ClCompile>
+    <ClCompile Include="EightSideBulletPrefabs.cpp">
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneralEffects.cpp">
+      <Filter>Contents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -97,7 +101,6 @@
     <ClInclude Include="JSABRenderer.h">
       <Filter>Contents\Load</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h" />
     <ClInclude Include="PlayerPrefab.h">
       <Filter>Contents\Player</Filter>
     </ClInclude>
@@ -119,7 +122,6 @@
     <ClInclude Include="TutorialScene.h">
       <Filter>Contents\Scene\Tutorial\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="EightSideBullet.h" />
     <ClInclude Include="yaPlayerScript.h">
       <Filter>EngineTesters</Filter>
     </ClInclude>
@@ -138,6 +140,12 @@
     <ClInclude Include="LTrianglePrefab.h">
       <Filter>Contents\Triangle</Filter>
     </ClInclude>
+    <ClInclude Include="EightSideBulletPrefabs.h">
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneralEffects.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -148,9 +156,6 @@
     </Filter>
     <Filter Include="Contents\Scene">
       <UniqueIdentifier>{2ece5e94-2beb-4579-8ff7-7b56ddd12fa1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Scripts">
-      <UniqueIdentifier>{50cf42d5-dd94-4d43-8e8d-4da76e95dd5c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Background">
       <UniqueIdentifier>{0d4b3305-a180-4535-a185-a204a6175fcb}</UniqueIdentifier>
@@ -179,11 +184,11 @@
     <Filter Include="Contents\Scene\Tutorial\Scene">
       <UniqueIdentifier>{e583f8ff-8653-465a-89a8-05937618ecd0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Scene\Tutorial\Object">
-      <UniqueIdentifier>{a99235cb-c668-4d9d-8f4d-d78158ce8435}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EngineTesters">
       <UniqueIdentifier>{89c1cf6b-235f-4192-bec8-7e6260ac1f60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Tutorial\Bullet">
+      <UniqueIdentifier>{d75bdd1e-9a2a-4064-92d3-3e5b2fa8c43e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

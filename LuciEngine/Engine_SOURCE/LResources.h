@@ -19,7 +19,6 @@ namespace lu
 			{
 				return std::dynamic_pointer_cast<T>(iter->second);
 			}
-
 			//데이터 없다면 널을 반환
 			return nullptr;
 		}
