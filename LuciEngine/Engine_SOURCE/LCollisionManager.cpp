@@ -34,18 +34,18 @@ namespace lu
 		const std::vector<GameObject*>& lefts = activeScene->GetLayer(left).GetGameObjects();
 		const std::vector<GameObject*>& rights = activeScene->GetLayer(right).GetGameObjects();
 
-		for (int i = 0; i < lefts.size(); ++i)
+		for (int left = 0; left < lefts.size(); ++left)
 		{
-			if (lefts[i]->GetState() != Entity::eState::Active) continue;
+			if (lefts[left]->GetState() != Entity::eState::Active) continue;
 
-			Collider2D* leftCol = lefts[i]->GetComponent<Collider2D>();
+			Collider2D* leftCol = lefts[left]->GetComponent<Collider2D>();
 			if (leftCol == nullptr || leftCol->GetState() != Entity::eState::Active) continue;
 
-			for (int j = 0; j < rights.size(); ++j)
+			for (int right = 0; right < rights.size(); ++right)
 			{
-				if (rights[i]->GetState() != GameObject::eState::Active) continue;
+				if (rights[right]->GetState() != GameObject::eState::Active) continue;
 
-				Collider2D* rightCol = rights[i]->GetComponent<Collider2D>();
+				Collider2D* rightCol = rights[right]->GetComponent<Collider2D>();
 				if (rightCol == nullptr || rightCol->GetState() != Entity::eState::Active
 					|| leftCol == rightCol) continue;
 

@@ -14,12 +14,13 @@ namespace lu::JSAB
 	}
 	void TrianglePrefab::Initialize()
 	{
+		SetName(L"CheckPointTriangle");
 		mTransform->SetScale({ 26, 26, 1 });
 		mTransform->SetPosition({ 50,50, 1 });
 		AddComponent<Collider2D>()->SetType(lu::enums::eColliderType::Circle)->SetSize({ 2.3, 2.3 });
 		{
 			GameObject* triangle = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
-			triangle->SetName(L"tri_effect_blue");
+			triangle->SetName(L"triangle");
 			MeshRenderer* mr = triangle->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(CreateTriangleMat());
 		}

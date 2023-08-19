@@ -1,6 +1,7 @@
 #include "EightSideBulletPrefabs.h"
 #include "LMeshRenderer.h"
 #include "LResources.h"
+#include "LCollider2D.h"
 #include "GeneralEffects.h"
 #include "LAnimator.h"
 #include "LObject.h"
@@ -8,6 +9,7 @@ namespace lu::JSAB
 {	
 	void TutorialEightBullets::Initialize()
 	{
+		SetName(L"EightSideBullet");
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		SetMeshRenderer(mr);
 		Animator* anim = AddComponent<Animator>();
@@ -24,6 +26,7 @@ namespace lu::JSAB
 		CreateEnterEffect(); 
 		mTransform->SetPosition(Vector3(500, -51, 0));
 		mTransform->SetScale(Vector3(42, 42, 1));
+		AddComponent<Collider2D>()->SetType(eColliderType::Circle);
 	}
 	void TutorialEightBullets::SetMeshRenderer(MeshRenderer* mr)
 	{
@@ -36,6 +39,7 @@ namespace lu::JSAB
 	void TutorialEightBullets::CreateEnterEffect()
 	{
 		GameObject* enterEffect = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
+		enterEffect->SetName(L"enterburst");
 		MeshRenderer* mr = enterEffect->AddComponent<MeshRenderer>();
 		SetEnterEffect(mr);
 		enterEffect->mTransform->SetLocalPosition({ 0, 0, -1 });
