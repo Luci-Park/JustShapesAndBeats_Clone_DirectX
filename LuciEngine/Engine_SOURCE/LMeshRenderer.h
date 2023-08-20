@@ -26,11 +26,16 @@ namespace lu
 		Color GetColor() { return mColor; }
 		MeshRenderer* SetInterpolation(float interpolation) { mInterpolation = std::clamp(interpolation, 0.f, 1.f); return this; }
 
+		void FlipX(bool flip) { flipX = flip; }
+		void FlipY(bool flip) { flipY = flip; }
+
 	private:
 	 	std::shared_ptr<Mesh> mMesh;
 		std::shared_ptr<Material> mMaterial;
 		Color mColor;
 		float mInterpolation;
+		bool flipX;
+		bool flipY;
 	};
 }
 

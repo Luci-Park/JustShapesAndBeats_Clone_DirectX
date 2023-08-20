@@ -34,8 +34,9 @@ namespace lu::renderer
 	{
 		lu::math::Color tint;
 		lu::math::Color color;
-		float padding[1];
 		float interpolation; // 0 uses original, 1 uses Color;
+		Vector2 Flip;
+		float padding;
 	};
 
 	CBUFFER(ParticleSystemCB, CBSLOT_PARTICLESYSTEM)

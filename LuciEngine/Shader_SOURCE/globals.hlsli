@@ -18,8 +18,9 @@ cbuffer MeshRenderer : register(b2)
 {
 	float4 Tint;
 	float4 Color;
-	float padding[1];
 	float Interpolation;
+    float2 Flip;
+    float padding;
 }
 
 cbuffer ParticleSystem : register(b3)
