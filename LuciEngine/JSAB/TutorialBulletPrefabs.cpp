@@ -1,4 +1,4 @@
-#include "EightSideBulletPrefabs.h"
+#include "TutorialBulletPrefabs.h"
 #include "LMeshRenderer.h"
 #include "LResources.h"
 #include "LCollider2D.h"
@@ -7,6 +7,8 @@
 #include "LObject.h"
 namespace lu::JSAB
 {	
+#pragma region Tutorial Eight Bullets
+
 	void TutorialEightBullets::Initialize()
 	{
 		SetName(L"EightSideBullet");
@@ -53,5 +55,28 @@ namespace lu::JSAB
 		ani->AddLocalScaleKey(0.1, { 1, 1, 1 });
 		ani->AddLocalScaleKey(duration, { 0, 0, 1 });
 		anim->PlayAnimation(L"Appear", true);
+	}
+
+#pragma endregion
+
+	void TutorialBurstBullets::Initialize()
+	{
+		{
+			GameObject* fourSide = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
+			fourSide->SetName(L"enterburst");
+			MeshRenderer* mr = fourSide->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"quad_circle_bullet"));
+			fourSide->mTransform->SetLocalPosition({ 0, 0, -1 });
+
+			Animator* anim = fourSide->AddComponent<Animator>();
+			Animation* ani = anim->CreateAnimation(L"Appear");
+			float duration = 0.5;
+			ani->AddTintKey(0, Color::white);
+			ani->AddTintKey(duration, { 1, 1, 1, 0 });
+			ani->AddLocalScaleKey(0, { 0, 0, 1 });
+			ani->AddLocalScaleKey(0.1, { 1, 1, 1 });
+			ani->AddLocalScaleKey(duration, { 0, 0, 1 });
+			anim->PlayAnimation(L"Appear", true);
+		}
 	}
 }

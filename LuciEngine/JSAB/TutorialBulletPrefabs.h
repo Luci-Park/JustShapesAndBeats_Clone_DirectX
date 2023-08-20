@@ -20,5 +20,14 @@ namespace lu::JSAB
 		void SetEnterEffect(MeshRenderer* mr);
 		void CreateEnterEffect();
 	};
+
+	class TutorialBurstBullets : public GameObject
+	{
+	public:
+		TutorialBurstBullets(){}
+		virtual ~TutorialBurstBullets(){}
+
+		virtual void Initialize() override;
+	};
 }
 

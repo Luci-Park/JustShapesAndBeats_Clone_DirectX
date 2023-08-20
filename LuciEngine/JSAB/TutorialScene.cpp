@@ -3,7 +3,7 @@
 #include "LTrianglePrefab.h"
 #include "LCamera.h"
 #include "..\\Editor_SOURCE\\TransformWidget.h"
-#include "EightSideBulletPrefabs.h"
+#include "TutorialBulletPrefabs.h"
 namespace lu::JSAB::Tutorial
 {
 	void TutorialScene::Initialize()
