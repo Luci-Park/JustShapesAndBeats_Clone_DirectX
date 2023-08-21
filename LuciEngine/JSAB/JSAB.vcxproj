@@ -185,7 +185,6 @@
     <ClCompile Include="CoolFriendsScene.cpp" />
     <ClCompile Include="DubwooferScene.cpp" />
     <ClCompile Include="TutorialBulletPrefabs.cpp" />
-    <ClCompile Include="GeneralEffects.cpp" />
     <ClCompile Include="JSABRenderer.cpp" />
     <ClCompile Include="LoadScenes.h" />
     <ClCompile Include="LTrianglePrefab.cpp" />

@@ -59,24 +59,32 @@ namespace lu::JSAB
 
 #pragma endregion
 
+#pragma region
 	void TutorialBurstBullets::Initialize()
 	{
 		{
 			GameObject* fourSide = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
-			fourSide->SetName(L"enterburst");
+			fourSide->mTransform->SetLocalPosition({ 0, 0, -1 });
+			fourSide->mTransform->SetScale({ 42, 42, 1 });
+			fourSide->SetName(L"burstBullet");
 			MeshRenderer* mr = fourSide->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"quad_circle_bullet"));
-			fourSide->mTransform->SetLocalPosition({ 0, 0, -1 });
-
+			mr->SetColor(Color::white);
 			Animator* anim = fourSide->AddComponent<Animator>();
-			Animation* ani = anim->CreateAnimation(L"Appear");
-			float duration = 0.5;
-			ani->AddTintKey(0, Color::white);
-			ani->AddTintKey(duration, { 1, 1, 1, 0 });
-			ani->AddLocalScaleKey(0, { 0, 0, 1 });
-			ani->AddLocalScaleKey(0.1, { 1, 1, 1 });
-			ani->AddLocalScaleKey(duration, { 0, 0, 1 });
-			anim->PlayAnimation(L"Appear", true);
+			Animation* ani = anim->CreateAnimation(L"Idle");
+			float duration = 0.55;
+			float step = 0.05;
+			CreateClockwiseAnimation(duration, ani);
+			bool current = 0;
+			for (float i = 0; i <= duration; i += step)
+			{
+				ani->AddInterpolationKey(i, current);
+				current = !current;
+			}
+
+
+			anim->PlayAnimation(L"Idle", true);
 		}
 	}
+
 }

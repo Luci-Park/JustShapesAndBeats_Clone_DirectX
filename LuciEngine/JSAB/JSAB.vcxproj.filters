@@ -71,9 +71,6 @@
     <ClCompile Include="TutorialBulletPrefabs.cpp">
       <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="GeneralEffects.cpp">
-      <Filter>Contents</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
