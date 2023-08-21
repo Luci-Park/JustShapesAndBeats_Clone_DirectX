@@ -17,7 +17,7 @@ namespace gui
 	}
 	void TransformWidget::Update()
 	{	
-		lu::Transform* tr = GetOwner()->mTransform;
+		lu::Transform* tr = Owner()->mTransform;
 		lu::math::Vector3 position = tr->GetPosition();
 		lu::math::Quaternion quaternion = tr->GetRotation();
 		lu::math::Vector3 scale = tr->GetScale();

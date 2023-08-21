@@ -8,7 +8,7 @@ namespace lu
 {
 	void CameraScript::Update()
 	{
-		Transform* tr = GetOwner()->GetComponent<Transform>();
+		Transform* tr = Owner()->GetComponent<Transform>();
 		Vector3 pos = tr->GetPosition();
 
 

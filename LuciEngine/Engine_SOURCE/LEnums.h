@@ -22,6 +22,7 @@ namespace lu::enums
 		Player,
 		Bullet,
 		UI,
+		System,
 		Camera,
 		End 
 	};

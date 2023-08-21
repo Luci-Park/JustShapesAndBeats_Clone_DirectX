@@ -4,14 +4,20 @@
 #include "LCamera.h"
 #include "..\\Editor_SOURCE\\TransformWidget.h"
 #include "TutorialBulletPrefabs.h"
+#include "LTutorialMusicController.h"
+#include "LObject.h"
+
 namespace lu::JSAB::Tutorial
 {
 	void TutorialScene::Initialize()
 	{
-		AddGameObject(eLayerType::Player, new PlayerPrefab());
+		AddGameObject(eLayerType::Player, new PlayerPrefab());/*
 		AddGameObject(eLayerType::Bullet, new TrianglePrefab());
 		AddGameObject(eLayerType::Bullet, new TutorialEightBullets());
-		AddGameObject(eLayerType::Bullet, new TutorialBurstBullets());
+		AddGameObject(eLayerType::Bullet, new TutorialBurstBullets());*/
+		GameObject* music = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
+		auto m = music->AddComponent<TutorialMusicController>();
+		m->Play();
 		/*GameObject* pieces = new Pieces;
 		pieces->AddComponent<gui::TransformWidget>();
 		AddGameObject(eLayerType::Player, pieces);

@@ -71,6 +71,9 @@
     <ClCompile Include="TutorialBulletPrefabs.cpp">
       <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="LTutorialMusicController.cpp">
+      <Filter>Contents\Scene\Tutorial</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -142,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="GeneralEffects.h">
       <Filter>Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="LTutorialMusicController.h">
+      <Filter>Contents\Scene\Tutorial</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

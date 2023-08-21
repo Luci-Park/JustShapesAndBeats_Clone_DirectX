@@ -37,7 +37,7 @@ namespace lu::JSAB
 			}
 		}
 
-		mMeshRenderer = GetOwner()->GetComponent<MeshRenderer>();
+		mMeshRenderer = Owner()->GetComponent<MeshRenderer>();
 	}
 	void BackgroundScript::SetBackground(Backgrounds type)
 	{

@@ -16,7 +16,7 @@ namespace lu
 		virtual void LateUpdate();
 		virtual void Render();
 
-		GameObject* GetOwner() { return mOwner; }
+		GameObject* Owner() { return mOwner; }
 		void SetOwner(GameObject* owner) { mOwner = owner; }
 
 	private:

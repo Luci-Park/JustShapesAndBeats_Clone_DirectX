@@ -158,6 +158,7 @@
     <ClInclude Include="BackgroundScript.h" />
     <ClInclude Include="CoolFriendsScene.h" />
     <ClInclude Include="DubwooferScene.h" />
+    <ClInclude Include="LTutorialMusicController.h" />
     <ClInclude Include="TutorialBulletPrefabs.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GeneralEffects.h" />
@@ -184,6 +185,7 @@
     <ClCompile Include="BackgroundScript.cpp" />
     <ClCompile Include="CoolFriendsScene.cpp" />
     <ClCompile Include="DubwooferScene.cpp" />
+    <ClCompile Include="LTutorialMusicController.cpp" />
     <ClCompile Include="TutorialBulletPrefabs.cpp" />
     <ClCompile Include="JSABRenderer.cpp" />
     <ClCompile Include="LoadScenes.h" />

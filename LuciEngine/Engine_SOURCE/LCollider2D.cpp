@@ -21,7 +21,7 @@ namespace lu
 	}
 	void Collider2D::Initialize()
 	{
-		mTransform = GetOwner()->mTransform;
+		mTransform = Owner()->mTransform;
 	}
 	void Collider2D::Update()
 	{
@@ -51,14 +51,14 @@ namespace lu
 	}
 	void Collider2D::OnCollisionEnter(Collider2D* other)
 	{
-		const std::vector<Script*>& scripts = GetOwner()->GetScripts();
+		const std::vector<Script*>& scripts = Owner()->GetScripts();
 		for (int i = 0; i < scripts.size(); i++)
 			scripts[i]->OnCollisionEnter(other);
 		mDebugMesh.color = Color::green;
 	}
 	void Collider2D::OnCollisionStay(Collider2D* other)
 	{
-		const std::vector<Script*>& scripts = GetOwner()->GetScripts();
+		const std::vector<Script*>& scripts = Owner()->GetScripts();
 		for (int i = 0; i < scripts.size(); i++)
 			scripts[i]->OnCollisionStay(other);
 
@@ -66,7 +66,7 @@ namespace lu
 	}
 	void Collider2D::OnCollisionExit(Collider2D* other)
 	{
-		const std::vector<Script*>& scripts = GetOwner()->GetScripts();
+		const std::vector<Script*>& scripts = Owner()->GetScripts();
 		for (int i = 0; i < scripts.size(); i++)
 			scripts[i]->OnCollisionExit(other);
 

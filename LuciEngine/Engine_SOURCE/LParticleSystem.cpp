@@ -85,7 +85,7 @@ namespace lu
 	}
 	void ParticleSystem::Render()
 	{
-		GetOwner()->GetComponent<Transform>()->BindConstantBuffer();
+		Owner()->GetComponent<Transform>()->BindConstantBuffer();
 		mBuffer->BindSRV(eShaderStage::VS, 14);
 		mBuffer->BindSRV(eShaderStage::GS, 14);
 		mBuffer->BindSRV(eShaderStage::PS, 14);

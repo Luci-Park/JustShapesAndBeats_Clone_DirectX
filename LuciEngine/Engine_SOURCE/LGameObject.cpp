@@ -84,7 +84,7 @@ namespace lu
 		const std::vector<Transform*>& children = mTransform->GetChildren();
 		for (int i = 0; i < children.size(); i++)
 		{
-			children[i]->GetOwner()->SetState(state);
+			children[i]->Owner()->SetState(state);
 		}
 		for (int i = 0; i < mComponents.size(); i++)
 			mComponents[i]->SetState(state);

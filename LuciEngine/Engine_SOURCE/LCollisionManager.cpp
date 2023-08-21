@@ -104,8 +104,8 @@ namespace lu
 
 	bool CollisionManager::Intersect(Collider2D* left, Collider2D* right)
 	{
-		Transform* leftTr = left->GetOwner()->mTransform;
-		Transform* rightTr = right->GetOwner()->mTransform;
+		Transform* leftTr = left->Owner()->mTransform;
+		Transform* rightTr = right->Owner()->mTransform;
 		Vector2 leftCenter = Vector2(leftTr->GetPosition().x + left->GetCenter().x, leftTr->GetPosition().y + left->GetCenter().y);
 		Vector2 leftSize = Vector2(leftTr->GetScale().x * left->GetSize().x, leftTr->GetScale().y * left->GetSize().y);
 		Quaternion leftRotation = left->GetRotation();

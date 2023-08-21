@@ -69,7 +69,7 @@ namespace lu
 	}
 	bool Camera::CreateViewMatrix()
 	{
-		Transform* tr = GetOwner()->GetComponent<Transform>();
+		Transform* tr = Owner()->GetComponent<Transform>();
 		Vector3 pos = tr->GetPosition();
 
 		//Translate

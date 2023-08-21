@@ -29,7 +29,7 @@ namespace gui
 			return;
 
 
-		lu::GameObject* gameObj = mCamera->GetOwner();
+		lu::GameObject* gameObj = mCamera->Owner();
 
 		lu::Transform* tr = gameObj->GetComponent<lu::Transform>();
 		Vector3 pos = tr->GetPosition();

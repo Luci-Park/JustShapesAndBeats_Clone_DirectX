@@ -40,7 +40,7 @@ namespace lu
 		Animation* animation = FindAnimation(name);
 		if (animation == nullptr)
 		{
-			animation = new Animation(GetOwner());
+			animation = new Animation(Owner());
 			animation->SetKey(name);
 			mAnimations.insert({ name, animation });
 		}

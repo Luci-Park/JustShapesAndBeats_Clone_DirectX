@@ -19,7 +19,7 @@ namespace lu
 	}
 	void AudioListener::LateUpdate()
 	{
-		Transform* tr = GetOwner()->GetComponent<Transform>();
+		Transform* tr = Owner()->GetComponent<Transform>();
 		Vector3 pos = tr->GetPosition();
 		Vector3 foward = tr->Forward();
 		Vector3 up = tr->Up();
