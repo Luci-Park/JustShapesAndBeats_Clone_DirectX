@@ -5,11 +5,14 @@
 #include "GeneralEffects.h"
 #include "LAnimator.h"
 #include "LObject.h"
+#include "LApplication.h"
+
+extern lu::Application application;
 namespace lu::JSAB
 {	
 #pragma region Tutorial Eight Bullets
 
-	void TutorialEightBullets::Initialize()
+	void TutorialEightBulletsPrefab::Initialize()
 	{
 		SetName(L"EightSideBullet");
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
@@ -30,15 +33,15 @@ namespace lu::JSAB
 		mTransform->SetScale(Vector3(42, 42, 1));
 		AddComponent<Collider2D>()->SetType(eColliderType::Circle);
 	}
-	void TutorialEightBullets::SetMeshRenderer(MeshRenderer* mr)
+	void TutorialEightBulletsPrefab::SetMeshRenderer(MeshRenderer* mr)
 	{
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"octa_circle_bullet"));
 	}
-	void TutorialEightBullets::SetEnterEffect(MeshRenderer* mr)
+	void TutorialEightBulletsPrefab::SetEnterEffect(MeshRenderer* mr)
 	{
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"circle_bullet_blink_white"));
 	}
-	void TutorialEightBullets::CreateEnterEffect()
+	void TutorialEightBulletsPrefab::CreateEnterEffect()
 	{
 		GameObject* enterEffect = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
 		enterEffect->SetName(L"enterburst");
@@ -60,7 +63,7 @@ namespace lu::JSAB
 #pragma endregion
 
 #pragma region
-	void TutorialBurstBullets::Initialize()
+	void TutorialBurstBulletsPrefab::Initialize()
 	{
 		{
 			GameObject* fourSide = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
@@ -89,8 +92,18 @@ namespace lu::JSAB
 		burst->mTransform->SetLocalPosition({ 40, 0, 0 });
 	}
 
-	void TutorialBeatBullets::Initialize()
+	void TutorialBeatBulletsPrefab::Initialize()
 	{
+		MeshRenderer* mr = AddComponent<MeshRenderer>();
+		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"verticlebar"));
+		mTransform->SetScale(30, application.GetHeight(), 1);
+	}
+	
+	void TutorialRoundBulletsPrefab::Initialize()
+	{
+		MeshRenderer* mr = AddComponent<MeshRenderer>();
+		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"circle_bullet_prep"));
+		mTransform->SetScale(250, 250, 1);
 	}
 
 }

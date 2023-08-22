@@ -8,11 +8,11 @@ namespace lu
 
 namespace lu::JSAB
 {
-	class TutorialEightBullets : public GameObject
+	class TutorialEightBulletsPrefab : public GameObject
 	{
 	public:
-		TutorialEightBullets(){}
-		virtual ~TutorialEightBullets(){}
+		TutorialEightBulletsPrefab(){}
+		virtual ~TutorialEightBulletsPrefab(){}
 
 		virtual void Initialize() override;
 	private:
@@ -21,13 +21,18 @@ namespace lu::JSAB
 		void CreateEnterEffect();
 	};
 
-	class TutorialBurstBullets : public GameObject
+	class TutorialBurstBulletsPrefab : public GameObject
 	{
 	public:
 		virtual void Initialize() override;
 	};
 
-	class TutorialBeatBullets : public GameObject
+	class TutorialBeatBulletsPrefab : public GameObject
+	{
+	public:
+		virtual void Initialize() override;
+	};
+	class TutorialRoundBulletsPrefab : public GameObject
 	{
 	public:
 		virtual void Initialize() override;
