@@ -64,16 +64,15 @@ namespace lu::JSAB
 	{
 		{
 			GameObject* fourSide = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
-			fourSide->mTransform->SetLocalPosition({ 0, 0, -1 });
-			fourSide->mTransform->SetScale({ 42, 42, 1 });
+			fourSide->mTransform->SetScale({ 30, 30, 1 });
 			fourSide->SetName(L"burstBullet");
 			MeshRenderer* mr = fourSide->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"quad_circle_bullet"));
 			mr->SetColor(Color::white);
 			Animator* anim = fourSide->AddComponent<Animator>();
 			Animation* ani = anim->CreateAnimation(L"Idle");
-			float duration = 0.55;
-			float step = 0.05;
+			float duration = 0.6;
+			float step = 0.07;
 			CreateClockwiseAnimation(duration, ani);
 			bool current = 0;
 			for (float i = 0; i <= duration; i += step)
@@ -81,10 +80,17 @@ namespace lu::JSAB
 				ani->AddInterpolationKey(i, current);
 				current = !current;
 			}
-
-
 			anim->PlayAnimation(L"Idle", true);
 		}
+		GameObject* burst = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
+		MeshRenderer* mr = burst->AddComponent<MeshRenderer>();
+		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"SmallCircle"));
+		burst->mTransform->SetScale({ 10, 10, 1 });
+		burst->mTransform->SetLocalPosition({ 40, 0, 0 });
+	}
+
+	void TutorialBeatBullets::Initialize()
+	{
 	}
 
 }

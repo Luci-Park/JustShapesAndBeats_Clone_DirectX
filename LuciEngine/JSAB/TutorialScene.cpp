@@ -12,13 +12,13 @@ namespace lu::JSAB::Tutorial
 	void TutorialScene::Initialize()
 	{
 		object::Instantiate<PlayerPrefab>(eLayerType::Player);
-		//AddGameObject(eLayerType::Bullet, new TutorialEightBullets());
-		//AddGameObject(eLayerType::Bullet, new TutorialBurstBullets());
+		object::Instantiate<TutorialEightBullets>(eLayerType::Bullet);
+		object::Instantiate<TutorialBurstBullets>(eLayerType::Bullet);
 
-		GameObject* music = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
-		music->SetName(L"TutorialMusic");
-		auto m = music->AddComponent<TutorialMusicController>();
-		m->Play();
+		//GameObject* music = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
+		//music->SetName(L"TutorialMusic");
+		//auto m = music->AddComponent<TutorialMusicController>();
+		//m->Play();
 		
 		/*GameObject* pieces = new Pieces;
 		pieces->AddComponent<gui::TransformWidget>();

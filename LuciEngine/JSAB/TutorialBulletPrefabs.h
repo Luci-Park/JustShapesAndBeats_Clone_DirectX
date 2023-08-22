@@ -24,9 +24,12 @@ namespace lu::JSAB
 	class TutorialBurstBullets : public GameObject
 	{
 	public:
-		TutorialBurstBullets(){}
-		virtual ~TutorialBurstBullets(){}
+		virtual void Initialize() override;
+	};
 
+	class TutorialBeatBullets : public GameObject
+	{
+	public:
 		virtual void Initialize() override;
 	};
 }
