@@ -19,35 +19,7 @@ namespace lu::object
 		return gameObj;
 	}
 
-	template <typename T>
-	static __forceinline T* Instantiate(Transform* parent, lu::enums::eLayerType layer)
-	{
-		T* gameObj = new T();
-		Transform* tr = gameObj->mTransform;
-		Scene* scene = SceneManager::GetActiveScene();
-		scene->AddGameObject(layer, gameObj);
-		tr->SetParent(parent);
-		tr->SetLocalPosition(Vector3::Zero);
-
-		return gameObj;
-	}
-
-	template <typename T>
-	static __forceinline T* Instantiate(Transform* parent, bool InstantiateInWorldSpace, lu::enums::eLayerType layer)
-	{
-		T* gameObj = new T();
-		Transform* tr = gameObj->mTransform;
-		Scene* scene = SceneManager::GetActiveScene();
-		scene->AddGameObject(layer, gameObj);
-		tr->SetParent(parent);
-		if(InstantiateInWorldSpace)
-			tr->SetPosition(Vector3::Zero);
-		else
-			tr->SetLocalPosition(Vector3::Zero);
-
-		return gameObj;
-	}
-
+	
 	template <typename T>
 	static __forceinline T* Instantiate(Vector3 pos, enums::eLayerType layer)
 	{
@@ -74,7 +46,7 @@ namespace lu::object
 
 		return gameObj;
 	}
-
+	
 	template <typename T>
 	static __forceinline T* Instantiate(Vector3 pos, Quaternion rotate, Vector3 scale, enums::eLayerType layer)
 	{
@@ -89,9 +61,64 @@ namespace lu::object
 
 		return gameObj;
 	}
+	template <typename T>
+	static __forceinline T* Instantiate(Transform* parent, lu::enums::eLayerType layer)
+	{
+		T* gameObj = new T();
+		Transform* tr = gameObj->mTransform;
+		Scene* scene = SceneManager::GetActiveScene();
+		scene->AddGameObject(layer, gameObj);
+		tr->SetParent(parent);
+
+		return gameObj;
+	}
 
 	template <typename T>
-	static __forceinline T* Instantiate(Vector3 pos, Quaternion rotate, Vector3 scale, Transform* parent, enums::eLayerType layer)
+	static __forceinline T* Instantiate(Vector3 pos, Transform* parent, enums::eLayerType layer, bool InstantiateInWorldSpace = false)
+	{
+		T* gameObj = new T();
+		Transform* tr = gameObj->mTransform;
+		tr->SetPosition(pos);
+
+		Scene* scene = SceneManager::GetActiveScene();
+		scene->AddGameObject(layer, gameObj);
+		tr->SetParent(parent);
+		if (InstantiateInWorldSpace)
+			tr->SetPosition(pos);
+		else
+			tr->SetLocalPosition(pos);
+
+		return gameObj;
+	}
+
+	template <typename T>
+	static __forceinline T* Instantiate(Vector3 pos, Quaternion rotate, Transform* parent, enums::eLayerType layer, bool InstantiateInWorldSpace = false)
+	{
+		T* gameObj = new T();
+		Transform* tr = gameObj->mTransform;
+		tr->SetPosition(pos);
+		tr->SetRotation(rotate);
+
+		Scene* scene = SceneManager::GetActiveScene();
+		scene->AddGameObject(layer, gameObj);
+
+		tr->SetParent(parent);
+		if (InstantiateInWorldSpace)
+		{
+			tr->SetPosition(pos);
+			tr->SetRotation(rotate);
+		}
+		else
+		{
+			tr->SetLocalPosition(pos);
+			tr->SetLocalRotation(rotate);
+		}
+
+		return gameObj;
+	}
+
+	template <typename T>
+	static __forceinline T* Instantiate(Vector3 pos, Quaternion rotate, Vector3 scale, Transform* parent, enums::eLayerType layer, bool InstantiateInWorldSpace = false)
 	{
 		T* gameObj = new T();
 		Transform* tr = gameObj->mTransform;
@@ -102,6 +129,20 @@ namespace lu::object
 
 		Scene* scene = SceneManager::GetActiveScene();
 		scene->AddGameObject(layer, gameObj);
+
+		tr->SetParent(parent);
+		if (InstantiateInWorldSpace)
+		{
+			tr->SetPosition(pos);
+			tr->SetRotation(rotate);
+			tr->SetScale(scale);
+		}
+		else
+		{
+			tr->SetLocalPosition(pos);
+			tr->SetLocalRotation(rotate);
+			tr->SetLocalScale(scale);
+		}
 
 		return gameObj;
 	}
