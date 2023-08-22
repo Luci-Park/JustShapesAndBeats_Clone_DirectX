@@ -78,4 +78,18 @@ namespace lu
 		int position_ms = static_cast<int>(round(position_sec * 1000));
 		mAudioClip->SetPosition(position_ms);
 	}
+	double AudioSource::GetPosition()
+	{
+		int milisec = mAudioClip->GetPosition();
+		double position_seconds = static_cast<double>(milisec) / 1000.0;
+		return position_seconds;
+	}
+	void AudioSource::SetVolume(float volume)
+	{
+		mAudioClip->SetVolume(volume);
+	}
+	float AudioSource::GetVolume()
+	{
+		return mAudioClip->GetVolume();
+	}
 }

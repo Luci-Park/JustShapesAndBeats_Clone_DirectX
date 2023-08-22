@@ -15,13 +15,20 @@ namespace lu::JSAB
 
 		virtual void Initialize() override;
 		virtual void Update() override;
+		virtual void Render() override;
 		void Play();
+		void PlayNextPart();
+		double GetTime() { return mTime; }
 	private:
 		AudioSource* mAudioSource;
 		std::vector<std::pair<double, double>> mCheckPoints;
 		double mEndTime;
 		double mTime;
+		float mFadeDuration;
+		float mFadeTime;
+		float mStartVolume;
 		int mIdx;
+		int mNextIdx;
 		bool mbIsPlaying;
 	};
 }

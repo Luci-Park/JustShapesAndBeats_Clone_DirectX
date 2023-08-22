@@ -57,6 +57,22 @@ namespace lu
 		mChannel->setPosition(position_ms, FMOD_TIMEUNIT_MS);
 		mChannel->setPaused(false); 
 	}
+	int AudioClip::GetPosition()
+	{
+		UINT ms;
+		mChannel->getPosition(&ms, FMOD_TIMEUNIT_MS);
+		return ms;
+	}
+	void AudioClip::SetVolume(float volume)
+	{
+		mChannel->setVolume(volume);
+	}
+	float AudioClip::GetVolume()
+	{
+		float v;
+		mChannel->getVolume(&v);
+		return v;
+	}
 	void AudioClip::Set3DAttributes(const Vector3 pos, const Vector3 vel)
 	{
 		FMOD_VECTOR fmodPos(pos.x, pos.y, pos.z);

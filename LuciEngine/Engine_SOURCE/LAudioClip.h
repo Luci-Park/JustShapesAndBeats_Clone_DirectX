@@ -17,6 +17,9 @@ namespace lu
 		void Pause(bool pause);
 		void Stop();
 		void SetPosition(int position_ms);
+		int GetPosition();
+		void SetVolume(float volume);
+		float GetVolume();
 		void Set3DAttributes(const Vector3 pos, const Vector3 vel);
 		void SetLoop(bool loop) { mbLoop = loop; }
 	private:

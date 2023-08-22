@@ -11,13 +11,15 @@ namespace lu::JSAB::Tutorial
 {
 	void TutorialScene::Initialize()
 	{
-		AddGameObject(eLayerType::Player, new PlayerPrefab());/*
-		AddGameObject(eLayerType::Bullet, new TrianglePrefab());
-		AddGameObject(eLayerType::Bullet, new TutorialEightBullets());
-		AddGameObject(eLayerType::Bullet, new TutorialBurstBullets());*/
+		object::Instantiate<PlayerPrefab>(eLayerType::Player);
+		//AddGameObject(eLayerType::Bullet, new TutorialEightBullets());
+		//AddGameObject(eLayerType::Bullet, new TutorialBurstBullets());
+
 		GameObject* music = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
+		music->SetName(L"TutorialMusic");
 		auto m = music->AddComponent<TutorialMusicController>();
 		m->Play();
+		
 		/*GameObject* pieces = new Pieces;
 		pieces->AddComponent<gui::TransformWidget>();
 		AddGameObject(eLayerType::Player, pieces);
@@ -46,15 +48,14 @@ namespace lu::JSAB::Tutorial
 
 		//Camera
 		{
+			bool active[]{ true, true, false, true, false };
 			GameObject* camera = new GameObject();
 			AddGameObject(eLayerType::Camera, camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			for (int i = 0; i < (UINT)eLayerType::End; i++)
 			{
-				if (i == (UINT)eLayerType::Player|| i == (UINT) eLayerType::Bullet)
-					continue;
-				cameraComp->TurnLayerMask((eLayerType)i, false);
+				cameraComp->TurnLayerMask((eLayerType)i, active[i]);
 			}
 		}
 		Scene::Initialize();

@@ -60,7 +60,6 @@ namespace lu
 		graphicDevice->UpdateViewPort();
 
 		Time::Render();
-		//FontWrapper::DrawFont(L"TEXT", 10.f, 30.f, 20, FONT_RGBA(255, 0, 255, 255));
 		
 		renderer::Render();
 	}

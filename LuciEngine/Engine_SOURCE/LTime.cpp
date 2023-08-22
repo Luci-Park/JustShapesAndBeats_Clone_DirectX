@@ -47,7 +47,8 @@ namespace lu
 			
 			//TextOut(hdc, 0, 0, szFloat, 20);
 			mSecond = 0.0f;
+			FontWrapper::DrawFont(L"bin", 10.f, 30.f, 20, FONT_RGBA(255, 0, 255, 255));
 		}
-		FontWrapper::DrawFont(L"Bin", 10.f, 30.f, 20, FONT_RGBA(255, 0, 255, 255));
+		
 	}
 }

@@ -3,12 +3,16 @@
 #include "LResources.h"
 #include "LAudioSource.h"
 #include "LTime.h"
+#include "LFontWrapper.h"
+#include "LInput.h"
 namespace lu::JSAB
 {
 	TutorialMusicController::TutorialMusicController()
-		: mEndTime(200)
-		, mTime(0)
+		: mTime(0)
 		, mIdx(0)
+		, mNextIdx(0)
+		, mFadeDuration(2)
+		, mFadeTime(0)
 	{
         mCheckPoints = {
             std::make_pair(0.763, 7.691),
@@ -22,38 +26,59 @@ namespace lu::JSAB
             std::make_pair(76.971, 83.899),
             std::make_pair(111.611, 125.467),
             std::make_pair(125.467, 160.107)
-        };	
+        };
+		mEndTime = mCheckPoints[10].second;
 	}
 
 	void TutorialMusicController::Initialize()
 	{
 		mAudioSource = Owner()->AddComponent<AudioSource>();
 		mAudioSource->SetClip(Resources::Load<AudioClip>(L"TestSound", L"..\\..\\Assets\\AudioClips\\GameMusic\\mus_corrupted.wav"));
+		mStartVolume = mAudioSource->GetVolume();
 	}
 	
 	void TutorialMusicController::Update()
 	{
 		if (mbIsPlaying)
 		{
-			mTime += Time::DeltaTime();
-			if (mTime > mCheckPoints[mIdx].second)
+			mTime = mAudioSource->GetPosition();
+			if (mTime < mEndTime)
 			{
-				if (mIdx + 1 < mCheckPoints.size())
+				if (mTime > mCheckPoints[mIdx].second)
 				{
-					mAudioSource->SetPosition(mCheckPoints[++mIdx].first);
+					if (mNextIdx > mIdx) mIdx = mNextIdx;
+					mAudioSource->SetPosition(mCheckPoints[mIdx].first);
 					mTime = mCheckPoints[mIdx].first;
 				}
-				else
-				{
-					mTime = 0;
-					mAudioSource->SetPosition(0);
-				}
+			}
+			else if (mAudioSource->GetVolume() > 0)
+			{
+				float fadeStep = mFadeTime / mFadeDuration;
+				float vol = mStartVolume * (1.0f - fadeStep);
+				
+				mAudioSource->SetVolume(vol);
+				mFadeTime += Time::DeltaTime();
+			}
+			else
+			{
+				mAudioSource->Stop();
 			}
 		}
+		if (Input::GetKeyDown(eKeyCode::Q))
+			PlayNextPart();
+	}
+	void TutorialMusicController::Render()
+	{
 	}
 	void TutorialMusicController::Play()
 	{
 		mbIsPlaying = true;
+		mAudioSource->SetPosition(0);
 		mAudioSource->Play();
+	}
+	void TutorialMusicController::PlayNextPart()
+	{
+		if (mNextIdx < mCheckPoints.size() - 1)
+			mNextIdx++;		
 	}
 }
