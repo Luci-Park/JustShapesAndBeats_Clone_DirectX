@@ -5,6 +5,13 @@
 namespace lu::JSAB
 {
 	MusicController* MusicController::_MusicController = nullptr;
+	MusicController::MusicController()
+		: mStageIdx(0)
+		, mNextStageIdx(0)
+		, mFadeDuration(2)
+		, mFadeTime(0)
+	{
+	}
 	void MusicController::Initialize()
 	{
 		mAudioSource = Owner()->AddComponent<AudioSource>();

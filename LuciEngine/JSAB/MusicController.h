@@ -11,7 +11,7 @@ namespace lu::JSAB
 	{
 	public:
 		static MusicController* _MusicController;
-		MusicController(){}
+		MusicController();
 		~MusicController(){}
 		virtual void Initialize() override;
 		virtual void Update() override;

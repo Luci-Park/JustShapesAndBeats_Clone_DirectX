@@ -8,11 +8,6 @@
 namespace lu::JSAB
 {
 	TutorialMusicController::TutorialMusicController()
-		: mTime(0)
-		, mStageIdx(0)
-		, mNextStageIdx(0)
-		, mFadeDuration(2)
-		, mFadeTime(0)
 	{
         mCheckPoints = {
             std::make_pair(0.763, 7.691),
@@ -42,14 +37,13 @@ namespace lu::JSAB
 	{
 		if (mbIsPlaying)
 		{
-			mTime = mAudioSource->GetPosition();
-			if (mTime < mEndTime)
+			double time = mAudioSource->GetPosition();
+			if (time < mEndTime)
 			{
-				if (mTime > mCheckPoints[mStageIdx].second)
+				if (time > mCheckPoints[mStageIdx].second)
 				{
 					if (mNextStageIdx > mStageIdx) mStageIdx = mNextStageIdx;
 					mAudioSource->SetPosition(mCheckPoints[mStageIdx].first);
-					mTime = mCheckPoints[mStageIdx].first;
 				}
 			}
 			else if (mAudioSource->GetVolume() > 0)
