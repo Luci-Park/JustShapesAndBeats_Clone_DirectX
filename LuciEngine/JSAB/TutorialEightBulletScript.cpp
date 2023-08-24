@@ -14,6 +14,7 @@ namespace lu::JSAB
 		float t = (time - mStartTime) / (endTime - mStartTime);
 		Vector3 pos = Vector3::Lerp(mStartPos, mEndPos, t);
 		mTr->SetLocalPosition(pos);
-		if (t >= 1.f)Owner()->SetActive(false);
+		if (t >= 1.f)
+			Owner()->SetActive(false);
 	}
 }
