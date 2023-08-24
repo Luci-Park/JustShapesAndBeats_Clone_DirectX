@@ -158,6 +158,8 @@
     <ClInclude Include="BackgroundScript.h" />
     <ClInclude Include="CoolFriendsScene.h" />
     <ClInclude Include="DubwooferScene.h" />
+    <ClInclude Include="MusicController.h" />
+    <ClInclude Include="TutorialEightBulletScript.h" />
     <ClInclude Include="TutorialMusicController.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="TutorialBulletPrefabs.h" />
@@ -187,6 +189,8 @@
     <ClCompile Include="BackgroundScript.cpp" />
     <ClCompile Include="CoolFriendsScene.cpp" />
     <ClCompile Include="DubwooferScene.cpp" />
+    <ClCompile Include="MusicController.cpp" />
+    <ClCompile Include="TutorialEightBulletScript.cpp" />
     <ClCompile Include="TutorialMusicController.cpp" />
     <ClCompile Include="TutorialBulletPrefabs.cpp" />
     <ClCompile Include="JSABRenderer.cpp" />

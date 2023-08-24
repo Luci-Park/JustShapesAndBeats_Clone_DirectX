@@ -9,8 +9,8 @@ namespace lu::JSAB
 {
 	TutorialMusicController::TutorialMusicController()
 		: mTime(0)
-		, mIdx(0)
-		, mNextIdx(0)
+		, mStageIdx(0)
+		, mNextStageIdx(0)
 		, mFadeDuration(2)
 		, mFadeTime(0)
 	{
@@ -32,6 +32,7 @@ namespace lu::JSAB
 
 	void TutorialMusicController::Initialize()
 	{
+		MusicController::Initialize();
 		mAudioSource = Owner()->AddComponent<AudioSource>();
 		mAudioSource->SetClip(Resources::Load<AudioClip>(L"TestSound", L"..\\..\\Assets\\AudioClips\\GameMusic\\mus_corrupted.wav"));
 		mStartVolume = mAudioSource->GetVolume();
@@ -44,11 +45,11 @@ namespace lu::JSAB
 			mTime = mAudioSource->GetPosition();
 			if (mTime < mEndTime)
 			{
-				if (mTime > mCheckPoints[mIdx].second)
+				if (mTime > mCheckPoints[mStageIdx].second)
 				{
-					if (mNextIdx > mIdx) mIdx = mNextIdx;
-					mAudioSource->SetPosition(mCheckPoints[mIdx].first);
-					mTime = mCheckPoints[mIdx].first;
+					if (mNextStageIdx > mStageIdx) mStageIdx = mNextStageIdx;
+					mAudioSource->SetPosition(mCheckPoints[mStageIdx].first);
+					mTime = mCheckPoints[mStageIdx].first;
 				}
 			}
 			else if (mAudioSource->GetVolume() > 0)
@@ -67,15 +68,9 @@ namespace lu::JSAB
 		if (Input::GetKeyDown(eKeyCode::Q))
 			PlayNextPart();
 	}
-	void TutorialMusicController::Play()
-	{
-		mbIsPlaying = true;
-		mAudioSource->SetPosition(0);
-		mAudioSource->Play();
-	}
 	void TutorialMusicController::PlayNextPart()
 	{
-		if (mNextIdx < mCheckPoints.size() - 1)
-			mNextIdx++;		
+		if (mNextStageIdx < mCheckPoints.size() - 1)
+			mNextStageIdx++;		
 	}
 }

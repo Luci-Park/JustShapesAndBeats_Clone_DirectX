@@ -21,17 +21,20 @@ namespace lu::JSAB
 		Animation* ani = anim->CreateAnimation(L"Rotate");
 
 		float duration = 1.f;
-		ani->AddRotationKey(0, Quaternion::Identity);
-		ani->AddRotationKey(duration * .25, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 0.5));
-		ani->AddRotationKey(duration * .5, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI));
-		ani->AddRotationKey(duration * .75, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 1.5));
-		ani->AddRotationKey(duration, Quaternion::CreateFromAxisAngle(Vector3::Forward, PI * -2));
+		ani->AddLocalRotationKey(0, Quaternion::Identity);
+		ani->AddLocalRotationKey(duration * .25, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 0.5));
+		ani->AddLocalRotationKey(duration * .5, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI));
+		ani->AddLocalRotationKey(duration * .75, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 1.5));
+		ani->AddLocalRotationKey(duration, Quaternion::CreateFromAxisAngle(Vector3::Forward, PI * -2));
 		anim->PlayAnimation(L"Rotate", true);
 		
 		CreateEnterEffect(); 
-		mTransform->SetPosition(Vector3(500, -51, 0));
 		mTransform->SetScale(Vector3(42, 42, 1));
 		AddComponent<Collider2D>()->SetType(eColliderType::Circle);
+	}
+	void TutorialEightBulletsPrefab::OnEnable()
+	{
+		mEnterEffect->PlayAnimation(L"Appear", false);
 	}
 	void TutorialEightBulletsPrefab::SetMeshRenderer(MeshRenderer* mr)
 	{
@@ -57,7 +60,8 @@ namespace lu::JSAB
 		ani->AddLocalScaleKey(0, { 0, 0, 1 });
 		ani->AddLocalScaleKey(0.1, { 1, 1, 1 });
 		ani->AddLocalScaleKey(duration, { 0, 0, 1 });
-		anim->PlayAnimation(L"Appear", true);
+
+		mEnterEffect = anim;
 	}
 
 #pragma endregion

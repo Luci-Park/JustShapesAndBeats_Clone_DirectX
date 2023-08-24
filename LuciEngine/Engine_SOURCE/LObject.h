@@ -15,7 +15,9 @@ namespace lu::object
 		T* gameObj = new T();
 		Scene* scene = SceneManager::GetActiveScene();
 		scene->AddGameObject(layer, gameObj);
-
+		
+		gameObj->Initialize();
+		
 		return gameObj;
 	}
 
@@ -30,6 +32,8 @@ namespace lu::object
 		Scene* scene = SceneManager::GetActiveScene();
 		scene->AddGameObject(layer, gameObj);
 
+		gameObj->Initialize();
+
 		return gameObj;
 	}
 
@@ -43,6 +47,8 @@ namespace lu::object
 
 		Scene* scene = SceneManager::GetActiveScene();
 		scene->AddGameObject(layer, gameObj);
+
+		gameObj->Initialize();
 
 		return gameObj;
 	}
@@ -59,6 +65,8 @@ namespace lu::object
 		Scene* scene = SceneManager::GetActiveScene();
 		scene->AddGameObject(layer, gameObj);
 
+		gameObj->Initialize();
+
 		return gameObj;
 	}
 	template <typename T>
@@ -69,6 +77,8 @@ namespace lu::object
 		Scene* scene = SceneManager::GetActiveScene();
 		scene->AddGameObject(layer, gameObj);
 		tr->SetParent(parent);
+
+		gameObj->Initialize();
 
 		return gameObj;
 	}
@@ -87,6 +97,8 @@ namespace lu::object
 			tr->SetPosition(pos);
 		else
 			tr->SetLocalPosition(pos);
+
+		gameObj->Initialize();
 
 		return gameObj;
 	}
@@ -113,6 +125,8 @@ namespace lu::object
 			tr->SetLocalPosition(pos);
 			tr->SetLocalRotation(rotate);
 		}
+
+		gameObj->Initialize();
 
 		return gameObj;
 	}
@@ -143,6 +157,8 @@ namespace lu::object
 			tr->SetLocalRotation(rotate);
 			tr->SetLocalScale(scale);
 		}
+
+		gameObj->Initialize();
 
 		return gameObj;
 	}

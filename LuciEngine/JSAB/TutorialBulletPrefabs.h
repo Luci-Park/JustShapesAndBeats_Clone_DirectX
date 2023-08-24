@@ -4,6 +4,7 @@
 namespace lu
 {
 	class MeshRenderer;
+	class Animator;
 }
 
 namespace lu::JSAB
@@ -15,10 +16,12 @@ namespace lu::JSAB
 		virtual ~TutorialEightBulletsPrefab(){}
 
 		virtual void Initialize() override;
+		virtual void OnEnable();
 	private:
 		void SetMeshRenderer(MeshRenderer* mr);
 		void SetEnterEffect(MeshRenderer* mr);
 		void CreateEnterEffect();
+		Animator* mEnterEffect;
 	};
 
 	class TutorialBurstBulletsPrefab : public GameObject

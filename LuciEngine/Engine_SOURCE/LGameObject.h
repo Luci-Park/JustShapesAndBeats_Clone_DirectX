@@ -58,7 +58,9 @@ namespace lu
 			return comp;
 		}
 
-		virtual void SetState(eState state);
+		virtual void SetState(eState state) override;
+		virtual void OnEnable() {};
+		virtual void OnDisable() {};
 
 		const std::vector<Script*>& GetScripts() { return mScripts; }
 	public:

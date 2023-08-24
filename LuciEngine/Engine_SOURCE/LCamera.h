@@ -52,10 +52,10 @@ namespace lu
 		Matrix& GetViewMatrix() { return view; }
 		Matrix& GetProjectionMatrix() { return projection; }
 
-		RECT GetBoundary();
+		RECT GetBoundary() { return mBoundary; }
 	private:
 		void Debug();
-
+		void CalculateBoundary();
 	private:
 		static Matrix View;
 		static Matrix Projection;
@@ -68,6 +68,7 @@ namespace lu
 		float mNear;
 		float mFar;
 		float mSize;
+		RECT mBoundary;
 
 		Transform* mTr;
 

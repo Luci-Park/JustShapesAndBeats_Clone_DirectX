@@ -51,8 +51,9 @@ namespace lu
 	{
 		CreateViewMatrix();
 		CreateProjectionMatrix(mType);
+		CalculateBoundary();
 		RegisterCameraInRenderer();
-		Debug();
+		//Debug();
 	}
 	void Camera::Render()
 	{
@@ -213,7 +214,21 @@ namespace lu
 			= renderer::depthStencilStates[(UINT)eDSType::None];
 		GetDevice()->BindDepthStencilState(dsState.Get());
 	}
-	RECT Camera::GetBoundary()
+	void Camera::Debug()
+	{
+		RECT rect = GetBoundary();
+
+		mBoundaryMesh.position.x = (rect.left + rect.right) * 0.5;
+		mBoundaryMesh.position.y = (rect.bottom + rect.top) * 0.5;
+		mBoundaryMesh.scale.x = rect.right - rect.left;
+		mBoundaryMesh.scale.y = rect.bottom - rect.top;
+		mBoundaryMesh.rotation = Quaternion::Identity;
+		mBoundaryMesh.color = Color::yellow;
+
+
+		renderer::PushDebugMeshAttribute(mBoundaryMesh);
+	}
+	void Camera::CalculateBoundary()
 	{
 		Matrix ViewProjection = view * projection;
 		Matrix InvertVP = ViewProjection.Invert();
@@ -241,21 +256,6 @@ namespace lu
 			maxX = std::max(maxX, frustumCorners[i].x);
 			maxY = std::max(maxY, frustumCorners[i].y);
 		}
-		RECT rect = { minX, minY, maxX, maxY };
-		return rect;
-	}
-	void Camera::Debug()
-	{
-		RECT rect = GetBoundary();
-
-		mBoundaryMesh.position.x = (rect.left + rect.right) * 0.5;
-		mBoundaryMesh.position.y = (rect.bottom + rect.top) * 0.5;
-		mBoundaryMesh.scale.x = rect.right - rect.left;
-		mBoundaryMesh.scale.y = rect.bottom - rect.top;
-		mBoundaryMesh.rotation = Quaternion::Identity;
-		mBoundaryMesh.color = Color::yellow;
-
-
-		renderer::PushDebugMeshAttribute(mBoundaryMesh);
+		mBoundary = { (long)minX, (long)minY, (long)maxX, (long)maxY };
 	}
 }

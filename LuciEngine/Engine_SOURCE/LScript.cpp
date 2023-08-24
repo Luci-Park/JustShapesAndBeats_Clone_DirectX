@@ -20,4 +20,12 @@ namespace lu
 	void Script::Render()
 	{
 	}
+	void Script::SetState(eState state)
+	{
+		Entity::mState = state;
+		if (Entity::Active == state)
+			OnEnable();
+		else if (Entity::InActive == state)
+			OnDisable();
+	}
 }

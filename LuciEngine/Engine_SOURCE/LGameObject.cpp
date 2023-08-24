@@ -81,6 +81,10 @@ namespace lu
 	void GameObject::SetState(eState state)
 	{
 		Entity::mState = state;
+		if (Entity::Active == state)
+			OnEnable();
+		else if (Entity::InActive == state)
+			OnDisable();
 		const std::vector<Transform*>& children = mTransform->GetChildren();
 		for (int i = 0; i < children.size(); i++)
 		{

@@ -17,10 +17,6 @@ namespace lu
 	}
 	void Layer::Initialize()
 	{
-		for (int i = 0; i < mGameObjects.size(); i++)
-		{
-			mGameObjects[i]->Initialize();
-		}
 	}
 	void Layer::Update()
 	{

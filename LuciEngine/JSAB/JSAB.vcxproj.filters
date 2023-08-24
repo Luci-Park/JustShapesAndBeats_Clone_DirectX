@@ -48,7 +48,7 @@
       <Filter>Contents\Scene\Title\UIs</Filter>
     </ClCompile>
     <ClCompile Include="TutorialScene.cpp">
-      <Filter>Contents\Scene\Tutorial\Scene</Filter>
+      <Filter>Contents\Tutorial\Scene</Filter>
     </ClCompile>
     <ClCompile Include="yaCameraScript.cpp">
       <Filter>EngineTesters</Filter>
@@ -69,14 +69,16 @@
       <Filter>Contents\Triangle</Filter>
     </ClCompile>
     <ClCompile Include="TutorialBulletPrefabs.cpp">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
+      <Filter>Contents\Tutorial\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="TutorialMusicController.cpp">
-      <Filter>Contents\Scene\Tutorial</Filter>
+      <Filter>Contents\Tutorial</Filter>
     </ClCompile>
     <ClCompile Include="TutorialManager.cpp">
-      <Filter>Contents\Scene\Tutorial</Filter>
+      <Filter>Contents\Tutorial</Filter>
     </ClCompile>
+    <ClCompile Include="TutorialEightBulletScript.cpp" />
+    <ClCompile Include="MusicController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -123,7 +125,7 @@
       <Filter>Contents\Scene\Title\UIs</Filter>
     </ClInclude>
     <ClInclude Include="TutorialScene.h">
-      <Filter>Contents\Scene\Tutorial\Scene</Filter>
+      <Filter>Contents\Tutorial\Scene</Filter>
     </ClInclude>
     <ClInclude Include="yaPlayerScript.h">
       <Filter>EngineTesters</Filter>
@@ -144,18 +146,20 @@
       <Filter>Contents\Triangle</Filter>
     </ClInclude>
     <ClInclude Include="TutorialBulletPrefabs.h">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
+      <Filter>Contents\Tutorial\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="GeneralEffects.h">
       <Filter>Contents</Filter>
     </ClInclude>
     <ClInclude Include="TutorialMusicController.h">
-      <Filter>Contents\Scene\Tutorial</Filter>
+      <Filter>Contents\Tutorial</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="TutorialManager.h">
-      <Filter>Contents\Scene\Tutorial</Filter>
+      <Filter>Contents\Tutorial</Filter>
     </ClInclude>
+    <ClInclude Include="TutorialEightBulletScript.h" />
+    <ClInclude Include="MusicController.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -176,9 +180,6 @@
     <Filter Include="Contents\Triangle">
       <UniqueIdentifier>{96c9b033-a0f2-4da5-9b47-3a6878c8c1dc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Scene\Tutorial">
-      <UniqueIdentifier>{7cf01eb1-5ee9-40c9-b20b-13a6609da5f9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Scene\Title">
       <UniqueIdentifier>{3a3123e0-4a96-482c-8c82-fe9d3e48f546}</UniqueIdentifier>
     </Filter>
@@ -191,13 +192,19 @@
     <Filter Include="Contents\Scene\Title\OpeningAnimation">
       <UniqueIdentifier>{1f52ea33-f941-478c-a5c1-538d32bfa56f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Scene\Tutorial\Scene">
-      <UniqueIdentifier>{e583f8ff-8653-465a-89a8-05937618ecd0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EngineTesters">
       <UniqueIdentifier>{89c1cf6b-235f-4192-bec8-7e6260ac1f60}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Scene\Tutorial\Bullet">
+    <Filter Include="Contents\SoundManager">
+      <UniqueIdentifier>{500b1b7f-c28c-4150-9629-6aa0f9b02e32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Tutorial">
+      <UniqueIdentifier>{7cf01eb1-5ee9-40c9-b20b-13a6609da5f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Tutorial\Scene">
+      <UniqueIdentifier>{e583f8ff-8653-465a-89a8-05937618ecd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Tutorial\Bullet">
       <UniqueIdentifier>{d75bdd1e-9a2a-4064-92d3-3e5b2fa8c43e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
