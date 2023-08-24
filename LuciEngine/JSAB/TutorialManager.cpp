@@ -7,7 +7,6 @@
 namespace lu::JSAB
 {
 	TutorialManager::TutorialManager()
-		:mStage(1)
 	{
 	}
 	void TutorialManager::Initialize()
@@ -22,7 +21,9 @@ namespace lu::JSAB
 	void TutorialManager::Update()
 	{
 		double time = MusicController::_MusicController->GetTime();
-		if (mStage == 1) Stage1(time);
+		int stage = MusicController::_MusicController->GetStage();
+		if (stage == 1) Stage1(time);
+		if (stage == 2) Stage2(time);
 	}
 	void TutorialManager::Stage1(double time)
 	{
@@ -54,5 +55,9 @@ namespace lu::JSAB
 			if (beat[12] > time)
 				idx = 0;
 		}
+	}
+	void TutorialManager::Stage2(double time)
+	{
+
 	}
 }

@@ -17,6 +17,7 @@ namespace lu::JSAB
 		virtual void Update() override;
 		void Play();
 		double GetTime();
+		int GetStage() { return mStageIdx; }
 	protected:
 		AudioSource* mAudioSource;
 		std::vector<std::pair<double, double>> mCheckPoints;

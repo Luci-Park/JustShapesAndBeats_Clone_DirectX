@@ -15,12 +15,11 @@ namespace lu::JSAB
 		void SetMusic(TutorialMusicController* music) { mMusic = music; }
 	private:
 		void Stage1(double time);
+		void Stage2(double time);
 	private:
 		TutorialMusicController* mMusic;
-		int mStage;
-
 		TutorialEightBulletsPrefab* mStage1Bullets[13];
-
+		TutorialBurstBulletsPrefab* mBurstBullets[4];
 	};
 }
 
