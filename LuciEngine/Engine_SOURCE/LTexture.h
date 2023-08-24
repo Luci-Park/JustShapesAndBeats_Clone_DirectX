@@ -24,7 +24,7 @@ namespace lu::graphics
 		void BindShaderResource(eShaderStage stage, UINT startSlot);
 		void BindUnorderedAccessViews(UINT slot);
 		void ClearUnorderedAccessViews(UINT slot);
-		void Clear();
+		void clear();
 
 		size_t GetWidth() { return mSize.x; }
 		size_t GetHeight() { return mSize.y; }

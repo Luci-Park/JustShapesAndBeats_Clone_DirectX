@@ -130,7 +130,7 @@ namespace lu::graphics
         UINT i = -1;
         GetDevice()->BindUnorderedAccess(slot, mUAV.GetAddressOf(), &i);
 	}
-	void StructedBuffer::Clear()
+	void StructedBuffer::clear()
 	{
         // srv clear
         ID3D11ShaderResourceView* srv = nullptr;

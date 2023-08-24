@@ -237,6 +237,7 @@ namespace lu::math
         Vector3& operator*= (const Vector3& V) noexcept;
         Vector3& operator*= (float S) noexcept;
         Vector3& operator/= (float S) noexcept;
+        Vector3& operator= (const Vector2& v) noexcept { x = v.x; y = v.y; z = 0; return *this; }
 
         // Unary operators
         Vector3 operator+ () const noexcept { return *this; }
@@ -858,7 +859,11 @@ namespace lu::math
         static const Color red;
         static const Color green;
         static const Color blue;
+        static const Color yellow;
+        static const Color magenta;
+        static const Color cyan;
         static const Color white;
+        static const Color gray;
         static const Color black;
         static const Color clear;
     };

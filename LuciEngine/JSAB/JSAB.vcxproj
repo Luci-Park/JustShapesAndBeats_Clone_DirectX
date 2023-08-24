@@ -158,13 +158,15 @@
     <ClInclude Include="BackgroundScript.h" />
     <ClInclude Include="CoolFriendsScene.h" />
     <ClInclude Include="DubwooferScene.h" />
-    <ClInclude Include="LTutorialMusicController.h" />
+    <ClInclude Include="TutorialMusicController.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="TutorialBulletPrefabs.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GeneralEffects.h" />
     <ClInclude Include="JSABRenderer.h" />
-    <ClInclude Include="LTrianglePrefab.h" />
+    <ClInclude Include="TrianglePrefab.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="TutorialManager.h" />
     <ClInclude Include="yaPlayScene.h" />
     <ClInclude Include="MenuButtonObject.h" />
     <ClInclude Include="MenuScene.h" />
@@ -185,12 +187,13 @@
     <ClCompile Include="BackgroundScript.cpp" />
     <ClCompile Include="CoolFriendsScene.cpp" />
     <ClCompile Include="DubwooferScene.cpp" />
-    <ClCompile Include="LTutorialMusicController.cpp" />
+    <ClCompile Include="TutorialMusicController.cpp" />
     <ClCompile Include="TutorialBulletPrefabs.cpp" />
     <ClCompile Include="JSABRenderer.cpp" />
     <ClCompile Include="LoadScenes.h" />
-    <ClCompile Include="LTrianglePrefab.cpp" />
+    <ClCompile Include="TrianglePrefab.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="TutorialManager.cpp" />
     <ClCompile Include="yaPlayScene.cpp" />
     <ClCompile Include="JSAB.cpp" />
     <ClCompile Include="MenuButtonObject.cpp" />
@@ -210,6 +213,9 @@
     <None Update="C:\Users\user\Documents\_Quve17\Luci\Coding\AssortRock\Win2DX\LuciEngine\Engine_SOURCE\LMath.inl">
       <FileType>Document</FileType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="JSAB.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

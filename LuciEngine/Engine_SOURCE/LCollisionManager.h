@@ -29,7 +29,7 @@ namespace lu
 		static bool Intersect(Collider2D* left, Collider2D* right);
 
 		static void SetLayer(eLayerType left, eLayerType right, bool enable);
-		static void Clear();
+		static void clear();
 	private:
 		static void GetRectMinMax(Vector2 center, Vector2 size, Quaternion rotation, Vector2 axis, float& min, float& max);
 		static void GetCircleMinMax(Vector2 center, Vector2 size, Vector2 axis, float& min, float& max);

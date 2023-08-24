@@ -4,6 +4,7 @@
 
 namespace lu
 {
+	class Transform;
 	class Camera : public Component
 	{
 	public:
@@ -50,6 +51,11 @@ namespace lu
 
 		Matrix& GetViewMatrix() { return view; }
 		Matrix& GetProjectionMatrix() { return projection; }
+
+		RECT GetBoundary();
+	private:
+		void Debug();
+
 	private:
 		static Matrix View;
 		static Matrix Projection;
@@ -63,10 +69,14 @@ namespace lu
 		float mFar;
 		float mSize;
 
+		Transform* mTr;
+
 		std::bitset<(UINT)eLayerType::End> mLayerMask;
 		std::vector<GameObject*> mOpaqueGameObjects;
 		std::vector<GameObject*> mCutOutGameObjects;
 		std::vector<GameObject*> mTransparentGameObjects;
+
+		graphics::DebugMesh mBoundaryMesh;
 	};
 }
 

@@ -1,4 +1,4 @@
-#include "LTutorialMusicController.h"
+#include "TutorialMusicController.h"
 #include "LGameObject.h"
 #include "LResources.h"
 #include "LAudioSource.h"
@@ -66,9 +66,6 @@ namespace lu::JSAB
 		}
 		if (Input::GetKeyDown(eKeyCode::Q))
 			PlayNextPart();
-	}
-	void TutorialMusicController::Render()
-	{
 	}
 	void TutorialMusicController::Play()
 	{

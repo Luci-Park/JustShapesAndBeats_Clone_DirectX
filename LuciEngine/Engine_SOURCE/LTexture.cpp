@@ -134,7 +134,7 @@ namespace lu::graphics
 		UINT i = -1;
 		GetDevice()->BindUnorderedAccess(slot, &p, &i);
 	}
-	void Texture::Clear()
+	void Texture::clear()
 	{
 		ID3D11ShaderResourceView* srv = nullptr;
 

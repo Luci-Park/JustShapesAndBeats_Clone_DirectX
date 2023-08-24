@@ -47,12 +47,12 @@ namespace lu::graphics
 		GetDevice()->BindComputeShader(mCS.Get());
 		GetDevice()->Dispatch(mGroupX, mGroupY, mGroupZ);
 
-		Clear();
+		clear();
 	}
 	void ComputeShader::Binds()
 	{
 	}
-	void ComputeShader::Clear()
+	void ComputeShader::clear()
 	{
 	}
 }

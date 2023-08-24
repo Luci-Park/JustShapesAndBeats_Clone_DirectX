@@ -65,13 +65,16 @@
     <ClCompile Include="Player.cpp">
       <Filter>Contents\Player</Filter>
     </ClCompile>
-    <ClCompile Include="LTrianglePrefab.cpp">
+    <ClCompile Include="TrianglePrefab.cpp">
       <Filter>Contents\Triangle</Filter>
     </ClCompile>
     <ClCompile Include="TutorialBulletPrefabs.cpp">
       <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="LTutorialMusicController.cpp">
+    <ClCompile Include="TutorialMusicController.cpp">
+      <Filter>Contents\Scene\Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialManager.cpp">
       <Filter>Contents\Scene\Tutorial</Filter>
     </ClCompile>
   </ItemGroup>
@@ -137,7 +140,7 @@
     <ClInclude Include="Player.h">
       <Filter>Contents\Player</Filter>
     </ClInclude>
-    <ClInclude Include="LTrianglePrefab.h">
+    <ClInclude Include="TrianglePrefab.h">
       <Filter>Contents\Triangle</Filter>
     </ClInclude>
     <ClInclude Include="TutorialBulletPrefabs.h">
@@ -146,7 +149,11 @@
     <ClInclude Include="GeneralEffects.h">
       <Filter>Contents</Filter>
     </ClInclude>
-    <ClInclude Include="LTutorialMusicController.h">
+    <ClInclude Include="TutorialMusicController.h">
+      <Filter>Contents\Scene\Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="TutorialManager.h">
       <Filter>Contents\Scene\Tutorial</Filter>
     </ClInclude>
   </ItemGroup>
@@ -193,5 +200,8 @@
     <Filter Include="Contents\Scene\Tutorial\Bullet">
       <UniqueIdentifier>{d75bdd1e-9a2a-4064-92d3-3e5b2fa8c43e}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="JSAB.rc" />
   </ItemGroup>
 </Project>

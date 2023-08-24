@@ -14,7 +14,7 @@ namespace lu::graphics
 		void GetData(void* data, UINT size);
 		void BindSRV(eShaderStage stage, UINT slot);
 		void BindUAV(UINT slot);
-		void Clear();
+		void clear();
 
 		UINT GetSize() { return mSize; }
 		UINT GetStride() { return mStride; }

@@ -93,6 +93,6 @@ namespace lu
 		GetMaterial()->Binds();
 		GetMesh()->RenderInstanced(1000);
 
-		mBuffer->Clear();
+		mBuffer->clear();
 	}
 }

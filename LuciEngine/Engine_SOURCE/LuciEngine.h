@@ -1,4 +1,5 @@
 #pragma once
+#define NOMINMAX
 #include <string>
 #include <Windows.h>
 #include <assert.h>
@@ -18,6 +19,7 @@
 #include <memory> //메모리 관련된 라이브러리
 #include <filesystem> // 파일입출력 편하게 도와주는 라이브러리
 #include <wrl.h>
+#include <windef.h>
 
 #include "CommonInclude.h"
 #include "LEnums.h"

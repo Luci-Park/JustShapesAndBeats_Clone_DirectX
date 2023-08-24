@@ -14,7 +14,7 @@ namespace lu::graphics
 		virtual HRESULT Load(const std::wstring& path) override;
 
 		void Binds();
-		void Clear();
+		void clear();
 
 		std::shared_ptr<Shader> GetShader() { return mShader; }
 		std::shared_ptr<Texture> GetTexture() { return mTexture; }

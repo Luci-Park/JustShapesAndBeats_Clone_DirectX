@@ -196,7 +196,7 @@ namespace lu
 		mMatrix[col][row] = enable;
 	}
 
-	void CollisionManager::Clear()
+	void CollisionManager::clear()
 	{
 		mMatrix->reset();
 		mCollisionMap.clear();

@@ -30,6 +30,8 @@ namespace lu::JSAB
 		void SetDashOutline(GameObject* outline) { mDashOutline = outline; }
 		void SetDashBurst(GameObject* burst);
 	private:
+		void Move(Vector3 target);
+
 		void MoveRotate(Quaternion rotation);
 		void MoveScale(Vector3 scale);
 		void CountTimer();

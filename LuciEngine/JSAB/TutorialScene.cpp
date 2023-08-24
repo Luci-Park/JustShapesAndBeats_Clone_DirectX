@@ -1,27 +1,28 @@
 #include "TutorialScene.h"
 #include "PlayerPrefab.h"
-#include "LTrianglePrefab.h"
 #include "LCamera.h"
 #include "..\\Editor_SOURCE\\TransformWidget.h"
+#include "TrianglePrefab.h"
 #include "TutorialBulletPrefabs.h"
-#include "LTutorialMusicController.h"
+#include "TutorialMusicController.h"
 #include "LObject.h"
+#include "yaCameraScript.h"
 
 namespace lu::JSAB::Tutorial
 {
 	void TutorialScene::Initialize()
 	{
-		object::Instantiate<PlayerPrefab>(eLayerType::Player);
-		object::Instantiate<TutorialEightBulletsPrefab>(eLayerType::Bullet);
-		object::Instantiate<TutorialBurstBulletsPrefab>(eLayerType::Bullet);
-		object::Instantiate<TutorialBeatBulletsPrefab>(eLayerType::Bullet);
-		object::Instantiate<TutorialRoundBulletsPrefab>(eLayerType::Bullet);
-
-		//GameObject* music = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
-		//music->SetName(L"TutorialMusic");
-		//auto m = music->AddComponent<TutorialMusicController>();
-		//m->Play();
+		GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
+		manager->SetName(L"TutorialManager");
+		/*auto m = manager->AddComponent<TutorialMusicController>();
+		m->Play();*/
 		
+		object::Instantiate<PlayerPrefab>(eLayerType::Player);
+		//object::Instantiate<TutorialEightBulletsPrefab>(eLayerType::Bullet)->AddComponent<gui::TransformWidget>();
+		//object::Instantiate<TutorialBurstBulletsPrefab>(eLayerType::Bullet);
+		//object::Instantiate<TutorialBeatBulletsPrefab>(eLayerType::Bullet);
+		//object::Instantiate<TutorialRoundBulletsPrefab>(eLayerType::Bullet);
+
 		/*GameObject* pieces = new Pieces;
 		pieces->AddComponent<gui::TransformWidget>();
 		AddGameObject(eLayerType::Player, pieces);
@@ -59,6 +60,7 @@ namespace lu::JSAB::Tutorial
 			{
 				cameraComp->TurnLayerMask((eLayerType)i, active[i]);
 			}
+			camera->AddComponent<CameraScript>();
 		}
 		Scene::Initialize();
 	}

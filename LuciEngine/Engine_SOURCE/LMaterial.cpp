@@ -27,8 +27,8 @@ namespace lu::graphics
 
 		
 	}
-	void Material::Clear()
+	void Material::clear()
 	{
-		mTexture->Clear();
+		mTexture->clear();
 	}
 }

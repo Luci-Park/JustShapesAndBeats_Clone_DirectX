@@ -15,7 +15,7 @@ namespace lu::graphics
 		void OnExecute();
 
 		virtual void Binds();
-		virtual void Clear();
+		virtual void clear();
 
 	protected:
 		Microsoft::WRL::ComPtr<ID3DBlob> mCSBlob;

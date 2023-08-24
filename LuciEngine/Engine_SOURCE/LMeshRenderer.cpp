@@ -47,7 +47,7 @@ namespace lu
 				
 		mMesh->Render();
 		
-		mMaterial->Clear();
+		mMaterial->clear();
 
 	}
 }

@@ -8,6 +8,7 @@
 #include "LMeshRenderer.h"
 #include "LTexture.h"
 #include "LAnimator.h"
+#include "LRenderer.h"
 namespace lu::JSAB
 {
 	Player::Player()
@@ -52,7 +53,7 @@ namespace lu::JSAB
 		{
 			mCr->SetState(eState::Active);
 			mDashOutline->SetState(eState::InActive);
-			mTr->SetPosition(mTr->GetPosition() + moveDir * mMoveSpeed * Time::DeltaTime());
+			Move(mTr->GetPosition() + moveDir * mMoveSpeed * Time::DeltaTime());
 			MoveRotate(GetRotation(moveDir));
 			MoveScale(GetMoveScale(moveDir));
 		}
@@ -66,7 +67,7 @@ namespace lu::JSAB
 			mCr->SetState(eState::InActive);
 			mDashOutline->SetState(eState::Active);
 
-			mTr->SetPosition(mTr->GetPosition() + mDashDir * mDashSpeed * Time::DeltaTime());
+			Move(mTr->GetPosition() + mDashDir * mDashSpeed * Time::DeltaTime());
 			MoveRotate(GetRotation(mDashDir));
 			mTr->SetScale(mDashScale);
 		}
@@ -76,6 +77,21 @@ namespace lu::JSAB
 		mDashBurst = burst;
 		mDashBurstAnim = mDashBurst->GetComponent<Animator>();
 	}
+	void Player::Move(Vector3 target)
+	{
+		Vector3 halfScale = mTr->GetScale() * 0.5f;
+		RECT rect = renderer::mainCamera->GetBoundary();
+		Vector3 newPos;
+		newPos.z = target.z;
+		if (rect.right >= halfScale.x)
+		{
+			newPos.y = std::clamp(target.y, (float)rect.top + halfScale.y, (float)rect.bottom - halfScale.y);
+			newPos.x = std::clamp(target.x, (float)rect.left + halfScale.x, (float)rect.right - halfScale.x);
+		}
+		mTr->SetPosition(newPos);
+	}
+
+
 	void Player::MoveRotate(Quaternion rotation)
 	{
 		static Quaternion originalRotation;

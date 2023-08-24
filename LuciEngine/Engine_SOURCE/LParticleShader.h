@@ -10,7 +10,7 @@ namespace lu::graphics
 		~ParticleShader();
 
 		virtual void Binds() override;
-		virtual void Clear() override;
+		virtual void clear() override;
 
 		void SetParticleBuffer(StructedBuffer* particleBuffer);
 		void SetSharedBuffer(StructedBuffer* sharedBuffer) { mSharedBuffer = sharedBuffer; }

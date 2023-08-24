@@ -1,4 +1,4 @@
-#include "LTrianglePrefab.h"
+#include "TrianglePrefab.h"
 #include "LObject.h"
 #include "LResources.h"
 #include "LMeshRenderer.h"

@@ -22,10 +22,10 @@ namespace lu::graphics
 		mGroupY = 1;
 		mGroupZ = 1;
 	}
-	void ParticleShader::Clear()
+	void ParticleShader::clear()
 	{
-		mParticleBuffer->Clear();
-		mSharedBuffer->Clear();
+		mParticleBuffer->clear();
+		mSharedBuffer->clear();
 	}
 	void ParticleShader::SetParticleBuffer(StructedBuffer* particleBuffer)
 	{

@@ -36,12 +36,13 @@ namespace lu
 		, projection(Matrix::Identity)
 	{
 		EnableLayerMasks();
-	}
+	} 
 	Camera::~Camera()
 	{
 	}
 	void Camera::Initialize()
 	{
+		mTr = Owner()->mTransform;
 	}
 	void Camera::Update()
 	{
@@ -51,6 +52,7 @@ namespace lu
 		CreateViewMatrix();
 		CreateProjectionMatrix(mType);
 		RegisterCameraInRenderer();
+		Debug();
 	}
 	void Camera::Render()
 	{
@@ -69,17 +71,16 @@ namespace lu
 	}
 	bool Camera::CreateViewMatrix()
 	{
-		Transform* tr = Owner()->GetComponent<Transform>();
-		Vector3 pos = tr->GetPosition();
+		Vector3 pos = mTr->GetPosition();
 
 		//Translate
 		view = Matrix::Identity;
 		view *= Matrix::CreateTranslation(-pos);
 
 		//Rotation
-		Vector3 up = tr->Up();
-		Vector3 right = tr->Right();
-		Vector3 foward = tr->Forward();
+		Vector3 up = mTr->Up();
+		Vector3 right = mTr->Right();
+		Vector3 foward = mTr->Forward();
 
 		Matrix viewRotate;
 		viewRotate._11 = right.x;	viewRotate._12 = up.x; viewRotate._13 = foward.x;
@@ -211,5 +212,50 @@ namespace lu
 		Microsoft::WRL::ComPtr<ID3D11DepthStencilState>dsState
 			= renderer::depthStencilStates[(UINT)eDSType::None];
 		GetDevice()->BindDepthStencilState(dsState.Get());
+	}
+	RECT Camera::GetBoundary()
+	{
+		Matrix ViewProjection = view * projection;
+		Matrix InvertVP = ViewProjection.Invert();
+		Vector4 frustumCorners[8];
+		frustumCorners[0] = Vector4(-1.0f, -1.0f, 0.0f, 1.0f);
+		frustumCorners[1] = Vector4(1.0f, -1.0f, 0.0f, 1.0f);
+		frustumCorners[2] = Vector4(-1.0f, 1.0f, 0.0f, 1.0f);
+		frustumCorners[3] = Vector4(1.0f, 1.0f, 0.0f, 1.0f);
+		frustumCorners[4] = Vector4(-1.0f, -1.0f, 1.0f, 1.0f);
+		frustumCorners[5] = Vector4(1.0f, -1.0f, 1.0f, 1.0f);
+		frustumCorners[6] = Vector4(-1.0f, 1.0f, 1.0f, 1.0f);
+		frustumCorners[7] = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+		for (int i = 0; i < 8; ++i) {
+			frustumCorners[i] = Vector4::Transform(frustumCorners[i], InvertVP);
+			frustumCorners[i] /= frustumCorners[i].w;
+		}
+		float minX = FLT_MAX;
+		float minY = FLT_MAX;
+		float maxX = -FLT_MAX;
+		float maxY = -FLT_MAX;
+
+		for (int i = 0; i < 4; ++i) {
+			minX = std::min(minX, frustumCorners[i].x);
+			minY = std::min(minY, frustumCorners[i].y);
+			maxX = std::max(maxX, frustumCorners[i].x);
+			maxY = std::max(maxY, frustumCorners[i].y);
+		}
+		RECT rect = { minX, minY, maxX, maxY };
+		return rect;
+	}
+	void Camera::Debug()
+	{
+		RECT rect = GetBoundary();
+
+		mBoundaryMesh.position.x = (rect.left + rect.right) * 0.5;
+		mBoundaryMesh.position.y = (rect.bottom + rect.top) * 0.5;
+		mBoundaryMesh.scale.x = rect.right - rect.left;
+		mBoundaryMesh.scale.y = rect.bottom - rect.top;
+		mBoundaryMesh.rotation = Quaternion::Identity;
+		mBoundaryMesh.color = Color::yellow;
+
+
+		renderer::PushDebugMeshAttribute(mBoundaryMesh);
 	}
 }
