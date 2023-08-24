@@ -11,9 +11,6 @@
     <ClCompile Include="CoolFriendsScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="DubwooferScene.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="OverworldScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
@@ -77,8 +74,15 @@
     <ClCompile Include="TutorialManager.cpp">
       <Filter>Contents\Tutorial</Filter>
     </ClCompile>
-    <ClCompile Include="TutorialEightBulletScript.cpp" />
-    <ClCompile Include="MusicController.cpp" />
+    <ClCompile Include="TutorialEightBulletScript.cpp">
+      <Filter>Contents\Tutorial\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="MusicController.cpp">
+      <Filter>Contents\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="DubwooferScene.cpp">
+      <Filter>Contents\Scene\Title\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -158,8 +162,12 @@
     <ClInclude Include="TutorialManager.h">
       <Filter>Contents\Tutorial</Filter>
     </ClInclude>
-    <ClInclude Include="TutorialEightBulletScript.h" />
-    <ClInclude Include="MusicController.h" />
+    <ClInclude Include="TutorialEightBulletScript.h">
+      <Filter>Contents\Tutorial\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="MusicController.h">
+      <Filter>Contents\SoundManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">

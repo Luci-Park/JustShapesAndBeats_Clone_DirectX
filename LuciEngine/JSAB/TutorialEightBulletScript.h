@@ -16,15 +16,15 @@ namespace lu::JSAB
 		virtual void Initialize();
 		virtual void Update();
 		
-		void Setup(float startTime, float duration) { mStartTime = startTime, mDuration = duration; }
-		void Setup(float startTime, float duration, Vector3 startPos, Vector3 endPos) 
+		void Setup(float duration, Vector3 startPos, Vector3 endPos) 
 		{
-			mStartTime = startTime, mDuration = duration; mStartPos = startPos; mEndPos = endPos;
+			mDuration = duration; mStartPos = startPos; mEndPos = endPos;
+			mTime = 0;
 		}
 		void GetEnterAnimator(Animator* anim) { anim = mEnterAnimator; }
 	private:
 		Animator* mEnterAnimator;
-		double mStartTime;
+		double mTime;
 		double mDuration;
 		Vector3 mStartPos;
 		Vector3 mEndPos;

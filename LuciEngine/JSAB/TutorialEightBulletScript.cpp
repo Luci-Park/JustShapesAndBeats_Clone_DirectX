@@ -1,6 +1,7 @@
 #include "TutorialEightBulletScript.h"
 #include "MusicController.h"
 #include "LGameObject.h"
+#include "LTime.h"
 namespace lu::JSAB
 {
 	void MoveFoward::Initialize()
@@ -9,12 +10,14 @@ namespace lu::JSAB
 	}
 	void MoveFoward::Update()
 	{
-		double time = MusicController::_MusicController->GetTime();
-		float endTime = mStartTime + mDuration;
-		float t = (time - mStartTime) / (endTime - mStartTime);
-		Vector3 pos = Vector3::Lerp(mStartPos, mEndPos, t);
-		mTr->SetLocalPosition(pos);
-		if (t >= 1.f)
+		mTime += Time::DeltaTime();
+		float t = mTime / mDuration;
+		if (t <= 1.0f)
+		{
+			Vector3 pos = Vector3::Lerp(mStartPos, mEndPos, t);
+			mTr->SetLocalPosition(pos);
+		}
+		else
 			Owner()->SetActive(false);
 	}
 }

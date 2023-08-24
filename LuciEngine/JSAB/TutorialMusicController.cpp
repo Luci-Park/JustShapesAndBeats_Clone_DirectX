@@ -42,7 +42,8 @@ namespace lu::JSAB
 			{
 				if (time > mCheckPoints[mStageIdx].second)
 				{
-					if (mNextStageIdx > mStageIdx) mStageIdx = mNextStageIdx;
+					if (mNextStageIdx > mStageIdx) 
+						mStageIdx = mNextStageIdx;
 					mAudioSource->SetPosition(mCheckPoints[mStageIdx].first);
 				}
 			}

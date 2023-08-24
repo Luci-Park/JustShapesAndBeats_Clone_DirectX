@@ -36,15 +36,23 @@ namespace lu::JSAB
 		RECT bounds = renderer::mainCamera->GetBoundary();
 		float x = bounds.right + mStage1Bullets[0]->mTransform->GetScale().x * 0.5;
 		float endX = bounds.left - mStage1Bullets[0]->mTransform->GetScale().x * 0.5;
-		idx %= 13;
-		if (beat[idx] <= time)
+	
+		if (idx < 13)
 		{
-			Vector3 pos = { x, posY[idicies[idx]], 1 };
-			Vector3 endPos = {endX, posY[idicies[idx]], 1 };
-			mStage1Bullets[idx]->mTransform->SetPosition(pos);
-			mStage1Bullets[idx]->GetComponent<MoveFoward>()->Setup(time, 7, pos, endPos);
-			mStage1Bullets[idx]->SetActive(true);
-			idx++;
+			if (beat[idx] <= time)
+			{
+				Vector3 pos = { x, posY[idicies[idx]], 1 };
+				Vector3 endPos = { endX, posY[idicies[idx]], 1 };
+				mStage1Bullets[idx]->mTransform->SetPosition(pos);
+				mStage1Bullets[idx]->GetComponent<MoveFoward>()->Setup(7, pos, endPos);
+				mStage1Bullets[idx]->SetActive(true);
+				idx++;
+			}
+		}
+		else
+		{
+			if (beat[12] > time)
+				idx = 0;
 		}
 	}
 }
