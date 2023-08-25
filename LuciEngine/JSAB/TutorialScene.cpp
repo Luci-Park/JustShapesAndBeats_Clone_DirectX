@@ -27,14 +27,14 @@ namespace lu::JSAB::Tutorial
 			camera->AddComponent<CameraScript>();
 		}
 
-		GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
-		manager->SetName(L"TutorialManager");
-		auto ma = manager->AddComponent<TutorialManager>();
-		auto m = manager->AddComponent<TutorialMusicController>();
-		ma->SetMusic(m);
-		m->Play();
+		//GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
+		//manager->SetName(L"TutorialManager");
+		//auto ma = manager->AddComponent<TutorialManager>();
+		//auto m = manager->AddComponent<TutorialMusicController>();
+		//ma->SetMusic(m);
+		//m->Play();
 		
-		//object::Instantiate<TutorialBurstBulletsPrefab>(eLayerType::Bullet);
+		object::Instantiate<TutorialBeatBulletsPrefab>(eLayerType::Bullet);
 
 		object::Instantiate<PlayerPrefab>(eLayerType::Player);
 

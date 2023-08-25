@@ -25,7 +25,7 @@ namespace lu
 		{
 			KeyFrame(){}
 			virtual ~KeyFrame() {}
-			float timestamp;
+			double timestamp;
 			eAnimationType type;
 			bool operator<(const KeyFrame& other) const
 			{
@@ -79,21 +79,21 @@ namespace lu
 		void Reset();
 		bool IsComplete() { return mbComplete; }
 
-		void AddPositionKey(float timestamp, Vector3 vector3);
-		void AddScaleKey(float timestamp, Vector3 vector3);
-		void AddRotationKey(float timestamp, Quaternion quaternion);
-		void AddLocalPositionKey(float timestamp, Vector3 vector3);
-		void AddLocalScaleKey(float timestamp, Vector3 vector3);
-		void AddLocalRotationKey(float timestamp, Quaternion quaternion);
-		void AddColliderCenterKey(float timestamp, Vector2 vector2);
-		void AddColliderSizeKey(float timestamp, Vector2 vector2);
-		void AddColliderActiveKey(float timestamp, bool active);
-		void AddTextureKey(float timestamp, std::shared_ptr<graphics::Texture> texture);
-		void AddColorKey(float timestamp, Color color);
-		void AddInterpolationKey(float timestamp, float interpolation);
-		void AddTintKey(float timestamp, Color color);
-		void AddRendererActiveKey(float timestamp, bool active);
-		void AddFunctionKey(float timestamp, std::function<void()> function);
+		void AddPositionKey(double timestamp, Vector3 vector3);
+		void AddScaleKey(double timestamp, Vector3 vector3);
+		void AddRotationKey(double timestamp, Quaternion quaternion);
+		void AddLocalPositionKey(double timestamp, Vector3 vector3);
+		void AddLocalScaleKey(double timestamp, Vector3 vector3);
+		void AddLocalRotationKey(double timestamp, Quaternion quaternion);
+		void AddColliderCenterKey(double timestamp, Vector2 vector2);
+		void AddColliderSizeKey(double timestamp, Vector2 vector2);
+		void AddColliderActiveKey(double timestamp, bool active);
+		void AddTextureKey(double timestamp, std::shared_ptr<graphics::Texture> texture);
+		void AddColorKey(double timestamp, Color color);
+		void AddInterpolationKey(double timestamp, float interpolation);
+		void AddTintKey(double timestamp, Color color);
+		void AddRendererActiveKey(double timestamp, bool active);
+		void AddFunctionKey(double timestamp, std::function<void()> function);
 	private:
 		Timeline* GetTimlineOfType(eAnimationType type);
 
@@ -120,7 +120,7 @@ namespace lu
 		Transform* mTr;
 		Collider2D* mCd;
 		MeshRenderer* mMr;
-		float mTime;
+		double mTime;
 		float mDuration;
 		bool mbComplete;
 	};

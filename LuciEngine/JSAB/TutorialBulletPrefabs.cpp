@@ -117,9 +117,30 @@ namespace lu::JSAB
 
 	void TutorialBeatBulletsPrefab::Initialize()
 	{
+		Animator* anim = AddComponent<Animator>();
+		AddComponent<Collider2D>()->SetType(eColliderType::Rect);
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"verticlebar"));
+		mr->SetColor(Color::white)->UseColor(false);
 		mTransform->SetScale(30, application.GetHeight(), 1);
+
+		Animation* ani = anim->CreateAnimation(L"Activate");
+		double appearTime = 0.455;
+		double appearDur = 0.1;
+		ani->AddColliderActiveKey(0, false);
+		ani->AddScaleKey(0, { 0, (float)application.GetHeight(), 1});
+		ani->AddTintKey(0, Color::clear);
+		ani->AddScaleKey(appearTime, { 30, (float)application.GetHeight(), 1});
+		ani->AddTintKey(appearTime, Color::white);
+		ani->AddColliderActiveKey(appearTime, true);
+
+		ani->AddScaleKey(appearTime + 0.001, { 30, 0, 1 });
+		ani->AddInterpolationKey(appearTime, 0);
+		ani->AddScaleKey(appearTime + appearDur, { 30, (float)application.GetHeight(), 1 });
+		ani->AddInterpolationKey(appearTime + appearDur, 1);
+		ani->AddInterpolationKey(appearTime + appearDur + 0.001, 0);
+		
+		anim->PlayAnimation(L"Activate", false);
 	}
 	
 	void TutorialRoundBulletsPrefab::Initialize()
