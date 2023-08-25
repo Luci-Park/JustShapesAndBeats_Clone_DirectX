@@ -462,7 +462,7 @@ namespace lu
 	{
 		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime)
 		{
-			FuncKey* keyframe = (FuncKey*) & timeline->keyframes[timeline->currIndex];
+			FuncKey* keyframe = dynamic_cast<FuncKey*>(timeline->keyframes[timeline->currIndex]);
 			if (mTime >= keyframe->timestamp)
 			{
 				keyframe->value();

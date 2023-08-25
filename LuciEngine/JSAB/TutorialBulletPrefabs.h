@@ -12,9 +12,6 @@ namespace lu::JSAB
 	class TutorialEightBulletsPrefab : public GameObject
 	{
 	public:
-		TutorialEightBulletsPrefab(){}
-		virtual ~TutorialEightBulletsPrefab(){}
-
 		virtual void Initialize() override;
 		virtual void OnEnable();
 	private:

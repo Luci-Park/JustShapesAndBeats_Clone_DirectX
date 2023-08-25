@@ -2,6 +2,7 @@
 #include "MusicController.h"
 #include "LGameObject.h"
 #include "LTime.h"
+#include "LAnimator.h"
 namespace lu::JSAB
 {
 #pragma region Interpolation 
@@ -45,9 +46,10 @@ namespace lu::JSAB
 	void BurstScript::Initialize()
 	{
 		mTr = Owner()->mTransform;
+		mAnim = Owner()->AddComponent<Animator>();
 	}
 	void BurstScript::Update()
-	{
+	{/*
 		mTime += Time::DeltaTime();
 		double t = mTime / mDuration;
 		if (t <= 1)
@@ -59,11 +61,10 @@ namespace lu::JSAB
 			mTr->SetScale(scale);
 			mTr->SetPosition(pos);
 		}
-		else
+		else 
 		{
-			mQuadCircle->SetActive(false);
 			EnableBurst();
-		}
+		}*/
 	}
 	void BurstScript::OnEnable()
 	{
@@ -77,6 +78,7 @@ namespace lu::JSAB
 	}
 	void BurstScript::EnableBurst()
 	{
+		mQuadCircle->SetActive(false);
 		for (int i = 0; i < 8; i++)
 		{
 			mBursts[i]->Owner()->SetActive(true);
@@ -84,12 +86,46 @@ namespace lu::JSAB
 	}
 	void BurstScript::DisableBurst()
 	{
+		mQuadCircle->SetActive(true);
 		for (int i = 0; i < 8; i++)
 		{
 			mBursts[i]->Reset();
 			mBursts[i]->Owner()->SetActive(false);
 		}
 	}
+
+	void BurstScript::CreateStraightDownAnimation(Vector3 startPos, Vector3 endPos, double duration)
+	{
+		Animation* ani = mAnim->CreateAnimation(L"straightDown");
+		CreateStraightAnimation(ani, startPos, endPos, duration);
+	}
+
+	void BurstScript::CreateStraightUpAnimation(Vector3 startPos, Vector3 endPos, double duration)
+	{
+		Animation* ani = mAnim->CreateAnimation(L"straightUp");
+		CreateStraightAnimation(ani, startPos, endPos, duration);
+	}
+	void BurstScript::CreateStraightFastAnimation(Vector3 startPos, Vector3 endPos, double duration)
+	{
+		Animation* ani = mAnim->CreateAnimation(L"straightFast");
+		CreateStraightAnimation(ani, startPos, endPos, duration);
+	}
+	void BurstScript::CreateStraightAnimation(Animation* ani, Vector3 startPos, Vector3 endPos, double duration)
+	{
+		ani->AddPositionKey(0, startPos);
+		Vector3 mid = Vector3::Lerp(startPos, endPos, 0.9);
+		ani->AddPositionKey(duration * 0.7, mid);
+		ani->AddPositionKey(duration, endPos);
+
+		ani->AddScaleKey(0, Vector3::Zero);
+		ani->AddScaleKey(duration, Vector3::One);
+
+		ani->AddFunctionKey(0, std::bind(&BurstScript::DisableBurst, this));
+		ani->AddFunctionKey(duration, std::bind(&BurstScript::EnableBurst, this));
+	}
+	void BurstScript::PlayStraightUp() { mAnim->PlayAnimation(L"straightUp", false); }
+	void BurstScript::PlayStraightDown() { mAnim->PlayAnimation(L"straightDown", false); }
+
 
 #pragma endregion
 }

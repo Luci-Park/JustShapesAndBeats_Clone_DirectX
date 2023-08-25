@@ -67,7 +67,7 @@ namespace lu::JSAB
 
 #pragma endregion
 
-#pragma region
+#pragma region BurstPrefab
 	void TutorialBurstBulletsPrefab::Initialize()
 	{
 		mTransform->SetScale(Vector3::One);
@@ -93,6 +93,7 @@ namespace lu::JSAB
 			anim->PlayAnimation(L"Idle", true);
 			fourSide->AddComponent<Collider2D>()->SetType(eColliderType::Circle);
 			script->mQuadCircle = fourSide;
+			fourSide->SetActive(false);
 		}
 		float theta = PI * 2 / 8.0f;
 		for (int i = 0; i < 8; i++)

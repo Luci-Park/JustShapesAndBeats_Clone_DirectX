@@ -43,6 +43,9 @@ namespace lu
 	void Camera::Initialize()
 	{
 		mTr = Owner()->mTransform;
+		CreateViewMatrix();
+		CreateProjectionMatrix(mType);
+		CalculateBoundary();
 	}
 	void Camera::Update()
 	{

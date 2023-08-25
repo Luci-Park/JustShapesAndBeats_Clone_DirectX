@@ -3,6 +3,7 @@
 namespace lu
 {
 	class Animator;
+	class Animation;
 	class Transform;
 }
 namespace lu::JSAB
@@ -54,10 +55,19 @@ namespace lu::JSAB
 		void Reset();
 		void EnableBurst();
 		void DisableBurst();
-	public:
-		Transform* mTr;
+		void CreateStraightDownAnimation(Vector3 startPos, Vector3 endPos, double duration);
+		void CreateStraightUpAnimation(Vector3 startPos, Vector3 endPos, double duration);
+		void CreateStraightFastAnimation(Vector3 startPos, Vector3 endPos, double duration);
+		void CreateStraightAnimation(Animation* ani, Vector3 startPos, Vector3 endPos, double duration);
+		void PlayStraightUp();
+		void PlayStraightDown();
+		void PlayStraightFast();
+		
 		GameObject* mQuadCircle;
 		BurstParticleScript* mBursts[8];
+	private:
+		Transform* mTr;
+		Animator* mAnim;
 		Vector3 mTargetPos;
 		Vector3 mStartPos;
 		double mDuration;
