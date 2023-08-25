@@ -117,30 +117,37 @@ namespace lu::JSAB
 
 	void TutorialBeatBulletsPrefab::Initialize()
 	{
-		Animator* anim = AddComponent<Animator>();
-		AddComponent<Collider2D>()->SetType(eColliderType::Rect);
+		SetName(L"BarShape");
+		mTransform->SetPosition(Vector3::Up * (float)application.GetHeight()*0.5);
+		mTransform->SetScale({ 30, (float)application.GetHeight() * 2, 1 });
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"verticlebar"));
 		mr->SetColor(Color::white)->UseColor(false);
-		mTransform->SetScale(30, application.GetHeight(), 1);
-
-		Animation* ani = anim->CreateAnimation(L"Activate");
-		double appearTime = 0.455;
-		double appearDur = 0.1;
-		ani->AddColliderActiveKey(0, false);
-		ani->AddScaleKey(0, { 0, (float)application.GetHeight(), 1});
-		ani->AddTintKey(0, Color::clear);
-		ani->AddScaleKey(appearTime, { 30, (float)application.GetHeight(), 1});
-		ani->AddTintKey(appearTime, Color::white);
-		ani->AddColliderActiveKey(appearTime, true);
-
-		ani->AddScaleKey(appearTime + 0.001, { 30, 0, 1 });
-		ani->AddInterpolationKey(appearTime, 0);
-		ani->AddScaleKey(appearTime + appearDur, { 30, (float)application.GetHeight(), 1 });
-		ani->AddInterpolationKey(appearTime + appearDur, 1);
-		ani->AddInterpolationKey(appearTime + appearDur + 0.001, 0);
+		AddComponent<Collider2D>()->SetType(eColliderType::Rect)->SetActive(false);
 		
-		anim->PlayAnimation(L"Activate", false);
+		double appearDuration = 0.455;
+		double flashDuration = 0.05;
+		double stayDuration = 0.1;
+		
+		Animator* anim = AddComponent<Animator>();
+		Animation* ani = anim->CreateAnimation(L"OnBeat");
+		ani->AddColliderActiveKey(0, false);
+		ani->AddScaleKey(0, { 0, (float)application.GetHeight() * 2, 1 });
+		ani->AddTintKey(0, Color::clear);
+		ani->AddScaleKey(appearDuration, { 30, (float)application.GetHeight() * 2, 1 });
+		ani->AddTintKey(appearDuration, Color::white);
+
+		ani->AddColliderActiveKey(appearDuration, true);		
+		ani->AddScaleKey(appearDuration, { 30, 0, 1 });
+		ani->AddInterpolationKey(appearDuration, 1);
+		ani->AddScaleKey(appearDuration + flashDuration, { 30, (float)application.GetHeight() * 2, 1 });
+		ani->AddInterpolationKey(appearDuration + flashDuration, 1);
+
+		ani->AddInterpolationKey(appearDuration + flashDuration, 0);
+		ani->AddInterpolationKey(appearDuration + flashDuration + stayDuration, 0);
+		ani->AddScaleKey(appearDuration + flashDuration + stayDuration, { 30, (float)application.GetHeight() * 2, 1 });
+
+		anim->PlayAnimation(L"OnBeat", true);
 	}
 	
 	void TutorialRoundBulletsPrefab::Initialize()

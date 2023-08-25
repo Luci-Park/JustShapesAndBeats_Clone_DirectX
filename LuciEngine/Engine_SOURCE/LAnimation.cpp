@@ -227,7 +227,7 @@ namespace lu
 		if (timeline->currIndex == 0)
 		{
 			Vector3Key* keyframe = dynamic_cast<Vector3Key*>(timeline->keyframes[0]);
-			if (keyframe->timestamp >= mTime)
+			if (mTime >= keyframe->timestamp)
 				mTr->SetPosition(keyframe->value);
 		}
 		else
@@ -246,7 +246,7 @@ namespace lu
 		if (timeline->currIndex == 0)
 		{
 			Vector3Key* keyframe = dynamic_cast<Vector3Key*>(timeline->keyframes[0]);
-			if (keyframe->timestamp >= mTime)
+			if (mTime >= keyframe->timestamp)
 				mTr->SetScale(keyframe->value);
 		}
 		else
@@ -265,9 +265,8 @@ namespace lu
 		if (timeline->currIndex == 0)
 		{
 			QuaternionKey* keyframe = dynamic_cast<QuaternionKey*>(timeline->keyframes[0]);
-			if (keyframe->timestamp >= mTime)
+			if (mTime >= keyframe->timestamp)
 				mTr->SetRotation(keyframe->value);
-			assert(keyframe->value == Quaternion::Identity);
 		}
 		else
 		{
@@ -285,7 +284,7 @@ namespace lu
 		if (timeline->currIndex == 0)
 		{
 			Vector3Key* keyframe = dynamic_cast<Vector3Key*>(timeline->keyframes[0]);
-			if (keyframe->timestamp >= mTime)
+			if (mTime >= keyframe->timestamp)
 				mTr->SetLocalPosition(keyframe->value);
 		}
 		else
@@ -304,7 +303,7 @@ namespace lu
 		if (timeline->currIndex == 0)
 		{
 			Vector3Key* keyframe = dynamic_cast<Vector3Key*>(timeline->keyframes[0]);
-			if (keyframe->timestamp >= mTime)
+			if (mTime >= keyframe->timestamp)
 				mTr->SetLocalScale(keyframe->value);
 		}
 		else
@@ -323,7 +322,7 @@ namespace lu
 		if (timeline->currIndex == 0)
 		{
 			QuaternionKey* keyframe = dynamic_cast<QuaternionKey*>(timeline->keyframes[0]);
-			if (keyframe->timestamp >= mTime)
+			if (mTime >= keyframe->timestamp)
 				mTr->SetLocalRotation(keyframe->value);
 		}
 		else
@@ -343,7 +342,7 @@ namespace lu
 		if (timeline->currIndex == 0)
 		{
 			Vector2Key* keyframe = dynamic_cast<Vector2Key*>(timeline->keyframes[0]);
-			if (keyframe->timestamp >= mTime)
+			if (mTime >= keyframe->timestamp)
 				mCd->SetCenter(keyframe->value);
 		}
 		else
@@ -362,7 +361,7 @@ namespace lu
 		if (timeline->currIndex == 0)
 		{
 			Vector2Key* keyframe = dynamic_cast<Vector2Key*>(timeline->keyframes[0]);
-			if (keyframe->timestamp >= mTime)
+			if (mTime >= keyframe->timestamp)
 				mCd->SetSize(keyframe->value);
 		}
 		else
@@ -376,14 +375,11 @@ namespace lu
 	}
 	void Animation::AnimCdActive(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime)
+		BoolKey* keyframe = dynamic_cast<BoolKey*>(timeline->keyframes[timeline->currIndex]);
+		if (mTime >= keyframe->timestamp)
 		{
-			BoolKey* keyframe = dynamic_cast<BoolKey*>(timeline->keyframes[timeline->currIndex]);
-			if (mTime >= keyframe->timestamp)
-			{
-				mCd->SetActive(keyframe->value);
-				timeline->currIndex++;
-			}
+			mCd->SetActive(keyframe->value);
+			timeline->currIndex++;
 		}
 	}
 	void Animation::AnimMrText(Timeline* timeline)
@@ -417,7 +413,7 @@ namespace lu
 		if (timeline->currIndex == 0)
 		{
 			FloatKey* keyframe = dynamic_cast<FloatKey*>(timeline->keyframes[0]);
-			if (keyframe->timestamp >= mTime)
+			if (mTime >= keyframe->timestamp)
 				mMr->SetInterpolation(keyframe->value);
 		}
 		else
@@ -435,7 +431,7 @@ namespace lu
 		if (timeline->currIndex == 0)
 		{
 			ColorKey* keyframe = dynamic_cast<ColorKey*>(timeline->keyframes[0]);
-			if (keyframe->timestamp >= mTime)
+			if (mTime >= keyframe->timestamp)
 				mMr->GetMaterial()->SetTint(keyframe->value);
 		}
 		else
