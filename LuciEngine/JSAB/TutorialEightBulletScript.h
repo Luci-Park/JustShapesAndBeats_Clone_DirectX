@@ -54,7 +54,6 @@ namespace lu::JSAB
 		void Reset();
 		void EnableBurst();
 		void DisableBurst();
-
 	public:
 		Transform* mTr;
 		GameObject* mQuadCircle;

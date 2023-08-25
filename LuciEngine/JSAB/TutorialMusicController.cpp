@@ -23,6 +23,7 @@ namespace lu::JSAB
             std::make_pair(125.467, 160.107)
         };
 		mEndTime = mCheckPoints[10].second;
+		mStageIdx = 1;
 	}
 
 	void TutorialMusicController::Initialize()

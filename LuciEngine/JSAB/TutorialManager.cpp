@@ -67,7 +67,7 @@ namespace lu::JSAB
 			7.691, 8.146, 9.021, 9.896, 10.771, 11.646, 12.521, 13.396//, 14.271
 		};
 		static int idx = 0;
-		static int move = 300;
+		static int move = 150;
 		RECT bounds = renderer::mainCamera->GetBoundary();
 		if (idx < 8)
 		{
@@ -88,7 +88,7 @@ namespace lu::JSAB
 				mBurstBullets[mBurstPoolIdx]->mStartPos = startPos;
 				mBurstBullets[mBurstPoolIdx]->mTargetPos = endPos;
 				mBurstBullets[mBurstPoolIdx]->mDuration = 0.875;
-				if (idx == 0) mBurstBullets[mBurstPoolIdx]->mTime = time;
+				if (idx == 0) mBurstBullets[mBurstPoolIdx]->mTime = beat[1] - time;
 				mBurstBullets[mBurstPoolIdx]->Owner()->SetActive(true);
 				idx++;
 				mBurstPoolIdx++;

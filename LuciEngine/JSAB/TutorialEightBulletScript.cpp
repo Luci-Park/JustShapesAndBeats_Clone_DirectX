@@ -28,7 +28,7 @@ namespace lu::JSAB
 	{
 		mTr = Owner()->mTransform;
 		mMove = false;
-		mSpeed = 200;
+		mSpeed = 330;
 	}
 
 	void BurstParticleScript::Update()
@@ -52,11 +52,12 @@ namespace lu::JSAB
 		double t = mTime / mDuration;
 		if (t <= 1)
 		{
+			DisableBurst();
 			mQuadCircle->SetActive(true);
 			Vector3 scale = Vector3::Lerp(Vector3::Zero, Vector3::One, t);
 			Vector3 pos = Vector3::Lerp(mStartPos, mTargetPos, t);
 			mTr->SetScale(scale);
-			//mTr->SetPosition(pos);
+			mTr->SetPosition(pos);
 		}
 		else
 		{
@@ -79,7 +80,6 @@ namespace lu::JSAB
 		for (int i = 0; i < 8; i++)
 		{
 			mBursts[i]->Owner()->SetActive(true);
-			mBursts[i]->Reset();
 		}
 	}
 	void BurstScript::DisableBurst()
@@ -90,5 +90,6 @@ namespace lu::JSAB
 			mBursts[i]->Owner()->SetActive(false);
 		}
 	}
+
 #pragma endregion
 }
