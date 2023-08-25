@@ -16,6 +16,7 @@ namespace lu::JSAB
 	private:
 		void Stage1(double time);
 		void Stage2(double time);
+		void Stage3(double time);
 	private:
 		TutorialMusicController* mMusic;
 		TutorialEightBulletsPrefab* mStage1Bullets[13];

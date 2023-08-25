@@ -12,7 +12,7 @@ namespace lu::JSAB
         mCheckPoints = {
             std::make_pair(0.763, 7.691),
             std::make_pair(7.691, 14.619),
-            std::make_pair(14.646, 21.547),
+            std::make_pair(14.619, 21.547),
             std::make_pair(28.475, 35.403),
             std::make_pair(35.403, 42.331),
             std::make_pair(42.331, 49.259),

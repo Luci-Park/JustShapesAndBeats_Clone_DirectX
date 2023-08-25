@@ -42,6 +42,7 @@ namespace lu::JSAB
 		int stage = MusicController::_MusicController->GetStage();
 		if (stage == 0)Stage1(time);
 		if (stage == 1)Stage2(time);
+		if (stage == 2)Stage3(time);
 	}
 	void TutorialManager::Stage1(double time)
 	{
@@ -80,14 +81,15 @@ namespace lu::JSAB
 			7.691, 8.566, 9.441, 10.316, 11.191, 12.066, 12.941, 13.816
 		};
 		static int idx = 0;
-		RECT bounds = renderer::mainCamera->GetBoundary();
 		if (idx < 8)
 		{
 			if (beat[idx] <= time)
 			{
 				mBurstBullets[mBurstPoolIdx]->Owner()->SetActive(true);
-				if(idx % 2 == 0) mBurstBullets[mBurstPoolIdx]->PlayStraightDown();
-				else mBurstBullets[mBurstPoolIdx]->PlayStraightUp();
+				if(idx % 2 == 0) 
+					mBurstBullets[mBurstPoolIdx]->PlayStraightDown();
+				else 
+					mBurstBullets[mBurstPoolIdx]->PlayStraightUp();
 				idx++;
 				mBurstPoolIdx++;
 				mBurstPoolIdx %= 5;
@@ -97,6 +99,34 @@ namespace lu::JSAB
 		{
 			if (beat[7] > time)
 				idx = 0;
+		}
+	}
+	void TutorialManager::Stage3(double time)
+	{
+		{
+			const double burstbeat[] = {
+				14.619,	15.494,	16.369,	17.244,	18.119,	18.994,	19.869,	20.744
+			};
+			static int burstIdx = 0;
+			if (burstIdx < 8)
+			{
+				if (burstbeat[burstIdx] <= time)
+				{
+					mBurstBullets[mBurstPoolIdx]->Owner()->SetActive(true);
+					if (burstIdx % 2 == 0)
+						mBurstBullets[mBurstPoolIdx]->PlayStraightDown();
+					else
+						mBurstBullets[mBurstPoolIdx]->PlayStraightUp();
+					burstIdx++;
+					mBurstPoolIdx++;
+					mBurstPoolIdx %= 5;
+				}
+			}
+			else
+			{
+				if (burstbeat[7] > time)
+					burstIdx = 0;
+			}
 		}
 	}
 }
