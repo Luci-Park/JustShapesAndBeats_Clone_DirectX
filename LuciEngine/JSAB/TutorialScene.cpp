@@ -34,6 +34,8 @@ namespace lu::JSAB::Tutorial
 		ma->SetMusic(m);
 		m->Play();
 		
+		//object::Instantiate<TutorialBurstBulletsPrefab>(eLayerType::Bullet);
+
 		object::Instantiate<PlayerPrefab>(eLayerType::Player);
 
 		Scene::Initialize();

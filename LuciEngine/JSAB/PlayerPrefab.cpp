@@ -141,7 +141,6 @@ namespace lu::JSAB
 
 			piece->mTransform->SetScale(Vector3(7, mat->GetTexture()->GetRatioHeight(7), 1));
 			piece->mTransform->SetPosition(pos[i - 1] * point);
-			pos[i - 1].z + 0.1;
 			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Player, piece);
 			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Player, CreateLight(pos[i-1] * point, rot[i - 1]));
 		}

@@ -6,6 +6,7 @@
 #include "LAnimator.h"
 #include "LObject.h"
 #include "LApplication.h"
+#include "TutorialEightBulletScript.h"
 
 extern lu::Application application;
 namespace lu::JSAB
@@ -69,9 +70,11 @@ namespace lu::JSAB
 #pragma region
 	void TutorialBurstBulletsPrefab::Initialize()
 	{
+		mTransform->SetScale(Vector3::One);
+		BurstScript* script = AddComponent<BurstScript>();
 		{
 			GameObject* fourSide = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
-			fourSide->mTransform->SetScale({ 30, 30, 1 });
+			fourSide->mTransform->SetLocalScale({ 30, 30, 1 });
 			fourSide->SetName(L"burstBullet");
 			MeshRenderer* mr = fourSide->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"quad_circle_bullet"));
@@ -88,13 +91,28 @@ namespace lu::JSAB
 				current = !current;
 			}
 			anim->PlayAnimation(L"Idle", true);
+			fourSide->AddComponent<Collider2D>()->SetType(eColliderType::Circle);
+			script->mQuadCircle = fourSide;
 		}
-		GameObject* burst = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
-		MeshRenderer* mr = burst->AddComponent<MeshRenderer>();
-		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"SmallCircle"));
-		burst->mTransform->SetScale({ 10, 10, 1 });
-		burst->mTransform->SetLocalPosition({ 40, 0, 0 });
+		float theta = PI * 2 / 8.0f;
+		for (int i = 0; i < 8; i++)
+		{
+			GameObject* burst = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
+			MeshRenderer* mr = burst->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"SmallCircle"));
+			burst->mTransform->SetScale({ 10, 10, 1 });
+			burst->mTransform->SetLocalPosition(Vector3::Zero);
+			burst->AddComponent<Collider2D>()->SetType(eColliderType::Circle);
+			auto sc = burst->AddComponent<BurstParticleScript>();
+			Vector3 dir = { cosf(theta * (float)i), sinf(theta * (float)i) , 0};
+			dir.Normalize();
+			sc->SetDirection(dir);
+			burst->SetActive(false);
+			script->mBursts[i] = sc;
+		}
+		script->DisableBurst();
 	}
+#pragma endregion
 
 	void TutorialBeatBulletsPrefab::Initialize()
 	{

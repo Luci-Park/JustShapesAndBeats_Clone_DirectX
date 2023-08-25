@@ -15,15 +15,20 @@ namespace lu::JSAB
 		{
 			mStage1Bullets[i] = object::Instantiate<TutorialEightBulletsPrefab>(eLayerType::Bullet);
 			mStage1Bullets[i]->SetActive(false);
-			mStage1Bullets[i]->AddComponent<MoveFoward>();
+			mStage1Bullets[i]->AddComponent<InterpolationMove>();
+		}
+		for (int i = 0; i < 5; i++)
+		{
+			mBurstBullets[i] = object::Instantiate<TutorialBurstBulletsPrefab>(eLayerType::Bullet)->GetComponent<BurstScript>();
+			mBurstBullets[i]->Owner()->SetActive(false);
 		}
 	}
 	void TutorialManager::Update()
 	{
 		double time = MusicController::_MusicController->GetTime();
 		int stage = MusicController::_MusicController->GetStage();
-		if (stage == 1) Stage1(time);
-		if (stage == 2) Stage2(time);
+		if (stage == 0) Stage1(time);
+		if (stage == 1) Stage2(time);
 	}
 	void TutorialManager::Stage1(double time)
 	{
@@ -45,7 +50,7 @@ namespace lu::JSAB
 				Vector3 pos = { x, posY[idicies[idx]], 1 };
 				Vector3 endPos = { endX, posY[idicies[idx]], 1 };
 				mStage1Bullets[idx]->mTransform->SetPosition(pos);
-				mStage1Bullets[idx]->GetComponent<MoveFoward>()->Setup(7, pos, endPos);
+				mStage1Bullets[idx]->GetComponent<InterpolationMove>()->SetDirection(7, pos, endPos);
 				mStage1Bullets[idx]->SetActive(true);
 				idx++;
 			}
@@ -58,6 +63,42 @@ namespace lu::JSAB
 	}
 	void TutorialManager::Stage2(double time)
 	{
-
+		const double beat[] = {
+			7.691, 8.146, 9.021, 9.896, 10.771, 11.646, 12.521, 13.396//, 14.271
+		};
+		static int idx = 0;
+		static int move = 300;
+		RECT bounds = renderer::mainCamera->GetBoundary();
+		if (idx < 8)
+		{
+			if (beat[idx] <= time)
+			{
+				Vector3 startPos, endPos;
+				if (idx % 2)
+				{
+					startPos = { 500, (float)bounds.bottom, 0 };
+					endPos = { 500, (float)bounds.bottom - move, 0 };
+				}
+				else
+				{
+					startPos = { 500, (float)bounds.top, 0 };
+					endPos = { 500, (float)bounds.top + move, 0 };
+				}
+				mBurstBullets[mBurstPoolIdx]->Reset();
+				mBurstBullets[mBurstPoolIdx]->mStartPos = startPos;
+				mBurstBullets[mBurstPoolIdx]->mTargetPos = endPos;
+				mBurstBullets[mBurstPoolIdx]->mDuration = 0.875;
+				if (idx == 0) mBurstBullets[mBurstPoolIdx]->mTime = time;
+				mBurstBullets[mBurstPoolIdx]->Owner()->SetActive(true);
+				idx++;
+				mBurstPoolIdx++;
+				mBurstPoolIdx %= 5;
+			}
+		}
+		else
+		{
+			if (beat[7] > time)
+				idx = 0;
+		}
 	}
 }
