@@ -1,5 +1,9 @@
 #pragma once
 #include "LScript.h"
+namespace lu
+{
+	class Animator;
+}
 namespace lu::JSAB
 {
 	class TutorialMusicController;
@@ -21,7 +25,9 @@ namespace lu::JSAB
 		TutorialMusicController* mMusic;
 		TutorialEightBulletsPrefab* mStage1Bullets[13];
 		BurstScript* mBurstBullets[5];
+		Animator* mBeatBullets[5];
 		int mBurstPoolIdx;
+		int mBeatPoolIdx;
 	};
 }
 

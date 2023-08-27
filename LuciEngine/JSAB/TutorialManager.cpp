@@ -4,9 +4,12 @@
 #include "TutorialEightBulletScript.h"
 #include "LObject.h"
 #include "LRenderer.h"
+#include "LAnimator.h"
 namespace lu::JSAB
 {
 	TutorialManager::TutorialManager()
+		: mBurstPoolIdx(0)
+		, mBeatPoolIdx(0)
 	{
 	}
 	void TutorialManager::Initialize()
@@ -34,6 +37,10 @@ namespace lu::JSAB
 				mBurstBullets[i]->CreateStraightDownAnimation(downStartPos, downEndPos, 0.455);
 				mBurstBullets[i]->Owner()->SetActive(false);
 			}
+		}
+		for (int i = 0; i < 5; i++)
+		{
+			mBeatBullets[i] = object::Instantiate<TutorialBeatBulletsPrefab>(eLayerType::Bullet)->GetComponent<Animator>();
 		}
 	}
 	void TutorialManager::Update()
@@ -104,13 +111,13 @@ namespace lu::JSAB
 	void TutorialManager::Stage3(double time)
 	{
 		{
-			const double burstbeat[] = {
+			const double beat[] = {
 				14.619,	15.494,	16.369,	17.244,	18.119,	18.994,	19.869,	20.744
 			};
 			static int burstIdx = 0;
 			if (burstIdx < 8)
 			{
-				if (burstbeat[burstIdx] <= time)
+				if (beat[burstIdx] <= time)
 				{
 					mBurstBullets[mBurstPoolIdx]->Owner()->SetActive(true);
 					if (burstIdx % 2 == 0)
@@ -124,9 +131,32 @@ namespace lu::JSAB
 			}
 			else
 			{
-				if (burstbeat[7] > time)
+				if (beat[7] > time)
 					burstIdx = 0;
 			}
+		}
+		{
+			const double beat[] =
+			{
+				14.850, 15.500, 16.583, 17.235, 17.450, 18.313, 18.959, 20.242, 20.697, 21.025
+			};
+			static int idx = 0;
+			if (idx < 10)
+			{
+				if (beat[idx] <= time)
+				{
+					mBeatBullets[mBeatPoolIdx]->PlayAnimation(L"OnBeat", false);
+					idx++;
+					mBurstPoolIdx++;
+					mBurstPoolIdx %= 5;
+				}
+			}
+			else
+			{
+				if (beat[9] > time)
+					idx = 0;
+			}
+
 		}
 	}
 }

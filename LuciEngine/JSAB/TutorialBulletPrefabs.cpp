@@ -117,9 +117,10 @@ namespace lu::JSAB
 
 	void TutorialBeatBulletsPrefab::Initialize()
 	{
+		Vector3 baseScale = { 20, (float)application.GetHeight() * 2, 1 };
 		SetName(L"BarShape");
 		mTransform->SetPosition(Vector3::Up * (float)application.GetHeight()*0.5);
-		mTransform->SetScale({ 30, (float)application.GetHeight() * 2, 1 });
+		mTransform->SetScale(baseScale);
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"verticlebar"));
 		mr->SetColor(Color::white)->UseColor(false);
@@ -134,20 +135,23 @@ namespace lu::JSAB
 		ani->AddColliderActiveKey(0, false);
 		ani->AddScaleKey(0, { 0, (float)application.GetHeight() * 2, 1 });
 		ani->AddTintKey(0, Color::clear);
-		ani->AddScaleKey(appearDuration, { 30, (float)application.GetHeight() * 2, 1 });
+		ani->AddInterpolationKey(0, 0);
+
+		ani->AddScaleKey(appearDuration, baseScale);
 		ani->AddTintKey(appearDuration, Color::white);
+		ani->AddInterpolationKey(appearDuration, 0);
 
 		ani->AddColliderActiveKey(appearDuration, true);		
 		ani->AddScaleKey(appearDuration, { 30, 0, 1 });
 		ani->AddInterpolationKey(appearDuration, 1);
-		ani->AddScaleKey(appearDuration + flashDuration, { 30, (float)application.GetHeight() * 2, 1 });
+		ani->AddScaleKey(appearDuration + flashDuration, baseScale);
 		ani->AddInterpolationKey(appearDuration + flashDuration, 1);
 
 		ani->AddInterpolationKey(appearDuration + flashDuration, 0);
 		ani->AddInterpolationKey(appearDuration + flashDuration + stayDuration, 0);
-		ani->AddScaleKey(appearDuration + flashDuration + stayDuration, { 30, (float)application.GetHeight() * 2, 1 });
-
-		anim->PlayAnimation(L"OnBeat", true);
+		ani->AddScaleKey(appearDuration + flashDuration + stayDuration, baseScale);
+		ani->AddTintKey(appearDuration + flashDuration + stayDuration, Color::white);
+		ani->AddTintKey(appearDuration + flashDuration + stayDuration, Color::clear);
 	}
 	
 	void TutorialRoundBulletsPrefab::Initialize()
