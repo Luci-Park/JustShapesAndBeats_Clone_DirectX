@@ -1,4 +1,5 @@
 #include "LScript.h"
+#include "LGameObject.h"
 namespace lu
 {
 	Script::Script()
@@ -10,6 +11,7 @@ namespace lu
 	}
 	void Script::Initialize()
 	{
+		mTransform = Owner()->mTransform;
 	}
 	void Script::Update()
 	{

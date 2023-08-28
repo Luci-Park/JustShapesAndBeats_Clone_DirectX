@@ -24,8 +24,8 @@ namespace lu::JSAB
 	private:
 		TutorialMusicController* mMusic;
 		TutorialEightBulletsPrefab* mStage1Bullets[13];
-		BurstScript* mBurstBullets[5];
-		Animator* mBeatBullets[5];
+		BurstScript* mBurstBullets[8];
+		Animator* mBeatBullets[8];
 		int mBurstPoolIdx;
 		int mBeatPoolIdx;
 	};

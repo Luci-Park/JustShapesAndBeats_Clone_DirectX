@@ -2,6 +2,7 @@
 #include "LComponent.h"
 namespace lu
 {
+	class Transform;
 	class Collider2D;
 	class Script : public Component
 	{
@@ -22,7 +23,10 @@ namespace lu
 		virtual void OnDisable() {}
 
 		virtual void SetState(eState state) override;
-	private:
+		
+	public:
+		Transform* mTransform;
+		
 	};
 }
 

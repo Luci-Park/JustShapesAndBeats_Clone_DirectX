@@ -57,11 +57,9 @@ namespace lu::JSAB
 		void DisableBurst();
 		void CreateStraightDownAnimation(Vector3 startPos, Vector3 endPos, double duration);
 		void CreateStraightUpAnimation(Vector3 startPos, Vector3 endPos, double duration);
-		void CreateStraightFastAnimation(Vector3 startPos, Vector3 endPos, double duration);
 		void CreateStraightAnimation(Animation* ani, Vector3 startPos, Vector3 endPos, double duration);
 		void PlayStraightUp();
 		void PlayStraightDown();
-		void PlayStraightFast();
 		
 		GameObject* mQuadCircle;
 		BurstParticleScript* mBursts[8];

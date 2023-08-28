@@ -105,11 +105,6 @@ namespace lu::JSAB
 		Animation* ani = mAnim->CreateAnimation(L"straightUp");
 		CreateStraightAnimation(ani, startPos, endPos, duration);
 	}
-	void BurstScript::CreateStraightFastAnimation(Vector3 startPos, Vector3 endPos, double duration)
-	{
-		Animation* ani = mAnim->CreateAnimation(L"straightFast");
-		CreateStraightAnimation(ani, startPos, endPos, duration);
-	}
 	void BurstScript::CreateStraightAnimation(Animation* ani, Vector3 startPos, Vector3 endPos, double duration)
 	{
 		ani->AddPositionKey(0, startPos);

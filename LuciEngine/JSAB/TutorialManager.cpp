@@ -5,6 +5,9 @@
 #include "LObject.h"
 #include "LRenderer.h"
 #include "LAnimator.h"
+#include "LApplication.h"
+
+extern lu::Application application;
 namespace lu::JSAB
 {
 	TutorialManager::TutorialManager()
@@ -22,23 +25,21 @@ namespace lu::JSAB
 			mStage1Bullets[i]->SetActive(false);
 		}
 		{
-			mBurstPoolIdx = 0;
 			float move = 180;
 			Vector3 downStartPos = { 500, (float)bounds.top, 0 };
 			Vector3 downEndPos = { 500, (float)bounds.top + move, 0 };
 			Vector3 upStartPos = { 500, (float)bounds.bottom, 0 };
 			Vector3 upEndPos = { 500, (float)bounds.bottom - move, 0 };
 			Vector3 fastStartPos = Vector3::Lerp(downStartPos, downEndPos, 0.455 / 0.875);
-			for (int i = 0; i < 5; i++)
+			for (int i = 0; i < 8; i++)
 			{
 				mBurstBullets[i] = object::Instantiate<TutorialBurstBulletsPrefab>(eLayerType::Bullet)->GetComponent<BurstScript>();
-				float t = i == 0 ? 0.455 : 0.875;
 				mBurstBullets[i]->CreateStraightUpAnimation(upStartPos, upEndPos, 0.455);
 				mBurstBullets[i]->CreateStraightDownAnimation(downStartPos, downEndPos, 0.455);
 				mBurstBullets[i]->Owner()->SetActive(false);
 			}
 		}
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 8; i++)
 		{
 			mBeatBullets[i] = object::Instantiate<TutorialBeatBulletsPrefab>(eLayerType::Bullet)->GetComponent<Animator>();
 		}
@@ -99,7 +100,7 @@ namespace lu::JSAB
 					mBurstBullets[mBurstPoolIdx]->PlayStraightUp();
 				idx++;
 				mBurstPoolIdx++;
-				mBurstPoolIdx %= 5;
+				mBurstPoolIdx %= 8;
 			}
 		}
 		else
@@ -126,7 +127,7 @@ namespace lu::JSAB
 						mBurstBullets[mBurstPoolIdx]->PlayStraightUp();
 					burstIdx++;
 					mBurstPoolIdx++;
-					mBurstPoolIdx %= 5;
+					mBurstPoolIdx %= 8;
 				}
 			}
 			else
@@ -140,15 +141,22 @@ namespace lu::JSAB
 			{
 				14.850, 15.500, 16.583, 17.235, 17.450, 18.313, 18.959, 20.242, 20.697, 21.025
 			};
+			const float y = application.GetHeight() * 2;
+			const float x[] = 
+			{
+				-120, -23, 14, 51, 88, 125, 162, 199
+			};			
 			static int idx = 0;
+
 			if (idx < 10)
 			{
 				if (beat[idx] <= time)
 				{
+					mBeatBullets[mBeatPoolIdx]->Owner()->mTransform->SetPosition({ x[idx], y, 0});
 					mBeatBullets[mBeatPoolIdx]->PlayAnimation(L"OnBeat", false);
 					idx++;
 					mBurstPoolIdx++;
-					mBurstPoolIdx %= 5;
+					mBurstPoolIdx %= 10;
 				}
 			}
 			else

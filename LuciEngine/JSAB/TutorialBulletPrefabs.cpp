@@ -115,6 +115,7 @@ namespace lu::JSAB
 	}
 #pragma endregion
 
+#pragma region BeatPrefab
 	void TutorialBeatBulletsPrefab::Initialize()
 	{
 		Vector3 baseScale = { 20, (float)application.GetHeight() * 2, 1 };
@@ -123,11 +124,12 @@ namespace lu::JSAB
 		mTransform->SetScale(baseScale);
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"verticlebar"));
+		mr->GetMaterial()->SetTint(Color::clear);
 		mr->SetColor(Color::white)->UseColor(false);
 		AddComponent<Collider2D>()->SetType(eColliderType::Rect)->SetActive(false);
 		
 		double appearDuration = 0.455;
-		double flashDuration = 0.05;
+		double flashDuration = 0.03;
 		double stayDuration = 0.1;
 		
 		Animator* anim = AddComponent<Animator>();
@@ -153,6 +155,7 @@ namespace lu::JSAB
 		ani->AddTintKey(appearDuration + flashDuration + stayDuration, Color::white);
 		ani->AddTintKey(appearDuration + flashDuration + stayDuration, Color::clear);
 	}
+#pragma endregion
 	
 	void TutorialRoundBulletsPrefab::Initialize()
 	{

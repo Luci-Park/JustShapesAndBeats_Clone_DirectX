@@ -33,7 +33,7 @@ namespace lu::JSAB::Tutorial
 		auto m = manager->AddComponent<TutorialMusicController>();
 		ma->SetMusic(m);
 		m->Play();
-
+		//object::Instantiate<TutorialBeatBulletsPrefab>(eLayerType::Bullet)->AddComponent<gui::TransformWidget>();
 		object::Instantiate<PlayerPrefab>(eLayerType::Player);
 
 		Scene::Initialize();
