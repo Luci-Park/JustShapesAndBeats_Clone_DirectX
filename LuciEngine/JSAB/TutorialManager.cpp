@@ -7,6 +7,7 @@
 #include "LAnimator.h"
 #include "LApplication.h"
 #include "TutorialEightBullets.h"
+#include "TutorialBurst.h"
 
 extern lu::Application application;
 namespace lu::JSAB
@@ -18,30 +19,15 @@ namespace lu::JSAB
 	}
 	void TutorialManager::Initialize()
 	{
-		RECT bounds = renderer::mainCamera->GetBoundary();
 		for (int i = 0; i < 13; i++)
 		{
 			mStage1Bullets[i] = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TutorialEightBullets>();
 		}
-		//{
-		//	float move = 180;
-		//	Vector3 downStartPos = { 500, (float)bounds.top, 0 };
-		//	Vector3 downEndPos = { 500, (float)bounds.top + move, 0 };
-		//	Vector3 upStartPos = { 500, (float)bounds.bottom, 0 };
-		//	Vector3 upEndPos = { 500, (float)bounds.bottom - move, 0 };
-		//	Vector3 fastStartPos = Vector3::Lerp(downStartPos, downEndPos, 0.455 / 0.875);
-		//	for (int i = 0; i < 8; i++)
-		//	{
-		//		mBurstBullets[i] = object::Instantiate<TutorialBurstBulletsPrefab>(eLayerType::Bullet)->GetComponent<BurstScript>();
-		//		mBurstBullets[i]->CreateStraightUpAnimation(upStartPos, upEndPos, 0.455);
-		//		mBurstBullets[i]->CreateStraightDownAnimation(downStartPos, downEndPos, 0.455);
-		//		mBurstBullets[i]->Owner()->SetActive(false);
-		//	}
-		//}
-		//for (int i = 0; i < 8; i++)
-		//{
-		//	mBeatBullets[i] = object::Instantiate<TutorialBeatBulletsPrefab>(eLayerType::Bullet)->GetComponent<Animator>();
-		//}
+
+		for (int i = 0; i < 8; i++)
+		{
+			mBurstBullets[i] = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TutorialBurst>();
+		}
 	}
 	void TutorialManager::Update()
 	{
@@ -92,11 +78,8 @@ namespace lu::JSAB
 		{
 			if (beat[idx] <= time)
 			{
-				mBurstBullets[mBurstPoolIdx]->Owner()->SetActive(true);
-				if(idx % 2 == 0) 
-					mBurstBullets[mBurstPoolIdx]->PlayStraightDown();
-				else 
-					mBurstBullets[mBurstPoolIdx]->PlayStraightUp();
+				mBurstBullets[mBeatPoolIdx]->IsEven(idx % 2 == 0);
+				mBurstBullets[mBurstPoolIdx]->Activate();
 				idx++;
 				mBurstPoolIdx++;
 				mBurstPoolIdx %= 8;
@@ -119,11 +102,8 @@ namespace lu::JSAB
 			{
 				if (beat[burstIdx] <= time)
 				{
-					mBurstBullets[mBurstPoolIdx]->Owner()->SetActive(true);
-					if (burstIdx % 2 == 0)
-						mBurstBullets[mBurstPoolIdx]->PlayStraightDown();
-					else
-						mBurstBullets[mBurstPoolIdx]->PlayStraightUp();
+					mBurstBullets[mBeatPoolIdx]->IsEven(!(burstIdx % 2));
+					mBurstBullets[mBurstPoolIdx]->Activate();
 					burstIdx++;
 					mBurstPoolIdx++;
 					mBurstPoolIdx %= 8;

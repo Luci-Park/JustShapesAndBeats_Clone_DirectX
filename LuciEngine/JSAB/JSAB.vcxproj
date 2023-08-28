@@ -160,6 +160,7 @@
     <ClInclude Include="CoolFriendsScene.h" />
     <ClInclude Include="DubwooferScene.h" />
     <ClInclude Include="MusicController.h" />
+    <ClInclude Include="TutorialBurst.h" />
     <ClInclude Include="TutorialEightBullets.h" />
     <ClInclude Include="TutorialEightBulletScript.h" />
     <ClInclude Include="TutorialMusicController.h" />
@@ -193,6 +194,7 @@
     <ClCompile Include="CoolFriendsScene.cpp" />
     <ClCompile Include="DubwooferScene.cpp" />
     <ClCompile Include="MusicController.cpp" />
+    <ClCompile Include="TutorialBurst.cpp" />
     <ClCompile Include="TutorialEightBullets.cpp" />
     <ClCompile Include="TutorialEightBulletScript.cpp" />
     <ClCompile Include="TutorialMusicController.cpp" />

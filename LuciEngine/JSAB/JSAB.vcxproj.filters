@@ -89,6 +89,9 @@
     <ClCompile Include="TutorialEightBullets.cpp">
       <Filter>Contents\Bullets\Tutorial Bullets</Filter>
     </ClCompile>
+    <ClCompile Include="TutorialBurst.cpp">
+      <Filter>Contents\Bullets\Tutorial Bullets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -178,6 +181,9 @@
       <Filter>Contents\Bullets</Filter>
     </ClInclude>
     <ClInclude Include="TutorialEightBullets.h">
+      <Filter>Contents\Bullets\Tutorial Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialBurst.h">
       <Filter>Contents\Bullets\Tutorial Bullets</Filter>
     </ClInclude>
   </ItemGroup>

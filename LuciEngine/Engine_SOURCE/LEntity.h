@@ -20,6 +20,7 @@ namespace lu
 		virtual eState GetState() { return mState; }
 		virtual void SetState(eState state) { 
 			mState = state; }
+		bool IsActive() { return mState == Entity::eState::Active; }
 		void SetActive(bool active);
 	protected:
 		eState mState;

@@ -18,7 +18,6 @@ namespace lu
 
 		GameObject* Owner() { return mOwner; }
 		void SetOwner(GameObject* owner) { mOwner = owner; }
-
 	private:
 		const eComponentType mType;
 		GameObject* mOwner;

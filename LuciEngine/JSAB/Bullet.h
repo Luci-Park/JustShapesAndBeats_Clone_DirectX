@@ -4,6 +4,7 @@
 namespace lu
 {
 	class Animator;
+	class Animation;
 	class MeshRenderer;
 	class Collider2D;
 }
