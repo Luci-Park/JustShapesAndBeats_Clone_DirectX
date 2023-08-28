@@ -7,6 +7,7 @@ namespace lu
 namespace lu::JSAB
 {
 	class TutorialMusicController;
+	class TutorialEightBullets;
 	class BurstScript;
 	class TutorialManager : public Script
 	{
@@ -23,7 +24,7 @@ namespace lu::JSAB
 		void Stage3(double time);
 	private:
 		TutorialMusicController* mMusic;
-		TutorialEightBulletsPrefab* mStage1Bullets[13];
+		TutorialEightBullets* mStage1Bullets[13];
 		BurstScript* mBurstBullets[8];
 		Animator* mBeatBullets[8];
 		int mBurstPoolIdx;

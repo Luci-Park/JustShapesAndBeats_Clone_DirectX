@@ -23,20 +23,20 @@ namespace lu::JSAB
 
 	void CreateClockwiseAnimation(float duration, Animation* ani)
 	{
-		ani->AddRotationKey(0, Quaternion::Identity);
-		ani->AddRotationKey(duration * .25, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 0.5));
-		ani->AddRotationKey(duration * .5, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI));
-		ani->AddRotationKey(duration * .75, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 1.5));
-		ani->AddRotationKey(duration, Quaternion::CreateFromAxisAngle(Vector3::Forward, PI * -2));
+		ani->AddLocalRotationKey(0, Quaternion::Identity);
+		ani->AddLocalRotationKey(duration * .25, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 0.5));
+		ani->AddLocalRotationKey(duration * .5, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI));
+		ani->AddLocalRotationKey(duration * .75, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 1.5));
+		ani->AddLocalRotationKey(duration, Quaternion::CreateFromAxisAngle(Vector3::Forward, PI * -2));
 	}
 
 	void CreateCounterClockwiseAnimation(float duration, Animation* ani)
 	{
-		ani->AddRotationKey(0, Quaternion::Identity);
-		ani->AddRotationKey(duration * .25, Quaternion::CreateFromAxisAngle(Vector3::Forward, PI * 0.5));
-		ani->AddRotationKey(duration * .5, Quaternion::CreateFromAxisAngle(Vector3::Forward, PI));
-		ani->AddRotationKey(duration * .75, Quaternion::CreateFromAxisAngle(Vector3::Forward, PI * 1.5));
-		ani->AddRotationKey(duration, Quaternion::CreateFromAxisAngle(Vector3::Forward, PI * 2));
+		ani->AddLocalRotationKey(0, Quaternion::Identity);
+		ani->AddLocalRotationKey(duration * .25, Quaternion::CreateFromAxisAngle(Vector3::Forward, PI * 0.5));
+		ani->AddLocalRotationKey(duration * .5, Quaternion::CreateFromAxisAngle(Vector3::Forward, PI));
+		ani->AddLocalRotationKey(duration * .75, Quaternion::CreateFromAxisAngle(Vector3::Forward, PI * 1.5));
+		ani->AddLocalRotationKey(duration, Quaternion::CreateFromAxisAngle(Vector3::Forward, PI * 2));
 	}
 
 	void CreateWhiteBlink(float duration, Animation* ani)

@@ -3,7 +3,9 @@
 
 namespace lu
 {
-	class Transform;
+	class Animator;
+	class MeshRenderer;
+	class Collider2D;
 }
 
 namespace lu::JSAB
@@ -11,7 +13,10 @@ namespace lu::JSAB
 	class Bullet : public Script
 	{
 	public:
-		virtual void Update();
+		Bullet():isActive(false) {};
+		virtual ~Bullet() {};
+		virtual void Initialize() override;
+		virtual void Update() override;
 		void Activate();
 		void DeActivate();
 
@@ -22,7 +27,6 @@ namespace lu::JSAB
 		virtual void WhileDeActive() = 0;
 
 	protected:
-		Transform* mTr;
 		bool isActive;
 
 	};

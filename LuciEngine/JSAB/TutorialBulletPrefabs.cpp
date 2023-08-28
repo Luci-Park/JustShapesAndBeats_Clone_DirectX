@@ -47,13 +47,13 @@ namespace lu::JSAB
 	}
 	void TutorialEightBulletsPrefab::CreateEnterEffect()
 	{
-		GameObject* enterEffect = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
-		enterEffect->SetName(L"enterburst");
-		MeshRenderer* mr = enterEffect->AddComponent<MeshRenderer>();
+		GameObject* mEnterEffect = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
+		mEnterEffect->SetName(L"enterburst");
+		MeshRenderer* mr = mEnterEffect->AddComponent<MeshRenderer>();
 		SetEnterEffect(mr);
-		enterEffect->mTransform->SetLocalPosition({ 0, 0, -1 });
+		mEnterEffect->mTransform->SetLocalPosition({ 0, 0, -0.1 });
 
-		Animator* anim = enterEffect->AddComponent<Animator>();
+		Animator* anim = mEnterEffect->AddComponent<Animator>();
 		Animation* ani = anim->CreateAnimation(L"Appear");
 		float duration = 0.5;
 		ani->AddTintKey(0, Color::white);
@@ -62,7 +62,7 @@ namespace lu::JSAB
 		ani->AddLocalScaleKey(0.1, { 1, 1, 1 });
 		ani->AddLocalScaleKey(duration, { 0, 0, 1 });
 
-		mEnterEffect = anim;
+		//mEnterEffect = anim;
 	}
 
 #pragma endregion

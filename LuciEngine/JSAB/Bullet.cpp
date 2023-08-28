@@ -3,6 +3,10 @@
 #include "LTransform.h"
 namespace lu::JSAB
 {
+	void Bullet::Initialize()
+	{
+		DeActivate();
+	}
 	void Bullet::Update()
 	{
 		if (isActive)

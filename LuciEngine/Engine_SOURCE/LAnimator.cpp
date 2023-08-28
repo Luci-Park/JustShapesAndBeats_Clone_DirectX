@@ -60,11 +60,22 @@ namespace lu
 	{
 		Animation* prevAnimation = mActiveAnimation;
 		Animation* animation = FindAnimation(name);
+		if (prevAnimation)
+			mActiveAnimation->Reset();
+
 		if (animation)
 		{
 			mActiveAnimation = animation;
 		}
 		mbLoop = loop;
 		mActiveAnimation->Reset();
+	}
+	void Animator::StopAnimation()
+	{
+		if (mActiveAnimation)
+		{
+			mActiveAnimation->Reset();
+			mActiveAnimation = nullptr;
+		}
 	}
 }

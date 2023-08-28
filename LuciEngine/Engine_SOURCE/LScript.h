@@ -23,7 +23,7 @@ namespace lu
 		virtual void OnDisable() {}
 
 		virtual void SetState(eState state) override;
-		
+
 	public:
 		Transform* mTransform;
 		

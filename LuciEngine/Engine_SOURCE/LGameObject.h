@@ -63,11 +63,17 @@ namespace lu
 		virtual void OnDisable() {};
 
 		const std::vector<Script*>& GetScripts() { return mScripts; }
+
+		void SetName(const std::wstring& name) { mName = name; }
+		std::wstring& GetName() { return mName; }
+
 	public:
 		Transform* mTransform;
 	private:
 		std::vector<Component*> mComponents;
 		std::vector<Script*> mScripts;
+
+		std::wstring mName;
 	};
 }
 

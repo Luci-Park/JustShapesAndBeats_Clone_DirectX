@@ -17,6 +17,7 @@ namespace lu
 		Animation* CreateAnimation(const std::wstring& name);
 		Animation* FindAnimation(const std::wstring& name);
 		void PlayAnimation(const std::wstring& name, bool loop);
+		void StopAnimation();
 	private:
 		std::map<std::wstring, Animation*>mAnimations;
 		Animation* mActiveAnimation;

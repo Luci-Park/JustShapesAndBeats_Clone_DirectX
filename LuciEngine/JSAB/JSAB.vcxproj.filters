@@ -83,6 +83,12 @@
     <ClCompile Include="DubwooferScene.cpp">
       <Filter>Contents\Scene\Title\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Contents\Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialEightBullets.cpp">
+      <Filter>Contents\Bullets\Tutorial Bullets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -168,6 +174,12 @@
     <ClInclude Include="MusicController.h">
       <Filter>Contents\SoundManager</Filter>
     </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Contents\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialEightBullets.h">
+      <Filter>Contents\Bullets\Tutorial Bullets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -214,6 +226,12 @@
     </Filter>
     <Filter Include="Contents\Tutorial\Bullet">
       <UniqueIdentifier>{d75bdd1e-9a2a-4064-92d3-3e5b2fa8c43e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Bullets">
+      <UniqueIdentifier>{d4b81a8b-9340-4988-bb91-4237afced6c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Bullets\Tutorial Bullets">
+      <UniqueIdentifier>{43971031-0f49-4717-87ae-748d329fff8f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

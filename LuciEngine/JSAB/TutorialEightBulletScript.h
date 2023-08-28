@@ -66,7 +66,7 @@ namespace lu::JSAB
 	private:
 		Transform* mTr;
 		Animator* mAnim;
-		Vector3 mTargetPos;
+		Vector3 mEndPos;
 		Vector3 mStartPos;
 		double mDuration;
 		double mTime;
