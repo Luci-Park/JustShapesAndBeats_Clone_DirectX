@@ -1,5 +1,6 @@
 #pragma once
 #include "LScript.h"
+#include "BulletPool.h"
 namespace lu
 {
 	class Animator;
@@ -24,11 +25,9 @@ namespace lu::JSAB
 		void Stage3(double time);
 	private:
 		TutorialMusicController* mMusic;
-		TutorialEightBullets* mStage1Bullets[13];
-		TutorialBurst* mBurstBullets[8];
+		BulletPool<TutorialEightBullets> mStage1Bullets;
+		BulletPool<TutorialBurst> mBurstBullets;
 		Animator* mBeatBullets[8];
-		int mBurstPoolIdx;
-		int mBeatPoolIdx;
 	};
 }
 

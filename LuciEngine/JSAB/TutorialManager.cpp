@@ -13,21 +13,12 @@ extern lu::Application application;
 namespace lu::JSAB
 {
 	TutorialManager::TutorialManager()
-		: mBurstPoolIdx(0)
-		, mBeatPoolIdx(0)
+		: mStage1Bullets(13)
+		, mBurstBullets(8)
 	{
 	}
 	void TutorialManager::Initialize()
 	{
-		for (int i = 0; i < 13; i++)
-		{
-			mStage1Bullets[i] = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TutorialEightBullets>();
-		}
-
-		for (int i = 0; i < 8; i++)
-		{
-			mBurstBullets[i] = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TutorialBurst>();
-		}
 	}
 	void TutorialManager::Update()
 	{
@@ -47,8 +38,8 @@ namespace lu::JSAB
 		static int idx = 0;
 
 		RECT bounds = renderer::mainCamera->GetBoundary();
-		float x = bounds.right + mStage1Bullets[0]->mTransform->GetScale().x * 0.5;
-		float endX = bounds.left - mStage1Bullets[0]->mTransform->GetScale().x * 0.5;
+		float x = bounds.right + 42 * 0.5;
+		float endX = bounds.left - 42 * 0.5;
 	
 		if (idx < 13)
 		{
@@ -56,9 +47,10 @@ namespace lu::JSAB
 			{
 				Vector3 pos = { x, posY[idicies[idx]], 1 };
 				Vector3 endPos = { endX, posY[idicies[idx]], 1 };
-				mStage1Bullets[idx]->mTransform->SetPosition(pos);
-				mStage1Bullets[idx]->Setup(7, pos, endPos);
-				mStage1Bullets[idx]->Activate();
+				TutorialEightBullets* bullet = mStage1Bullets.GetNext();
+				bullet->mTransform->SetPosition(pos);
+				bullet->Setup(7, pos, endPos);
+				bullet->Activate();
 				idx++;
 			}
 		}
@@ -78,11 +70,10 @@ namespace lu::JSAB
 		{
 			if (beat[idx] <= time)
 			{
-				mBurstBullets[mBurstPoolIdx]->IsEven(idx % 2 == 0);
-				mBurstBullets[mBurstPoolIdx]->Activate();
+				auto bullet = mBurstBullets.GetNext();
+				bullet->IsEven(idx % 2 == 0);
+				bullet->Activate();
 				idx++;
-				mBurstPoolIdx++;
-				mBurstPoolIdx %= 8;
 			}
 		}
 		else
@@ -102,11 +93,10 @@ namespace lu::JSAB
 			{
 				if (beat[burstIdx] <= time)
 				{
-					mBurstBullets[mBeatPoolIdx]->IsEven(!(burstIdx % 2));
-					mBurstBullets[mBurstPoolIdx]->Activate();
+					auto bullet = mBurstBullets.GetNext();
+					bullet->IsEven(burstIdx % 2 == 0);
+					bullet->Activate();
 					burstIdx++;
-					mBurstPoolIdx++;
-					mBurstPoolIdx %= 8;
 				}
 			}
 			else
@@ -115,7 +105,7 @@ namespace lu::JSAB
 					burstIdx = 0;
 			}
 		}
-		{
+		/*{
 			const double beat[] =
 			{
 				14.850, 15.500, 16.583, 17.235, 17.450, 18.313, 18.959, 20.242, 20.697, 21.025
@@ -144,6 +134,6 @@ namespace lu::JSAB
 					idx = 0;
 			}
 
-		}
+		}*/
 	}
 }

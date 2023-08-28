@@ -160,6 +160,7 @@
     <ClInclude Include="CoolFriendsScene.h" />
     <ClInclude Include="DubwooferScene.h" />
     <ClInclude Include="MusicController.h" />
+    <ClInclude Include="BulletPool.h" />
     <ClInclude Include="TutorialBurst.h" />
     <ClInclude Include="TutorialEightBullets.h" />
     <ClInclude Include="TutorialEightBulletScript.h" />
