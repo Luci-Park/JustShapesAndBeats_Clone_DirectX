@@ -78,7 +78,7 @@ namespace lu::JSAB
 		{
 			if (beat[idx] <= time)
 			{
-				mBurstBullets[mBeatPoolIdx]->IsEven(idx % 2 == 0);
+				mBurstBullets[mBurstPoolIdx]->IsEven(idx % 2 == 0);
 				mBurstBullets[mBurstPoolIdx]->Activate();
 				idx++;
 				mBurstPoolIdx++;

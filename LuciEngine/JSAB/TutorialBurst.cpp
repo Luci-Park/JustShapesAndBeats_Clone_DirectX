@@ -75,20 +75,26 @@ namespace lu::JSAB
 		mShell->Owner()->SetActive(true);
 		mShell->PlayAnimation(L"Blink", true);
 		if (mbEven)
+		{
+			mTransform->SetPosition({ 500, (float)bounds.top, 0 });
 			mBase->PlayAnimation(L"Down", false);
+		}
 		else
+		{
+			mTransform->SetPosition({ 500, (float)bounds.bottom, 0 });
 			mBase->PlayAnimation(L"Up", false);
+		}
 	}
 	
 	void TutorialBurst::OnDeActivate()
 	{
+		mbIsBursting = false;
 		mShell->Owner()->SetActive(false);
 		for (int i = 0; i < 8; i++)
 		{
 			mBursts[i]->Owner()->SetActive(false);
 			mBursts[i]->SetLocalPosition(Vector3::Zero);
 		}
-		mbIsBursting = false;
 	}
 
 	void TutorialBurst::WhileActive()

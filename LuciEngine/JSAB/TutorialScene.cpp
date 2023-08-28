@@ -6,11 +6,14 @@
 #include "TutorialBulletPrefabs.h"
 #include "TutorialMusicController.h"
 #include "TutorialManager.h"
+#include "TutorialBurst.h"
 #include "LObject.h"
+#include "LInput.h"
 #include "yaCameraScript.h"
 
 namespace lu::JSAB::Tutorial
 {
+	TutorialBurst* burst;
 	void TutorialScene::Initialize()
 	{
 		//Camera
@@ -33,13 +36,23 @@ namespace lu::JSAB::Tutorial
 		auto m = manager->AddComponent<TutorialMusicController>();
 		ma->SetMusic(m);
 		m->Play();
-		//object::Instantiate<TutorialBeatBulletsPrefab>(eLayerType::Bullet)->AddComponent<gui::TransformWidget>();
+		burst = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TutorialBurst>();
 		object::Instantiate<PlayerPrefab>(eLayerType::Player);
 
 		Scene::Initialize();
 	}
 	void TutorialScene::Update()
 	{
+		if (Input::GetKeyDown(eKeyCode::O))
+		{
+			burst->IsEven(true);
+			burst->Activate();
+		}
+		else if (Input::GetKeyDown(eKeyCode::P))
+		{
+			burst->IsEven(false);
+			burst->Activate();
+		}
 		Scene::Update();
 	}
 	void TutorialScene::LateUpdate()
