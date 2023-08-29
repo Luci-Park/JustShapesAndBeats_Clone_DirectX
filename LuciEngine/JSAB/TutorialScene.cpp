@@ -9,16 +9,16 @@
 #include "TutorialBeatBar.h"
 #include "LObject.h"
 #include "LInput.h"
-#include "yaCameraScript.h"
+#include "CameraScript.h"
 
 namespace lu::JSAB::Tutorial
 {
-	TutorialBeatBar* burst;
+	CameraScript* burst;
 	void TutorialScene::Initialize()
 	{
 		//Camera
 		{
-			bool active[]{ true, true, false, true, false };
+			bool active[]{ true, true, true, true, false };
 			GameObject* camera = new GameObject();
 			AddGameObject(eLayerType::Camera, camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
@@ -27,15 +27,15 @@ namespace lu::JSAB::Tutorial
 			{
 				cameraComp->TurnLayerMask((eLayerType)i, active[i]);
 			}
-			camera->AddComponent<CameraScript>();
+			burst = camera->AddComponent<CameraScript>();
 		}
 
-		GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
+		/*GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
 		manager->SetName(L"TutorialManager");
 		auto ma = manager->AddComponent<TutorialManager>();
 		auto m = manager->AddComponent<TutorialMusicController>();
 		ma->SetMusic(m);
-		m->Play();
+		m->Play();*/
 		//burst = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TutorialBeatBar>();
 		object::Instantiate<PlayerPrefab>(eLayerType::Player);
 
@@ -43,6 +43,20 @@ namespace lu::JSAB::Tutorial
 	}
 	void TutorialScene::Update()
 	{
+		if (Input::GetKeyDown(eKeyCode::W))
+			burst->BeatUp();
+
+		if (Input::GetKeyDown(eKeyCode::S))
+			burst->BeatDown();
+
+		if (Input::GetKeyDown(eKeyCode::A))
+			burst->BeatLeft();
+
+		if (Input::GetKeyDown(eKeyCode::D))
+			burst->BeatRight();
+
+		if (Input::GetKeyDown(eKeyCode::F))
+			burst->Flash();
 		Scene::Update();
 	}
 	void TutorialScene::LateUpdate()

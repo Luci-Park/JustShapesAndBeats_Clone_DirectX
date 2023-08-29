@@ -157,6 +157,7 @@
     <ClInclude Include="BackgroundObject.h" />
     <ClInclude Include="BackgroundScript.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="CameraScript.h" />
     <ClInclude Include="CoolFriendsScene.h" />
     <ClInclude Include="DubwooferScene.h" />
     <ClInclude Include="MusicController.h" />
@@ -193,6 +194,7 @@
     <ClCompile Include="BackgroundObject.cpp" />
     <ClCompile Include="BackgroundScript.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="CameraScript.cpp" />
     <ClCompile Include="CoolFriendsScene.cpp" />
     <ClCompile Include="DubwooferScene.cpp" />
     <ClCompile Include="MusicController.cpp" />

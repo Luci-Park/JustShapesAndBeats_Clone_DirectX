@@ -95,6 +95,9 @@
     <ClCompile Include="TutorialMusicController.cpp">
       <Filter>Contents\Tutorial</Filter>
     </ClCompile>
+    <ClCompile Include="CameraScript.cpp">
+      <Filter>Contents\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -195,6 +198,9 @@
     <ClInclude Include="TutorialMusicController.h">
       <Filter>Contents\Tutorial</Filter>
     </ClInclude>
+    <ClInclude Include="CameraScript.h">
+      <Filter>Contents\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -247,6 +253,9 @@
     </Filter>
     <Filter Include="Contents\Managers">
       <UniqueIdentifier>{500b1b7f-c28c-4150-9629-6aa0f9b02e32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Camera">
+      <UniqueIdentifier>{a63bfb69-c775-400c-aa2a-c738e4cd9c3f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
