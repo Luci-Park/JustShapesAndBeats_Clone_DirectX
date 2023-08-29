@@ -31,6 +31,18 @@ namespace lu::JSAB
 
 		Bullet::Initialize();
 	}
+	void TutorialBeatBar::SetTime(double targetTime, double currentTime)
+	{
+		if (IsActive()) return;
+		double diff = targetTime - currentTime;
+		if (0 < diff && diff <= appearDuration)
+		{
+			Activate();
+			double time = appearDuration + flashDuration + stayDuration + disappearDuration;
+			mAnim->SetTime(time - diff);
+		}
+		
+	}
 	void TutorialBeatBar::OnActivate()
 	{
 		mMr->SetActive(true);

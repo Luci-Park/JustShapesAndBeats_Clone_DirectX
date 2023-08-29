@@ -9,7 +9,7 @@ namespace lu::JSAB
 		virtual ~TutorialBeatBar(){}
 
 		virtual void Initialize() override;
-		
+		void SetTime(double targetTime, double currentTime);
 	private:
 		virtual void OnActivate();
 		virtual void OnDeActivate();
@@ -24,7 +24,7 @@ namespace lu::JSAB
 		Animator* mAnim;
 		const double appearDuration = 1;
 		const double flashDuration = 0.05;
-		const double stayDuration = 0.2;
+		const double stayDuration = 0.3;
 		const double disappearDuration = 0.05;
 	};
 }

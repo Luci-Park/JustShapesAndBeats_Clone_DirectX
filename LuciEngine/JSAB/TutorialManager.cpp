@@ -110,7 +110,7 @@ namespace lu::JSAB
 		{
 			const double beat[] =
 			{
-				14.619, 15.269, 16.352, 17.004, 17.219, 18.082, 18.728, 19.769, 20.466, 20.794
+				14.85, 15.5, 16.583, 17.235, 17.45, 18.313, 18.959, 20, 20.697, 21.025
 			};
 			/*{
 				14.850, 15.500, 16.583, 17.235, 17.450, 18.313, 18.959, 20., 20.697, 21.025
@@ -121,23 +121,12 @@ namespace lu::JSAB
 			{ 
 				-60, - 20, 20, 60, 100, 140, 180, 220, 260, 300
 			};
-			static int idx = 0;
-			if (idx < 8)
+			for (int i = 0; i < 10; i++)
 			{
-				if (beat[idx] <= time)
-				{
-					auto bullet = mBeatBars.GetNext();
-					bullet->mTransform->SetPosition({ x[idx], y, 0 });
-					bullet->Activate();
-					idx++;
-				}
+				auto bullet = mBeatBars.GetNext();
+				bullet->mTransform->SetPosition({ x[i], y, 0 });
+				bullet->SetTime(beat[i], time);
 			}
-			else
-			{
-				if (beat[idx - 1] > time)
-					idx = 0;
-			}
-
 		}
 	}
 }
