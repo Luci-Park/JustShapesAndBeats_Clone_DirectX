@@ -38,7 +38,7 @@ namespace lu
 			return findObjs;
 		}
 		Layer& GetLayer(eLayerType type) { return mLayers[(UINT)type]; }
-
+		
 	private:
 		std::vector<Layer> mLayers;
 	};

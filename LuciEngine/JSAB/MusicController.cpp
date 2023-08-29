@@ -46,7 +46,7 @@ namespace lu::JSAB
 	void MusicController::Play()
 	{
 		mbIsPlaying = true;
-		mAudioSource->SetPosition(14.619);
+		mAudioSource->SetPosition(0);//14.619);
 		mAudioSource->Play();
 		_MusicController = this;
 	}

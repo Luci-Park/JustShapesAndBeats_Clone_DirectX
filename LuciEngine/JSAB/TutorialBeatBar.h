@@ -2,7 +2,6 @@
 #include "Bullet.h"
 namespace lu::JSAB
 {
-	class CameraScript;
 	class TutorialBeatBar : public Bullet
 	{
 	public:
@@ -21,7 +20,6 @@ namespace lu::JSAB
 		void Beat();
 
 	private:
-		CameraScript* mCamera;
 		MeshRenderer* mMr;
 		Collider2D* mCol;
 		Animator* mAnim;

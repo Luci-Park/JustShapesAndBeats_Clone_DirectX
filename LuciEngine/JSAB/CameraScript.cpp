@@ -42,29 +42,30 @@ namespace lu::JSAB
 	}
 	void CameraScript::CreateAnimation()
 	{
-		double duration = 0.1;
+		double duration = 0.01;
 		Animation* anim = mAnim->CreateAnimation(L"Flash");
 		anim->AddFunctionKey(0, std::bind(&CameraScript::SetFlash, this, true));
 		anim->AddFunctionKey(duration, std::bind(&CameraScript::SetFlash, this, false));
 
+		int dist = 50;
 		anim = mAnim->CreateAnimation(L"BeatUp");
 		anim->AddPositionKey(0, Vector3::Zero);
-		anim->AddPositionKey(duration * 0.5, Vector3::Up * 100);
+		anim->AddPositionKey(duration * 0.5, Vector3::Up * 50);
 		anim->AddPositionKey(duration, Vector3::Zero);
 
 		anim = mAnim->CreateAnimation(L"BeatDown");
 		anim->AddPositionKey(0, Vector3::Zero);
-		anim->AddPositionKey(duration * 0.5, Vector3::Down * 100);
+		anim->AddPositionKey(duration * 0.5, Vector3::Down * 50);
 		anim->AddPositionKey(duration, Vector3::Zero);
 
 		anim = mAnim->CreateAnimation(L"BeatLeft");
 		anim->AddPositionKey(0, Vector3::Zero);
-		anim->AddPositionKey(duration * 0.5, Vector3::Left * 100);
+		anim->AddPositionKey(duration * 0.5, Vector3::Left * 50);
 		anim->AddPositionKey(duration, Vector3::Zero);
 
 		anim = mAnim->CreateAnimation(L"BeatRight");
 		anim->AddPositionKey(0, Vector3::Zero);
-		anim->AddPositionKey(duration * 0.5, Vector3::Right * 100);
+		anim->AddPositionKey(duration * 0.5, Vector3::Right * 50);
 		anim->AddPositionKey(duration, Vector3::Zero);
 	}
 }

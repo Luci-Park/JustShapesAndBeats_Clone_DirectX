@@ -31,8 +31,6 @@ namespace lu::JSAB
 		mAnim = Owner()->AddComponent<Animator>();
 		CreateOnBeatAnimation();
 
-		mCamera = renderer::mainCamera->Owner()->GetComponent<CameraScript>();
-
 		Bullet::Initialize();
 	}
 	void TutorialBeatBar::SetTime(double targetTime, double currentTime)
@@ -76,17 +74,18 @@ namespace lu::JSAB
 		ani->AddInterpolationKey(0, 0);
 
 		ani->AddScaleKey(appearDuration, baseScale);
-		ani->AddTintKey(appearDuration, Color::white);
+		ani->AddTintKey(appearDuration, {1.f, 1.f, 1.f, 0.8f});
 		ani->AddInterpolationKey(appearDuration, 0);
 
 		ani->AddColliderActiveKey(appearDuration, true);
 		ani->AddScaleKey(appearDuration, { 20, 0, 1 });
 		ani->AddInterpolationKey(appearDuration, 1);
 		ani->AddScaleKey(appearDuration + flashDuration, baseScale);
+		ani->AddTintKey(appearDuration + flashDuration, Color::white);
 		ani->AddInterpolationKey(appearDuration + flashDuration, 1);
 		ani->AddInterpolationKey(appearDuration + flashDuration, 0);
 
-		ani->AddFunctionKey(appearDuration + flashDuration, std::bind(&TutorialBeatBar::Beat, this));
+		//ani->AddFunctionKey(appearDuration + flashDuration, std::bind(&TutorialBeatBar::Beat, this));
 
 		ani->AddScaleKey(appearDuration + flashDuration +stayDuration, baseScale);
 		ani->AddScaleKey(appearDuration + flashDuration + stayDuration + disappearDuration, { 0, (float)application.GetHeight() * 2, 1 });
@@ -97,12 +96,12 @@ namespace lu::JSAB
 	{
 		Vector3 pos = mTransform->GetPosition();
 		if (-pos.y == (float)application.GetWidth() * 0.5)
-			mCamera->BeatDown();
+			renderer::mainCamera->Owner()->GetComponent<CameraScript>()->BeatDown();
 		else if (pos.y == (float)application.GetHeight() * 0.5)
-			mCamera->BeatUp();
+			renderer::mainCamera->Owner()->GetComponent<CameraScript>()->BeatUp();
 		else if (-pos.x == (float)application.GetWidth() * 0.5)
-			mCamera->BeatLeft();
+			renderer::mainCamera->Owner()->GetComponent<CameraScript>()->BeatLeft();
 		else if (pos.x == (float)application.GetHeight() * 0.5)
-			mCamera->BeatRight();
+			renderer::mainCamera->Owner()->GetComponent<CameraScript>()->BeatRight();
 	}
 }
