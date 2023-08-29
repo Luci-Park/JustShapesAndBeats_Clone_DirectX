@@ -1,7 +1,5 @@
 #include "TutorialManager.h"
 #include "TutorialMusicController.h"
-#include "TutorialBulletPrefabs.h"
-#include "TutorialEightBulletScript.h"
 #include "TutorialBeatBar.h"
 #include "LObject.h"
 #include "LRenderer.h"
@@ -26,9 +24,17 @@ namespace lu::JSAB
 	{
 		double time = MusicController::_MusicController->GetTime();
 		int stage = MusicController::_MusicController->GetStage();
+
 		if (stage == 0)Stage1(time);
 		if (stage == 1)Stage2(time);
 		if (stage == 2)Stage3(time);
+		if (stage == 3)Stage4(time);
+		if (stage == 4)Stage5(time);
+		if (stage == 5)Stage6(time);
+		if (stage == 6)Stage7(time);
+		if (stage == 7)Stage8(time);
+		if (stage == 8)Stage9(time);
+		if (stage == 9)Stage10(time);
 	}
 	void TutorialManager::Stage1(double time)
 	{
@@ -112,10 +118,6 @@ namespace lu::JSAB
 			{
 				14.85, 15.5, 16.583, 17.235, 17.45, 18.313, 18.959, 20, 20.697, 21.025
 			};
-			/*{
-				14.850, 15.500, 16.583, 17.235, 17.450, 18.313, 18.959, 20., 20.697, 21.025
-			};
-			*/
 			const float y = application.GetHeight() * 0.5;
 			const float x[] = 
 			{ 
@@ -128,5 +130,57 @@ namespace lu::JSAB
 				bullet->SetTime(beat[i], time);
 			}
 		}
+	}
+	void TutorialManager::Stage4(double time)
+	{
+		{
+			const double beat[] = { 
+				28.475,	29.35,	30.225,	31.1,	31.975,	32.85,	33.756,	34.556
+			};
+			static int idx = 0;
+			if (idx < 8)
+			{
+				if (beat[idx] <= time)
+				{
+					auto bullet = mBurstBullets.GetNext();
+					bullet->IsEven(idx % 2 == 0);
+					bullet->Activate();
+					idx++;
+				}
+			}
+			else if(beat[idx - 1] > time)
+			{
+				idx = 0;
+			}
+		}
+		{
+			const double beat[] =
+			{
+				28.701, 29.350, 30.219, 30.868, 31.949, 32.598, 33.677, 34.326
+			};
+
+			const float y = application.GetHeight() * 0.5;
+			const float x[] = { 200, -200, 100, -100 };
+			static int idx = 0;
+		}
+
+	}
+	void TutorialManager::Stage5(double time)
+	{
+	}
+	void TutorialManager::Stage6(double time)
+	{
+	}
+	void TutorialManager::Stage7(double time)
+	{
+	}
+	void TutorialManager::Stage8(double time)
+	{
+	}
+	void TutorialManager::Stage9(double time)
+	{
+	}
+	void TutorialManager::Stage10(double time)
+	{
 	}
 }

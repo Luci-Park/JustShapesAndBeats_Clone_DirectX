@@ -6,7 +6,7 @@ namespace lu::JSAB
 {
 	MusicController* MusicController::_MusicController = nullptr;
 	MusicController::MusicController()
-		: mStageIdx(2)
+		: mStageIdx(0)
 		, mNextStageIdx(0)
 		, mFadeDuration(2)
 		, mFadeTime(0)
