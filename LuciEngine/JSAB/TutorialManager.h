@@ -10,6 +10,7 @@ namespace lu::JSAB
 	class TutorialMusicController;
 	class TutorialEightBullets;
 	class TutorialBurst;
+	class TutorialBeatBar;
 	class TutorialManager : public Script
 	{
 	public:
@@ -27,6 +28,7 @@ namespace lu::JSAB
 		TutorialMusicController* mMusic;
 		BulletPool<TutorialEightBullets> mStage1Bullets;
 		BulletPool<TutorialBurst> mBurstBullets;
+		BulletPool<TutorialBeatBar>mBeatBars;
 		Animator* mBeatBullets[8];
 	};
 }

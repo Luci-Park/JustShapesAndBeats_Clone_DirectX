@@ -78,6 +78,7 @@ namespace lu
 		
 		void Reset();
 		bool IsComplete() { return mbComplete; }
+		void SetTime(double time) { mTime = time; }
 
 		void AddPositionKey(double timestamp, Vector3 vector3);
 		void AddScaleKey(double timestamp, Vector3 vector3);

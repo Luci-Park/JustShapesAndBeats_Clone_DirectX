@@ -2,6 +2,7 @@
 #include "TutorialMusicController.h"
 #include "TutorialBulletPrefabs.h"
 #include "TutorialEightBulletScript.h"
+#include "TutorialBeatBar.h"
 #include "LObject.h"
 #include "LRenderer.h"
 #include "LAnimator.h"
@@ -15,6 +16,7 @@ namespace lu::JSAB
 	TutorialManager::TutorialManager()
 		: mStage1Bullets(13)
 		, mBurstBullets(8)
+		, mBeatBars(10)
 	{
 	}
 	void TutorialManager::Initialize()
@@ -88,52 +90,54 @@ namespace lu::JSAB
 			const double beat[] = {
 				14.619,	15.494,	16.369,	17.244,	18.119,	18.994,	19.869,	20.744
 			};
-			static int burstIdx = 0;
-			if (burstIdx < 8)
-			{
-				if (beat[burstIdx] <= time)
-				{
-					auto bullet = mBurstBullets.GetNext();
-					bullet->IsEven(burstIdx % 2 == 0);
-					bullet->Activate();
-					burstIdx++;
-				}
-			}
-			else
-			{
-				if (beat[7] > time)
-					burstIdx = 0;
-			}
-		}
-		/*{
-			const double beat[] =
-			{
-				14.850, 15.500, 16.583, 17.235, 17.450, 18.313, 18.959, 20.242, 20.697, 21.025
-			};
-			const float y = application.GetHeight() * 2;
-			const float x[] = 
-			{
-				-120, -23, 14, 51, 88, 125, 162, 199
-			};			
 			static int idx = 0;
-
-			if (idx < 10)
+			if (idx < 8)
 			{
 				if (beat[idx] <= time)
 				{
-					mBeatBullets[mBeatPoolIdx]->Owner()->mTransform->SetPosition({ x[idx], y, 0});
-					mBeatBullets[mBeatPoolIdx]->PlayAnimation(L"OnBeat", false);
+					auto bullet = mBurstBullets.GetNext();
+					bullet->IsEven(idx % 2 == 0);
+					bullet->Activate();
 					idx++;
-					mBurstPoolIdx++;
-					mBurstPoolIdx %= 10;
 				}
 			}
 			else
 			{
-				if (beat[9] > time)
+				if (beat[idx - 1] > time)
+					idx = 0;
+			}
+		}
+		{
+			const double beat[] =
+			{
+				14.619, 15.269, 16.352, 17.004, 17.219, 18.082, 18.728, 19.769, 20.466, 20.794
+			};
+			/*{
+				14.850, 15.500, 16.583, 17.235, 17.450, 18.313, 18.959, 20., 20.697, 21.025
+			};
+			*/
+			const float y = application.GetHeight() * 0.5;
+			const float x[] = 
+			{ 
+				-60, - 20, 20, 60, 100, 140, 180, 220, 260, 300
+			};
+			static int idx = 0;
+			if (idx < 8)
+			{
+				if (beat[idx] <= time)
+				{
+					auto bullet = mBeatBars.GetNext();
+					bullet->mTransform->SetPosition({ x[idx], y, 0 });
+					bullet->Activate();
+					idx++;
+				}
+			}
+			else
+			{
+				if (beat[idx - 1] > time)
 					idx = 0;
 			}
 
-		}*/
+		}
 	}
 }

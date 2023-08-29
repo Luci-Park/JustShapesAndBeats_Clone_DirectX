@@ -78,4 +78,13 @@ namespace lu
 			mActiveAnimation = nullptr;
 		}
 	}
+	void Animator::SetTime(double time)
+	{
+		if (mActiveAnimation)
+			mActiveAnimation->SetTime(time);
+	}
+	bool Animator::IsPlaying()
+	{
+		return mActiveAnimation != nullptr && !mActiveAnimation->IsComplete();
+	}
 }

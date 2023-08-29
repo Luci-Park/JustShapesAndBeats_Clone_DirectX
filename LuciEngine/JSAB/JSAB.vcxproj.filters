@@ -44,9 +44,6 @@
     <ClCompile Include="MenuButtonObject.cpp">
       <Filter>Contents\Scene\Title\UIs</Filter>
     </ClCompile>
-    <ClCompile Include="TutorialScene.cpp">
-      <Filter>Contents\Tutorial\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="yaCameraScript.cpp">
       <Filter>EngineTesters</Filter>
     </ClCompile>
@@ -68,17 +65,11 @@
     <ClCompile Include="TutorialBulletPrefabs.cpp">
       <Filter>Contents\Tutorial\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="TutorialMusicController.cpp">
-      <Filter>Contents\Tutorial</Filter>
-    </ClCompile>
-    <ClCompile Include="TutorialManager.cpp">
-      <Filter>Contents\Tutorial</Filter>
-    </ClCompile>
     <ClCompile Include="TutorialEightBulletScript.cpp">
       <Filter>Contents\Tutorial\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="MusicController.cpp">
-      <Filter>Contents\SoundManager</Filter>
+      <Filter>Contents\Managers</Filter>
     </ClCompile>
     <ClCompile Include="DubwooferScene.cpp">
       <Filter>Contents\Scene\Title\Scene</Filter>
@@ -94,6 +85,15 @@
     </ClCompile>
     <ClCompile Include="TutorialBeatBar.cpp">
       <Filter>Contents\Bullets\Tutorial Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialScene.cpp">
+      <Filter>Contents\Tutorial\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialManager.cpp">
+      <Filter>Contents\Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialMusicController.cpp">
+      <Filter>Contents\Tutorial</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,9 +140,6 @@
     <ClInclude Include="MenuButtonObject.h">
       <Filter>Contents\Scene\Title\UIs</Filter>
     </ClInclude>
-    <ClInclude Include="TutorialScene.h">
-      <Filter>Contents\Tutorial\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="yaPlayerScript.h">
       <Filter>EngineTesters</Filter>
     </ClInclude>
@@ -167,18 +164,12 @@
     <ClInclude Include="GeneralEffects.h">
       <Filter>Contents</Filter>
     </ClInclude>
-    <ClInclude Include="TutorialMusicController.h">
-      <Filter>Contents\Tutorial</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="TutorialManager.h">
-      <Filter>Contents\Tutorial</Filter>
-    </ClInclude>
     <ClInclude Include="TutorialEightBulletScript.h">
       <Filter>Contents\Tutorial\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="MusicController.h">
-      <Filter>Contents\SoundManager</Filter>
+      <Filter>Contents\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Contents\Bullets</Filter>
@@ -194,6 +185,15 @@
     </ClInclude>
     <ClInclude Include="TutorialBeatBar.h">
       <Filter>Contents\Bullets\Tutorial Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialScene.h">
+      <Filter>Contents\Tutorial\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialManager.h">
+      <Filter>Contents\Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialMusicController.h">
+      <Filter>Contents\Tutorial</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -230,9 +230,6 @@
     <Filter Include="EngineTesters">
       <UniqueIdentifier>{89c1cf6b-235f-4192-bec8-7e6260ac1f60}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\SoundManager">
-      <UniqueIdentifier>{500b1b7f-c28c-4150-9629-6aa0f9b02e32}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Tutorial">
       <UniqueIdentifier>{7cf01eb1-5ee9-40c9-b20b-13a6609da5f9}</UniqueIdentifier>
     </Filter>
@@ -247,6 +244,9 @@
     </Filter>
     <Filter Include="Contents\Bullets\Tutorial Bullets">
       <UniqueIdentifier>{43971031-0f49-4717-87ae-748d329fff8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Managers">
+      <UniqueIdentifier>{500b1b7f-c28c-4150-9629-6aa0f9b02e32}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

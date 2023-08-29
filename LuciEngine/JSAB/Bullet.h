@@ -20,7 +20,7 @@ namespace lu::JSAB
 		virtual void Update() override;
 		void Activate();
 		void DeActivate();
-
+		bool IsActive() { return isActive; }
 	protected:
 		virtual void OnActivate() = 0;
 		virtual void OnDeActivate() = 0;

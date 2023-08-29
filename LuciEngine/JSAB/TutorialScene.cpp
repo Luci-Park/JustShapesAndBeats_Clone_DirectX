@@ -6,14 +6,14 @@
 #include "TutorialBulletPrefabs.h"
 #include "TutorialMusicController.h"
 #include "TutorialManager.h"
-#include "TutorialBurst.h"
+#include "TutorialBeatBar.h"
 #include "LObject.h"
 #include "LInput.h"
 #include "yaCameraScript.h"
 
 namespace lu::JSAB::Tutorial
 {
-	TutorialBurst* burst;
+	TutorialBeatBar* burst;
 	void TutorialScene::Initialize()
 	{
 		//Camera
@@ -30,29 +30,21 @@ namespace lu::JSAB::Tutorial
 			camera->AddComponent<CameraScript>();
 		}
 
-		GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
-		manager->SetName(L"TutorialManager");
-		auto ma = manager->AddComponent<TutorialManager>();
-		auto m = manager->AddComponent<TutorialMusicController>();
-		ma->SetMusic(m);
-		m->Play();
-		burst = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TutorialBurst>();
+		//GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
+		//manager->SetName(L"TutorialManager");
+		//auto ma = manager->AddComponent<TutorialManager>();
+		//auto m = manager->AddComponent<TutorialMusicController>();
+		//ma->SetMusic(m);
+		//m->Play();
+		burst = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TutorialBeatBar>();
 		object::Instantiate<PlayerPrefab>(eLayerType::Player);
 
 		Scene::Initialize();
 	}
 	void TutorialScene::Update()
 	{
-		if (Input::GetKeyDown(eKeyCode::O))
-		{
-			burst->IsEven(true);
+		if (!burst->IsActive())
 			burst->Activate();
-		}
-		else if (Input::GetKeyDown(eKeyCode::P))
-		{
-			burst->IsEven(false);
-			burst->Activate();
-		}
 		Scene::Update();
 	}
 	void TutorialScene::LateUpdate()
