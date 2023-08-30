@@ -155,13 +155,30 @@ namespace lu::JSAB
 		}
 		{
 			const double beat[] =
-			{
-				28.701, 29.350, 30.219, 30.868, 31.949, 32.598, 33.677, 34.326
+			{ 
+				28.701,	29.565,	30.429,	31.293,	32.157,	33.021,	33.885,	34.749,	35.613
 			};
 
 			const float y = application.GetHeight() * 0.5;
 			const float x[] = { 200, -200, 100, -100 };
 			static int idx = 0;
+			while (idx < 8 && beat[idx] - 1 < time)
+			{
+				for (int i = 0; i < 2; i++)
+				{
+					auto bullet = mBeatBars.GetNext();
+					if (idx % 2 == 0)
+						bullet->mTransform->SetPosition({ x[i], y, 0 });
+					else
+						bullet->mTransform->SetPosition({ x[2 + i], y, 0 });
+					bullet->SetTime(beat[idx], time);
+				}
+				idx++;
+			}
+			if (beat[7] < time)
+			{
+				idx = 0;
+			}
 		}
 
 	}
