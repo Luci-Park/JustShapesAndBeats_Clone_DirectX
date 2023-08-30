@@ -57,4 +57,12 @@ namespace lu
 		mActiveScene->OnEnter();
 		return it->second;
 	}
+	void SceneManager::AddCamera(Camera* camera)
+	{
+		mActiveScene->AddCamera(camera);
+	}
+	Camera* SceneManager::MainCamera()
+	{
+		return mActiveScene->mainCamera;
+	}
 }

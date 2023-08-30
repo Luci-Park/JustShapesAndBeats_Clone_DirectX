@@ -3,6 +3,7 @@
 #include "LLayer.h"
 namespace lu
 {
+	class Camera;
 	class Scene : public Entity
 	{
 	public:
@@ -38,9 +39,11 @@ namespace lu
 			return findObjs;
 		}
 		Layer& GetLayer(eLayerType type) { return mLayers[(UINT)type]; }
-		
+		Camera* mainCamera;
+		void AddCamera(Camera* camera);
 	private:
 		std::vector<Layer> mLayers;
+		std::vector<lu::Camera*> cameras = {};
 	};
 }
 

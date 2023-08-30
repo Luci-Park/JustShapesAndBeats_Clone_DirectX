@@ -62,6 +62,7 @@ namespace lu
 		Time::Render();
 		
 		renderer::Render();
+		SceneManager::Render();
 	}
 
 	void Application::Present()

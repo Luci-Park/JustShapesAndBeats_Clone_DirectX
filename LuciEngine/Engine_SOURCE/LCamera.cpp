@@ -46,6 +46,7 @@ namespace lu
 		CreateViewMatrix();
 		CreateProjectionMatrix(mType);
 		CalculateBoundary();
+		SceneManager::AddCamera(this);
 	}
 	void Camera::Update()
 	{
@@ -55,7 +56,7 @@ namespace lu
 		CreateViewMatrix();
 		CreateProjectionMatrix(mType);
 		CalculateBoundary();
-		RegisterCameraInRenderer();
+		//RegisterCameraInRenderer();
 		//Debug();
 	}
 	void Camera::Render()

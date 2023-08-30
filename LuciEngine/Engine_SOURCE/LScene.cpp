@@ -1,4 +1,5 @@
 #include "LScene.h"
+#include "LRenderer.h"
 namespace lu
 {
 	Scene::Scene()
@@ -31,6 +32,15 @@ namespace lu
 	}
 	void Scene::Render()
 	{
+		for (int i = 0; i < cameras.size(); i++)
+		{
+			if (cameras[i] == nullptr)
+				continue;
+
+			cameras[i]->Render();
+		}
+		mainCamera = cameras.size() > 0 ? cameras[0] : nullptr;
+
 		for (int i = 0; i < mLayers.size(); i++)
 		{
 			mLayers[i].Render();
@@ -52,5 +62,9 @@ namespace lu
 	void Scene::AddGameObject(eLayerType type, GameObject* gameObj)
 	{
 		mLayers[(int)type].AddGameObject(gameObj);
+	}
+	void Scene::AddCamera(Camera* camera)
+	{
+		cameras.push_back(camera);
 	}
 }

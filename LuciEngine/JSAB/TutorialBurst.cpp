@@ -7,7 +7,8 @@
 #include "LResources.h"
 #include "LCollider2D.h"
 //#include "TutorialEightBulletScript.h"
-#include "LRenderer.h"
+#include "LSceneManager.h"
+#include "LCamera.h"
 #include "LTime.h"
 
 namespace lu::JSAB
@@ -17,7 +18,7 @@ namespace lu::JSAB
 		Script::Initialize();
 
 		mBase = Owner()->AddComponent<Animator>();
-		bounds = renderer::mainCamera->GetBoundary();
+		bounds = SceneManager::MainCamera()->GetBoundary();
 		CreateAnimation();
 
 		{
@@ -142,7 +143,7 @@ namespace lu::JSAB
 		ani->AddScaleKey(0, Vector3::Zero);
 		ani->AddScaleKey(duration, Vector3::One);
 
-		//ani->AddFunctionKey(duration, std::bind(&CameraScript::Flash, renderer::mainCamera->Owner()->GetComponent<CameraScript>()));
+		ani->AddFunctionKey(duration, std::bind(&CameraScript::Flash, SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()));
 		ani->AddFunctionKey(duration, std::bind(&TutorialBurst::OnBurst, this));
 	}
 }

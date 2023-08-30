@@ -402,7 +402,7 @@ namespace lu::renderer
 
 	void Render()
 	{
-		BindNoiseTexture();
+		BindNoiseTexture();/*
 		for (int i =0; i < cameras.size(); i++)
 		{
 			if (cameras[i] == nullptr)
@@ -411,7 +411,7 @@ namespace lu::renderer
 			cameras[i]->Render();
 		}
 		mainCamera = cameras.size() > 0 ? cameras[0] : nullptr;
-		cameras.clear();
+		cameras.clear();*/
 	}
 
 

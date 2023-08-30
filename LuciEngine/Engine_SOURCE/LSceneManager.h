@@ -17,6 +17,9 @@ namespace lu
 		static Scene* GetScene(std::wstring name);
 		static Scene* LoadScene(std::wstring name);
 
+		static void AddCamera(Camera* camera);
+		static Camera* MainCamera();
+
 		template <typename T>
 		static bool CreateScene(std::wstring name)
 		{
