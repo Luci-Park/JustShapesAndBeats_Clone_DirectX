@@ -24,7 +24,7 @@ namespace lu::JSAB
 		MeshRenderer* mMr;
 		Collider2D* mCol;
 		Animator* mAnim;
-		const double appearDuration = 1;
+		const double appearDuration = 1.3;
 		const double flashDuration = 0.05;
 		const double stayDuration = 0.3;
 		const double disappearDuration = 0.05;

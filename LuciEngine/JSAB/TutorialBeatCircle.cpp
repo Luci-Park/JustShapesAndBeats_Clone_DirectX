@@ -26,7 +26,7 @@ namespace lu::JSAB
 		mAnim = Owner()->AddComponent<Animator>();
 		CreateOnBeatAnimation();
 
-		//Bullet::Initialize();
+		Bullet::Initialize();
 	}
 	void TutorialBeatCircle::OnShow()
 	{
