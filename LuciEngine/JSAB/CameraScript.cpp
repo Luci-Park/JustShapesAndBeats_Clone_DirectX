@@ -13,7 +13,7 @@ namespace lu::JSAB
 		Script::Initialize();
 		mFlash = object::Instantiate<GameObject>(mTransform, eLayerType::UI);
 		mFlash->AddComponent<MeshRenderer>()->SetMesh(Resources::Find<Mesh>(L"RectMesh"))
-			->SetMaterial(GetGeneralMaterial(L"ThickBar"))->SetColor(Color::white)->UseColor(true);
+			->SetMaterial(GetGeneralMaterial(L"ThickBar"))->SetColor({1.f, 1.f, 1.f, 0.5})->UseColor(true);
 		mFlash->mTransform->SetScale(application.GetWidth(), application.GetHeight(), 1);
 		mFlash->SetActive(false);
 
@@ -42,7 +42,7 @@ namespace lu::JSAB
 	}
 	void CameraScript::CreateAnimation()
 	{
-		double duration = 0.01;
+		double duration = 0.05;
 		Animation* anim = mAnim->CreateAnimation(L"Flash");
 		anim->AddFunctionKey(0, std::bind(&CameraScript::SetFlash, this, true));
 		anim->AddFunctionKey(duration, std::bind(&CameraScript::SetFlash, this, false));

@@ -111,9 +111,6 @@ namespace lu
 			cameraComp->SetSize(5.0f);
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
 			//camera->AddComponent<CameraScript>();
-			renderer::cameras.push_back(cameraComp);
-			renderer::mainCamera = cameraComp;
-
 
 			camera->AddComponent<AudioListener>();
 		}

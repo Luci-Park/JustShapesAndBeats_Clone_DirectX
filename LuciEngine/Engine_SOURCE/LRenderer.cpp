@@ -13,8 +13,8 @@ namespace lu::renderer
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthStencilStates[(UINT)eDSType::End] = {};
 	Microsoft::WRL::ComPtr<ID3D11BlendState> blendStates[(UINT)eBSType::End] = {};
 
-	Camera* mainCamera = nullptr;
-	std::vector<lu::Camera*> cameras = {};
+	//Camera* mainCamera = nullptr;
+	//std::vector<lu::Camera*> cameras = {};
 	std::vector<DebugMesh> debugMeshes;
 
 	void SetupState()

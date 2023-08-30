@@ -59,8 +59,8 @@ namespace lu::renderer
 	extern Microsoft::WRL::ComPtr<ID3D11DepthStencilState>depthStencilStates[];
 	extern Microsoft::WRL::ComPtr<ID3D11BlendState> blendStates[];
 	
-	extern lu::Camera* mainCamera;
-	extern std::vector<lu::Camera*> cameras;
+	//extern lu::Camera* mainCamera;
+	//extern std::vector<lu::Camera*> cameras;
 	extern std::vector<DebugMesh>debugMeshes;
 
 	void Initialize();

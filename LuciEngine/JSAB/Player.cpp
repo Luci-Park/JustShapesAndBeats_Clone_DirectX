@@ -8,7 +8,8 @@
 #include "LMeshRenderer.h"
 #include "LTexture.h"
 #include "LAnimator.h"
-#include "LRenderer.h"
+#include "LSceneManager.h"
+#include "LCamera.h"
 namespace lu::JSAB
 {
 	Player::Player()
@@ -80,7 +81,7 @@ namespace lu::JSAB
 	void Player::Move(Vector3 target)
 	{
 		Vector3 halfScale = mTr->GetScale() * 0.5f;
-		RECT rect = renderer::mainCamera->GetBoundary();
+		RECT rect = SceneManager::MainCamera()->GetBoundary();
 		Vector3 newPos;
 		newPos.z = target.z;
 		if (rect.right >= halfScale.x)

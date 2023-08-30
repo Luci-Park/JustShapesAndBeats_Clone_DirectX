@@ -5,6 +5,7 @@
 #include "..\\Engine_SOURCE\\LMeshRenderer.h"
 #include "..\\Engine_SOURCE\\LMaterial.h"
 #include "..\\Engine_SOURCE\\LRenderer.h"
+#include "..\\Engine_SOURCE\\LSceneManager.h"
 
 #include "GridScript.h"
 
@@ -138,7 +139,7 @@ namespace gui
 		mr->SetColor(mesh.color);
 
 		// main camera
-		lu::Camera* mainCamara = lu::renderer::mainCamera;
+		lu::Camera* mainCamara = lu::SceneManager::MainCamera();
 		if (mainCamara != nullptr)
 		{
 			lu::Camera::SetGpuViewMatrix(mainCamara->GetViewMatrix());

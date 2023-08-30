@@ -66,5 +66,6 @@ namespace lu
 	void Scene::AddCamera(Camera* camera)
 	{
 		cameras.push_back(camera);
+		mainCamera = cameras.size() > 0 ? cameras[0] : nullptr;
 	}
 }

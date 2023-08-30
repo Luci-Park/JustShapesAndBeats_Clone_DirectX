@@ -118,10 +118,6 @@ namespace lu
 		}
 		return true;
 	}
-	void Camera::RegisterCameraInRenderer()
-	{
-		renderer::cameras.push_back(this);
-	}
 	void Camera::TurnLayerMask(eLayerType type, bool enable)
 	{
 		mLayerMask.set((UINT)type, enable);

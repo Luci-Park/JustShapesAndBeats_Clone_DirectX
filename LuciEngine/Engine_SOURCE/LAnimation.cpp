@@ -375,16 +375,19 @@ namespace lu
 	}
 	void Animation::AnimCdActive(Timeline* timeline)
 	{
-		BoolKey* keyframe = dynamic_cast<BoolKey*>(timeline->keyframes[timeline->currIndex]);
-		if (mTime >= keyframe->timestamp)
+		while (!timeline->IsComplete() && timeline->keyframes[timeline->currIndex]->timestamp < mTime)
 		{
-			mCd->SetActive(keyframe->value);
-			timeline->currIndex++;
+			BoolKey* keyframe = dynamic_cast<BoolKey*>(timeline->keyframes[timeline->currIndex]);
+			if (mTime >= keyframe->timestamp)
+			{
+				mCd->SetActive(keyframe->value);
+				timeline->currIndex++;
+			}
 		}
 	}
 	void Animation::AnimMrText(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime)
+		while (!timeline->IsComplete() && timeline->keyframes[timeline->currIndex]->timestamp < mTime)
 		{
 			TextureKey* textureKey = dynamic_cast<TextureKey*>(timeline->keyframes[timeline->currIndex]);
 			if (mTime >= textureKey->timestamp)
@@ -396,7 +399,7 @@ namespace lu
 	}
 	void Animation::AnimMrColor(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime)
+		while (!timeline->IsComplete() && timeline->keyframes[timeline->currIndex]->timestamp < mTime)
 		{
 			ColorKey* keyframe = dynamic_cast<ColorKey*>(timeline->keyframes[timeline->currIndex]);
 			if (mTime >= keyframe->timestamp)
@@ -444,7 +447,7 @@ namespace lu
 	}
 	void Animation::AnimMrActive(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime)
+		while (!timeline->IsComplete() && timeline->keyframes[timeline->currIndex]->timestamp < mTime)
 		{
 			BoolKey* keyframe = dynamic_cast<BoolKey*>(timeline->keyframes[timeline->currIndex]);
 			if (mTime >= keyframe->timestamp)
@@ -456,7 +459,7 @@ namespace lu
 	}
 	void Animation::AnimScFunc(Timeline* timeline)
 	{
-		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime)
+		while (!timeline->IsComplete() && timeline->keyframes[timeline->currIndex]->timestamp < mTime)
 		{
 			FuncKey* keyframe = dynamic_cast<FuncKey*>(timeline->keyframes[timeline->currIndex]);
 			if (mTime >= keyframe->timestamp)

@@ -9,6 +9,7 @@
 #include "LAnimator.h"
 #include "LTime.h"
 #include "LRenderer.h"
+#include "TutorialManager.h"
 
 extern lu::Application application;
 namespace lu::JSAB
@@ -83,7 +84,7 @@ namespace lu::JSAB
 		ani->AddInterpolationKey(flashDuration, 1);
 		ani->AddInterpolationKey(flashDuration, 0);
 
-		//ani->AddFunctionKey(appearDuration + flashDuration, std::bind(&TutorialBeatBar::Beat, this));
+		ani->AddFunctionKey(flashDuration, std::bind(&TutorialBeatBar::Beat, this));
 
 		ani->AddScaleKey(flashDuration +stayDuration, baseScale);
 		ani->AddScaleKey(flashDuration + stayDuration + disappearDuration, { 0, (float)application.GetHeight() * 2, 1 });
@@ -94,12 +95,12 @@ namespace lu::JSAB
 	{
 		Vector3 pos = mTransform->GetPosition();
 		if (-pos.y == (float)application.GetWidth() * 0.5)
-			renderer::mainCamera->Owner()->GetComponent<CameraScript>()->BeatDown();
+			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->BeatDown();
 		else if (pos.y == (float)application.GetHeight() * 0.5)
-			renderer::mainCamera->Owner()->GetComponent<CameraScript>()->BeatUp();
+			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->BeatUp();
 		else if (-pos.x == (float)application.GetWidth() * 0.5)
-			renderer::mainCamera->Owner()->GetComponent<CameraScript>()->BeatLeft();
+			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->BeatLeft();
 		else if (pos.x == (float)application.GetHeight() * 0.5)
-			renderer::mainCamera->Owner()->GetComponent<CameraScript>()->BeatRight();
+			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->BeatRight();
 	}
 }

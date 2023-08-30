@@ -2,7 +2,7 @@
 #include "TutorialMusicController.h"
 #include "TutorialBeatBar.h"
 #include "LObject.h"
-#include "LRenderer.h"
+#include "LCamera.h"
 #include "LAnimator.h"
 #include "LApplication.h"
 #include "TutorialEightBullets.h"
@@ -47,7 +47,7 @@ namespace lu::JSAB
 		const int idicies[] = { 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 2, 3, 2 };
 		static int idx = 0;
 
-		RECT bounds = renderer::mainCamera->GetBoundary();
+		RECT bounds = SceneManager::MainCamera()->GetBoundary();
 		float x = bounds.right + 42 * 0.5;
 		float endX = bounds.left - 42 * 0.5;
 	
