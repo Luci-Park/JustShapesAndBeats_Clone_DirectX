@@ -30,6 +30,8 @@ namespace lu::JSAB
 	}
 	void TutorialBeatCircle::OnShow()
 	{
+		mMr->SetActive(true);
+		mAnim->SetActive(true);
 		mAnim->PlayAnimation(L"Preparation", true);
 	}
 	void TutorialBeatCircle::OnActivate()
@@ -63,13 +65,13 @@ namespace lu::JSAB
 		anim->AddColliderActiveKey(0, true);
 
 		anim->AddInterpolationKey(0, 0);
-		anim->AddInterpolationKey(duration * 0.5, 0.5);
-		anim->AddInterpolationKey(duration * 0.8, 0.8);
+		anim->AddInterpolationKey(duration * 0.7, 0.5);
+		anim->AddInterpolationKey(duration * 0.9, 0.8);
 		anim->AddInterpolationKey(duration, 0);
 
 		anim->AddScaleKey(0, { 230, 230, 1 });
-		anim->AddScaleKey(duration * 0.5, { 330, 330, 1 });
-		anim->AddScaleKey(duration * 0.9, { 360, 360, 1 });
+		anim->AddScaleKey(duration * 0.7, { 280, 280, 1 });
+		anim->AddScaleKey(duration * 0.9, { 300, 300, 1 });
 		anim->AddScaleKey(duration, { 0, 0 , 1 });
 
 		anim->AddFunctionKey(duration, std::bind(&Bullet::DeActivate, this));

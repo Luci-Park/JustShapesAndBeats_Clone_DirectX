@@ -6,6 +6,7 @@
 #include "TutorialMusicController.h"
 #include "TutorialManager.h"
 #include "TutorialBeatBar.h"
+#include "TutorialBeatCircle.h"
 #include "LObject.h"
 #include "LInput.h"
 #include "CameraScript.h"
@@ -36,9 +37,9 @@ namespace lu::JSAB::Tutorial
 		ma->SetMusic(m);
 		m->Play();
 		//burst = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TutorialBeatBar>();
-		object::Instantiate<PlayerPrefab>(eLayerType::Player);
 
-		Scene::Initialize();
+		object::Instantiate<PlayerPrefab>(eLayerType::Player);
+		Scene::Initialize(); 
 	}
 	void TutorialScene::Update()
 	{

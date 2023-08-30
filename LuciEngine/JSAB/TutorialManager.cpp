@@ -231,34 +231,34 @@ namespace lu::JSAB
 				idx = 0;
 			}
 		}
-		//{
-		//	const double beat[] = { 35.629,
-		//		36.493,	36.781,	37.069,	37.357,
-		//		38.221,
-		//		39.949,	40.237,	40.525,	40.813
-		//	};
-		//	static int idx = 0;
-		//	const Vector3 pos[] = { {-200, 200, 1}, {200, 200, 1}, {-200, -200, 1}, {200, -200, 1} };
-		//	if (beat[idx] < time)
-		//	{
-		//		if (idx == 0 || idx == 5)
-		//		{
-		//			for (int i = 0; i < 4; i++)
-		//			{
-		//				auto c = mBeatCircles.GetNext();
-		//				c->mTransform->SetPosition(pos[i]);
-		//				c->Show();						
-		//			}
-		//		}
-		//		else
-		//		{
-		//			mBeatCircles.GetNext()->Activate();
-		//		}
-		//		idx++;
-		//	}
-		//	if (idx >= 10 && beat[9] < time)
-		//		idx = 0;
-		//}
+		{
+			const double beat[] = { 35.629,
+				36.493,	36.601,	36.709,	36.817,
+				38.221,
+				39.949,	40.057,	40.165,	40.273,
+			};
+			static int idx = 0;
+			const Vector3 pos[] = { {-230, 150, 1}, {230, 150, 1}, {-230, -150, 1}, {230, -150, 1} };
+			while (idx < 10 && beat[idx] < time)
+			{
+				if (idx == 0 || idx == 5)
+				{
+					for (int i = 0; i < 4; i++)
+					{
+						auto c = mBeatCircles.GetNext();
+						c->mTransform->SetPosition(pos[i]);
+						c->Show();						
+					}
+				}
+				else
+				{
+					mBeatCircles.GetNext()->Activate();
+				}
+				idx++;
+			}
+			if (idx >= 10 && beat[9] > time)
+				idx = 0;
+		}
 	}
 	void TutorialManager::Stage6(double time)
 	{
