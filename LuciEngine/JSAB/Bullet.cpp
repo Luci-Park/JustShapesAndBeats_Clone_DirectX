@@ -9,23 +9,27 @@ namespace lu::JSAB
 	}
 	void Bullet::Update()
 	{
-		if (isActive)
+		if (BulletState::Active == mState)
 			WhileActive();
-		else
+		else if (BulletState::InActive == mState)
 			WhileDeActive();
+		else
+			WhileShowing();
 	}
-	void Bullet::Show()
+	void Bullet::Show(double activateTime)
 	{
+		mActivateTime = activateTime;
+		mState = BulletState::Show;
 		OnShow();
 	}
 	void Bullet::Activate()
 	{
-		isActive = true;
+		mState = BulletState::Active;
 		OnActivate();
 	}
 	void Bullet::DeActivate()
 	{
-		isActive = false;
+		mState = BulletState::InActive;
 		OnDeActivate();
 	}
 }

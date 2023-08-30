@@ -1,6 +1,8 @@
 #include "TutorialBeatBar.h"
 #include "GeneralEffects.h"
 #include "CameraScript.h"
+#include "MusicController.h"
+#include "TutorialManager.h"
 #include "LResources.h"
 #include "LApplication.h"
 #include "LGameObject.h"
@@ -9,7 +11,6 @@
 #include "LAnimator.h"
 #include "LTime.h"
 #include "LRenderer.h"
-#include "TutorialManager.h"
 
 extern lu::Application application;
 namespace lu::JSAB
@@ -46,6 +47,12 @@ namespace lu::JSAB
 		}
 		
 	}
+	void TutorialBeatBar::OnShow()
+	{
+		mMr->SetActive(true);
+		mAnim->SetActive(true);
+		mAnim->PlayAnimation(L"Show", false);
+	}
 	void TutorialBeatBar::OnActivate()
 	{
 		mMr->SetActive(true);
@@ -57,6 +64,11 @@ namespace lu::JSAB
 		mCol->SetActive(false);
 		mMr->SetActive(false);
 		mAnim->SetActive(false);
+	}
+	void TutorialBeatBar::WhileShowing()
+	{
+		if (MusicController::_MusicController->GetTime() >= mActivateTime)
+			Activate();
 	}
 	void TutorialBeatBar::WhileActive()
 	{
@@ -78,6 +90,7 @@ namespace lu::JSAB
 		ani->AddColliderActiveKey(0, true);
 		ani->AddScaleKey(0, { 20, 0, 1 });
 		ani->AddInterpolationKey(0, 1);
+		ani->AddTintKey(0, Color::white);
 
 		ani->AddScaleKey(flashDuration, baseScale);
 		ani->AddTintKey(flashDuration, Color::white);

@@ -111,16 +111,15 @@ namespace lu::JSAB
 				-60, - 20, 20, 60, 100, 140, 180, 220, 260, 300
 			};
 			static int idx = 0;
-			if (idx >= 10 && beat[9] > time)
+			if (idx >= 10 && beat[0] >= time)
 				idx = 0;
-			if (idx < 10 && beat[idx]<= time)
+			if (idx < 10 && beat[idx] - 1.3 <= time)
 			{
 				auto bullet = mBeatBars.GetNext();
 				bullet->mTransform->SetPosition({ x[idx], y, 0 });
-				bullet->Activate();
+				bullet->Show(beat[idx]);
 				idx++;
 			}
-			
 		}
 	}
 	void TutorialManager::Stage4(double time)
@@ -151,9 +150,9 @@ namespace lu::JSAB
 			const float y = application.GetHeight() * 0.5;
 			const float x[] = { 200, -200, 100, -100 };
 			static int idx = 0;
-			if (idx >= 8 && beat[7] > time)
+			if (idx >= 8 && beat[0] >= time)
 				idx = 0;
-			if (idx < 8 && beat[idx] <= time)
+			if (idx < 8 && beat[idx] - 1.3 <= time)
 			{
 				for (int i = 0; i < 2; i++)
 				{
@@ -162,7 +161,7 @@ namespace lu::JSAB
 						bullet->mTransform->SetPosition({ x[i], y, 0 });
 					else
 						bullet->mTransform->SetPosition({ x[2 + i], y, 0 });
-					bullet->Activate();
+					bullet->Show(beat[idx]);
 				}
 				idx++;
 			}
@@ -195,49 +194,40 @@ namespace lu::JSAB
 			const float y = application.GetHeight() * 0.5;
 			const float x[][3] = { {-300, 0, 300}, {-150, 150, 0}};
 			static int idx = 0;
-			if (idx >= 8 && beat[7] > time)
-			{
+			if (idx >= 8 && beat[0] >= time)
 				idx = 0;
-			}
-			if (idx < 8 && beat[idx] < time)
+			if (idx < 8 && beat[idx] - 1.3 <= time)
 			{
 				int num = idx % 2 == 0 ? 3 : 2;
 				for (int i = 0; i < num; i++)
 				{
 					auto bullet = mBeatBars.GetNext();
 					bullet->mTransform->SetPosition({ x[idx % 2][i], y, 0 });
-					bullet->Activate();
+					bullet->Show(beat[idx]);
 				}
 				idx++;
 			}
 		}
 		{
-			const double beat[] = { 35.629,
-				36.493,	36.601,	36.709,	36.817,
-				38.221,
-				39.949,	40.057,	40.165,	40.273,
+			const double show[] = { 35.629, 38.221 };
+			const double beat[2][4] = {
+				{36.493, 36.601, 36.709, 36.817},
+				{39.949, 40.057, 40.165, 40.273}
 			};
 			static int idx = 0;
 			const Vector3 pos[] = { {-230, 150, 1}, {230, 150, 1}, {-230, -150, 1}, {230, -150, 1} };
-			while (idx < 10 && beat[idx] < time)
+			if (idx >= 2 && show[0] >= time)
+				idx = 0;
+			if (idx < 2 && show[idx] <= time)
 			{
-				if (idx == 0 || idx == 5)
+				for (int i = 0; i < 4; i++)
 				{
-					for (int i = 0; i < 4; i++)
-					{
-						auto c = mBeatCircles.GetNext();
-						c->mTransform->SetPosition(pos[i]);
-						c->Show();						
-					}
-				}
-				else
-				{
-					mBeatCircles.GetNext()->Activate();
+					auto c = mBeatCircles.GetNext();
+					c->mTransform->SetPosition(pos[i]);
+					c->Show(beat[idx][i]);
 				}
 				idx++;
 			}
-			if (idx >= 10 && beat[9] > time)
-				idx = 0;
 		}
 	}
 	void TutorialManager::Stage6(double time)

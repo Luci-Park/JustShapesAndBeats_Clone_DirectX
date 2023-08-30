@@ -13,6 +13,7 @@ namespace lu::JSAB
 		virtual void OnShow() override;
 		virtual void OnActivate()override;
 		virtual void OnDeActivate()override;
+		virtual void WhileShowing() override;
 		virtual void WhileActive()override;
 		virtual void WhileDeActive()override;
 

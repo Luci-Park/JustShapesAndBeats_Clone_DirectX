@@ -1,5 +1,6 @@
 #include "TutorialBeatCircle.h"
 #include "GeneralEffects.h"
+#include "MusicController.h"
 #include "LGameObject.h"
 #include "LResources.h"
 #include "LMeshRenderer.h"
@@ -46,6 +47,11 @@ namespace lu::JSAB
 		mMr->SetActive(false);
 		mAnim->SetActive(false);
 		mTransform->SetScale({ 230, 230, 1 });
+	}
+	void TutorialBeatCircle::WhileShowing()
+	{
+		if (MusicController::_MusicController->GetTime() >= mActivateTime)
+			Activate();
 	}
 	void TutorialBeatCircle::WhileActive()
 	{

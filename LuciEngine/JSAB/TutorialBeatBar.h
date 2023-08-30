@@ -9,13 +9,15 @@ namespace lu::JSAB
 		virtual ~TutorialBeatBar(){}
 
 		virtual void Initialize() override;
+		void SetTime(double targetTime);
 		void SetTime(double targetTime, double currentTime);
 	private:
-		virtual void OnShow(){}
-		virtual void OnActivate();
-		virtual void OnDeActivate();
-		virtual void WhileActive();
-		virtual void WhileDeActive();
+		virtual void OnShow() override;
+		virtual void OnActivate()override;
+		virtual void OnDeActivate()override;
+		virtual void WhileShowing() override;
+		virtual void WhileActive()override;
+		virtual void WhileDeActive()override;
 
 		void CreateOnBeatAnimation();
 		void Beat();
@@ -28,6 +30,8 @@ namespace lu::JSAB
 		const double flashDuration = 0.05;
 		const double stayDuration = 0.3;
 		const double disappearDuration = 0.05;
+
+		double mTargetTime;
 	};
 }
 

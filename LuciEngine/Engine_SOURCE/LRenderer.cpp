@@ -60,7 +60,7 @@ namespace lu::renderer
 #pragma endregion
 
 
-#pragma region Sampler State
+#pragma region Sampler BulletState
 		D3D11_SAMPLER_DESC sd = {};
 		sd.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
 		sd.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
@@ -74,7 +74,7 @@ namespace lu::renderer
 		GetDevice()->BindSampler(eShaderStage::PS, 1, samplerStates[(UINT)eSamplerType::Anisotropic].GetAddressOf());
 #pragma endregion
 
-#pragma region Rasterizer State
+#pragma region Rasterizer BulletState
 		D3D11_RASTERIZER_DESC rd = {};
 		rd.FillMode = D3D11_FILL_SOLID;
 		rd.CullMode = D3D11_CULL_BACK;
@@ -93,7 +93,7 @@ namespace lu::renderer
 		GetDevice()->CreateRasterizeState(&rd, rasterizerStates[(UINT)eRSType::WireframeNone].GetAddressOf());
 #pragma endregion
 
-#pragma region Depth Stencil State
+#pragma region Depth Stencil BulletState
 		D3D11_DEPTH_STENCIL_DESC dsd = {};
 		dsd.DepthEnable = true; //깊이 테스트를 하는 가?
 		dsd.DepthFunc = D3D11_COMPARISON_LESS; //같은 위치에 있는 픽셀들 중 깊이가 가장 작은 것으로 그린다.
@@ -120,7 +120,7 @@ namespace lu::renderer
 		GetDevice()->CreateDepthStencilState(&dsd, depthStencilStates[(UINT)eDSType::None].GetAddressOf());
 #pragma endregion
 
-#pragma region Blend State
+#pragma region Blend BulletState
 		D3D11_BLEND_DESC bd = {};
 		blendStates[(UINT)eBSType::Default] = nullptr;
 

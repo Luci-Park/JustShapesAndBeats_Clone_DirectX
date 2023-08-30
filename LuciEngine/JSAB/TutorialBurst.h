@@ -13,11 +13,12 @@ namespace lu::JSAB
 		void IsEven(bool even) { mbEven = even; }
 		void OnBurst();
 	private:
-		virtual void OnShow() {}
-		virtual void OnActivate();
-		virtual void OnDeActivate();
-		virtual void WhileActive();
-		virtual void WhileDeActive();
+		virtual void OnShow() override {};
+		virtual void OnActivate()override;
+		virtual void OnDeActivate()override;
+		virtual void WhileShowing() override {};
+		virtual void WhileActive()override;
+		virtual void WhileDeActive()override;
 
 		void CreateAnimation();
 		void CreateMoveAnimation(Animation* ani, Vector3 startPos, Vector3 endPos, double duration);

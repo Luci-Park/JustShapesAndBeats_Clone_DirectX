@@ -13,11 +13,12 @@ namespace lu::JSAB
 		void Initialize();
 		void SetMove(bool move) { mbMove = move; }
 	private:
-		virtual void OnShow() {};
-		virtual void OnActivate();
-		virtual void OnDeActivate();
-		virtual void WhileActive() {};
-		virtual void WhileDeActive() {}
+		virtual void OnShow() override {};
+		virtual void OnActivate()override;
+		virtual void OnDeActivate()override;
+		virtual void WhileShowing() override {};
+		virtual void WhileActive()override;
+		virtual void WhileDeActive()override {};
 	private:
 		TutorialEightBullets* mBullets[10];
 		bool mbMove;

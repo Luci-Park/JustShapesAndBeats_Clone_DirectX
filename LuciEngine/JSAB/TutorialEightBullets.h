@@ -11,11 +11,12 @@ namespace lu::JSAB
 		virtual void Initialize() override;
 		void Setup(float duration, Vector3 startPos, Vector3 endPos);
 	private:
-		virtual void OnShow() {}
-		virtual void OnActivate();
-		virtual void OnDeActivate();
-		virtual void WhileActive();
-		virtual void WhileDeActive();
+		virtual void OnShow() override {};
+		virtual void OnActivate()override;
+		virtual void OnDeActivate()override;
+		virtual void WhileShowing() override {};
+		virtual void WhileActive()override;
+		virtual void WhileDeActive()override;
 		
 		void CreateEnterEffect();
 

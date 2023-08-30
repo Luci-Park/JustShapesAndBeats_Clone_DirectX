@@ -24,4 +24,7 @@ namespace lu::JSAB
 		for (int i = 0; i < 10; i++)
 			mBullets[i]->DeActivate();
 	}
+	void TutorialEightBar::WhileActive()
+	{
+	}
 }
