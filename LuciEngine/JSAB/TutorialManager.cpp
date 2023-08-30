@@ -51,23 +51,18 @@ namespace lu::JSAB
 		float x = bounds.right + 42 * 0.5;
 		float endX = bounds.left - 42 * 0.5;
 	
-		if (idx < 13)
+		if (idx >= 13 && beat[12] > time)
+			idx = 0;
+		
+		if (idx < 13 && beat[idx] <= time)
 		{
-			if (beat[idx] <= time)
-			{
-				Vector3 pos = { x, posY[idicies[idx]], 1 };
-				Vector3 endPos = { endX, posY[idicies[idx]], 1 };
-				TutorialEightBullets* bullet = mStage1Bullets.GetNext();
-				bullet->mTransform->SetPosition(pos);
-				bullet->Setup(7, pos, endPos);
-				bullet->Activate();
-				idx++;
-			}
-		}
-		else
-		{
-			if (beat[12] > time)
-				idx = 0;
+			Vector3 pos = { x, posY[idicies[idx]], 1 };
+			Vector3 endPos = { endX, posY[idicies[idx]], 1 };
+			TutorialEightBullets* bullet = mStage1Bullets.GetNext();
+			bullet->mTransform->SetPosition(pos);
+			bullet->Setup(7, pos, endPos);
+			bullet->Activate();
+			idx++;
 		}
 	}
 	void TutorialManager::Stage2(double time)
@@ -76,21 +71,16 @@ namespace lu::JSAB
 			7.691, 8.566, 9.441, 10.316, 11.191, 12.066, 12.941, 13.816
 		};
 		static int idx = 0;
-		if (idx < 8)
+		if (idx >= 8 && beat[7] > time)
+			idx = 0;
+		if (idx < 8 && beat[idx] <= time)
 		{
-			if (beat[idx] <= time)
-			{
-				auto bullet = mBurstBullets.GetNext();
-				bullet->IsEven(idx % 2 == 0);
-				bullet->Activate();
-				idx++;
-			}
+			auto bullet = mBurstBullets.GetNext();
+			bullet->IsEven(idx % 2 == 0);
+			bullet->Activate();
+			idx++;
 		}
-		else
-		{
-			if (beat[7] > time)
-				idx = 0;
-		}
+		
 	}
 	void TutorialManager::Stage3(double time)
 	{
@@ -99,38 +89,38 @@ namespace lu::JSAB
 				14.619,	15.494,	16.369,	17.244,	18.119,	18.994,	19.9, 20.7
 			};
 			static int idx = 0;
-			if (idx < 8)
+			if (idx >= 8 && beat[7] > time)
+				idx = 0;
+			if (idx < 8 && beat[idx] <= time)
 			{
-				if (beat[idx] <= time)
-				{
-					auto bullet = mBurstBullets.GetNext();
-					bullet->IsEven(idx % 2 == 0);
-					bullet->Activate();
-					idx++;
-				}
-			}
-			else
-			{
-				if (beat[idx - 1] > time)
-					idx = 0;
+				auto bullet = mBurstBullets.GetNext();
+				bullet->IsEven(idx % 2 == 0);
+				bullet->Activate();
+				idx++;
 			}
 		}
 		{
 			const double beat[] =
-			{
-				14.85, 15.5, 16.583, 17.235, 17.45, 18.313, 18.959, 20, 20.697, 21.025
+			{ 
+				14.850, 15.500, 16.583, 17.235, 17.450, 18.313, 18.959, 20.242, 20.697, 21.025
+				//14.854, 15.557, 16.562, 17.232, 17.467, 18.374, 18.924, 20.063, 20.7, 21.035
 			};
 			const float y = application.GetHeight() * 0.5;
 			const float x[] = 
 			{ 
 				-60, - 20, 20, 60, 100, 140, 180, 220, 260, 300
 			};
-			for (int i = 0; i < 10; i++)
+			static int idx = 0;
+			if (idx >= 10 && beat[9] > time)
+				idx = 0;
+			if (idx < 10 && beat[idx]<= time)
 			{
 				auto bullet = mBeatBars.GetNext();
-				bullet->mTransform->SetPosition({ x[i], y, 0 });
-				bullet->SetTime(beat[i], time);
+				bullet->mTransform->SetPosition({ x[idx], y, 0 });
+				bullet->Activate();
+				idx++;
 			}
+			
 		}
 	}
 	void TutorialManager::Stage4(double time)
@@ -140,31 +130,30 @@ namespace lu::JSAB
 				28.475,	29.35,	30.225,	31.1, 31.975, 32.85, 33.756, 34.556
 			};
 			static int idx = 0;
-			if (idx < 8)
-			{
-				if (beat[idx] <= time)
-				{
-					auto bullet = mBurstBullets.GetNext();
-					bullet->IsEven(idx % 2 == 0);
-					bullet->Activate();
-					idx++;
-				}
-			}
-			else if(beat[idx - 1] > time)
-			{
+			if (idx >= 8 && beat[7] > time)
 				idx = 0;
+			if (idx < 8 && beat[idx] <= time)
+			{
+				auto bullet = mBurstBullets.GetNext();
+				bullet->IsEven(idx % 2 == 0);
+				bullet->Activate();
+				idx++;
 			}
 		}
 		{
 			const double beat[] =
 			{ 
-				28.701,	29.565,	30.429,	31.293,	32.157,	33.021,	33.885,	34.749,	35.613
+
+				28.701, 29.350, 30.219, 30.868, 31.949, 32.598, 33.677, 34.326
+				//28.701,	29.565,	30.429,	31.293,	32.157,	33.021,	33.885,	34.749,	35.613
 			};
 
 			const float y = application.GetHeight() * 0.5;
 			const float x[] = { 200, -200, 100, -100 };
 			static int idx = 0;
-			while (idx < 8 && beat[idx] - 1.3 < time)
+			if (idx >= 8 && beat[7] > time)
+				idx = 0;
+			if (idx < 8 && beat[idx] <= time)
 			{
 				for (int i = 0; i < 2; i++)
 				{
@@ -173,16 +162,11 @@ namespace lu::JSAB
 						bullet->mTransform->SetPosition({ x[i], y, 0 });
 					else
 						bullet->mTransform->SetPosition({ x[2 + i], y, 0 });
-					bullet->SetTime(beat[idx], time);
+					bullet->Activate();
 				}
 				idx++;
 			}
-			if (beat[7] < time)
-			{
-				idx = 0;
-			}
 		}
-
 	}
 	void TutorialManager::Stage5(double time)
 	{
@@ -191,44 +175,40 @@ namespace lu::JSAB
 				35.403,	36.278,	37.153,	38.028,	38.903,	39.778,	40.684,	41.484
 			};
 			static int idx = 0;
-			if (idx < 8)
-			{
-				if (beat[idx] <= time)
-				{
-					auto bullet = mBurstBullets.GetNext();
-					bullet->IsEven(idx % 2 == 0);
-					bullet->Activate();
-					idx++;
-				}
-			}
-			else if (beat[idx - 1] > time)
-			{
+			if (idx >= 8 && beat[7] > time)
 				idx = 0;
+			if (idx < 8 && beat[idx] <= time)
+			{
+				auto bullet = mBurstBullets.GetNext();
+				bullet->IsEven(idx % 2 == 0);
+				bullet->Activate();
+				idx++;
 			}
 		}
 		{
 			const double beat[] =
-			{
-				35.629,	36.493,	37.357,	38.221,	39.085,	39.949,	40.813,	41.677
+			{ 
+				35.403,	36.052,	36.921,	37.57,	38.651,	39.3,	40.379,	41.028
+				//35.629,	36.493,	37.357,	38.221,	39.085,	39.949,	40.813,	41.677
 			};
 
 			const float y = application.GetHeight() * 0.5;
 			const float x[][3] = { {-300, 0, 300}, {-150, 150, 0}};
 			static int idx = 0;
-			while (idx < 8 && beat[idx] - 1.3 < time)
+			if (idx >= 8 && beat[7] > time)
+			{
+				idx = 0;
+			}
+			if (idx < 8 && beat[idx] < time)
 			{
 				int num = idx % 2 == 0 ? 3 : 2;
 				for (int i = 0; i < num; i++)
 				{
 					auto bullet = mBeatBars.GetNext();
 					bullet->mTransform->SetPosition({ x[idx % 2][i], y, 0 });
-					bullet->SetTime(beat[idx], time);
+					bullet->Activate();
 				}
 				idx++;
-			}
-			if (idx >= 8 && beat[7] < time)
-			{
-				idx = 0;
 			}
 		}
 		{

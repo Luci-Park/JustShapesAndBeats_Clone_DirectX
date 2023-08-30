@@ -49,7 +49,7 @@ namespace lu::JSAB
 	{
 		mMr->SetActive(true);
 		mAnim->SetActive(true);
-		mAnim->PlayAnimation(L"OnBeat", false);
+		mAnim->PlayAnimation(L"Appear", false);
 	}
 	void TutorialBeatBar::OnDeActivate()
 	{
@@ -67,29 +67,27 @@ namespace lu::JSAB
 	{
 		Vector3 baseScale = { 20, (float)application.GetHeight() * 2, 1 };
 
-		Animation* ani = mAnim->CreateAnimation(L"OnBeat");
-		ani->AddColliderActiveKey(0, false);
+		Animation* ani = mAnim->CreateAnimation(L"Show");
 		ani->AddScaleKey(0, { 0, (float)application.GetHeight() * 2, 1 });
 		ani->AddTintKey(0, Color::clear);
-		ani->AddInterpolationKey(0, 0);
-
 		ani->AddScaleKey(appearDuration, baseScale);
 		ani->AddTintKey(appearDuration, {1.f, 1.f, 1.f, 0.8f});
-		ani->AddInterpolationKey(appearDuration, 0);
 
-		ani->AddColliderActiveKey(appearDuration, true);
-		ani->AddScaleKey(appearDuration, { 20, 0, 1 });
-		ani->AddInterpolationKey(appearDuration, 1);
-		ani->AddScaleKey(appearDuration + flashDuration, baseScale);
-		ani->AddTintKey(appearDuration + flashDuration, Color::white);
-		ani->AddInterpolationKey(appearDuration + flashDuration, 1);
-		ani->AddInterpolationKey(appearDuration + flashDuration, 0);
+		ani = mAnim->CreateAnimation(L"Appear");
+		ani->AddColliderActiveKey(0, true);
+		ani->AddScaleKey(0, { 20, 0, 1 });
+		ani->AddInterpolationKey(0, 1);
+
+		ani->AddScaleKey(flashDuration, baseScale);
+		ani->AddTintKey(flashDuration, Color::white);
+		ani->AddInterpolationKey(flashDuration, 1);
+		ani->AddInterpolationKey(flashDuration, 0);
 
 		//ani->AddFunctionKey(appearDuration + flashDuration, std::bind(&TutorialBeatBar::Beat, this));
 
-		ani->AddScaleKey(appearDuration + flashDuration +stayDuration, baseScale);
-		ani->AddScaleKey(appearDuration + flashDuration + stayDuration + disappearDuration, { 0, (float)application.GetHeight() * 2, 1 });
-		ani->AddFunctionKey(appearDuration + flashDuration + stayDuration + disappearDuration, std::bind(&Bullet::DeActivate, this));
+		ani->AddScaleKey(flashDuration +stayDuration, baseScale);
+		ani->AddScaleKey(flashDuration + stayDuration + disappearDuration, { 0, (float)application.GetHeight() * 2, 1 });
+		ani->AddFunctionKey(flashDuration + stayDuration + disappearDuration, std::bind(&Bullet::DeActivate, this));
 
 	}
 	void TutorialBeatBar::Beat()
