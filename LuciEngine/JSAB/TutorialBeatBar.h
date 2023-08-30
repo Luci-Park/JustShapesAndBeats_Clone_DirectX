@@ -11,6 +11,7 @@ namespace lu::JSAB
 		virtual void Initialize() override;
 		void SetTime(double targetTime, double currentTime);
 	private:
+		virtual void OnShow(){}
 		virtual void OnActivate();
 		virtual void OnDeActivate();
 		virtual void WhileActive();
