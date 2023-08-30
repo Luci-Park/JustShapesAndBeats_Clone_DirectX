@@ -1,8 +1,6 @@
 Devlog
 	- player particle
 	- player collision
-	- transition through triangle
-	- player death
 
 Corrupted
 1 beat = .432

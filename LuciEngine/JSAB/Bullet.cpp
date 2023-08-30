@@ -7,9 +7,12 @@ namespace lu::JSAB
 	{
 		DeActivate();
 	}
-	void Bullet::Show()
+	void Bullet::Update()
 	{
-		OnShow();
+		if (isActive)
+			WhileActive();
+		else
+			WhileDeActive();
 	}
 	void Bullet::Activate()
 	{

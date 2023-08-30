@@ -17,14 +17,15 @@ namespace lu::JSAB
 		Bullet():isActive(false) {};
 		virtual ~Bullet() {};
 		virtual void Initialize() override;
-		void Show();
+		virtual void Update() override;
 		void Activate();
 		void DeActivate();
 		bool IsActive() { return isActive; }
 	protected:
-		virtual void OnShow() = 0;
 		virtual void OnActivate() = 0;
 		virtual void OnDeActivate() = 0;
+		virtual void WhileActive() = 0;
+		virtual void WhileDeActive() = 0;
 
 	protected:
 		bool isActive;

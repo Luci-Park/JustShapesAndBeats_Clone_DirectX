@@ -5,15 +5,14 @@
 #include "TrianglePrefab.h"
 #include "TutorialMusicController.h"
 #include "TutorialManager.h"
-#include "TutorialBeatCircle.h"
+#include "TutorialBeatBar.h"
 #include "LObject.h"
 #include "LInput.h"
 #include "CameraScript.h"
 
 namespace lu::JSAB::Tutorial
 {
-	CameraScript* cs;
-	TutorialBeatCircle* bullet;
+	CameraScript* burst;
 	void TutorialScene::Initialize()
 	{
 		//Camera
@@ -27,17 +26,16 @@ namespace lu::JSAB::Tutorial
 			{
 				cameraComp->TurnLayerMask((eLayerType)i, active[i]);
 			}
-			cs = camera->AddComponent<CameraScript>();
+			burst = camera->AddComponent<CameraScript>();
 		}
 
-		//GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
-		//manager->SetName(L"TutorialManager");
-		//auto ma = manager->AddComponent<TutorialManager>();
-		//auto m = manager->AddComponent<TutorialMusicController>();
-		//ma->SetMusic(m);
-		//m->Play();
-		bullet = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TutorialBeatCircle>();
-		//bullet->Owner()->AddComponent<gui::TransformWidget>();
+		GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
+		manager->SetName(L"TutorialManager");
+		auto ma = manager->AddComponent<TutorialManager>();
+		auto m = manager->AddComponent<TutorialMusicController>();
+		ma->SetMusic(m);
+		m->Play();
+		//burst = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TutorialBeatBar>();
 		object::Instantiate<PlayerPrefab>(eLayerType::Player);
 
 		Scene::Initialize();
@@ -45,24 +43,19 @@ namespace lu::JSAB::Tutorial
 	void TutorialScene::Update()
 	{
 		if (Input::GetKeyDown(eKeyCode::W))
-			cs->BeatUp();
+			burst->BeatUp();
 
 		if (Input::GetKeyDown(eKeyCode::S))
-			cs->BeatDown();
+			burst->BeatDown();
 
 		if (Input::GetKeyDown(eKeyCode::A))
-			cs->BeatLeft();
+			burst->BeatLeft();
 
 		if (Input::GetKeyDown(eKeyCode::D))
-			cs->BeatRight();
+			burst->BeatRight();
 
 		if (Input::GetKeyDown(eKeyCode::F))
-			cs->Flash();
-
-		if (Input::GetKeyDown(eKeyCode::O))
-			bullet->Show();
-		if (Input::GetKeyDown(eKeyCode::P))
-			bullet->Activate();
+			burst->Flash();
 		Scene::Update();
 	}
 	void TutorialScene::LateUpdate()

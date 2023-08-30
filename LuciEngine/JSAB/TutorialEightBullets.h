@@ -11,7 +11,6 @@ namespace lu::JSAB
 		virtual void Initialize() override;
 		void Setup(float duration, Vector3 startPos, Vector3 endPos);
 	private:
-		virtual void OnShow() {}
 		virtual void OnActivate();
 		virtual void OnDeActivate();
 		virtual void WhileActive();
