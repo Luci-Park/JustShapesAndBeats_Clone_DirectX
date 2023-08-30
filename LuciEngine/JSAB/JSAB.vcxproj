@@ -165,6 +165,7 @@
     <ClInclude Include="TutorialBeatBar.h" />
     <ClInclude Include="TutorialBeatCircle.h" />
     <ClInclude Include="TutorialBurst.h" />
+    <ClInclude Include="TutorialEightBar.h" />
     <ClInclude Include="TutorialEightBullets.h" />
     <ClInclude Include="TutorialMusicController.h" />
     <ClInclude Include="resource.h" />
@@ -200,6 +201,7 @@
     <ClCompile Include="TutorialBeatBar.cpp" />
     <ClCompile Include="TutorialBeatCircle.cpp" />
     <ClCompile Include="TutorialBurst.cpp" />
+    <ClCompile Include="TutorialEightBar.cpp" />
     <ClCompile Include="TutorialEightBullets.cpp" />
     <ClCompile Include="TutorialMusicController.cpp" />
     <ClCompile Include="JSABRenderer.cpp" />

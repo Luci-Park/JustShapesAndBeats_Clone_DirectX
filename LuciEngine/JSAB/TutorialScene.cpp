@@ -10,6 +10,7 @@
 #include "LObject.h"
 #include "LInput.h"
 #include "CameraScript.h"
+#include "TutorialEightBar.h"
 
 namespace lu::JSAB::Tutorial
 {
@@ -30,14 +31,19 @@ namespace lu::JSAB::Tutorial
 			burst = camera->AddComponent<CameraScript>();
 		}
 
-		GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
-		manager->SetName(L"TutorialManager");
-		auto ma = manager->AddComponent<TutorialManager>();
-		auto m = manager->AddComponent<TutorialMusicController>();
-		ma->SetMusic(m);
-		m->Play();
+		//GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
+		//manager->SetName(L"TutorialManager");
+		//auto ma = manager->AddComponent<TutorialManager>();
+		//auto m = manager->AddComponent<TutorialMusicController>();
+		//ma->SetMusic(m);
+		//m->Play();
 		//burst = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TutorialBeatBar>();
-
+		auto a = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent <TutorialEightBar>();
+		a->Activate();
+		a->mTransform->SetPosition({ 0, 360 - 40 * 4, 1 });
+		auto b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent <TutorialEightBar>();
+		b->Activate();
+		b->mTransform->SetPosition({ 0, -360 + 40 * 4, 1 });
 		object::Instantiate<PlayerPrefab>(eLayerType::Player);
 		Scene::Initialize(); 
 	}

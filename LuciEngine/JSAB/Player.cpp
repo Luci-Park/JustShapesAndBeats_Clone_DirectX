@@ -13,7 +13,7 @@ namespace lu::JSAB
 {
 	Player::Player()
 		: mMoveSpeed(330)
-		, mDashSpeed(1120.0f)
+		, mDashSpeed(1320.0f)
 		, mDashDuration(.1f)
 		, mDashCoolDuration(.2f)
 		, mTimer(0.0f)

@@ -95,6 +95,9 @@
     <ClCompile Include="TutorialBeatCircle.cpp">
       <Filter>Contents\Tutorial\Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="TutorialEightBar.cpp">
+      <Filter>Contents\Tutorial\Bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -193,6 +196,9 @@
       <Filter>Contents\Tutorial\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="TutorialBeatCircle.h">
+      <Filter>Contents\Tutorial\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialEightBar.h">
       <Filter>Contents\Tutorial\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
