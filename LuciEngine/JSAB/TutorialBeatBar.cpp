@@ -85,7 +85,7 @@ namespace lu::JSAB
 		ani->AddInterpolationKey(appearDuration + flashDuration, 1);
 		ani->AddInterpolationKey(appearDuration + flashDuration, 0);
 
-		//ani->AddFunctionKey(appearDuration + flashDuration, std::bind(&TutorialBeatBar::Beat, this));
+		ani->AddFunctionKey(appearDuration + flashDuration, std::bind(&TutorialBeatBar::Beat, this));
 
 		ani->AddScaleKey(appearDuration + flashDuration +stayDuration, baseScale);
 		ani->AddScaleKey(appearDuration + flashDuration + stayDuration + disappearDuration, { 0, (float)application.GetHeight() * 2, 1 });

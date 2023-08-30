@@ -14,6 +14,10 @@ namespace lu::JSAB
 		else
 			WhileDeActive();
 	}
+	void Bullet::Show()
+	{
+		OnShow();
+	}
 	void Bullet::Activate()
 	{
 		isActive = true;

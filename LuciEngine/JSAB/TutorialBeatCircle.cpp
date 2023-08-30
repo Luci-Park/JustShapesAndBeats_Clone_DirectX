@@ -57,7 +57,7 @@ namespace lu::JSAB
 		anim->AddTextureKey(0, mReadySprite);
 		CreateCounterClockwiseAnimation(0.5, anim);
 
-		double duration = 0.5;
+		double duration = 0.3;
 		anim = mAnim->CreateAnimation(L"Activate");
 		anim->AddTextureKey(0, mActivateSprite);
 		anim->AddColliderActiveKey(0, true);

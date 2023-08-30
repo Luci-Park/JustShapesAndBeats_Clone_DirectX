@@ -10,11 +10,11 @@ namespace lu::JSAB
 		virtual ~TutorialBeatCircle() {}
 		virtual void Initialize()override;
 	private:
-		virtual void OnShow();
-		virtual void OnActivate();
-		virtual void OnDeActivate();
-		virtual void WhileActive();
-		virtual void WhileDeActive();
+		virtual void OnShow() override;
+		virtual void OnActivate()override;
+		virtual void OnDeActivate()override;
+		virtual void WhileActive()override;
+		virtual void WhileDeActive()override;
 
 		void CreateOnBeatAnimation();
 	private:

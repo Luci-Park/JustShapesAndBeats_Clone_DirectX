@@ -13,6 +13,7 @@ namespace lu::JSAB
 		void IsEven(bool even) { mbEven = even; }
 		void OnBurst();
 	private:
+		virtual void OnShow() {}
 		virtual void OnActivate();
 		virtual void OnDeActivate();
 		virtual void WhileActive();

@@ -18,10 +18,12 @@ namespace lu::JSAB
 		virtual ~Bullet() {};
 		virtual void Initialize() override;
 		virtual void Update() override;
+		void Show();
 		void Activate();
 		void DeActivate();
 		bool IsActive() { return isActive; }
 	protected:
+		virtual void OnShow() = 0;
 		virtual void OnActivate() = 0;
 		virtual void OnDeActivate() = 0;
 		virtual void WhileActive() = 0;

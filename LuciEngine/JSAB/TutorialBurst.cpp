@@ -1,5 +1,6 @@
 #include "TutorialBurst.h"
 #include "GeneralEffects.h"
+#include "CameraScript.h"
 #include "LObject.h"
 #include "LAnimator.h"
 #include "LMeshRenderer.h"
@@ -142,5 +143,6 @@ namespace lu::JSAB
 		ani->AddScaleKey(duration, Vector3::One);
 
 		ani->AddFunctionKey(duration, std::bind(&TutorialBurst::OnBurst, this));
+		ani->AddFunctionKey(duration, std::bind(&CameraScript::Flash, renderer::mainCamera->Owner()->GetComponent<CameraScript>()));
 	}
 }

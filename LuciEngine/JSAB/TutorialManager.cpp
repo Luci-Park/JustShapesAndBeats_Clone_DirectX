@@ -7,6 +7,7 @@
 #include "LApplication.h"
 #include "TutorialEightBullets.h"
 #include "TutorialBurst.h"
+#include "TutorialBeatCircle.h"
 
 extern lu::Application application;
 namespace lu::JSAB
@@ -15,6 +16,7 @@ namespace lu::JSAB
 		: mStage1Bullets(13)
 		, mBurstBullets(8)
 		, mBeatBars(10)
+		, mBeatCircles(4)
 	{
 	}
 	void TutorialManager::Initialize()
@@ -230,7 +232,32 @@ namespace lu::JSAB
 			}
 		}
 		{
-
+			const double beat[] = { 35.629,
+				36.493,	36.781,	37.069,	37.357,
+				38.221,
+				39.949,	40.237,	40.525,	40.813
+			};
+			static int idx = 0;
+			const Vector3 pos[] = { {-200, 200, 1}, {200, 200, 1}, {-200, -200, 1}, {200, -200, 1} };
+			if (beat[idx] < time)
+			{
+				if (idx == 0 || idx == 5)
+				{
+					for (int i = 0; i < 4; i++)
+					{
+						auto c = mBeatCircles.GetNext();
+						c->mTransform->SetPosition(pos[i]);
+						c->Show();						
+					}
+				}
+				else
+				{
+					mBeatCircles.GetNext()->Activate();
+				}
+				idx++;
+			}
+			if (idx >= 10 && beat[9] < time)
+				idx = 0;
 		}
 	}
 	void TutorialManager::Stage6(double time)

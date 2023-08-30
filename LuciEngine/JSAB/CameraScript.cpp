@@ -50,22 +50,22 @@ namespace lu::JSAB
 		int dist = 50;
 		anim = mAnim->CreateAnimation(L"BeatUp");
 		anim->AddPositionKey(0, Vector3::Zero);
-		anim->AddPositionKey(duration * 0.5, Vector3::Up * 50);
+		anim->AddPositionKey(duration * 0.5, Vector3::Up * 10);
 		anim->AddPositionKey(duration, Vector3::Zero);
 
 		anim = mAnim->CreateAnimation(L"BeatDown");
 		anim->AddPositionKey(0, Vector3::Zero);
-		anim->AddPositionKey(duration * 0.5, Vector3::Down * 50);
+		anim->AddPositionKey(duration * 0.5, Vector3::Down * 10);
 		anim->AddPositionKey(duration, Vector3::Zero);
 
 		anim = mAnim->CreateAnimation(L"BeatLeft");
 		anim->AddPositionKey(0, Vector3::Zero);
-		anim->AddPositionKey(duration * 0.5, Vector3::Left * 50);
+		anim->AddPositionKey(duration * 0.5, Vector3::Left * 10);
 		anim->AddPositionKey(duration, Vector3::Zero);
 
 		anim = mAnim->CreateAnimation(L"BeatRight");
 		anim->AddPositionKey(0, Vector3::Zero);
-		anim->AddPositionKey(duration * 0.5, Vector3::Right * 50);
+		anim->AddPositionKey(duration * 0.5, Vector3::Right * 0);
 		anim->AddPositionKey(duration, Vector3::Zero);
 	}
 }
