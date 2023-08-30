@@ -62,12 +62,6 @@
     <ClCompile Include="TrianglePrefab.cpp">
       <Filter>Contents\Triangle</Filter>
     </ClCompile>
-    <ClCompile Include="TutorialBulletPrefabs.cpp">
-      <Filter>Contents\Tutorial\Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="TutorialEightBulletScript.cpp">
-      <Filter>Contents\Tutorial\Bullet</Filter>
-    </ClCompile>
     <ClCompile Include="MusicController.cpp">
       <Filter>Contents\Managers</Filter>
     </ClCompile>
@@ -76,15 +70,6 @@
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Contents\Bullets</Filter>
-    </ClCompile>
-    <ClCompile Include="TutorialEightBullets.cpp">
-      <Filter>Contents\Bullets\Tutorial Bullets</Filter>
-    </ClCompile>
-    <ClCompile Include="TutorialBurst.cpp">
-      <Filter>Contents\Bullets\Tutorial Bullets</Filter>
-    </ClCompile>
-    <ClCompile Include="TutorialBeatBar.cpp">
-      <Filter>Contents\Bullets\Tutorial Bullets</Filter>
     </ClCompile>
     <ClCompile Include="TutorialScene.cpp">
       <Filter>Contents\Tutorial\Scene</Filter>
@@ -97,6 +82,18 @@
     </ClCompile>
     <ClCompile Include="CameraScript.cpp">
       <Filter>Contents\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialBeatBar.cpp">
+      <Filter>Contents\Tutorial\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialBurst.cpp">
+      <Filter>Contents\Tutorial\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialEightBullets.cpp">
+      <Filter>Contents\Tutorial\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialBeatCircle.cpp">
+      <Filter>Contents\Tutorial\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,33 +158,18 @@
     <ClInclude Include="TrianglePrefab.h">
       <Filter>Contents\Triangle</Filter>
     </ClInclude>
-    <ClInclude Include="TutorialBulletPrefabs.h">
-      <Filter>Contents\Tutorial\Bullet</Filter>
-    </ClInclude>
     <ClInclude Include="GeneralEffects.h">
       <Filter>Contents</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="TutorialEightBulletScript.h">
-      <Filter>Contents\Tutorial\Bullet</Filter>
-    </ClInclude>
     <ClInclude Include="MusicController.h">
       <Filter>Contents\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Contents\Bullets</Filter>
     </ClInclude>
-    <ClInclude Include="TutorialEightBullets.h">
-      <Filter>Contents\Bullets\Tutorial Bullets</Filter>
-    </ClInclude>
-    <ClInclude Include="TutorialBurst.h">
-      <Filter>Contents\Bullets\Tutorial Bullets</Filter>
-    </ClInclude>
     <ClInclude Include="BulletPool.h">
       <Filter>Contents\Bullets</Filter>
-    </ClInclude>
-    <ClInclude Include="TutorialBeatBar.h">
-      <Filter>Contents\Bullets\Tutorial Bullets</Filter>
     </ClInclude>
     <ClInclude Include="TutorialScene.h">
       <Filter>Contents\Tutorial\Scene</Filter>
@@ -200,6 +182,18 @@
     </ClInclude>
     <ClInclude Include="CameraScript.h">
       <Filter>Contents\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialBeatBar.h">
+      <Filter>Contents\Tutorial\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialBurst.h">
+      <Filter>Contents\Tutorial\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialEightBullets.h">
+      <Filter>Contents\Tutorial\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialBeatCircle.h">
+      <Filter>Contents\Tutorial\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -247,9 +241,6 @@
     </Filter>
     <Filter Include="Contents\Bullets">
       <UniqueIdentifier>{d4b81a8b-9340-4988-bb91-4237afced6c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Bullets\Tutorial Bullets">
-      <UniqueIdentifier>{43971031-0f49-4717-87ae-748d329fff8f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Managers">
       <UniqueIdentifier>{500b1b7f-c28c-4150-9629-6aa0f9b02e32}</UniqueIdentifier>
