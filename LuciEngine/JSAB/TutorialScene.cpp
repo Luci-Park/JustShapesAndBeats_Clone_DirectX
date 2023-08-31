@@ -15,7 +15,6 @@
 namespace lu::JSAB::Tutorial
 {
 	CameraScript* burst;
-	TutorialBeatBar* b;
 	void TutorialScene::Initialize()
 	{
 		//Camera
@@ -59,9 +58,6 @@ namespace lu::JSAB::Tutorial
 
 		if (Input::GetKeyDown(eKeyCode::F))
 			burst->OnFlash();
-
-		if (Input::GetKeyDown(eKeyCode::SPACE))
-			b->Activate();
 		Scene::Update();
 	}
 	void TutorialScene::LateUpdate()

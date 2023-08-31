@@ -50,6 +50,7 @@ namespace lu::JSAB
 	}
 	void TutorialBeatCircle::WhileShowing()
 	{
+		if (MusicController::_MusicController == nullptr) return;
 		if (MusicController::_MusicController->GetTime() >= mActivateTime)
 			Activate();
 	}
