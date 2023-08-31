@@ -19,7 +19,7 @@ namespace lu::JSAB
 	{
 		Script::Initialize();
 
-		Vector3 baseScale = { 20, (float)application.GetHeight() * 2, 1 };
+		Vector3 baseScale = { 20, (float)application.GetWidth() * 2, 1 };
 		Owner()->SetName(L"BeatBar");
 		mTransform->SetPosition(Vector3::Up * (float)application.GetHeight() * 0.5);
 		mTransform->SetScale(baseScale);
@@ -34,18 +34,6 @@ namespace lu::JSAB
 		CreateOnBeatAnimation();
 
 		Bullet::Initialize();
-	}
-	void TutorialBeatBar::SetTime(double targetTime, double currentTime)
-	{
-		if (IsActive()) return;
-		double diff = targetTime - currentTime;
-		if (0 < diff && diff <= appearDuration)
-		{
-			Activate();
-			double time = appearDuration + flashDuration + stayDuration + disappearDuration;
-			mAnim->SetTime(time - diff);
-		}
-		
 	}
 	void TutorialBeatBar::OnShow()
 	{
@@ -78,10 +66,10 @@ namespace lu::JSAB
 	}
 	void TutorialBeatBar::CreateOnBeatAnimation()
 	{
-		Vector3 baseScale = { 20, (float)application.GetHeight() * 2, 1 };
+		Vector3 baseScale = { 20, (float)application.GetWidth() * 2, 1 };
 
 		Animation* ani = mAnim->CreateAnimation(L"Show");
-		ani->AddScaleKey(0, { 0, (float)application.GetHeight() * 2, 1 });
+		ani->AddScaleKey(0, { 0, (float)application.GetWidth() * 2, 1 });
 		ani->AddTintKey(0, Color::clear);
 		ani->AddScaleKey(appearDuration, baseScale);
 		ani->AddTintKey(appearDuration, {1.f, 1.f, 1.f, 0.8f});
@@ -100,20 +88,22 @@ namespace lu::JSAB
 		ani->AddFunctionKey(flashDuration, std::bind(&TutorialBeatBar::Beat, this));
 
 		ani->AddScaleKey(flashDuration +stayDuration, baseScale);
-		ani->AddScaleKey(flashDuration + stayDuration + disappearDuration, { 0, (float)application.GetHeight() * 2, 1 });
+		ani->AddScaleKey(flashDuration + stayDuration + disappearDuration, { 0, (float)application.GetWidth() * 2, 1 });
 		ani->AddFunctionKey(flashDuration + stayDuration + disappearDuration, std::bind(&Bullet::DeActivate, this));
 
 	}
 	void TutorialBeatBar::Beat()
 	{
-		Vector3 pos = mTransform->GetPosition();
-		if (pos.y == -(float)application.GetHeight() * 0.5)
+		Quaternion rot = mTransform->GetRotation();
+		if(rot == Quaternion::Identity)
+			//position = {0, -application.GetHight() * 0.5f, 0);
 			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->OnBeat(Vector3::Down);
-		else if (pos.y == (float)application.GetHeight() * 0.5)
-			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->OnBeat(Vector3::Up);
-		else if (pos.x == -(float)application.GetWidth() * 0.5)
-			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->OnBeat(Vector3::Right);
-		else if (pos.x == (float)application.GetWidth() * 0.5)
+		else if (rot == Quaternion::CreateFromAxisAngle(Vector3::Forward, PI*0.5))
+			//position = { -application.GetWidth() * 0.5f,0, 0);
 			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->OnBeat(Vector3::Left);
+			//position = { application.GetWidth() * 0.5f,0, 0);
+		else if (rot == Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 0.5))
+			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->OnBeat(Vector3::Right);
+		
 	}
 }

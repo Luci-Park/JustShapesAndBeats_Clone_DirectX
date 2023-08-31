@@ -9,8 +9,6 @@ namespace lu::JSAB
 		virtual ~TutorialBeatBar(){}
 
 		virtual void Initialize() override;
-		void SetTime(double targetTime);
-		void SetTime(double targetTime, double currentTime);
 	private:
 		virtual void OnShow() override;
 		virtual void OnActivate()override;
