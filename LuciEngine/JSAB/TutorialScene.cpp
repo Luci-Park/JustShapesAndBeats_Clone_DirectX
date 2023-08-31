@@ -50,19 +50,19 @@ namespace lu::JSAB::Tutorial
 	void TutorialScene::Update()
 	{
 		if (Input::GetKeyDown(eKeyCode::W))
-			burst->BeatUp();
+			burst->OnBeat(Vector3::Up);
 
 		if (Input::GetKeyDown(eKeyCode::S))
-			burst->BeatDown();
+			burst->OnBeat(Vector3::Down);
 
 		if (Input::GetKeyDown(eKeyCode::A))
-			burst->BeatLeft();
+			burst->OnBeat(Vector3::Left);
 
 		if (Input::GetKeyDown(eKeyCode::D))
-			burst->BeatRight();
+			burst->OnBeat(Vector3::Right);
 
 		if (Input::GetKeyDown(eKeyCode::F))
-			burst->Flash();
+			burst->OnFlash();
 		Scene::Update();
 	}
 	void TutorialScene::LateUpdate()

@@ -107,13 +107,13 @@ namespace lu::JSAB
 	void TutorialBeatBar::Beat()
 	{
 		Vector3 pos = mTransform->GetPosition();
-		if (-pos.y == (float)application.GetWidth() * 0.5)
-			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->BeatDown();
+		if (pos.y == -(float)application.GetHeight() * 0.5)
+			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->OnBeat(Vector3::Down);
 		else if (pos.y == (float)application.GetHeight() * 0.5)
-			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->BeatUp();
-		else if (-pos.x == (float)application.GetWidth() * 0.5)
-			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->BeatLeft();
-		else if (pos.x == (float)application.GetHeight() * 0.5)
-			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->BeatRight();
+			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->OnBeat(Vector3::Up);
+		else if (pos.x == -(float)application.GetWidth() * 0.5)
+			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->OnBeat(Vector3::Right);
+		else if (pos.x == (float)application.GetWidth() * 0.5)
+			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->OnBeat(Vector3::Left);
 	}
 }

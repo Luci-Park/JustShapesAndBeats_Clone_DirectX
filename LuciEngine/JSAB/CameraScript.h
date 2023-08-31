@@ -11,21 +11,23 @@ namespace lu::JSAB
 	class CameraScript : public Script
 	{
 	public:
-		CameraScript(){}
+		CameraScript():mbIsBeating(false), mbIsFlashing(false){}
 		virtual ~CameraScript(){}
-		void Initialize();
-		void Flash();
-		void BeatUp();
-		void BeatDown();
-		void BeatLeft();
-		void BeatRight();
+		virtual void Initialize() override;
+		virtual void Update() override;
+		void OnFlash();
+		void OnBeat(Vector3 dir);
 
 	private:
-		void CreateAnimation();
-		void SetFlash(bool active) { mFlash->SetActive(active); }
+		void Flash();
+		void Beat();
+
 	private:
 		GameObject* mFlash;
-		Animator* mAnim;
+		bool mbIsBeating;
+		bool mbIsFlashing;
+		Vector3 mDefaultPos;
+		Vector3 mBeatDir;
 	};
 }
 
