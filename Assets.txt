@@ -1,6 +1,8 @@
 Devlog
 	- player particle
 	- player collision
+	- tutorial 에서 끝날 때마다 bullet reset
+	- 
 
 Corrupted
 1 beat = .432

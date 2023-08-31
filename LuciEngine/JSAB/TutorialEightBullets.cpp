@@ -26,7 +26,6 @@ namespace lu::JSAB
 		Bullet::Initialize();
 	}
 	void TutorialEightBullets::Setup(float duration, Vector3 startPos, Vector3 endPos)
-
 	{
 		mDuration = duration; 
 		mStartPos = startPos; 

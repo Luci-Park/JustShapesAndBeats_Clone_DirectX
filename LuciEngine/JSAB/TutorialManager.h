@@ -11,7 +11,8 @@ namespace lu::JSAB
 	class TutorialEightBullets;
 	class TutorialBurst;
 	class TutorialBeatBar;
-	class TutorialBeatCircle;
+	class TutorialBeatCircle; 
+	class TutorialFullBar;
 	class TutorialManager : public Script
 	{
 	public:
@@ -37,7 +38,8 @@ namespace lu::JSAB
 		BulletPool<TutorialEightBullets> mStage1Bullets;
 		BulletPool<TutorialBurst> mBurstBullets;
 		BulletPool<TutorialBeatBar>mBeatBars;
-		BulletPool<TutorialBeatCircle> mBeatCircles;
+		BulletPool<TutorialBeatCircle> mBeatCircles;	
+		BulletPool<TutorialFullBar> mFullBar;
 		Animator* mBeatBullets[8];
 	};
 }

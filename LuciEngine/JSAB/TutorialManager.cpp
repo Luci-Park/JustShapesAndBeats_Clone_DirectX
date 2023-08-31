@@ -1,13 +1,14 @@
 #include "TutorialManager.h"
 #include "TutorialMusicController.h"
 #include "TutorialBeatBar.h"
+#include "TutorialEightBullets.h"
+#include "TutorialBurst.h"
+#include "TutorialBeatCircle.h"
+#include "TutorialEightBar.h"
 #include "LObject.h"
 #include "LCamera.h"
 #include "LAnimator.h"
 #include "LApplication.h"
-#include "TutorialEightBullets.h"
-#include "TutorialBurst.h"
-#include "TutorialBeatCircle.h"
 
 extern lu::Application application;
 namespace lu::JSAB
@@ -17,6 +18,7 @@ namespace lu::JSAB
 		, mBurstBullets(8)
 		, mBeatBars(10)
 		, mBeatCircles(4)
+		, mFullBar(4)
 	{
 	}
 	void TutorialManager::Initialize()
@@ -232,12 +234,84 @@ namespace lu::JSAB
 	}
 	void TutorialManager::Stage6(double time)
 	{
+		const double beat[] = {
+			42.331,	43.206,	44.081,	44.956,	45.831,	46.706,	47.612,	48.412
+		};
+		static int idx = 0;
+		if (idx >= 8 && beat[7] > time)
+			idx = 0;
+		if (idx < 8 && beat[idx] <= time)
+		{
+			auto bullet = mBurstBullets.GetNext();
+			bullet->IsEven(idx % 2 == 0);
+			bullet->Activate();
+			idx++;
+		}
+		if (beat[0] >= time)
+		{
+			for (int i = 0; i < 2; i++)
+			{
+				auto bullet = mFullBar.GetNext();
+				bullet->mTransform->SetPosition({ 200.f * (i ? -1 : 1),  0, 0 });
+				bullet->Activate();
+			}
+		}
 	}
 	void TutorialManager::Stage7(double time)
 	{
+		const double beat[] = {
+			56.187, 56.624, 59.651 , 60.088
+		};
+		static int idx = 0;
+		if (idx >= 4 && beat[0] >= time)
+			idx = 0;
+		if(idx < 4 && beat[idx] <= time)
+		{
+			RECT bounds = SceneManager::MainCamera()->GetBoundary();
+			auto b = mBeatBars.GetNext();
+			b->mTransform->SetPosition({ (float)bounds.right, application.GetHeight() * 0.5f,0}); //({(float)bounds.right, 0, 0 });
+			b->Activate();
+			if (idx % 2)
+			{
+				RECT bounds = SceneManager::MainCamera()->GetBoundary();
+				float x = bounds.right + 42 * 0.5;
+				float endX = bounds.left - 42 * 0.5;
+				Vector3 pos = { x, 0, 1 };
+				Vector3 endPos = { endX, 0, 1 };
+				auto c = mFullBar.GetNext();
+				c->Setup(7, pos, endPos);
+				c->Activate();
+			}
+			idx++;
+		}
 	}
 	void TutorialManager::Stage8(double time)
 	{
+		const double beat[] = {
+			   70.043 , 70.480, 73.507 , 73.944
+		};
+		static int idx = 0;
+		if (idx >= 4 && beat[0] >= time)
+			idx = 0;
+		if (idx < 4 && beat[idx] <= time)
+		{
+			RECT bounds = SceneManager::MainCamera()->GetBoundary();
+			auto b = mBeatBars.GetNext();
+			b->mTransform->SetPosition({ (float)bounds.right, application.GetHeight() * 0.5f,0 }); //({(float)bounds.right, 0, 0 });
+			b->Activate();
+			if (idx % 2)
+			{
+				RECT bounds = SceneManager::MainCamera()->GetBoundary();
+				float x = bounds.right + 42 * 0.5;
+				float endX = bounds.left - 42 * 0.5;
+				Vector3 pos = { x, 0, 1 };
+				Vector3 endPos = { endX, 0, 1 };
+				auto c = mFullBar.GetNext();
+				c->Setup(7, pos, endPos);
+				c->Activate();
+			}
+			idx++;
+		}
 	}
 	void TutorialManager::Stage9(double time)
 	{
