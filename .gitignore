@@ -402,3 +402,5 @@ FodyWeavers.xsd
 !LuciEngine/x64/Release/JSAB.lib
 !LuciEngine/Extern/*
 !LuciEngine/Extern/**
+
+Assets/AudioClips/Not Used
