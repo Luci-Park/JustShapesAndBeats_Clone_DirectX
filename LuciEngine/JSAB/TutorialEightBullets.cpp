@@ -35,20 +35,15 @@ namespace lu::JSAB
 	}
 	void TutorialEightBullets::OnActivate()
 	{
-		mEnterEffect->Owner()->SetActive(true);
+		Owner()->SetActive(true);
 		mEnterEffect->PlayAnimation(L"Appear", false);
 		mAnim->PlayAnimation(L"Rotate", true);
-		mMr->SetActive(true);
-		mCol->SetActive(true);
-
 		mTime = 0;
 	}
 	void TutorialEightBullets::OnDeActivate()
 	{
+		Owner()->SetActive(false);
 		mEnterEffect->Owner()->SetActive(false);
-		mAnim->StopAnimation();
-		mMr->SetActive(false);
-		mCol->SetActive(false);
 	}
 	void TutorialEightBullets::WhileActive()
 	{

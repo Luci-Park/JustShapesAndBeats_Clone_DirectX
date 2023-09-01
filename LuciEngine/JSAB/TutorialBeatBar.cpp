@@ -37,21 +37,19 @@ namespace lu::JSAB
 	}
 	void TutorialBeatBar::OnShow()
 	{
-		mMr->SetActive(true);
-		mAnim->SetActive(true);
-		mAnim->PlayAnimation(L"Show", false);
+		Owner()->SetActive(true);
+		mCol->SetActive(false);
+		mAnim->PlayAnimation(L"Warning", false);
 	}
 	void TutorialBeatBar::OnActivate()
 	{
-		mMr->SetActive(true);
-		mAnim->SetActive(true);
+		Owner()->SetActive(true);
+		mCol->SetActive(false);
 		mAnim->PlayAnimation(L"Appear", false);
 	}
 	void TutorialBeatBar::OnDeActivate()
 	{
-		mCol->SetActive(false);
-		mMr->SetActive(false);
-		mAnim->SetActive(false);
+		Owner()->SetActive(false);
 	}
 	void TutorialBeatBar::WhileShowing()
 	{
@@ -68,7 +66,7 @@ namespace lu::JSAB
 	{
 		Vector3 baseScale = { 20, (float)application.GetWidth() * 2, 1 };
 
-		Animation* ani = mAnim->CreateAnimation(L"Show");
+		Animation* ani = mAnim->CreateAnimation(L"Warning");
 		ani->AddScaleKey(0, { 0, (float)application.GetWidth() * 2, 1 });
 		ani->AddTintKey(0, Color::clear);
 		ani->AddScaleKey(appearDuration, baseScale);

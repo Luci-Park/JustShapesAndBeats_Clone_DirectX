@@ -73,7 +73,7 @@ namespace lu::JSAB
 
 	void TutorialBurst::OnActivate()
 	{
-		OnDeActivate();
+		DeActivate();
 		mShell->Owner()->SetActive(true);
 		mShell->PlayAnimation(L"Blink", true);
 		if (mbEven)

@@ -151,12 +151,12 @@ namespace lu::JSAB
 	void TutorialCircleLine::MultipleShow(const double* times)
 	{
 		for (int i = 0; i < 7; i++)
-			mCircles[i]->Show(times[i]);
+			mCircles[i]->Warning(times[i]);
 	}
 	void TutorialCircleLine::OnShow()
 	{
 		for (int i = 0; i < 7; i++)
-			mCircles[i]->Show(mActivateTime);
+			mCircles[i]->Warning(mActivateTime);
 	}
 	void TutorialCircleLine::OnActivate()
 	{

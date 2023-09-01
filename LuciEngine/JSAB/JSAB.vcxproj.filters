@@ -92,12 +92,14 @@
     <ClCompile Include="TutorialEightBar.cpp">
       <Filter>Contents\Tutorial\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="TutorialGiantCircle.cpp" />
     <ClCompile Include="TutorialManager.cpp">
       <Filter>Contents\Tutorial\Managers</Filter>
     </ClCompile>
     <ClCompile Include="TutorialMusicController.cpp">
       <Filter>Contents\Tutorial\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialGiantCircle.cpp">
+      <Filter>Contents\Tutorial\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -196,12 +198,14 @@
     <ClInclude Include="TutorialEightBar.h">
       <Filter>Contents\Tutorial\Bullet</Filter>
     </ClInclude>
-    <ClInclude Include="TutorialGiantCircle.h" />
     <ClInclude Include="TutorialManager.h">
       <Filter>Contents\Tutorial\Managers</Filter>
     </ClInclude>
     <ClInclude Include="TutorialMusicController.h">
       <Filter>Contents\Tutorial\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialGiantCircle.h">
+      <Filter>Contents\Tutorial\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
