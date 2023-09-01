@@ -25,5 +25,27 @@ namespace lu::JSAB
 		std::shared_ptr<Texture> mReadySprite;
 		std::shared_ptr<Texture> mActivateSprite;
 	};
+	
+	class TutorialCircleLine : public Bullet
+	{
+	public:
+		TutorialCircleLine() {}
+		virtual ~TutorialCircleLine() {}
+		virtual void Initialize()override;
+
+		void FitToWidth();
+		void FitToHeight();
+
+		void MultipleShow(double times[7]);
+	private:
+		virtual void OnShow() override;
+		virtual void OnActivate()override;
+		virtual void OnDeActivate()override;
+		virtual void WhileShowing() override;
+		virtual void WhileActive()override;
+		virtual void WhileDeActive()override;
+	private:
+		TutorialBeatCircle* mCircles[7];
+	};
 }
 

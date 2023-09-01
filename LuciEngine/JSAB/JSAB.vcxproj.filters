@@ -74,12 +74,6 @@
     <ClCompile Include="TutorialScene.cpp">
       <Filter>Contents\Tutorial\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="TutorialManager.cpp">
-      <Filter>Contents\Tutorial</Filter>
-    </ClCompile>
-    <ClCompile Include="TutorialMusicController.cpp">
-      <Filter>Contents\Tutorial</Filter>
-    </ClCompile>
     <ClCompile Include="CameraScript.cpp">
       <Filter>Contents\Camera</Filter>
     </ClCompile>
@@ -97,6 +91,13 @@
     </ClCompile>
     <ClCompile Include="TutorialEightBar.cpp">
       <Filter>Contents\Tutorial\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialGiantCircle.cpp" />
+    <ClCompile Include="TutorialManager.cpp">
+      <Filter>Contents\Tutorial\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialMusicController.cpp">
+      <Filter>Contents\Tutorial\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -177,12 +178,6 @@
     <ClInclude Include="TutorialScene.h">
       <Filter>Contents\Tutorial\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="TutorialManager.h">
-      <Filter>Contents\Tutorial</Filter>
-    </ClInclude>
-    <ClInclude Include="TutorialMusicController.h">
-      <Filter>Contents\Tutorial</Filter>
-    </ClInclude>
     <ClInclude Include="CameraScript.h">
       <Filter>Contents\Camera</Filter>
     </ClInclude>
@@ -200,6 +195,13 @@
     </ClInclude>
     <ClInclude Include="TutorialEightBar.h">
       <Filter>Contents\Tutorial\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialGiantCircle.h" />
+    <ClInclude Include="TutorialManager.h">
+      <Filter>Contents\Tutorial\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialMusicController.h">
+      <Filter>Contents\Tutorial\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +255,9 @@
     </Filter>
     <Filter Include="Contents\Camera">
       <UniqueIdentifier>{a63bfb69-c775-400c-aa2a-c738e4cd9c3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Tutorial\Managers">
+      <UniqueIdentifier>{f65359ed-cd0a-4232-a371-6926038e203b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

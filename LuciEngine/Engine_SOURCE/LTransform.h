@@ -28,13 +28,13 @@ namespace lu
 		void SetLocalRotation(Quaternion rotation) { mLocalRotation = rotation; CalculateWorldRotation(); }
 		void SetLocalScale(Vector3 scale) { mLocalScale = scale; CalculateWorldScale(); }
 
-		Vector3 GetPosition() { return mPosition; }
-		Quaternion GetRotation() { return mRotation; }
-		Vector3 GetScale() { return mScale; }
+		Vector3 GetPosition() { CalculateWorldPosition(); return mPosition; }
+		Quaternion GetRotation() { CalculateWorldRotation();  return mRotation; }
+		Vector3 GetScale() { CalculateWorldScale(); return mScale; }
 
-		Vector3 GetLocalPosition() { return mLocalPosition; }
-		Quaternion GetLocalRotation() { return mLocalRotation; }
-		Vector3 GetLocalScale() { return mLocalScale; }
+		Vector3 GetLocalPosition() { CalculateLocalPosition(); return mLocalPosition; }
+		Quaternion GetLocalRotation() { CalculateLocalRotation(); return mLocalRotation; }
+		Vector3 GetLocalScale() { CalculateLocalScale(); return mLocalScale; }
 
 		Vector3 Forward() { return mForward; }
 		Vector3 Right() { return mRight; }

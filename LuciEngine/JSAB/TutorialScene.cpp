@@ -15,6 +15,7 @@
 namespace lu::JSAB::Tutorial
 {
 	CameraScript* burst;
+	TutorialCircleLine* b;
 	void TutorialScene::Initialize()
 	{
 		//Camera
@@ -37,13 +38,16 @@ namespace lu::JSAB::Tutorial
 		//auto m = manager->AddComponent<TutorialMusicController>();
 		//ma->SetMusic(m);
 		//m->Play();
-
+		b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TutorialCircleLine>();
+		b->FitToHeight();
+		b->Show(0);
+		
 
 		object::Instantiate<PlayerPrefab>(eLayerType::Player);
 		Scene::Initialize(); 
 	}
 	void TutorialScene::Update()
-	{
+	{/*
 		if (Input::GetKeyDown(eKeyCode::W))
 			burst->OnBeat(Vector3::Up);
 
@@ -57,7 +61,11 @@ namespace lu::JSAB::Tutorial
 			burst->OnBeat(Vector3::Right);
 
 		if (Input::GetKeyDown(eKeyCode::F))
-			burst->OnFlash();
+			burst->OnFlash();*/
+
+		if (Input::GetKeyDown(eKeyCode::Q))
+			b->Activate();
+
 		Scene::Update();
 	}
 	void TutorialScene::LateUpdate()
