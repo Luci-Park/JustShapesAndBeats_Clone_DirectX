@@ -9,6 +9,7 @@ namespace lu::JSAB
 		TutorialBeatCircle() {}
 		virtual ~TutorialBeatCircle() {}
 		virtual void Initialize()override;
+		void FastAnim(bool fast) { mbFastActivate = fast; }
 	private:
 		virtual void OnShow() override;
 		virtual void OnActivate()override;
@@ -24,6 +25,7 @@ namespace lu::JSAB
 		Animator* mAnim;
 		std::shared_ptr<Texture> mReadySprite;
 		std::shared_ptr<Texture> mActivateSprite;
+		bool mbFastActivate;
 	};
 	
 	class TutorialCircleLine : public Bullet
@@ -36,7 +38,7 @@ namespace lu::JSAB
 		void FitToWidth();
 		void FitToHeight();
 
-		void MultipleShow(double times[7]);
+		void MultipleShow(const double* times);
 	private:
 		virtual void OnShow() override;
 		virtual void OnActivate()override;

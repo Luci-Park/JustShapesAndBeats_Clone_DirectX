@@ -43,7 +43,10 @@ namespace lu::JSAB
 	{
 		mMr->SetActive(true);
 		mAnim->SetActive(true);
-		mAnim->PlayAnimation(L"Activate", false);
+		if(mbFastActivate)
+			mAnim->PlayAnimation(L"FastActivate", false);
+		else
+			mAnim->PlayAnimation(L"SlowActivate", false);
 	}
 	void TutorialBeatCircle::OnDeActivate()
 	{
@@ -70,22 +73,42 @@ namespace lu::JSAB
 		anim->AddTextureKey(0, mReadySprite);
 		CreateCounterClockwiseAnimation(0.5, anim);
 
-		double duration = 0.7;
-		anim = mAnim->CreateAnimation(L"Activate");
-		anim->AddTextureKey(0, mActivateSprite);
-		anim->AddColliderActiveKey(0, true);
+		{
+			double duration = 0.3;
+			anim = mAnim->CreateAnimation(L"FastActivate");
+			anim->AddTextureKey(0, mActivateSprite);
+			anim->AddColliderActiveKey(0, true);
 
-		anim->AddInterpolationKey(0, 0);
-		anim->AddInterpolationKey(duration * 0.5, 0.5);
-		anim->AddInterpolationKey(duration * 0.6, 0.8);
-		anim->AddInterpolationKey(duration, 0);
+			anim->AddInterpolationKey(0, 0);
+			anim->AddInterpolationKey(duration * 0.5, 0.5);
+			anim->AddInterpolationKey(duration * 0.6, 0.8);
+			anim->AddInterpolationKey(duration, 0);
 
-		anim->AddLocalScaleKey(0, { 100, 100, 1 });
-		anim->AddLocalScaleKey(duration * 0.7, { 280, 280, 1 });
-		anim->AddLocalScaleKey(duration * 0.9, { 300, 300, 1 });
-		anim->AddLocalScaleKey(duration, { 0, 0 , 1 });
+			anim->AddScaleKey(0, { 230, 230, 1 });
+			anim->AddScaleKey(duration * 0.5, { 280, 280, 1 });
+			anim->AddScaleKey(duration * 0.6, { 300, 300, 1 });
+			anim->AddScaleKey(duration, { 0, 0 , 1 });
 
-		anim->AddFunctionKey(duration, std::bind(&Bullet::DeActivate, this));
+			anim->AddFunctionKey(duration, std::bind(&Bullet::DeActivate, this));
+		}
+		{
+			Animation* anim = mAnim->CreateAnimation(L"SlowActivate");
+			double duration = 0.6;
+			anim->AddTextureKey(0, mActivateSprite);
+			anim->AddColliderActiveKey(0, true);
+
+			anim->AddInterpolationKey(0, 0);
+			anim->AddInterpolationKey(duration * 0.3, 0.5);
+			anim->AddInterpolationKey(duration * 0.6, 0.8);
+			anim->AddInterpolationKey(duration, 0);
+
+			anim->AddLocalScaleKey(0, { 100, 100, 1 });
+			anim->AddLocalScaleKey(duration * 0.3, { 280, 280, 1 });
+			anim->AddLocalScaleKey(duration * 0.9, { 300, 300, 1 });
+			anim->AddLocalScaleKey(duration, { 0, 0 , 1 });
+
+			anim->AddFunctionKey(duration, std::bind(&Bullet::DeActivate, this));
+		}
 	}
 #pragma endregion
 #pragma region TutorialCircleLine
@@ -110,6 +133,7 @@ namespace lu::JSAB
 		for (int i = 0; i < 7; i++)
 		{
 			mCircles[i]->mTransform->SetLocalPosition({ startPos + scale.x * i, 0, 0 });
+			mCircles[i]->FastAnim(false);
 		}
 	}
 	void TutorialCircleLine::FitToHeight()
@@ -124,7 +148,7 @@ namespace lu::JSAB
 			mCircles[i]->mTransform->SetLocalPosition({ 0, startPos + scale.x * i, 0 });
 		}
 	}
-	void TutorialCircleLine::MultipleShow(double times[7])
+	void TutorialCircleLine::MultipleShow(const double* times)
 	{
 		for (int i = 0; i < 7; i++)
 			mCircles[i]->Show(times[i]);
@@ -132,7 +156,7 @@ namespace lu::JSAB
 	void TutorialCircleLine::OnShow()
 	{
 		for (int i = 0; i < 7; i++)
-			mCircles[i]->Show(0);
+			mCircles[i]->Show(mActivateTime);
 	}
 	void TutorialCircleLine::OnActivate()
 	{

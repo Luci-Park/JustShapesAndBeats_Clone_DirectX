@@ -19,6 +19,7 @@ namespace lu::JSAB
 		, mBeatBars(10)
 		, mBeatCircles(4)
 		, mFullBar(4)
+		, mCircles(4)
 	{
 	}
 	void TutorialManager::Initialize()
@@ -226,6 +227,7 @@ namespace lu::JSAB
 				{
 					auto c = mBeatCircles.GetNext();
 					c->mTransform->SetPosition(pos[i]);
+					c->FastAnim(true);
 					c->Show(beat[idx][i]);
 				}
 				idx++;
@@ -290,6 +292,11 @@ namespace lu::JSAB
 		const double beat[] = {
 			   70.043 , 70.480, 73.507 , 73.944
 		};
+		const double semibeat[2][7] =
+		{
+			{71.798, 71.959, 72.12,	72.28,	72.441,	72.601,	72.762},
+			{75.262, 75.423, 75.583, 75.744, 75.905, 76.065, 76.226 }
+		};
 		static int idx = 0;
 		if (idx >= 4 && beat[0] >= time)
 			idx = 0;
@@ -301,7 +308,6 @@ namespace lu::JSAB
 			b->Activate();
 			if (idx % 2)
 			{
-				RECT bounds = SceneManager::MainCamera()->GetBoundary();
 				float x = bounds.right + 42 * 0.5;
 				float endX = bounds.left - 42 * 0.5;
 				Vector3 pos = { x, 0, 1 };
@@ -310,8 +316,37 @@ namespace lu::JSAB
 				c->Setup(7, pos, endPos);
 				c->Activate();
 			}
+			if (idx % 2 == 0)
+			{
+				float dist = 100;
+				Vector3 pos[] = { {0, bounds.top + dist, 0 }, { 0, bounds.bottom - dist, 0 } };
+				for (int i = 0; i < 2; i++)
+				{
+					auto c = mCircles.GetNext();
+					c->FitToWidth();
+					c->mTransform->SetPosition(pos[i]);
+					c->Show(beat[idx] + 0.848);
+				}
+			}
+			else
+			{
+				float dist = 100;
+				Vector3 pos[] = { {0, bounds.top + dist, 0 }, { 0, bounds.bottom - dist, 0 } };
+				for (int i = 0; i < 2; i++)
+				{
+					auto c = mCircles.GetNext();
+					c->FitToWidth();
+					c->mTransform->SetPosition(pos[i]);
+					int j = idx == 1 ? 0 : 1;
+					c->MultipleShow(semibeat[j]);
+				}
+			}
 			idx++;
 		}
+
+
+		
+
 	}
 	void TutorialManager::Stage9(double time)
 	{

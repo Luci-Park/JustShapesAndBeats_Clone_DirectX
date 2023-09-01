@@ -32,15 +32,16 @@ namespace lu::JSAB::Tutorial
 			burst = camera->AddComponent<CameraScript>();
 		}
 
-		//GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
-		//manager->SetName(L"TutorialManager");
-		//auto ma = manager->AddComponent<TutorialManager>();
-		//auto m = manager->AddComponent<TutorialMusicController>();
-		//ma->SetMusic(m);
-		//m->Play();
+		GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
+		manager->SetName(L"TutorialManager");
+		auto ma = manager->AddComponent<TutorialManager>();
+		auto m = manager->AddComponent<TutorialMusicController>();
+		ma->SetMusic(m);
+		m->Play();
+		/*
 		b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TutorialCircleLine>();
 		b->FitToHeight();
-		b->Show(0);
+		b->Show(0);*/
 		
 
 		object::Instantiate<PlayerPrefab>(eLayerType::Player);
@@ -63,7 +64,7 @@ namespace lu::JSAB::Tutorial
 		if (Input::GetKeyDown(eKeyCode::F))
 			burst->OnFlash();*/
 
-		if (Input::GetKeyDown(eKeyCode::Q))
+		if (Input::GetKeyDown(eKeyCode::P))
 			b->Activate();
 
 		Scene::Update();
