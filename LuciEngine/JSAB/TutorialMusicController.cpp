@@ -18,11 +18,10 @@ namespace lu::JSAB
             std::make_pair(42.331, 49.259),
             std::make_pair(56.187, 63.115),
             std::make_pair(70.043, 76.971),
-            std::make_pair(76.971, 83.899),
             std::make_pair(111.611, 125.467),
             std::make_pair(125.467, 160.107)
         };
-		mEndTime = mCheckPoints[10].second;
+		mEndTime = mCheckPoints[9].second;
 	}
 
 	void TutorialMusicController::Initialize()
