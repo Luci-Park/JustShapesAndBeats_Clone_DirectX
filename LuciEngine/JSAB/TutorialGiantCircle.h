@@ -11,6 +11,7 @@ namespace lu::JSAB
 
 		virtual void Initialize() override;
 
+		void ActivateWithTime(double time);
 	protected:
 		virtual void OnShow();
 		virtual void OnActivate() {};

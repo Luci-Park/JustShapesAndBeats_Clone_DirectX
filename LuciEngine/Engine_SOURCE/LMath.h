@@ -20,6 +20,18 @@ using namespace DirectX::PackedVector;
 
 namespace lu::math
 {
+    template <typename T>
+    T Random(T minNum, T maxNum) {
+        // Create a random number generator
+        std::random_device rd;
+        std::mt19937 gen(rd());
+
+        // Create a uniform distribution for the specified range
+        std::uniform_real_distribution<T> dist(minNum, maxNum);
+
+        // Generate and return a random value
+        return dist(gen);
+    }
     struct Vector2;
     struct Vector4;
     struct Matrix;

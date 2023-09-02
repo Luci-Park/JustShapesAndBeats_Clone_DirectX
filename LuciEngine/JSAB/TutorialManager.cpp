@@ -352,20 +352,41 @@ namespace lu::JSAB
 	}
 	void TutorialManager::Stage9(double time)
 	{
-		const double beat[2] = { 111.611, 123.718 };
+		const double beat[3] = { 111.611, 123.718, 125.035 };
 		const Vector3 pos[6] = { {-640, 360, 0}, {640, 360, 0}, {-640, -360, 0}, {640, -360, 0}, {0, -500, 0},{0, 500, 0} };
 
 		static int idx = 0;
-		if (idx < 2 && time >= beat[idx])
+		if (idx < 3 && time >= beat[idx])
 		{
-			for (int i = 0; i < 6; i++)
+			if (idx == 0)
 			{
-				auto c = mCircles.GetNext();
-				c->mTransform->SetPosition(pos[i]);
-				c->Show(0);
+				for (int i = 0; i < 6; i++)
+				{
+					auto c = mCircles.GetNext();
+					c->mTransform->SetPosition(pos[i]);
+					c->Show(0);
+				}
+			}
+			else if (idx == 1)
+			{
+				for (int i = 0; i < 6; i++)
+				{
+					auto c = mCircles.GetNext();
+					c->ActivateWithTime(lu::math::Random<double>(0, 0.432));
+				}
+			}
+			else if (idx == 2)
+			{
+				for (int i = 0; i < 6; i++)
+				{
+					auto c = mCircles.GetNext();
+					c->DeActivate();
+				}
 			}
 			idx++;
 		}
+		else if (idx > 2 && time < beat[2])
+			idx = 0;
 	}
 	void TutorialManager::Stage10(double time)
 	{
