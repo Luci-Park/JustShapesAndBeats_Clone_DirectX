@@ -35,6 +35,28 @@ namespace lu::JSAB
 
 		Bullet::Initialize();
 	}
+	void TutorialBeatBar::SetRandomPosition()
+	{
+		int y = lu::math::IntRandom(0, 1);
+		Vector3 pos;
+		Quaternion rot;
+		if (y)
+		{
+			int up = lu::math::IntRandom(0, 1);
+			pos = (up ? Vector3::Up : Vector3::Down) * application.GetHeight() * 0.5f;
+			rot = up ? Quaternion::Identity : Quaternion::CreateFromAxisAngle(Vector3::Forward, PI);
+			pos.x = lu::math::RealRandom<float>(application.GetWidth() * -0.5f, application.GetWidth() * 0.5f);
+		}
+		else
+		{
+			int left = lu::math::IntRandom(0, 1);
+			pos = (left ? Vector3::Left : Vector3::Right) * application.GetWidth() * 0.5f;
+			rot = left ? Quaternion::CreateFromAxisAngle(Vector3::Forward, PI * 0.5) : Quaternion::CreateFromAxisAngle(Vector3::Forward, PI * -0.5);
+			pos.y = lu::math::RealRandom<float>(application.GetHeight() * -0.5f, application.GetHeight() * 0.5f);
+		}
+		mTransform->SetPosition(pos);
+		mTransform->SetRotation(rot);
+	}
 	void TutorialBeatBar::OnShow()
 	{
 		Owner()->SetActive(true);
@@ -94,8 +116,9 @@ namespace lu::JSAB
 	{
 		Quaternion rot = mTransform->GetRotation();
 		if(rot == Quaternion::Identity)
-			//position = {0, -application.GetHight() * 0.5f, 0);
 			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->OnBeat(Vector3::Down);
+		if (rot == Quaternion::CreateFromAxisAngle(Vector3::Forward, PI))
+			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->OnBeat(Vector3::Up);
 		else if (rot == Quaternion::CreateFromAxisAngle(Vector3::Forward, PI*0.5))
 			//position = { -application.GetWidth() * 0.5f,0, 0);
 			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->OnBeat(Vector3::Left);

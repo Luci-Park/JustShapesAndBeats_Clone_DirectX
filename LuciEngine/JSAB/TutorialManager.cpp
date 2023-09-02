@@ -372,7 +372,7 @@ namespace lu::JSAB
 				for (int i = 0; i < 6; i++)
 				{
 					auto c = mCircles.GetNext();
-					c->ActivateWithTime(lu::math::Random<double>(0, 0.432));
+					c->ActivateWithTime(lu::math::RealRandom<double>(0, 0.432));
 				}
 			}
 			else if (idx == 2)
@@ -390,5 +390,35 @@ namespace lu::JSAB
 	}
 	void TutorialManager::Stage10(double time)
 	{
+		static double readTime = 125.467;
+		static int beat = 0;
+		if (readTime < 152.683 && time >= readTime)
+		{
+			{
+				static int showNum = 0;
+				for (showNum; showNum < 4; showNum++)
+				{
+					auto b = mBeatBars.GetNext();
+					double showTime = readTime + showNum * 0.432;
+					if (showTime <= 152.683)
+					{
+						b->SetRandomPosition();
+						b->Show(showTime);
+					}
+				}
+				showNum--;
+			}
+			if(beat % 2 ==0)
+			{
+				static int idx = 0;
+				auto bullet = mBurstBullets.GetNext();
+				bullet->IsEven(idx % 2 == 0);
+				bullet->Activate();
+				idx++;
+			}
+
+			readTime += 0.432;
+			beat++;
+		}
 	}
 }

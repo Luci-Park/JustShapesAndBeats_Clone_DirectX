@@ -7,7 +7,7 @@ namespace lu::JSAB
 	MusicController* MusicController::Instance = nullptr;
 	MusicController::MusicController()
 		: mStageIdx(0)
-		, mNextStageIdx(8)
+		, mNextStageIdx(9)
 		, mFadeDuration(2)
 		, mFadeTime(0)
 	{
@@ -46,7 +46,7 @@ namespace lu::JSAB
 	void MusicController::Play()
 	{
 		mbIsPlaying = true;
-		mAudioSource->SetPosition(111.611);
+		mAudioSource->SetPosition(125.467);
 		mAudioSource->Play();
 		Instance = this;
 	}

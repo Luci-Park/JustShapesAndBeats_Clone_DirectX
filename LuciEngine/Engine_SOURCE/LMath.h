@@ -21,7 +21,7 @@ using namespace DirectX::PackedVector;
 namespace lu::math
 {
     template <typename T>
-    T Random(T minNum, T maxNum) {
+    T RealRandom(T minNum, T maxNum) {
         // Create a random number generator
         std::random_device rd;
         std::mt19937 gen(rd());
@@ -32,6 +32,7 @@ namespace lu::math
         // Generate and return a random value
         return dist(gen);
     }
+    int IntRandom(int minNum, int maxNum);
     struct Vector2;
     struct Vector4;
     struct Matrix;

@@ -264,4 +264,16 @@ namespace lu::math
 
 		return result;
 	}
+	int IntRandom(int minNum, int maxNum)
+	{
+		// Create a random number generator
+		std::random_device rd;
+		std::mt19937 gen(rd());
+
+		// Create a uniform distribution for the specified range
+		std::uniform_int_distribution dist(minNum, maxNum);
+
+		// Generate and return a random value
+		return dist(gen);
+	}
 }

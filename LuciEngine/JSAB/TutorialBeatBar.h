@@ -9,6 +9,7 @@ namespace lu::JSAB
 		virtual ~TutorialBeatBar(){}
 
 		virtual void Initialize() override;
+		void SetRandomPosition();
 	private:
 		virtual void OnShow() override;
 		virtual void OnActivate()override;
