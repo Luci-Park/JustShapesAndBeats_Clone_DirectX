@@ -53,7 +53,7 @@ namespace lu::JSAB
 	}
 	void TutorialBeatBar::WhileShowing()
 	{
-		if (MusicController::_MusicController->GetTime() >= mActivateTime)
+		if (MusicController::Instance->GetTime() >= mActivateTime)
 			Activate();
 	}
 	void TutorialBeatBar::WhileActive()

@@ -47,7 +47,7 @@ namespace lu::JSAB
 		virtual void WhileActive()override;
 		virtual void WhileDeActive()override;
 	private:
-		TutorialBeatCircle* mCircles[7];
+		TutorialBeatCircle* mCircleLines[7];
 	};
 }
 

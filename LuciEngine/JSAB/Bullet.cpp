@@ -16,10 +16,10 @@ namespace lu::JSAB
 		else
 			WhileShowing();
 	}
-	void Bullet::Warning(double activateTime)
+	void Bullet::Show(double activateTime)
 	{
 		mActivateTime = activateTime;
-		mState = BulletState::Warning;
+		mState = BulletState::Show;
 		OnShow();
 	}
 	void Bullet::Activate()

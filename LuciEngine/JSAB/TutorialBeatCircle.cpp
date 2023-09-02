@@ -57,8 +57,8 @@ namespace lu::JSAB
 	}
 	void TutorialBeatCircle::WhileShowing()
 	{
-		if (MusicController::_MusicController == nullptr) return;
-		if (MusicController::_MusicController->GetTime() >= mActivateTime)
+		if (MusicController::Instance == nullptr) return;
+		if (MusicController::Instance->GetTime() >= mActivateTime)
 			Activate();
 	}
 	void TutorialBeatCircle::WhileActive()
@@ -119,7 +119,7 @@ namespace lu::JSAB
 		{
 			auto b = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<TutorialBeatCircle>();
 			b->mTransform->SetLocalPosition({ -690.f + 230.f * i, 0, 0 });
-			mCircles[i] = b;
+			mCircleLines[i] = b;
 		}
 		
 	}
@@ -132,8 +132,8 @@ namespace lu::JSAB
 		float startPos = 0 - scale.x * 3;
 		for (int i = 0; i < 7; i++)
 		{
-			mCircles[i]->mTransform->SetLocalPosition({ startPos + scale.x * i, 0, 0 });
-			mCircles[i]->FastAnim(false);
+			mCircleLines[i]->mTransform->SetLocalPosition({ startPos + scale.x * i, 0, 0 });
+			mCircleLines[i]->FastAnim(false);
 		}
 	}
 	void TutorialCircleLine::FitToHeight()
@@ -145,28 +145,28 @@ namespace lu::JSAB
 		float startPos = 0 - scale.x * 3;
 		for (int i = 0; i < 7; i++)
 		{
-			mCircles[i]->mTransform->SetLocalPosition({ 0, startPos + scale.x * i, 0 });
+			mCircleLines[i]->mTransform->SetLocalPosition({ 0, startPos + scale.x * i, 0 });
 		}
 	}
 	void TutorialCircleLine::MultipleShow(const double* times)
 	{
 		for (int i = 0; i < 7; i++)
-			mCircles[i]->Warning(times[i]);
+			mCircleLines[i]->Show(times[i]);
 	}
 	void TutorialCircleLine::OnShow()
 	{
 		for (int i = 0; i < 7; i++)
-			mCircles[i]->Warning(mActivateTime);
+			mCircleLines[i]->Show(mActivateTime);
 	}
 	void TutorialCircleLine::OnActivate()
 	{
 		for (int i = 0; i < 7; i++)
-			mCircles[i]->Activate();
+			mCircleLines[i]->Activate();
 	}
 	void TutorialCircleLine::OnDeActivate()
 	{
 		for (int i = 0; i < 7; i++)
-			mCircles[i]->DeActivate();
+			mCircleLines[i]->DeActivate();
 	}
 	void TutorialCircleLine::WhileShowing()
 	{

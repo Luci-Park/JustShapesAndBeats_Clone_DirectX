@@ -10,7 +10,7 @@ namespace lu::JSAB
 	class MusicController : public Script
 	{
 	public:
-		static MusicController* _MusicController;
+		static MusicController* Instance;
 		MusicController();
 		~MusicController(){}
 		virtual void Initialize() override;

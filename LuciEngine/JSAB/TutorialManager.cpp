@@ -5,6 +5,7 @@
 #include "TutorialBurst.h"
 #include "TutorialBeatCircle.h"
 #include "TutorialEightBar.h"
+#include "TutorialGiantCircle.h"
 #include "LObject.h"
 #include "LCamera.h"
 #include "LAnimator.h"
@@ -19,7 +20,8 @@ namespace lu::JSAB
 		, mBeatBars(10)
 		, mBeatCircles(4)
 		, mFullBar(4)
-		, mCircles(4)
+		, mCircleLines(4)
+		, mCircles(6)
 	{
 	}
 	void TutorialManager::Initialize()
@@ -27,8 +29,8 @@ namespace lu::JSAB
 	}
 	void TutorialManager::Update()
 	{
-		double time = MusicController::_MusicController->GetTime();
-		int stage = MusicController::_MusicController->GetStage();
+		double time = MusicController::Instance->GetTime();
+		int stage = MusicController::Instance->GetStage();
 
 		if (stage == 0)Stage1(time);
 		if (stage == 1)Stage2(time);
@@ -120,7 +122,7 @@ namespace lu::JSAB
 			{
 				auto bullet = mBeatBars.GetNext();
 				bullet->mTransform->SetPosition({ x[idx], y, 0 });
-				bullet->Warning(beat[idx]);
+				bullet->Show(beat[idx]);
 				idx++;
 			}
 		}
@@ -164,7 +166,7 @@ namespace lu::JSAB
 						bullet->mTransform->SetPosition({ x[i], y, 0 });
 					else
 						bullet->mTransform->SetPosition({ x[2 + i], y, 0 });
-					bullet->Warning(beat[idx]);
+					bullet->Show(beat[idx]);
 				}
 				idx++;
 			}
@@ -206,7 +208,7 @@ namespace lu::JSAB
 				{
 					auto bullet = mBeatBars.GetNext();
 					bullet->mTransform->SetPosition({ x[idx % 2][i], y, 0 });
-					bullet->Warning(beat[idx]);
+					bullet->Show(beat[idx]);
 				}
 				idx++;
 			}
@@ -228,7 +230,7 @@ namespace lu::JSAB
 					auto c = mBeatCircles.GetNext();
 					c->mTransform->SetPosition(pos[i]);
 					c->FastAnim(true);
-					c->Warning(beat[idx][i]);
+					c->Show(beat[idx][i]);
 				}
 				idx++;
 			}
@@ -322,10 +324,10 @@ namespace lu::JSAB
 				Vector3 pos[] = { {0, bounds.top + dist, 0 }, { 0, bounds.bottom - dist, 0 } };
 				for (int i = 0; i < 2; i++)
 				{
-					auto c = mCircles.GetNext();
+					auto c = mCircleLines.GetNext();
 					c->FitToWidth();
 					c->mTransform->SetPosition(pos[i]);
-					c->Warning(beat[idx] + 0.848);
+					c->Show(beat[idx] + 0.848);
 				}
 			}
 			else
@@ -334,7 +336,7 @@ namespace lu::JSAB
 				Vector3 pos[] = { {0, bounds.top + dist, 0 }, { 0, bounds.bottom - dist, 0 } };
 				for (int i = 0; i < 2; i++)
 				{
-					auto c = mCircles.GetNext();
+					auto c = mCircleLines.GetNext();
 					c->FitToWidth();
 					c->mTransform->SetPosition(pos[i]);
 					int j = idx == 1 ? 0 : 1;
@@ -350,6 +352,20 @@ namespace lu::JSAB
 	}
 	void TutorialManager::Stage9(double time)
 	{
+		const double beat[2] = { 111.611, 123.718 };
+		const Vector3 pos[6] = { {-640, 360, 0}, {640, 360, 0}, {-640, -360, 0}, {640, -360, 0}, {0, -500, 0},{0, 500, 0} };
+
+		static int idx = 0;
+		if (idx < 2 && time >= beat[idx])
+		{
+			for (int i = 0; i < 6; i++)
+			{
+				auto c = mCircles.GetNext();
+				c->mTransform->SetPosition(pos[i]);
+				c->Show(0);
+			}
+			idx++;
+		}
 	}
 	void TutorialManager::Stage10(double time)
 	{

@@ -16,17 +16,17 @@ namespace lu::JSAB
 	public:
 		enum class BulletState
 		{
-			InActive, Warning, Active
+			InActive, Show, Active
 		};
 		Bullet():mState(BulletState::InActive) {};
 		virtual ~Bullet() {};
 		virtual void Initialize() override;
 		virtual void Update() override;
-		void Warning(double activateTime);
+		void Show(double activateTime);
 		void Activate();
 		void DeActivate();
 		bool IsActive() { return mState == BulletState::Active; }
-		bool IsShow() { return mState == BulletState::Warning; }
+		bool IsShow() { return mState == BulletState::Show; }
 	protected:
 		virtual void OnShow() = 0;
 		virtual void OnActivate() = 0;

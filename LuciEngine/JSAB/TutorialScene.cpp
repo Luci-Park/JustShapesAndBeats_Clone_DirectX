@@ -7,6 +7,7 @@
 #include "TutorialManager.h"
 #include "TutorialBeatBar.h"
 #include "TutorialBeatCircle.h"
+#include "TutorialGiantCircle.h"
 #include "LObject.h"
 #include "LInput.h"
 #include "CameraScript.h"
@@ -43,7 +44,6 @@ namespace lu::JSAB::Tutorial
 		b->FitToHeight();
 		b->Show(0);*/
 		
-
 		object::Instantiate<PlayerPrefab>(eLayerType::Player);
 		Scene::Initialize(); 
 	}
@@ -64,8 +64,8 @@ namespace lu::JSAB::Tutorial
 		if (Input::GetKeyDown(eKeyCode::F))
 			burst->OnFlash();*/
 
-		if (Input::GetKeyDown(eKeyCode::P))
-			b->Activate();
+		/*if (Input::GetKeyDown(eKeyCode::P))
+			b->Activate();*/
 
 		Scene::Update();
 	}

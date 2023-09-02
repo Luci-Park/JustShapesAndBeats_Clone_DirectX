@@ -12,13 +12,18 @@ namespace lu::JSAB
 		virtual void Initialize() override;
 
 	protected:
-		virtual void OnShow() = 0;
-		virtual void OnActivate() = 0;
-		virtual void OnDeActivate() = 0;
-		virtual void WhileShowing() = 0;
-		virtual void WhileActive() = 0;
-		virtual void WhileDeActive() = 0;
+		virtual void OnShow();
+		virtual void OnActivate() {};
+		virtual void OnDeActivate();
+		virtual void WhileShowing();
+		virtual void WhileActive();
+		virtual void WhileDeActive() {};
+
+		void CreateAnimation();
 	private:
+		Animator* mAnim;
+		MeshRenderer* mMr;
+		double mTime;
 	};
 }
 
