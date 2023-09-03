@@ -306,7 +306,7 @@ namespace lu::JSAB
 		{
 			RECT bounds = SceneManager::MainCamera()->GetBoundary();
 			auto b = mBeatBars.GetNext();
-			b->mTransform->SetPosition({ (float)bounds.right, application.GetHeight() * 0.5f,0 }); //({(float)bounds.right, 0, 0 });
+			b->mTransform->SetPosition({ (float)bounds.right, application.GetHeight() * 0.5f,0 });
 			b->Activate();
 			if (idx % 2)
 			{
@@ -416,7 +416,48 @@ namespace lu::JSAB
 				bullet->Activate();
 				idx++;
 			}
+			{
+				const int beats[] = { 5, 13, 21, 29, 36, 41, 50, 57 };
+				static int idx = 0;
+				//5 8 8 8 8 7 7 7 
 
+				if ((beat + 2 ) == beats[idx])
+				{
+					auto c = mCircleLines.GetNext();
+					c->FitToHeight();
+					double time[7];
+					double step = 0.432 * 1 / 7;
+					for (int i = 0; i < 7; i++)
+					{
+						time[i] = readTime + 0.432 * 1 + step * i;
+					}
+					c->MultipleShow(time);
+					idx++;
+				}
+			}  
+			{
+				const int beats[] = { 10, 17, 26, 33, 40, 48, 56 };
+				static int idx = 0;
+				if (beat == beats[idx])
+				{
+					auto r = SceneManager::MainCamera()->GetBoundary();
+					Vector3 pos[2] = { {r.right - 20.f, -462, 1}, {r.right - 20.f, 501,1} };
+					auto c = mFullBar.GetNext();
+					c->Setup(7, pos[idx%2], { r.left + 40.f, pos[idx % 2].y, 1 });
+					c->Activate();
+					idx++;
+				}
+			}
+			readTime += 0.432;
+			beat++;
+		}
+		if (beat == 64)
+		{
+			auto r = SceneManager::MainCamera()->GetBoundary();
+			Vector3 pos[2] = { {r.right - 20.f, -462, 1}, {r.right - 20.f, 501,1} };
+			auto c = mFullBar.GetNext();
+			c->Setup(7, { r.right - 20.f, 0, 0 }, { r.left + 40.f, 0, 0 });
+			c->Activate();
 			readTime += 0.432;
 			beat++;
 		}

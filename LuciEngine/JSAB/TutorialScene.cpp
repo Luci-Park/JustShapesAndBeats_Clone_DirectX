@@ -16,7 +16,7 @@
 namespace lu::JSAB::Tutorial
 {
 	CameraScript* burst;
-	TutorialCircleLine* b;
+	TutorialFullBar* b;
 	void TutorialScene::Initialize()
 	{
 		//Camera
@@ -39,10 +39,10 @@ namespace lu::JSAB::Tutorial
 		auto m = manager->AddComponent<TutorialMusicController>();
 		ma->SetMusic(m);
 		m->Play();
-		/*
-		b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TutorialCircleLine>();
-		b->FitToHeight();
-		b->Show(0);*/
+		
+		/*b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TutorialFullBar>();
+		b->Activate();
+		b->Owner()->AddComponent<gui::TransformWidget>();*/
 		
 		object::Instantiate<PlayerPrefab>(eLayerType::Player);
 		Scene::Initialize(); 

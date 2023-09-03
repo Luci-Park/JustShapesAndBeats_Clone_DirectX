@@ -10,7 +10,9 @@
 #include "LObject.h"
 #include "LCamera.h"
 #include "LSceneManager.h"
+#include "LApplication.h"
 
+extern lu::Application application;
 namespace lu::JSAB
 {
 #pragma region TutorialBeatCircle
@@ -142,11 +144,12 @@ namespace lu::JSAB
 		const float target = 800.f;
 		mTransform->SetScale({ target / width, target / width, 1 });
 		Vector3 scale = { target / width * 200, target / width * 200, 1 };
-		float startPos = 0 - scale.x * 3;
+		float startPos = 0 + scale.x * 3;
 		for (int i = 0; i < 7; i++)
 		{
-			mCircleLines[i]->mTransform->SetLocalPosition({ 0, startPos + scale.x * i, 0 });
+			mCircleLines[i]->mTransform->SetLocalPosition({ 0, startPos - scale.x * i, 0 });
 		}
+		mTransform->SetPosition({ RealRandom(application.GetWidth() * -0.5f + scale.x, application.GetWidth() * 0.5f - scale.x), 0, 0 });
 	}
 	void TutorialCircleLine::MultipleShow(const double* times)
 	{

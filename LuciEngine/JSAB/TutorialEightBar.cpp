@@ -62,6 +62,7 @@ namespace lu::JSAB
 		mEndPos = endPos;
 		mTime = 0;
 		mbIsMoving = mStartPos != mEndPos;
+		mTransform->SetPosition(mStartPos);
 	}
 	void TutorialFullBar::OnActivate()
 	{
