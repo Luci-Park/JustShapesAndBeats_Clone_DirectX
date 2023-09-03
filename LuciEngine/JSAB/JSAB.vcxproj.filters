@@ -65,41 +65,41 @@
     <ClCompile Include="MusicController.cpp">
       <Filter>Contents\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="DubwooferScene.cpp">
-      <Filter>Contents\Scene\Title\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Contents\Bullets</Filter>
     </ClCompile>
     <ClCompile Include="TutorialScene.cpp">
-      <Filter>Contents\Tutorial\Scene</Filter>
+      <Filter>Contents\Scene\Tutorial\Scene</Filter>
     </ClCompile>
     <ClCompile Include="CameraScript.cpp">
       <Filter>Contents\Camera</Filter>
     </ClCompile>
     <ClCompile Include="TutorialBeatBar.cpp">
-      <Filter>Contents\Tutorial\Bullet</Filter>
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="TutorialBurst.cpp">
-      <Filter>Contents\Tutorial\Bullet</Filter>
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="TutorialEightBullets.cpp">
-      <Filter>Contents\Tutorial\Bullet</Filter>
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="TutorialBeatCircle.cpp">
-      <Filter>Contents\Tutorial\Bullet</Filter>
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="TutorialEightBar.cpp">
-      <Filter>Contents\Tutorial\Bullet</Filter>
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="TutorialManager.cpp">
-      <Filter>Contents\Tutorial\Managers</Filter>
+      <Filter>Contents\Scene\Tutorial\Managers</Filter>
     </ClCompile>
     <ClCompile Include="TutorialMusicController.cpp">
-      <Filter>Contents\Tutorial\Managers</Filter>
+      <Filter>Contents\Scene\Tutorial\Managers</Filter>
     </ClCompile>
     <ClCompile Include="TutorialGiantCircle.cpp">
-      <Filter>Contents\Tutorial\Bullet</Filter>
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="DubwooferScene.cpp">
+      <Filter>Contents\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -108,9 +108,6 @@
       <Filter>Contents\Scene</Filter>
     </ClInclude>
     <ClInclude Include="CoolFriendsScene.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="DubwooferScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
     <ClInclude Include="OverworldScene.h">
@@ -178,34 +175,37 @@
       <Filter>Contents\Bullets</Filter>
     </ClInclude>
     <ClInclude Include="TutorialScene.h">
-      <Filter>Contents\Tutorial\Scene</Filter>
+      <Filter>Contents\Scene\Tutorial\Scene</Filter>
     </ClInclude>
     <ClInclude Include="CameraScript.h">
       <Filter>Contents\Camera</Filter>
     </ClInclude>
     <ClInclude Include="TutorialBeatBar.h">
-      <Filter>Contents\Tutorial\Bullet</Filter>
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="TutorialBurst.h">
-      <Filter>Contents\Tutorial\Bullet</Filter>
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="TutorialEightBullets.h">
-      <Filter>Contents\Tutorial\Bullet</Filter>
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="TutorialBeatCircle.h">
-      <Filter>Contents\Tutorial\Bullet</Filter>
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="TutorialEightBar.h">
-      <Filter>Contents\Tutorial\Bullet</Filter>
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="TutorialManager.h">
-      <Filter>Contents\Tutorial\Managers</Filter>
+      <Filter>Contents\Scene\Tutorial\Managers</Filter>
     </ClInclude>
     <ClInclude Include="TutorialMusicController.h">
-      <Filter>Contents\Tutorial\Managers</Filter>
+      <Filter>Contents\Scene\Tutorial\Managers</Filter>
     </ClInclude>
     <ClInclude Include="TutorialGiantCircle.h">
-      <Filter>Contents\Tutorial\Bullet</Filter>
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="DubwooferScene.h">
+      <Filter>Contents\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -242,15 +242,6 @@
     <Filter Include="EngineTesters">
       <UniqueIdentifier>{89c1cf6b-235f-4192-bec8-7e6260ac1f60}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Tutorial">
-      <UniqueIdentifier>{7cf01eb1-5ee9-40c9-b20b-13a6609da5f9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Tutorial\Scene">
-      <UniqueIdentifier>{e583f8ff-8653-465a-89a8-05937618ecd0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Tutorial\Bullet">
-      <UniqueIdentifier>{d75bdd1e-9a2a-4064-92d3-3e5b2fa8c43e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Bullets">
       <UniqueIdentifier>{d4b81a8b-9340-4988-bb91-4237afced6c5}</UniqueIdentifier>
     </Filter>
@@ -260,7 +251,16 @@
     <Filter Include="Contents\Camera">
       <UniqueIdentifier>{a63bfb69-c775-400c-aa2a-c738e4cd9c3f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Tutorial\Managers">
+    <Filter Include="Contents\Scene\Tutorial">
+      <UniqueIdentifier>{7cf01eb1-5ee9-40c9-b20b-13a6609da5f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Tutorial\Scene">
+      <UniqueIdentifier>{e583f8ff-8653-465a-89a8-05937618ecd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Tutorial\Bullet">
+      <UniqueIdentifier>{d75bdd1e-9a2a-4064-92d3-3e5b2fa8c43e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Tutorial\Managers">
       <UniqueIdentifier>{f65359ed-cd0a-4232-a371-6926038e203b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
