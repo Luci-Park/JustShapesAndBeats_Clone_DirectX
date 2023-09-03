@@ -9,7 +9,7 @@ namespace lu::JSAB::Menu
 		float height = 80.0f;
 		float y = 200;
 		{
-			GameObject* tag = new GameObject();
+			GameObject* tag = new GameObject(GetLayer());
 			std::shared_ptr<Material> mat = Resources::Find<Material>(L"Story_Tag");
 			if (mat == nullptr)
 			{
@@ -30,7 +30,7 @@ namespace lu::JSAB::Menu
 			SceneManager::GetActiveScene()->AddGameObject(eLayerType::UI, tag);
 		}
 		{
-			GameObject* tag = new GameObject();
+			GameObject* tag = new GameObject(GetLayer());
 			std::shared_ptr<Material> mat = Resources::Find<Material>(L"Story_SideTag");
 
 			if (mat == nullptr)

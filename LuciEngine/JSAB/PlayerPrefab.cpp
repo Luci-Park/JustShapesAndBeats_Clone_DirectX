@@ -7,7 +7,8 @@
 #include "LAnimator.h"
 namespace lu::JSAB
 {
-	PlayerPrefab::PlayerPrefab()
+	PlayerPrefab::PlayerPrefab(eLayerType layer)
+		:GameObject(layer)
 	{
 	}
 	PlayerPrefab::~PlayerPrefab()
@@ -129,7 +130,7 @@ namespace lu::JSAB
 		};
 		for (int i = 1; i <= 8; ++i)
 		{
-			GameObject* piece = new GameObject();
+			GameObject* piece = object::Instantiate<GameObject>(eLayerType::Player);
 			std::shared_ptr<Material> mat = std::make_shared<Material>();
 			mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
 			mat->SetTexture(Resources::Find<Texture>(L"PlayerPiece_" + std::to_wstring(i)));
@@ -142,12 +143,12 @@ namespace lu::JSAB
 			piece->mTransform->SetScale(Vector3(7, mat->GetTexture()->GetRatioHeight(7), 1));
 			piece->mTransform->SetPosition(pos[i - 1] * point);
 			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Player, piece);
-			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Player, CreateLight(pos[i-1] * point, rot[i - 1]));
+			CreateLight(pos[i - 1] * point, rot[i - 1]);
 		}
 	}
 	GameObject* Pieces::CreateLight(Vector3 pos, float rotation)
 	{
-		GameObject* light = new GameObject();
+		GameObject* light = object::Instantiate<GameObject>(eLayerType::Player);
 		std::shared_ptr<Material> mat = Resources::Find<Material>(L"PlayerPiece_Light");
 		if (!mat)
 		{

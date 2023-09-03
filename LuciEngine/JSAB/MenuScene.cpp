@@ -9,15 +9,15 @@ namespace lu::JSAB::Menu
 {
 	void MenuScene::Initialize()
 	{
-		BackgroundObject* bg = new BackgroundObject();
+		BackgroundObject* bg = new BackgroundObject(eLayerType::UI);
 		AddGameObject(eLayerType::UI, bg);
-		TitleObject* title = new TitleObject();
+		TitleObject* title = new TitleObject(eLayerType::UI);
 		AddGameObject(eLayerType::UI, title);
 		title->AddComponent<gui::TransformWidget>();
-		AddGameObject(eLayerType::UI, new Menu::MenuButtonObject());
+		AddGameObject(eLayerType::UI, new Menu::MenuButtonObject(eLayerType::UI));
 		//Camera
 		{
-			GameObject* camera = new GameObject();
+			GameObject* camera = new GameObject(eLayerType::Camera);
 			AddGameObject(eLayerType::Camera, camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 			Camera* cameraComp = camera->AddComponent<Camera>();

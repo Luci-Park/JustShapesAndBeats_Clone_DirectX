@@ -5,7 +5,7 @@ namespace lu::JSAB::Menu
 	class TitleObject : public GameObject
 	{
 	public:
-		TitleObject() {}
+		TitleObject(eLayerType layer):GameObject(layer) {}
 		virtual ~TitleObject() {}
 		virtual void Initialize() override;
 	};

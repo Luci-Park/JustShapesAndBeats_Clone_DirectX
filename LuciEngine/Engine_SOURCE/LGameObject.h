@@ -9,8 +9,8 @@ namespace lu
 	{
 	public:
 
-		GameObject();
-		GameObject(Transform* parent);
+		GameObject(eLayerType layer);
+		GameObject(eLayerType layer, Transform* parent);
 		virtual ~GameObject();
 
 		virtual void Initialize() {}
@@ -66,7 +66,7 @@ namespace lu
 
 		void SetName(const std::wstring& name) { mName = name; }
 		std::wstring& GetName() { return mName; }
-
+		eLayerType GetLayer() { return mLayer; }
 	public:
 		Transform* mTransform;
 	private:
@@ -74,6 +74,7 @@ namespace lu
 		std::vector<Script*> mScripts;
 
 		std::wstring mName;
+		eLayerType mLayer;
 	};
 }
 

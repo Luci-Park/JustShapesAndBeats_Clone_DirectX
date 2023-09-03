@@ -11,7 +11,7 @@ namespace lu::JSAB
 	class TrianglePrefab : public GameObject
 	{
 	public:
-		TrianglePrefab();
+		TrianglePrefab(eLayerType layer);
 		~TrianglePrefab();
 
 		virtual void Initialize() override;

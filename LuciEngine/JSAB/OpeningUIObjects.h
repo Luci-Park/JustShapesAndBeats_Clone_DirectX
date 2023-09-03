@@ -6,7 +6,7 @@ namespace lu::JSAB::Title
 	class ShapesObject : public GameObject
 	{
 	public:
-		ShapesObject(){}
+		ShapesObject(eLayerType layer) : GameObject(layer){}
 		virtual ~ShapesObject(){}
 		virtual void Initialize() override;
 	};
@@ -14,7 +14,7 @@ namespace lu::JSAB::Title
 	class AndObject : public GameObject
 	{
 	public:
-		AndObject(){}
+		AndObject(eLayerType layer) : GameObject(layer) {}
 		virtual ~AndObject(){}
 		virtual void Initialize() override;
 	};
@@ -22,7 +22,7 @@ namespace lu::JSAB::Title
 	class BeatsObject : public GameObject
 	{
 	public:
-		BeatsObject(){}
+		BeatsObject(eLayerType layer) : GameObject(layer) {}
 		virtual ~BeatsObject(){}
 		virtual void Initialize() override;
 	};
@@ -30,7 +30,7 @@ namespace lu::JSAB::Title
 	class LightCircleObject : public GameObject
 	{
 	public:
-		LightCircleObject(){}
+		LightCircleObject(eLayerType layer) : GameObject(layer) {}
 		virtual ~LightCircleObject(){}
 		virtual void Initialize() override;
 	};

@@ -7,7 +7,8 @@ extern lu::Application application;
 
 namespace lu::JSAB
 {
-	BackgroundObject::BackgroundObject()
+	BackgroundObject::BackgroundObject(eLayerType layer)
+		:GameObject(layer)
 	{
 	}
 	BackgroundObject::~BackgroundObject()

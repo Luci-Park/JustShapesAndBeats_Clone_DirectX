@@ -22,8 +22,7 @@ namespace lu::JSAB::Tutorial
 		//Camera
 		{
 			bool active[]{ true, true, true, true, false };
-			GameObject* camera = new GameObject();
-			AddGameObject(eLayerType::Camera, camera);
+			GameObject* camera = object::Instantiate<GameObject>(eLayerType::Camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			for (int i = 0; i < (UINT)eLayerType::End; i++)

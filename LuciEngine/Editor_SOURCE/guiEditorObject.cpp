@@ -2,6 +2,7 @@
 namespace gui
 {
 	EditorObject::EditorObject()
+		:GameObject(lu::enums::eLayerType::End)
 	{
 	}
 	EditorObject::~EditorObject()

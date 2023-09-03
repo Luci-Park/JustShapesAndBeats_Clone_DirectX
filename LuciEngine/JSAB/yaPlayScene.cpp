@@ -91,7 +91,7 @@ namespace lu
 			//as->PlayReversed();
 		}
 		{
-			GameObject* player = new GameObject();
+			GameObject* player = new GameObject(eLayerType::Bullet);
 			player->SetName(L"Particle");
 			AddGameObject(eLayerType::Bullet, player);
 			ParticleSystem* mr = player->AddComponent<ParticleSystem>();
@@ -104,7 +104,7 @@ namespace lu
 		//Main Camera
 		Camera* cameraComp = nullptr;
 		{
-			GameObject* camera = new GameObject();
+			GameObject* camera = new GameObject(eLayerType::Player);
 			AddGameObject(eLayerType::Player, camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 			cameraComp = camera->AddComponent<Camera>();
@@ -117,7 +117,7 @@ namespace lu
 
 		//UI Camera
 		{
-			GameObject* camera = new GameObject();
+			GameObject* camera = new GameObject(eLayerType::Player);
 			AddGameObject(eLayerType::Player, camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 			Camera* cameraComp = camera->AddComponent<Camera>();

@@ -28,6 +28,7 @@ namespace lu::JSAB
 	{
 		mTr = Owner()->mTransform;
 		mCr = Owner()->GetComponent<Collider2D>();
+		mMr = Owner()->GetComponent<MeshRenderer>();
 		mOrgScale = mTr->GetScale();
 		mMoveScale = { mOrgScale.x * 0.7f, mOrgScale.y * 1.3f, 1.f };
 		mDashScale = { mOrgScale.x * 0.5f, mOrgScale.y * 2.f, 1.f };
@@ -75,7 +76,8 @@ namespace lu::JSAB
 	}
 	void Player::OnCollisionEnter(Collider2D* other)
 	{
-		
+		if (other->Owner()->GetLayer() == eLayerType::Bullet)
+			OnDamage();
 	}
 	void Player::SetDashBurst(GameObject* burst)
 	{

@@ -417,11 +417,11 @@ namespace lu::JSAB
 				idx++;
 			}
 			{
-				const int beats[] = { 5, 13, 21, 29, 36, 41, 50, 57 };
+				const int beats[] = { 5, 13, 21, 29, 36, 41, 49, 57 };
 				static int idx = 0;
 				//5 8 8 8 8 7 7 7 
 
-				if ((beat + 2 ) == beats[idx])
+				if ((beat + 3 ) == beats[idx])
 				{
 					auto c = mCircleLines.GetNext();
 					c->FitToHeight();
@@ -429,7 +429,7 @@ namespace lu::JSAB
 					double step = 0.432 * 1 / 7;
 					for (int i = 0; i < 7; i++)
 					{
-						time[i] = readTime + 0.432 * 1 + step * i;
+						time[i] = readTime + 0.432 * 2 + step * i;
 					}
 					c->MultipleShow(time);
 					idx++;
@@ -454,9 +454,8 @@ namespace lu::JSAB
 		if (beat == 64)
 		{
 			auto r = SceneManager::MainCamera()->GetBoundary();
-			Vector3 pos[2] = { {r.right - 20.f, -462, 1}, {r.right - 20.f, 501,1} };
 			auto c = mFullBar.GetNext();
-			c->Setup(7, { r.right - 20.f, 0, 0 }, { r.left + 40.f, 0, 0 });
+			c->Setup(9 , { r.right - 20.f, 0, 0 }, { r.left - 40.f, 0, 0 });
 			c->Activate();
 			readTime += 0.432;
 			beat++;

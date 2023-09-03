@@ -6,7 +6,8 @@
 #include "LCollider2D.h"
 namespace lu::JSAB
 {
-	TrianglePrefab::TrianglePrefab()
+	TrianglePrefab::TrianglePrefab(eLayerType layer)
+		:GameObject(layer)
 	{
 	}
 	TrianglePrefab::~TrianglePrefab()

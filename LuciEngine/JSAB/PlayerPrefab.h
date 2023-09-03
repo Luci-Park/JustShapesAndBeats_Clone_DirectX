@@ -10,7 +10,7 @@ namespace lu::JSAB
 	class PlayerPrefab : public GameObject
 	{
 	public:
-		PlayerPrefab();
+		PlayerPrefab(eLayerType layer);
 		virtual ~PlayerPrefab();
 
 		virtual void Initialize() override;
@@ -23,7 +23,7 @@ namespace lu::JSAB
 	class Pieces : public GameObject
 	{
 	public:
-		Pieces(){}
+		Pieces(eLayerType layer) : GameObject(layer){}
 		virtual ~Pieces(){}
 
 		virtual void Initialize() override;

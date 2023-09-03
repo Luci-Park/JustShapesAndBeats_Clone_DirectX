@@ -7,7 +7,7 @@ namespace lu::JSAB
 	class BackgroundObject : public GameObject
 	{
 	public:
-		BackgroundObject();
+		BackgroundObject(eLayerType layer);
 		virtual ~BackgroundObject();
 
 		virtual void Initialize() override;

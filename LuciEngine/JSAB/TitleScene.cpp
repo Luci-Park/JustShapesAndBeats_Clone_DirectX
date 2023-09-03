@@ -5,6 +5,7 @@
 #include "OpeningUIObjects.h"
 #include "TitleObject.h"
 #include "LRenderer.h"
+#include "LObject.h"
 #include "..\\Editor_SOURCE\\TransformWidget.h"
 
 namespace lu::JSAB::Title
@@ -17,22 +18,15 @@ namespace lu::JSAB::Title
 	}
 	void TitleScene::Initialize()
 	{
-		BackgroundObject* bg = new BackgroundObject();
-		AddGameObject(eLayerType::UI, bg);
-		//AddGameObject(eLayerType::UI, new PlayerObject());
-		
-		AddGameObject(eLayerType::UI, new ShapesObject());
-		AddGameObject(eLayerType::UI, new AndObject());
-		AddGameObject(eLayerType::UI, new BeatsObject());
-		GameObject* lightcircle = new LightCircleObject();
-		AddGameObject(eLayerType::UI, lightcircle);
-
-		AddGameObject(eLayerType::UI, new Menu::TitleObject());
-
+		BackgroundObject* bg = object::Instantiate<BackgroundObject>(eLayerType::UI);		
+		object::Instantiate<ShapesObject>(eLayerType::UI);
+		object::Instantiate<AndObject>(eLayerType::UI);
+		object::Instantiate<BeatsObject>(eLayerType::UI);
+		object::Instantiate<LightCircleObject>(eLayerType::UI);
+		object::Instantiate<Menu::TitleObject>(eLayerType::UI);
 		//Camera
 		{
-			GameObject* camera = new GameObject();
-			AddGameObject(eLayerType::Camera, camera);
+			GameObject* camera = object::Instantiate<BeatsObject>(eLayerType::Camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			for (int i = 0; i < (UINT)eLayerType::End; i++)

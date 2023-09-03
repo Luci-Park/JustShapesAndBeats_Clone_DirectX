@@ -5,15 +5,17 @@
 
 namespace lu
 {
-	GameObject::GameObject()
+	GameObject::GameObject(eLayerType layer)
+		: mLayer(layer)
 	{
 		mTransform = AddComponent<Transform>();
 	}
 
-	GameObject::GameObject(Transform* parent)
+	GameObject::GameObject(eLayerType layer, Transform* parent)
+		:mLayer(layer)
 	{
-		mTransform->SetParent(parent);
 		mTransform = AddComponent<Transform>();
+		mTransform->SetParent(parent);
 	}
 
 	GameObject::~GameObject()

@@ -2,6 +2,7 @@
 namespace gui
 {
 	DebugObject::DebugObject()
+		:GameObject(lu::enums::eLayerType::End)
 	{
 	}
 	DebugObject::~DebugObject()

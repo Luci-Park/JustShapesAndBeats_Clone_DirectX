@@ -27,8 +27,12 @@ namespace lu::JSAB
 		virtual void Initialize() override;
 		virtual void Update() override;
 
+		virtual void OnCollisionEnter(Collider2D* other);
+
 		void SetDashOutline(GameObject* outline) { mDashOutline = outline; }
 		void SetDashBurst(GameObject* burst);
+
+
 	private:
 		void Move(Vector3 target);
 

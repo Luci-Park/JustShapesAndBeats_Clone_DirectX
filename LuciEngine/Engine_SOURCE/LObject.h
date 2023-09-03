@@ -12,7 +12,7 @@ namespace lu::object
 	template <typename T>
 	static __forceinline T* Instantiate(lu::enums::eLayerType layer)
 	{
-		T* gameObj = new T();
+		T* gameObj = new T(layer);
 		Scene* scene = SceneManager::GetActiveScene();
 		scene->AddGameObject(layer, gameObj);
 		
@@ -25,7 +25,7 @@ namespace lu::object
 	template <typename T>
 	static __forceinline T* Instantiate(Vector3 pos, enums::eLayerType layer)
 	{
-		T* gameObj = new T();
+		T* gameObj = new T(layer);
 		Transform* tr = gameObj->mTransform;
 		tr->SetPosition(pos);
 
@@ -40,7 +40,7 @@ namespace lu::object
 	template <typename T>
 	static __forceinline T* Instantiate(Vector3 pos, Quaternion rotate, enums::eLayerType layer)
 	{
-		T* gameObj = new T();
+		T* gameObj = new T(layer);
 		Transform* tr = gameObj->mTransform;
 		tr->SetPosition(pos);
 		tr->SetRotation(rotate);
@@ -56,7 +56,7 @@ namespace lu::object
 	template <typename T>
 	static __forceinline T* Instantiate(Vector3 pos, Quaternion rotate, Vector3 scale, enums::eLayerType layer)
 	{
-		T* gameObj = new T();
+		T* gameObj = new T(layer);
 		Transform* tr = gameObj->mTransform;
 		tr->SetPosition(pos);
 		tr->SetRotation(rotate);
@@ -72,7 +72,7 @@ namespace lu::object
 	template <typename T>
 	static __forceinline T* Instantiate(Transform* parent, lu::enums::eLayerType layer)
 	{
-		T* gameObj = new T();
+		T* gameObj = new T(layer);
 		Transform* tr = gameObj->mTransform;
 		Scene* scene = SceneManager::GetActiveScene();
 		scene->AddGameObject(layer, gameObj);
@@ -86,7 +86,7 @@ namespace lu::object
 	template <typename T>
 	static __forceinline T* Instantiate(Vector3 pos, Transform* parent, enums::eLayerType layer, bool InstantiateInWorldSpace = false)
 	{
-		T* gameObj = new T();
+		T* gameObj = new T(layer);
 		Transform* tr = gameObj->mTransform;
 		tr->SetPosition(pos);
 
@@ -106,7 +106,7 @@ namespace lu::object
 	template <typename T>
 	static __forceinline T* Instantiate(Vector3 pos, Quaternion rotate, Transform* parent, enums::eLayerType layer, bool InstantiateInWorldSpace = false)
 	{
-		T* gameObj = new T();
+		T* gameObj = new T(layer);
 		Transform* tr = gameObj->mTransform;
 		tr->SetPosition(pos);
 		tr->SetRotation(rotate);
@@ -134,7 +134,7 @@ namespace lu::object
 	template <typename T>
 	static __forceinline T* Instantiate(Vector3 pos, Quaternion rotate, Vector3 scale, Transform* parent, enums::eLayerType layer, bool InstantiateInWorldSpace = false)
 	{
-		T* gameObj = new T();
+		T* gameObj = new T(layer);
 		Transform* tr = gameObj->mTransform;
 		tr->SetParent(parent);
 		tr->SetPosition(pos);
