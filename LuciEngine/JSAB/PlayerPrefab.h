@@ -18,6 +18,8 @@ namespace lu::JSAB
 		std::shared_ptr<graphics::Material> CreatePlayerMat();
 		std::shared_ptr<graphics::Material> CreateDashOutlineMat();
 		std::shared_ptr<graphics::Material> CreateDashEffectMat();
+		std::shared_ptr<graphics::Material> CreateShieldGaugeMat();
+		std::shared_ptr<graphics::Material> CreateShieldMat();
 	};
 
 	class Pieces : public GameObject

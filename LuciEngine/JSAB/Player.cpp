@@ -10,6 +10,8 @@
 #include "LAnimator.h"
 #include "LSceneManager.h"
 #include "LCamera.h"
+#include "LAudioSource.h"
+
 namespace lu::JSAB
 {
 	Player::Player()
@@ -29,6 +31,9 @@ namespace lu::JSAB
 		mTr = Owner()->mTransform;
 		mCr = Owner()->GetComponent<Collider2D>();
 		mMr = Owner()->GetComponent<MeshRenderer>();
+		mAnim = Owner()->AddComponent<Animator>();
+		mAudio = Owner()->AddComponent<AudioSource>();
+
 		mOrgScale = mTr->GetScale();
 		mMoveScale = { mOrgScale.x * 0.7f, mOrgScale.y * 1.3f, 1.f };
 		mDashScale = { mOrgScale.x * 0.5f, mOrgScale.y * 2.f, 1.f };
@@ -37,6 +42,16 @@ namespace lu::JSAB
 		lifeTextures[2] = Resources::Find<graphics::Texture>(L"player22");
 		lifeTextures[1] = Resources::Find<graphics::Texture>(L"player41");
 		lifeTextures[0] = Resources::Find<graphics::Texture>(L"player61");
+
+		auto a = mAnim->CreateAnimation(L"Flash");
+		double duration = 2.0;
+		for (int i = 0; i < 40; i++)
+		{
+			a->AddInterpolationKey(duration / 40 * i, i % 2 ? 0 : 1);
+		}
+
+		mHitSounds[0] = Resources::Load<AudioClip>(L"PlayerHit1", L"..\\..\\Assets\\AudioClips\\Player\\SFX_HIT_1.wav");
+		mHitSounds[1] = Resources::Load<AudioClip>(L"PlayerHit2", L"..\\..\\Assets\\AudioClips\\Player\\SFX_HIT_2.wav");
 	}
 	void Player::Update()
 	{
@@ -76,14 +91,10 @@ namespace lu::JSAB
 	}
 	void Player::OnCollisionEnter(Collider2D* other)
 	{
-		if (other->Owner()->GetLayer() == eLayerType::Bullet)
+		if (other->Owner()->GetLayer() == eLayerType::Bullet && !mShield->Owner()->IsActive())
 			OnDamage();
 	}
-	void Player::SetDashBurst(GameObject* burst)
-	{
-		mDashBurst = burst;
-		mDashBurstAnim = mDashBurst->GetComponent<Animator>();
-	}
+
 	void Player::Move(Vector3 target)
 	{
 		Vector3 halfScale = mTr->GetScale() * 0.5f;
@@ -170,9 +181,24 @@ namespace lu::JSAB
 	}
 	void Player::OnDamage()
 	{
+		PlayHitSound();
 		mCurrHealth--;
 		if (mCurrHealth > 0)
+		{
 			mMr->GetMaterial()->SetTexture(lifeTextures[mCurrHealth - 1]);
+			mShield->Activate();
+			mAnim->PlayAnimation(L"Flash", false);
+		}
+		else 
+			OnDeath();
+	}
+	void Player::PlayHitSound()
+	{
+		mAudio->SetClip(mHitSounds[math::IntRandom(0, 1)]);
+		mAudio->Play();
+	}
+	void Player::OnDeath()
+	{
 	}
 	Vector3 Player::GetInputDir()
 	{
@@ -199,4 +225,34 @@ namespace lu::JSAB
 
 		return Quaternion::CreateFromAxisAngle(Vector3::Forward, radian);
 	}
+	void Player::SetDashBurst(GameObject* burst)
+	{
+		mDashBurst = burst;
+		mDashBurstAnim = mDashBurst->GetComponent<Animator>();
+	}
+	
+#pragma region  ShieldScript
+	void ShieldScript::Update()
+	{
+		mTransform->SetPosition(mPlayer->GetPosition());
+	}
+	void ShieldScript::CreateAnimation()
+	{
+		mAnim = Owner()->AddComponent<Animator>();
+		auto a = mAnim->CreateAnimation(L"Shield");
+		double duration = 1;
+		for (int i = 0; i < 85; i++)
+		{
+			std::wstring name = L"Shield" + std::to_wstring(i + 1);
+			a->AddTextureKey(duration / 85.f * i, Resources::Find<Texture>(name));
+		}
+		a->AddFunctionKey(duration, std::bind(&GameObject::SetActive, Owner(), false));
+	}
+	void ShieldScript::Activate()
+	{
+		mAnim->PlayAnimation(L"Shield", false);
+		Owner()->SetActive(true);
+	}
+#pragma endregion
+
 }

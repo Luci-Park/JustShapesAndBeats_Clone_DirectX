@@ -24,6 +24,7 @@ namespace lu
 
 	void AudioSource::LateUpdate()
 	{
+		if (mAudioClip == nullptr) return;
 		if (is3D)
 		{
 			Transform* tr = Owner()->GetComponent<Transform>();
@@ -40,11 +41,13 @@ namespace lu
 
 	void AudioSource::Play()
 	{
+		if (mAudioClip == nullptr) return;
 		mAudioClip->Play();
 	}
 
 	void AudioSource::Play(bool loop)
 	{
+		if (mAudioClip == nullptr) return;
 		mAudioClip->SetLoop(loop);
 		mAudioClip->Play();
 	}

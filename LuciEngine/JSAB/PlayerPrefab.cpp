@@ -21,6 +21,7 @@ namespace lu::JSAB
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(mat);
+		mr->SetColor(Color::magenta);
 		
 		mTransform->SetScale(Vector3(22.3, 22.3, 1));
 		AddComponent<Collider2D>();
@@ -65,6 +66,20 @@ namespace lu::JSAB
 			anim->AddRendererActiveKey(duration, false);
 			script->SetDashBurst(dashBurst);
 		}
+
+		GameObject* shield = object::Instantiate<GameObject>(eLayerType::Player);
+		shield->AddComponent<MeshRenderer>()->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(CreateShieldGaugeMat());
+		shield->mTransform->SetScale(mTransform->GetScale() * 2.5);
+		auto shieldScript = shield->AddComponent<ShieldScript>();
+
+		auto s = object::Instantiate<GameObject>(shield->mTransform, eLayerType::Player);
+		s->AddComponent<MeshRenderer>()->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(CreateShieldMat());
+		
+		shieldScript->SetBack(s);
+		shieldScript->SetPlayer(mTransform);
+		shieldScript->CreateAnimation();
+		script->SetShield(shieldScript);
+		shieldScript->Owner()->SetActive(false);
 	}
 	std::shared_ptr<Material> PlayerPrefab::CreatePlayerMat()
 	{
@@ -102,6 +117,32 @@ namespace lu::JSAB
 			mat->SetTexture(Resources::Find<Texture>(L"Dash"));
 			mat->SetRenderingMode(eRenderingMode::CutOut);
 			Resources::Insert(L"DashEffectMat", mat);
+		}
+		return mat;
+	}
+	std::shared_ptr<graphics::Material> PlayerPrefab::CreateShieldGaugeMat()
+	{
+		std::shared_ptr<Material> mat = Resources::Find<Material>(L"ShieldGaugeMat");
+		if (!mat)
+		{
+			mat = std::make_shared<Material>();
+			mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
+			mat->SetTexture(Resources::Find<Texture>(L"Shield1"));
+			mat->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"ShieldGaugeMat", mat);
+		}
+		return mat;
+	}
+	std::shared_ptr<graphics::Material> PlayerPrefab::CreateShieldMat()
+	{
+		std::shared_ptr<Material> mat = Resources::Find<Material>(L"ShieldMat");
+		if (!mat)
+		{
+			mat = std::make_shared<Material>();
+			mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
+			mat->SetTexture(Resources::Find<Texture>(L"ShieldBackground"));
+			mat->SetRenderingMode(eRenderingMode::Transparent);
+			Resources::Insert(L"ShieldMat", mat);
 		}
 		return mat;
 	}

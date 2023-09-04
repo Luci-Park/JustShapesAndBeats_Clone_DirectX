@@ -7,7 +7,7 @@ namespace lu
 		, mSound(nullptr)
 		, mChannel(nullptr)
 		, mMinDistance(1.0f)
-		, mMaxDistance(1000.0f)
+		, mMaxDistance(5000.0f)
 		, mbLoop(false)
 	{
 	}
