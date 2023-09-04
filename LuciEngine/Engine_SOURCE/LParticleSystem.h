@@ -18,13 +18,13 @@ namespace lu
 		virtual void Update() override;
 		virtual void LateUpdate() override;
 		virtual void Render() override;
-	public:
 
 	private:
 		graphics::StructedBuffer* mBuffer;
 		graphics::StructedBuffer* mSharedBuffer;
 
 		std::shared_ptr<ParticleShader> mParticles;
+		std::shared_ptr<Texture> mTexture;
 
 		Vector4 mStartSize;
 		Vector4 mEndSize;
@@ -33,6 +33,7 @@ namespace lu
 		float mStartSpeed;
 		float mEndSpeed;
 		float mLifeTime;
+		double mTime;
 		bool mbLoop;
 		bool mbAsBurst;
 		UINT mMaxParticles;

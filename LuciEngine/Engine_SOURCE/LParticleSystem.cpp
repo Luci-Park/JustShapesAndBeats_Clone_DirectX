@@ -9,7 +9,7 @@
 namespace lu
 {
 	ParticleSystem::ParticleSystem()
-		: mCount(0)
+		: mMaxParticles(0)
 		, mStartSize(Vector4::One)
 		, mEndSize(Vector4::One)
 		, mStartColor(Vector4::Zero)
