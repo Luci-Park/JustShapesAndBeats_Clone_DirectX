@@ -5,7 +5,8 @@
 #include "LResources.h"
 #include "LTransform.h"
 #include "LGameObject.h"
-
+#include "LConstantBuffer.h"
+#include "LRenderer.h"
 namespace lu
 {
 	ParticleSystem::ParticleSystem()
@@ -85,7 +86,9 @@ namespace lu
 	void ParticleSystem::Render()
 	{
 		Owner()->mTransform->BindConstantBuffer();
-		mParticleShader->SetParticles(mParticleBuffer, this);
+		BindConstantBuffer();
+
+		mParticleShader->SetParticles(mParticleBuffer);
 		mParticleShader->SetSharedBuffer(mSharedBuffer);
 		mParticleShader->OnExecute();
 
@@ -98,5 +101,28 @@ namespace lu
 
 		mParticleBuffer->clear();
 		GetMaterial()->clear();
+	}
+	void ParticleSystem::BindConstantBuffer()
+	{
+		ConstantBuffer* cb = renderer::constantBuffer[(UINT)eCBType::ParticleSystem];
+
+		renderer::ParticleSystemCB data = {};
+		data.startTint = mStartTint;
+		data.endTint = mEndTint;
+		data.startRot = mStartRotation;
+		data.endRot = mEndRotation;
+		data.lifeTime = mLifeTime;
+		data.elapsedTime = mElapsedTime;
+		data.deltaTime = Time::DeltaTime();
+
+		data.startSize = mStartSize;
+		data.endSize = mEndSize;
+		data.startSpeed = mStartSpeed;
+		data.endSpeed = mEndSpeed;
+		data.elementCount = mMaxParticles;
+
+		cb->SetData(&data);
+		for (int i = 0; i < (int)eShaderStage::End; i++)
+			cb->Bind((eShaderStage)i);
 	}
 }

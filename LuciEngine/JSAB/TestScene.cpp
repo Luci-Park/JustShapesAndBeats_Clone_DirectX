@@ -32,6 +32,6 @@ namespace lu::JSAB
 		p->mStartSize = 100;
 		p->mEndSize = 0;
 		p->mStartTint = Color::white;
-		p->mEndTint = Color::white;
+		p->mEndTint = Color::clear;
 	}
 }

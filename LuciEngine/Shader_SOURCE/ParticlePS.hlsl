@@ -18,11 +18,12 @@ float4 main(GSOut In) : SV_TARGET
         discard;
     else
     {
-        //float t = particles[id].time / particles[id].lifeTime;
-        //float4 tint = lerp(particleStartTint, particleEndTint, t);
-        //color = particleEndTint;
-        color = particleStartTint;
-        color.w = 1;
+        float t = particles[id].time / particles[id].lifeTime;
+        float4 tint = lerp(particleStartTint, particleEndTint, t);
+        color.x *= tint.x;
+        color.y *= tint.y;
+        color.z *= tint.z;
+        color.w *= tint.w;
         color = saturate(color);
     }
 

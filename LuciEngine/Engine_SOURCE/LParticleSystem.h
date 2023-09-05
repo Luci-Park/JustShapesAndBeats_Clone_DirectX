@@ -16,7 +16,8 @@ namespace lu
 
 		virtual void LateUpdate() override;
 		virtual void Render() override;
-
+	private:
+		void BindConstantBuffer();
 	public:
 		Vector4 mStartTint;
 		Vector4 mEndTint;

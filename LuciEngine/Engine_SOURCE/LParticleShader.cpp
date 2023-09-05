@@ -28,27 +28,9 @@ namespace lu::graphics
 		mParticleBuffer->clear();
 		mSharedBuffer->clear();
 	}
-	void ParticleShader::SetParticles(StructedBuffer* particleBuffer, ParticleSystem* ps)
+	void ParticleShader::SetParticles(StructedBuffer* particleBuffer)
 	{
 		mParticleBuffer = particleBuffer;
-		ConstantBuffer* cb = renderer::constantBuffer[(UINT)eCBType::ParticleSystem];
-
-		renderer::ParticleSystemCB data = {};
-		data.startTint = ps->mStartTint;
-		data.endTint = ps->mEndTint;
-		data.startRot = ps->mStartRotation;
-		data.endRot = ps->mEndRotation;
-		data.lifeTime = ps->mLifeTime;
-		data.elapsedTime = ps->mElapsedTime;
-		data.deltaTime = Time::DeltaTime();
 		
-		data.startSize = ps->mStartSize;
-		data.endSize = ps->mEndSize;
-		data.startSpeed = ps->mStartSpeed;
-		data.endSpeed = ps->mEndSpeed;
-		data.elementCount = ps->mMaxParticles;
-
-		cb->SetData(&data);
-		cb->Bind(eShaderStage::CS);
 	}
 }

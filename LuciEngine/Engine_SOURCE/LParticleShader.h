@@ -16,7 +16,7 @@ namespace lu::graphics
 		virtual void Binds() override;
 		virtual void clear() override;
 
-		void SetParticles(StructedBuffer* particleBuffer, ParticleSystem* ps);
+		void SetParticles(StructedBuffer* particleBuffer);
 		void SetSharedBuffer(StructedBuffer* sharedBuffer) { mSharedBuffer = sharedBuffer; }
 	private:
 		StructedBuffer* mParticleBuffer;
