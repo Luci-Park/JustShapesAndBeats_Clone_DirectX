@@ -18,17 +18,27 @@ cbuffer MeshRenderer : register(b2)
 {
 	float4 Tint;
 	float4 Color;
-	float Interpolation;
     float2 Flip;
-    float padding;
+	float Interpolation;
+    uint mrpadd;
 }
 
 cbuffer ParticleSystem : register(b3)
 {
+    float4  particleStartTint;
+    float4  particleEndTint;
+    float4  particleStartRotation;
+    float4  particleEndRotation;
+    float   particleLifetime;
+    float   particleElapsedTime;
+    float   particleDeltaTime;
+    
+    float   particleStartSize;
+    float   particleEndSize;
+    float   particleStartSpeed;
+    float   particleEndSpeed;
+    
 	uint elementCount;
-	float elapsedTime;
-	float deltaTime;
-	int padd2;
 }
 
 cbuffer Noise : register(b4)
@@ -44,12 +54,12 @@ SamplerState anisotropicSampler : register(s1);
 
 struct Particle
 {
-	float4 position;
-	float4 direction;
-	float endTime;
-	float time;
-	float speed;
-	uint active;
+	float4  position;
+	float4  direction;
+	float   lifeTime;
+	float   time;
+	float   speed;
+	uint    active;
 };
 
 struct ParticleShared

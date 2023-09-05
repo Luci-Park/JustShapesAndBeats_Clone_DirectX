@@ -26,6 +26,12 @@ namespace lu::JSAB
 		}
 		auto a = object::Instantiate<PlayerPrefab>(eLayerType::Player);
 		auto p = a->AddComponent<ParticleSystem>();
-		p->SetTexture(Resources::Find<Texture>(L"player1"));
+		p->GetMaterial()->SetTexture(Resources::Find<Texture>(L"player1"));
+		p->mLifeTime = 60.f;
+		p->mMaxParticles = 1;
+		p->mStartSize = 100;
+		p->mEndSize = 0;
+		p->mStartTint = Color::white;
+		p->mEndTint = Color::white;
 	}
 }

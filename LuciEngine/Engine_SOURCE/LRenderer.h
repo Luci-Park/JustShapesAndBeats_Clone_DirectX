@@ -34,17 +34,27 @@ namespace lu::renderer
 	{
 		lu::math::Color tint;
 		lu::math::Color color;
-		float interpolation; // 0 uses original, 1 uses Color;
 		Vector2 Flip;
-		float padding;
+		float interpolation; // 0 uses original, 1 uses Color;
+		UINT padding;
 	};
 
 	CBUFFER(ParticleSystemCB, CBSLOT_PARTICLESYSTEM)
 	{
-		UINT elementCount;
+		lu::math::Color startTint;
+		lu::math::Color endTint;
+		lu::math::Quaternion startRot;
+		lu::math::Quaternion endRot;
+		float lifeTime;
 		float elapsedTime;
 		float deltaTime;
-		int padd2;
+
+		float startSize;
+		float endSize;
+		float startSpeed;
+		float endSpeed;
+		
+		int elementCount;
 	};
 
 	CBUFFER(NoiseCB, CBSLOT_NOISE)

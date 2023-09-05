@@ -69,9 +69,8 @@ namespace lu::graphics
             if (!GetDevice()->CreateUnordedAccessView(buffer.Get(), &uavDesc, mUAV.GetAddressOf()))
                 return false;
         }
-
-        if (cpuAccess)
-            CreateRWBuffer();
+        
+        CreateRWBuffer();
 
         return true;
 	}

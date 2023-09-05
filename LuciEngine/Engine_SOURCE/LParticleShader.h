@@ -1,5 +1,9 @@
 #pragma once
 #include "LComputeShader.h"
+namespace lu
+{
+	class ParticleSystem;
+}
 namespace lu::graphics
 {
 	class StructedBuffer;
@@ -12,7 +16,7 @@ namespace lu::graphics
 		virtual void Binds() override;
 		virtual void clear() override;
 
-		void SetParticleBuffer(StructedBuffer* particleBuffer);
+		void SetParticles(StructedBuffer* particleBuffer, ParticleSystem* ps);
 		void SetSharedBuffer(StructedBuffer* sharedBuffer) { mSharedBuffer = sharedBuffer; }
 	private:
 		StructedBuffer* mParticleBuffer;

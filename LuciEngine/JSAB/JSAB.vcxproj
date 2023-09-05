@@ -153,6 +153,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Engine_SOURCE\LTexture.h" />
     <ClInclude Include="BackgroundObject.h" />
     <ClInclude Include="BackgroundScript.h" />
     <ClInclude Include="Bullet.h" />
@@ -187,6 +188,7 @@
     <ClInclude Include="yaPlayerScript.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Engine_SOURCE\LTexture.cpp" />
     <ClCompile Include="BackgroundObject.cpp" />
     <ClCompile Include="BackgroundScript.cpp" />
     <ClCompile Include="Bullet.cpp" />

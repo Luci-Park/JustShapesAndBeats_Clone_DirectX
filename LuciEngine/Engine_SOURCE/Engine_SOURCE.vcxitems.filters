@@ -76,9 +76,6 @@
     <Filter Include="Resource\Shader">
       <UniqueIdentifier>{62ca3647-4e7a-4084-9843-a9aa60a573b9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource\Texture">
-      <UniqueIdentifier>{8a48a0d5-950d-4e79-8cd3-e2d12dea67a4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Component\Collider">
       <UniqueIdentifier>{af020d85-d1ec-4860-9475-51ea75cb608c}</UniqueIdentifier>
     </Filter>
@@ -188,9 +185,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)LMesh.h">
       <Filter>Resource\Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)LTexture.h">
-      <Filter>Resource\Texture</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)LShader.h">
       <Filter>Resource\Shader</Filter>
@@ -304,9 +298,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMesh.cpp">
       <Filter>Resource\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)LTexture.cpp">
-      <Filter>Resource\Texture</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LShader.cpp">
       <Filter>Resource\Shader</Filter>

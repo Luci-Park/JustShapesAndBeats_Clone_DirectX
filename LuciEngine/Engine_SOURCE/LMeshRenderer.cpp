@@ -27,8 +27,7 @@ namespace lu
 	}
 	void MeshRenderer::Render()
 	{
-		Transform* tr = Owner()->GetComponent<Transform>();
-		tr->BindConstantBuffer();
+		Owner()->mTransform->BindConstantBuffer();
 
 		mMesh->BindBuffer();
 		mMaterial->Binds();

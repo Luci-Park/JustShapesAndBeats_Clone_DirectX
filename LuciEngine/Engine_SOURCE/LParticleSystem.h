@@ -14,29 +14,27 @@ namespace lu
 		ParticleSystem();
 		~ParticleSystem();
 
-		virtual void Initialize() override;
-		virtual void Update() override;
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-		void SetTexture(std::shared_ptr<Texture> mTexture);
-
-	private:
-		graphics::StructedBuffer* mBuffer;
-		graphics::StructedBuffer* mSharedBuffer;
-
-		std::shared_ptr<ParticleShader> mParticles;
-
-		Vector4 mStartSize;
-		Vector4 mEndSize;
-		Vector4 mStartColor;
-		Vector4 mEndColor;
+	public:
+		Vector4 mStartTint;
+		Vector4 mEndTint;
+		Quaternion mStartRotation;
+		Quaternion mEndRotation;
+		float mLifeTime;
+		float mElapsedTime;
+		float mStartSize;
+		float mEndSize;
 		float mStartSpeed;
 		float mEndSpeed;
-		float mLifeTime;
-		double mTime;
 		bool mbLoop;
 		bool mbAsBurst;
 		UINT mMaxParticles;
+	private:
+		graphics::StructedBuffer* mParticleBuffer;
+		graphics::StructedBuffer* mSharedBuffer;
+
+		std::shared_ptr<ParticleShader> mParticleShader;
 	};
 }

@@ -3,15 +3,44 @@
 RWStructuredBuffer<Particle> ParticleBuffer : register(u0);
 RWStructuredBuffer<ParticleShared> ParticleSharedBuffer : register(u1);
 
+void InitializeParticle(int id)
+{
+    ParticleBuffer[id].active = 1;
+    ParticleBuffer[id].time = 0;
+    ParticleBuffer[id].lifeTime = particleLifetime;
+    
+    // 랜덤값으로 위치와 방향을 설정한다.
+    // 샘플링을 시도할 UV 를 계산한다.=> 노이즈로부터의 sampling
+    
+    float4 vRandom = (float4) 0.f;
+
+    float2 vUV = float2((float) id / elementCount, 0.5f);
+    vUV.x += particleElapsedTime;
+    vUV.y += sin((vUV.x + particleElapsedTime) * 3.141592f + 2.f * 10.f) * 0.5f;
+
+    vRandom = float4
+            (
+                  GaussianBlur(vUV + float2(0.f, 0.f)).x
+                , GaussianBlur(vUV + float2(0.1f, 0.f)).x
+                , GaussianBlur(vUV + float2(0.2f, 0.f)).x
+                , GaussianBlur(vUV + float2(0.3f, 0.f)).x
+            );
+            
+    ParticleBuffer[id].position.xyz = vRandom.xyz * 3.0f;
+    ParticleBuffer[id].position.x -= 0.65f;
+    ParticleBuffer[id].position.y -= 1.4f;
+    ParticleBuffer[id].position.z = 0.0f;
+}
 [numthreads(128, 1, 1)]// run with 128 thread each dimension
 void main(uint3 DTid : SV_DispatchThreadID)
 {
+    uint id = DTid.x;
     //thread termination check => 할당되지 않은 element는 작동하지 않는다.
-	if (elementCount <= DTid.x)
+    if (elementCount <= id)
 		return;
 
     //if particle is not active
-    if (ParticleBuffer[DTid.x].active == 0)
+    if (ParticleBuffer[id].active == 0)
     {
         //if there are active particles to process
         while (ParticleSharedBuffer[0].ActiveSharedCount > 0)
@@ -23,43 +52,26 @@ void main(uint3 DTid : SV_DispatchThreadID)
             InterlockedCompareExchange(ParticleSharedBuffer[0].ActiveSharedCount
                 , origin, exchange, exchange);//activeSharedCount을 origin에서 exchange로 바꾸기 시도.
             
-            if (origin == exchange) // activeSharedCount update을 성공했다면 particle활성화.
+            if (origin == exchange) // activeSharedCount update을 성공했다면 particle initialize
             {
-                ParticleBuffer[DTid.x].active = 1;
+                InitializeParticle(id);
                 break;
             }
-        }
-        
-        if (ParticleBuffer[DTid.x].active == 1)
-        {
-            // 랜덤값으로 위치와 방향을 설정한다.
-            // 샘플링을 시도할 UV 를 계산한다.=> 노이즈로부터의 sampling
-            float4 vRandom = (float4) 0.f;
-
-            float2 vUV = float2((float) DTid.x / elementCount, 0.5f);
-            vUV.x += elapsedTime;
-            vUV.y += sin((vUV.x + elapsedTime) * 3.141592f + 2.f * 10.f) * 0.5f;
-
-            vRandom = float4
-            (
-                  GaussianBlur(vUV + float2(0.f, 0.f)).x
-                , GaussianBlur(vUV + float2(0.1f, 0.f)).x
-                , GaussianBlur(vUV + float2(0.2f, 0.f)).x
-                , GaussianBlur(vUV + float2(0.3f, 0.f)).x
-            );
-            
-            ParticleBuffer[DTid.x].position.xyz = vRandom.xyz * 3.0f;
-            ParticleBuffer[DTid.x].position.x -= 0.65f;
-            ParticleBuffer[DTid.x].position.y -= 1.4f;
-            ParticleBuffer[DTid.x].position.z = 0.0f;
         }
     }
     else
     {
-        ParticleBuffer[DTid.x].position 
-           += ParticleBuffer[DTid.x].direction * ParticleBuffer[DTid.x].speed * deltaTime;
+        ParticleBuffer[id].time += particleDeltaTime;
+        float t = ParticleBuffer[id].time / ParticleBuffer[id].lifeTime;
+        if(t >= 1.0f)
+            ParticleBuffer[id].active = 0;
+        else
+        {
+            ParticleBuffer[id].position 
+           += ParticleBuffer[id].direction * ParticleBuffer[id].speed * particleDeltaTime;
+            
+        }
         
-        // 시간을 체크해서 일정 시간(랜덤)이 지나면
-        // active = 0;
     }
 }
+

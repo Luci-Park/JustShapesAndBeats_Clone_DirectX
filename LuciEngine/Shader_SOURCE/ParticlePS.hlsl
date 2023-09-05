@@ -4,18 +4,27 @@ struct GSOut
 {
     float4 Pos : SV_Position;
     float2 UV : TEXCOORD;
+    uint Instance : SV_InstanceID;
 };
 
 //spritePS¿Í µ¿ÀÏ
 float4 main(GSOut In) : SV_TARGET
 {
-    float4 Out = (float4) 0.0f;
-    
-    Out = albedoTexture.Sample(anisotropicSampler, In.UV);
-    
-    if (Out.a <= 0.0f)
+    uint id = In.Instance;
+    float4 color = (float4) 0.0f;
+    float2 uv = In.UV;
+    color = albedoTexture.Sample(anisotropicSampler, uv);
+    if (color.a <= 0.0f)
         discard;
-    
-    return Out;
+    else
+    {
+        //float t = particles[id].time / particles[id].lifeTime;
+        //float4 tint = lerp(particleStartTint, particleEndTint, t);
+        //color = particleEndTint;
+        color = particleStartTint;
+        color.w = 1;
+        color = saturate(color);
+    }
 
+    return color;
 }

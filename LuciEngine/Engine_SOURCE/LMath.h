@@ -372,6 +372,10 @@ namespace lu::math
         Vector4& operator*= (float S) noexcept;
         Vector4& operator/= (float S) noexcept;
 
+        //Vector3 to Vector4
+        Vector4(const Vector3& v) : XMFLOAT4(v.x, v.y, v.z, 0.f) {}
+        Vector4& operator= (const Vector3& v) noexcept { x = v.x; y = v.y; z = v.z; w = 0; return *this; }
+
         // Unary operators
         Vector4 operator+ () const noexcept { return *this; }
         Vector4 operator- () const noexcept;

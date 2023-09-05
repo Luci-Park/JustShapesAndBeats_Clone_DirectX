@@ -128,7 +128,7 @@ namespace lu::graphics
 		math::Vector4 position;
 		math::Vector4 direction;
 
-		float endTime;
+		float lifeTime;
 		float time;
 		float speed;
 		UINT active;
