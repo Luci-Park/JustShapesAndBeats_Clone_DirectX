@@ -44,6 +44,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LParticleShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LParticleSystem.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LRigidBody.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LSceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LScript.h" />
@@ -85,6 +86,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LResources.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)LRigidBody.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LSceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LScript.cpp" />

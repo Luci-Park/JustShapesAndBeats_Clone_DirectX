@@ -5,6 +5,7 @@ namespace lu::enums
 	{
 		None,
 		Transform,
+		Rigidbody,
 		Collider2D,
 		MeshRenderer,
 		Mesh,

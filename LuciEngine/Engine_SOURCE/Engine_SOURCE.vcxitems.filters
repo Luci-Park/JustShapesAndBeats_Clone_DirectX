@@ -112,6 +112,9 @@
     <Filter Include="Sound">
       <UniqueIdentifier>{5b970508-06e2-4014-94f6-76c19ed0cad7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Component\RigidBody">
+      <UniqueIdentifier>{ba4c8efb-63be-4de3-b5f2-d992f749f582}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -237,6 +240,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LFontWrapper.h">
       <Filter>Font</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LRigidBody.h">
+      <Filter>GameObject\Component\RigidBody</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp">
@@ -346,6 +352,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LFontWrapper.cpp">
       <Filter>Font</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LRigidBody.cpp">
+      <Filter>GameObject\Component\RigidBody</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
