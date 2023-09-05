@@ -1,6 +1,10 @@
 #pragma once
 #include "..\Engine_SOURCE\LScene.h"
 
+namespace lu::JSAB
+{
+	class TutorialMusicController;
+}
 
 namespace lu::JSAB::Tutorial
 {
@@ -12,8 +16,11 @@ namespace lu::JSAB::Tutorial
 
 		virtual void Initialize() override;
 		virtual void Update() override;
-		virtual void LateUpdate() override;
-		virtual void Render() override;
+
+		virtual void OnEnter() override;
+
+	private:
+		TutorialMusicController* music;
 	};
 }
 

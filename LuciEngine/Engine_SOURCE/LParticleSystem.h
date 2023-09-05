@@ -19,12 +19,13 @@ namespace lu
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
+		void SetTexture(std::shared_ptr<Texture> mTexture);
+
 	private:
 		graphics::StructedBuffer* mBuffer;
 		graphics::StructedBuffer* mSharedBuffer;
 
 		std::shared_ptr<ParticleShader> mParticles;
-		std::shared_ptr<Texture> mTexture;
 
 		Vector4 mStartSize;
 		Vector4 mEndSize;

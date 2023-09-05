@@ -95,4 +95,8 @@ namespace lu
 
 		mBuffer->clear();
 	}
+	void ParticleSystem::SetTexture(std::shared_ptr<Texture> mTexture)
+	{
+		GetMaterial()->SetTexture(mTexture);
+	}
 }

@@ -35,9 +35,9 @@ namespace lu::JSAB::Tutorial
 		GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
 		manager->SetName(L"TutorialManager");
 		auto ma = manager->AddComponent<TutorialManager>();
-		auto m = manager->AddComponent<TutorialMusicController>();
-		ma->SetMusic(m);
-		m->Play();
+		music = manager->AddComponent<TutorialMusicController>();
+		ma->SetMusic(music);
+		//m->Play();
 		
 		/*b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TutorialFullBar>();
 		b->Activate();
@@ -68,12 +68,9 @@ namespace lu::JSAB::Tutorial
 
 		Scene::Update();
 	}
-	void TutorialScene::LateUpdate()
+
+	void TutorialScene::OnEnter()
 	{
-		Scene::LateUpdate();
-	}
-	void TutorialScene::Render()
-	{
-		Scene::Render();
+		music->Play();
 	}
 }

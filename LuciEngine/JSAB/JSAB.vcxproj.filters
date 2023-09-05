@@ -5,18 +5,6 @@
     <ClCompile Include="LoadScenes.h">
       <Filter>Contents\Load</Filter>
     </ClCompile>
-    <ClCompile Include="AnnhilateScene.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="CoolFriendsScene.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="OverworldScene.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="TryThisScene.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="BackgroundObject.cpp">
       <Filter>Contents\Background</Filter>
     </ClCompile>
@@ -98,24 +86,12 @@
     <ClCompile Include="TutorialGiantCircle.cpp">
       <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="DubwooferScene.cpp">
-      <Filter>Contents\Scene</Filter>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>Contents\Scene\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
-    <ClInclude Include="AnnhilateScene.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="CoolFriendsScene.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="OverworldScene.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="TryThisScene.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="BackgroundObject.h">
       <Filter>Contents\Background</Filter>
     </ClInclude>
@@ -204,8 +180,8 @@
     <ClInclude Include="TutorialGiantCircle.h">
       <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClInclude>
-    <ClInclude Include="DubwooferScene.h">
-      <Filter>Contents\Scene</Filter>
+    <ClInclude Include="TestScene.h">
+      <Filter>Contents\Scene\Test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -236,9 +212,6 @@
     <Filter Include="Contents\Scene\Title\UIs">
       <UniqueIdentifier>{c9d45362-4870-4773-a869-e7e077680a40}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Scene\Title\OpeningAnimation">
-      <UniqueIdentifier>{1f52ea33-f941-478c-a5c1-538d32bfa56f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EngineTesters">
       <UniqueIdentifier>{89c1cf6b-235f-4192-bec8-7e6260ac1f60}</UniqueIdentifier>
     </Filter>
@@ -262,6 +235,12 @@
     </Filter>
     <Filter Include="Contents\Scene\Tutorial\Managers">
       <UniqueIdentifier>{f65359ed-cd0a-4232-a371-6926038e203b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Title\Scene\OpeningAnimation">
+      <UniqueIdentifier>{1f52ea33-f941-478c-a5c1-538d32bfa56f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Test">
+      <UniqueIdentifier>{de2dac49-9e17-43a8-ba0f-70c71b38782e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

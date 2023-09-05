@@ -10,20 +10,20 @@ void main(uint3 DTid : SV_DispatchThreadID)
 	if (elementCount <= DTid.x)
 		return;
 
-    //is particle active
+    //if particle is not active
     if (ParticleBuffer[DTid.x].active == 0)
     {
-        //thread가 particle꺼 일 동안
-        while (0 < ParticleSharedBuffer[0].ActiveSharedCount)
+        //if there are active particles to process
+        while (ParticleSharedBuffer[0].ActiveSharedCount > 0)
         {
             int origin = ParticleSharedBuffer[0].ActiveSharedCount;
-            int exchange = origin - 1;
+            int exchange = origin - 1;// <- process one particle at one time
             
             // 쓰레드 동기화 Interlock 관련 함수            
             InterlockedCompareExchange(ParticleSharedBuffer[0].ActiveSharedCount
-                , origin, exchange, exchange);
+                , origin, exchange, exchange);//activeSharedCount을 origin에서 exchange로 바꾸기 시도.
             
-            if (origin == exchange)
+            if (origin == exchange) // activeSharedCount update을 성공했다면 particle활성화.
             {
                 ParticleBuffer[DTid.x].active = 1;
                 break;
@@ -33,7 +33,7 @@ void main(uint3 DTid : SV_DispatchThreadID)
         if (ParticleBuffer[DTid.x].active == 1)
         {
             // 랜덤값으로 위치와 방향을 설정한다.
-            // 샘플링을 시도할 UV 를 계산한다.
+            // 샘플링을 시도할 UV 를 계산한다.=> 노이즈로부터의 sampling
             float4 vRandom = (float4) 0.f;
 
             float2 vUV = float2((float) DTid.x / elementCount, 0.5f);
@@ -56,8 +56,8 @@ void main(uint3 DTid : SV_DispatchThreadID)
     }
     else
     {
-        //ParticleBuffer[DTid.x].position 
-        //   += ParticleBuffer[DTid.x].direction * ParticleBuffer[DTid.x].speed * deltaTime;
+        ParticleBuffer[DTid.x].position 
+           += ParticleBuffer[DTid.x].direction * ParticleBuffer[DTid.x].speed * deltaTime;
         
         // 시간을 체크해서 일정 시간(랜덤)이 지나면
         // active = 0;

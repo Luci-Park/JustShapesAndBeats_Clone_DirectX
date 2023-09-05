@@ -31,12 +31,13 @@ void main(point VSOut In[1], inout TriangleStream<GSOut> output)
     float3 viewPos = mul(float4(worldPos, 1.0f), ViewMatrix).xyz;
     
     //Create Quad
+    //put size & rotation here
     float3 NewPos[4] =
     {
-        viewPos - float3(-0.5f, 0.5f, 0.f) * float3(0.2f, 0.2f, 1.f),
-        viewPos - float3(0.5f, 0.5f, 0.f) * float3(0.2f, 0.2f, 1.f),
-        viewPos - float3(0.5f, -0.5f, 0.f) * float3(0.2f, 0.2f, 1.f),
-        viewPos - float3(-0.5f, -0.5f, 0.f) * float3(0.2f, 0.2f, 1.f)
+        viewPos - float3(-0.5f, 0.5f, 0.f) * float3(10.f, 10.f, 1.f),
+        viewPos - float3(0.5f, 0.5f, 0.f) * float3(10.f, 10.f, 1.f),
+        viewPos - float3(0.5f, -0.5f, 0.f) * float3(10.f, 10.f, 1.f),
+        viewPos - float3(-0.5f, -0.5f, 0.f) * float3(10.f, 10.f, 1.f)
     };
     
     //Set each vertex to view pos

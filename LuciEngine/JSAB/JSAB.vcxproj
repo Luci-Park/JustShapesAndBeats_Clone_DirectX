@@ -153,15 +153,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AnnhilateScene.h" />
     <ClInclude Include="BackgroundObject.h" />
     <ClInclude Include="BackgroundScript.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CameraScript.h" />
-    <ClInclude Include="CoolFriendsScene.h" />
-    <ClInclude Include="DubwooferScene.h" />
     <ClInclude Include="MusicController.h" />
     <ClInclude Include="BulletPool.h" />
+    <ClInclude Include="TestScene.h" />
     <ClInclude Include="TutorialBeatBar.h" />
     <ClInclude Include="TutorialBeatCircle.h" />
     <ClInclude Include="TutorialBurst.h" />
@@ -182,23 +180,19 @@
     <ClInclude Include="TitleObject.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="OpeningUIObjects.h" />
-    <ClInclude Include="OverworldScene.h" />
     <ClInclude Include="PlayerPrefab.h" />
-    <ClInclude Include="TryThisScene.h" />
     <ClInclude Include="TutorialScene.h" />
     <ClInclude Include="yaCameraScript.h" />
     <ClInclude Include="yaGridScript.h" />
     <ClInclude Include="yaPlayerScript.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AnnhilateScene.cpp" />
     <ClCompile Include="BackgroundObject.cpp" />
     <ClCompile Include="BackgroundScript.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CameraScript.cpp" />
-    <ClCompile Include="CoolFriendsScene.cpp" />
-    <ClCompile Include="DubwooferScene.cpp" />
     <ClCompile Include="MusicController.cpp" />
+    <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="TutorialBeatBar.cpp" />
     <ClCompile Include="TutorialBeatCircle.cpp" />
     <ClCompile Include="TutorialBurst.cpp" />
@@ -218,9 +212,7 @@
     <ClCompile Include="TitleObject.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="OpeningUIObjects.cpp" />
-    <ClCompile Include="OverworldScene.cpp" />
     <ClCompile Include="PlayerPrefab.cpp" />
-    <ClCompile Include="TryThisScene.cpp" />
     <ClCompile Include="TutorialScene.cpp" />
     <ClCompile Include="yaCameraScript.cpp" />
     <ClCompile Include="yaGridScript.cpp" />
