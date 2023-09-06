@@ -39,7 +39,8 @@ cbuffer ParticleSystem : register(b3)
     float   particleEndSpeed;
     
 	uint elementCount;
-    float2 particlepadding;
+    uint particlepadding1;
+    uint particlepadding2;
 }
 
 cbuffer Noise : register(b4)
@@ -57,10 +58,14 @@ struct Particle
 {
 	float4  position;
 	float4  direction;
+    float   rotation;
 	float   lifeTime;
 	float   time;
 	float   speed;
 	uint    active;
+    uint    partPadd1;
+    uint    partPadd2;
+    uint    partPadd3;
 };
 
 struct ParticleShared

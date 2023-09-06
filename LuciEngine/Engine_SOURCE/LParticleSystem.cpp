@@ -46,6 +46,7 @@ namespace lu
 			particles[i].position = pos;
 			particles[i].speed = 1.0f;
 			particles[i].active = 0;
+			particles[i].rotation = 0;
 		}
 
 		mParticleBuffer = new graphics::StructedBuffer();

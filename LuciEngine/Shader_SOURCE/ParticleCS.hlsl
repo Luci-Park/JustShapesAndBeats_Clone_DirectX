@@ -8,6 +8,7 @@ void InitializeParticle(int id)
     ParticleBuffer[id].active = 1;
     ParticleBuffer[id].time = 0;
     ParticleBuffer[id].lifeTime = particleLifetime;
+    ParticleBuffer[id].rotation = particleStartRotation;
     
     // 랜덤값으로 위치와 방향을 설정한다.
     // 샘플링을 시도할 UV 를 계산한다.=> 노이즈로부터의 sampling
@@ -67,9 +68,10 @@ void main(uint3 DTid : SV_DispatchThreadID)
             ParticleBuffer[id].active = 0;
         else
         {
+            float speed = lerp(particleStartSpeed, particleEndSpeed, t);
             ParticleBuffer[id].position 
-           += ParticleBuffer[id].direction * lerp(particleStartSpeed, particleEndSpeed, t) * particleDeltaTime;
-            
+           += ParticleBuffer[id].direction * speed * particleDeltaTime;
+            ParticleBuffer[id].rotation += particleRotationSpeed * particleDeltaTime;
         }
         
     }

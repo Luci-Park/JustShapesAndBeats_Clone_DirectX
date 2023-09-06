@@ -55,7 +55,8 @@ namespace lu::renderer
 		float endSpeed;
 		
 		int elementCount;
-		Vector2 padding;
+		int padding1;
+		int padding2;
 	};
 
 	CBUFFER(NoiseCB, CBSLOT_NOISE)
