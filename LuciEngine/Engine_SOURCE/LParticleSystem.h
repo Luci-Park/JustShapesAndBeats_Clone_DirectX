@@ -16,11 +16,17 @@ namespace lu
 
 		virtual void LateUpdate() override;
 		virtual void Render() override;
+
+		void SetLifeTime(float time) { mLifeTime = time; }
+		void SetSize(float start, float end) { mStartSize = start; mEndSize = end; }
+		void SetSpeed(float start, float end) { mStartSpeed = start; mEndSpeed = end; }
+		void SetTint(Color start, Color end) { mStartTint = start, mEndTint = end; }
+		void SetRotation(Quaternion start, Quaternion end) { mStartRotation = start, mEndRotation = end; }
 	private:
 		void BindConstantBuffer();
 	public:
-		Vector4 mStartTint;
-		Vector4 mEndTint;
+		Color mStartTint;
+		Color mEndTint;
 		Quaternion mStartRotation;
 		Quaternion mEndRotation;
 		float mLifeTime;

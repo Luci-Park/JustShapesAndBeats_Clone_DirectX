@@ -68,7 +68,7 @@ void main(uint3 DTid : SV_DispatchThreadID)
         else
         {
             ParticleBuffer[id].position 
-           += ParticleBuffer[id].direction * ParticleBuffer[id].speed * particleDeltaTime;
+           += ParticleBuffer[id].direction * lerp(particleStartSpeed, particleEndSpeed, t) * particleDeltaTime;
             
         }
         

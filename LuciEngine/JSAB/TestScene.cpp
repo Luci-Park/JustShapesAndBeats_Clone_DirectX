@@ -27,11 +27,10 @@ namespace lu::JSAB
 		auto a = object::Instantiate<PlayerPrefab>(eLayerType::Player);
 		auto p = a->AddComponent<ParticleSystem>();
 		p->GetMaterial()->SetTexture(Resources::Find<Texture>(L"player1"));
-		p->mLifeTime = 60.f;
+		p->mLifeTime = 30.f;
 		p->mMaxParticles = 1;
-		p->mStartSize = 100;
-		p->mEndSize = 0;
-		p->mStartTint = Color::white;
-		p->mEndTint = Color::clear;
+		p->SetSize(100, 0);
+		p->SetTint({ 0, 0, 1, 0.5 }, { 0, 0, 1, 0.5 });
+		p->SetRotation(Quaternion::Identity, Quaternion::CreateFromAxisAngle(Vector3::Forward, PI * 1.5));
 	}
 }
