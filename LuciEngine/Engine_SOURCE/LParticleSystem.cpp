@@ -12,8 +12,8 @@ namespace lu
 	ParticleSystem::ParticleSystem()
 		: mStartTint(Color::white)
 		, mEndTint(Color::white)
-		, mStartRotation(Quaternion::Identity)
-		, mEndRotation(Quaternion::Identity)
+		, mStartRotation(0)
+		, mRotationSpeed(0)
 		, mLifeTime(10)
 		, mElapsedTime(1)
 		, mStartSize(100)
@@ -110,7 +110,7 @@ namespace lu
 		data.startTint = mStartTint;
 		data.endTint = mEndTint;
 		data.startRot = mStartRotation;
-		data.endRot = mEndRotation;
+		data.rotSpeed = mRotationSpeed;
 		data.lifeTime = mLifeTime;
 		data.elapsedTime = mElapsedTime;
 		data.deltaTime = Time::DeltaTime();

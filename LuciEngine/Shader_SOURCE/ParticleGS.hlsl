@@ -39,7 +39,6 @@ void main(point VSOut In[1], inout TriangleStream<GSOut> output)
     //put size & rotation here
     float t = particles[id].time / particles[id].lifeTime;
     float scale = lerp(particleStartSize, particleEndSize, t);
-    float4 rotation = lerp(particleStartRotation, particleEndRotation, t);
   
     float3 NewPos[4] =
     {

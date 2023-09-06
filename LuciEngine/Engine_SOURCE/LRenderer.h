@@ -43,18 +43,19 @@ namespace lu::renderer
 	{
 		lu::math::Color startTint;
 		lu::math::Color endTint;
-		lu::math::Quaternion startRot;
-		lu::math::Quaternion endRot;
 		float lifeTime;
 		float elapsedTime;
 		float deltaTime;
 
+		float startRot;
+		float rotSpeed;
 		float startSize;
 		float endSize;
 		float startSpeed;
 		float endSpeed;
 		
 		int elementCount;
+		Vector2 padding;
 	};
 
 	CBUFFER(NoiseCB, CBSLOT_NOISE)

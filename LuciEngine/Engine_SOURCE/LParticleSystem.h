@@ -21,14 +21,14 @@ namespace lu
 		void SetSize(float start, float end) { mStartSize = start; mEndSize = end; }
 		void SetSpeed(float start, float end) { mStartSpeed = start; mEndSpeed = end; }
 		void SetTint(Color start, Color end) { mStartTint = start, mEndTint = end; }
-		void SetRotation(Quaternion start, Quaternion end) { mStartRotation = start, mEndRotation = end; }
+		void SetRotation(float start, float speed) { mStartRotation = start, mRotationSpeed = speed; }
 	private:
 		void BindConstantBuffer();
 	public:
 		Color mStartTint;
 		Color mEndTint;
-		Quaternion mStartRotation;
-		Quaternion mEndRotation;
+		float mStartRotation;
+		float mRotationSpeed;
 		float mLifeTime;
 		float mElapsedTime;
 		float mStartSize;

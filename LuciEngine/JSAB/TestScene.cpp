@@ -31,6 +31,6 @@ namespace lu::JSAB
 		p->mMaxParticles = 1;
 		p->SetSize(100, 0);
 		p->SetTint({ 0, 0, 1, 0.5 }, { 0, 0, 1, 0.5 });
-		p->SetRotation(Quaternion::Identity, Quaternion::CreateFromAxisAngle(Vector3::Forward, PI * 1.5));
+		p->SetRotation(0, 0);
 	}
 }
