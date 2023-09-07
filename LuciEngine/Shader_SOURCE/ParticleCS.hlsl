@@ -31,10 +31,27 @@ void InitializeParticle(int id)
     ParticleBuffer[id].position.xyz = vRandom.xyz * 3.0f;
     ParticleBuffer[id].position.x -= 0.65f;
     ParticleBuffer[id].position.y -= 1.4f;
-    ParticleBuffer[id].position.z = 0.0f;
-    
-    
+    ParticleBuffer[id].position.z = 0.0f;  
 }
+
+void UpdateParticle(int id)
+{
+    ParticleBuffer[id].time += particleDeltaTime;
+    float t = ParticleBuffer[id].time / ParticleBuffer[id].lifeTime;
+    if (t >= 1.0f)
+        ParticleBuffer[id].active = 0;
+    else
+    {
+        float3 acceleration = float3(0, -particleGravityRate, 0);
+            
+        ParticleBuffer[id].position += ParticleBuffer[id].velocity *
+            particleDeltaTime + 0.5 * acceleration * particleDeltaTime * particleDeltaTime;
+            
+        ParticleBuffer[id].rotation += particleRotationSpeed * particleDeltaTime;
+        ParticleBuffer[id].velocity += acceleration * particleDeltaTime;
+    }
+}
+
 [numthreads(128, 1, 1)]// run with 128 thread each dimension
 void main(uint3 DTid : SV_DispatchThreadID)
 {
@@ -65,21 +82,7 @@ void main(uint3 DTid : SV_DispatchThreadID)
     }
     else
     {
-        ParticleBuffer[id].time += particleDeltaTime;
-        float t = ParticleBuffer[id].time / ParticleBuffer[id].lifeTime;
-        if(t >= 1.0f)
-            ParticleBuffer[id].active = 0;
-        else
-        {   
-            float3 acceleration = float3(0, -particleGravityRate, 0);
-            
-            ParticleBuffer[id].position += ParticleBuffer[id].velocity *
-            particleDeltaTime + 0.5 * acceleration * particleDeltaTime * particleDeltaTime;
-            
-            ParticleBuffer[id].rotation += particleRotationSpeed * particleDeltaTime;
-            ParticleBuffer[id].velocity += acceleration * particleDeltaTime;
-        }
-        
+        UpdateParticle(id);        
     }
 }
 

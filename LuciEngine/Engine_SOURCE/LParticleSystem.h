@@ -11,6 +11,12 @@ namespace lu
 	class ParticleSystem : public MeshRenderer
 	{
 	public:
+		enum class Space { local, world };
+		struct Burst
+		{
+			double time;
+			UINT count;
+		};
 		ParticleSystem();
 		~ParticleSystem();
 
@@ -25,30 +31,42 @@ namespace lu
 		//in degrees
 		void SetAngle(float angle1, float angle2) { mAngle1 = angle1, mAngle2 = angle2; }
 		void SetGravity(float gravity) { mGravityModification = gravity; }
+		void SetWorldSpace(Space space) { mbParticleInWorldSpace = (int)space; }
+
+		void Play() { mIsPlaying = true; }
+		void Stop() { mIsPlaying = false; }
 	private:
 		void BindConstantBuffer();
 	public:
+		double Duration;
 		bool Loop;
-		bool mbAsBurst;
-		UINT mMaxParticles;
-		bool mbParticleInWorldSpace;
+		float RateOverTime;
+		float RateOverDistance;
+		std::vector<Burst> Bursts;
+		UINT MaxParticles;
 	private:
 		graphics::StructedBuffer* mParticleBuffer;
 		graphics::StructedBuffer* mSharedBuffer;
 
 		std::shared_ptr<ParticleShader> mParticleShader;
 		
+		bool mIsPlaying;
+
 		Color mStartTint;
 		Color mEndTint;
+		float mLifeTime;
+		float mElapsedTime;
+
 		float mAngle1;
 		float mAngle2;
 		float mStartRotation;
 		float mRotationSpeed;
-		float mLifeTime;
-		float mElapsedTime;
+		
 		float mStartSize;
 		float mEndSize;
 		float mStartSpeed;
+		
 		float mGravityModification;
+		bool mbParticleInWorldSpace;
 	};
 }

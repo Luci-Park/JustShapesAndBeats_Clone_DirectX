@@ -10,22 +10,25 @@
 namespace lu
 {
 	ParticleSystem::ParticleSystem()
-		: Loop(false)
+		: Duration(5)
+		, Loop(true)
+		, RateOverTime(10)
+		, RateOverDistance(0)
+		, Bursts(0)
+		, MaxParticles(1000)
 		, mbParticleInWorldSpace(true)
+		, mLifeTime(10)
+		, mGravityModification(0)
 		, mStartTint(Color::white)
 		, mEndTint(Color::white)
 		, mAngle1(0)
 		, mAngle2(0)
 		, mStartRotation(0)
 		, mRotationSpeed(0)
-		, mLifeTime(10)
 		, mElapsedTime(1)
 		, mStartSize(100)
 		, mEndSize(100)
 		, mStartSpeed(20)
-		, mbAsBurst(false)
-		, mMaxParticles(1000)
-		, mGravityModification(0)
 	{
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"PointMesh");
 		SetMesh(mesh);
@@ -62,24 +65,27 @@ namespace lu
 	}
 	void ParticleSystem::LateUpdate()
 	{
-		float AliveTime = 0.5f;
-		//mElapsedTime += Time::DeltaTime();
-
-		if (mElapsedTime > AliveTime)
+		if (!mIsPlaying) return;
+		if (mElapsedTime > Duration)
 		{
-			float f = (mElapsedTime / AliveTime);
-			UINT AliveCount = (UINT)f;
-			mElapsedTime = f - floor(f);
-
-			ParticleShared shareData = {};
-			shareData.sharedActiveCount = mMaxParticles;
-			mSharedBuffer->SetData(&shareData, 1);
+			if (!Loop)
+			{
+				mIsPlaying = false;
+				return;
+			}
+			mElapsedTime = 0;
 		}
-		else
+		static double frequencyTimer = 0;
+		double frequency = 1.0 / RateOverTime;
+
+		mElapsedTime += Time::DeltaTime();
+		frequencyTimer += Time::DeltaTime();
+		if (frequencyTimer >= frequency)
 		{
-			ParticleShared shareData = {};
-			shareData.sharedActiveCount = 0;
-			mSharedBuffer->SetData(&shareData, 1);
+			frequencyTimer -= frequencyTimer;
+			ParticleShared sharedData = {};
+			sharedData.sharedActiveCount = 1000;
+			mSharedBuffer->SetData(&sharedData, 1);
 		}
 
 	}
@@ -121,7 +127,7 @@ namespace lu
 		data.startSize = mStartSize;
 		data.endSize = mEndSize;
 		data.startSpeed = mStartSpeed;
-		data.elementCount = mMaxParticles;
+		data.elementCount = MaxParticles;
 		data.isParticleInWorldSpace = mbParticleInWorldSpace;
 		data.gravityRate = mGravityModification;
 		cb->SetData(&data);
