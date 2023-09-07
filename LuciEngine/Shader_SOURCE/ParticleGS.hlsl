@@ -38,7 +38,8 @@ void main(point VSOut In[1], inout TriangleStream<GSOut> output)
     float4x4 transformMatrix = CreateRotationMatrix(particles[id].rotation, float3(0, 0, 1));
     transformMatrix = mul(transformMatrix, CreateScaleMatrix(scale));
     transformMatrix = mul(transformMatrix, CreateTranslationMatrix(particles[id].position));
-   
+    if(particleInWorldSpace == 0)
+        transformMatrix = mul(transformMatrix, WorldMatrix);
     for (int i = 0; i < 4; i++)
     {
         Out[i].Instance = In[0].Instance;

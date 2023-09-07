@@ -27,20 +27,25 @@ cbuffer ParticleSystem : register(b3)
 {
     float4  particleStartTint;
     float4  particleEndTint;
+    
     float   particleLifetime;
     float   particleElapsedTime;
     float   particleDeltaTime;
-    float   particleAngle1;
-    float   particleAngle2;
     
+    float   particleAngle1;    
+    float   particleAngle2;
     float   particleStartRotation;
     float   particleRotationSpeed;
+    
     float   particleStartSize;
     float   particleEndSize;
     float   particleStartSpeed;
     float   particleEndSpeed;
     
 	uint elementCount;
+    
+    uint particleInWorldSpace;
+    float3 partpadd;
 }
 
 cbuffer Noise : register(b4)

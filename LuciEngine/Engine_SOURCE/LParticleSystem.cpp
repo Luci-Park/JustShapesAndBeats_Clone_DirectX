@@ -38,11 +38,7 @@ namespace lu
 		for (size_t i = 0; i < 1000; i++)
 		{
 			Vector3 pos = Vector3::Left * 40;
-			particles[i].direction =
-				Vector3(cosf((float)i * (XM_2PI / (float)1000))
-					, sinf((float)i * (XM_2PI / 100.f))
-					, 0.0f);
-
+			particles[i].direction = Vector3::Zero;
 			particles[i].lifeTime = 0;
 			particles[i].time = 0;
 			particles[i].position = pos;
@@ -126,6 +122,7 @@ namespace lu
 		data.startSpeed = mStartSpeed;
 		data.endSpeed = mEndSpeed;
 		data.elementCount = mMaxParticles;
+		data.isParticleInWorldSpace = mbParticleInWorldSpace;
 
 		cb->SetData(&data);
 		for (int i = 0; i < (int)eShaderStage::End; i++)
