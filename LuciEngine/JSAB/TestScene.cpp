@@ -36,7 +36,7 @@ namespace lu::JSAB
 		p->SetTint({ 0, 0, 1, 0.5 }, { 0, 0, 1, 0.5 });
 		p->SetRotation(45, 30);
 		p->SetWorldSpace(ParticleSystem::Space::world);
-		p->SetGravity(10);
+		p->SetGravity(0);
 		p->SetStartSpeed(20);
 		p->Play();
 

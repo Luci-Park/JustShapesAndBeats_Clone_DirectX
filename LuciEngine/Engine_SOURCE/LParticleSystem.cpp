@@ -41,8 +41,8 @@ namespace lu
 		Particle particles[1000] = {};
 		for (size_t i = 0; i < 1000; i++)
 		{
-			Vector3 pos = Vector3::Left * 40;
-			particles[i].velocity = Vector3(0, 1, 0);
+			Vector3 pos = Vector3(RealRandom<float>(-100, 100), RealRandom<float>(-100, 100), 0);
+			particles[i].velocity = Vector3(RealRandom<float>( - 100, 100), RealRandom<float>(-100, 100), 0);
 			particles[i].velocity.Normalize();
 			particles[i].lifeTime = 0;
 			particles[i].time = 0;
@@ -84,7 +84,7 @@ namespace lu
 		{
 			frequencyTimer -= frequencyTimer;
 			ParticleShared sharedData = {};
-			sharedData.sharedActiveCount = 1000;
+			sharedData.sharedActiveCount = 1	;
 			mSharedBuffer->SetData(&sharedData, 1);
 		}
 
