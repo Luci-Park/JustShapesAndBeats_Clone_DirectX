@@ -22,11 +22,14 @@ namespace lu
 		void SetSpeed(float start, float end) { mStartSpeed = start; mEndSpeed = end; }
 		void SetTint(Color start, Color end) { mStartTint = start, mEndTint = end; }
 		void SetRotation(float start, float speed) { mStartRotation = start, mRotationSpeed = speed; }
+		void SetAngle(float angle1, float angle2) { mAngle1 = angle1, mAngle2 = angle2; }
 	private:
 		void BindConstantBuffer();
 	public:
 		Color mStartTint;
 		Color mEndTint;
+		float mAngle1;
+		float mAngle2;
 		float mStartRotation;
 		float mRotationSpeed;
 		float mLifeTime;

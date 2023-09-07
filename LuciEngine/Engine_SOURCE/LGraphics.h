@@ -125,11 +125,11 @@ namespace lu::graphics
 
 	struct Particle
 	{
-		math::Vector4 position;
-		math::Vector4 direction;
-		float rotation;
+		math::Vector3 position;
 		float lifeTime;
+		math::Vector3 direction;
 		float time;
+		float rotation;
 		float speed;
 		UINT active;
 		UINT padding1;

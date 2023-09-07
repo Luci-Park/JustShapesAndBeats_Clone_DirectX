@@ -18,44 +18,38 @@ struct GSOut
 [maxvertexcount(6)]
 void main(point VSOut In[1], inout TriangleStream<GSOut> output)
 {
-    GSOut Out[4] = { (GSOut) 0.0f, (GSOut) 0.0f, (GSOut) 0.0f, (GSOut) 0.0f };
-    for (int i = 0; i < 4; ++i)
-    {
-        Out[i].Instance = In[0].Instance;
-    }
-    
     uint id = In[0].Instance;
     if (particles[id].active == 0) //is particle active?
         return;
     
-    //World Space -> View Space
-    float3 worldPos = (In[0].LocalPos.xyz)
-                    //+ WorldMatrix._41_42_43 
-                    + particles[id].position.xyz;
-    
-    float3 viewPos = mul(float4(worldPos, 1.0f), ViewMatrix).xyz;
-    
-    //Create Quad
-    //put size & rotation here
-    float t = particles[id].time / particles[id].lifeTime;
-    float scale = lerp(particleStartSize, particleEndSize, t);
+    GSOut Out[4] = { (GSOut) 0.0f, (GSOut) 0.0f, (GSOut) 0.0f, (GSOut) 0.0f };
   
-    float3 NewPos[4] =
+    float3 Corners[4] =
     {
-        viewPos - float3(-0.5f, 0.5f, 0.f) * float3(scale, scale, 1.f),
-        viewPos - float3(0.5f, 0.5f, 0.f) * float3(scale,  scale, 1.f),
-        viewPos - float3(0.5f, -0.5f, 0.f) * float3(scale, scale, 1.f),
-        viewPos - float3(-0.5f, -0.5f, 0.f) * float3(scale, scale, 1.f)
+        float3(-0.5f, 0.5f, 0.f),
+        float3(0.5f, 0.5f, 0.f),
+        float3(0.5f, -0.5f, 0.f),
+        float3(-0.5f, -0.5f, 0.f)
     };
     
-    //Set each vertex to view pos
-    for (int i = 0; i < 4; ++i)
+    float t = particles[id].time / particles[id].lifeTime;
+    float scale = lerp(particleStartSize, particleEndSize, t);
+    
+    float4x4 transformMatrix = CreateRotationMatrix(particles[id].rotation, float3(0, 0, 1));
+    transformMatrix = mul(transformMatrix, CreateScaleMatrix(scale));
+    transformMatrix = mul(transformMatrix, CreateTranslationMatrix(particles[id].position));
+   
+    for (int i = 0; i < 4; i++)
     {
-        Out[i].Pos = mul(float4(NewPos[i], 1.0f), ProjectionMatrix);
+        Out[i].Instance = In[0].Instance;
+        float4 world = mul(float4(Corners[i], 1.0f), transformMatrix);
+        float4 view = mul(world, ViewMatrix);
+        float4 proj = mul(view, ProjectionMatrix);
+        Out[i].Pos = proj;
     }
     
     //Set Texture Coordinates
-    Out[0].UV = float2(0.0f, 0.0f);
+        Out[0].UV = float2(0.0f, 0.0f);
     Out[1].UV = float2(1.0f, 0.0f);
     Out[2].UV = float2(1.0f, 1.0f);
     Out[3].UV = float2(0.0f, 1.0f);

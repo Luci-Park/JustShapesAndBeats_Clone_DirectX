@@ -30,6 +30,8 @@ cbuffer ParticleSystem : register(b3)
     float   particleLifetime;
     float   particleElapsedTime;
     float   particleDeltaTime;
+    float   particleAngle1;
+    float   particleAngle2;
     
     float   particleStartRotation;
     float   particleRotationSpeed;
@@ -39,8 +41,6 @@ cbuffer ParticleSystem : register(b3)
     float   particleEndSpeed;
     
 	uint elementCount;
-    uint particlepadding1;
-    uint particlepadding2;
 }
 
 cbuffer Noise : register(b4)
@@ -56,16 +56,14 @@ SamplerState anisotropicSampler : register(s1);
 
 struct Particle
 {
-	float4  position;
-	float4  direction;
-    float   rotation;
+	float3  position;
 	float   lifeTime;
+	float3  direction;
 	float   time;
+    float   rotation;
 	float   speed;
 	uint    active;
     uint    partPadd1;
-    uint    partPadd2;
-    uint    partPadd3;
 };
 
 struct ParticleShared
@@ -111,4 +109,55 @@ float4 GaussianBlur(float2 UV)
     }
     
     return Out;
+}
+
+float4x4 CreateTranslationMatrix(float x, float y, float z)
+{
+    return float4x4(
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 0, 1,
+        x, y, z, 1
+    );
+}
+float4x4 CreateTranslationMatrix(float3 translation)
+{
+    return CreateTranslationMatrix(translation.x, translation.y, translation.z);
+}
+
+float4x4 CreateScaleMatrix(float x, float y, float z)
+{
+    return float4x4(
+        x, 0, 0, 0,
+        0, y, 0, 0,
+        0, 0, z, 0,
+        0, 0, 0, 1
+    );
+}
+
+float4x4 CreateScaleMatrix(float3 scale)
+{
+    return CreateScaleMatrix(scale.x, scale.y, scale.z);
+}
+
+float4x4 CreateScaleMatrix(float scale, bool scaleZ = false)
+{
+    return CreateScaleMatrix(scale, scale, scaleZ ? scale : 1);
+}
+float4x4 CreateRotationMatrix(float angle, float3 axis)
+{
+    float c, s;
+    sincos(angle, s, c);
+
+    float t = 1 - c;
+    float x = axis.x;
+    float y = axis.y;
+    float z = axis.z;
+
+    return float4x4(
+        t * x * x + c, t * x * y - s * z, t * x * z + s * y, 0,
+        t * x * y + s * z, t * y * y + c, t * y * z - s * x, 0,
+        t * x * z - s * y, t * y * z + s * x, t * z * z + c, 0,
+        0, 0, 0, 1
+    );
 }

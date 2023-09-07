@@ -46,6 +46,8 @@ namespace lu::renderer
 		float lifeTime;
 		float elapsedTime;
 		float deltaTime;
+		float   particleAngle1;
+		float   particleAngle2;
 
 		float startRot;
 		float rotSpeed;
@@ -55,8 +57,6 @@ namespace lu::renderer
 		float endSpeed;
 		
 		int elementCount;
-		int padding1;
-		int padding2;
 	};
 
 	CBUFFER(NoiseCB, CBSLOT_NOISE)

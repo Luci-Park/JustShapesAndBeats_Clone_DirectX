@@ -12,6 +12,8 @@ namespace lu
 	ParticleSystem::ParticleSystem()
 		: mStartTint(Color::white)
 		, mEndTint(Color::white)
+		, mAngle1(0)
+		, mAngle2(0)
 		, mStartRotation(0)
 		, mRotationSpeed(0)
 		, mLifeTime(10)
@@ -35,11 +37,11 @@ namespace lu
 		Particle particles[1000] = {};
 		for (size_t i = 0; i < 1000; i++)
 		{
-			Vector4 pos = Vector3::Left * 40;
+			Vector3 pos = Vector3::Left * 40;
 			particles[i].direction =
-				Vector4(cosf((float)i * (XM_2PI / (float)1000))
+				Vector3(cosf((float)i * (XM_2PI / (float)1000))
 					, sinf((float)i * (XM_2PI / 100.f))
-					, 0.0f, 1.0f);
+					, 0.0f);
 
 			particles[i].lifeTime = 0;
 			particles[i].time = 0;
@@ -108,14 +110,17 @@ namespace lu
 		ConstantBuffer* cb = renderer::constantBuffer[(UINT)eCBType::ParticleSystem];
 
 		renderer::ParticleSystemCB data = {};
-		data.startTint = mStartTint;
-		data.endTint = mEndTint;
-		data.startRot = mStartRotation;
-		data.rotSpeed = mRotationSpeed;
 		data.lifeTime = mLifeTime;
 		data.elapsedTime = mElapsedTime;
 		data.deltaTime = Time::DeltaTime();
 
+		data.particleAngle1 = XMConvertToRadians(mAngle1);
+		data.particleAngle2 = XMConvertToRadians(mAngle2);
+
+		data.startTint = mStartTint;
+		data.endTint = mEndTint;
+		data.startRot = XMConvertToRadians(mStartRotation);
+		data.rotSpeed = XMConvertToRadians(mRotationSpeed);
 		data.startSize = mStartSize;
 		data.endSize = mEndSize;
 		data.startSpeed = mStartSpeed;
