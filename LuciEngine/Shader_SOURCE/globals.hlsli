@@ -31,6 +31,7 @@ cbuffer ParticleSystem : register(b3)
     float   particleLifetime;
     float   particleElapsedTime;
     float   particleDeltaTime;
+    float   particleGravityRate;
     
     float   particleAngle1;    
     float   particleAngle2;
@@ -42,10 +43,9 @@ cbuffer ParticleSystem : register(b3)
     float   particleStartSpeed;
     float   particleEndSpeed;
     
-	uint elementCount;
-    
+	uint elementCount;    
     uint particleInWorldSpace;
-    float3 partpadd;
+    float2 partpadd;
 }
 
 cbuffer Noise : register(b4)

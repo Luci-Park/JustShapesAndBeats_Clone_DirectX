@@ -24,9 +24,20 @@ namespace lu
 		void SetRotation(float start, float speed) { mStartRotation = start, mRotationSpeed = speed; }
 		//in degrees
 		void SetAngle(float angle1, float angle2) { mAngle1 = angle1, mAngle2 = angle2; }
+		void SetGravity(float gravity) { mGravityModification = gravity; }
 	private:
 		void BindConstantBuffer();
 	public:
+		bool Loop;
+		bool mbAsBurst;
+		UINT mMaxParticles;
+		bool mbParticleInWorldSpace;
+	private:
+		graphics::StructedBuffer* mParticleBuffer;
+		graphics::StructedBuffer* mSharedBuffer;
+
+		std::shared_ptr<ParticleShader> mParticleShader;
+		
 		Color mStartTint;
 		Color mEndTint;
 		float mAngle1;
@@ -39,14 +50,6 @@ namespace lu
 		float mEndSize;
 		float mStartSpeed;
 		float mEndSpeed;
-		bool mbLoop;
-		bool mbAsBurst;
-		UINT mMaxParticles;
-		bool mbParticleInWorldSpace;
-	private:
-		graphics::StructedBuffer* mParticleBuffer;
-		graphics::StructedBuffer* mSharedBuffer;
-
-		std::shared_ptr<ParticleShader> mParticleShader;
+		float mGravityModification;
 	};
 }

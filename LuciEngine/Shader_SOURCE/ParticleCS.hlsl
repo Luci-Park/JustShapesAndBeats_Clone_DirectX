@@ -67,10 +67,12 @@ void main(uint3 DTid : SV_DispatchThreadID)
         if(t >= 1.0f)
             ParticleBuffer[id].active = 0;
         else
-        {
-            float speed = lerp(particleStartSpeed, particleEndSpeed, t);
-            ParticleBuffer[id].position 
-           += ParticleBuffer[id].direction * speed * particleDeltaTime;
+        {   
+            float3 moveDirection = ParticleBuffer[id].direction * particleStartSpeed;
+            moveDirection += float3(0, -particleGravityRate, 0);
+            float3 moveRate = moveDirection * particleDeltaTime;
+            
+            ParticleBuffer[id].position += moveRate;
             ParticleBuffer[id].rotation += particleRotationSpeed * particleDeltaTime;
         }
         

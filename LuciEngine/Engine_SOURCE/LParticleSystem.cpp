@@ -10,7 +10,9 @@
 namespace lu
 {
 	ParticleSystem::ParticleSystem()
-		: mStartTint(Color::white)
+		: Loop(false)
+		, mbParticleInWorldSpace(true)
+		, mStartTint(Color::white)
 		, mEndTint(Color::white)
 		, mAngle1(0)
 		, mAngle2(0)
@@ -22,9 +24,9 @@ namespace lu
 		, mEndSize(100)
 		, mStartSpeed(20)
 		, mEndSpeed(20)
-		, mbLoop(false)
 		, mbAsBurst(false)
 		, mMaxParticles(1000)
+		, mGravityModification(0)
 	{
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"PointMesh");
 		SetMesh(mesh);
@@ -38,7 +40,7 @@ namespace lu
 		for (size_t i = 0; i < 1000; i++)
 		{
 			Vector3 pos = Vector3::Left * 40;
-			particles[i].direction = Vector3::Zero;
+			particles[i].direction = Vector3::Right;
 			particles[i].lifeTime = 0;
 			particles[i].time = 0;
 			particles[i].position = pos;
@@ -123,7 +125,7 @@ namespace lu
 		data.endSpeed = mEndSpeed;
 		data.elementCount = mMaxParticles;
 		data.isParticleInWorldSpace = mbParticleInWorldSpace;
-
+		data.gravityRate = mGravityModification;
 		cb->SetData(&data);
 		for (int i = 0; i < (int)eShaderStage::End; i++)
 			cb->Bind((eShaderStage)i);

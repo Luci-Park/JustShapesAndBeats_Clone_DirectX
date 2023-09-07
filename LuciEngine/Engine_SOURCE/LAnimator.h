@@ -23,7 +23,7 @@ namespace lu
 	private:
 		std::map<std::wstring, Animation*>mAnimations;
 		Animation* mActiveAnimation;
-		bool mbLoop;
+		bool Loop;
 	};
 }
 

@@ -22,7 +22,7 @@ namespace lu
 	{
 		if (mActiveAnimation == nullptr)
 			return;
-		if (mActiveAnimation->IsComplete() && mbLoop)
+		if (mActiveAnimation->IsComplete() && Loop)
 		{
 			mActiveAnimation->Reset();
 		}
@@ -67,7 +67,7 @@ namespace lu
 		{
 			mActiveAnimation = animation;
 		}
-		mbLoop = loop;
+		Loop = loop;
 		mActiveAnimation->Reset();
 	}
 	void Animator::StopAnimation()

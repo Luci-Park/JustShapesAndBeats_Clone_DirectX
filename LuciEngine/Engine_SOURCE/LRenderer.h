@@ -43,21 +43,25 @@ namespace lu::renderer
 	{
 		lu::math::Color startTint;
 		lu::math::Color endTint;
-		float lifeTime;
-		float elapsedTime;
-		float deltaTime;
+		
+		float	lifeTime;
+		float	elapsedTime;
+		float	deltaTime;
+		float	gravityRate;
+		
 		float   particleAngle1;
 		float   particleAngle2;
-
 		float startRot;
 		float rotSpeed;
+
 		float startSize;
 		float endSize;
 		float startSpeed;
 		float endSpeed;
 		
-		int elementCount;
+		UINT elementCount;
 		UINT isParticleInWorldSpace;
+		Vector2 padd;
 	};
 
 	CBUFFER(NoiseCB, CBSLOT_NOISE)

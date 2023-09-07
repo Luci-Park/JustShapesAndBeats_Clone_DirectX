@@ -8,7 +8,7 @@ namespace lu
 		, mChannel(nullptr)
 		, mMinDistance(1.0f)
 		, mMaxDistance(5000.0f)
-		, mbLoop(false)
+		, Loop(false)
 	{
 	}
 	AudioClip::~AudioClip()
@@ -27,7 +27,7 @@ namespace lu
 	}
 	void AudioClip::Play()
 	{
-		if (mbLoop)
+		if (Loop)
 			mSound->setMode(FMOD_LOOP_NORMAL);
 		else
 			mSound->setMode(FMOD_LOOP_OFF);

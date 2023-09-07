@@ -21,13 +21,13 @@ namespace lu
 		void SetVolume(float volume);
 		float GetVolume();
 		void Set3DAttributes(const Vector3 pos, const Vector3 vel);
-		void SetLoop(bool loop) { mbLoop = loop; }
+		void SetLoop(bool loop) { Loop = loop; }
 	private:
 		FMOD::Sound* mSound;
 		FMOD::Channel* mChannel;
 		float mMinDistance;
 		float mMaxDistance;
-		bool mbLoop;
+		bool Loop;
 	};
 }
 
