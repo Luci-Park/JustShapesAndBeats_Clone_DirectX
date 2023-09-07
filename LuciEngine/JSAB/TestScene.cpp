@@ -27,12 +27,15 @@ namespace lu::JSAB
 		auto a = object::Instantiate<PlayerPrefab>(eLayerType::Player);
 		auto p = a->AddComponent<ParticleSystem>();
 		p->GetMaterial()->SetTexture(Resources::Find<Texture>(L"player1"));
-		
+		p->Duration = 5;
 		p->MaxParticles = 1000;
 		p->Loop = true;
+		p->Bursts.push_back({ 3, 10, false });
+		p->RateOverTime = 0;
 
-		p->SetLifeTime(30.f);
-		p->SetSize(30, 0);
+
+		p->SetLifeTime(10.f);
+		p->SetSize(30, 30);
 		p->SetTint({ 0, 0, 1, 0.5 }, { 0, 0, 1, 0.5 });
 		p->SetRotation(45, 30);
 		p->SetWorldSpace(ParticleSystem::Space::world);

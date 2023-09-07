@@ -16,6 +16,7 @@ namespace lu
 		{
 			double time;
 			UINT count;
+			bool complete = false;
 		};
 		ParticleSystem();
 		~ParticleSystem();

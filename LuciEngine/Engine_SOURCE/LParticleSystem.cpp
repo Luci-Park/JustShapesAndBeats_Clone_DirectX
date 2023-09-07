@@ -41,8 +41,8 @@ namespace lu
 		Particle particles[1000] = {};
 		for (size_t i = 0; i < 1000; i++)
 		{
-			Vector3 pos = Vector3(RealRandom<float>(-100, 100), RealRandom<float>(-100, 100), 0);
-			particles[i].velocity = Vector3(RealRandom<float>( - 100, 100), RealRandom<float>(-100, 100), 0);
+			Vector3 pos = Vector3(RealRandom<float>(-10, 10), RealRandom<float>(-10, 10), 0);
+			particles[i].velocity = Vector3(RealRandom<float>( - 10, 10), RealRandom<float>(-10, 10), 0);
 			particles[i].velocity.Normalize();
 			particles[i].lifeTime = 0;
 			particles[i].time = 0;
@@ -65,29 +65,64 @@ namespace lu
 	}
 	void ParticleSystem::LateUpdate()
 	{
-		if (!mIsPlaying) return;
-		if (mElapsedTime > Duration)
+		static double frequencyTimer = 0;
+		static Vector3 prevPos; 
+		static bool posSet = false;
+
+		int numberOfParticles = 0;
+		if (!posSet)
 		{
+			posSet = true;
+			prevPos = Owner()->mTransform->GetPosition();
+		}
+
+		if (!mIsPlaying) return;
+		if (mElapsedTime > Duration + mLifeTime)
+		{
+			mElapsedTime -= mElapsedTime;
+			frequencyTimer -= frequencyTimer;
+			for (int i = 0; i < Bursts.size(); i++)
+			{
+				Bursts[i].complete = false;
+			}
 			if (!Loop)
 			{
 				mIsPlaying = false;
 				return;
 			}
-			mElapsedTime = 0;
 		}
-		static double frequencyTimer = 0;
-		double frequency = 1.0 / RateOverTime;
-
 		mElapsedTime += Time::DeltaTime();
-		frequencyTimer += Time::DeltaTime();
-		if (frequencyTimer >= frequency)
+		if (mElapsedTime > Duration)
+			return;
+		if (RateOverTime > 0)
 		{
-			frequencyTimer -= frequencyTimer;
-			ParticleShared sharedData = {};
-			sharedData.sharedActiveCount = 1	;
-			mSharedBuffer->SetData(&sharedData, 1);
+			double frequency = 1.0 / RateOverTime;
+
+			frequencyTimer += Time::DeltaTime();
+			if (frequencyTimer >= frequency)
+			{
+				frequencyTimer -= frequencyTimer;
+				numberOfParticles++;
+			}
+		}
+		if (RateOverDistance > 0)
+		{
+			Vector3 current = Owner()->mTransform->GetPosition();
+
+		}
+		for (int i = 0; i < Bursts.size(); i++)
+		{
+			if (Bursts[i].complete) continue;
+			if (mElapsedTime >= Bursts[i].time)
+			{
+				numberOfParticles += Bursts[i].count;
+				Bursts[i].complete = true;
+			}
 		}
 
+		ParticleShared sharedData = {};
+		sharedData.sharedActiveCount = numberOfParticles;
+		mSharedBuffer->SetData(&sharedData, 1);
 	}
 	void ParticleSystem::Render()
 	{

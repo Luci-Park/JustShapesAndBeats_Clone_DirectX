@@ -9,18 +9,18 @@ void InitializeParticle(int id)
     ParticleBuffer[id].time = 0;
     ParticleBuffer[id].lifeTime = particleLifetime;
     ParticleBuffer[id].rotation = particleStartRotation;
-    ParticleBuffer[id].velocity *= particleStartSpeed;
+    ParticleBuffer[id].velocity = normalize(ParticleBuffer[id].velocity) * particleStartSpeed;
     
     // 랜덤값으로 위치와 방향을 설정한다.
     // 샘플링을 시도할 UV 를 계산한다.=> 노이즈로부터의 sampling
     
-    float4 vRandom = (float4) 0.f;
+        float4 vRandom = (float4) 0.f;
 
-    float2 vUV = float2((float) id / elementCount, 0.5f);
-    vUV.x += particleElapsedTime;
-    vUV.y += sin((vUV.x + particleElapsedTime) * 3.141592f + 2.f * 10.f) * 0.5f;
+        float2 vUV = float2((float) id / elementCount, 0.5f);
+        vUV.x += particleElapsedTime;
+        vUV.y += sin((vUV.x + particleElapsedTime) * 3.141592f + 2.f * 10.f) * 0.5f;
 
-    vRandom = float4
+        vRandom = float4
             (
                   GaussianBlur(vUV + float2(0.f, 0.f)).x
                 , GaussianBlur(vUV + float2(0.1f, 0.f)).x
@@ -28,11 +28,11 @@ void InitializeParticle(int id)
                 , GaussianBlur(vUV + float2(0.3f, 0.f)).x
             );
             
-    ParticleBuffer[id].position.xyz = vRandom.xyz * 3.0f;
-    ParticleBuffer[id].position.x -= 0.65f;
-    ParticleBuffer[id].position.y -= 1.4f;
-    ParticleBuffer[id].position.z = 0.0f;  
-}
+        ParticleBuffer[id].position.xyz = vRandom.xyz * 3.0f;
+        ParticleBuffer[id].position.x -= 0.65f;
+        ParticleBuffer[id].position.y -= 1.4f;
+        ParticleBuffer[id].position.z = 0.0f;
+    }
 
 void UpdateParticle(int id)
 {
