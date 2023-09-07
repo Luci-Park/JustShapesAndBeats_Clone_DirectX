@@ -43,7 +43,7 @@ namespace lu::JSAB
 		void CountTimer();
 		Vector3 GetInputDir();
 		Quaternion GetRotation(Vector3 moveDir);
-		Vector3 GetMoveScale(Vector3 direction);
+		Vector3 GetMoveScale(Vector3 velocity);
 
 		void OnDamage();
 		void PlayHitSound();

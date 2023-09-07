@@ -899,10 +899,10 @@ namespace lu::math
     {
     public:
         Vector3 position;
-        Vector3 direction;
+        Vector3 velocity;
 
-        Ray() noexcept : position(0, 0, 0), direction(0, 0, 1) {}
-        Ray(const Vector3& pos, const Vector3& dir) noexcept : position(pos), direction(dir) {}
+        Ray() noexcept : position(0, 0, 0), velocity(0, 0, 1) {}
+        Ray(const Vector3& pos, const Vector3& dir) noexcept : position(pos), velocity(dir) {}
 
         Ray(const Ray&) = default;
         Ray& operator=(const Ray&) = default;

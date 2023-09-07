@@ -3689,8 +3689,8 @@ inline bool Ray::operator == (const Ray& r) const noexcept
     using namespace DirectX;
     const XMVECTOR r1p = XMLoadFloat3(&position);
     const XMVECTOR r2p = XMLoadFloat3(&r.position);
-    const XMVECTOR r1d = XMLoadFloat3(&direction);
-    const XMVECTOR r2d = XMLoadFloat3(&r.direction);
+    const XMVECTOR r1d = XMLoadFloat3(&velocity);
+    const XMVECTOR r2d = XMLoadFloat3(&r.velocity);
     return XMVector3Equal(r1p, r2p) && XMVector3Equal(r1d, r2d);
 }
 
@@ -3699,8 +3699,8 @@ inline bool Ray::operator != (const Ray& r) const noexcept
     using namespace DirectX;
     const XMVECTOR r1p = XMLoadFloat3(&position);
     const XMVECTOR r2p = XMLoadFloat3(&r.position);
-    const XMVECTOR r1d = XMLoadFloat3(&direction);
-    const XMVECTOR r2d = XMLoadFloat3(&r.direction);
+    const XMVECTOR r1d = XMLoadFloat3(&velocity);
+    const XMVECTOR r2d = XMLoadFloat3(&r.velocity);
     return XMVector3NotEqual(r1p, r2p) && XMVector3NotEqual(r1d, r2d);
 }
 
@@ -3710,17 +3710,17 @@ inline bool Ray::operator != (const Ray& r) const noexcept
 
 inline bool Ray::Intersects(const BoundingSphere& sphere, _Out_ float& Dist) const noexcept
 {
-    return sphere.Intersects(position, direction, Dist);
+    return sphere.Intersects(position, velocity, Dist);
 }
 
 inline bool Ray::Intersects(const BoundingBox& box, _Out_ float& Dist) const noexcept
 {
-    return box.Intersects(position, direction, Dist);
+    return box.Intersects(position, velocity, Dist);
 }
 
 inline bool Ray::Intersects(const Vector3& tri0, const Vector3& tri1, const Vector3& tri2, _Out_ float& Dist) const noexcept
 {
-    return DirectX::TriangleTests::Intersects(position, direction, tri0, tri1, tri2, Dist);
+    return DirectX::TriangleTests::Intersects(position, velocity, tri0, tri1, tri2, Dist);
 }
 
 inline bool Ray::Intersects(const Plane& plane, _Out_ float& Dist) const noexcept
@@ -3728,7 +3728,7 @@ inline bool Ray::Intersects(const Plane& plane, _Out_ float& Dist) const noexcep
     using namespace DirectX;
 
     const XMVECTOR p = XMLoadFloat4(&plane);
-    const XMVECTOR dir = XMLoadFloat3(&direction);
+    const XMVECTOR dir = XMLoadFloat3(&velocity);
 
     const XMVECTOR nd = XMPlaneDotNormal(p, dir);
 

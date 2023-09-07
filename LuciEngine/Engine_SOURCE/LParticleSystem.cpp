@@ -23,7 +23,6 @@ namespace lu
 		, mStartSize(100)
 		, mEndSize(100)
 		, mStartSpeed(20)
-		, mEndSpeed(20)
 		, mbAsBurst(false)
 		, mMaxParticles(1000)
 		, mGravityModification(0)
@@ -40,11 +39,11 @@ namespace lu
 		for (size_t i = 0; i < 1000; i++)
 		{
 			Vector3 pos = Vector3::Left * 40;
-			particles[i].direction = Vector3::Right;
+			particles[i].velocity = Vector3(0, 1, 0);
+			particles[i].velocity.Normalize();
 			particles[i].lifeTime = 0;
 			particles[i].time = 0;
 			particles[i].position = pos;
-			particles[i].speed = 1.0f;
 			particles[i].active = 0;
 			particles[i].rotation = 0;
 		}
@@ -122,7 +121,6 @@ namespace lu
 		data.startSize = mStartSize;
 		data.endSize = mEndSize;
 		data.startSpeed = mStartSpeed;
-		data.endSpeed = mEndSpeed;
 		data.elementCount = mMaxParticles;
 		data.isParticleInWorldSpace = mbParticleInWorldSpace;
 		data.gravityRate = mGravityModification;

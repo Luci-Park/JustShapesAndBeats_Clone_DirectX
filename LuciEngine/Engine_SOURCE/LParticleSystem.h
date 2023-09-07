@@ -19,7 +19,7 @@ namespace lu
 
 		void SetLifeTime(float time) { mLifeTime = time; }
 		void SetSize(float start, float end) { mStartSize = start; mEndSize = end; }
-		void SetSpeed(float start, float end) { mStartSpeed = start; mEndSpeed = end; }
+		void SetStartSpeed(float speed) { mStartSpeed = speed;}
 		void SetTint(Color start, Color end) { mStartTint = start, mEndTint = end; }
 		void SetRotation(float start, float speed) { mStartRotation = start, mRotationSpeed = speed; }
 		//in degrees
@@ -49,7 +49,6 @@ namespace lu
 		float mStartSize;
 		float mEndSize;
 		float mStartSpeed;
-		float mEndSpeed;
 		float mGravityModification;
 	};
 }

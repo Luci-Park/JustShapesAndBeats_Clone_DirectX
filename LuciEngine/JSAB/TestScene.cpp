@@ -33,7 +33,7 @@ namespace lu::JSAB
 		p->SetTint({ 0, 0, 1, 0.5 }, { 0, 0, 1, 0.5 });
 		p->SetRotation(45, 30);
 		p->mbParticleInWorldSpace = true;
-		p->SetGravity(0);
-		p->SetSpeed(20, 0);
+		p->SetGravity(10);
+		p->SetStartSpeed(20);
 	}
 }

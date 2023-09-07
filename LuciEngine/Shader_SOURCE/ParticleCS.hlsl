@@ -9,6 +9,7 @@ void InitializeParticle(int id)
     ParticleBuffer[id].time = 0;
     ParticleBuffer[id].lifeTime = particleLifetime;
     ParticleBuffer[id].rotation = particleStartRotation;
+    ParticleBuffer[id].velocity *= particleStartSpeed;
     
     // 랜덤값으로 위치와 방향을 설정한다.
     // 샘플링을 시도할 UV 를 계산한다.=> 노이즈로부터의 sampling
@@ -31,6 +32,8 @@ void InitializeParticle(int id)
     ParticleBuffer[id].position.x -= 0.65f;
     ParticleBuffer[id].position.y -= 1.4f;
     ParticleBuffer[id].position.z = 0.0f;
+    
+    
 }
 [numthreads(128, 1, 1)]// run with 128 thread each dimension
 void main(uint3 DTid : SV_DispatchThreadID)
@@ -68,12 +71,13 @@ void main(uint3 DTid : SV_DispatchThreadID)
             ParticleBuffer[id].active = 0;
         else
         {   
-            float3 moveDirection = ParticleBuffer[id].direction * particleStartSpeed;
-            moveDirection += float3(0, -particleGravityRate, 0);
-            float3 moveRate = moveDirection * particleDeltaTime;
+            float3 acceleration = float3(0, -particleGravityRate, 0);
             
-            ParticleBuffer[id].position += moveRate;
+            ParticleBuffer[id].position += ParticleBuffer[id].velocity *
+            particleDeltaTime + 0.5 * acceleration * particleDeltaTime * particleDeltaTime;
+            
             ParticleBuffer[id].rotation += particleRotationSpeed * particleDeltaTime;
+            ParticleBuffer[id].velocity += acceleration * particleDeltaTime;
         }
         
     }

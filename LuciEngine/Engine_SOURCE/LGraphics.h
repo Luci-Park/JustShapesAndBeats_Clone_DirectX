@@ -127,14 +127,12 @@ namespace lu::graphics
 	{
 		math::Vector3 position;
 		float lifeTime;
-		math::Vector3 direction;
+		math::Vector3 velocity;
 		float time;
+		
 		float rotation;
-		float speed;
 		UINT active;
-		UINT padding1;
-		UINT padding2;
-		UINT padding3;
+		math::Vector2 padding;
 	};
 
 	struct ParticleShared

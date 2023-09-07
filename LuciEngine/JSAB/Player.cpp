@@ -166,12 +166,12 @@ namespace lu::JSAB
 			mDashState = eDashState::Idle;
 	}
 
-	Vector3 Player::GetMoveScale(Vector3 direction)
+	Vector3 Player::GetMoveScale(Vector3 velocity)
 	{
 		static Vector3 prevDir = Vector3::Zero;
-		if (direction == Vector3::Zero || direction != prevDir)
+		if (velocity == Vector3::Zero || velocity != prevDir)
 		{
-			prevDir = direction;
+			prevDir = velocity;
 			return mOrgScale;
 		}
 		else
