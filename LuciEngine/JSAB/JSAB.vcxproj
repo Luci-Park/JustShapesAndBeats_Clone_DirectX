@@ -161,6 +161,7 @@
     <ClInclude Include="MusicController.h" />
     <ClInclude Include="BulletPool.h" />
     <ClInclude Include="TestScene.h" />
+    <ClInclude Include="Triangle.h" />
     <ClInclude Include="TutorialBeatBar.h" />
     <ClInclude Include="TutorialBeatCircle.h" />
     <ClInclude Include="TutorialBurst.h" />
@@ -195,6 +196,7 @@
     <ClCompile Include="CameraScript.cpp" />
     <ClCompile Include="MusicController.cpp" />
     <ClCompile Include="TestScene.cpp" />
+    <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="TutorialBeatBar.cpp" />
     <ClCompile Include="TutorialBeatCircle.cpp" />
     <ClCompile Include="TutorialBurst.cpp" />

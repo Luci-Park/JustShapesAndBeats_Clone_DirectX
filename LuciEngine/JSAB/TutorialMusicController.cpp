@@ -5,6 +5,7 @@
 #include "LTime.h"
 #include "LFontWrapper.h"
 #include "LInput.h"
+#include "TutorialManager.h"
 namespace lu::JSAB
 {
 	TutorialMusicController::TutorialMusicController()
@@ -41,8 +42,11 @@ namespace lu::JSAB
 			{
 				if (time > mCheckPoints[mStageIdx].second)
 				{
-					if (mNextStageIdx > mStageIdx) 
+					if (mNextStageIdx > mStageIdx)
+					{
 						mStageIdx = mNextStageIdx;
+						Owner()->GetComponent<TutorialManager>()->ClearBullets();
+					}
 					mAudioSource->SetPosition(mCheckPoints[mStageIdx].first);
 				}
 			}

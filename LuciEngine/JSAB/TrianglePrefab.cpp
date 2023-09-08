@@ -4,6 +4,7 @@
 #include "LMeshRenderer.h"
 #include "LAnimator.h"
 #include "LCollider2D.h"
+#include "Triangle.h"
 namespace lu::JSAB
 {
 	TrianglePrefab::TrianglePrefab(eLayerType layer)
@@ -20,14 +21,14 @@ namespace lu::JSAB
 		mTransform->SetPosition({ 50,50, 1 });
 		AddComponent<Collider2D>()->SetType(lu::enums::eColliderType::Circle)->SetSize({ 2.3, 2.3 });
 		{
-			GameObject* triangle = object::Instantiate<GameObject>(mTransform, eLayerType::FriendlyObjects);
+			GameObject* triangle = object::Instantiate<GameObject>(mTransform, eLayerType::Item);
 			triangle->SetName(L"triangle");
 			MeshRenderer* mr = triangle->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(CreateTriangleMat());
 		}
 
 		{
-			GameObject* circle = object::Instantiate<GameObject>(mTransform, eLayerType::FriendlyObjects);
+			GameObject* circle = object::Instantiate<GameObject>(mTransform, eLayerType::Item);
 			circle->SetName(L"tri_effect_blue");
 			MeshRenderer* mr = circle->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(CreateWhiteBlueCircleMat());
@@ -61,6 +62,7 @@ namespace lu::JSAB
 			ani->AddRotationKey(duration, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 2));
 			anim->PlayAnimation(L"Rotate", true);
 		}
+		AddComponent<Triangle>();
 	}
 	std::shared_ptr<graphics::Material> TrianglePrefab::CreateTriangleMat()
 	{

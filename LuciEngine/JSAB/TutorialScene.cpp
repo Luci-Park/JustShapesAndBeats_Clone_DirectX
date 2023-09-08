@@ -17,7 +17,7 @@ namespace lu::JSAB::Tutorial
 	void TutorialScene::Initialize()
 	{
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Bullet, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::FriendlyObjects, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Item, true);
 		//Camera
 		{
 			bool active[]{ true, true, true, true, false, false };

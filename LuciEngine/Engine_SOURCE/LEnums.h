@@ -23,7 +23,7 @@ namespace lu::enums
 	{
 		Player,
 		Bullet,
-		FriendlyObjects,
+		Item,
 		UI,
 		System,
 		Camera,

@@ -43,6 +43,17 @@ namespace lu::JSAB
 		if (stage == 8)Stage9(time);
 		if (stage == 9)Stage10(time);
 	}
+	void TutorialManager::ClearBullets()
+	{
+		mStage1Bullets.Reset();
+		mBurstBullets.Reset();
+		mBeatBars.Reset();
+		mBeatCircles.Reset();
+		mFullBar.Reset();
+		mCircleLines.Reset();
+		mCircles.Reset();
+		mStage1Bullets.Reset();
+	}
 	void TutorialManager::Stage1(double time)
 	{
 		const double beat[] = {

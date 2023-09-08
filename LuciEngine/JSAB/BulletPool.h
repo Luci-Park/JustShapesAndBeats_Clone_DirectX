@@ -25,6 +25,14 @@ namespace lu::JSAB
 			_idx %= _objects.size();
 			return _objects[_idx++];
 		}
+		void Reset()
+		{
+			for (int i = 0; i < _objects.size(); i++)
+			{
+				_objects[i]->Deactivate();
+			}
+			_idx = 0;
+		}
 	private:
 		std::vector<T*> _objects;
 		int _maxSize;

@@ -67,40 +67,6 @@ namespace lu::JSAB
 			OnDamage(other->Owner()->mTransform);
 	}
 
-	void Player::WhileDamaged()
-	{
-	}
-
-	void Player::CheckBoundary()
-	{
-		Vector3 currPos = mTr->GetPosition();
-		Vector3 halfScale = mTr->GetScale() * 0.5f;
-		RECT rect = SceneManager::MainCamera()->GetBoundary();
-		if (currPos.y < (float)rect.top + halfScale.y || currPos.y >(float)rect.bottom - halfScale.y
-			|| currPos.x < (float)rect.left + halfScale.x || currPos.x >(float)rect.right - halfScale.x)
-		{
-			if (!IsShieldUp())
-			{
-				Vector3 newPos;
-				newPos.y = std::clamp(currPos.y, (float)rect.top + halfScale.y, (float)rect.bottom - halfScale.y);
-				newPos.x = std::clamp(currPos.x, (float)rect.left + halfScale.x, (float)rect.right - halfScale.x);
-				mTr->SetPosition(newPos);
-			}
-			else
-			{
-				Vector3 wallNormal, velocity = mRb->GetVelocity();
-				if (currPos.y < (float)rect.top + halfScale.y) wallNormal = Vector3::Down;
-				else if (currPos.y > (float)rect.bottom - halfScale.y) wallNormal = Vector3::Up;
-				else if (currPos.x < (float)rect.left + halfScale.x) wallNormal = Vector3::Right;
-				else if (currPos.x > (float)rect.right - halfScale.x) wallNormal = Vector3::Left;
-
-				float intoWall = wallNormal.Dot(velocity);
-				Vector3 bounce = velocity - 2.0f * intoWall * wallNormal;
-				mRb->SetVelocity(bounce);				
-			}
-		}		
-	}
-
 	void Player::Move()
 	{
 		if (IsShieldUp()) return;
@@ -138,6 +104,36 @@ namespace lu::JSAB
 		}
 	}
 
+	void Player::CheckBoundary()
+	{
+		Vector3 currPos = mTr->GetPosition();
+		Vector3 halfScale = mTr->GetScale() * 0.5f;
+		RECT rect = SceneManager::MainCamera()->GetBoundary();
+		if (currPos.y < (float)rect.top + halfScale.y || currPos.y >(float)rect.bottom - halfScale.y
+			|| currPos.x < (float)rect.left + halfScale.x || currPos.x >(float)rect.right - halfScale.x)
+		{
+			if (!IsShieldUp())
+			{
+				Vector3 newPos;
+				newPos.y = std::clamp(currPos.y, (float)rect.top + halfScale.y, (float)rect.bottom - halfScale.y);
+				newPos.x = std::clamp(currPos.x, (float)rect.left + halfScale.x, (float)rect.right - halfScale.x);
+				mTr->SetPosition(newPos);
+			}
+			else
+			{
+				Vector3 wallNormal, velocity = mRb->GetVelocity();
+				if (currPos.y < (float)rect.top + halfScale.y) wallNormal = Vector3::Down;
+				else if (currPos.y > (float)rect.bottom - halfScale.y) wallNormal = Vector3::Up;
+				else if (currPos.x < (float)rect.left + halfScale.x) wallNormal = Vector3::Right;
+				else if (currPos.x > (float)rect.right - halfScale.x) wallNormal = Vector3::Left;
+
+				float intoWall = wallNormal.Dot(velocity);
+				Vector3 bounce = velocity - 2.0f * intoWall * wallNormal;
+				mRb->SetVelocity(bounce);				
+			}
+		}		
+	}
+
 	void Player::OnDamage(Transform* other)
 	{
 		PlayHitSound();
@@ -155,49 +151,11 @@ namespace lu::JSAB
 		else 
 			OnDeath();
 	}
-	Vector3 Player::GetInputDir()
+	
+	void Player::OnDeath()
 	{
-		Vector3 moveDir = Vector3::Zero;
-		if (Input::GetKey(eKeyCode::LEFT))
-			moveDir = Vector3::Left;
-		if (Input::GetKey(eKeyCode::RIGHT))
-			moveDir = Vector3::Right;
-		if (Input::GetKey(eKeyCode::UP))
-			moveDir = Vector3::Up;
-		if (Input::GetKey(eKeyCode::DOWN))
-			moveDir = Vector3::Down;
-		return moveDir;
 	}
-	Vector3 Player::GetMoveScale(Vector3 velocity)
-	{
-		static Vector3 prevDir = Vector3::Zero;
-		if (velocity == Vector3::Zero || velocity != prevDir)
-		{
-			prevDir = velocity;
-			return mOrgScale;
-		}
-		else
-		{
-			return mMoveScale;
-		}
-	}
-	bool Player::IsShieldUp()
-	{
-		return (mShield->IsShieldUp() && mShield->ShieldProgress() < 0.5f);
-	}
-	Quaternion Player::GetRotation(Vector3 moveDir)
-	{
-		float radian = 0;
-		if (moveDir == Vector3::Left)
-			radian = PI * 0.5f;
-		if (moveDir == Vector3::Right)
-			radian = -PI * 0.5f;
-		if (moveDir == Vector3::Down)
-			radian = PI;
-
-		return Quaternion::CreateFromAxisAngle(Vector3::Forward, radian);
-	}
-
+	
 	void Player::MoveRotate(Quaternion rotation)
 	{
 		static Quaternion originalRotation;
@@ -222,6 +180,7 @@ namespace lu::JSAB
 			mTr->SetRotation(rotation);
 		}
 	}
+	
 	void Player::MoveScale(Vector3 scale)
 	{
 		static Vector3 originalScale;
@@ -246,12 +205,58 @@ namespace lu::JSAB
 			mTr->SetScale(scale);
 		}
 	}
-
+	
 	void Player::CountDashTimer()
 	{
 		mTimer += Time::DeltaTime();
 		if (mDashState == eDashState::CoolDown && mTimer > mDashCoolDuration)
 			mDashState = eDashState::Idle;
+	}
+	
+	Vector3 Player::GetInputDir()
+	{
+		Vector3 moveDir = Vector3::Zero;
+		if (Input::GetKey(eKeyCode::LEFT))
+			moveDir = Vector3::Left;
+		if (Input::GetKey(eKeyCode::RIGHT))
+			moveDir = Vector3::Right;
+		if (Input::GetKey(eKeyCode::UP))
+			moveDir = Vector3::Up;
+		if (Input::GetKey(eKeyCode::DOWN))
+			moveDir = Vector3::Down;
+		return moveDir;
+	}
+		
+	Quaternion Player::GetRotation(Vector3 moveDir)
+	{
+		float radian = 0;
+		if (moveDir == Vector3::Left)
+			radian = PI * 0.5f;
+		if (moveDir == Vector3::Right)
+			radian = -PI * 0.5f;
+		if (moveDir == Vector3::Down)
+			radian = PI;
+
+		return Quaternion::CreateFromAxisAngle(Vector3::Forward, radian);
+	}
+	
+	Vector3 Player::GetMoveScale(Vector3 velocity)
+	{
+		static Vector3 prevDir = Vector3::Zero;
+		if (velocity == Vector3::Zero || velocity != prevDir)
+		{
+			prevDir = velocity;
+			return mOrgScale;
+		}
+		else
+		{
+			return mMoveScale;
+		}
+	}
+
+	bool Player::IsShieldUp()
+	{
+		return (mShield->IsShieldUp() && mShield->ShieldProgress() < 0.5f);
 	}
 
 	void Player::PlayHitSound()
@@ -259,9 +264,14 @@ namespace lu::JSAB
 		mAudio->SetClip(mHitSounds[math::IntRandom(0, 1)]);
 		mAudio->Play();
 	}
-	void Player::OnDeath()
+
+	void Player::PlayGetItemSound()
 	{
+		mAudio->SetClip(Resources::Load<AudioClip>(L"PowerUp", L"..\\..\\Assets\\AudioClips\\Player\\SFX_POWERUP_2.wav"));
+		mAudio->Play();
 	}
+
+
 	void Player::SetDashBurst(GameObject* burst)
 	{
 		mDashBurst = burst;

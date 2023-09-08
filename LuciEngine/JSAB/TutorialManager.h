@@ -24,6 +24,7 @@ namespace lu::JSAB
 		virtual void Update() override;
 
 		void SetMusic(TutorialMusicController* music) { mMusic = music; }
+		void ClearBullets();
 	private:
 		void Stage1(double time);
 		void Stage2(double time);
@@ -44,7 +45,6 @@ namespace lu::JSAB
 		BulletPool<TutorialFullBar> mFullBar;
 		BulletPool<TutorialCircleLine> mCircleLines;
 		BulletPool<TutorialGiantCircle> mCircles;
-		Animator* mBeatBullets[8];
 	};
 }
 

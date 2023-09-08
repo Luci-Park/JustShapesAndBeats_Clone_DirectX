@@ -92,6 +92,9 @@
     <ClCompile Include="..\Engine_SOURCE\LTexture.cpp">
       <Filter>Contents\Texture</Filter>
     </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Contents\Triangle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -188,6 +191,9 @@
     </ClInclude>
     <ClInclude Include="..\Engine_SOURCE\LTexture.h">
       <Filter>Contents\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Contents\Triangle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

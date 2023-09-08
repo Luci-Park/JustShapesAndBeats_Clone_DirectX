@@ -1,6 +1,5 @@
 #pragma once
 #include "LGameObject.h"
-
 namespace lu::graphics
 {
 	class Material;

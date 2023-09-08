@@ -38,11 +38,9 @@ namespace lu::JSAB
 		void SetShield(ShieldScript* shield) { mShield = shield; }
 	private:
 		void Move();
-		void WhileDamaged();
 		void CheckBoundary();
 
 		void OnDamage(Transform* other);
-		void PlayHitSound();
 		void OnDeath();
 
 		void MoveRotate(Quaternion rotation);
@@ -54,6 +52,8 @@ namespace lu::JSAB
 		
 		bool IsShieldUp();
 
+		void PlayHitSound();
+		void PlayGetItemSound();
 	private:
 		float mMoveSpeed;
 		float mDashSpeed;
