@@ -24,6 +24,8 @@ void InitializeParticle(int id)
         , GaussianBlur(vUV + float2(0.2f, 0.f)).x
         , GaussianBlur(vUV + float2(0.3f, 0.f)).x
     );
+    
+    
     float4 position;
     position.xyz = vRandom.xyz * 3.0f;
     position.x -= 0.65f;

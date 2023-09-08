@@ -28,16 +28,16 @@ namespace lu::JSAB
 		auto p = a->AddComponent<ParticleSystem>();
 		p->GetMaterial()->SetTexture(Resources::Find<Texture>(L"player1"));
 		p->Duration = 10;
-		p->MaxParticles = 100;
+		p->MaxParticles = 1000;
 		p->Loop = true;
 		//p->Bursts.push_back({ 0, 10, false });
-		p->RateOverTime = 1;
+		p->RateOverTime = 0;
+		p->RateOverDistance = 5;
 
 
-		p->SetLifeTime(10);
-		p->SetSize(30, 30);
-		p->SetTint({ 0, 0, 1, 0.5 }, { 0, 0, 1, 0.5 });
-		p->SetRotation(45, 30);
+		p->SetLifeTime(2);
+		p->SetSize(10, 0);
+		p->SetTint({ 1, 1, 1, 0.5 }, { 0, 0, 1, 0.5 });
 		p->SetWorldSpace(ParticleSystem::Space::world);
 		p->SetGravity(0);
 		p->SetStartSpeed(20);

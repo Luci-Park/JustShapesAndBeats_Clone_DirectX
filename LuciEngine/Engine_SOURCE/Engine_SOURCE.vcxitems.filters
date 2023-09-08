@@ -112,6 +112,9 @@
     <Filter Include="GameObject\Component\RigidBody">
       <UniqueIdentifier>{ba4c8efb-63be-4de3-b5f2-d992f749f582}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Component\Text">
+      <UniqueIdentifier>{f6bfea80-aa5d-4063-8670-9b07103b9ca2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -237,6 +240,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LRigidBody.h">
       <Filter>GameObject\Component\RigidBody</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LText.h">
+      <Filter>GameObject\Component\Text</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp">
@@ -346,6 +352,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LRigidBody.cpp">
       <Filter>GameObject\Component\RigidBody</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LText.cpp">
+      <Filter>GameObject\Component\Text</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

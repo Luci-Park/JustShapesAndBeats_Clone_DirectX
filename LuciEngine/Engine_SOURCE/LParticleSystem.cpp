@@ -42,7 +42,7 @@ namespace lu
 		Particle particles[1000] = {};
 		for (size_t i = 0; i < 1000; i++)
 		{
-			Vector3 pos = Vector3(RealRandom<float>(-10, 10), RealRandom<float>(-10, 10), 0);
+			Vector3 pos = Vector3::Down * 20;
 			particles[i].velocity = Vector3(RealRandom<float>( - 10, 10), RealRandom<float>(-10, 10), 0);
 			particles[i].velocity.Normalize();
 			particles[i].lifeTime = 0;
@@ -83,23 +83,19 @@ namespace lu
 
 		if (mElapsedTime > Duration)
 		{
-			if (lifeTimeTimer < 0)
+			mElapsedTime -= mElapsedTime;
+			frequencyTimer -= frequencyTimer;
+			lifeTimeTimer = mLifeTime;
+			prevPos = Owner()->mTransform->GetPosition();
+			for (int i = 0; i < Bursts.size(); i++)
 			{
-
-				mElapsedTime -= mElapsedTime;
-				frequencyTimer -= frequencyTimer;
-				lifeTimeTimer = mLifeTime;
-				for (int i = 0; i < Bursts.size(); i++)
-				{
-					Bursts[i].complete = false;
-				}
-				if (!Loop)
-				{
-					mIsPlaying = false;
-					return;
-				}
+				Bursts[i].complete = false;
 			}
-			return;
+			if (!Loop)
+			{
+				mIsPlaying = false;
+				return;
+			}
 		}
 
 		int numberOfParticles = 0;
@@ -118,7 +114,9 @@ namespace lu
 		if (RateOverDistance > 0)
 		{
 			Vector3 current = Owner()->mTransform->GetPosition();
-
+			float delta = abs(Vector3::Distance(prevPos, current));
+			numberOfParticles += delta * RateOverDistance;
+			prevPos = current;
 		}
 		for (int i = 0; i < Bursts.size(); i++)
 		{
