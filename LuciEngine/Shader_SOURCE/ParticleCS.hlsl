@@ -12,15 +12,12 @@ void InitializeParticle(int id)
     ParticleBuffer[id].velocity = normalize(ParticleBuffer[id].velocity) * particleStartSpeed;
     
     // 랜덤값으로 위치와 방향을 설정한다.
-    // 샘플링을 시도할 UV 를 계산한다.=> 노이즈로부터의 sampling
-    
-    float4 vRandom = (float4) 0.f;
-    
+    // 샘플링을 시도할 UV 를 계산한다.=> 노이즈로부터의 sampling    
     float2 vUV = float2((float) id / elementCount, 0.5f);
     vUV.x += particleElapsedTime;
     vUV.y += sin((vUV.x + particleElapsedTime) * 3.141592f + 2.f * 10.f) * 0.5f;
     
-    vRandom = float4
+    float4 vRandom = float4
     (
           GaussianBlur(vUV + float2(0.f, 0.f)).x
         , GaussianBlur(vUV + float2(0.1f, 0.f)).x
