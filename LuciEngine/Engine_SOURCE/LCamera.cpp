@@ -6,6 +6,7 @@
 #include "LSceneManager.h"
 #include "LScene.h"
 #include "LMeshRenderer.h"
+#include "LText.h"
 extern lu::Application application;
 
 namespace lu
@@ -154,27 +155,32 @@ namespace lu
 		{
 			if (!gameObjects[i]->IsActive())
 				continue;
-
 			MeshRenderer* mr
 				= gameObjects[i]->GetComponent<MeshRenderer>();
 			if (mr == nullptr || !mr->IsActive())
-				continue;
-
-			std::shared_ptr<Material> mat = mr->GetMaterial();
-			eRenderingMode mode = mat->GetRenderingMode();
-			switch (mode)
 			{
-			case lu::graphics::eRenderingMode::Opaque:
-				mOpaqueGameObjects.push_back(gameObjects[i]);
-				break;
-			case lu::graphics::eRenderingMode::CutOut:
-				mCutOutGameObjects.push_back(gameObjects[i]);
-				break;
-			case lu::graphics::eRenderingMode::Transparent:
-				mTransparentGameObjects.push_back(gameObjects[i]);
-				break;
-			default:
-				break;
+				Text* txt = gameObjects[i]->GetComponent<Text>();
+				if (txt != nullptr && txt->IsActive())
+					gameObjects[i]->Render();
+			}
+			else
+			{
+				std::shared_ptr<Material> mat = mr->GetMaterial();
+				eRenderingMode mode = mat->GetRenderingMode();
+				switch (mode)
+				{
+				case lu::graphics::eRenderingMode::Opaque:
+					mOpaqueGameObjects.push_back(gameObjects[i]);
+					break;
+				case lu::graphics::eRenderingMode::CutOut:
+					mCutOutGameObjects.push_back(gameObjects[i]);
+					break;
+				case lu::graphics::eRenderingMode::Transparent:
+					mTransparentGameObjects.push_back(gameObjects[i]);
+					break;
+				default:
+					break;
+				}
 			}
 		}
 	}

@@ -14,6 +14,7 @@ namespace lu::enums
 		Camera,
 		AudioListener,
 		AudioSource,
+		Text,
 		Script,
 		End
 	};
