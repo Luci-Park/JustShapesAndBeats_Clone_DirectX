@@ -7,6 +7,7 @@
 #include "LGameObject.h"
 #include "LConstantBuffer.h"
 #include "LRenderer.h"
+#include "LFontWrapper.h"
 namespace lu
 {
 	ParticleSystem::ParticleSystem()
@@ -25,7 +26,7 @@ namespace lu
 		, mAngle2(0)
 		, mStartRotation(0)
 		, mRotationSpeed(0)
-		, mElapsedTime(1)
+		, mElapsedTime(0)
 		, mStartSize(100)
 		, mEndSize(100)
 		, mStartSpeed(20)
@@ -68,8 +69,7 @@ namespace lu
 		static double frequencyTimer = 0;
 		static Vector3 prevPos; 
 		static bool posSet = false;
-
-		int numberOfParticles = 0;
+		static double lifeTimeTimer = mLifeTime;
 		if (!posSet)
 		{
 			posSet = true;
@@ -77,23 +77,33 @@ namespace lu
 		}
 
 		if (!mIsPlaying) return;
-		if (mElapsedTime > Duration + mLifeTime)
-		{
-			mElapsedTime -= mElapsedTime;
-			frequencyTimer -= frequencyTimer;
-			for (int i = 0; i < Bursts.size(); i++)
-			{
-				Bursts[i].complete = false;
-			}
-			if (!Loop)
-			{
-				mIsPlaying = false;
-				return;
-			}
-		}
+
+		lifeTimeTimer -= Time::DeltaTime();
 		mElapsedTime += Time::DeltaTime();
+
 		if (mElapsedTime > Duration)
+		{
+			if (lifeTimeTimer < 0)
+			{
+
+				mElapsedTime -= mElapsedTime;
+				frequencyTimer -= frequencyTimer;
+				lifeTimeTimer = mLifeTime;
+				for (int i = 0; i < Bursts.size(); i++)
+				{
+					Bursts[i].complete = false;
+				}
+				if (!Loop)
+				{
+					mIsPlaying = false;
+					return;
+				}
+			}
 			return;
+		}
+
+		int numberOfParticles = 0;
+
 		if (RateOverTime > 0)
 		{
 			double frequency = 1.0 / RateOverTime;
@@ -119,13 +129,17 @@ namespace lu
 				Bursts[i].complete = true;
 			}
 		}
-
-		ParticleShared sharedData = {};
-		sharedData.sharedActiveCount = numberOfParticles;
-		mSharedBuffer->SetData(&sharedData, 1);
+		if (numberOfParticles > 0)
+		{
+			ParticleShared sharedData = {};
+			sharedData.sharedActiveCount = numberOfParticles;
+			mSharedBuffer->SetData(&sharedData, 1);
+			lifeTimeTimer = mLifeTime;
+		}
 	}
 	void ParticleSystem::Render()
 	{
+		FontWrapper::DrawFont(std::to_wstring(mElapsedTime), 10.f, 30.f, 20, FONT_RGBA(255, 0, 255, 255));
 		Owner()->mTransform->BindConstantBuffer();
 		BindConstantBuffer();
 

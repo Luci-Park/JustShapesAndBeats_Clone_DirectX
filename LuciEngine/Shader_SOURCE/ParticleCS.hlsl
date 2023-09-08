@@ -14,34 +14,39 @@ void InitializeParticle(int id)
     // 랜덤값으로 위치와 방향을 설정한다.
     // 샘플링을 시도할 UV 를 계산한다.=> 노이즈로부터의 sampling
     
-        float4 vRandom = (float4) 0.f;
-
-        float2 vUV = float2((float) id / elementCount, 0.5f);
-        vUV.x += particleElapsedTime;
-        vUV.y += sin((vUV.x + particleElapsedTime) * 3.141592f + 2.f * 10.f) * 0.5f;
-
-        vRandom = float4
-            (
-                  GaussianBlur(vUV + float2(0.f, 0.f)).x
-                , GaussianBlur(vUV + float2(0.1f, 0.f)).x
-                , GaussianBlur(vUV + float2(0.2f, 0.f)).x
-                , GaussianBlur(vUV + float2(0.3f, 0.f)).x
-            );
-            
-        ParticleBuffer[id].position.xyz = vRandom.xyz * 3.0f;
-        ParticleBuffer[id].position.x -= 0.65f;
-        ParticleBuffer[id].position.y -= 1.4f;
-        ParticleBuffer[id].position.z = 0.0f;
-    }
+    float4 vRandom = (float4) 0.f;
+    
+    float2 vUV = float2((float) id / elementCount, 0.5f);
+    vUV.x += particleElapsedTime;
+    vUV.y += sin((vUV.x + particleElapsedTime) * 3.141592f + 2.f * 10.f) * 0.5f;
+    
+    vRandom = float4
+    (
+          GaussianBlur(vUV + float2(0.f, 0.f)).x
+        , GaussianBlur(vUV + float2(0.1f, 0.f)).x
+        , GaussianBlur(vUV + float2(0.2f, 0.f)).x
+        , GaussianBlur(vUV + float2(0.3f, 0.f)).x
+    );
+    float4 position;
+    position.xyz = vRandom.xyz * 3.0f;
+    position.x -= 0.65f;
+    position.y -= 1.4f;
+    position.z = 0.0f;
+    position.w = 1;
+    position = mul(position, WorldMatrix);
+    
+    ParticleBuffer[id].position = position;
+}
 
 void UpdateParticle(int id)
 {
-    ParticleBuffer[id].time += particleDeltaTime;
+    
     float t = ParticleBuffer[id].time / ParticleBuffer[id].lifeTime;
     if (t >= 1.0f)
         ParticleBuffer[id].active = 0;
     else
     {
+        ParticleBuffer[id].time += particleDeltaTime;
         float3 acceleration = float3(0, -particleGravityRate, 0);
             
         ParticleBuffer[id].position += ParticleBuffer[id].velocity *
