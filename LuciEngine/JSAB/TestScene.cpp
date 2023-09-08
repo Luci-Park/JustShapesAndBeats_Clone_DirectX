@@ -32,10 +32,10 @@ namespace lu::JSAB
 		p->Loop = true;
 		//p->Bursts.push_back({ 0, 10, false });
 		p->RateOverTime = 0;
-		p->RateOverDistance = 5;
+		p->RateOverDistance = 3;
 
 
-		p->SetLifeTime(2);
+		p->SetLifeTime(1);
 		p->SetSize(10, 0);
 		p->SetTint({ 1, 1, 1, 0.5 }, { 0, 0, 1, 0.5 });
 		p->SetWorldSpace(ParticleSystem::Space::world);

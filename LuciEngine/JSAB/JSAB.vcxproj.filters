@@ -251,6 +251,9 @@
     <Filter Include="Contents\Texture">
       <UniqueIdentifier>{ec8dd054-b0fc-45af-b7e0-5c396364e315}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Walls">
+      <UniqueIdentifier>{27f3a799-0a7a-4f7e-bf3c-5ac658ae8c79}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="JSAB.rc" />

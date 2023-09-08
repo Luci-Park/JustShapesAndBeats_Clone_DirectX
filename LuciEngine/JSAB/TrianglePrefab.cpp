@@ -20,14 +20,14 @@ namespace lu::JSAB
 		mTransform->SetPosition({ 50,50, 1 });
 		AddComponent<Collider2D>()->SetType(lu::enums::eColliderType::Circle)->SetSize({ 2.3, 2.3 });
 		{
-			GameObject* triangle = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
+			GameObject* triangle = object::Instantiate<GameObject>(mTransform, eLayerType::FriendlyObjects);
 			triangle->SetName(L"triangle");
 			MeshRenderer* mr = triangle->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(CreateTriangleMat());
 		}
 
 		{
-			GameObject* circle = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
+			GameObject* circle = object::Instantiate<GameObject>(mTransform, eLayerType::FriendlyObjects);
 			circle->SetName(L"tri_effect_blue");
 			MeshRenderer* mr = circle->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(CreateWhiteBlueCircleMat());

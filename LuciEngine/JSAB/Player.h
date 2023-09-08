@@ -13,6 +13,7 @@ namespace lu
 	class Animator;
 	class AudioSource;
 	class AudioClip;
+	class Rigidbody;
 }
 
 namespace lu::JSAB
@@ -36,18 +37,22 @@ namespace lu::JSAB
 		void SetDashBurst(GameObject* burst);
 		void SetShield(ShieldScript* shield) { mShield = shield; }
 	private:
-		void Move(Vector3 target);
+		void Move();
+		void WhileDamaged();
+		void CheckBoundary();
+
+		void OnDamage(Transform* other);
+		void PlayHitSound();
+		void OnDeath();
 
 		void MoveRotate(Quaternion rotation);
 		void MoveScale(Vector3 scale);
-		void CountTimer();
+		void CountDashTimer();
 		Vector3 GetInputDir();
 		Quaternion GetRotation(Vector3 moveDir);
 		Vector3 GetMoveScale(Vector3 velocity);
-
-		void OnDamage();
-		void PlayHitSound();
-		void OnDeath();
+		
+		bool IsShieldUp();
 
 	private:
 		float mMoveSpeed;
@@ -68,6 +73,7 @@ namespace lu::JSAB
 		MeshRenderer* mMr;
 		Animator* mAnim;
 		AudioSource* mAudio;
+		Rigidbody* mRb;
 
 		std::shared_ptr<AudioClip> mHitSounds[2];
 
@@ -91,6 +97,8 @@ namespace lu::JSAB
 		void SetBack(GameObject* b) { mBackground = b; }
 		void SetPlayer(Transform* b) { mPlayer = b; }
 		void Activate();
+		bool IsShieldUp() { return Owner()->IsActive(); }
+		float ShieldProgress();
 	private:
 		GameObject* mBackground;
 		Transform* mPlayer;

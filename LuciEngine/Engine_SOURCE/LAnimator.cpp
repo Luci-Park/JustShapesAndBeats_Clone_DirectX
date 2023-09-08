@@ -83,6 +83,12 @@ namespace lu
 		if (mActiveAnimation)
 			mActiveAnimation->SetTime(time);
 	}
+	double Animator::GetTime()
+	{
+		if (mActiveAnimation)
+			return mActiveAnimation->GetTime();
+		return 0.0;
+	}
 	bool Animator::IsPlaying()
 	{
 		return mActiveAnimation != nullptr && !mActiveAnimation->IsComplete();

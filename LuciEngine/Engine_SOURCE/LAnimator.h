@@ -19,6 +19,7 @@ namespace lu
 		void PlayAnimation(const std::wstring& name, bool loop);
 		void StopAnimation();
 		void SetTime(double time);
+		double GetTime();
 		bool IsPlaying();
 	private:
 		std::map<std::wstring, Animation*>mAnimations;

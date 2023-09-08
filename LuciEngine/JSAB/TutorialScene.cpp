@@ -1,17 +1,14 @@
 #include "TutorialScene.h"
 #include "PlayerPrefab.h"
-#include "LCamera.h"
 #include "..\\Editor_SOURCE\\TransformWidget.h"
+#include "CameraScript.h"
 #include "TrianglePrefab.h"
 #include "TutorialMusicController.h"
 #include "TutorialManager.h"
-#include "TutorialBeatBar.h"
-#include "TutorialBeatCircle.h"
-#include "TutorialGiantCircle.h"
+#include "LCamera.h"
 #include "LObject.h"
 #include "LInput.h"
-#include "CameraScript.h"
-#include "TutorialEightBar.h"
+#include "LCollisionManager.h"
 
 namespace lu::JSAB::Tutorial
 {
@@ -19,9 +16,11 @@ namespace lu::JSAB::Tutorial
 	TutorialFullBar* b;
 	void TutorialScene::Initialize()
 	{
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Bullet, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::FriendlyObjects, true);
 		//Camera
 		{
-			bool active[]{ true, true, true, true, false };
+			bool active[]{ true, true, true, true, false, false };
 			GameObject* camera = object::Instantiate<GameObject>(eLayerType::Camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 			Camera* cameraComp = camera->AddComponent<Camera>();
@@ -36,36 +35,12 @@ namespace lu::JSAB::Tutorial
 		manager->SetName(L"TutorialManager");
 		auto ma = manager->AddComponent<TutorialManager>();
 		music = manager->AddComponent<TutorialMusicController>();
-		ma->SetMusic(music);
-		//m->Play();
-		
-		/*b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TutorialFullBar>();
-		b->Activate();
-		b->Owner()->AddComponent<gui::TransformWidget>();*/
-		
+		ma->SetMusic(music);		
 		object::Instantiate<PlayerPrefab>(eLayerType::Player);
 		Scene::Initialize(); 
 	}
 	void TutorialScene::Update()
-	{/*
-		if (Input::GetKeyDown(eKeyCode::W))
-			burst->OnBeat(Vector3::Up);
-
-		if (Input::GetKeyDown(eKeyCode::S))
-			burst->OnBeat(Vector3::Down);
-
-		if (Input::GetKeyDown(eKeyCode::A))
-			burst->OnBeat(Vector3::Left);
-
-		if (Input::GetKeyDown(eKeyCode::D))
-			burst->OnBeat(Vector3::Right);
-
-		if (Input::GetKeyDown(eKeyCode::F))
-			burst->OnFlash();*/
-
-		/*if (Input::GetKeyDown(eKeyCode::P))
-			b->Activate();*/
-
+	{
 		Scene::Update();
 	}
 

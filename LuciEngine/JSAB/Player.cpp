@@ -11,6 +11,7 @@
 #include "LSceneManager.h"
 #include "LCamera.h"
 #include "LAudioSource.h"
+#include "LRigidBody.h"
 
 namespace lu::JSAB
 {
@@ -33,6 +34,7 @@ namespace lu::JSAB
 		mMr = Owner()->GetComponent<MeshRenderer>();
 		mAnim = Owner()->AddComponent<Animator>();
 		mAudio = Owner()->AddComponent<AudioSource>();
+		mRb = Owner()->AddComponent<Rigidbody>();
 
 		mOrgScale = mTr->GetScale();
 		mMoveScale = { mOrgScale.x * 0.7f, mOrgScale.y * 1.3f, 1.f };
@@ -55,9 +57,55 @@ namespace lu::JSAB
 	}
 	void Player::Update()
 	{
-		CountTimer();
+		CountDashTimer();
+		Move();
+		CheckBoundary();
+	}
+	void Player::OnCollisionEnter(Collider2D* other)
+	{
+		if (other->Owner()->GetLayer() == eLayerType::Bullet && !mShield->Owner()->IsActive())
+			OnDamage(other->Owner()->mTransform);
+	}
+
+	void Player::WhileDamaged()
+	{
+	}
+
+	void Player::CheckBoundary()
+	{
+		Vector3 currPos = mTr->GetPosition();
+		Vector3 halfScale = mTr->GetScale() * 0.5f;
+		RECT rect = SceneManager::MainCamera()->GetBoundary();
+		if (currPos.y < (float)rect.top + halfScale.y || currPos.y >(float)rect.bottom - halfScale.y
+			|| currPos.x < (float)rect.left + halfScale.x || currPos.x >(float)rect.right - halfScale.x)
+		{
+			if (!IsShieldUp())
+			{
+				Vector3 newPos;
+				newPos.y = std::clamp(currPos.y, (float)rect.top + halfScale.y, (float)rect.bottom - halfScale.y);
+				newPos.x = std::clamp(currPos.x, (float)rect.left + halfScale.x, (float)rect.right - halfScale.x);
+				mTr->SetPosition(newPos);
+			}
+			else
+			{
+				Vector3 wallNormal, velocity = mRb->GetVelocity();
+				if (currPos.y < (float)rect.top + halfScale.y) wallNormal = Vector3::Down;
+				else if (currPos.y > (float)rect.bottom - halfScale.y) wallNormal = Vector3::Up;
+				else if (currPos.x < (float)rect.left + halfScale.x) wallNormal = Vector3::Right;
+				else if (currPos.x > (float)rect.right - halfScale.x) wallNormal = Vector3::Left;
+
+				float intoWall = wallNormal.Dot(velocity);
+				Vector3 bounce = velocity - 2.0f * intoWall * wallNormal;
+				mRb->SetVelocity(bounce);				
+			}
+		}		
+	}
+
+	void Player::Move()
+	{
+		if (IsShieldUp()) return;
 		Vector3 moveDir = GetInputDir();
-	  	if (Input::GetKeyDown(eKeyCode::SPACE) && mDashState == eDashState::Idle)
+		if (Input::GetKeyDown(eKeyCode::SPACE) && mDashState == eDashState::Idle)
 		{
 			mDashState = eDashState::Dashing;
 			mTimer = 0.f;
@@ -65,12 +113,12 @@ namespace lu::JSAB
 			mDashBurst->mTransform->SetPosition(mTr->GetPosition());
 			mDashBurstAnim->PlayAnimation(L"Burst", false);
 		}
-	
+
 		if (mDashState != eDashState::Dashing)
 		{
 			mCr->SetState(eState::Active);
 			mDashOutline->SetState(eState::InActive);
-			Move(mTr->GetPosition() + moveDir * mMoveSpeed * Time::DeltaTime());
+			mRb->SetVelocity(moveDir * mMoveSpeed);
 			MoveRotate(GetRotation(moveDir));
 			MoveScale(GetMoveScale(moveDir));
 		}
@@ -84,31 +132,71 @@ namespace lu::JSAB
 			mCr->SetState(eState::InActive);
 			mDashOutline->SetState(eState::Active);
 
-			Move(mTr->GetPosition() + mDashDir * mDashSpeed * Time::DeltaTime());
+			mRb->SetVelocity(mDashDir * mDashSpeed);
 			MoveRotate(GetRotation(mDashDir));
 			mTr->SetScale(mDashScale);
 		}
 	}
-	void Player::OnCollisionEnter(Collider2D* other)
-	{
-		if (other->Owner()->GetLayer() == eLayerType::Bullet && !mShield->Owner()->IsActive())
-			OnDamage();
-	}
 
-	void Player::Move(Vector3 target)
+	void Player::OnDamage(Transform* other)
 	{
-		Vector3 halfScale = mTr->GetScale() * 0.5f;
-		RECT rect = SceneManager::MainCamera()->GetBoundary();
-		Vector3 newPos;
-		newPos.z = target.z;
-		if (rect.right >= halfScale.x)
+		PlayHitSound();
+		//mCurrHealth--;
+		if (mCurrHealth > 0)
 		{
-			newPos.y = std::clamp(target.y, (float)rect.top + halfScale.y, (float)rect.bottom - halfScale.y);
-			newPos.x = std::clamp(target.x, (float)rect.left + halfScale.x, (float)rect.right - halfScale.x);
-		}
-		mTr->SetPosition(newPos);
-	}
+			Vector3 dir = mTr->GetPosition()- other->GetPosition();
+			Vector3 force = mRb->GetVelocity();
 
+			mRb->SetVelocity(dir * 25);
+			mMr->GetMaterial()->SetTexture(lifeTextures[mCurrHealth - 1]);
+			mShield->Activate();
+			mAnim->PlayAnimation(L"Flash", false);
+		}
+		else 
+			OnDeath();
+	}
+	Vector3 Player::GetInputDir()
+	{
+		Vector3 moveDir = Vector3::Zero;
+		if (Input::GetKey(eKeyCode::LEFT))
+			moveDir = Vector3::Left;
+		if (Input::GetKey(eKeyCode::RIGHT))
+			moveDir = Vector3::Right;
+		if (Input::GetKey(eKeyCode::UP))
+			moveDir = Vector3::Up;
+		if (Input::GetKey(eKeyCode::DOWN))
+			moveDir = Vector3::Down;
+		return moveDir;
+	}
+	Vector3 Player::GetMoveScale(Vector3 velocity)
+	{
+		static Vector3 prevDir = Vector3::Zero;
+		if (velocity == Vector3::Zero || velocity != prevDir)
+		{
+			prevDir = velocity;
+			return mOrgScale;
+		}
+		else
+		{
+			return mMoveScale;
+		}
+	}
+	bool Player::IsShieldUp()
+	{
+		return (mShield->IsShieldUp() && mShield->ShieldProgress() < 0.5f);
+	}
+	Quaternion Player::GetRotation(Vector3 moveDir)
+	{
+		float radian = 0;
+		if (moveDir == Vector3::Left)
+			radian = PI * 0.5f;
+		if (moveDir == Vector3::Right)
+			radian = -PI * 0.5f;
+		if (moveDir == Vector3::Down)
+			radian = PI;
+
+		return Quaternion::CreateFromAxisAngle(Vector3::Forward, radian);
+	}
 
 	void Player::MoveRotate(Quaternion rotation)
 	{
@@ -159,39 +247,13 @@ namespace lu::JSAB
 		}
 	}
 
-	void Player::CountTimer()
+	void Player::CountDashTimer()
 	{
 		mTimer += Time::DeltaTime();
 		if (mDashState == eDashState::CoolDown && mTimer > mDashCoolDuration)
 			mDashState = eDashState::Idle;
 	}
 
-	Vector3 Player::GetMoveScale(Vector3 velocity)
-	{
-		static Vector3 prevDir = Vector3::Zero;
-		if (velocity == Vector3::Zero || velocity != prevDir)
-		{
-			prevDir = velocity;
-			return mOrgScale;
-		}
-		else
-		{
-			return mMoveScale;
-		}
-	}
-	void Player::OnDamage()
-	{
-		PlayHitSound();
-		mCurrHealth--;
-		if (mCurrHealth > 0)
-		{
-			mMr->GetMaterial()->SetTexture(lifeTextures[mCurrHealth - 1]);
-			mShield->Activate();
-			mAnim->PlayAnimation(L"Flash", false);
-		}
-		else 
-			OnDeath();
-	}
 	void Player::PlayHitSound()
 	{
 		mAudio->SetClip(mHitSounds[math::IntRandom(0, 1)]);
@@ -199,31 +261,6 @@ namespace lu::JSAB
 	}
 	void Player::OnDeath()
 	{
-	}
-	Vector3 Player::GetInputDir()
-	{
-		Vector3 moveDir = Vector3::Zero;
-		if (Input::GetKey(eKeyCode::LEFT))
-			moveDir = Vector3::Left;
-		if (Input::GetKey(eKeyCode::RIGHT))
-			moveDir = Vector3::Right;
-		if (Input::GetKey(eKeyCode::UP))
-			moveDir = Vector3::Up;
-		if (Input::GetKey(eKeyCode::DOWN))
-			moveDir = Vector3::Down;
-		return moveDir;
-	}
-	Quaternion Player::GetRotation(Vector3 moveDir)
-	{
-		float radian = 0;
-		if (moveDir == Vector3::Left)
-			radian = PI * 0.5f;
-		if (moveDir == Vector3::Right)
-			radian = -PI * 0.5f;
-		if (moveDir == Vector3::Down)
-			radian = PI;
-
-		return Quaternion::CreateFromAxisAngle(Vector3::Forward, radian);
 	}
 	void Player::SetDashBurst(GameObject* burst)
 	{
@@ -252,6 +289,10 @@ namespace lu::JSAB
 	{
 		mAnim->PlayAnimation(L"Shield", false);
 		Owner()->SetActive(true);
+	}
+	float ShieldScript::ShieldProgress()
+	{
+		return mAnim->GetTime() / 1;
 	}
 #pragma endregion
 
