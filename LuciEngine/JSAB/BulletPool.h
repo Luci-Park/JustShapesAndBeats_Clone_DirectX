@@ -29,7 +29,7 @@ namespace lu::JSAB
 		{
 			for (int i = 0; i < _objects.size(); i++)
 			{
-				_objects[i]->Deactivate();
+				_objects[i]->DeActivate();
 			}
 			_idx = 0;
 		}
