@@ -45,6 +45,7 @@ namespace lu
 	{
 		Time::Update();
 		Input::Update();
+		Fmod::Update();
 		CollisionManager::Update();
 		SceneManager::Update();
 	}
