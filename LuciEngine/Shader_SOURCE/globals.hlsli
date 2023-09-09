@@ -1,4 +1,4 @@
-
+static const float PI = 3.14159265f;
 
 cbuffer Transform : register(b0)
 {

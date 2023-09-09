@@ -32,16 +32,16 @@ void InitializeParticle(int id)
         , GaussianBlur(vUV + float2(0.2f, 0.f)).x
         , GaussianBlur(vUV + float2(0.3f, 0.f)).x
     );
+    float radius = randomValue * 0.5;
+    float theta = randomValue * 2 * PI;
     
-    //float4 position;
-    //position.xyz = vRandom.xyz * 3.0f;
-    //position.x -= 0.65f;
-    //position.y -= 1.4f;
-    //position.z = 0.0f;
-    //position.w = 1;
-    //position = mul(position, WorldMatrix);
-    //float4 pos = 0;
-    ParticleBuffer[id].position = mul(float4(particleOffset, 1), WorldMatrix);
+    float4 position = float4(particleOffset, 1);
+    position.x += radius * cos(theta);
+    position.y += radius * sin(theta);
+    position.z = 0.0f;
+    position.w = 1;
+    position = mul(position, WorldMatrix);
+    ParticleBuffer[id].position = position; //mul(float4(particleOffset, 1), WorldMatrix);
 
 }
 
