@@ -33,6 +33,7 @@ namespace lu
 		void SetAngle(float angle1, float angle2) { mAngle1 = angle1, mAngle2 = angle2; }
 		void SetGravity(float gravity) { mGravityModification = gravity; }
 		void SetWorldSpace(Space space) { mbParticleInWorldSpace = (int)space; }
+		void SetOffset(Vector3 offset) { mOffset = offset; }
 
 		void Play() { mIsPlaying = true; }
 		void Stop() { mIsPlaying = false; }
@@ -58,6 +59,7 @@ namespace lu
 		float mLifeTime;
 		float mElapsedTime;
 
+		Vector3 mOffset;
 		float mAngle1;
 		float mAngle2;
 		float mStartRotation;

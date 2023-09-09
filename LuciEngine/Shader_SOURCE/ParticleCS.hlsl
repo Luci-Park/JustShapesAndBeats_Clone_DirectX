@@ -16,7 +16,7 @@ void InitializeParticle(int id)
 // Calculate a random float within the range [a, b]
     float randomAngle = particleAngle1 + randomValue * (particleAngle2 - particleAngle1);
     float3 direction = float3(cos(randomAngle), sin(randomAngle), 0);
-    
+    direction = normalize(mul(WorldMatrix, float4(direction, 0.0))).xyz;
     ParticleBuffer[id].velocity = normalize(direction) * particleStartSpeed;
     
     // 랜덤값으로 위치와 방향을 설정한다.
@@ -41,7 +41,8 @@ void InitializeParticle(int id)
     //position.w = 1;
     //position = mul(position, WorldMatrix);
     //float4 pos = 0;
-    ParticleBuffer[id].position = mul(float4(0, 0, 0, 1), WorldMatrix);
+    ParticleBuffer[id].position = mul(float4(particleOffset, 1), WorldMatrix);
+
 }
 
 void UpdateParticle(int id)

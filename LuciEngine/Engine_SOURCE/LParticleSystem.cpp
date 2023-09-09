@@ -30,6 +30,7 @@ namespace lu
 		, mStartSize(100)
 		, mEndSize(100)
 		, mStartSpeed(20)
+		, mOffset(Vector3::Zero)
 	{
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"PointMesh");
 		SetMesh(mesh);
@@ -177,6 +178,7 @@ namespace lu
 		data.elementCount = MaxParticles;
 		data.isParticleInWorldSpace = mbParticleInWorldSpace;
 		data.gravityRate = mGravityModification;
+		data.offset = mOffset;
 		cb->SetData(&data);
 		for (int i = 0; i < (int)eShaderStage::End; i++)
 			cb->Bind((eShaderStage)i);
