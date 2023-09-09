@@ -1,54 +1,18 @@
-# Win2DX
-Since 5/15 ~
+# Just Shapes and Beats Clone
+- 개발 기간 : 2023.05.15 ~ 진행 중
+- 스택 : C++, WinAPI, DirectX11
+- 개발 인원 : 1
+- 대상 플랫폼 : Windows
+---
 
-## Week 1(5/15 ~ 5/20)
-- 라이브러리 이론
-- Directx 11 import
-- Shader 이론 
-- Rendering Pipeline 이론
-## Week 2(5/21 ~ 5/27)
-- `GraphicDevice_Dx11` class
-- Rendering target
-- Swap Chain
-- Coding Shaders
-- Creating and Binding Buffers
-- Drawing a triangle
-## Week 3(5/28 ~ 6/3)
-- Smart Pointers
+# 📜프로젝트 설명
 
-## Week 4(6/4 ~ 6/10)
-- 6/3 ~ 6/6 : rest(Happy Independence Day)
-- Code Generalization
+DirectX11와 게임 엔진 대해 공부하기 위해 제작 중인 Just Shapes and Beats 모작입니다. 특히 graphics pipeline과 particle 생성에 집중하고 있습니다. 
 
-## Week 5(6/11 ~ 6/17)
-- Texture to shader
-- Create Sampler
+Just Shapes and Beats는 Berzerk Studio에서 개발 된 리듬 탄막 게임입니다. 이펙트와 파티클이 많은 게임이기 때문에 모작 대상으로 선택했습니다.
 
-## Week 6(6/18 ~ 6/24)
-- Sampler added
-    - Point
-    - Anisotropic
-- Material Created
-- Material, Mesh, Texture as components
-- Camera Projection
-
-## Week 7(6/25 ~ 7/1)
-- background
-- SceneCreation
-- camera
-    - layermask
-    - alpha blending
-    - z depth
-- transform parent, child relationship
-- 순환참조를 하면 구문 오류가 난다.
-- Unity error = 헤더 파일을 중복 include 했을 때 가능성이 높다.
-
-## Week 8(7/2 ~ 7/8)
-- Object Scaling + Placement
-
-## Week 9(7/9 ~ 7/15)
-- Collision
-- Debug Renderer
-
-## Week 10 (7/16 ~ 7/22)
-- 
+# 기본 기능
+## 그래픽스 파이프라인
+## 파티클
+## 충돌 처리
+## 키프레임 애니메이션
