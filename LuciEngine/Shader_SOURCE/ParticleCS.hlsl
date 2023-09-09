@@ -9,7 +9,15 @@ void InitializeParticle(int id)
     ParticleBuffer[id].time = 0;
     ParticleBuffer[id].lifeTime = particleLifetime;
     ParticleBuffer[id].rotation = particleStartRotation;
-    ParticleBuffer[id].velocity = normalize(ParticleBuffer[id].velocity) * particleStartSpeed;
+    
+    // Generate a pseudorandom value between 0 and 1 using your PRNG (assuming particleElapsedTime is the seed)
+    float randomValue = frac(sin(particleElapsedTime) * 43758.5453);
+
+// Calculate a random float within the range [a, b]
+    float randomAngle = particleAngle1 + randomValue * (particleAngle2 - particleAngle1);
+    float3 direction = float3(cos(randomAngle), sin(randomAngle), 0);
+    
+    ParticleBuffer[id].velocity = normalize(direction) * particleStartSpeed;
     
     // 랜덤값으로 위치와 방향을 설정한다.
     // 샘플링을 시도할 UV 를 계산한다.=> 노이즈로부터의 sampling    
@@ -25,16 +33,15 @@ void InitializeParticle(int id)
         , GaussianBlur(vUV + float2(0.3f, 0.f)).x
     );
     
-    
-    float4 position;
-    position.xyz = vRandom.xyz * 3.0f;
-    position.x -= 0.65f;
-    position.y -= 1.4f;
-    position.z = 0.0f;
-    position.w = 1;
-    position = mul(position, WorldMatrix);
-    
-    ParticleBuffer[id].position = position;
+    //float4 position;
+    //position.xyz = vRandom.xyz * 3.0f;
+    //position.x -= 0.65f;
+    //position.y -= 1.4f;
+    //position.z = 0.0f;
+    //position.w = 1;
+    //position = mul(position, WorldMatrix);
+    //float4 pos = 0;
+    ParticleBuffer[id].position = mul(float4(0, 0, 0, 1), WorldMatrix);
 }
 
 void UpdateParticle(int id)

@@ -160,7 +160,7 @@
     <ClInclude Include="CameraScript.h" />
     <ClInclude Include="MusicController.h" />
     <ClInclude Include="BulletPool.h" />
-    <ClInclude Include="TestScene.h" />
+    <ClInclude Include="ParticleTestScene.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="TutorialBeatBar.h" />
     <ClInclude Include="TutorialBeatCircle.h" />
@@ -195,7 +195,7 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CameraScript.cpp" />
     <ClCompile Include="MusicController.cpp" />
-    <ClCompile Include="TestScene.cpp" />
+    <ClCompile Include="ParticleTestScene.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="TutorialBeatBar.cpp" />
     <ClCompile Include="TutorialBeatCircle.cpp" />

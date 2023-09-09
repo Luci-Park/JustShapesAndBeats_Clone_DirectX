@@ -2,11 +2,11 @@
 #include "..\Engine_SOURCE\LScene.h"
 namespace lu::JSAB
 {
-	class TestScene : public Scene
+	class ParticleTestScene : public Scene
 	{
 	public:
-		TestScene();
-		virtual ~TestScene();
+		ParticleTestScene();
+		virtual ~ParticleTestScene();
 
 		virtual void Initialize() override;
 

@@ -86,7 +86,7 @@
     <ClCompile Include="TutorialGiantCircle.cpp">
       <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="TestScene.cpp">
+    <ClCompile Include="ParticleTestScene.cpp">
       <Filter>Contents\Scene\Test</Filter>
     </ClCompile>
     <ClCompile Include="..\Engine_SOURCE\LTexture.cpp">
@@ -186,7 +186,7 @@
     <ClInclude Include="TutorialGiantCircle.h">
       <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClInclude>
-    <ClInclude Include="TestScene.h">
+    <ClInclude Include="ParticleTestScene.h">
       <Filter>Contents\Scene\Test</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine_SOURCE\LTexture.h">

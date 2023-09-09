@@ -1,4 +1,4 @@
-#include "TestScene.h"
+#include "ParticleTestScene.h"
 #include "LObject.h"
 #include "PlayerPrefab.h"
 #include "LParticleSystem.h"
@@ -6,13 +6,13 @@
 #include "LCamera.h"
 namespace lu::JSAB
 {
-	TestScene::TestScene()
+	ParticleTestScene::ParticleTestScene()
 	{
 	}
-	TestScene::~TestScene()
+	ParticleTestScene::~ParticleTestScene()
 	{
 	}
-	void TestScene::Initialize()
+	void ParticleTestScene::Initialize()
 	{
 		{
 			bool active[]{ true, true, true, true, false };
@@ -34,8 +34,8 @@ namespace lu::JSAB
 		p->RateOverTime = 0;
 		p->RateOverDistance = 3;
 
-
-		p->SetLifeTime(1);
+		p->SetAngle(30, -30);
+		p->SetLifeTime(3);
 		p->SetSize(10, 0);
 		p->SetTint({ 1, 1, 1, 0.5 }, { 0, 0, 1, 0.5 });
 		p->SetWorldSpace(ParticleSystem::Space::world);
