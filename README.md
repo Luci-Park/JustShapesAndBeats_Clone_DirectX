@@ -24,8 +24,8 @@ Just Shapes and Beats는 Berzerk Studio에서 개발 된 리듬 탄막 게임입
 `ParticleSystem`은 파티클들의 모양과 움직임, 시간 등을 관리하는 클래스이다.
 
 이것으로 플레이어 모양과 추후에 스테이지에 쓰일 이펙트를 만들 것이다.
-![2023-09-09 18-41-05](https://github.com/Luci-Park/JustShapesAndBeats_Clone_DirectX/assets/97658764/7e9027dd-a24d-4df7-8a48-f196a282bb27 |width = 50%)
-![2023-09-09 18-43-18](https://github.com/Luci-Park/JustShapesAndBeats_Clone_DirectX/assets/97658764/b46fb27d-f77d-4da9-ace5-026e30279f31)
+<img src = "https://github.com/Luci-Park/JustShapesAndBeats_Clone_DirectX/assets/97658764/7e9027dd-a24d-4df7-8a48-f196a282bb27" width=50% height=50%>
+<img src = "https://github.com/Luci-Park/JustShapesAndBeats_Clone_DirectX/assets/97658764/b46fb27d-f77d-4da9-ace5-026e30279f31" width=50% height=50%>
 
 생각해 두었으나 시간상 문제로 보류해 둔것:
 
