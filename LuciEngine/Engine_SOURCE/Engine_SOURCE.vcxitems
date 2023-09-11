@@ -19,7 +19,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LAudioClip.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)LAudioListener.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LAudioSource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LCollider2D.h" />
@@ -62,7 +61,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)LAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LAudioClip.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)LAudioListener.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LAudioSource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LCollider2D.cpp" />

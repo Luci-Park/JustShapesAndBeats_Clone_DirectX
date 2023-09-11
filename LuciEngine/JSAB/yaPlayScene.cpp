@@ -14,7 +14,6 @@
 #include "LCollisionManager.h"
 #include "..\\Editor_SOURCE\\TransformWidget.h"
 #include "LParticleSystem.h"
-#include "LAudioListener.h"
 #include "LAudioClip.h"
 #include "LAudioSource.h"
 #include "LInput.h"
@@ -111,8 +110,6 @@ namespace lu
 			cameraComp->SetSize(5.0f);
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
 			//camera->AddComponent<CameraScript>();
-
-			camera->AddComponent<AudioListener>();
 		}
 
 		//UI Camera

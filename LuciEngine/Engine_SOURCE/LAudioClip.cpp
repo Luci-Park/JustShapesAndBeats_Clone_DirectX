@@ -6,8 +6,6 @@ namespace lu
 		:Resource(enums::eResourceType::AudioClip)
 		, mSound(nullptr)
 		, mChannel(nullptr)
-		, mMinDistance(1.0f)
-		, mMaxDistance(5000.0f)
 		, Loop(false)
 	{
 	}
@@ -19,10 +17,6 @@ namespace lu
 		std::string cPath(path.begin(), path.end());
 		if (!Fmod::CreateSound(cPath, &mSound))
 			return S_FALSE;
-
-		mSound->set3DMinMaxDistance(mMinDistance, mMaxDistance);
-		Fmod::Play(mSound, &mChannel);
-		mChannel->setPaused(true);
 		return S_OK;
 	}
 	void AudioClip::Play()
@@ -31,15 +25,7 @@ namespace lu
 			mSound->setMode(FMOD_LOOP_NORMAL);
 		else
 			mSound->setMode(FMOD_LOOP_OFF);
-
-		mChannel->setPaused(false);
-	}
-
-	void AudioClip::PlayReversed()
-	{
-		mChannel->setPaused(true);
-		mChannel->setFrequency(2.0f);
-		mChannel->setPaused(false);
+		Fmod::Play(mSound, &mChannel);
 	}
 
 	void AudioClip::Pause(bool pause)
@@ -53,9 +39,8 @@ namespace lu
 	}
 	void AudioClip::SetPosition(int position_ms)
 	{
-		mChannel->setPaused(true);
-		mChannel->setPosition(position_ms, FMOD_TIMEUNIT_MS);
-		mChannel->setPaused(false); 
+		if(mChannel != nullptr)
+			mChannel->setPosition(position_ms, FMOD_TIMEUNIT_MS);
 	}
 	int AudioClip::GetPosition()
 	{
@@ -72,12 +57,5 @@ namespace lu
 		float v;
 		mChannel->getVolume(&v);
 		return v;
-	}
-	void AudioClip::Set3DAttributes(const Vector3 pos, const Vector3 vel)
-	{
-		FMOD_VECTOR fmodPos(pos.x, pos.y, pos.z);
-		FMOD_VECTOR fmodVel(vel.x, vel.y, vel.z);
-
-		mChannel->set3DAttributes(&fmodPos, &fmodVel);
 	}
 }

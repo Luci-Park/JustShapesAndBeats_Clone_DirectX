@@ -13,20 +13,16 @@ namespace lu
 		virtual HRESULT Load(const std::wstring& path) override;
 
 		void Play();
-		void PlayReversed();
 		void Pause(bool pause);
 		void Stop();
 		void SetPosition(int position_ms);
 		int GetPosition();
 		void SetVolume(float volume);
 		float GetVolume();
-		void Set3DAttributes(const Vector3 pos, const Vector3 vel);
 		void SetLoop(bool loop) { Loop = loop; }
 	private:
 		FMOD::Sound* mSound;
 		FMOD::Channel* mChannel;
-		float mMinDistance;
-		float mMaxDistance;
 		bool Loop;
 	};
 }

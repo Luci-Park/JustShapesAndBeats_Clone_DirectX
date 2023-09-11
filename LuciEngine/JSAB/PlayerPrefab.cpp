@@ -35,7 +35,7 @@ namespace lu::JSAB
 			p->MaxParticles = 1000;
 			p->Loop = true;
 			p->RateOverTime = 0;
-			p->RateOverDistance = 0.5;
+			p->RateOverDistance = 1.2;
 
 			p->SetOffset(Vector3::Zero);
 			p->SetAngle(60, -60);

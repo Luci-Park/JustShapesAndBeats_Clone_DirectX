@@ -6,36 +6,10 @@ namespace lu
 	AudioSource::AudioSource()
 		: Component(eComponentType::AudioSource)
 		, mAudioClip(nullptr)
-		, is3D(true)
 	{
 	}
 
 	AudioSource::~AudioSource()
-	{
-	}
-
-	void AudioSource::Initialize()
-	{
-	}
-
-	void AudioSource::Update()
-	{
-	}
-
-	void AudioSource::LateUpdate()
-	{
-		if (mAudioClip == nullptr) return;
-		if (is3D)
-		{
-			Transform* tr = Owner()->GetComponent<Transform>();
-			Vector3 pos = tr->GetPosition();
-			Vector3 foward = tr->Forward();
-
-			mAudioClip->Set3DAttributes(pos, foward);
-		}
-	}
-
-	void AudioSource::Render()
 	{
 	}
 
@@ -50,11 +24,6 @@ namespace lu
 		if (mAudioClip == nullptr) return;
 		mAudioClip->SetLoop(loop);
 		mAudioClip->Play();
-	}
-
-	void AudioSource::PlayReversed()
-	{
-		mAudioClip->PlayReversed();
 	}
 
 	void AudioSource::Pause()
