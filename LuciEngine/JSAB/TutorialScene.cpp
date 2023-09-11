@@ -48,4 +48,9 @@ namespace lu::JSAB::Tutorial
 	{
 		music->Play();
 	}
+
+	void TutorialScene::OnExit()
+	{
+		music->Stop();
+	}
 }

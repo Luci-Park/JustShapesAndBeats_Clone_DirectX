@@ -18,6 +18,7 @@ namespace lu::JSAB::Tutorial
 		virtual void Update() override;
 
 		virtual void OnEnter() override;
+		virtual void OnExit() override;
 
 	private:
 		TutorialMusicController* music;

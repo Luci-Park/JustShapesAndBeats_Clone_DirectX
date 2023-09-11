@@ -1,6 +1,9 @@
 #pragma once
 #include "LGameObject.h"
-
+namespace lu
+{
+	class Animator;
+}
 namespace lu::JSAB::Title
 {
 	class ShapesObject : public GameObject

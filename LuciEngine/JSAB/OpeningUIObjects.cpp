@@ -1,7 +1,7 @@
 #include "OpeningUIObjects.h"
 #include "LMeshRenderer.h"
 #include "LResources.h"
-
+#include "LAnimator.h"
 namespace lu::JSAB::Title
 {
 	void ShapesObject::Initialize()
@@ -20,9 +20,21 @@ namespace lu::JSAB::Title
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(mat);
 
-		float height = 50;
-		mTransform->SetScale(Vector3(mat->GetTexture()->GetRatioWidth(height), height, 1));
-		mTransform->SetPosition(Vector3(-200, 0, 3));
+		Vector3 scale = Vector3::One;
+		scale.y = 40;
+		scale.x = mat->GetTexture()->GetRatioWidth(scale.y);
+		mTransform->SetScale(scale);
+
+		mTransform->SetPosition(Vector3(-60, 0, 3));
+
+		auto anim = AddComponent<Animator>();
+		auto an = anim->CreateAnimation(L"Fade In");
+		an->AddTintKey(0, Color::clear);
+		an->AddTintKey(0.3, Color::white);
+		an = anim->CreateAnimation(L"Beat");
+		an->AddScaleKey(0, scale);
+		an->AddScaleKey(0.2, scale * 1.5);
+		an->AddScaleKey(0, scale);
 	}
 	
 	void AndObject::Initialize()
@@ -40,9 +52,12 @@ namespace lu::JSAB::Title
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(mat);
+		mat->SetTint({ 1, 1, 1, 0.5f });
 
-		float height = 50;
-		mTransform->SetScale(Vector3(mat->GetTexture()->GetRatioWidth(height), height, 1));
+		Vector3 scale = Vector3::One;
+		scale.y = 25;
+		scale.x = mat->GetTexture()->GetRatioWidth(scale.y);
+		mTransform->SetScale(scale);
 		mTransform->SetPosition(Vector3(0, 0, 3));
 	}
 	
@@ -62,9 +77,12 @@ namespace lu::JSAB::Title
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(mat);
 
-		float height = 50;
-		mTransform->SetScale(Vector3(mat->GetTexture()->GetRatioWidth(height), height, 1));
-		mTransform->SetPosition(Vector3(200, 0, 3));
+		Vector3 scale = Vector3::One;
+		scale.y = 40;
+		scale.x = mat->GetTexture()->GetRatioWidth(scale.y);
+		mTransform->SetScale(scale);
+
+		mTransform->SetPosition(Vector3(53, 0, 3));
 	}
 
 	void LightCircleObject::Initialize()

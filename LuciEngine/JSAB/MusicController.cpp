@@ -50,6 +50,12 @@ namespace lu::JSAB
 		mAudioSource->Play();
 		Instance = this;
 	}
+	void MusicController::Stop()
+	{
+		mbIsPlaying = false;
+		mAudioSource->Stop();
+		Instance = nullptr;
+	}
 	double MusicController::GetTime()
 	{
 		return mAudioSource->GetPosition();

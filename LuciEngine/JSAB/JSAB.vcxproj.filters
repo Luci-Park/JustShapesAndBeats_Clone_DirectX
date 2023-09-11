@@ -95,6 +95,9 @@
     <ClCompile Include="Triangle.cpp">
       <Filter>Contents\Triangle</Filter>
     </ClCompile>
+    <ClCompile Include="SplashAnimation.cpp">
+      <Filter>Contents\Scene\Title\Scene\OpeningAnimation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -194,6 +197,9 @@
     </ClInclude>
     <ClInclude Include="Triangle.h">
       <Filter>Contents\Triangle</Filter>
+    </ClInclude>
+    <ClInclude Include="SplashAnimation.h">
+      <Filter>Contents\Scene\Title\Scene\OpeningAnimation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
