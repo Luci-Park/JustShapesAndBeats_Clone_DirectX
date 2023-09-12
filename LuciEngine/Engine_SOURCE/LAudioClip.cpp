@@ -37,6 +37,12 @@ namespace lu
 	{
 		mChannel->stop();
 	}
+	bool AudioClip::IsPlaying()
+	{
+		bool playing;
+		mChannel->isPlaying(&playing);
+		return playing;
+	}
 	void AudioClip::SetPosition(int position_ms)
 	{
 		if(mChannel != nullptr)

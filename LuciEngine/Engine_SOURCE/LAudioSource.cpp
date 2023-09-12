@@ -64,4 +64,12 @@ namespace lu
 	{
 		return mAudioClip->GetVolume();
 	}
+	bool AudioSource::IsPlaying()
+	{
+		return(mAudioClip != nullptr && mAudioClip->IsPlaying());
+	}
+	bool AudioSource::IsPlaying(std::shared_ptr<AudioClip> clip)
+	{
+		return mAudioClip == clip && IsPlaying();
+	}
 }

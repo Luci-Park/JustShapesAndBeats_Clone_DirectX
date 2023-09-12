@@ -3,12 +3,11 @@
 #include "LObject.h"
 #include "LCamera.h"
 #include "LGameObject.h"
+#include "LAudioSource.h"
+#include "LResources.h"
 #include "..\\Editor_SOURCE\\TransformWidget.h"
-#include "PlayerPrefab.h"
-#include "BackgroundObject.h"
+#include "BackgroundScript.h"
 #include "SplashAnimation.h"
-#include "OpeningUIObjects.h"
-#include "TitleObject.h"
 
 namespace lu::JSAB::Title
 {
@@ -31,15 +30,22 @@ namespace lu::JSAB::Title
 				cameraComp->TurnLayerMask((eLayerType)i, false);
 			}
 		}
-		object::Instantiate<GameObject>(eLayerType::UI)->AddComponent<SplashAnimation>();
-		//BackgroundObject* bg = object::Instantiate<BackgroundObject>(eLayerType::UI);
-		//mbgs = bg->GetComponent<BackgroundScript>();
+		mbgs = object::Instantiate<GameObject>(eLayerType::UI)->AddComponent<BackgroundScript>();
 
+		mbgm = object::Instantiate<GameObject>(eLayerType::System)->AddComponent<AudioSource>();
+		mAudios[0] = Resources::Load<AudioClip>(L"ThemeOpening", L"..\\..\\Assets\\AudioClips\\MainMenu\\SFX_INTRO_LOOP.wav");
+		mAudios[1] = Resources::Load<AudioClip>(L"Theme", L"..\\..\\Assets\\AudioClips\\MainMenu\\mus_jsbtheme.wav");
+		mAudios[2] = Resources::Load<AudioClip>(L"Stinger", L"..\\..\\Assets\\AudioClips\\MainMenu\\SFX_INTRO_STINGER.wav");
 		Scene::Initialize();
 
 	}
 	void TitleScene::Update()
 	{
+		if (!mbgm->IsPlaying())
+		{
+			mbgm->SetClip(mAudios[1]);
+			mbgm->Play(true);
+		}
 		Scene::Update();
 	}
 	void TitleScene::LateUpdate()
@@ -52,6 +58,12 @@ namespace lu::JSAB::Title
 	}
 	void TitleScene::OnEnter()
 	{
-		//mbgs->SetBackground(BackgroundScript::Backgrounds::TITLE);
+		mbgs->SetBackground(BackgroundScript::Backgrounds::TITLE);
+		mbgm->SetClip(mAudios[0]);
+		mbgm->Play(false);
+	}
+	void TitleScene::OnExit()
+	{
+
 	}
 }

@@ -15,6 +15,7 @@ namespace lu
 		void Play();
 		void Pause(bool pause);
 		void Stop();
+		bool IsPlaying();
 		void SetPosition(int position_ms);
 		int GetPosition();
 		void SetVolume(float volume);

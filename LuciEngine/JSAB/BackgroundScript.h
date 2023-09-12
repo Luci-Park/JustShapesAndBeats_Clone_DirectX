@@ -1,6 +1,11 @@
 #pragma once
 #include "..\\Engine_SOURCE\LScript.h"
 #include "..\\Engine_SOURCE\LMeshRenderer.h"
+namespace lu
+{
+	class MeshRenderer;
+}
+
 namespace lu::JSAB
 {
 	class BackgroundScript : public Script
@@ -32,7 +37,7 @@ namespace lu::JSAB
 		void SetBackground(Backgrounds type);
 		void SetBackground(int type);
 	private:
-		lu::MeshRenderer* mMeshRenderer;
+		MeshRenderer* mMeshRenderer;
 	};
 }
 

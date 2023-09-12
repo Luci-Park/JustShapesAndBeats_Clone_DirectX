@@ -2,6 +2,9 @@
 #include "LMaterial.h"
 #include "LResources.h"
 #include "LGameObject.h"
+#include "LApplication.h"
+
+extern lu::Application application;
 namespace lu::JSAB
 {
 	std::vector<std::shared_ptr<Texture>> BackgroundScript::_backgrounds = {};
@@ -13,6 +16,7 @@ namespace lu::JSAB
 	}
 	void BackgroundScript::Initialize()
 	{
+		Script::Initialize();
 		if (_backgrounds.empty())
 		{
 			std::vector<std::wstring> imgs = {
@@ -36,8 +40,21 @@ namespace lu::JSAB
 				_backgrounds[i] = Resources::Find<Texture>(imgs[i]);
 			}
 		}
+		std::shared_ptr<Material> mat = Resources::Find<Material>(L"BackgroundMat");
+		if (mat == nullptr)
+		{
+			mat = std::make_shared<Material>();
+			mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
+			Resources::Insert(L"BackgroundMat", mat);
+		}
 
-		mMeshRenderer = Owner()->GetComponent<MeshRenderer>();
+		mMeshRenderer = Owner()->AddComponent<MeshRenderer>();
+		mMeshRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		mMeshRenderer->SetMaterial(mat);
+
+		mTransform->SetPosition(Vector3(0, 0, 10));
+		mTransform->SetScale(Vector3(application.GetWidth(), application.GetHeight(), 1));
+
 	}
 	void BackgroundScript::SetBackground(Backgrounds type)
 	{

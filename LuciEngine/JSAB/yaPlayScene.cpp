@@ -6,7 +6,6 @@
 #include "yaCameraScript.h"
 #include "LCamera.h"
 #include "LSceneManager.h"
-#include "BackgroundObject.h"
 #include "LRenderer.h"
 #include "LCollider2D.h"
 #include "LObject.h"

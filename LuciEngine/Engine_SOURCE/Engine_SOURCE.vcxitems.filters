@@ -112,6 +112,9 @@
     <Filter Include="GameObject\Component\Text">
       <UniqueIdentifier>{f6bfea80-aa5d-4063-8670-9b07103b9ca2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\Texture">
+      <UniqueIdentifier>{1be506d5-a833-4e43-9818-71d659a8c0f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -237,6 +240,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LText.h">
       <Filter>GameObject\Component\Text</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)LTexture.h">
+      <Filter>Resource\Texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LMath.cpp">
@@ -346,6 +352,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LText.cpp">
       <Filter>GameObject\Component\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LTexture.cpp">
+      <Filter>Resource\Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

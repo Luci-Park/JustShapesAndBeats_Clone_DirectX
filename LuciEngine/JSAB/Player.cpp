@@ -57,6 +57,8 @@ namespace lu::JSAB
 	}
 	void Player::Update()
 	{
+		if (IsShieldUp())
+			mRb->AddForce(mRb->GetVelocity() * -0.1);
 		CountDashTimer();
 		Move();
 		CheckBoundary();
@@ -137,7 +139,7 @@ namespace lu::JSAB
 	void Player::OnDamage(Transform* other)
 	{
 		PlayHitSound();
-		//mCurrHealth--;
+		mCurrHealth--;
 		if (mCurrHealth > 0)
 		{
 			Vector3 dir = mTr->GetPosition()- other->GetPosition();

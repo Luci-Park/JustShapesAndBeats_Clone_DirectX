@@ -19,6 +19,7 @@ namespace lu::JSAB::Title
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(mat);
+		mat->SetTint(Color::clear);
 
 		Vector3 scale = Vector3::One;
 		scale.y = 40;
@@ -32,9 +33,11 @@ namespace lu::JSAB::Title
 		an->AddTintKey(0, Color::clear);
 		an->AddTintKey(0.3, Color::white);
 		an = anim->CreateAnimation(L"Beat");
+		an->AddTextureKey(0, Resources::Find<Texture>(L"Title_Shapes_Red"));
 		an->AddScaleKey(0, scale);
 		an->AddScaleKey(0.2, scale * 1.5);
 		an->AddScaleKey(0, scale);
+		anim->PlayAnimation(L"Fade In", true);
 	}
 	
 	void AndObject::Initialize()
@@ -52,13 +55,18 @@ namespace lu::JSAB::Title
 		MeshRenderer* mr = AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(mat);
-		mat->SetTint({ 1, 1, 1, 0.5f });
+		mat->SetTint(Color::clear);
 
 		Vector3 scale = Vector3::One;
 		scale.y = 25;
 		scale.x = mat->GetTexture()->GetRatioWidth(scale.y);
 		mTransform->SetScale(scale);
 		mTransform->SetPosition(Vector3(0, 0, 3));
+
+		auto anim = AddComponent<Animator>();
+		auto an = anim->CreateAnimation(L"Fade In");
+		an->AddTintKey(0, Color::clear);
+		an->AddTintKey(0.3, {1, 1, 1, 0.5f});
 	}
 	
 	void BeatsObject::Initialize()
@@ -81,8 +89,12 @@ namespace lu::JSAB::Title
 		scale.y = 40;
 		scale.x = mat->GetTexture()->GetRatioWidth(scale.y);
 		mTransform->SetScale(scale);
-
 		mTransform->SetPosition(Vector3(53, 0, 3));
+
+		auto anim = AddComponent<Animator>();
+		auto an = anim->CreateAnimation(L"Fade In");
+		an->AddTintKey(0, Color::clear);
+		an->AddTintKey(0.3, Color::white);
 	}
 
 	void LightCircleObject::Initialize()

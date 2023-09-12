@@ -1,7 +1,7 @@
 #include "MenuScene.h"
 #include "TitleObject.h"
 #include "LCamera.h"
-#include "BackgroundObject.h"
+#include "LObject.h"
 #include "BackgroundScript.h"
 #include "MenuButtonObject.h"
 #include "..\\Editor_SOURCE\\TransformWidget.h"
@@ -9,8 +9,7 @@ namespace lu::JSAB::Menu
 {
 	void MenuScene::Initialize()
 	{
-		BackgroundObject* bg = new BackgroundObject(eLayerType::UI);
-		AddGameObject(eLayerType::UI, bg);
+		//mbgs = object::Instantiate<GameObject>(eLayerType::UI)->AddComponent<BackgroundScript>();
 		TitleObject* title = new TitleObject(eLayerType::UI);
 		AddGameObject(eLayerType::UI, title);
 		title->AddComponent<gui::TransformWidget>();

@@ -1,6 +1,15 @@
 #pragma once
 #include "..\Engine_SOURCE\LScene.h"
-#include "BackgroundScript.h"
+namespace lu
+{
+	class AudioSource;
+	class AudioClip;
+}
+namespace lu::JSAB
+{
+	class BackgroundScript;
+	class SplashAnimation;
+}
 namespace lu::JSAB::Title
 {
 	class TitleScene : public Scene
@@ -15,9 +24,13 @@ namespace lu::JSAB::Title
 		virtual void Render() override;
 
 		virtual void OnEnter() override;
+		virtual void OnExit() override;
 
 	private:
 		BackgroundScript* mbgs;
+		SplashAnimation* mAnim;
+		AudioSource* mbgm;
+		std::shared_ptr<AudioClip> mAudios[3];
 	};
 }
 

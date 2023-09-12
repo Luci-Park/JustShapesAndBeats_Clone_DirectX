@@ -14,6 +14,9 @@ namespace lu::JSAB::Title
 		virtual void Initialize() override;
 	private:
 		Animator* mAnim;
+		Animator* mShapes;
+		Animator* mAnd;
+		Animator* mBeats;
 	};
 }
 

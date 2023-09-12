@@ -22,6 +22,8 @@ namespace lu
 		float GetVolume();
 		void SetClip(std::shared_ptr<AudioClip> clip) { mAudioClip = clip; }
 		std::shared_ptr<AudioClip> GetClip() { return mAudioClip; }
+		bool IsPlaying();
+		bool IsPlaying(std::shared_ptr<AudioClip> clip);
 	private:
 		std::shared_ptr<AudioClip> mAudioClip;
 	};
