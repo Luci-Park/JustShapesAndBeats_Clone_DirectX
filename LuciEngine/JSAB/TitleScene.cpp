@@ -70,6 +70,15 @@ namespace lu::JSAB::Title
 				}
 			}
 		}
+		else
+		{
+			if (Input::GetKeyDown(eKeyCode::ENTER))
+			{
+				mbgm->Stop();
+				mbgm->SetClip(mAudios[2]);
+				mbgm->Play(false);
+			}
+		}
 		Scene::Update();
 	}
 	void TitleScene::LateUpdate()
