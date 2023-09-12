@@ -36,16 +36,24 @@ namespace lu::JSAB
 		an->AddScaleKey(0, orgScale * 0.4);
 		an->AddScaleKey(0.3, orgScale);
 
-		auto anim = img -> AddComponent<Animator>();
-		mImgAnim = anim;
-		auto a = anim->CreateAnimation(L"Bump");
-		float spb = 0.435;
-		a->AddLocalPositionKey(spb * 0.8, Vector3::Zero);
-		a->AddLocalPositionKey(spb, Vector3::Up * 30);
-		a->AddLocalPositionKey(spb * 1.3, Vector3::Zero);
-		a->AddLocalScaleKey(spb * 1.8, Vector3::One);
-		a->AddLocalScaleKey(spb * 2, Vector3::One * 1.1);
-		a->AddLocalScaleKey(spb * 2.2, Vector3::One); 
+		an = mAnim->CreateAnimation(L"Move");
+		an->AddPositionKey(0, Vector3::Zero);
+		an->AddScaleKey(0, orgScale);
+		an->AddPositionKey(1, Vector3(-281, 0, 0));
+		an->AddScaleKey(1, orgScale * 0.8);
+
+		{
+			auto anim = img->AddComponent<Animator>();
+			mImgAnim = anim;
+			auto a = anim->CreateAnimation(L"Bump");
+			float spb = 0.435;
+			a->AddLocalPositionKey(spb * 0.8, Vector3::Zero);
+			a->AddLocalPositionKey(spb, Vector3::Up * 30);
+			a->AddLocalPositionKey(spb * 1.3, Vector3::Zero);
+			a->AddLocalScaleKey(spb * 1.8, Vector3::One);
+			a->AddLocalScaleKey(spb * 2, Vector3::One * 1.1);
+			a->AddLocalScaleKey(spb * 2.2, Vector3::One);
+		}
 		{
 			auto light = object::Instantiate<GameObject>(eLayerType::UI);
 			auto lightanim = light->AddComponent<Animator>();
@@ -75,6 +83,7 @@ namespace lu::JSAB
 			mLight = lightanim;
 			light->SetActive(false);
 		}
+		
 	}
 	void TitleObject::OnBeat()
 	{
@@ -89,6 +98,9 @@ namespace lu::JSAB
 	{
 		mAnim->PlayAnimation(L"Fade In", false);
 		mImgAnim->PlayAnimation(L"Bump", true);
-
+	}
+	void TitleObject::OnMove()
+	{
+		mAnim->PlayAnimation(L"Move", false);
 	}
 }

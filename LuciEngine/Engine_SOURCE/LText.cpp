@@ -24,6 +24,6 @@ namespace lu
 		int b = color.B() * 255;
 		int a = color.A() * 255;
 		UINT fcolor = FONT_RGBA(r, g, b, a);
-		FontWrapper::DrawFont(text, offset.x, offset.y, size, fcolor);
+		FontWrapper::DrawFont(text, pos.x, pos.y, size, fcolor);
 	}
 }

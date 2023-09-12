@@ -2,7 +2,9 @@
 #include "LMeshRenderer.h"
 #include "LResources.h"
 #include "LSceneManager.h"
-namespace lu::JSAB::Menu
+#include "LAnimator.h"
+#include "LText.h"
+namespace lu::JSAB
 {
 	void MenuButtonObject::Initialize()
 	{
@@ -10,6 +12,7 @@ namespace lu::JSAB::Menu
 		float y = 200;
 		{
 			GameObject* tag = new GameObject(GetLayer());
+			tag->SetName(L"Main Button");
 			std::shared_ptr<Material> mat = Resources::Find<Material>(L"Story_Tag");
 			if (mat == nullptr)
 			{
@@ -27,6 +30,13 @@ namespace lu::JSAB::Menu
 			float width = mat->GetTexture()->GetRatioWidth(height);
 			tag->mTransform->SetScale(Vector3(width, height, 1));
 			tag->mTransform->SetParent(mTransform);
+			auto t = tag->AddComponent<Text>();
+			t->color = Color::white;
+			t->text = L"STORY";
+			t->size = 50;
+			t->offset.x = 350;
+			t->offset.y = -70;
+
 			SceneManager::GetActiveScene()->AddGameObject(eLayerType::UI, tag);
 		}
 		{
@@ -51,6 +61,15 @@ namespace lu::JSAB::Menu
 			tag->mTransform->SetParent(mTransform);
 
 			SceneManager::GetActiveScene()->AddGameObject(eLayerType::UI, tag);
+
+			mAnim = AddComponent<Animator>();
+			auto a = mAnim->CreateAnimation(L"Appear");
+			a->AddScaleKey(0, {0, 1, 1});
+			a->AddPositionKey(0, { -200, 0, 0 });
+			a->AddScaleKey(0.2, { 1.3, 1, 1 });
+			a->AddPositionKey(0.3, { 20, 0, 0 });
+			a->AddScaleKey(0.5, Vector3::One);
+			a->AddPositionKey(0.7, { 0, 0, 0 });
 		}
 		GameObject::Initialize();
 	}

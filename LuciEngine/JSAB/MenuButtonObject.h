@@ -1,6 +1,10 @@
 #pragma once
 #include "LGameObject.h"
-namespace lu::JSAB::Menu
+namespace lu
+{
+	class Animator;
+}
+namespace lu::JSAB
 {
 	class MenuButtonObject : public GameObject
 	{
@@ -9,6 +13,8 @@ namespace lu::JSAB::Menu
 		virtual ~MenuButtonObject(){}
 
 		virtual void Initialize() override;
+	private:
+		Animator* mAnim;
 	};
 }
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "..\Engine_SOURCE\LScene.h"
 
-namespace lu::JSAB::Menu
+namespace lu::JSAB
 {
 	class MenuScene : public Scene
 	{

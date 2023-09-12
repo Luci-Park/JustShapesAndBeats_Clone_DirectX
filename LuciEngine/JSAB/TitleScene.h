@@ -10,10 +10,10 @@ namespace lu::JSAB
 {
 	class BackgroundScript;
 	class TitleObject;
+	class MenuButtonObject;
 }
 namespace lu::JSAB::Title
 {
-	class SplashAnimation;
 	class TitleScene : public Scene
 	{
 	public:
@@ -31,10 +31,10 @@ namespace lu::JSAB::Title
 	private:
 		BackgroundScript* mbgs;
 		TitleObject* mTitle;
-		SplashAnimation* mImgAnim;
 		AudioSource* mbgm;
+		MenuButtonObject* mButton;
+		bool mbIsInMenu;
 		std::shared_ptr<AudioClip> mAudios[3];
-		double spb = 0.435;
 	};
 }
 

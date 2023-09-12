@@ -14,6 +14,7 @@ namespace lu::JSAB
 		virtual void Initialize() override;
 		void OnBeat();
 		void OnAppear();
+		void OnMove();
 	private:
 		Vector3 orgScale;
 		Animator* mImgAnim;

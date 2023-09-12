@@ -10,6 +10,8 @@
 #include "BackgroundScript.h"
 #include "SplashAnimation.h"
 #include "TitleObject.h"
+#include "MenuButtonObject.h"
+#include "LInput.h"
 
 namespace lu::JSAB::Title
 {
@@ -36,6 +38,8 @@ namespace lu::JSAB::Title
 
 		mbgs = object::Instantiate<GameObject>(eLayerType::UI)->AddComponent<BackgroundScript>();
 		mTitle = object::Instantiate<TitleObject>(eLayerType::UI);
+		mButton = object::Instantiate<MenuButtonObject>(eLayerType::UI);
+		mButton->SetActive(false);
 
 		mbgm = object::Instantiate<GameObject>(eLayerType::System)->AddComponent<AudioSource>();
 		mAudios[0] = Resources::Load<AudioClip>(L"ThemeOpening", L"..\\..\\Assets\\AudioClips\\MainMenu\\SFX_INTRO_LOOP.wav");
@@ -46,12 +50,25 @@ namespace lu::JSAB::Title
 	}
 	void TitleScene::Update()
 	{
-		if(!mbgm->IsPlaying())
+		if (!mbIsInMenu)
 		{
-			mbgm->SetClip(mAudios[1]);
-			mbgm->Play(true);
-			mbgs->SetBackground(BackgroundScript::Backgrounds::TITLEGREEN);
-			mTitle->OnBeat();
+			if (!mbgm->IsPlaying())
+			{
+				mbgm->SetClip(mAudios[1]);
+				mbgm->Play(true);
+				mbgs->SetBackground(BackgroundScript::Backgrounds::TITLEGREEN);
+				mTitle->OnBeat();
+			}
+			if (mbgm->GetClip() == mAudios[1])
+			{
+				if (Input::GetKeyDown(eKeyCode::ENTER))
+				{
+					mTitle->OnMove();
+					mbIsInMenu = true;
+					mButton->SetActive(true);
+					mButton->GetComponent<Animator>()->PlayAnimation(L"Appear", false);
+				}
+			}
 		}
 		Scene::Update();
 	}
@@ -65,6 +82,7 @@ namespace lu::JSAB::Title
 	}
 	void TitleScene::OnEnter()
 	{
+		mbIsInMenu = false;
 		mbgs->SetBackground(BackgroundScript::Backgrounds::TITLE);
 		mbgm->SetClip(mAudios[0]);
 		mbgm->Play(false);
