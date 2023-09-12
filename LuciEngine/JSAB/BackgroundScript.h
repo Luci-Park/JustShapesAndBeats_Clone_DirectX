@@ -39,7 +39,7 @@ namespace lu::JSAB
 		void SetBackground(int type);
 	private:
 		MeshRenderer* mMeshRenderer;
-		Animator* mAnim;
+		Animator* mImgAnim;
 	};
 }
 

@@ -71,7 +71,7 @@ namespace lu::JSAB
 		Transform* mTr;
 		Collider2D* mCr;
 		MeshRenderer* mMr;
-		Animator* mAnim;
+		Animator* mImgAnim;
 		AudioSource* mAudio;
 		Rigidbody* mRb;
 
@@ -102,7 +102,7 @@ namespace lu::JSAB
 	private:
 		GameObject* mBackground;
 		Transform* mPlayer;
-		Animator* mAnim;
+		Animator* mImgAnim;
 	};
 }
 

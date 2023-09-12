@@ -21,7 +21,7 @@ namespace lu::JSAB
 		void CreateEnterEffect();
 
 	private:
-		Animator* mAnim;
+		Animator* mImgAnim;
 		Animator* mEnterEffect;
 		Collider2D* mCol;
 		MeshRenderer* mMr;

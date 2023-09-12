@@ -22,7 +22,7 @@ namespace lu::JSAB
 	private:
 		MeshRenderer* mMr;
 		Collider2D* mCol;
-		Animator* mAnim;
+		Animator* mImgAnim;
 		std::shared_ptr<Texture> mReadySprite;
 		std::shared_ptr<Texture> mActivateSprite;
 		bool mbFastActivate;

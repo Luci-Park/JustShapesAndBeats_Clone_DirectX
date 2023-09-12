@@ -15,7 +15,7 @@ namespace lu::JSAB::Title
 
 		void FadeIn();
 	private:
-		Animator* mAnim;
+		Animator* mImgAnim;
 		Animator* mShapes;
 		Animator* mAnd;
 		Animator* mBeats;

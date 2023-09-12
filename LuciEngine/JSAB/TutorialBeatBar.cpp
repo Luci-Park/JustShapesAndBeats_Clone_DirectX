@@ -30,7 +30,7 @@ namespace lu::JSAB
 		mMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"verticlebar"));
 		mMr->SetColor(Color::white)->UseColor(false);
 
-		mAnim = Owner()->AddComponent<Animator>();
+		mImgAnim = Owner()->AddComponent<Animator>();
 		CreateOnBeatAnimation();
 
 		Bullet::Initialize();
@@ -61,13 +61,13 @@ namespace lu::JSAB
 	{
 		Owner()->SetActive(true);
 		mCol->SetActive(false);
-		mAnim->PlayAnimation(L"Warning", false);
+		mImgAnim->PlayAnimation(L"Warning", false);
 	}
 	void TutorialBeatBar::OnActivate()
 	{
 		Owner()->SetActive(true);
 		mCol->SetActive(false);
-		mAnim->PlayAnimation(L"Appear", false);
+		mImgAnim->PlayAnimation(L"Appear", false);
 	}
 	void TutorialBeatBar::OnDeActivate()
 	{
@@ -88,13 +88,13 @@ namespace lu::JSAB
 	{
 		Vector3 baseScale = { 20, (float)application.GetWidth() * 2, 1 };
 
-		Animation* ani = mAnim->CreateAnimation(L"Warning");
+		Animation* ani = mImgAnim->CreateAnimation(L"Warning");
 		ani->AddScaleKey(0, { 0, (float)application.GetWidth() * 2, 1 });
 		ani->AddTintKey(0, Color::clear);
 		ani->AddScaleKey(appearDuration, baseScale);
 		ani->AddTintKey(appearDuration, {1.f, 1.f, 1.f, 0.8f});
 
-		ani = mAnim->CreateAnimation(L"Appear");
+		ani = mImgAnim->CreateAnimation(L"Appear");
 		ani->AddColliderActiveKey(0, true);
 		ani->AddScaleKey(0, { 20, 0, 1 });
 		ani->AddInterpolationKey(0, 1);

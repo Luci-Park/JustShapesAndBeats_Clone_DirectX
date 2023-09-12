@@ -20,14 +20,14 @@ namespace lu::JSAB
 		Owner()->SetName(L"GiantCircle");
 		mMr = Owner()->AddComponent<MeshRenderer>()->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"circle_bullet"));
 		mMr->SetColor(Color::white);
-		mAnim = Owner()->AddComponent<Animator>();
+		mImgAnim = Owner()->AddComponent<Animator>();
 		CreateAnimation();
 		Bullet::Initialize();
 	}
 	void TutorialGiantCircle::ActivateWithTime(double time)
 	{
-		mAnim->PlayAnimation(L"Bump", true);
-		mAnim->SetTime(time);
+		mImgAnim->PlayAnimation(L"Bump", true);
+		mImgAnim->SetTime(time);
 		Activate();
 	}
 	void TutorialGiantCircle::OnShow()
@@ -38,7 +38,7 @@ namespace lu::JSAB
 	}
 	void TutorialGiantCircle::OnDeActivate()
 	{
-		mAnim->PlayAnimation(L"Disappear", false);
+		mImgAnim->PlayAnimation(L"Disappear", false);
 		mTime = 111.611;
 	}
 	void TutorialGiantCircle::WhileShowing()
@@ -61,7 +61,7 @@ namespace lu::JSAB
 	}
 	void TutorialGiantCircle::CreateAnimation()
 	{
-		auto a = mAnim->CreateAnimation(L"Disappear");
+		auto a = mImgAnim->CreateAnimation(L"Disappear");
 		double duration = 0.432;
 		a->AddScaleKey(0, {740, 740, 1});
 		a->AddScaleKey(duration * 0.7, { 760, 760, 1 });
@@ -77,7 +77,7 @@ namespace lu::JSAB
 
 
 
-		a = mAnim->CreateAnimation(L"Bump");
+		a = mImgAnim->CreateAnimation(L"Bump");
 		a->AddScaleKey(duration * 0, {40.f, 40.f, 1.f});
 		a->AddInterpolationKey(duration * 0, 0);
 		a->AddScaleKey(duration * .25, { 760, 760, 1 });

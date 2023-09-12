@@ -19,8 +19,8 @@ namespace lu::JSAB
 		mMr = Owner()->AddComponent<MeshRenderer>();
 		mMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"octa_circle_bullet"));
 
-		mAnim = Owner()->AddComponent<Animator>();
-		Animation* ani = mAnim->CreateAnimation(L"Rotate");
+		mImgAnim = Owner()->AddComponent<Animator>();
+		Animation* ani = mImgAnim->CreateAnimation(L"Rotate");
 		CreateClockwiseAnimation(1.f, ani);
 		CreateEnterEffect();
 		Bullet::Initialize();
@@ -37,7 +37,7 @@ namespace lu::JSAB
 	{
 		Owner()->SetActive(true);
 		mEnterEffect->PlayAnimation(L"Appear", false);
-		mAnim->PlayAnimation(L"Rotate", true);
+		mImgAnim->PlayAnimation(L"Rotate", true);
 		mTime = 0;
 	}
 	void TutorialEightBullets::OnDeActivate()

@@ -8,12 +8,12 @@ namespace lu::JSAB::Title
 {
 	void SplashAnimation::Initialize()
 	{
-		mAnim = Owner()->AddComponent<Animator>();
+		mImgAnim = Owner()->AddComponent<Animator>();
 		mShapes = object::Instantiate<ShapesObject>(eLayerType::UI)->GetComponent<Animator>();
 		mAnd = object::Instantiate<AndObject>(eLayerType::UI)->GetComponent<Animator>();
 		mBeats = object::Instantiate<BeatsObject>(eLayerType::UI)->GetComponent<Animator>();
 
-		auto a = mAnim->CreateAnimation(L"Fade In");
+		auto a = mImgAnim->CreateAnimation(L"Fade In");
 		a->AddFunctionKey(0, std::bind(&Animator::PlayAnimation, mShapes, L"Fade In", false));
 		a->AddFunctionKey(0.3, std::bind(&Animator::PlayAnimation, mAnd, L"Fade In", false));
 		a->AddFunctionKey(0.6, std::bind(&Animator::PlayAnimation, mBeats, L"Fade In", false));
@@ -21,6 +21,6 @@ namespace lu::JSAB::Title
 	}
 	void SplashAnimation::FadeIn()
 	{
-		mAnim->PlayAnimation(L"Fade In", false);
+		mImgAnim->PlayAnimation(L"Fade In", false);
 	}
 }

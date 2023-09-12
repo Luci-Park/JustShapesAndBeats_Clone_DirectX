@@ -21,13 +21,24 @@ namespace lu::JSAB
 		MeshRenderer* mr = img -> AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(mat);
+		mat->SetTint({ 0.3, 0.3, 0.3, 0.3 });
 
 		Vector3 scale = mat->GetTexture()->GetSize();
 		mTransform->SetScale(scale * 0.5);
-		orgScale = scale;
+		orgScale = scale * 0.5;
+
+		mAnim = AddComponent<Animator>();
+		auto an = mAnim->CreateAnimation(L"Fade In");
+		an->AddScaleKey(0, Vector3::Zero);
+		an->AddScaleKey(5, orgScale * 0.3);
+
+		an = mAnim->CreateAnimation(L"Appear");
+		an->AddScaleKey(0, orgScale * 0.4);
+		an->AddScaleKey(0.3, orgScale);
+
 
 		auto anim = img -> AddComponent<Animator>();
-		mAnim = anim;
+		mImgAnim = anim;
 		auto a = anim->CreateAnimation(L"Bump");
 		float spb = 0.435;
 		a->AddLocalPositionKey(spb * 0.8, Vector3::Zero);
@@ -40,16 +51,16 @@ namespace lu::JSAB
 	}
 	void TitleObject::OnBeat()
 	{
-		mAnim->PlayAnimation(L"Bump", true);
-		/*if (beat)
-			mAnim->PlayAnimation(L"Beat", false);
-		else
-			mAnim->PlayAnimation(L"Bump", false);
-		beat = !beat;*/
+
+		mImgAnim->PlayAnimation(L"Bump", true);
+		mAnim->PlayAnimation(L"Appear", false);
+		mImgAnim->Owner()->GetComponent<MeshRenderer>()->GetMaterial()->SetTint(Color::white);
 	}
 
-	void TitleObject::SetScaleToOrg()
+	void TitleObject::OnAppear()
 	{
-		mTransform->SetScale(orgScale);
+		mAnim->PlayAnimation(L"Fade In", false);
+		mImgAnim->PlayAnimation(L"Bump", true);
+
 	}
 }

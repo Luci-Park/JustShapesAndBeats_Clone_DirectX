@@ -22,7 +22,7 @@ namespace lu::JSAB
 
 		void CreateAnimation();
 	private:
-		Animator* mAnim;
+		Animator* mImgAnim;
 		MeshRenderer* mMr;
 		double mTime;
 	};

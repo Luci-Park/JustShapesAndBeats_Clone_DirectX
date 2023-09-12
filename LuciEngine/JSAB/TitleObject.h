@@ -13,9 +13,10 @@ namespace lu::JSAB
 		virtual ~TitleObject() {}
 		virtual void Initialize() override;
 		void OnBeat();
-		void SetScaleToOrg();
+		void OnAppear();
 	private:
 		Vector3 orgScale;
+		Animator* mImgAnim;
 		Animator* mAnim;
 		bool beat;
 	};

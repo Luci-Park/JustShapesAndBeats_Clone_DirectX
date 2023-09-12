@@ -68,7 +68,7 @@ namespace lu::JSAB::Title
 		mbgs->SetBackground(BackgroundScript::Backgrounds::TITLE);
 		mbgm->SetClip(mAudios[0]);
 		mbgm->Play(false);
-		mTitle->OnBeat();
+		mTitle->OnAppear();
 	}
 	void TitleScene::StartMusic()
 	{

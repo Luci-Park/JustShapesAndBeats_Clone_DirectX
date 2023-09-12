@@ -32,7 +32,7 @@ namespace lu::JSAB
 		mTr = Owner()->mTransform;
 		mCr = Owner()->GetComponent<Collider2D>();
 		mMr = Owner()->GetComponent<MeshRenderer>();
-		mAnim = Owner()->AddComponent<Animator>();
+		mImgAnim = Owner()->AddComponent<Animator>();
 		mAudio = Owner()->AddComponent<AudioSource>();
 		mRb = Owner()->AddComponent<Rigidbody>();
 
@@ -45,7 +45,7 @@ namespace lu::JSAB
 		lifeTextures[1] = Resources::Find<graphics::Texture>(L"player41");
 		lifeTextures[0] = Resources::Find<graphics::Texture>(L"player61");
 
-		auto a = mAnim->CreateAnimation(L"Flash");
+		auto a = mImgAnim->CreateAnimation(L"Flash");
 		double duration = 2.0;
 		for (int i = 0; i < 40; i++)
 		{
@@ -148,7 +148,7 @@ namespace lu::JSAB
 			mRb->SetVelocity(dir * 25);
 			mMr->GetMaterial()->SetTexture(lifeTextures[mCurrHealth - 1]);
 			mShield->Activate();
-			mAnim->PlayAnimation(L"Flash", false);
+			mImgAnim->PlayAnimation(L"Flash", false);
 		}
 		else 
 			OnDeath();
@@ -287,8 +287,8 @@ namespace lu::JSAB
 	}
 	void ShieldScript::CreateAnimation()
 	{
-		mAnim = Owner()->AddComponent<Animator>();
-		auto a = mAnim->CreateAnimation(L"Shield");
+		mImgAnim = Owner()->AddComponent<Animator>();
+		auto a = mImgAnim->CreateAnimation(L"Shield");
 		double duration = 1;
 		for (int i = 0; i < 85; i++)
 		{
@@ -299,12 +299,12 @@ namespace lu::JSAB
 	}
 	void ShieldScript::Activate()
 	{
-		mAnim->PlayAnimation(L"Shield", false);
+		mImgAnim->PlayAnimation(L"Shield", false);
 		Owner()->SetActive(true);
 	}
 	float ShieldScript::ShieldProgress()
 	{
-		return mAnim->GetTime() / 1;
+		return mImgAnim->GetTime() / 1;
 	}
 #pragma endregion
 

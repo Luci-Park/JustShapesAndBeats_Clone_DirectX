@@ -31,7 +31,7 @@ namespace lu::JSAB::Title
 	private:
 		BackgroundScript* mbgs;
 		TitleObject* mTitle;
-		SplashAnimation* mAnim;
+		SplashAnimation* mImgAnim;
 		AudioSource* mbgm;
 		std::shared_ptr<AudioClip> mAudios[3];
 		double spb = 0.435;
