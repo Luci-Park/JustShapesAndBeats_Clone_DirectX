@@ -18,6 +18,7 @@ namespace lu::JSAB
 		Vector3 orgScale;
 		Animator* mImgAnim;
 		Animator* mAnim;
+		Animator* mLight;
 		bool beat;
 	};
 }

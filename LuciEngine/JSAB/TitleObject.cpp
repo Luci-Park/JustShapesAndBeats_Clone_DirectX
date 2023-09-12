@@ -17,16 +17,6 @@ namespace lu::JSAB
 			Resources::Insert(L"TitleMat", mat);
 			mat->SetRenderingMode(eRenderingMode::Transparent);
 		}
-		auto light = object::Instantiate<GameObject>(mTransform, eLayerType::UI);
-		auto lightanim = light->AddComponent<Animator>();
-		auto ani = lightanim->CreateAnimation(L"Appear");
-		double duration = 0.1;
-		ani->AddLocalScaleKey(0, Vector3::Zero);
-		ani->AddLocalRotationKey(0, Quaternion::Identity);
-		ani->AddLocalRotationKey(duration * 0.5, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI));
-		ani->AddLocalScaleKey(duration * 0.5, Vector3::One);
-		ani->AddLocalRotationKey(duration, Quaternion::CreateFromAxisAngle(Vector3::Forward, -2*PI));
-		ani->AddLocalScaleKey(duration, Vector3::Zero);
 
 		MeshRenderer* mr = img -> AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -55,14 +45,44 @@ namespace lu::JSAB
 		a->AddLocalPositionKey(spb * 1.3, Vector3::Zero);
 		a->AddLocalScaleKey(spb * 1.8, Vector3::One);
 		a->AddLocalScaleKey(spb * 2, Vector3::One * 1.1);
-		a->AddLocalScaleKey(spb * 2.2, Vector3::One);
+		a->AddLocalScaleKey(spb * 2.2, Vector3::One); 
+		{
+			auto light = object::Instantiate<GameObject>(eLayerType::UI);
+			auto lightanim = light->AddComponent<Animator>();
+			auto ani = lightanim->CreateAnimation(L"Appear");
+			double duration = 1;
+			ani->AddScaleKey(0, Vector3::Zero);
+			ani->AddRotationKey(0, Quaternion::Identity);
+			ani->AddRotationKey(duration * 0.5, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI));
+			ani->AddScaleKey(duration * 0.5, Vector3::One * orgScale.x);
+			ani->AddRotationKey(duration, Quaternion::CreateFromAxisAngle(Vector3::Forward, -2 * PI));
+			ani->AddScaleKey(duration, Vector3::Zero);
+			light->mTransform->SetPosition({ 0, 0, 2 });
+
+			std::shared_ptr<Material> mat = Resources::Find<Material>(L"TitleLight");
+			if (mat == nullptr)
+			{
+				mat = std::make_shared<Material>();
+				mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
+				mat->SetTexture(Resources::Find<Texture>(L"Title_Effect"));
+				Resources::Insert(L"TitleLight", mat);
+				mat->SetRenderingMode(eRenderingMode::Transparent);
+			}
+
+			MeshRenderer* mr = light->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(mat);
+			mLight = lightanim;
+			light->SetActive(false);
+		}
 	}
 	void TitleObject::OnBeat()
 	{
-
 		mImgAnim->PlayAnimation(L"Bump", true);
 		mAnim->PlayAnimation(L"Appear", false);
 		mImgAnim->Owner()->GetComponent<MeshRenderer>()->GetMaterial()->SetTint(Color::white);
+		mLight->Owner()->SetActive(true);
+		mLight->PlayAnimation(L"Appear", false);
 	}
 
 	void TitleObject::OnAppear()
