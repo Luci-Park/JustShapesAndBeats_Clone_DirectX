@@ -26,6 +26,13 @@ namespace lu
 		mAudioClip->Play();
 	}
 
+	void AudioSource::PlayOneShot(std::shared_ptr<AudioClip> clip, float volume)
+	{
+		clip->SetVolume(volume);
+		clip->SetLoop(false);
+		clip->Play();
+	}
+
 	void AudioSource::Pause()
 	{
 		mAudioClip->Pause(true);

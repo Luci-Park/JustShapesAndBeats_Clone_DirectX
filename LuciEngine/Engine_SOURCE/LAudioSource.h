@@ -12,6 +12,7 @@ namespace lu
 
 		void Play();
 		void Play(bool loop);
+		void PlayOneShot(std::shared_ptr<AudioClip> clip, float volume);
 		void Pause();
 		void UnPause();
 		void Stop();
