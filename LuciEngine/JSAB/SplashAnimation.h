@@ -12,6 +12,8 @@ namespace lu::JSAB::Title
 		SplashAnimation(){}
 		virtual ~SplashAnimation(){}
 		virtual void Initialize() override;
+
+		void FadeIn();
 	private:
 		Animator* mAnim;
 		Animator* mShapes;

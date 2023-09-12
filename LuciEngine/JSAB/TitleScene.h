@@ -4,14 +4,16 @@ namespace lu
 {
 	class AudioSource;
 	class AudioClip;
+	class GameObject;
 }
 namespace lu::JSAB
 {
 	class BackgroundScript;
-	class SplashAnimation;
+	class TitleObject;
 }
 namespace lu::JSAB::Title
 {
+	class SplashAnimation;
 	class TitleScene : public Scene
 	{
 	public:
@@ -25,12 +27,14 @@ namespace lu::JSAB::Title
 
 		virtual void OnEnter() override;
 		virtual void OnExit() override;
-
+		void StartMusic();
 	private:
 		BackgroundScript* mbgs;
+		TitleObject* mTitle;
 		SplashAnimation* mAnim;
 		AudioSource* mbgm;
 		std::shared_ptr<AudioClip> mAudios[3];
+		double spb = 0.435;
 	};
 }
 

@@ -4,6 +4,7 @@
 namespace lu
 {
 	class MeshRenderer;
+	class Animator;
 }
 
 namespace lu::JSAB
@@ -38,6 +39,7 @@ namespace lu::JSAB
 		void SetBackground(int type);
 	private:
 		MeshRenderer* mMeshRenderer;
+		Animator* mAnim;
 	};
 }
 

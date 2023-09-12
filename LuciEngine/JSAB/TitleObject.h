@@ -1,6 +1,10 @@
 #pragma once
 #include "LGameObject.h"
-namespace lu::JSAB::Menu
+namespace lu
+{
+	class Animator;
+}
+namespace lu::JSAB
 {
 	class TitleObject : public GameObject
 	{
@@ -8,6 +12,12 @@ namespace lu::JSAB::Menu
 		TitleObject(eLayerType layer):GameObject(layer) {}
 		virtual ~TitleObject() {}
 		virtual void Initialize() override;
+		void OnBeat();
+		void SetScaleToOrg();
+	private:
+		Vector3 orgScale;
+		Animator* mAnim;
+		bool beat;
 	};
 }
 

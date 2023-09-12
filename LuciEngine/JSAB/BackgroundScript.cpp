@@ -3,6 +3,7 @@
 #include "LResources.h"
 #include "LGameObject.h"
 #include "LApplication.h"
+#include "LAnimator.h"
 
 extern lu::Application application;
 namespace lu::JSAB

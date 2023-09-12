@@ -6,95 +6,103 @@ namespace lu::JSAB::Title
 {
 	void ShapesObject::Initialize()
 	{
-		std::shared_ptr<Material> mat = Resources::Find<Material>(L"MenuShapesMat");
-		if (mat == nullptr)
 		{
-			mat = std::make_shared<Material>();
-			mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
-			mat->SetTexture(Resources::Find<Texture>(L"Title_Shapes_White"));
-			Resources::Insert(L"MenuShapesMat", mat);
-			mat->SetRenderingMode(eRenderingMode::Transparent);
+			std::shared_ptr<Material> mat = Resources::Find<Material>(L"MenuShapesMat");
+			if (mat == nullptr)
+			{
+				mat = std::make_shared<Material>();
+				mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
+				mat->SetTexture(Resources::Find<Texture>(L"Title_Shapes_White"));
+				Resources::Insert(L"MenuShapesMat", mat);
+				mat->SetRenderingMode(eRenderingMode::Transparent);
+			}
+
+			MeshRenderer* mr = AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(mat);
+			mat->SetTint(Color::clear);
+
+			Vector3 scale = Vector3::One;
+			scale.y = 40;
+			scale.x = mat->GetTexture()->GetRatioWidth(scale.y);
+			mTransform->SetScale(scale);
+
+			mTransform->SetPosition(Vector3(-60, 0, 3));
 		}
-
-		MeshRenderer* mr = AddComponent<MeshRenderer>();
-		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mr->SetMaterial(mat);
-		mat->SetTint(Color::clear);
-
-		Vector3 scale = Vector3::One;
-		scale.y = 40;
-		scale.x = mat->GetTexture()->GetRatioWidth(scale.y);
-		mTransform->SetScale(scale);
-
-		mTransform->SetPosition(Vector3(-60, 0, 3));
-
 		auto anim = AddComponent<Animator>();
 		auto an = anim->CreateAnimation(L"Fade In");
 		an->AddTintKey(0, Color::clear);
-		an->AddTintKey(0.3, Color::white);
+		an->AddTintKey(0.2, Color::white);
+		
+		/*
 		an = anim->CreateAnimation(L"Beat");
 		an->AddTextureKey(0, Resources::Find<Texture>(L"Title_Shapes_Red"));
 		an->AddScaleKey(0, scale);
 		an->AddScaleKey(0.2, scale * 1.5);
 		an->AddScaleKey(0, scale);
-		anim->PlayAnimation(L"Fade In", true);
+		anim->PlayAnimation(L"Fade In", true);*/
 	}
 	
 	void AndObject::Initialize()
 	{
-		std::shared_ptr<Material> mat = Resources::Find<Material>(L"MenuAndMat");
-		if (mat == nullptr)
 		{
-			mat = std::make_shared<Material>();
-			mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
-			mat->SetTexture(Resources::Find<Texture>(L"Title_And_Gray"));
-			Resources::Insert(L"MenuAndMat", mat);
-			mat->SetRenderingMode(eRenderingMode::Transparent);
+			std::shared_ptr<Material> mat = Resources::Find<Material>(L"MenuAndMat");
+			if (mat == nullptr)
+			{
+				mat = std::make_shared<Material>();
+				mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
+				mat->SetTexture(Resources::Find<Texture>(L"Title_And_Gray"));
+				Resources::Insert(L"MenuAndMat", mat);
+				mat->SetRenderingMode(eRenderingMode::Transparent);
+			}
+
+			MeshRenderer* mr = AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(mat);
+			mat->SetTint(Color::clear);
+
+			Vector3 scale = Vector3::One;
+			scale.y = 25;
+			scale.x = mat->GetTexture()->GetRatioWidth(scale.y);
+			mTransform->SetScale(scale);
+			mTransform->SetPosition(Vector3(0, 0, 3));
 		}
-
-		MeshRenderer* mr = AddComponent<MeshRenderer>();
-		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mr->SetMaterial(mat);
-		mat->SetTint(Color::clear);
-
-		Vector3 scale = Vector3::One;
-		scale.y = 25;
-		scale.x = mat->GetTexture()->GetRatioWidth(scale.y);
-		mTransform->SetScale(scale);
-		mTransform->SetPosition(Vector3(0, 0, 3));
 
 		auto anim = AddComponent<Animator>();
 		auto an = anim->CreateAnimation(L"Fade In");
 		an->AddTintKey(0, Color::clear);
-		an->AddTintKey(0.3, {1, 1, 1, 0.5f});
+		an->AddTintKey(0.2, {1, 1, 1, 0.5f});
 	}
 	
 	void BeatsObject::Initialize()
 	{
-		std::shared_ptr<Material> mat = Resources::Find<Material>(L"MenuBeatMat");
-		if (mat == nullptr)
 		{
-			mat = std::make_shared<Material>();
-			mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
-			mat->SetTexture(Resources::Find<Texture>(L"Title_Beats_White"));
-			Resources::Insert(L"MenuBeatMat", mat);
-			mat->SetRenderingMode(eRenderingMode::Transparent);
+			std::shared_ptr<Material> mat = Resources::Find<Material>(L"MenuBeatMat");
+			if (mat == nullptr)
+			{
+				mat = std::make_shared<Material>();
+				mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
+				mat->SetTexture(Resources::Find<Texture>(L"Title_Beats_White"));
+				Resources::Insert(L"MenuBeatMat", mat);
+				mat->SetRenderingMode(eRenderingMode::Transparent);
+			}
+
+			MeshRenderer* mr = AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(mat);
+			mat->SetTint(Color::clear);
+
+			Vector3 scale = Vector3::One;
+			scale.y = 40;
+			scale.x = mat->GetTexture()->GetRatioWidth(scale.y);
+			mTransform->SetScale(scale);
+			mTransform->SetPosition(Vector3(53, 0, 3));
 		}
-
-		MeshRenderer* mr = AddComponent<MeshRenderer>();
-		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mr->SetMaterial(mat);
-
-		Vector3 scale = Vector3::One;
-		scale.y = 40;
-		scale.x = mat->GetTexture()->GetRatioWidth(scale.y);
-		mTransform->SetScale(scale);
-		mTransform->SetPosition(Vector3(53, 0, 3));
 
 		auto anim = AddComponent<Animator>();
 		auto an = anim->CreateAnimation(L"Fade In");
 		an->AddTintKey(0, Color::clear);
-		an->AddTintKey(0.3, Color::white);
+		an->AddTintKey(0.2, Color::white);
 	}
 
 	void LightCircleObject::Initialize()

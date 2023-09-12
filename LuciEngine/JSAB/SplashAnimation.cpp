@@ -18,6 +18,9 @@ namespace lu::JSAB::Title
 		a->AddFunctionKey(0.3, std::bind(&Animator::PlayAnimation, mAnd, L"Fade In", false));
 		a->AddFunctionKey(0.6, std::bind(&Animator::PlayAnimation, mBeats, L"Fade In", false));
 		
-		mAnim->PlayAnimation(L"Fade In", true);
+	}
+	void SplashAnimation::FadeIn()
+	{
+		mAnim->PlayAnimation(L"Fade In", false);
 	}
 }

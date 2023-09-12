@@ -5,9 +5,11 @@
 #include "LGameObject.h"
 #include "LAudioSource.h"
 #include "LResources.h"
+#include "LAnimator.h"
 #include "..\\Editor_SOURCE\\TransformWidget.h"
 #include "BackgroundScript.h"
 #include "SplashAnimation.h"
+#include "TitleObject.h"
 
 namespace lu::JSAB::Title
 {
@@ -30,7 +32,10 @@ namespace lu::JSAB::Title
 				cameraComp->TurnLayerMask((eLayerType)i, false);
 			}
 		}
+		//auto an = mAnim->Owner()->GetComponent<Animator>();
+
 		mbgs = object::Instantiate<GameObject>(eLayerType::UI)->AddComponent<BackgroundScript>();
+		mTitle = object::Instantiate<TitleObject>(eLayerType::UI);
 
 		mbgm = object::Instantiate<GameObject>(eLayerType::System)->AddComponent<AudioSource>();
 		mAudios[0] = Resources::Load<AudioClip>(L"ThemeOpening", L"..\\..\\Assets\\AudioClips\\MainMenu\\SFX_INTRO_LOOP.wav");
@@ -41,10 +46,12 @@ namespace lu::JSAB::Title
 	}
 	void TitleScene::Update()
 	{
-		if (!mbgm->IsPlaying())
+		if(!mbgm->IsPlaying())
 		{
 			mbgm->SetClip(mAudios[1]);
 			mbgm->Play(true);
+			mbgs->SetBackground(BackgroundScript::Backgrounds::TITLEGREEN);
+			mTitle->OnBeat();
 		}
 		Scene::Update();
 	}
@@ -61,9 +68,13 @@ namespace lu::JSAB::Title
 		mbgs->SetBackground(BackgroundScript::Backgrounds::TITLE);
 		mbgm->SetClip(mAudios[0]);
 		mbgm->Play(false);
+		mTitle->OnBeat();
+	}
+	void TitleScene::StartMusic()
+	{
 	}
 	void TitleScene::OnExit()
 	{
-
+		mbgm->Stop();
 	}
 }
