@@ -17,6 +17,16 @@ namespace lu::JSAB
 			Resources::Insert(L"TitleMat", mat);
 			mat->SetRenderingMode(eRenderingMode::Transparent);
 		}
+		auto light = object::Instantiate<GameObject>(mTransform, eLayerType::UI);
+		auto lightanim = light->AddComponent<Animator>();
+		auto ani = lightanim->CreateAnimation(L"Appear");
+		double duration = 0.1;
+		ani->AddLocalScaleKey(0, Vector3::Zero);
+		ani->AddLocalRotationKey(0, Quaternion::Identity);
+		ani->AddLocalRotationKey(duration * 0.5, Quaternion::CreateFromAxisAngle(Vector3::Forward, PI));
+		ani->AddLocalScaleKey(duration * 0.5, Vector3::One);
+		ani->AddLocalRotationKey(duration, Quaternion::CreateFromAxisAngle(Vector3::Forward, 2*PI));
+		ani->AddLocalScaleKey(duration, Vector3::Zero);
 
 		MeshRenderer* mr = img -> AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -36,7 +46,6 @@ namespace lu::JSAB
 		an->AddScaleKey(0, orgScale * 0.4);
 		an->AddScaleKey(0.3, orgScale);
 
-
 		auto anim = img -> AddComponent<Animator>();
 		mImgAnim = anim;
 		auto a = anim->CreateAnimation(L"Bump");
@@ -47,7 +56,6 @@ namespace lu::JSAB
 		a->AddLocalScaleKey(spb * 1.8, Vector3::One);
 		a->AddLocalScaleKey(spb * 2, Vector3::One * 1.1);
 		a->AddLocalScaleKey(spb * 2.2, Vector3::One);
-		//a->AddLocalPositionKey(spb * 2.5, Vector3::Zero);
 	}
 	void TitleObject::OnBeat()
 	{
