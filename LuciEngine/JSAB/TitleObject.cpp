@@ -23,9 +23,9 @@ namespace lu::JSAB
 		double duration = 0.1;
 		ani->AddLocalScaleKey(0, Vector3::Zero);
 		ani->AddLocalRotationKey(0, Quaternion::Identity);
-		ani->AddLocalRotationKey(duration * 0.5, Quaternion::CreateFromAxisAngle(Vector3::Forward, PI));
+		ani->AddLocalRotationKey(duration * 0.5, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI));
 		ani->AddLocalScaleKey(duration * 0.5, Vector3::One);
-		ani->AddLocalRotationKey(duration, Quaternion::CreateFromAxisAngle(Vector3::Forward, 2*PI));
+		ani->AddLocalRotationKey(duration, Quaternion::CreateFromAxisAngle(Vector3::Forward, -2*PI));
 		ani->AddLocalScaleKey(duration, Vector3::Zero);
 
 		MeshRenderer* mr = img -> AddComponent<MeshRenderer>();
