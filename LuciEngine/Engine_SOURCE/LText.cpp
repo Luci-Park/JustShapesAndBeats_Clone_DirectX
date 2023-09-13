@@ -28,7 +28,8 @@ namespace lu
 		int g = color.G() * 255;
 		int b = color.B() * 255;
 		int a = color.A() * 255;
+		float s = size * Owner()->mTransform->GetScale().y;
 		UINT fcolor = FONT_RGBA(r, g, b, a);
-		FontWrapper::DrawFont(text, pos.x, pos.y, size, fcolor);
+		FontWrapper::DrawFont(text, pos.x, pos.y, s, fcolor);
 	}
 }

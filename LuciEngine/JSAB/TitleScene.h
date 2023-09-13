@@ -5,6 +5,7 @@ namespace lu
 	class AudioSource;
 	class AudioClip;
 	class GameObject;
+	class Animator;
 }
 namespace lu::JSAB
 {
@@ -35,6 +36,7 @@ namespace lu::JSAB::Title
 		AudioSource* mbgm;
 		MenuButtonObject* mButton;
 		CameraScript* mCamera;
+		Animator* mText;
 		bool mbIsInMenu;
 		std::shared_ptr<AudioClip> mAudios[3];
 	};

@@ -66,6 +66,8 @@ namespace lu::JSAB
 		t->color = Color(48/255.f, 249/255.f, 246/255.f, 1);
 		t->text = L"Let's Go";
 		t->size = 60;
+		t->offset.x = -111;
+		t->offset.y = -88;
 		t->Owner()->AddComponent<gui::TransformWidget>();
 	}
 	void CameraTestScene::Update()

@@ -55,13 +55,13 @@ namespace gui
 			rotation.z -= fRotateSpeed * lu::Time::DeltaTime();
 		}
 
-		if (lu::Input::GetKey(lu::eKeyCode::R))
+		if (lu::Input::GetKeyDown(lu::eKeyCode::R))
 		{
 			scale.x -= fScaleSpeed * lu::Time::DeltaTime();
 			scale.y -= fScaleSpeed * lu::Time::DeltaTime();
 		}
 
-		if (lu::Input::GetKey(lu::eKeyCode::F))
+		if (lu::Input::GetKeyDown(lu::eKeyCode::F))
 		{
 			scale.x += fScaleSpeed * lu::Time::DeltaTime();
 			scale.y += fScaleSpeed * lu::Time::DeltaTime();

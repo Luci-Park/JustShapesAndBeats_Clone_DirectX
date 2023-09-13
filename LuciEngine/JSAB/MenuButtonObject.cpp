@@ -30,10 +30,10 @@ namespace lu::JSAB
 			float width = mat->GetTexture()->GetRatioWidth(height);
 			tag->mTransform->SetScale(Vector3(width, height, 1));
 			tag->mTransform->SetParent(mTransform);
-			auto t = tag->AddComponent<Text>();
+			/*auto t = tag->AddComponent<Text>();
 			t->color = Color::white;
 			t->text = L"STORY";
-			t->size = 50;
+			t->size = 50;*/
 			//t->offset.x = 350;
 			//t->offset.y = -70;
 
