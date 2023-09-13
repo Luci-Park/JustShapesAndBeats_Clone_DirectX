@@ -38,8 +38,10 @@ namespace lu::JSAB
 
 		GameObject* flash = object::Instantiate<GameObject>(mTransform, eLayerType::UI);
 		flash->AddComponent<MeshRenderer>()->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"ThickBar"))->SetColor({1.f, 1.f, 1.f, 0.5})->UseColor(true);
+		flash->GetComponent<MeshRenderer>()->GetMaterial()->SetRenderingMode(lu::graphics::eRenderingMode::Transparent);
 		flash->mTransform->SetScale(application.GetWidth(), application.GetHeight(), 1);
 		flash->mTransform->SetPosition({ 0, 0, -5 });
+		flash->SetName(L"Camera Flash");
 		mFlash = flash->AddComponent<Animator>();
 		{
 			auto a = mFlash->CreateAnimation(L"WhiteFlash");
@@ -92,6 +94,7 @@ namespace lu::JSAB
 	void CameraScript::Reset()
 	{
 		mTransform->SetPosition({ 0, 0, -10 });
+		//mFlash->Owner()->SetActive(false);
 		mFlash->Owner()->GetComponent<MeshRenderer>()->SetColor(Color::clear);
 	}
 }

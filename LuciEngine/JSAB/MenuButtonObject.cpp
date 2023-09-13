@@ -30,12 +30,12 @@ namespace lu::JSAB
 			float width = mat->GetTexture()->GetRatioWidth(height);
 			tag->mTransform->SetScale(Vector3(width, height, 1));
 			tag->mTransform->SetParent(mTransform);
-			/*auto t = tag->AddComponent<Text>();
+			auto t = tag->AddComponent<Text>();
 			t->color = Color::white;
 			t->text = L"STORY";
-			t->size = 50;*/
-			//t->offset.x = 350;
-			//t->offset.y = -70;
+			t->size = 0.8;
+			t->offset.x = -250;
+			t->offset.y = -435;
 
 			SceneManager::GetActiveScene()->AddGameObject(eLayerType::UI, tag);
 		}

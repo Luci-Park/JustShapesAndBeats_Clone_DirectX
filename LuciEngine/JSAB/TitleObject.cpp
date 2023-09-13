@@ -7,7 +7,9 @@ namespace lu::JSAB
 {
 	void TitleObject::Initialize()
 	{
+		SetName(L"TitleParent");
 		auto img = object::Instantiate<GameObject>(mTransform, eLayerType::UI);
+		img->SetName(L"TitleObject");
 		std::shared_ptr<Material> mat = Resources::Find<Material>(L"TitleMat");
 		if (mat == nullptr)
 		{
@@ -56,6 +58,7 @@ namespace lu::JSAB
 		}
 		{
 			auto light = object::Instantiate<GameObject>(eLayerType::UI);
+			light->SetName(L"TitleLight");
 			auto lightanim = light->AddComponent<Animator>();
 			auto ani = lightanim->CreateAnimation(L"Appear");
 			double duration = 1;
