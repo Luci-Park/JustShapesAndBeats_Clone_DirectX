@@ -6,7 +6,6 @@
 #include "LAudioSource.h"
 #include "LResources.h"
 #include "LAnimator.h"
-#include "..\\Editor_SOURCE\\TransformWidget.h"
 #include "BackgroundScript.h"
 #include "SplashAnimation.h"
 #include "TitleObject.h"

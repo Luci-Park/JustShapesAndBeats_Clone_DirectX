@@ -52,9 +52,13 @@ namespace lu::JSAB
 			a->AddColorKey(0.025, { 0, 0, 0, 1 });
 			a->AddColorKey(0.05, { 0, 0, 0, 0 });
 
-			a = mFlash->CreateAnimation(L"BlackFade");
+			a = mFlash->CreateAnimation(L"BlackFadeOut");
 			a->AddColorKey(0, { 0, 0, 0, 0.5 });
 			a->AddColorKey(0.5, { 0, 0, 0, 1 });
+
+			a = mFlash->CreateAnimation(L"BlackFadeIn");
+			a->AddColorKey(0, { 0, 0, 0, 1 });
+			a->AddColorKey(0.5, { 0, 0, 0, 0 });
 		}
 		Reset();
 	}
@@ -79,7 +83,11 @@ namespace lu::JSAB
 	}
 	void CameraScript::BlackFadeOut()
 	{
-		mFlash->PlayAnimation(L"BlackFade", false);
+		mFlash->PlayAnimation(L"BlackFadeOut", false);
+	}
+	void CameraScript::BlackFadeIn()
+	{
+		mFlash->PlayAnimation(L"BlackFadeIn", false);
 	}
 	void CameraScript::Reset()
 	{

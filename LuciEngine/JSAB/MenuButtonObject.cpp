@@ -34,8 +34,8 @@ namespace lu::JSAB
 			t->color = Color::white;
 			t->text = L"STORY";
 			t->size = 50;
-			t->offset.x = 350;
-			t->offset.y = -70;
+			//t->offset.x = 350;
+			//t->offset.y = -70;
 
 			SceneManager::GetActiveScene()->AddGameObject(eLayerType::UI, tag);
 		}

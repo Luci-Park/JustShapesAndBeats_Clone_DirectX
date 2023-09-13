@@ -18,6 +18,7 @@ namespace lu::JSAB
 		void WhiteFlash();
 		void BlackFlash();
 		void BlackFadeOut();
+		void BlackFadeIn();
 		void Reset();
 	private:
 

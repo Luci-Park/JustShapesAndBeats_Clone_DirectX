@@ -23,9 +23,6 @@
     <ClCompile Include="TitleObject.cpp">
       <Filter>Contents\Scene\Title\UIs</Filter>
     </ClCompile>
-    <ClCompile Include="MenuScene.cpp">
-      <Filter>Contents\Scene\Title\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="MenuButtonObject.cpp">
       <Filter>Contents\Scene\Title\UIs</Filter>
     </ClCompile>
@@ -112,9 +109,6 @@
     </ClInclude>
     <ClInclude Include="TitleObject.h">
       <Filter>Contents\Scene\Title\UIs</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuScene.h">
-      <Filter>Contents\Scene\Title\Scene</Filter>
     </ClInclude>
     <ClInclude Include="MenuButtonObject.h">
       <Filter>Contents\Scene\Title\UIs</Filter>

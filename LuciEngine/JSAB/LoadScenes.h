@@ -2,7 +2,6 @@
 #include "..\\Engine_SOURCE\LSceneManager.h"
 #include "yaPlayScene.h"
 #include "TitleScene.h"
-#include "MenuScene.h"
 #include "TutorialScene.h"
 #include "ParticleTestScene.h"
 
@@ -17,10 +16,9 @@ namespace lu::JSAB
 	{
 		SceneManager::CreateScene<PlayScene>(L"PlayScene");
 		SceneManager::CreateScene<Title::TitleScene>(L"TitleScene");
-		SceneManager::CreateScene<MenuScene>(L"MenuScene");
 		SceneManager::CreateScene<Tutorial::TutorialScene>(L"TutorialScene");
 		SceneManager::CreateScene<ParticleTestScene>(L"ParticleTestScene");
 		SceneManager::CreateScene<CameraTestScene>(L"CameraTestScene");
-		SceneManager::LoadScene(L"TutorialScene");
+		SceneManager::LoadScene(L"CameraTestScene");
 	}
 }

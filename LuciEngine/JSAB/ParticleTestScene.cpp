@@ -5,6 +5,8 @@
 #include "LResources.h"
 #include "LCamera.h"
 #include "LInput.h"
+#include "LText.h"
+#include "..\\Editor_SOURCE\\TransformWidget.h"
 namespace lu::JSAB
 {
 	ParticleTestScene::ParticleTestScene()
@@ -49,7 +51,7 @@ namespace lu::JSAB
 	void CameraTestScene::Initialize()
 	{
 		{
-			bool active[]{ true, true, true, true, false };
+			bool active[]{ true, true, true, true, false, false };
 			GameObject* camera = object::Instantiate<GameObject>(eLayerType::Camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 			Camera* cameraComp = camera->AddComponent<Camera>();
@@ -60,10 +62,15 @@ namespace lu::JSAB
 			script = camera->AddComponent<CameraScript>();
 		}
 		auto a = object::Instantiate<PlayerPrefab>(eLayerType::Player);
-		
+		auto t = object::Instantiate<GameObject>(eLayerType::UI)->AddComponent<Text>();
+		t->color = Color(48/255.f, 249/255.f, 246/255.f, 1);
+		t->text = L"Let's Go";
+		t->size = 60;
+		t->Owner()->AddComponent<gui::TransformWidget>();
 	}
 	void CameraTestScene::Update()
 	{
+		/*
 		if (Input::GetKeyDown(eKeyCode::W))
 			script->Bump(Vector3::Up);
 		if (Input::GetKeyDown(eKeyCode::A))
@@ -78,6 +85,7 @@ namespace lu::JSAB
 		if (Input::GetKeyDown(eKeyCode::R))
 			script->BlackFlash();
 		if (Input::GetKeyDown(eKeyCode::V))
-			script->BlackFadeOut();
+			script->BlackFadeOut();*/
+		Scene::Update();
 	}
 }

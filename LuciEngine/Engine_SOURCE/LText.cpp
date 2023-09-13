@@ -2,6 +2,10 @@
 #include "LFontWrapper.h"
 #include "LGameObject.h"
 #include "LTransform.h"
+#include "LApplication.h"
+
+extern lu::Application application;
+
 namespace lu
 {
 	Text::Text()
@@ -19,6 +23,7 @@ namespace lu
 	{
 		Vector3 pos = Owner()->mTransform->GetPosition();
 		pos += offset;
+		pos += Vector3(application.GetWidth(), application.GetHeight(), 0) * 0.5;
 		int r = color.R() * 255;
 		int g = color.G() * 255;
 		int b = color.B() * 255;
