@@ -3,7 +3,7 @@
 
 namespace lu
 {
-	class Animator;
+	class MeshRenderer;
 }
 
 namespace lu::JSAB
@@ -15,17 +15,23 @@ namespace lu::JSAB
 		virtual ~CameraScript(){}
 		virtual void Initialize() override;
 		virtual void Update() override;
-		void OnFlash();
+		void OnWhiteFlash();
+		void OnBlackFadeOut();
 		void OnBeat(Vector3 dir);
+		void TurnEffectOff();
 
 	private:
 		void Flash();
 		void Beat();
+		void FadeIn();
+		void FadeOut();
 
 	private:
-		GameObject* mFlash;
+		MeshRenderer* mFlash;
 		bool mbIsBeating;
 		bool mbIsFlashing;
+		bool mbIsFadingIn;
+		bool mbIsFadingOut;
 		Vector3 mDefaultPos;
 		Vector3 mBeatDir;
 	};

@@ -11,6 +11,7 @@ namespace lu::JSAB
 	class BackgroundScript;
 	class TitleObject;
 	class MenuButtonObject;
+	class CameraScript;
 }
 namespace lu::JSAB::Title
 {
@@ -33,6 +34,7 @@ namespace lu::JSAB::Title
 		TitleObject* mTitle;
 		AudioSource* mbgm;
 		MenuButtonObject* mButton;
+		CameraScript* mCamera;
 		bool mbIsInMenu;
 		std::shared_ptr<AudioClip> mAudios[3];
 	};

@@ -8,7 +8,7 @@
     <ClCompile Include="BackgroundScript.cpp">
       <Filter>Contents\Background</Filter>
     </ClCompile>
-    <ClCompile Include="JSABRenderer.cpp">
+    <ClCompile Include="JSABLoader.cpp">
       <Filter>Contents\Load</Filter>
     </ClCompile>
     <ClCompile Include="PlayerPrefab.cpp">
@@ -98,7 +98,7 @@
     <ClInclude Include="BackgroundScript.h">
       <Filter>Contents\Background</Filter>
     </ClInclude>
-    <ClInclude Include="JSABRenderer.h">
+    <ClInclude Include="JSABLoader.h">
       <Filter>Contents\Load</Filter>
     </ClInclude>
     <ClInclude Include="PlayerPrefab.h">

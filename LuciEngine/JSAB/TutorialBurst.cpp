@@ -144,6 +144,6 @@ namespace lu::JSAB
 		ani->AddScaleKey(duration, Vector3::One);
 
 		ani->AddFunctionKey(duration, std::bind(&TutorialBurst::OnBurst, this));
-		ani->AddFunctionKey(duration, std::bind(&CameraScript::OnFlash, SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()));
+		ani->AddFunctionKey(duration, std::bind(&CameraScript::OnWhiteFlash, SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()));
 	}
 }

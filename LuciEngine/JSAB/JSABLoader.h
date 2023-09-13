@@ -2,7 +2,7 @@
 
 namespace lu::JSAB
 {
-	void InitializeGraphics();
+	void LoadAssets();
 }
 
 

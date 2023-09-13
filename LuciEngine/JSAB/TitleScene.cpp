@@ -11,6 +11,7 @@
 #include "SplashAnimation.h"
 #include "TitleObject.h"
 #include "MenuButtonObject.h"
+#include "CameraScript.h"
 #include "LInput.h"
 
 namespace lu::JSAB::Title
@@ -25,7 +26,9 @@ namespace lu::JSAB::Title
 	{
 		{
 			GameObject* camera = object::Instantiate<GameObject>(eLayerType::Camera);
+			camera->SetName(L"TitleScene Camera");
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+			mCamera = camera->AddComponent<CameraScript>();
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			for (int i = 0; i < (UINT)eLayerType::End; i++)
 			{
@@ -42,9 +45,9 @@ namespace lu::JSAB::Title
 		mButton->SetActive(false);
 
 		mbgm = object::Instantiate<GameObject>(eLayerType::System)->AddComponent<AudioSource>();
-		mAudios[0] = Resources::Load<AudioClip>(L"ThemeOpening", L"..\\..\\Assets\\AudioClips\\MainMenu\\SFX_INTRO_LOOP.wav");
-		mAudios[1] = Resources::Load<AudioClip>(L"Theme", L"..\\..\\Assets\\AudioClips\\MainMenu\\mus_jsbtheme.wav");
-		mAudios[2] = Resources::Load<AudioClip>(L"Stinger", L"..\\..\\Assets\\AudioClips\\MainMenu\\SFX_INTRO_STINGER.wav");
+		mAudios[0] = Resources::Find<AudioClip>(L"SFX_INTRO_LOOP");
+		mAudios[1] = Resources::Find<AudioClip>(L"mus_jsbtheme");
+		mAudios[2] = Resources::Find<AudioClip>(L"SFX_INTRO_STINGER");
 		Scene::Initialize();
 
 	}
@@ -77,6 +80,9 @@ namespace lu::JSAB::Title
 				mbgm->Stop();
 				mbgm->SetClip(mAudios[2]);
 				mbgm->Play(false);
+				mbgm->PlayOneShot(Resources::Find<AudioClip>(L"SFX_HEX_CHALLENGE_RIBBON_TO_COIN"), 1);
+				mButton->GetComponent<Animator>()->PlayAnimation(L"Disappear", false);
+				mCamera->FadeOut();
 			}
 		}
 		Scene::Update();
@@ -96,6 +102,8 @@ namespace lu::JSAB::Title
 		mbgm->SetClip(mAudios[0]);
 		mbgm->Play(false);
 		mTitle->OnAppear();
+		mButton->SetActive(false);
+		mCamera->TurnEffectOff();
 	}
 	void TitleScene::StartMusic()
 	{

@@ -29,7 +29,7 @@ namespace lu::JSAB
 	{
 		MusicController::Initialize();
 		mAudioSource = Owner()->AddComponent<AudioSource>();
-		mAudioSource->SetClip(Resources::Load<AudioClip>(L"Tutorial", L"..\\..\\Assets\\AudioClips\\Stage Music\\mus_corrupted.wav"));
+		mAudioSource->SetClip(Resources::Find<AudioClip>(L"mus_corrupted"));
 		mStartVolume = mAudioSource->GetVolume();
 	}
 	

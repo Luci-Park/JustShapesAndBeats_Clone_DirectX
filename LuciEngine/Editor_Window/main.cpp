@@ -7,7 +7,7 @@
 #include "Engine_SOURCE/LApplication.h"
 #include "Editor_SOURCE/guiEditor.h"
 #include "..\\JSAB\\LoadScenes.h"
-#include "..\\JSAB\\JSABRenderer.h"
+#include "..\\JSAB\\JSABLoader.h"
 #ifdef _DEBUG
 #pragma comment(lib, "..\\x64\\Debug\\JSAB.lib")
 #else
@@ -146,7 +146,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    UpdateWindow(hWnd);
 
    application.Initialize();
-   lu::JSAB::InitializeGraphics();
+   lu::JSAB::LoadAssets();
    lu::JSAB::InitializeScenes();
    gui::Editor::Initialize();
 

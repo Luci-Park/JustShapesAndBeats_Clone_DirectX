@@ -171,7 +171,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GeneralEffects.h" />
-    <ClInclude Include="JSABRenderer.h" />
+    <ClInclude Include="JSABLoader.h" />
     <ClInclude Include="TrianglePrefab.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="TutorialManager.h" />
@@ -202,7 +202,7 @@
     <ClCompile Include="TutorialEightBullets.cpp" />
     <ClCompile Include="TutorialGiantCircle.cpp" />
     <ClCompile Include="TutorialMusicController.cpp" />
-    <ClCompile Include="JSABRenderer.cpp" />
+    <ClCompile Include="JSABLoader.cpp" />
     <ClCompile Include="LoadScenes.h" />
     <ClCompile Include="TrianglePrefab.cpp" />
     <ClCompile Include="Player.cpp" />
