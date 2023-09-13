@@ -3,6 +3,7 @@
 #include "LObject.h"
 #include "LMeshRenderer.h"
 #include "LApplication.h"
+#include "LAnimator.h"
 #include "LTime.h"
 
 extern lu::Application application;
@@ -11,106 +12,78 @@ namespace lu::JSAB
 	void CameraScript::Initialize()
 	{
 		Script::Initialize();
-		mFlash = object::Instantiate<GameObject>(mTransform, eLayerType::UI)->AddComponent<MeshRenderer>();
-		mFlash->SetMesh(Resources::Find<Mesh>(L"RectMesh"))
-			->SetMaterial(GetGeneralMaterial(L"ThickBar"))->SetColor({1.f, 1.f, 1.f, 0.5})->UseColor(true);
-		mFlash->Owner()->mTransform->SetScale(application.GetWidth(), application.GetHeight(), 1);
-		mFlash->SetActive(false);
-	}
+		mAnim = Owner()->AddComponent<Animator>();
+		{
+			auto a = mAnim->CreateAnimation(L"BumpUp");
+			a->AddPositionYKey(0, 0);
+			a->AddPositionYKey(0.025, 50);
+			a->AddPositionYKey(0.05, 0);
+			
+			a = mAnim->CreateAnimation(L"BumpDown");
+			a->AddPositionYKey(0, 0);
+			a->AddPositionYKey(0.025, -50);
+			a->AddPositionYKey(0.05, 0);
 
-	void CameraScript::Update()
-	{
-		Flash();
-		Beat();
-	}
+			a = mAnim->CreateAnimation(L"BumpRight");
+			a->AddPositionXKey(0, 0);
+			a->AddPositionXKey(0.025, 50);
+			a->AddPositionXKey(0.05, 0);
 
-	void CameraScript::OnWhiteFlash()
-	{
-		mbIsFlashing = true;
-		mFlash->SetColor(Color::white);
-	}
-	void CameraScript::OnBlackFadeOut()
-	{
-	}
-	void CameraScript::OnBeat(Vector3 dir)
-	{
-		mDefaultPos = mTransform->GetPosition();
-		mbIsBeating = true;
-		mBeatDir = dir;
-	}
-	void CameraScript::TurnEffectOff()
-	{
-		mFlash->SetActive(false);
-	}
+			a = mAnim->CreateAnimation(L"BumpLeft");
+			a->AddPositionXKey(0, 0);
+			a->AddPositionXKey(0.025, -50);
+			a->AddPositionXKey(0.05, 0);
+		}
 
-	void CameraScript::Flash()
-	{
-		static double duration = 0.05;
-		static double time = 0;
-		if (!mbIsFlashing) return;
-		time += Time::DeltaTime();
-		if (time < duration)
-			mFlash->SetActive(true);
-		else
+
+		GameObject* flash = object::Instantiate<GameObject>(mTransform, eLayerType::UI);
+		flash->AddComponent<MeshRenderer>()->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"ThickBar"))->SetColor({1.f, 1.f, 1.f, 0.5})->UseColor(true);
+		flash->mTransform->SetScale(application.GetWidth(), application.GetHeight(), 1);
+		flash->mTransform->SetPosition({ 0, 0, -5 });
+		mFlash = flash->AddComponent<Animator>();
 		{
-			mFlash->SetActive(false);
-			time = 0;
-			mbIsFlashing = false;
+			auto a = mFlash->CreateAnimation(L"WhiteFlash");
+			a->AddColorKey(0, {1, 1, 1, 0});
+			a->AddColorKey(0.025, {1, 1, 1, 1});
+			a->AddColorKey(0.05, {1, 1, 1, 0});
+
+			a = mFlash->CreateAnimation(L"BlackFlash");
+			a->AddColorKey(0, { 0, 0, 0, 0 });
+			a->AddColorKey(0.025, { 0, 0, 0, 1 });
+			a->AddColorKey(0.05, { 0, 0, 0, 0 });
+
+			a = mFlash->CreateAnimation(L"BlackFade");
+			a->AddColorKey(0, { 0, 0, 0, 0.5 });
+			a->AddColorKey(0.5, { 0, 0, 0, 1 });
 		}
+		Reset();
 	}
-	void CameraScript::Beat()
+	void CameraScript::Bump(Vector3 dir)
 	{
-		static double duration = 0.05;
-		static double time = 0;
-		static float dist = 50;
-		if (!mbIsBeating) return;
-		time += Time::DeltaTime();
-		if (time < duration)
-		{
-			Vector3 pos = Vector3::Lerp(mDefaultPos, mDefaultPos + mBeatDir * dist, time / duration);
-			mTransform->SetPosition(pos);
-		}
-		else
-		{
-			mTransform->SetPosition(mDefaultPos);
-			time = 0;
-			mbIsBeating = false;
-		}
+		if (dir == Vector3::Up)
+			mAnim->PlayAnimation(L"BumpUp", false);
+		if (dir == Vector3::Down)
+			mAnim->PlayAnimation(L"BumpDown", false);
+		if (dir == Vector3::Left)
+			mAnim->PlayAnimation(L"BumpRight", false);
+		if (dir == Vector3::Right)
+			mAnim->PlayAnimation(L"BumpLeft", false);
 	}
-	void CameraScript::FadeIn()
+	void CameraScript::WhiteFlash()
 	{
-		static double duration = 0.05;
-		static double time = 0;
-		if (!mbIsFadingIn) return;
-		time += Time::DeltaTime();
-		float t = 1 - time / duration;
-		if (t <= 1.0f)
-		{
-			Color c = mFlash->GetColor();
-			mFlash->SetColor(c.R(), c.G(), c.B(), t);
-		}
-		else
-		{
-			time = 0;
-			mbIsFadingIn = false;
-		}
+		mFlash->PlayAnimation(L"WhiteFlash", false);
 	}
-	void CameraScript::FadeOut()
+	void CameraScript::BlackFlash()
 	{
-		static double duration = 0.05;
-		static double time = 0;
-		if (!mbIsFadingOut) return;
-		time += Time::DeltaTime();
-		float t = time / duration;
-		if (t <= 1.0f)
-		{
-			Color c = mFlash->GetColor();
-			mFlash->SetColor(c.R(), c.G(), c.B(), t);
-		}
-		else
-		{
-			time = 0;
-			mbIsFadingOut = false;
-		}
+		mFlash->PlayAnimation(L"BlackFlash", false);
+	}
+	void CameraScript::BlackFadeOut()
+	{
+		mFlash->PlayAnimation(L"BlackFade", false);
+	}
+	void CameraScript::Reset()
+	{
+		mTransform->SetPosition({ 0, 0, -10 });
+		mFlash->Owner()->GetComponent<MeshRenderer>()->SetColor(Color::clear);
 	}
 }

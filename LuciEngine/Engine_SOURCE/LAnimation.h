@@ -1,6 +1,6 @@
 #pragma once
 #include "LResource.h"
-#include "LTexture.h"
+#include "LTimeLines.h"
 namespace lu
 {
 	using namespace lu::math;
@@ -12,60 +12,14 @@ namespace lu
 	class Animation : public Resource
 	{
 	public:
-
 		enum class eAnimationType
 		{
-			TrPosition, TrScale, TrRotation, TrLocalPosition, TrLocalScale, TrLocalRotation,
+			TrPosX, TrPosY, TrPosZ, TrPosition, 
+			TrScale, TrRotation, TrLocalPosition, TrLocalScale, TrLocalRotation,
 			CdCenter, CdSize, CdActive,
-			MrTexture, MrColor, MrInterpolation, MrTint, MrActive,
+			MrTexture, MrAlpha, MrColor, MrInterpolation, MrTint, MrActive,
 			ScFunc,
 			End
-		};
-		struct KeyFrame
-		{
-			KeyFrame(){}
-			virtual ~KeyFrame() {}
-			double timestamp;
-			eAnimationType type;
-			bool operator<(const KeyFrame& other) const
-			{
-				return timestamp < other.timestamp;
-			}
-
-		};
-		struct FuncKey : KeyFrame
-		{
-			FuncKey():value(nullptr){}
-			std::function<void()>value;
-		};
-		struct TextureKey : KeyFrame
-		{
-			TextureKey():value(nullptr){}
-			std::shared_ptr<graphics::Texture> value;
-		};
-		struct ColorKey : KeyFrame { Color value; };
-		struct QuaternionKey : KeyFrame	{ Quaternion value;};
-		struct Vector3Key : KeyFrame { Vector3 value;};
-		struct Vector2Key : KeyFrame { Vector2 value;};
-		struct FloatKey : KeyFrame { float value; };
-		struct BoolKey : KeyFrame { bool value; };
-
-		struct Timeline
-		{
-			~Timeline()
-			{
-				for(int i =0; i < keyframes.size(); i++)
-					if (keyframes[i])
-					{
-						delete keyframes[i];
-						keyframes[i] = nullptr;
-					}
-			}
-			int currIndex = 0;
-			std::vector<KeyFrame*> keyframes;
-			bool IsComplete() { return currIndex >= keyframes.size(); }
-			void Reset() { currIndex = 0; }
-			void SortKeyframes() { std::sort(keyframes.begin(), keyframes.end()); }
 		};
 	public:
 		Animation(GameObject* owner);
@@ -81,7 +35,11 @@ namespace lu
 		void SetTime(double time) { mTime = time; }
 		double GetTime() { return mTime; }
 
+		void AddPositionXKey(double timestamp, float x);
+		void AddPositionYKey(double timestamp, float y);
+		void AddPositionZKey(double timestamp, float z);
 		void AddPositionKey(double timestamp, Vector3 vector3);
+
 		void AddScaleKey(double timestamp, Vector3 vector3);
 		void AddRotationKey(double timestamp, Quaternion quaternion);
 		void AddLocalPositionKey(double timestamp, Vector3 vector3);
@@ -91,6 +49,8 @@ namespace lu
 		void AddColliderSizeKey(double timestamp, Vector2 vector2);
 		void AddColliderActiveKey(double timestamp, bool active);
 		void AddTextureKey(double timestamp, std::shared_ptr<graphics::Texture> texture);
+
+		void AddAlphaKey(double timestamp, float alpha);
 		void AddColorKey(double timestamp, Color color);
 		void AddInterpolationKey(double timestamp, float interpolation);
 		void AddTintKey(double timestamp, Color color);
@@ -98,8 +58,11 @@ namespace lu
 		void AddFunctionKey(double timestamp, std::function<void()> function);
 	private:
 		Timeline* GetTimlineOfType(eAnimationType type);
-
+		void AnimTrPosX(Timeline* timeline);
+		void AnimTrPosY(Timeline* timeline);
+		void AnimTrPosZ(Timeline* timeline);
 		void AnimTrPos(Timeline* timeline);
+
 		void AnimTrScale(Timeline* timeline);
 		void AnimTrRot(Timeline* timeline);
 		void AnimTrLocPos(Timeline* timeline);
@@ -109,7 +72,10 @@ namespace lu
 		void AnimCdSize(Timeline* timeline);
 		void AnimCdActive(Timeline* timeline);
 		void AnimMrText(Timeline* timeline);
+		
+		void AnimMrColorAlpha(Timeline* timeline);
 		void AnimMrColor(Timeline* timeline);
+
 		void AnimMrColorpolation(Timeline* timeline);
 		void AnimMrTint(Timeline* timeline);
 		void AnimMrActive(Timeline* timeline);

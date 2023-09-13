@@ -82,7 +82,7 @@ namespace lu::JSAB::Title
 				mbgm->Play(false);
 				mbgm->PlayOneShot(Resources::Find<AudioClip>(L"SFX_HEX_CHALLENGE_RIBBON_TO_COIN"), 1);
 				mButton->GetComponent<Animator>()->PlayAnimation(L"Disappear", false);
-				mCamera->FadeOut();
+				mCamera->BlackFadeOut();
 			}
 		}
 		Scene::Update();
@@ -103,7 +103,7 @@ namespace lu::JSAB::Title
 		mbgm->Play(false);
 		mTitle->OnAppear();
 		mButton->SetActive(false);
-		mCamera->TurnEffectOff();
+		mCamera->Reset();
 	}
 	void TitleScene::StartMusic()
 	{

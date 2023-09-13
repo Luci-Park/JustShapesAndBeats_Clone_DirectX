@@ -1,6 +1,7 @@
 #pragma once
 #include "LComponent.h"
 #include "LTransform.h"
+#include "LGraphics.h"
 
 namespace lu
 {
