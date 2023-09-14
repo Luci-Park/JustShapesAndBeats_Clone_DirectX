@@ -10,15 +10,8 @@ namespace lu::JSAB
 		SetName(L"TitleParent");
 		auto img = object::Instantiate<GameObject>(mTransform, eLayerType::UI);
 		img->SetName(L"TitleObject");
-		std::shared_ptr<Material> mat = Resources::Find<Material>(L"TitleMat");
-		if (mat == nullptr)
-		{
-			mat = std::make_shared<Material>();
-			mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
-			mat->SetTexture(Resources::Find<Texture>(L"Title_Fill"));
-			Resources::Insert(L"TitleMat", mat);
-			mat->SetRenderingMode(eRenderingMode::Transparent);
-		}
+		std::shared_ptr<Material> mat = Resources::Load<Material>(L"TitleMat", L"Title_Fill");
+		mat->SetRenderingMode(eRenderingMode::Transparent);
 
 		MeshRenderer* mr = img -> AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -70,15 +63,8 @@ namespace lu::JSAB
 			ani->AddScaleKey(duration, Vector3::Zero);
 			light->mTransform->SetPosition({ 0, 0, 2 });
 
-			std::shared_ptr<Material> mat = Resources::Find<Material>(L"TitleLight");
-			if (mat == nullptr)
-			{
-				mat = std::make_shared<Material>();
-				mat->SetShader(Resources::Find<Shader>(L"SpriteShader"));
-				mat->SetTexture(Resources::Find<Texture>(L"Title_Effect"));
-				Resources::Insert(L"TitleLight", mat);
-				mat->SetRenderingMode(eRenderingMode::Transparent);
-			}
+			std::shared_ptr<Material> mat = Resources::Load<Material>(L"TitleLight", L"Title_Effect");
+			mat->SetRenderingMode(eRenderingMode::Transparent);
 
 			MeshRenderer* mr = light->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));

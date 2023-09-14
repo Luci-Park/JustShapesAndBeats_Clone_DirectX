@@ -38,9 +38,14 @@ namespace lu::JSAB
 		}
 
 
-		GameObject* flash = object::Instantiate<GameObject>(mTransform, eLayerType::UI);
-		flash->AddComponent<MeshRenderer>()->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"ThickBar"))->SetColor({1.f, 1.f, 1.f, 0.5})->UseColor(true);
-		flash->GetComponent<MeshRenderer>()->GetMaterial()->SetRenderingMode(lu::graphics::eRenderingMode::Transparent);
+		/*GameObject* flash = object::Instantiate<GameObject>(mTransform, eLayerType::UI);
+		auto m = flash->AddComponent<MeshRenderer>()->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		m->SetColor({ 1.f, 1.f, 1.f, 0.5 })->UseColor(true);
+
+		std::shared_ptr<Material> mat = Resources::Load<Material>(L"CameraFlashMat", L"ThickBar");
+		mat->SetRenderingMode(eRenderingMode::Transparent);
+		m->SetMaterial(mat);
+
 		flash->mTransform->SetScale(application.GetWidth(), application.GetHeight(), 1);
 		flash->mTransform->SetLocalPosition({ 0, 0, 1 });
 		flash->SetName(L"Camera Flash");
@@ -63,7 +68,7 @@ namespace lu::JSAB
 			a = mFlash->CreateAnimation(L"BlackFadeIn");
 			a->AddColorKey(0, { 0, 0, 0, 1 });
 			a->AddColorKey(0.5, { 0, 0, 0, 0 });
-		}
+		}*/
 		Reset();
 	}
 	void CameraEffectScript::Bump(Vector3 dir)
@@ -96,7 +101,7 @@ namespace lu::JSAB
 	void CameraEffectScript::Reset()
 	{
 		mTransform->SetLocalPosition(Vector3::Zero);
-		mFlash->Owner()->GetComponent<MeshRenderer>()->SetColor(Color::clear);
+		//mFlash->Owner()->GetComponent<MeshRenderer>()->SetColor(Color::clear);
 	}
 #pragma endregion
 

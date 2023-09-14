@@ -1,6 +1,7 @@
 #include "LMaterial.h"
 #include "LRenderer.h"
 #include "LConstantBuffer.h"
+#include "LResources.h"
 namespace lu::graphics
 {
 	Material::Material()
@@ -16,7 +17,9 @@ namespace lu::graphics
 	}
 	HRESULT Material::Load(const std::wstring& path)
 	{
-		return E_NOTIMPL;
+		SetShader(Resources::Find<Shader>(L"SpriteShader"));
+		SetTexture(Resources::Find<Texture>(path));
+		return S_OK;
 	}
 	void Material::Binds()
 	{
