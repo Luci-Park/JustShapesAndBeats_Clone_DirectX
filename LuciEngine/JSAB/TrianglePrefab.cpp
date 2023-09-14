@@ -79,7 +79,7 @@ namespace lu::JSAB
 	}
 	std::shared_ptr<graphics::Material> TrianglePrefab::CreateWhiteCircleMat()
 	{
-		std::shared_ptr<Material> mat = Resources::Find<Material>(L"TriangleEffect_White");
+		std::shared_ptr<Material> mat = Resources::Find<Material>(L"TriangleEffect_White_Mat");
 		if (!mat)
 		{
 			mat = std::make_shared<Material>();
@@ -92,7 +92,7 @@ namespace lu::JSAB
 	}
 	std::shared_ptr<graphics::Material> TrianglePrefab::CreateWhiteBlueCircleMat()
 	{
-		std::shared_ptr<Material> mat = Resources::Find<Material>(L"TriangleEffect_Blue");
+		std::shared_ptr<Material> mat = Resources::Find<Material>(L"TriangleEffect_Blue_Mat");
 		if (!mat)
 		{
 			mat = std::make_shared<Material>();

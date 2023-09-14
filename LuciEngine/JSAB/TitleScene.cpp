@@ -54,16 +54,16 @@ namespace lu::JSAB::Title
 		{
 			mText = object::Instantiate<GameObject>(eLayerType::UI)->AddComponent<Animator>();
 			auto t = mText->Owner()->AddComponent<Text>();
-			t->size = 60;
 			t->text = L"Let's Go";
-			t->offset.x = -111;
-			t->offset.y = -80;
+			t->size = 100;
+			t->offset.x = -160;
+			t->offset.y = -50;
 			t->color = Color(48 / 255.f, 249 / 255.f, 246 / 255.f, 1);
 			auto a = mText->CreateAnimation(L"Appear");
-			a->AddScaleKey(0, {7, 7, 1});
+			a->AddScaleKey(0, {5.4, 5.4, 1});
 			a->AddScaleKey(0.25, { 1, 1, 1 });
-			a->AddPositionKey(0, { -678.7, -278, 0 });
-			a->AddPositionKey(0.25, Vector3::Zero);
+			a->AddPositionKey(0, { -727.8, -487.7, -9.5 });
+			a->AddPositionKey(0.25, { -34.3, -42.5, -9.5 });
 			a->AddPositionXKey(2, 0);
 			a->AddPositionXKey(2.3, 900);
 			a->AddFunctionKey(2.5, std::bind(&SceneManager::LoadScene, L"TutorialScene"));

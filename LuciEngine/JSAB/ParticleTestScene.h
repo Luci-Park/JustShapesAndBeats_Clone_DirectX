@@ -23,4 +23,13 @@ namespace lu::JSAB
 
 		GameCamera* script;
 	};
+
+	class TriangleTestScene : public Scene
+	{
+	public:
+		TriangleTestScene(){}
+		~TriangleTestScene() {};
+		virtual void Initialize()override;
+		virtual void Update() override;
+	};
 }
