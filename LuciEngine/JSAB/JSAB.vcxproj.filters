@@ -89,6 +89,9 @@
     <ClCompile Include="SplashAnimation.cpp">
       <Filter>Contents\Scene\Title\Scene\OpeningAnimation</Filter>
     </ClCompile>
+    <ClCompile Include="SubstepScene.cpp">
+      <Filter>Contents\Scene\Substep</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -183,6 +186,9 @@
     <ClInclude Include="SplashAnimation.h">
       <Filter>Contents\Scene\Title\Scene\OpeningAnimation</Filter>
     </ClInclude>
+    <ClInclude Include="SubstepScene.h">
+      <Filter>Contents\Scene\Substep</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -241,6 +247,9 @@
     </Filter>
     <Filter Include="Contents\Scene\Test">
       <UniqueIdentifier>{de2dac49-9e17-43a8-ba0f-70c71b38782e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Substep">
+      <UniqueIdentifier>{3e5a4ef0-3b6f-4212-bdb3-e62a14c438f0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

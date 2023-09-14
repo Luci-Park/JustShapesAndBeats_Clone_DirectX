@@ -30,7 +30,7 @@ namespace lu::JSAB
 	class GameCamera : public Script
 	{
 	public:
-		GameCamera(){}
+		GameCamera(){};
 		virtual ~GameCamera(){}
 		virtual void Initialize() override;
 

@@ -160,6 +160,7 @@
     <ClInclude Include="BulletPool.h" />
     <ClInclude Include="ParticleTestScene.h" />
     <ClInclude Include="SplashAnimation.h" />
+    <ClInclude Include="SubstepScene.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="TutorialBeatBar.h" />
     <ClInclude Include="TutorialBeatCircle.h" />
@@ -193,6 +194,7 @@
     <ClCompile Include="MusicController.cpp" />
     <ClCompile Include="ParticleTestScene.cpp" />
     <ClCompile Include="SplashAnimation.cpp" />
+    <ClCompile Include="SubstepScene.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="TutorialBeatBar.cpp" />
     <ClCompile Include="TutorialBeatCircle.cpp" />
