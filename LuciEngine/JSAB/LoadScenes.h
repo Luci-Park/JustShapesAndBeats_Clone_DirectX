@@ -3,7 +3,8 @@
 #include "yaPlayScene.h"
 #include "TitleScene.h"
 #include "TutorialScene.h"
-#include "ParticleTestScene.h"
+#include "TestScene.h"
+#include "SubstepScene.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "..\\x64\\Debug\\JSAB.lib")
@@ -19,6 +20,7 @@ namespace lu::JSAB
 		SceneManager::CreateScene<Tutorial::TutorialScene>(L"TutorialScene");
 		SceneManager::CreateScene<ParticleTestScene>(L"ParticleTestScene");
 		SceneManager::CreateScene<CameraTestScene>(L"CameraTestScene");
-		SceneManager::LoadScene(L"TitleScene");
+		SceneManager::CreateScene<FakeTutorialScene>(L"FakeTutorialScene");
+		SceneManager::LoadScene(L"FakeTutorialScene");
 	}
 }

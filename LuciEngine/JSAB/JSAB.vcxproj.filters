@@ -80,7 +80,7 @@
     <ClCompile Include="TutorialGiantCircle.cpp">
       <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleTestScene.cpp">
+    <ClCompile Include="TestScene.cpp">
       <Filter>Contents\Scene\Test</Filter>
     </ClCompile>
     <ClCompile Include="Triangle.cpp">
@@ -91,6 +91,15 @@
     </ClCompile>
     <ClCompile Include="SubstepScene.cpp">
       <Filter>Contents\Scene\Substep</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Contents\BulletTest</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyRoundSpikes.cpp">
+      <Filter>EngineTesters\NewTutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="NewTutorialManager.cpp">
+      <Filter>EngineTesters\NewTutorial</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -177,7 +186,7 @@
     <ClInclude Include="TutorialGiantCircle.h">
       <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleTestScene.h">
+    <ClInclude Include="TestScene.h">
       <Filter>Contents\Scene\Test</Filter>
     </ClInclude>
     <ClInclude Include="Triangle.h">
@@ -188,6 +197,15 @@
     </ClInclude>
     <ClInclude Include="SubstepScene.h">
       <Filter>Contents\Scene\Substep</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Contents\BulletTest</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyRoundSpikes.h">
+      <Filter>EngineTesters\NewTutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="NewTutorialManager.h">
+      <Filter>EngineTesters\NewTutorial</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +268,12 @@
     </Filter>
     <Filter Include="Contents\Scene\Substep">
       <UniqueIdentifier>{3e5a4ef0-3b6f-4212-bdb3-e62a14c438f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\BulletTest">
+      <UniqueIdentifier>{72951c92-b49d-4206-83d7-f55d018d819b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineTesters\NewTutorial">
+      <UniqueIdentifier>{ceece7f3-f648-40e3-86f5-55aa064012f3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

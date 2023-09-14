@@ -23,4 +23,23 @@ namespace lu::JSAB
 
 		GameCamera* script;
 	};
+	class BulletTestScene : public Scene
+	{
+	public:
+		BulletTestScene(){}
+		~BulletTestScene() {};
+		virtual void Initialize() override;
+		virtual void Update() override;
+	};
+
+	class FakeTutorialScene : public Scene
+	{
+	public:
+		FakeTutorialScene(){}
+		virtual ~FakeTutorialScene() {};
+		virtual void Initialize() override;
+		virtual void Update() override;
+
+	};
+
 }
