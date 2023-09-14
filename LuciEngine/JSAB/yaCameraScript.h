@@ -3,7 +3,7 @@
 
 namespace lu
 {
-	class CameraScript : public Script
+	class GameCamera : public Script
 	{
 	public:
 		virtual void Update() override;

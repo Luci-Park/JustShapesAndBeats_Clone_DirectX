@@ -283,6 +283,7 @@ namespace lu
 	void Animation::AnimTrPosY(Timeline* timeline)
 	{
 		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime) timeline->currIndex++;
+		Vector3 pos = mTr->GetPosition();
 		if (timeline->IsComplete())
 		{
 			FloatKey* keyframe = dynamic_cast<FloatKey*>(timeline->keyframes.back());
@@ -290,7 +291,6 @@ namespace lu
 			mTr->SetPosition(pos);
 			return;
 		}
-		Vector3 pos = mTr->GetPosition();
 		if (timeline->currIndex == 0)
 		{
 			FloatKey* keyframe = dynamic_cast<FloatKey*>(timeline->keyframes[0]);
@@ -312,6 +312,7 @@ namespace lu
 	void Animation::AnimTrPosZ(Timeline* timeline)
 	{
 		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime) timeline->currIndex++;
+		Vector3 pos = mTr->GetPosition();
 		if (timeline->IsComplete())
 		{
 			FloatKey* keyframe = dynamic_cast<FloatKey*>(timeline->keyframes.back());
@@ -319,7 +320,6 @@ namespace lu
 			mTr->SetPosition(pos);
 			return;
 		}
-		Vector3 pos = mTr->GetPosition();
 		if (timeline->currIndex == 0)
 		{
 			FloatKey* keyframe = dynamic_cast<FloatKey*>(timeline->keyframes[0]);
@@ -562,7 +562,7 @@ namespace lu
 		if (timeline->IsComplete())
 		{
 			FloatKey* key = dynamic_cast<FloatKey*>(timeline->keyframes.back());
-			c = Color(c.R(), c.G(), c.B(), keyframe->value);
+			c = Color(c.R(), c.G(), c.B(), key->value);
 			mMr->SetColor(c);
 			return;
 		}

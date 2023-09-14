@@ -12,24 +12,12 @@
 
 namespace lu::JSAB::Tutorial
 {
-	CameraScript* burst;
 	TutorialFullBar* b;
 	void TutorialScene::Initialize()
 	{
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Bullet, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Item, true);
-		//Camera
-		{
-			bool active[]{ true, true, true, true, false, false };
-			GameObject* camera = object::Instantiate<GameObject>(eLayerType::Camera);
-			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
-			Camera* cameraComp = camera->AddComponent<Camera>();
-			for (int i = 0; i < (UINT)eLayerType::End; i++)
-			{
-				cameraComp->TurnLayerMask((eLayerType)i, active[i]);
-			}
-			burst = camera->AddComponent<CameraScript>();
-		}
+		object::Instantiate<GameObject>(eLayerType::Camera)->AddComponent<GameCamera>();
 
 		GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
 		manager->SetName(L"TutorialManager");

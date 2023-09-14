@@ -130,7 +130,7 @@ namespace lu::JSAB
 				else if (currPos.x > (float)rect.right - halfScale.x) wallNormal = Vector3::Left;
 
 				float intoWall = wallNormal.Dot(velocity);
-				Vector3 bounce = velocity - 2.0f * intoWall * wallNormal;
+				Vector3 bounce = velocity - 1.5f * intoWall * wallNormal;
 				mRb->SetVelocity(bounce);				
 			}
 		}		

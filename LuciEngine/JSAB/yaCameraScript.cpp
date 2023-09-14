@@ -6,7 +6,7 @@
 
 namespace lu
 {
-	void CameraScript::Update()
+	void GameCamera::Update()
 	{
 		Transform* tr = Owner()->GetComponent<Transform>();
 		Vector3 pos = tr->GetPosition();

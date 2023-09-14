@@ -8,11 +8,11 @@ namespace lu
 
 namespace lu::JSAB
 {
-	class CameraScript : public Script
+	class CameraEffectScript : public Script
 	{
 	public:
-		CameraScript() {}
-		virtual ~CameraScript(){}
+		CameraEffectScript() {}
+		virtual ~CameraEffectScript(){}
 		virtual void Initialize() override;
 		void Bump(Vector3 dir);
 		void WhiteFlash();
@@ -25,6 +25,20 @@ namespace lu::JSAB
 	private:
 		Animator* mFlash;
 		Animator* mAnim;
+	};
+
+	class GameCamera : public Script
+	{
+	public:
+		GameCamera(){}
+		virtual ~GameCamera(){}
+		virtual void Initialize() override;
+
+		CameraEffectScript* GetEffect() { return mEffect; }
+		
+
+	private:
+		CameraEffectScript* mEffect;
 	};
 }
 

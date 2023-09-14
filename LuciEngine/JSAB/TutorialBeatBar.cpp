@@ -116,15 +116,15 @@ namespace lu::JSAB
 	{
 		Quaternion rot = mTransform->GetRotation();
 		if(rot == Quaternion::Identity)
-			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->Bump(Vector3::Down);
+			SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->Bump(Vector3::Down);
 		if (rot == Quaternion::CreateFromAxisAngle(Vector3::Forward, PI))
-			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->Bump(Vector3::Up);
+			SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->Bump(Vector3::Up);
 		else if (rot == Quaternion::CreateFromAxisAngle(Vector3::Forward, PI*0.5))
 			//position = { -application.GetWidth() * 0.5f,0, 0);
-			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->Bump(Vector3::Left);
+			SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->Bump(Vector3::Left);
 			//position = { application.GetWidth() * 0.5f,0, 0);
 		else if (rot == Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 0.5))
-			SceneManager::MainCamera()->Owner()->GetComponent<CameraScript>()->Bump(Vector3::Right);
+			SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->Bump(Vector3::Right);
 		
 	}
 }

@@ -5,34 +5,36 @@
 #include "LApplication.h"
 #include "LAnimator.h"
 #include "LTime.h"
+#include "LCamera.h"
 
 extern lu::Application application;
 namespace lu::JSAB
 {
-	void CameraScript::Initialize()
+#pragma region Camera Effect
+	void CameraEffectScript::Initialize()
 	{
 		Script::Initialize();
 		mAnim = Owner()->AddComponent<Animator>();
 		{
 			auto a = mAnim->CreateAnimation(L"BumpUp");
-			a->AddPositionYKey(0, 0);
-			a->AddPositionYKey(0.025, 50);
-			a->AddPositionYKey(0.05, 0);
+			a->AddLocalPositionKey(0, { 0, 0, 0 });
+			a->AddLocalPositionKey(0.025, { 0, 50, 0 });
+			a->AddLocalPositionKey(0.05, { 0, 0, 0 });
 			
 			a = mAnim->CreateAnimation(L"BumpDown");
-			a->AddPositionYKey(0, 0);
-			a->AddPositionYKey(0.025, -50);
-			a->AddPositionYKey(0.05, 0);
+			a->AddLocalPositionKey(0, { 0, 0, 0 });
+			a->AddLocalPositionKey(0.025, { 0, -50, 0 });
+			a->AddLocalPositionKey(0.05, { 0, 0, 0 });
 
 			a = mAnim->CreateAnimation(L"BumpRight");
-			a->AddPositionXKey(0, 0);
-			a->AddPositionXKey(0.025, 50);
-			a->AddPositionXKey(0.05, 0);
+			a->AddLocalPositionKey(0, { 0, 0, 0 });
+			a->AddLocalPositionKey(0.025, { 50, 0, 0 });
+			a->AddLocalPositionKey(0.05, { 0, 0, 0 });
 
 			a = mAnim->CreateAnimation(L"BumpLeft");
-			a->AddPositionXKey(0, 0);
-			a->AddPositionXKey(0.025, -50);
-			a->AddPositionXKey(0.05, 0);
+			a->AddLocalPositionKey(0, { 0, 0, 0 });
+			a->AddLocalPositionKey(0.025, { -50, 0, 0 });
+			a->AddLocalPositionKey(0.05, { 0, 0, 0 });
 		}
 
 
@@ -40,7 +42,7 @@ namespace lu::JSAB
 		flash->AddComponent<MeshRenderer>()->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"ThickBar"))->SetColor({1.f, 1.f, 1.f, 0.5})->UseColor(true);
 		flash->GetComponent<MeshRenderer>()->GetMaterial()->SetRenderingMode(lu::graphics::eRenderingMode::Transparent);
 		flash->mTransform->SetScale(application.GetWidth(), application.GetHeight(), 1);
-		flash->mTransform->SetPosition({ 0, 0, -5 });
+		flash->mTransform->SetLocalPosition({ 0, 0, 1 });
 		flash->SetName(L"Camera Flash");
 		mFlash = flash->AddComponent<Animator>();
 		{
@@ -64,7 +66,7 @@ namespace lu::JSAB
 		}
 		Reset();
 	}
-	void CameraScript::Bump(Vector3 dir)
+	void CameraEffectScript::Bump(Vector3 dir)
 	{
 		if (dir == Vector3::Up)
 			mAnim->PlayAnimation(L"BumpUp", false);
@@ -75,26 +77,52 @@ namespace lu::JSAB
 		if (dir == Vector3::Right)
 			mAnim->PlayAnimation(L"BumpLeft", false);
 	}
-	void CameraScript::WhiteFlash()
+	void CameraEffectScript::WhiteFlash()
 	{
 		mFlash->PlayAnimation(L"WhiteFlash", false);
 	}
-	void CameraScript::BlackFlash()
+	void CameraEffectScript::BlackFlash()
 	{
 		mFlash->PlayAnimation(L"BlackFlash", false);
 	}
-	void CameraScript::BlackFadeOut()
+	void CameraEffectScript::BlackFadeOut()
 	{
 		mFlash->PlayAnimation(L"BlackFadeOut", false);
 	}
-	void CameraScript::BlackFadeIn()
+	void CameraEffectScript::BlackFadeIn()
 	{
 		mFlash->PlayAnimation(L"BlackFadeIn", false);
 	}
-	void CameraScript::Reset()
+	void CameraEffectScript::Reset()
 	{
-		mTransform->SetPosition({ 0, 0, -10 });
-		//mFlash->Owner()->SetActive(false);
+		mTransform->SetLocalPosition(Vector3::Zero);
 		mFlash->Owner()->GetComponent<MeshRenderer>()->SetColor(Color::clear);
 	}
+#pragma endregion
+
+#pragma region GameCamera
+	void GameCamera::Initialize()
+	{
+		Script::Initialize();
+		{
+			Owner()->SetName(L"CameraParent");
+			mTransform->SetPosition({ 0, 0, -10 });
+			auto c = Owner()->AddComponent<Camera>();
+			for (int i = 0; i < (UINT)eLayerType::End; i++)
+			{
+				c->TurnLayerMask((eLayerType)i, false);
+			}
+		}
+		{
+			auto g = object::Instantiate<GameObject>(mTransform, eLayerType::Camera);
+			g->SetName(L"Main Camera");
+			auto c = g->AddComponent<Camera>();
+			bool active[] = { true, true, true, true, false, false };
+			for (int i = 0; i < (UINT)eLayerType::End; i++)
+				c->TurnLayerMask((eLayerType)i, active[i]);
+			mEffect = g->AddComponent<CameraEffectScript>();
+		}
+	}
+#pragma endregion
+
 }

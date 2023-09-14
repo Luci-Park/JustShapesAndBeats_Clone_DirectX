@@ -59,7 +59,7 @@ namespace lu::JSAB
 			{
 				cameraComp->TurnLayerMask((eLayerType)i, active[i]);
 			}
-			script = camera->AddComponent<CameraScript>();
+			script = camera->AddComponent<GameCamera>();
 		}
 		auto a = object::Instantiate<PlayerPrefab>(eLayerType::Player);
 		auto t = object::Instantiate<GameObject>(eLayerType::UI)->AddComponent<Text>();

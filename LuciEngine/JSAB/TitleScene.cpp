@@ -29,7 +29,7 @@ namespace lu::JSAB::Title
 			GameObject* camera = object::Instantiate<GameObject>(eLayerType::Camera);
 			camera->SetName(L"TitleScene Camera");
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
-			mCamera = camera->AddComponent<CameraScript>();
+			mCamera = camera->AddComponent<CameraEffectScript>();
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			for (int i = 0; i < (UINT)eLayerType::End; i++)
 			{

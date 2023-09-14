@@ -21,6 +21,6 @@ namespace lu::JSAB
 		virtual void Initialize() override;
 		virtual void Update() override;
 
-		CameraScript* script;
+		GameCamera* script;
 	};
 }
