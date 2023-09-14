@@ -41,10 +41,10 @@ namespace lu
 		}
 		mainCamera = cameras.size() > 0 ? cameras[0] : nullptr;
 
-		for (int i = 0; i < mLayers.size(); i++)
+		/*for (int i = 0; i < mLayers.size(); i++)
 		{
 			mLayers[i].Render();
-		}
+		}*/
 	}
 	void Scene::Destroy()
 	{

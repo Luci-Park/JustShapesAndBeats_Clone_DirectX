@@ -28,7 +28,7 @@ namespace lu
 	void MeshRenderer::Render()
 	{
 		Owner()->mTransform->BindConstantBuffer();
-
+		std::wstring s = Owner()->GetName();
 		mMesh->BindBuffer();
 		mMaterial->Binds();
 
