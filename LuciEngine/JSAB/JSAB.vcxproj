@@ -156,10 +156,6 @@
     <ClInclude Include="BackgroundScript.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CameraScript.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="EnemyBeam.h" />
-    <ClInclude Include="EnemyCircle.h" />
-    <ClInclude Include="EnemySpikeLine.h" />
     <ClInclude Include="MusicController.h" />
     <ClInclude Include="BulletPool.h" />
     <ClInclude Include="TestScene.h" />
@@ -195,10 +191,6 @@
     <ClCompile Include="BackgroundScript.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CameraScript.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="EnemyBeam.cpp" />
-    <ClCompile Include="EnemyCircle.cpp" />
-    <ClCompile Include="EnemySpikeLine.cpp" />
     <ClCompile Include="MusicController.cpp" />
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="SplashAnimation.cpp" />
