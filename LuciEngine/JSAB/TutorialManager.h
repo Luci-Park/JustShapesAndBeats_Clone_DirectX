@@ -8,9 +8,9 @@ namespace lu
 namespace lu::JSAB
 {
 	class TutorialMusicController;
-	class TutorialEightBullets;
+	class TutorialRoundSpikes;
 	class TutorialBurst;
-	class TutorialBeatBar;
+	class TutorialBeam;
 	class TutorialBeatCircle; 
 	class TutorialFullBar;
 	class TutorialCircleLine;
@@ -38,9 +38,9 @@ namespace lu::JSAB
 		void Stage10(double time);
 	private:
 		TutorialMusicController* mMusic;
-		BulletPool<TutorialEightBullets> mStage1Bullets;
+		BulletPool<TutorialRoundSpikes> mStage1Bullets;
 		BulletPool<TutorialBurst> mBurstBullets;
-		BulletPool<TutorialBeatBar>mBeatBars;
+		BulletPool<TutorialBeam>mBeatBars;
 		BulletPool<TutorialBeatCircle> mBeatCircles;	
 		BulletPool<TutorialFullBar> mFullBar;
 		BulletPool<TutorialCircleLine> mCircleLines;

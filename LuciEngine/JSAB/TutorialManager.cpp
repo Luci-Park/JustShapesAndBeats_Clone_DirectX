@@ -74,7 +74,7 @@ namespace lu::JSAB
 		{
 			Vector3 pos = { x, posY[idicies[idx]], 1 };
 			Vector3 endPos = { endX, posY[idicies[idx]], 1 };
-			TutorialEightBullets* bullet = mStage1Bullets.GetNext();
+			TutorialRoundSpikes* bullet = mStage1Bullets.GetNext();
 			bullet->mTransform->SetPosition(pos);
 			bullet->Setup(7, pos, endPos);
 			bullet->Activate();

@@ -9,21 +9,21 @@ namespace lu::JSAB
 		TutorialGiantCircle();
 		~TutorialGiantCircle();
 
-		virtual void Initialize() override;
-
-		void ActivateWithTime(double time);
 	protected:
-		virtual void OnShow();
-		virtual void OnActivate() {};
-		virtual void OnDeActivate();
-		virtual void WhileShowing();
-		virtual void WhileActive();
-		virtual void WhileDeActive() {};
+		virtual void BulletSetUp()override;
+		virtual void OnWarning()override;
+		virtual void WhileWarning(double time)override;
+		virtual void OnActivate()override;
+		virtual void WhileActivate(double time)override;
+		virtual void OnOutro()override;
+		virtual void WhileOutro(double time)override;
+		virtual void OnDeActivate()override;
 
 		void CreateAnimation();
 	private:
-		Animator* mImgAnim;
+		Animator* mAnim;
 		MeshRenderer* mMr;
+		Collider2D* mCol;
 		double mTime;
 	};
 }

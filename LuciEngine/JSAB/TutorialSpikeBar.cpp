@@ -10,7 +10,7 @@ namespace lu::JSAB
 		Script::Initialize();
 		for (int i = 0; i < 10; i++)
 		{
-			mBullets[i] = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<TutorialEightBullets>();
+			mBullets[i] = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<TutorialRoundSpikes>();
 			mBullets[i]->mTransform->SetLocalPosition({ 0, -200.f + 40.f * i, 0 });
 		}
 		Bullet::Initialize();

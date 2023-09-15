@@ -8,21 +8,22 @@ namespace lu::JSAB
 	public:
 		TutorialBeatCircle() {}
 		virtual ~TutorialBeatCircle() {}
-		virtual void Initialize()override;
 		void FastAnim(bool fast) { mbFastActivate = fast; }
 	private:
-		virtual void OnShow() override;
+		virtual void BulletSetUp()override;
+		virtual void OnWarning()override;
+		virtual void WhileWarning(double time)override;
 		virtual void OnActivate()override;
+		virtual void WhileActivate(double time)override;
+		virtual void OnOutro()override;
+		virtual void WhileOutro(double time)override;
 		virtual void OnDeActivate()override;
-		virtual void WhileShowing() override;
-		virtual void WhileActive()override;
-		virtual void WhileDeActive()override;
 
 		void CreateOnBeatAnimation();
 	private:
 		MeshRenderer* mMr;
 		Collider2D* mCol;
-		Animator* mImgAnim;
+		Animator* mAnim;
 		std::shared_ptr<Texture> mReadySprite;
 		std::shared_ptr<Texture> mActivateSprite;
 		bool mbFastActivate;

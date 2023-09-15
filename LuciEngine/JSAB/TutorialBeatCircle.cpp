@@ -1,14 +1,5 @@
 #include "TutorialBeatCircle.h"
 #include "GeneralEffects.h"
-#include "MusicController.h"
-#include "LGameObject.h"
-#include "LResources.h"
-#include "LMeshRenderer.h"
-#include "LCollider2D.h"
-#include "LAnimator.h"
-#include "LCollider2D.h"
-#include "LObject.h"
-#include "LCamera.h"
 #include "LSceneManager.h"
 #include "LApplication.h"
 
@@ -16,9 +7,8 @@ extern lu::Application application;
 namespace lu::JSAB
 {
 #pragma region TutorialBeatCircle
-	void TutorialBeatCircle::Initialize()
+	void TutorialBeatCircle::BulletSetUp()
 	{
-		Script::Initialize();
 		Owner()->SetName(L"BeatCircle");
 		mTransform->SetLocalScale({ 230, 230, 1 });
 		mCol = Owner()->AddComponent<Collider2D>()->SetType(eColliderType::Circle);
@@ -30,54 +20,54 @@ namespace lu::JSAB
 		mReadySprite = Resources::Find<Texture>(L"circle_bullet_prep");
 		mActivateSprite = Resources::Find<Texture>(L"circle_bullet");
 
-		mImgAnim = Owner()->AddComponent<Animator>();
+		mAnim = Owner()->AddComponent<Animator>();
 		CreateOnBeatAnimation();
-
-		Bullet::Initialize();
 	}
-	void TutorialBeatCircle::OnShow()
+	void TutorialBeatCircle::OnWarning()
 	{
 		mMr->SetActive(true);
-		mImgAnim->SetActive(true);
-		mImgAnim->PlayAnimation(L"Preparation", true);
+		mAnim->SetActive(true);
+		mAnim->PlayAnimation(L"Preparation", true);
 	}
+	void TutorialBeatCircle::WhileWarning(double time)
+	{
+	}
+
 	void TutorialBeatCircle::OnActivate()
 	{
 		mMr->SetActive(true);
-		mImgAnim->SetActive(true);
+		mAnim->SetActive(true);
 		if(mbFastActivate)
-			mImgAnim->PlayAnimation(L"FastActivate", false);
+			mAnim->PlayAnimation(L"FastActivate", false);
 		else
-			mImgAnim->PlayAnimation(L"SlowActivate", false);
+			mAnim->PlayAnimation(L"SlowActivate", false);
+	}
+	void TutorialBeatCircle::WhileActivate(double time)
+	{
+	}
+	void TutorialBeatCircle::OnOutro()
+	{
+	}
+	void TutorialBeatCircle::WhileOutro(double time)
+	{
 	}
 	void TutorialBeatCircle::OnDeActivate()
 	{
 		mCol->SetActive(false);
 		mMr->SetActive(false);
-		mImgAnim->SetActive(false);
+		mAnim->SetActive(false);
 		mTransform->SetLocalScale({ 230, 230, 1 });
 	}
-	void TutorialBeatCircle::WhileShowing()
-	{
-		if (MusicController::Instance == nullptr) return;
-		if (MusicController::Instance->GetTime() >= mActivateTime)
-			Activate();
-	}
-	void TutorialBeatCircle::WhileActive()
-	{
-	}
-	void TutorialBeatCircle::WhileDeActive()
-	{
-	}
+
 	void TutorialBeatCircle::CreateOnBeatAnimation()
 	{
-		Animation* anim = mImgAnim->CreateAnimation(L"Preparation");
+		Animation* anim = mAnim->CreateAnimation(L"Preparation");
 		anim->AddTextureKey(0, mReadySprite);
 		CreateCounterClockwiseAnimation(0.5, anim);
 
 		{
 			double duration = 0.3;
-			anim = mImgAnim->CreateAnimation(L"FastActivate");
+			anim = mAnim->CreateAnimation(L"FastActivate");
 			anim->AddTextureKey(0, mActivateSprite);
 			anim->AddColliderActiveKey(0, true);
 
@@ -94,7 +84,7 @@ namespace lu::JSAB
 			anim->AddFunctionKey(duration, std::bind(&Bullet::DeActivate, this));
 		}
 		{
-			Animation* anim = mImgAnim->CreateAnimation(L"SlowActivate");
+			Animation* anim = mAnim->CreateAnimation(L"SlowActivate");
 			double duration = 0.6;
 			anim->AddTextureKey(0, mActivateSprite);
 			anim->AddColliderActiveKey(0, true);
@@ -113,6 +103,8 @@ namespace lu::JSAB
 		}
 	}
 #pragma endregion
+
+
 #pragma region TutorialCircleLine
 	void TutorialCircleLine::Initialize()
 	{

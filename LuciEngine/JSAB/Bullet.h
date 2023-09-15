@@ -1,43 +1,55 @@
 #pragma once
 #include "LScript.h"
-
-namespace lu
-{
-	class Animator;
-	class Animation;
-	class MeshRenderer;
-	class Collider2D;
-}
+#include "MusicController.h"
+#include "LGameObject.h"
+#include "LTransform.h"
+#include "LAnimator.h"
+#include "LMeshRenderer.h"
+#include "LCollider2D.h"
+#include "LObject.h"
+#include "LResources.h"
+#include "CameraScript.h"
 
 namespace lu::JSAB
 {
 	class Bullet : public Script
 	{
 	public:
-		enum class BulletState
-		{
-			InActive, Show, Active
-		};
-		Bullet():mState(BulletState::InActive) {};
+		enum class eState { DeActivate, Warning, Activate, Outro };
+		Bullet() {};
 		virtual ~Bullet() {};
 		virtual void Initialize() override;
 		virtual void Update() override;
-		void Show(double activateTime);
-		void Activate();
+		void SetTimeline(MusicController* music, double wt, double at, double ot);
 		void DeActivate();
-		bool IsActive() { return mState == BulletState::Active; }
-		bool IsShow() { return mState == BulletState::Show; }
-	protected:
-		virtual void OnShow() = 0;
-		virtual void OnActivate() = 0;
-		virtual void OnDeActivate() = 0;
-		virtual void WhileShowing() = 0;
-		virtual void WhileActive() = 0;
-		virtual void WhileDeActive() = 0;
+		void TestTime(double time);
 
 	protected:
-		BulletState mState;
+		void TimeCheck(double time);
+		virtual void BulletSetUp() = 0;
+
+		virtual void OnWarning() = 0;
+		virtual void WhileWarning(double time) = 0;
+		virtual void OnActivate() = 0;
+		virtual void WhileActivate(double time) = 0;
+		virtual void OnOutro() = 0;
+		virtual void WhileOutro(double time) = 0;
+		virtual void OnDeActivate() = 0;
+
+		Vector2 PathInCircle(double durationforacircle, double time, float radius);
+
+	private:
+		void CheckState(double time);
+		void ChangeToWarning(double time);
+		void ChangeToActive(double time);
+		void ChangeToOutro(double time);
+	protected:
+		CameraEffectScript* mCamera;
+		eState mState;
+		MusicController* mMusic;
+		double mWarningTime;
 		double mActivateTime;
+		double mOutroTime;
 
 	};
 }

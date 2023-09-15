@@ -1,10 +1,5 @@
 #include "TutorialGiantCircle.h"
 #include "GeneralEffects.h"
-#include "LMeshRenderer.h"
-#include "LGameObject.h"
-#include "LResources.h"
-#include "LAnimator.h"
-#include "MusicController.h"
 namespace lu::JSAB
 {
 	TutorialGiantCircle::TutorialGiantCircle()
@@ -13,40 +8,27 @@ namespace lu::JSAB
 	TutorialGiantCircle::~TutorialGiantCircle()
 	{
 	}
-	void TutorialGiantCircle::Initialize()
+	void TutorialGiantCircle::BulletSetUp()
 	{
-		Script::Initialize();
 		mTransform->SetScale(Vector3::Zero);
 		Owner()->SetName(L"GiantCircle");
 		mMr = Owner()->AddComponent<MeshRenderer>()->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"circle_bullet"));
 		mMr->SetColor(Color::white);
-		mImgAnim = Owner()->AddComponent<Animator>();
+		mAnim = Owner()->AddComponent<Animator>();
+		mCol = Owner()->AddComponent<Collider2D>()->SetType(eColliderType::Circle);
 		CreateAnimation();
-		Bullet::Initialize();
 	}
-	void TutorialGiantCircle::ActivateWithTime(double time)
+	void TutorialGiantCircle::OnWarning()
 	{
-		mImgAnim->PlayAnimation(L"Bump", true);
-		mImgAnim->SetTime(time);
-		Activate();
-	}
-	void TutorialGiantCircle::OnShow()
-	{
-		Owner()->SetActive(true);
+		mMr->SetActive(true);
 		mTransform->SetScale(Vector3::Zero);
 		mMr->UseColor(false);
+		mTime = mWarningTime;
+		mCol->SetActive(true);
 	}
-	void TutorialGiantCircle::OnDeActivate()
+	void TutorialGiantCircle::WhileWarning(double time)
 	{
-		mImgAnim->PlayAnimation(L"Disappear", false);
-		mTime = 111.611;
-	}
-	void TutorialGiantCircle::WhileShowing()
-	{
- 		if (MusicController::Instance == nullptr) return;
-		double currTime = MusicController::Instance->GetTime();
-
-		if (currTime >= mTime)
+		if (time >= mTime)
 		{
 			mTime += 0.108;
 			Vector3 scale = mTransform->GetScale();
@@ -55,13 +37,30 @@ namespace lu::JSAB
 			mTransform->SetScale(scale);
 		}
 	}
-	void TutorialGiantCircle::WhileActive()
+	void TutorialGiantCircle::OnActivate()
 	{
-
+		mAnim->PlayAnimation(L"Bump", true);
 	}
+	void TutorialGiantCircle::WhileActivate(double time)
+	{
+	}
+	void TutorialGiantCircle::OnOutro()
+	{
+		mAnim->PlayAnimation(L"Disappear", false);
+	}
+	void TutorialGiantCircle::WhileOutro(double time)
+	{
+	}
+	void TutorialGiantCircle::OnDeActivate()
+	{
+		mMr->SetActive(false);
+		mTransform->SetScale({ 0, 0, 1 });
+		mCol->SetActive(false);
+	}
+	
 	void TutorialGiantCircle::CreateAnimation()
 	{
-		auto a = mImgAnim->CreateAnimation(L"Disappear");
+		auto a = mAnim->CreateAnimation(L"Disappear");
 		double duration = 0.432;
 		a->AddScaleKey(0, {740, 740, 1});
 		a->AddScaleKey(duration * 0.7, { 760, 760, 1 });
@@ -73,11 +72,9 @@ namespace lu::JSAB
 		a->AddInterpolationKey(duration * 0.9, 0);
 		a->AddInterpolationKey(duration * 1, 1);
 
-		a->AddFunctionKey(duration, std::bind(&GameObject::SetActive, Owner(), false));
+		a->AddFunctionKey(duration, std::bind(&Bullet::DeActivate, this));
 
-
-
-		a = mImgAnim->CreateAnimation(L"Bump");
+		a = mAnim->CreateAnimation(L"Bump");
 		a->AddScaleKey(duration * 0, {40.f, 40.f, 1.f});
 		a->AddInterpolationKey(duration * 0, 0);
 		a->AddScaleKey(duration * .25, { 760, 760, 1 });

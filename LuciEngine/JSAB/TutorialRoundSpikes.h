@@ -3,25 +3,27 @@
 
 namespace lu::JSAB
 {
-	class TutorialEightBullets : public Bullet
+	class TutorialRoundSpikes : public Bullet
 	{
 	public:
-		TutorialEightBullets() : mTime(0) {}
-		virtual ~TutorialEightBullets(){}
-		virtual void Initialize() override;
+		TutorialRoundSpikes() : mTime(0) {}
+		virtual ~TutorialRoundSpikes(){}
+
 		void Setup(float duration, Vector3 startPos, Vector3 endPos);
 	private:
-		virtual void OnShow() override {};
+		virtual void BulletSetUp()override;
+		virtual void OnWarning()override;
+		virtual void WhileWarning(double time)override;
 		virtual void OnActivate()override;
+		virtual void WhileActivate(double time)override;
+		virtual void OnOutro()override;
+		virtual void WhileOutro(double time)override;
 		virtual void OnDeActivate()override;
-		virtual void WhileShowing() override {};
-		virtual void WhileActive()override;
-		virtual void WhileDeActive()override;
 		
 		void CreateEnterEffect();
 
 	private:
-		Animator* mImgAnim;
+		Animator* mAnim;
 		Animator* mEnterEffect;
 		Collider2D* mCol;
 		MeshRenderer* mMr;

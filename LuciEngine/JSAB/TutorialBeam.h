@@ -1,15 +1,13 @@
 #pragma once
 #include "Bullet.h"
-
 namespace lu::JSAB
 {
-	class TutorialBurst : public Bullet
+	class TutorialBeam : public Bullet
 	{
 	public:
-		TutorialBurst(): mbIsBursting(false){}
-		virtual ~TutorialBurst(){}
-
-		void IsEven(bool even) { mbEven = even; }
+		TutorialBeam(){}
+		virtual ~TutorialBeam(){}
+		void SetRandomPosition();
 	private:
 		virtual void BulletSetUp()override;
 
@@ -21,18 +19,18 @@ namespace lu::JSAB
 		virtual void WhileOutro(double time)override;
 		virtual void OnDeActivate()override;
 
-		void CreateAnimation();
-		void CreateMoveAnimation(Animation* ani, Vector3 startPos, Vector3 endPos, double duration);
+		void CreateOnBeatAnimation();
+		void Beat();
 
 	private:
-		Animator* mBase;
-		Animator* mShell;
-		Transform* mBursts[8];
-		Vector3 mParticleDirection[8];
+		MeshRenderer* mMr;
+		Collider2D* mCol;
+		Animator* mAnim;
+		const double appearDuration = 1.3;
+		const double flashDuration = 0.05;
+		const double disappearDuration = 0.35;
 
-		RECT bounds;
-		bool mbIsBursting;
-		bool mbEven;
+		double mTargetTime;
 	};
 }
 

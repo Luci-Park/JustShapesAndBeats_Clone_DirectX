@@ -1,22 +1,13 @@
 #include "TutorialBurst.h"
 #include "GeneralEffects.h"
-#include "CameraScript.h"
-#include "LObject.h"
-#include "LAnimator.h"
-#include "LMeshRenderer.h"
-#include "LResources.h"
-#include "LCollider2D.h"
-//#include "TutorialEightBulletScript.h"
 #include "LSceneManager.h"
 #include "LCamera.h"
 #include "LTime.h"
 
 namespace lu::JSAB
 {
-	void TutorialBurst::Initialize()
+	void TutorialBurst::BulletSetUp()
 	{
-		Script::Initialize();
-
 		mBase = Owner()->AddComponent<Animator>();
 		bounds = SceneManager::MainCamera()->GetBoundary();
 		CreateAnimation();
@@ -58,22 +49,10 @@ namespace lu::JSAB
 
 			burst->SetActive(false);
 		}
-
-		Bullet::Initialize();
 	}
 
-	void TutorialBurst::OnBurst()
+	void TutorialBurst::OnWarning()
 	{
-		mShell->StopAnimation();
-		mShell->Owner()->SetActive(false);
-		mbIsBursting = true;
-		for (int i = 0; i < 8; i++)
-			mBursts[i]->Owner()->SetActive(true);
-	}
-
-	void TutorialBurst::OnActivate()
-	{
-		OnDeActivate();//Don't touch this.
 		mShell->Owner()->SetActive(true);
 		mShell->PlayAnimation(L"Blink", true);
 		if (mbEven)
@@ -87,6 +66,49 @@ namespace lu::JSAB
 			mBase->PlayAnimation(L"Up", false);
 		}
 	}
+
+	void TutorialBurst::WhileWarning(double time)
+	{
+	}
+
+	void TutorialBurst::OnActivate()
+	{
+		mShell->StopAnimation();
+		mShell->Owner()->SetActive(false);
+		mbIsBursting = true;
+		for (int i = 0; i < 8; i++)
+			mBursts[i]->Owner()->SetActive(true);
+	}
+
+	void TutorialBurst::WhileActivate(double time)
+	{
+		int activs = 0;
+		for (int i = 0; i < 8; i++)
+		{
+			float speed = 300;
+			if (mBursts[i]->Owner()->IsActive())
+			{
+				mBursts[i]->SetLocalPosition(mBursts[i]->GetLocalPosition() + speed * Time::DeltaTime() * mParticleDirection[i]);
+				Vector3 pos = mBursts[i]->GetPosition() - mBursts[i]->GetScale() * 0.5;
+				Rectangle bBound = { (long)pos.x,(long)pos.y, (long)mBursts[i]->GetScale().x, (long)mBursts[i]->GetScale().y };
+				if (!((Rectangle)bounds).Contains(bBound))
+					mBursts[i]->Owner()->SetActive(false);
+			}
+			else
+			{
+				activs++;
+			}
+		}
+		if (activs == 8)DeActivate();
+	}
+
+	void TutorialBurst::OnOutro()
+	{
+	}
+
+	void TutorialBurst::WhileOutro(double time)
+	{
+	}
 	
 	void TutorialBurst::OnDeActivate()
 	{
@@ -99,26 +121,6 @@ namespace lu::JSAB
 		}
 	}
 
-	void TutorialBurst::WhileActive()
-	{
-		if (!mbIsBursting) return;
-		for (int i = 0; i < 8; i++)
-		{
-			float speed = 300;
-			if (mBursts[i]->Owner()->IsActive())
-			{
-				mBursts[i]->SetLocalPosition(mBursts[i]->GetLocalPosition() + speed * Time::DeltaTime() * mParticleDirection[i]);
-				Vector3 pos = mBursts[i]->GetPosition() - mBursts[i]->GetScale() * 0.5;
-				Rectangle bBound = { (long)pos.x,(long)pos.y, (long)mBursts[i]->GetScale().x, (long)mBursts[i]->GetScale().y };
-				if (!((Rectangle)bounds).Contains(bBound))
-					mBursts[i]->Owner()->SetActive(false);
-			}
-		}
-	}
-	void TutorialBurst::WhileDeActive()
-	{
-	}
-	
 	void TutorialBurst::CreateAnimation()
 	{
 		float move = 180;
@@ -143,7 +145,7 @@ namespace lu::JSAB
 		ani->AddScaleKey(0, Vector3::Zero);
 		ani->AddScaleKey(duration, Vector3::One);
 
-		ani->AddFunctionKey(duration, std::bind(&TutorialBurst::OnBurst, this));
-		ani->AddFunctionKey(duration, std::bind(&CameraEffectScript::WhiteFlash, SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()));
+		ani->AddFunctionKey(duration, std::bind(&Bullet::OnActivate, this));
+		ani->AddFunctionKey(duration, std::bind(&CameraEffectScript::WhiteFlash, mCamera));
 	}
 }

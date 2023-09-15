@@ -1,41 +1,13 @@
-#include "TutorialBeatBar.h"
+#include "TutorialBeam.h"
 #include "GeneralEffects.h"
-#include "CameraScript.h"
-#include "MusicController.h"
-#include "TutorialManager.h"
-#include "LResources.h"
 #include "LApplication.h"
-#include "LGameObject.h"
-#include "LMeshRenderer.h"
-#include "LCollider2D.h"
-#include "LAnimator.h"
 #include "LTime.h"
 #include "LRenderer.h"
 
 extern lu::Application application;
 namespace lu::JSAB
 {
-	void TutorialBeatBar::Initialize()
-	{
-		Script::Initialize();
-
-		Vector3 baseScale = { 20, (float)application.GetWidth() * 2, 1 };
-		Owner()->SetName(L"BeatBar");
-		mTransform->SetPosition(Vector3::Up * (float)application.GetHeight() * 0.5);
-		mTransform->SetScale(baseScale);
-
-		mCol = Owner()->AddComponent<Collider2D>();
-
-		mMr = Owner()->AddComponent<MeshRenderer>();
-		mMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"verticlebar"));
-		mMr->SetColor(Color::white)->UseColor(false);
-
-		mImgAnim = Owner()->AddComponent<Animator>();
-		CreateOnBeatAnimation();
-
-		Bullet::Initialize();
-	}
-	void TutorialBeatBar::SetRandomPosition()
+	void TutorialBeam::SetRandomPosition()
 	{
 		int y = lu::math::IntRandom(0, 1);
 		Vector3 pos;
@@ -57,44 +29,62 @@ namespace lu::JSAB
 		mTransform->SetPosition(pos);
 		mTransform->SetRotation(rot);
 	}
-	void TutorialBeatBar::OnShow()
+	void TutorialBeam::BulletSetUp()
 	{
-		Owner()->SetActive(true);
+		Vector3 baseScale = { 20, (float)application.GetWidth() * 2, 1 };
+		Owner()->SetName(L"BeatBar");
+		mTransform->SetPosition(Vector3::Up * (float)application.GetHeight() * 0.5);
+		mTransform->SetScale(baseScale);
+
+		mCol = Owner()->AddComponent<Collider2D>();
+
+		mMr = Owner()->AddComponent<MeshRenderer>();
+		mMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"verticlebar"));
+		mMr->SetColor(Color::white)->UseColor(false);
+
+		mAnim = Owner()->AddComponent<Animator>();
+		CreateOnBeatAnimation();
+	}
+	void TutorialBeam::OnWarning()
+	{
+		mAnim->PlayAnimation(L"Warning", false);
+	}
+	void TutorialBeam::WhileWarning(double time)
+	{
+	}
+	void TutorialBeam::OnActivate()
+	{
 		mCol->SetActive(false);
-		mImgAnim->PlayAnimation(L"Warning", false);
+		mAnim->PlayAnimation(L"Activate", false);
 	}
-	void TutorialBeatBar::OnActivate()
+	void TutorialBeam::WhileActivate(double time)
 	{
-		Owner()->SetActive(true);
+	}
+	void TutorialBeam::OnOutro()
+	{
+	}
+	void TutorialBeam::WhileOutro(double time)
+	{
+		if (!mAnim->IsPlaying())
+			mAnim->PlayAnimation(L"Outro", false);
+	}
+	void TutorialBeam::OnDeActivate()
+	{
+		mMr->SetActive(false);
 		mCol->SetActive(false);
-		mImgAnim->PlayAnimation(L"Appear", false);
+		mAnim->SetActive(false);
 	}
-	void TutorialBeatBar::OnDeActivate()
-	{
-		Owner()->SetActive(false);
-	}
-	void TutorialBeatBar::WhileShowing()
-	{
-		if (MusicController::Instance->GetTime() >= mActivateTime)
-			Activate();
-	}
-	void TutorialBeatBar::WhileActive()
-	{
-	}
-	void TutorialBeatBar::WhileDeActive()
-	{
-	}
-	void TutorialBeatBar::CreateOnBeatAnimation()
+	void TutorialBeam::CreateOnBeatAnimation()
 	{
 		Vector3 baseScale = { 20, (float)application.GetWidth() * 2, 1 };
 
-		Animation* ani = mImgAnim->CreateAnimation(L"Warning");
+		Animation* ani = mAnim->CreateAnimation(L"Warning");
 		ani->AddScaleKey(0, { 0, (float)application.GetWidth() * 2, 1 });
 		ani->AddTintKey(0, Color::clear);
 		ani->AddScaleKey(appearDuration, baseScale);
 		ani->AddTintKey(appearDuration, {1.f, 1.f, 1.f, 0.8f});
 
-		ani = mImgAnim->CreateAnimation(L"Appear");
+		ani = mAnim->CreateAnimation(L"Activate");
 		ani->AddColliderActiveKey(0, true);
 		ani->AddScaleKey(0, { 20, 0, 1 });
 		ani->AddInterpolationKey(0, 1);
@@ -105,14 +95,14 @@ namespace lu::JSAB
 		ani->AddInterpolationKey(flashDuration, 1);
 		ani->AddInterpolationKey(flashDuration, 0);
 
-		ani->AddFunctionKey(flashDuration, std::bind(&TutorialBeatBar::Beat, this));
+		ani->AddFunctionKey(flashDuration, std::bind(&TutorialBeam::Beat, this));
 
-		ani->AddScaleKey(flashDuration +stayDuration, baseScale);
-		ani->AddScaleKey(flashDuration + stayDuration + disappearDuration, { 0, (float)application.GetWidth() * 2, 1 });
-		ani->AddFunctionKey(flashDuration + stayDuration + disappearDuration, std::bind(&Bullet::DeActivate, this));
-
+		ani = mAnim->CreateAnimation(L"Outro");
+		ani->AddScaleKey(0, baseScale);
+		ani->AddScaleKey(disappearDuration, { 0, (float)application.GetWidth() * 2, 1 });
+		ani->AddFunctionKey(disappearDuration, std::bind(&Bullet::DeActivate, this));
 	}
-	void TutorialBeatBar::Beat()
+	void TutorialBeam::Beat()
 	{
 		Quaternion rot = mTransform->GetRotation();
 		if(rot == Quaternion::Identity)
@@ -120,9 +110,7 @@ namespace lu::JSAB
 		if (rot == Quaternion::CreateFromAxisAngle(Vector3::Forward, PI))
 			SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->Bump(Vector3::Up);
 		else if (rot == Quaternion::CreateFromAxisAngle(Vector3::Forward, PI*0.5))
-			//position = { -application.GetWidth() * 0.5f,0, 0);
 			SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->Bump(Vector3::Left);
-			//position = { application.GetWidth() * 0.5f,0, 0);
 		else if (rot == Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 0.5))
 			SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->Bump(Vector3::Right);
 		

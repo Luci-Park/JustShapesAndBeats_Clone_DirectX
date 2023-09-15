@@ -1,31 +1,10 @@
-#include "TutorialEightBullets.h"
+#include "TutorialRoundSpikes.h"
 #include "GeneralEffects.h"
-#include "LMeshRenderer.h"
-#include "LResources.h"
-#include "LCollider2D.h"
-#include "LAnimator.h"
 #include "LTime.h"
-#include "LObject.h"
 
 namespace lu::JSAB
 {
-	void TutorialEightBullets::Initialize()
-	{
-		Script::Initialize();
-		Owner()->SetName(L"EightPointBullet");
-		mTransform->SetScale(Vector3(42, 42, 1));
-		mCol = Owner()->AddComponent<Collider2D>()->SetType(eColliderType::Circle);
-
-		mMr = Owner()->AddComponent<MeshRenderer>();
-		mMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"octa_circle_bullet"));
-
-		mImgAnim = Owner()->AddComponent<Animator>();
-		Animation* ani = mImgAnim->CreateAnimation(L"Rotate");
-		CreateClockwiseAnimation(1.f, ani);
-		CreateEnterEffect();
-		Bullet::Initialize();
-	}
-	void TutorialEightBullets::Setup(float duration, Vector3 startPos, Vector3 endPos)
+	void TutorialRoundSpikes::Setup(float duration, Vector3 startPos, Vector3 endPos)
 	{
 		mDuration = duration; 
 		mStartPos = startPos; 
@@ -33,21 +12,41 @@ namespace lu::JSAB
 		mTime = 0;
 		mbIsMoving = mStartPos != mEndPos;
 	}
-	void TutorialEightBullets::OnActivate()
+	void TutorialRoundSpikes::BulletSetUp()
 	{
-		Owner()->SetActive(true);
+		Owner()->SetName(L"EightPointBullet");
+		mTransform->SetScale(Vector3(42, 42, 1));
+		mCol = Owner()->AddComponent<Collider2D>()->SetType(eColliderType::Circle);
+
+		mMr = Owner()->AddComponent<MeshRenderer>();
+		mMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"octa_circle_bullet"));
+
+		mAnim = Owner()->AddComponent<Animator>();
+		Animation* ani = mAnim->CreateAnimation(L"Rotate");
+		CreateClockwiseAnimation(1.f, ani);
+		CreateEnterEffect();
+	}
+	void TutorialRoundSpikes::OnWarning()
+	{
+	}
+
+	void TutorialRoundSpikes::WhileWarning(double time)
+	{
+	}
+
+	void TutorialRoundSpikes::OnActivate()
+	{
+		mEnterEffect->Owner()->SetActive(false);
+		mAnim->SetActive(true);
+		mMr->SetActive(false);
+		mCol->SetActive(false);
 		mEnterEffect->PlayAnimation(L"Appear", false);
-		mImgAnim->PlayAnimation(L"Rotate", true);
+		mAnim->PlayAnimation(L"Rotate", true);
 		mTime = 0;
 	}
-	void TutorialEightBullets::OnDeActivate()
+	void TutorialRoundSpikes::WhileActivate(double time)
 	{
-		Owner()->SetActive(false);
-		mEnterEffect->Owner()->SetActive(false);
-	}
-	void TutorialEightBullets::WhileActive()
-	{
-		if (!mbIsMoving) return;
+		if (mStartPos == mEndPos) return;
 		mTime += Time::DeltaTime();
 		float t = mTime / mDuration;
 		if (t <= 1.0f)
@@ -58,10 +57,23 @@ namespace lu::JSAB
 		else
 			DeActivate();
 	}
-	void TutorialEightBullets::WhileDeActive()
+	
+	void TutorialRoundSpikes::OnOutro()
 	{
 	}
-	void TutorialEightBullets::CreateEnterEffect()
+	void TutorialRoundSpikes::WhileOutro(double time)
+	{
+	}
+
+	void TutorialRoundSpikes::OnDeActivate()
+	{
+		mEnterEffect->Owner()->SetActive(false);
+		mMr->SetActive(false);
+		mCol->SetActive(false);
+		mAnim->SetActive(false);
+	}
+
+	void TutorialRoundSpikes::CreateEnterEffect()
 	{
 		GameObject* enterEffect = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
 		enterEffect->SetName(L"enterburst");

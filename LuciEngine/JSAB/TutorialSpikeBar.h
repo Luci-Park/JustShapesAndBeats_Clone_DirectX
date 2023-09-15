@@ -3,7 +3,7 @@
 
 namespace lu::JSAB
 {
-	class TutorialEightBullets;
+	class TutorialRoundSpikes;
 	class TutorialHalfBar : public Bullet
 	{
 	public:
@@ -20,7 +20,7 @@ namespace lu::JSAB
 		virtual void WhileActive()override;
 		virtual void WhileDeActive()override {};
 	private:
-		TutorialEightBullets* mBullets[10];
+		TutorialRoundSpikes* mBullets[10];
 		Vector3 mEndPos;
 		Vector3 mStartPos;
 		double mTime;

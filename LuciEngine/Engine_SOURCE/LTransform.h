@@ -16,9 +16,9 @@ namespace lu
 
 		void BindConstantBuffer();
 
-		void SetPosition(Vector3 position) { mPosition = position; CalculateLocalPosition(); }
-		void SetRotation(Quaternion rotation) { mRotation = rotation; CalculateLocalRotation(); }
-		void SetScale(Vector3 scale) { mScale = scale; CalculateLocalScale(); }
+		void SetPosition(Vector3 position) { mPosition = position; }
+		void SetRotation(Quaternion rotation) { mRotation = rotation; }
+		void SetScale(Vector3 scale) { mScale = scale; }
 
 		void SetPosition(float x, float y, float z) { mPosition = Vector3(x, y, z);}
 		void SetRotation(float x, float y, float z) { mRotation = Quaternion::CreateFromYawPitchRoll(Vector3(x, y, z));}
