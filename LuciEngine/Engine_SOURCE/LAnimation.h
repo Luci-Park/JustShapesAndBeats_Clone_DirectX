@@ -3,7 +3,6 @@
 #include "LTimeLines.h"
 namespace lu
 {
-	using namespace lu::math;
 	class GameObject;
 	class Transform;
 	class Collider2D;

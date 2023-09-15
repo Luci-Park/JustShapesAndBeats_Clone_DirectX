@@ -36,7 +36,23 @@ namespace lu
 			}
 			return nullptr;
 		}
+		
+		template <typename T>
+		T* GetComponentsInChildren()
+		{
+			T* component = nullptr;
 
+			component = GetComponent<T>();
+			if (component != nullptr) return component;
+
+			auto children = mTransform->GetChildren();
+			for (int i = 0; i < children.size(); i++)
+			{
+				component = children[i]->Owner()->GetComponentsInChildren<T>();
+				if (component != nullptr) return component;
+			}
+			return nullptr;
+		}
 		template <typename T>
 		T* AddComponent()
 		{

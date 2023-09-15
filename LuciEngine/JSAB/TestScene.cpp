@@ -1,4 +1,4 @@
-#include "ParticleTestScene.h"
+#include "TestScene.h"
 #include "LObject.h"
 #include "PlayerPrefab.h"
 #include "LParticleSystem.h"
@@ -6,10 +6,14 @@
 #include "LCamera.h"
 #include "LInput.h"
 #include "LText.h"
+#include "LCollisionManager.h"
 #include "..\\Editor_SOURCE\\TransformWidget.h"
 #include "TrianglePrefab.h" 
 namespace lu::JSAB
 {
+#pragma region ParticleTestScene
+
+
 	ParticleTestScene::ParticleTestScene()
 	{
 	}
@@ -49,6 +53,9 @@ namespace lu::JSAB
 		p->Play();
 
 	}
+#pragma endregion
+
+#pragma region CameraTestScene
 	void CameraTestScene::Initialize()
 	{
 		{
@@ -133,4 +140,30 @@ namespace lu::JSAB
 	{
 		Scene::Update();
 	}
+#pragma endregion
+
+#pragma region TutorialScene
+	
+	using namespace lu::JSAB;
+	void FakeTutorialScene::Initialize()
+	{
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Bullet, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Item, true);
+		object::Instantiate<GameObject>(eLayerType::Camera)->AddComponent<GameCamera>();
+
+		GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
+		manager->SetName(L"TutorialManager");
+		auto m = manager->AddComponent<TutorialMusicController>();
+		manager->AddComponent<NewTutorialManager>();
+		
+		m->Play();
+		Scene::Initialize();		
+	}
+
+	void FakeTutorialScene::Update()
+	{
+		Scene::Update();
+	}
+#pragma endregion
+
 }

@@ -733,3 +733,5 @@ Structured Buffer : 상수버퍼와 비슷하게 정보를 넘기는 역할. 대
 노이즈를 통해 랜덤을 만드는 것.
 8/17
 
+9/14
+추측 1 : time in MS는 발동시간, warning time은 tms - wt, outtime in tims + ot

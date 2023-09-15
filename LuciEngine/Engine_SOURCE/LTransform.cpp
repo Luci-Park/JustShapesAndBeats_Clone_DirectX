@@ -28,6 +28,12 @@ namespace lu
 	}
 	void Transform::LateUpdate()
 	{
+		if (mParent == nullptr || mParent == this)
+		{
+			mLocalPosition = mPosition;
+			mLocalRotation = mRotation;
+			mLocalScale = mScale;
+		}
 		UpdateMatrix();
 	}
 	void Transform::Render()
