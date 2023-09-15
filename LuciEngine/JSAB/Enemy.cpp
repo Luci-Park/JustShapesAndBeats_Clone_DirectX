@@ -1,9 +1,13 @@
 #include "Enemy.h"
+#include "LSceneManager.h"
+#include "LCamera.h"
+#include "CameraScript.h"
 namespace lu::JSAB
 {
 	void Enemy::Initialize()
 	{
 		Script::Initialize();
+		mCamera = SceneManager::MainCamera()->Owner()->GetComponentsInChildren<CameraEffectScript>();
 		BulletSetUp();
 		DeActivate();
 	}
@@ -36,7 +40,7 @@ namespace lu::JSAB
 	void Enemy::DeActivate()
 	{
 		mState = eState::DeActivate;
-		OnDeactivate();
+		OnDeActivate();
 	}
 	void Enemy::CheckState(double time)
 	{

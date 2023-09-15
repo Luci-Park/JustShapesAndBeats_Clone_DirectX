@@ -157,6 +157,7 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CameraScript.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyBurst.h" />
     <ClInclude Include="EnemyRoundSpikes.h" />
     <ClInclude Include="MusicController.h" />
     <ClInclude Include="BulletPool.h" />
@@ -195,6 +196,8 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CameraScript.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyBurst.cpp" />
+    <ClCompile Include="EnemyContainer.h" />
     <ClCompile Include="EnemyRoundSpikes.cpp" />
     <ClCompile Include="MusicController.cpp" />
     <ClCompile Include="NewTutorialManager.cpp" />

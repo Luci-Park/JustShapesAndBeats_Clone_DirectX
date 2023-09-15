@@ -60,7 +60,7 @@ namespace lu::JSAB
 		}
 		mTransform->SetPosition(Vector3::Lerp(mStartPos, mEndPos, t));
 	}
-	void EnemyRoundSpikes::OnDeactivate()
+	void EnemyRoundSpikes::OnDeActivate()
 	{
 		mEnterEffect->Owner()->SetActive(false);
 		mMr->SetActive(false);

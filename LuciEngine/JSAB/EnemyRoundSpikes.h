@@ -17,7 +17,7 @@ namespace lu::JSAB
 		virtual void WhileActivate(double time)override;
 		virtual void OnOutro()override {}
 		virtual void WhileOutro(double time)override {}
-		virtual void OnDeactivate() override;
+		virtual void OnDeActivate() override;
 	private:
 		MeshRenderer* mMr;
 		Animator* mEnterEffect;

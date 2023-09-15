@@ -101,6 +101,12 @@
     <ClCompile Include="NewTutorialManager.cpp">
       <Filter>EngineTesters\NewTutorial</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyContainer.h">
+      <Filter>EngineTesters\NewTutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBurst.cpp">
+      <Filter>EngineTesters\NewTutorial</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -205,6 +211,9 @@
       <Filter>EngineTesters\NewTutorial</Filter>
     </ClInclude>
     <ClInclude Include="NewTutorialManager.h">
+      <Filter>EngineTesters\NewTutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBurst.h">
       <Filter>EngineTesters\NewTutorial</Filter>
     </ClInclude>
   </ItemGroup>

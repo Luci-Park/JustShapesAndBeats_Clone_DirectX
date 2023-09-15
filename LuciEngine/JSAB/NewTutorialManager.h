@@ -1,13 +1,16 @@
 #pragma once
 #include "LScript.h"
+#include "EnemyContainer.h"
+
 namespace lu::JSAB
 {
-	class TutorialMusicController;
 	class EnemyRoundSpikes;
+	class EnemyBurst;
+	class TutorialMusicController;
 	class NewTutorialManager : public Script
 	{
 	public:
-		NewTutorialManager() {};
+		NewTutorialManager();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -25,7 +28,10 @@ namespace lu::JSAB
 		void Stage10(double time);
 	private:
 		TutorialMusicController* mMusic;
-		std::vector<EnemyRoundSpikes*> mSpikes;
+		EnemyContainer<EnemyRoundSpikes> mSpikes;
+		EnemyContainer<EnemyBurst> mBursts;
+
+		RECT mBounds;
 	};
 }
 
