@@ -1,5 +1,6 @@
 #include "EnemyBurst.h"
 #include "LTime.h"
+#include "LCamera.h"
 #include "CameraScript.h"
 namespace lu::JSAB
 {
@@ -49,13 +50,22 @@ namespace lu::JSAB
 		Vector3 rot = mShell->GetRotation().ToEuler();
 		rot.z += PI * -2 * Time::DeltaTime();
 		Vector3 midPos = Vector3::Lerp(mStartPos, mEndPos, 0.8);
+		Vector3 midScale = Vector3::Lerp({ 0, 0, 1 }, { 1, 1, 1 }, 0.8);
 		Vector3 pos;
-		float midTime = 0.4;
+		Vector3 size;
+		float midTime = 0.8;
 		if (t <= midTime)
-			pos = Vector3::Lerp(mStartPos, midPos, t/midTime);
+		{
+			pos = Vector3::Lerp(mStartPos, midPos, t / midTime);
+			size = Vector3::Lerp({0, 0, 1}, midScale, t / midTime);
+		}
 		else
+		{
 			pos = Vector3::Lerp(midPos, mEndPos, t);
+			size = Vector3::Lerp(midScale, {1, 1, 1}, t);
+		}
 		mTransform->SetPosition(pos);
+		mTransform->SetScale(size);
 	}
 	void EnemyBurst::OnActivate()
 	{
@@ -64,18 +74,30 @@ namespace lu::JSAB
 		mTransform->SetPosition(mEndPos);
 		for (int i = 0; i < 8; i++)
 			mBursts[i]->Owner()->SetActive(true);
+		mActivatedBullet = 8;
 		mCamera->WhiteFlash();
 	}
 	void EnemyBurst::WhileActivate(double time)
 	{
 		for (int i = 0; i < 8; i++)
 		{
+			if (!mBursts[i]->Owner()->IsActive()) return;
 			mBursts[i]->SetLocalPosition(mBursts[i]->GetLocalPosition() + mParticleMoveSpeed * Time::DeltaTime() * mParticleDirection[i]);
 			Vector3 pos = mBursts[i]->GetPosition() - mBursts[i]->GetScale() * 0.5;
+			RECT bounds = SceneManager::MainCamera()->GetBoundary();
+			Rectangle bBound = { (long)pos.x,(long)pos.y, (long)mBursts[i]->GetScale().x, (long)mBursts[i]->GetScale().y };
+			if (!((Rectangle)bounds).Contains(bBound))
+			{
+				mBursts[i]->Owner()->SetActive(false);
+				mActivatedBullet--;
+			}
 		}
+		if (mActivatedBullet <= 0)
+			DeActivate();
 	}
 	void EnemyBurst::OnDeActivate()
 	{
+		mShell->Owner()->SetActive(false);
 		for (int i = 0; i < 8; i++)
 		{
 			mBursts[i]->Owner()->SetActive(false);

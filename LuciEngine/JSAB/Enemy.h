@@ -8,6 +8,7 @@
 #include "LCollider2D.h"
 #include "LObject.h"
 #include "LResources.h"
+#include "CameraScript.h"
 
 namespace lu::JSAB
 {
@@ -22,8 +23,10 @@ namespace lu::JSAB
 		virtual void Update() override;
 		void SetTimeline(MusicController* music, double wt, double at, double ot);
 		void DeActivate();
+		void TestTime(double time);
 
 	protected:
+		void TimeCheck(double time);
 		virtual void BulletSetUp() = 0;
 
 		virtual void OnWarning() = 0;

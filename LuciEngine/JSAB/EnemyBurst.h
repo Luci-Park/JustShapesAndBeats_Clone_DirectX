@@ -31,7 +31,7 @@ namespace lu::JSAB
 
 		float mRotateSpeed;
 		float mParticleMoveSpeed;
-
+		int mActivatedBullet;
 	};
 }
 

@@ -20,9 +20,9 @@ namespace lu
 		void SetRotation(Quaternion rotation) { mRotation = rotation; CalculateLocalRotation(); }
 		void SetScale(Vector3 scale) { mScale = scale; CalculateLocalScale(); }
 
-		void SetPosition(float x, float y, float z) { mPosition = Vector3(x, y, z); CalculateLocalPosition();}
-		void SetRotation(float x, float y, float z) { mRotation = Quaternion::CreateFromYawPitchRoll(Vector3(x, y, z)); CalculateLocalRotation();}
-		void SetScale(float x, float y, float z) { mScale = Vector3(x, y, z);  CalculateLocalScale();}
+		void SetPosition(float x, float y, float z) { mPosition = Vector3(x, y, z);}
+		void SetRotation(float x, float y, float z) { mRotation = Quaternion::CreateFromYawPitchRoll(Vector3(x, y, z));}
+		void SetScale(float x, float y, float z) { mScale = Vector3(x, y, z);}
 
 		void SetLocalPosition(Vector3 position) { mLocalPosition = position; CalculateWorldPosition(); }
 		void SetLocalRotation(Quaternion rotation) { mLocalRotation = rotation; CalculateWorldRotation(); }
@@ -32,9 +32,9 @@ namespace lu
 		Quaternion GetRotation() { CalculateWorldRotation();  return mRotation; }
 		Vector3 GetScale() { CalculateWorldScale(); return mScale; }
 
-		Vector3 GetLocalPosition() { CalculateLocalPosition(); return mLocalPosition; }
-		Quaternion GetLocalRotation() { CalculateLocalRotation(); return mLocalRotation; }
-		Vector3 GetLocalScale() { CalculateLocalScale(); return mLocalScale; }
+		Vector3 GetLocalPosition() { return mLocalPosition; }
+		Quaternion GetLocalRotation() { return mLocalRotation; }
+		Vector3 GetLocalScale() { return mLocalScale; }
 
 		Vector3 Forward() { return mForward; }
 		Vector3 Right() { return mRight; }

@@ -1,19 +1,38 @@
 #include "Enemy.h"
 #include "LSceneManager.h"
 #include "LCamera.h"
-#include "CameraScript.h"
 namespace lu::JSAB
 {
 	void Enemy::Initialize()
 	{
 		Script::Initialize();
-		mCamera = SceneManager::MainCamera()->Owner()->GetComponentsInChildren<CameraEffectScript>();
+		mCamera = SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect();
 		BulletSetUp();
 		DeActivate();
 	}
 	void Enemy::Update()
 	{
 		double time = mMusic->GetTime();
+		TimeCheck(time);
+	}
+	void Enemy::SetTimeline(MusicController* music, double wt, double at, double ot)
+	{
+		mMusic = music;
+		mWarningTime = wt / 1000;
+		mActivateTime = at / 1000;
+		mOutroTime = ot / 1000;
+	}
+	void Enemy::DeActivate()
+	{
+		mState = eState::DeActivate;
+		OnDeActivate();
+	}
+	void Enemy::TestTime(double time)
+	{
+		TimeCheck(time);
+	}
+	void Enemy::TimeCheck(double time)
+	{
 		CheckState(time);
 		switch (mState)
 		{
@@ -30,18 +49,6 @@ namespace lu::JSAB
 			break;
 		}
 	}
-	void Enemy::SetTimeline(MusicController* music, double wt, double at, double ot)
-	{
-		mMusic = music;
-		mWarningTime = wt / 1000;
-		mActivateTime = at / 1000;
-		mOutroTime = ot / 1000;
-	}
-	void Enemy::DeActivate()
-	{
-		mState = eState::DeActivate;
-		OnDeActivate();
-	}
 	void Enemy::CheckState(double time)
 	{
 		if (mState == eState::DeActivate)
@@ -55,9 +62,13 @@ namespace lu::JSAB
 		{
 			ChangeToActive(time);
 		}
-		else if (mState == eState::Activate)
+		if (mState == eState::Activate)
 			if (mOutroTime >= 0.010)
 				ChangeToOutro(time);
+		if (mState == eState::Outro && time >= mActivateTime + mOutroTime)
+		{
+				DeActivate();
+		}
 	}
 	void Enemy::ChangeToWarning(double time)
 	{

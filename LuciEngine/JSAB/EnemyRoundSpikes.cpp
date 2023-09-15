@@ -44,6 +44,7 @@ namespace lu::JSAB
 		mEnterEffect->Owner()->SetActive(true);
 		mMr->SetActive(true);
 		mEnterEffect->PlayAnimation(L"Appear", false);
+		Owner()->GetComponent<Collider2D>()->SetActive(true);
 	}
 	void EnemyRoundSpikes::WhileActivate(double time)
 	{
@@ -66,5 +67,6 @@ namespace lu::JSAB
 		mMr->SetActive(false);
 		mTransform->SetPosition(mStartPos);
 		mMoveTime = 0;
+		Owner()->GetComponent<Collider2D>()->SetActive(false);
 	}
 }
