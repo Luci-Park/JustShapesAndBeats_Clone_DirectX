@@ -16,8 +16,8 @@ namespace lu::JSAB
 	TutorialManager::TutorialManager()
 		: mRoundSpikes(40)
 		, mBursts(8)
-		, mBeams(16)
-		, mBeatCircles(4)
+		, mBeams(40)
+		, mBeatCircles(8)
 		, mGCircles(6)
 	{
 	}
@@ -32,6 +32,7 @@ namespace lu::JSAB
 		if (stage == 1) Stage2();
 		if (stage == 2) Stage3();
 		if (stage == 3) Stage4();
+		if (stage == 4) Stage5();
 	}
 	void TutorialManager::Stage1()
 	{
@@ -114,9 +115,9 @@ namespace lu::JSAB
 			{
 				auto bullet = mBursts.GetNext();
 				if (i % 2 == 0)
-					bullet->SetUp({ 500, (float)bounds.bottom, 0 }, { 500, (float)bounds.bottom - move, 0 });
-				else
 					bullet->SetUp({ 500, (float)bounds.top, 0 }, { 500, (float)bounds.top + move, 0 });
+				else
+					bullet->SetUp({ 500, (float)bounds.bottom, 0 }, { 500, (float)bounds.bottom - move, 0 });
 				bullet->SetTimeline(mMusic, warning[i], beat[i], 0);
 			}
 		}
@@ -138,67 +139,54 @@ namespace lu::JSAB
 			}
 		}
 	}
-	void TutorialManager::Stage5(double time)
+	void TutorialManager::Stage5()
 	{
 		{
-			const double beat[] = {
-				35.403,	36.278,	37.153,	38.028,	38.903,	39.778,	40.684,	41.484
-			};
-			static int idx = 0;
-			if (idx >= 8 && beat[7] > time)
-				idx = 0;
-			if (idx < 8 && beat[idx] <= time)
+			double warning[] = { .319, .662, .736, .662, .736, .834, .687, .662 };
+			double beat[] = {35.912, 36.662, 37.512, 38.312, 39.212, 40.262, 41.162, 41.962};
+			RECT bounds = SceneManager::MainCamera()->GetBoundary();
+			float move = 180;
+			for (int i = 0; i < 9; i++)
 			{
-				auto bullet = mBurstBullets.GetNext();
-				bullet->IsEven(idx % 2 == 0);
-				bullet->Activate();
-				idx++;
+				auto bullet = mBursts.GetNext();
+				if (i % 2 == 0)
+					bullet->SetUp({ 500, (float)bounds.bottom, 0 }, { 500, (float)bounds.bottom - move, 0 });
+				else
+					bullet->SetUp({ 500, (float)bounds.top, 0 }, { 500, (float)bounds.top + move, 0 });
+				bullet->SetTimeline(mMusic, warning[i], beat[i], 0);
 			}
 		}
 		{
-			const double beat[] =
-			{ 
-				35.403,	36.052,	36.921,	37.57,	38.651,	39.3,	40.379,	41.028
-				//35.629,	36.493,	37.357,	38.221,	39.085,	39.949,	40.813,	41.677
-			};
+			double beat[] ={ 35.403, 36.052, 36.921, 37.57,	38.651,	39.3, 40.379, 41.028 };
 
-			const float y = application.GetHeight() * 0.5;
-			const float x[][3] = { {-300, 0, 300}, {-150, 150, 0}};
-			static int idx = 0;
-			if (idx >= 8 && beat[0] >= time)
-				idx = 0;
-			if (idx < 8 && beat[idx] - 1.3 <= time)
+			float y = application.GetHeight() * 0.5;
+			float x[][3] = { {-300, 0, 300}, {-150, 150, 0}};
+			
+			for(int i =0; i < 8; i++)
 			{
-				int num = idx % 2 == 0 ? 3 : 2;
-				for (int i = 0; i < num; i++)
+				int num = i % 2 == 0 ? 3 : 2;
+				for (int j = 0; j < num; j++)
 				{
-					auto bullet = mBeatBars.GetNext();
-					bullet->mTransform->SetPosition({ x[idx % 2][i], y, 0 });
-					bullet->Show(beat[idx]);
+					auto bullet = mBeams.GetNext();
+					bullet->mTransform->SetPosition({ x[i % 2][j], y, 0 });
+					bullet->SetTimeline(mMusic, 1.3, beat[i], 0.35);
 				}
-				idx++;
 			}
 		}
 		{
-			const double show[] = { 35.629, 38.221 };
-			const double beat[2][4] = {
-				{36.493, 36.601, 36.709, 36.817},
-				{39.949, 40.057, 40.165, 40.273}
-			};
-			static int idx = 0;
-			const Vector3 pos[] = { {-230, 150, 1}, {230, 150, 1}, {-230, -150, 1}, {230, -150, 1} };
-			if (idx >= 2 && show[0] >= time)
-				idx = 0;
-			if (idx < 2 && show[idx] <= time)
+			double show[] = { 35.629, 38.221 };
+			double beat[8] = {36.493, 36.601, 36.709, 36.817, 39.949, 40.057, 40.165, 40.273,};
+			Vector3 pos[] = { {-230, 150, 1}, {230, 150, 1}, {-230, -150, 1}, {230, -150, 1} };
+			for (int i = 0; i < 2; i++)
 			{
-				for (int i = 0; i < 4; i++)
+				for (int j = 0; j < 4; j++)
 				{
+					int idx = i * 4 + j;
 					auto c = mBeatCircles.GetNext();
-					c->mTransform->SetPosition(pos[i]);
+					c->mTransform->SetPosition(pos[j]);
 					c->FastAnim(true);
-					c->Show(beat[idx][i]);
+					c->SetTimeline(mMusic, beat[idx]- show[i], beat[idx], 0);
 				}
-				idx++;
 			}
 		}
 	}
