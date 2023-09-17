@@ -47,10 +47,13 @@ namespace lu::JSAB
 		CameraEffectScript* mCamera;
 		eState mState;
 		MusicController* mMusic;
+		RECT mBounds;
 		double mWarningTime;
 		double mActivateTime;
 		double mOutroTime;
-
+		float mWarningProcess;
+		float mActivateProcess;
+		float mOutroProcess;
 	};
 }
 

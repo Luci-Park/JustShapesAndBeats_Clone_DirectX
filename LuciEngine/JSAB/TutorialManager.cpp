@@ -58,10 +58,15 @@ namespace lu::JSAB
 		double beat[] = {
 			8.2, 8.95, 9.8, 10.6, 11.5, 12.55, 13.45, 14.25
 		};
+		RECT bounds = SceneManager::MainCamera()->GetBoundary();
+		float move = 180;
 		for (int i = 0; i < 8; i++)
 		{
 			auto bullet = mBursts.GetNext();
-			bullet->IsEven(i % 2 == 0);
+			if (i % 2 == 0)
+				bullet->SetUp({ 500, (float)bounds.top, 0 }, { 500, (float)bounds.top + move, 0 });
+			else
+				bullet->SetUp({ 500, (float)bounds.bottom, 0 }, { 500, (float)bounds.bottom - move, 0 });
 			bullet->SetTimeline(mMusic, warning[i], beat[i], 0);
 		}
 		

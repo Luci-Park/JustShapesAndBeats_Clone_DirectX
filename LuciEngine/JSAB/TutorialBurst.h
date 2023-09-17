@@ -6,10 +6,10 @@ namespace lu::JSAB
 	class TutorialBurst : public Bullet
 	{
 	public:
-		TutorialBurst(): mbIsBursting(false){}
+		TutorialBurst(){}
 		virtual ~TutorialBurst(){}
 
-		void IsEven(bool even) { mbEven = even; }
+		void SetUp(Vector3 start, Vector3 end);
 	private:
 		virtual void BulletSetUp()override;
 
@@ -30,9 +30,7 @@ namespace lu::JSAB
 		Transform* mBursts[8];
 		Vector3 mParticleDirection[8];
 
-		RECT bounds;
-		bool mbIsBursting;
-		bool mbEven;
+		Vector3 mStartPos, mEndPos;
 	};
 }
 

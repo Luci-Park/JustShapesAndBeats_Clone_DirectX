@@ -7,11 +7,13 @@ namespace lu::JSAB
 	{
 		Script::Initialize();
 		mCamera = SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect();
+		mBounds = SceneManager::MainCamera()->GetBoundary();
 		BulletSetUp();
 		DeActivate();
 	}
 	void Bullet::Update()
 	{
+		mBounds = SceneManager::MainCamera()->GetBoundary();
 		if (mMusic == nullptr) return;
 		double time = mMusic->GetTime();
 		TimeCheck(time);
@@ -74,7 +76,7 @@ namespace lu::JSAB
 			ChangeToActive(time);
 		}
 		if (mState == eState::Activate)
-			if (mOutroTime >= 0.010)
+			if (mOutroTime >= 0.01)
 				ChangeToOutro(time);
 		if (mState == eState::Outro && time >= mActivateTime + mOutroTime)
 		{
@@ -83,20 +85,26 @@ namespace lu::JSAB
 	}
 	void Bullet::ChangeToWarning(double time)
 	{
-		if (time < mActivateTime - mWarningTime) return;
-		mState = eState::Warning;
-		OnWarning();
+		if (mActivateTime - mWarningTime <= time && time < mActivateTime)
+		{
+			mState = eState::Warning;
+			OnWarning();
+		}
 	}
 	void Bullet::ChangeToActive(double time)
 	{
-		if (time < mActivateTime) return;
-		mState = eState::Activate;
-		OnActivate();
+		if (abs(time - mActivateTime) <= 0.01)
+		{
+			mState = eState::Activate;
+			OnActivate();
+		}
 	}
 	void Bullet::ChangeToOutro(double time)
 	{
-		if (time < mActivateTime + mOutroTime) return;
-		mState = eState::Outro;
-		OnOutro();
+		if (abs(time - mActivateTime + mOutroTime) <= 0.01)
+		{
+			mState = eState::Outro;
+			OnOutro();
+		}
 	}
 }

@@ -53,7 +53,7 @@ namespace lu::JSAB
 		{
 			auto a = mFlash->CreateAnimation(L"WhiteFlash");
 			a->AddColorKey(0, {1, 1, 1, 0});
-			a->AddColorKey(0.025, {1, 1, 1, 1});
+			a->AddColorKey(0.025, {1, 1, 1, 0.3});
 			a->AddColorKey(0.05, {1, 1, 1, 0});
 
 			a = mFlash->CreateAnimation(L"BlackFlash");

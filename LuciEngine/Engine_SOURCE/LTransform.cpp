@@ -46,6 +46,60 @@ namespace lu
 		for (int i = 0; i < (int)eShaderStage::End; i++)
 			cb->Bind((eShaderStage)i);
 	}
+	void Transform::SetPosition(Vector3 position)
+	{
+		mPosition = position;
+		CalculateLocalPosition();
+	}
+	void Transform::SetRotation(Quaternion rotation)
+	{
+		mRotation = rotation;
+		CalculateLocalRotation();
+	}
+	void Transform::SetScale(Vector3 scale)
+	{
+		mScale = scale;
+		CalculateLocalScale();
+	}
+	void Transform::SetPosition(float x, float y, float z)
+	{
+		SetPosition({ x, y, z });
+	}
+	void Transform::SetRotation(float x, float y, float z)
+	{
+		SetRotation(Quaternion::CreateFromYawPitchRoll(x, y, z));
+	}
+	void Transform::SetScale(float x, float y, float z)
+	{
+		SetScale({ x, y, z });
+	}
+	void Transform::SetLocalPosition(Vector3 position)
+	{
+		mLocalPosition = position;
+		CalculateWorldPosition();
+	}
+	void Transform::SetLocalRotation(Quaternion rotation)
+	{
+		mLocalRotation = rotation;
+		CalculateWorldRotation();
+	}
+	void Transform::SetLocalScale(Vector3 scale)
+	{
+		mLocalScale = scale;
+		CalculateWorldScale();
+	}
+	void Transform::SetLocalPosition(float x, float y, float z)
+	{
+		SetLocalPosition({ x, y, z });
+	}
+	void Transform::SetLocalRotation(float x, float y, float z)
+	{
+		SetLocalRotation(Quaternion::CreateFromYawPitchRoll(x, y, z));
+	}
+	void Transform::SetLocalScale(float x, float y, float z)
+	{
+		SetLocalScale({ x, y, z });
+	}
 	void Transform::SetParent(Transform* parent)
 	{
 		if (mParent && mParent != this)
@@ -107,8 +161,6 @@ namespace lu
 			mLocalPosition = mPosition - mParent->GetPosition();
 		else
 			mLocalPosition = mPosition;
-
-		UpdateMatrix();
 	}
 
 	void Transform::CalculateLocalRotation()
@@ -120,8 +172,6 @@ namespace lu
 		}
 		else
 			mLocalRotation = mRotation;
-
-		UpdateMatrix();
 	}
 
 	void Transform::CalculateLocalScale()
@@ -135,18 +185,10 @@ namespace lu
 		}
 		else
 			mLocalScale = mScale;
-
-		UpdateMatrix();
 	}
 
 	void Transform::UpdateMatrix()
 	{
-		if (mParent == nullptr || mParent == this)
-		{
-			mLocalPosition = mPosition;
-			mLocalRotation = mRotation;
-			mLocalScale = mScale;
-		}
 		world = Matrix::Identity;
 		CalculateWorldPosition();
 		CalculateWorldRotation();
