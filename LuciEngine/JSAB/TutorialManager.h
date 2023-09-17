@@ -26,8 +26,8 @@ namespace lu::JSAB
 		void Stage3();
 		void Stage4();
 		void Stage5();
-		/*
 		void Stage6();
+		/*
 		void Stage7();
 		void Stage8();
 		void Stage9();

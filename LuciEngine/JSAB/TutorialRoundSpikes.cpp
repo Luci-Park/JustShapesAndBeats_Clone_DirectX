@@ -46,16 +46,22 @@ namespace lu::JSAB
 	}
 	void TutorialRoundSpikes::WhileActivate(double time)
 	{
-		if (mStartPos == mEndPos) return;
-		mTime += Time::DeltaTime();
-		float t = mTime / mDuration;
-		if (t <= 1.0f)
+		if (mStartPos == mEndPos)
 		{
-			Vector3 pos = Vector3::Lerp(mStartPos, mEndPos, t);
-			mTransform->SetLocalPosition(pos);
+			mTransform->SetPosition(mStartPos);
 		}
 		else
-			DeActivate();
+		{
+			mTime += Time::DeltaTime();
+			float t = mTime / mDuration;
+			if (t <= 1.0f)
+			{
+				Vector3 pos = Vector3::Lerp(mStartPos, mEndPos, t);
+				mTransform->SetLocalPosition(pos);
+			}
+			else
+				DeActivate();
+		}
 	}
 	
 	void TutorialRoundSpikes::OnOutro()

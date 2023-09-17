@@ -33,6 +33,7 @@ namespace lu::JSAB
 		if (stage == 2) Stage3();
 		if (stage == 3) Stage4();
 		if (stage == 4) Stage5();
+		if (stage == 5) Stage6();
 	}
 	void TutorialManager::Stage1()
 	{
@@ -190,31 +191,32 @@ namespace lu::JSAB
 			}
 		}
 	}
-	//void TutorialManager::Stage6(double time)
-	//{
-	//	const double beat[] = {
-	//		42.331,	43.206,	44.081,	44.956,	45.831,	46.706,	47.612,	48.412
-	//	};
-	//	static int idx = 0;
-	//	if (idx >= 8 && beat[7] > time)
-	//		idx = 0;
-	//	if (idx < 8 && beat[idx] <= time)
-	//	{
-	//		auto bullet = mBurstBullets.GetNext();
-	//		bullet->IsEven(idx % 2 == 0);
-	//		bullet->Activate();
-	//		idx++;
-	//	}
-	//	if (beat[0] >= time)
-	//	{
-	//		for (int i = 0; i < 2; i++)
-	//		{
-	//			auto bullet = mFullBar.GetNext();
-	//			bullet->mTransform->SetPosition({ 200.f * (i ? -1 : 1),  0, 0 });
-	//			bullet->Activate();
-	//		}
-	//	}
-	//}
+	void TutorialManager::Stage6()
+	{
+		RECT bounds = SceneManager::MainCamera()->GetBoundary();
+		double warning[] = { .319, .662, .736, .662, .736, .834, .687, .662 };
+		double beat[] = { 42.84, 43.59, 44.44, 45.24, 46.14, 47.19, 48.09, 48.89 };
+		float move = 180;
+		for (int i = 0; i < 9; i++)
+		{
+			auto bullet = mBursts.GetNext();
+			if (i % 2 == 0)
+				bullet->SetUp({ 500, (float)bounds.top, 0 }, { 500, (float)bounds.top + move, 0 });
+			else
+				bullet->SetUp({ 500, (float)bounds.bottom, 0 }, { 500, (float)bounds.bottom - move, 0 });
+			bullet->SetTimeline(mMusic, warning[i], beat[i], 0);
+		}
+		for (int i = 0; i < 2; i++)
+		{
+			for (int j = 0; j < 20; j++)
+			{
+				Vector3 pos = { 200.f * (i ? -1 : 1), bounds.top + 40.f * j, 0 };
+				auto bullet = mRoundSpikes.GetNext();
+				bullet->Setup(0, pos, pos);
+				bullet->SetTimeline(mMusic, 0, beat[0], 0);
+			}
+		}
+	}
 	//void TutorialManager::Stage7(double time)
 	//{
 	//	const double beat[] = {

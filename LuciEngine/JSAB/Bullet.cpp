@@ -67,7 +67,7 @@ namespace lu::JSAB
 	}
 	void Bullet::CheckState(double time)
 	{
-		if (mState == eState::DeActivate && time < mActivateTime)
+		if (mState == eState::DeActivate && time <= mActivateTime)
 			mState = eState::Waiting;
 		if (mState == eState::Waiting)
 		{
