@@ -60,23 +60,11 @@ namespace lu::JSAB
 		mShell->Owner()->SetActive(true);
 		mShell->PlayAnimation(L"Blink", true);
 		mTransform->SetPosition(mStartPos);
-		/*
-		if (mbEven)
-		{
-			mTransform->SetPosition({ 500, (float)bounds.top, 0 });
-			mBase->PlayAnimation(L"Down", false);
-		}
-		else
-		{
-			mTransform->SetPosition({ 500, (float)bounds.bottom, 0 });
-			mBase->PlayAnimation(L"Up", false);
-		}
-		*/
 	}
 
 	void TutorialBurst::WhileWarning(double time)
 	{
-		float t = 1 - (mActivateTime - time) / mWarningTime;
+		float t = mWarningProcess;
 		Vector3 midPoint = Vector3::Lerp(mStartPos, mEndPos, 0.8);
 		Vector3 midScale = Vector3::Lerp({ 0, 0, 1 }, { 1, 1, 1 }, 0.8);
 		Vector3 pos = mStartPos;

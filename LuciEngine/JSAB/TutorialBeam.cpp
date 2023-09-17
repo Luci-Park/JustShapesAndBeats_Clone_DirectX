@@ -47,6 +47,8 @@ namespace lu::JSAB
 	}
 	void TutorialBeam::OnWarning()
 	{
+		mMr->SetActive(true);
+		mAnim->SetActive(true);
 		mAnim->PlayAnimation(L"Warning", false);
 	}
 	void TutorialBeam::WhileWarning(double time)
@@ -54,7 +56,9 @@ namespace lu::JSAB
 	}
 	void TutorialBeam::OnActivate()
 	{
-		mCol->SetActive(false);
+		mMr->SetActive(true);
+		mAnim->SetActive(true);
+		mCol->SetActive(true);
 		mAnim->PlayAnimation(L"Activate", false);
 	}
 	void TutorialBeam::WhileActivate(double time)
@@ -62,11 +66,10 @@ namespace lu::JSAB
 	}
 	void TutorialBeam::OnOutro()
 	{
+		mAnim->PlayAnimation(L"Outro", false);
 	}
 	void TutorialBeam::WhileOutro(double time)
 	{
-		if (!mAnim->IsPlaying())
-			mAnim->PlayAnimation(L"Outro", false);
 	}
 	void TutorialBeam::OnDeActivate()
 	{

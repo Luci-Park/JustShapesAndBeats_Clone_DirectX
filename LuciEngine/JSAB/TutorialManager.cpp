@@ -30,6 +30,7 @@ namespace lu::JSAB
 	{
 		if (stage == 0) Stage1();
 		if (stage == 1) Stage2();
+		if (stage == 2) Stage3();
 	}
 	void TutorialManager::Stage1()
 	{
@@ -55,9 +56,7 @@ namespace lu::JSAB
 	void TutorialManager::Stage2()
 	{
 		double warning[] = { .319, .662, .736, .662, .736, .834, .687, .662 };
-		double beat[] = {
-			8.2, 8.95, 9.8, 10.6, 11.5, 12.55, 13.45, 14.25
-		};
+		double beat[] = {8.2, 8.95, 9.8, 10.6, 11.5, 12.55, 13.45, 14.25};
 		RECT bounds = SceneManager::MainCamera()->GetBoundary();
 		float move = 180;
 		for (int i = 0; i < 8; i++)
@@ -71,47 +70,38 @@ namespace lu::JSAB
 		}
 		
 	}
-	//
-	//void TutorialManager::Stage3(double time)
-	//{
-	//	{
-	//		const double beat[] = {
-	//			14.619,	15.494,	16.369,	17.244,	18.119,	18.994,	19.9, 20.7
-	//		};
-	//		static int idx = 0;
-	//		if (idx >= 8 && beat[7] > time)
-	//			idx = 0;
-	//		if (idx < 8 && beat[idx] <= time)
-	//		{
-	//			auto bullet = mBurstBullets.GetNext();
-	//			bullet->IsEven(idx % 2 == 0);
-	//			bullet->Activate();
-	//			idx++;
-	//		}
-	//	}
-	//	{
-	//		const double beat[] =
-	//		{ 
-	//			14.850, 15.500, 16.583, 17.235, 17.450, 18.313, 18.959, 20.242, 20.697, 21.025
-	//			//14.854, 15.557, 16.562, 17.232, 17.467, 18.374, 18.924, 20.063, 20.7, 21.035
-	//		};
-	//		const float y = application.GetHeight() * 0.5;
-	//		const float x[] = 
-	//		{ 
-	//			-60, - 20, 20, 60, 100, 140, 180, 220, 260, 300
-	//		};
-	//		static int idx = 0;
-	//		if (idx >= 10 && beat[0] >= time)
-	//			idx = 0;
-	//		if (idx < 10 && beat[idx] - 1.3 <= time)
-	//		{
-	//			auto bullet = mBeatBars.GetNext();
-	//			bullet->mTransform->SetPosition({ x[idx], y, 0 });
-	//			bullet->Show(beat[idx]);
-	//			idx++;
-	//		}
-	//	}
-	//}
+	
+	void TutorialManager::Stage3()
+	{
+		{
+			double warning[] = { .319, .662, .736, .662, .736, .834, .687, .662 };
+			double beat[] = { 15.128, 15.878, 16.728, 17.528, 18.428, 19.478, 20.378, 21.178 };
+			RECT bounds = SceneManager::MainCamera()->GetBoundary();
+			float move = 180;
+			for (int i = 0; i < 9; i++)
+			{
+				auto bullet = mBursts.GetNext();
+				if (i % 2 == 0)
+					bullet->SetUp({ 500, (float)bounds.bottom, 0 }, { 500, (float)bounds.bottom - move, 0 });
+				else
+					bullet->SetUp({ 500, (float)bounds.top, 0 }, { 500, (float)bounds.top + move, 0 });
+				bullet->SetTimeline(mMusic, warning[i], beat[i], 0);
+			}
+		}
+		{
+			//double warning[] = { 0.676, 0.76, 1.3, 1.177, 0.908, 0.736, 0.932, 0.981, 0.908, 0.908 };
+			double beat[] =	{ 14.850, 15.500, 16.583, 17.235, 17.450, 18.313, 18.959, 20.242, 20.697, 21.025 };
+			const float y = application.GetHeight() * 0.5;
+			const float x[] = { -60, - 20, 20, 60, 100, 140, 180, 220, 260, 300	};
+
+			for(int i =0; i < 10; i++)
+			{
+				auto bullet = mBeams.GetNext();
+				bullet->mTransform->SetPosition({ x[i], y, 0 });
+				bullet->SetTimeline(mMusic, 1.3, beat[i], 0.35);
+			}
+		}
+	}
 	//void TutorialManager::Stage4(double time)
 	//{
 	//	{

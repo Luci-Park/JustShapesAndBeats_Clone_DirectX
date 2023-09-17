@@ -10,6 +10,7 @@ namespace lu::JSAB
 		mBounds = SceneManager::MainCamera()->GetBoundary();
 		BulletSetUp();
 		DeActivate();
+		mState = eState::Waiting;
 	}
 	void Bullet::Update()
 	{
@@ -42,9 +43,11 @@ namespace lu::JSAB
 		case eState::DeActivate:
 			return;
 		case eState::Warning:
+			mWarningProcess = 1 - (mActivateTime - time) / mWarningTime;
 			WhileWarning(time);
 			break;
 		case eState::Activate:
+			mActivateProcess = 1 - (time - mActivateTime) / mOutroTime;
 			WhileActivate(time);
 			break;
 		case eState::Outro:
@@ -64,9 +67,11 @@ namespace lu::JSAB
 	}
 	void Bullet::CheckState(double time)
 	{
-		if (mState == eState::DeActivate)
+		if (mState == eState::DeActivate && time < mActivateTime)
+			mState = eState::Waiting;
+		if (mState == eState::Waiting)
 		{
-			if (mWarningTime >= 0.010)
+			if (mWarningTime >= 0.001)
 				ChangeToWarning(time);
 			else
 				ChangeToActive(time);
@@ -76,12 +81,8 @@ namespace lu::JSAB
 			ChangeToActive(time);
 		}
 		if (mState == eState::Activate)
-			if (mOutroTime >= 0.01)
+			if (mOutroTime >= 0.001)
 				ChangeToOutro(time);
-		if (mState == eState::Outro && time >= mActivateTime + mOutroTime)
-		{
-			DeActivate();
-		}
 	}
 	void Bullet::ChangeToWarning(double time)
 	{
@@ -93,7 +94,7 @@ namespace lu::JSAB
 	}
 	void Bullet::ChangeToActive(double time)
 	{
-		if (abs(time - mActivateTime) <= 0.01)
+		if (mActivateTime<= time)
 		{
 			mState = eState::Activate;
 			OnActivate();
@@ -101,7 +102,7 @@ namespace lu::JSAB
 	}
 	void Bullet::ChangeToOutro(double time)
 	{
-		if (abs(time - mActivateTime + mOutroTime) <= 0.01)
+		if (mActivateTime + mOutroTime<= time)
 		{
 			mState = eState::Outro;
 			OnOutro();

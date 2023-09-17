@@ -28,7 +28,7 @@ namespace lu::JSAB
 		Animator* mAnim;
 		const double appearDuration = 1.3;
 		const double flashDuration = 0.05;
-		const double disappearDuration = 0.35;
+		const double disappearDuration = 0.1;
 
 		double mTargetTime;
 	};

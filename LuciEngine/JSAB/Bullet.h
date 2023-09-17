@@ -15,7 +15,7 @@ namespace lu::JSAB
 	class Bullet : public Script
 	{
 	public:
-		enum class eState { DeActivate, Warning, Activate, Outro };
+		enum class eState { Waiting, Warning, Activate, Outro, DeActivate};
 		Bullet() {};
 		virtual ~Bullet() {};
 		virtual void Initialize() override;
