@@ -9,7 +9,7 @@
 #include "LObject.h"
 #include "LInput.h"
 #include "LCollisionManager.h"
-
+#include "LFontWrapper.h"
 namespace lu::JSAB::Tutorial
 {
 	void TutorialScene::Initialize()
@@ -28,6 +28,7 @@ namespace lu::JSAB::Tutorial
 	}
 	void TutorialScene::Update()
 	{
+		FontWrapper::DrawFont(std::to_wstring(music->GetTime()), 100.f, 100.f, 20, FONT_RGBA(48, 249, 246, 255));
 		Scene::Update();
 	}
 

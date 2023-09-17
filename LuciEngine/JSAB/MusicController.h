@@ -4,6 +4,7 @@
 namespace lu
 {
 	class AudioSource;
+	class Text;
 }
 namespace lu::JSAB
 {
@@ -21,6 +22,7 @@ namespace lu::JSAB
 		int GetStage() { return mStageIdx; }
 	protected:
 		AudioSource* mAudioSource;
+		Text* mText;
 		std::vector<std::pair<double, double>> mCheckPoints;
 		double mEndTime;
 		float mFadeDuration;

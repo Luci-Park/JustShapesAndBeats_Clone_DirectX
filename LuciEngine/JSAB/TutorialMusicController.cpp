@@ -6,6 +6,7 @@
 #include "LFontWrapper.h"
 #include "LInput.h"
 #include "TutorialManager.h"
+#include "LText.h"
 namespace lu::JSAB
 {
 	TutorialMusicController::TutorialMusicController()
@@ -28,7 +29,6 @@ namespace lu::JSAB
 	void TutorialMusicController::Initialize()
 	{
 		MusicController::Initialize();
-		mAudioSource = Owner()->AddComponent<AudioSource>();
 		mAudioSource->SetClip(Resources::Find<AudioClip>(L"mus_corrupted"));
 		mStartVolume = mAudioSource->GetVolume();
 	}
@@ -38,6 +38,7 @@ namespace lu::JSAB
 		if (mbIsPlaying)
 		{
 			double time = mAudioSource->GetPosition();
+			mText->text = std::to_wstring(time);
 			if (time < mEndTime)
 			{
 				if (time > mCheckPoints[mStageIdx].second)

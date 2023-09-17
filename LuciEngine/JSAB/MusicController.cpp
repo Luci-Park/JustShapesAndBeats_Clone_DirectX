@@ -2,6 +2,7 @@
 #include "LAudioSource.h"
 #include "LGameObject.h"
 #include "LTime.h"
+#include "LText.h"
 namespace lu::JSAB
 {
 	MusicController* MusicController::Instance = nullptr;
@@ -15,12 +16,16 @@ namespace lu::JSAB
 	void MusicController::Initialize()
 	{
 		mAudioSource = Owner()->AddComponent<AudioSource>();
+		mText = Owner()->AddComponent<Text>();
+		mText->size = 60;
+		mText->color = Color::yellow;
 	}
 	void MusicController::Update()
 	{
 		if (mbIsPlaying)
 		{
 			double time = GetTime();
+			mText->text = std::to_wstring(time);
 			if (time < mEndTime)
 			{
 				if (time > mCheckPoints[mStageIdx].second)
