@@ -36,10 +36,10 @@ namespace lu::JSAB
 
 	void TutorialRoundSpikes::OnActivate()
 	{
-		mEnterEffect->Owner()->SetActive(false);
+		mEnterEffect->Owner()->SetActive(true);
 		mAnim->SetActive(true);
-		mMr->SetActive(false);
-		mCol->SetActive(false);
+		mMr->SetActive(true);
+		mCol->SetActive(true);
 		mEnterEffect->PlayAnimation(L"Appear", false);
 		mAnim->PlayAnimation(L"Rotate", true);
 		mTime = 0;

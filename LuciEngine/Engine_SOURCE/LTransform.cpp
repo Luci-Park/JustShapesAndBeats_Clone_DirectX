@@ -22,18 +22,13 @@ namespace lu
 	}
 	void Transform::Initialize()
 	{
+		UpdateMatrix();
 	}
 	void Transform::Update()
 	{
 	}
 	void Transform::LateUpdate()
 	{
-		if (mParent == nullptr || mParent == this)
-		{
-			mLocalPosition = mPosition;
-			mLocalRotation = mRotation;
-			mLocalScale = mScale;
-		}
 		UpdateMatrix();
 	}
 	void Transform::Render()
@@ -57,9 +52,7 @@ namespace lu
 			mParent->RemoveChildren(this);
 		mParent = parent;
 		mParent->AddChildren(this);
-		CalculateWorldPosition();
-		CalculateWorldRotation();
-		CalculateWorldScale();
+		UpdateMatrix();
 	}
 
 	void Transform::AddChildren(Transform* child)
@@ -148,6 +141,12 @@ namespace lu
 
 	void Transform::UpdateMatrix()
 	{
+		if (mParent == nullptr || mParent == this)
+		{
+			mLocalPosition = mPosition;
+			mLocalRotation = mRotation;
+			mLocalScale = mScale;
+		}
 		world = Matrix::Identity;
 		CalculateWorldPosition();
 		CalculateWorldRotation();

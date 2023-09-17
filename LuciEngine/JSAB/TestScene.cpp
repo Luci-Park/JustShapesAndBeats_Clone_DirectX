@@ -142,28 +142,4 @@ namespace lu::JSAB
 	}
 #pragma endregion
 
-#pragma region TutorialScene
-	
-	using namespace lu::JSAB;
-	void FakeTutorialScene::Initialize()
-	{
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Bullet, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Item, true);
-		object::Instantiate<GameObject>(eLayerType::Camera)->AddComponent<GameCamera>();
-
-		GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
-		manager->SetName(L"TutorialManager");
-		auto m = manager->AddComponent<TutorialMusicController>();
-		manager->AddComponent<NewTutorialManager>();
-		
-		m->Play();
-		Scene::Initialize();		
-	}
-
-	void FakeTutorialScene::Update()
-	{
-		Scene::Update();
-	}
-#pragma endregion
-
 }

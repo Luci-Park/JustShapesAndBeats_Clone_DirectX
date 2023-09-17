@@ -78,6 +78,7 @@ namespace lu::JSAB
 		mbIsBursting = true;
 		for (int i = 0; i < 8; i++)
 			mBursts[i]->Owner()->SetActive(true);
+		mCamera->WhiteFlash();
 	}
 
 	void TutorialBurst::WhileActivate(double time)
@@ -144,8 +145,5 @@ namespace lu::JSAB
 
 		ani->AddScaleKey(0, Vector3::Zero);
 		ani->AddScaleKey(duration, Vector3::One);
-
-		ani->AddFunctionKey(duration, std::bind(&Bullet::OnActivate, this));
-		ani->AddFunctionKey(duration, std::bind(&CameraEffectScript::WhiteFlash, mCamera));
 	}
 }

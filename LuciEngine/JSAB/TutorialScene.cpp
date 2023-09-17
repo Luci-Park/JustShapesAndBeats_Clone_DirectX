@@ -12,7 +12,6 @@
 
 namespace lu::JSAB::Tutorial
 {
-	TutorialFullBar* b;
 	void TutorialScene::Initialize()
 	{
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Bullet, true);
@@ -21,9 +20,9 @@ namespace lu::JSAB::Tutorial
 
 		GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
 		manager->SetName(L"TutorialManager");
-		auto ma = manager->AddComponent<TutorialManager>();
 		music = manager->AddComponent<TutorialMusicController>();
-		ma->SetMusic(music);		
+		manager->AddComponent<TutorialManager>();
+		
 		object::Instantiate<PlayerPrefab>(eLayerType::Player);
 		Scene::Initialize(); 
 	}

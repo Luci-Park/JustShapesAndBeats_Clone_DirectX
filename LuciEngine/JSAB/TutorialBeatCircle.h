@@ -28,7 +28,7 @@ namespace lu::JSAB
 		std::shared_ptr<Texture> mActivateSprite;
 		bool mbFastActivate;
 	};
-	
+	/*
 	class TutorialCircleLine : public Bullet
 	{
 	public:
@@ -49,6 +49,6 @@ namespace lu::JSAB
 		virtual void WhileDeActive()override;
 	private:
 		TutorialBeatCircle* mCircleLines[7];
-	};
+	};*/
 }
 

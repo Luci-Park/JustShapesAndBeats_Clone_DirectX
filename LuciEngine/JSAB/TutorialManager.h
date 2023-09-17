@@ -12,39 +12,33 @@ namespace lu::JSAB
 	class TutorialBurst;
 	class TutorialBeam;
 	class TutorialBeatCircle; 
-	class TutorialFullBar;
-	class TutorialCircleLine;
 	class TutorialGiantCircle;
 	class TutorialManager : public Script
 	{
 	public:
 		TutorialManager();
-
 		virtual void Initialize() override;
-		virtual void Update() override;
-
+		void OnStageChange(int stage);
 		void SetMusic(TutorialMusicController* music) { mMusic = music; }
-		void ClearBullets();
 	private:
-		void Stage1(double time);
-		void Stage2(double time);
-		void Stage3(double time);
-		void Stage4(double time);
-		void Stage5(double time);
-		void Stage6(double time);
-		void Stage7(double time);
-		void Stage8(double time);
-		void Stage9(double time);
-		void Stage10(double time);
+		void Stage1();
+		void Stage2();
+		/*
+		void Stage3();
+		void Stage4();
+		void Stage5();
+		void Stage6();
+		void Stage7();
+		void Stage8();
+		void Stage9();
+		void Stage10();*/
 	private:
 		TutorialMusicController* mMusic;
-		BulletPool<TutorialRoundSpikes> mStage1Bullets;
-		BulletPool<TutorialBurst> mBurstBullets;
-		BulletPool<TutorialBeam>mBeatBars;
-		BulletPool<TutorialBeatCircle> mBeatCircles;	
-		BulletPool<TutorialFullBar> mFullBar;
-		BulletPool<TutorialCircleLine> mCircleLines;
-		BulletPool<TutorialGiantCircle> mCircles;
+		BulletPool<TutorialRoundSpikes> mRoundSpikes;
+		BulletPool<TutorialBurst> mBursts;
+		BulletPool<TutorialBeam>mBeams;
+		BulletPool<TutorialBeatCircle> mBeatCircles;
+		BulletPool<TutorialGiantCircle> mGCircles;
 	};
 }
 

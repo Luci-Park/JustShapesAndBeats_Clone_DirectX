@@ -12,15 +12,16 @@ namespace lu::JSAB
 	}
 	void Bullet::Update()
 	{
+		if (mMusic == nullptr) return;
 		double time = mMusic->GetTime();
 		TimeCheck(time);
 	}
 	void Bullet::SetTimeline(MusicController* music, double wt, double at, double ot)
 	{
 		mMusic = music;
-		mWarningTime = wt / 1000;
-		mActivateTime = at / 1000;
-		mOutroTime = ot / 1000;
+		mWarningTime = wt;
+		mActivateTime = at;
+		mOutroTime = ot;
 	}
 	void Bullet::DeActivate()
 	{

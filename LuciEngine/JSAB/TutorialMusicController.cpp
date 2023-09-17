@@ -45,7 +45,7 @@ namespace lu::JSAB
 					if (mNextStageIdx > mStageIdx)
 					{
 						mStageIdx = mNextStageIdx;
-						//Owner()->GetComponent<TutorialManager>()->ClearBullets();
+						Owner()->GetComponent<TutorialManager>()->OnStageChange(mStageIdx);
 					}
 					mAudioSource->SetPosition(mCheckPoints[mStageIdx].first);
 				}

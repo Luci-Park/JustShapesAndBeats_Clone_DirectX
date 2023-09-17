@@ -40,15 +40,4 @@ namespace lu::JSAB
 		virtual void Initialize() override;
 		virtual void Update() override;
 	};
-
-	class FakeTutorialScene : public Scene
-	{
-	public:
-		FakeTutorialScene(){}
-		virtual ~FakeTutorialScene() {};
-		virtual void Initialize() override;
-		virtual void Update() override;
-
-	};
-
 }

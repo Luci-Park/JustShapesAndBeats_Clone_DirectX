@@ -56,19 +56,10 @@
     <ClCompile Include="CameraScript.cpp">
       <Filter>Contents\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="TutorialBeatBar.cpp">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
-    </ClCompile>
     <ClCompile Include="TutorialBurst.cpp">
       <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="TutorialEightBullets.cpp">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
-    </ClCompile>
     <ClCompile Include="TutorialBeatCircle.cpp">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="TutorialEightBar.cpp">
       <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="TutorialManager.cpp">
@@ -92,20 +83,14 @@
     <ClCompile Include="SubstepScene.cpp">
       <Filter>Contents\Scene\Substep</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Contents\BulletTest</Filter>
+    <ClCompile Include="TutorialBeam.cpp">
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyRoundSpikes.cpp">
-      <Filter>EngineTesters\NewTutorial</Filter>
+    <ClCompile Include="TutorialRoundSpikes.cpp">
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="NewTutorialManager.cpp">
-      <Filter>EngineTesters\NewTutorial</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyContainer.h">
-      <Filter>EngineTesters\NewTutorial</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyBurst.cpp">
-      <Filter>EngineTesters\NewTutorial</Filter>
+    <ClCompile Include="TutorialSpikeBar.cpp">
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -168,19 +153,10 @@
     <ClInclude Include="CameraScript.h">
       <Filter>Contents\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="TutorialBeatBar.h">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
-    </ClInclude>
     <ClInclude Include="TutorialBurst.h">
       <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClInclude>
-    <ClInclude Include="TutorialEightBullets.h">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
-    </ClInclude>
     <ClInclude Include="TutorialBeatCircle.h">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="TutorialEightBar.h">
       <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="TutorialManager.h">
@@ -204,17 +180,14 @@
     <ClInclude Include="SubstepScene.h">
       <Filter>Contents\Scene\Substep</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Contents\BulletTest</Filter>
+    <ClInclude Include="TutorialBeam.h">
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyRoundSpikes.h">
-      <Filter>EngineTesters\NewTutorial</Filter>
+    <ClInclude Include="TutorialRoundSpikes.h">
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClInclude>
-    <ClInclude Include="NewTutorialManager.h">
-      <Filter>EngineTesters\NewTutorial</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyBurst.h">
-      <Filter>EngineTesters\NewTutorial</Filter>
+    <ClInclude Include="TutorialSpikeBar.h">
+      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
