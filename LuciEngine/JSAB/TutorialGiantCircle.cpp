@@ -23,7 +23,7 @@ namespace lu::JSAB
 		mMr->SetActive(true);
 		mTransform->SetScale(Vector3::Zero);
 		mMr->UseColor(false);
-		mTime = mWarningTime;
+		mTime = mActivateTime - mWarningTime;
 		mCol->SetActive(true);
 	}
 	void TutorialGiantCircle::WhileWarning(double time)
@@ -40,6 +40,7 @@ namespace lu::JSAB
 	void TutorialGiantCircle::OnActivate()
 	{
 		mAnim->PlayAnimation(L"Bump", true);
+		mAnim->SetTime(RealRandom<double>(0, 0.432));
 	}
 	void TutorialGiantCircle::WhileActivate(double time)
 	{

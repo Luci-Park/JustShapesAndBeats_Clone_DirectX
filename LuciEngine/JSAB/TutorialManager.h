@@ -13,6 +13,7 @@ namespace lu::JSAB
 	class TutorialBeam;
 	class TutorialBeatCircle; 
 	class TutorialGiantCircle;
+	class TutorialCircleLine;
 	class TutorialManager : public Script
 	{
 	public:
@@ -27,16 +28,16 @@ namespace lu::JSAB
 		void Stage4();
 		void Stage5();
 		void Stage6();
-		/*
 		void Stage7();
 		void Stage8();
 		void Stage9();
-		void Stage10();*/
+		void Stage10();
 	private:
 		TutorialMusicController* mMusic;
 		BulletPool<TutorialRoundSpikes> mRoundSpikes;
 		BulletPool<TutorialBurst> mBursts;
 		BulletPool<TutorialBeam>mBeams;
+		BulletPool<TutorialCircleLine> mCircleLines;
 		BulletPool<TutorialBeatCircle> mBeatCircles;
 		BulletPool<TutorialGiantCircle> mGCircles;
 	};

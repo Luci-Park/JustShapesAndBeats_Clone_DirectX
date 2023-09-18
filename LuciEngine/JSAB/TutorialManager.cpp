@@ -15,10 +15,11 @@ namespace lu::JSAB
 {
 	TutorialManager::TutorialManager()
 		: mRoundSpikes(40)
-		, mBursts(8)
-		, mBeams(40)
+		, mBursts(32)
+		, mBeams(63)
 		, mBeatCircles(8)
 		, mGCircles(6)
+		, mCircleLines(4)
 	{
 	}
 	void TutorialManager::Initialize()
@@ -34,6 +35,13 @@ namespace lu::JSAB
 		if (stage == 3) Stage4();
 		if (stage == 4) Stage5();
 		if (stage == 5) Stage6();
+		if (stage == 6) Stage7();
+		if (stage == 7) Stage8();
+		if (stage == 8)
+		{
+			Stage9();
+			Stage10();
+		}
 	}
 	void TutorialManager::Stage1()
 	{
@@ -92,7 +100,6 @@ namespace lu::JSAB
 			}
 		}
 		{
-			//double warning[] = { 0.676, 0.76, 1.3, 1.177, 0.908, 0.736, 0.932, 0.981, 0.908, 0.908 };
 			double beat[] =	{ 14.850, 15.500, 16.583, 17.235, 17.450, 18.313, 18.959, 20.242, 20.697, 21.025 };
 			const float y = application.GetHeight() * 0.5;
 			const float x[] = { -60, - 20, 20, 60, 100, 140, 180, 220, 260, 300	};
@@ -217,137 +224,134 @@ namespace lu::JSAB
 			}
 		}
 	}
-	//void TutorialManager::Stage7(double time)
-	//{
-	//	const double beat[] = {
-	//		56.187, 56.624, 59.651 , 60.088
-	//	};
-	//	static int idx = 0;
-	//	if (idx >= 4 && beat[0] >= time)
-	//		idx = 0;
-	//	if(idx < 4 && beat[idx] <= time)
-	//	{
-	//		RECT bounds = SceneManager::MainCamera()->GetBoundary();
-	//		auto b = mBeatBars.GetNext();
-	//		b->mTransform->SetPosition({ (float)bounds.right, application.GetHeight() * 0.5f,0}); //({(float)bounds.right, 0, 0 });
-	//		b->Activate();
-	//		if (idx % 2)
-	//		{
-	//			RECT bounds = SceneManager::MainCamera()->GetBoundary();
-	//			float x = bounds.right + 42 * 0.5;
-	//			float endX = bounds.left - 42 * 0.5;
-	//			Vector3 pos = { x, 0, 1 };
-	//			Vector3 endPos = { endX, 0, 1 };
-	//			auto c = mFullBar.GetNext();
-	//			c->Setup(7, pos, endPos);
-	//			c->Activate();
-	//		}
-	//		idx++;
-	//	}
-	//}
-	//void TutorialManager::Stage8(double time)
-	//{
-	//	const double beat[] = {
-	//		   70.043 , 70.480, 73.507 , 73.944
-	//	};
-	//	const double semibeat[2][7] =
-	//	{
-	//		{71.798, 71.959, 72.12,	72.28,	72.441,	72.601,	72.762},
-	//		{75.262, 75.423, 75.583, 75.744, 75.905, 76.065, 76.226 }
-	//	};
-	//	static int idx = 0;
-	//	if (idx >= 4 && beat[0] >= time)
-	//		idx = 0;
-	//	if (idx < 4 && beat[idx] <= time)
-	//	{
-	//		RECT bounds = SceneManager::MainCamera()->GetBoundary();
-	//		auto b = mBeatBars.GetNext();
-	//		b->mTransform->SetPosition({ (float)bounds.right, application.GetHeight() * 0.5f,0 });
-	//		b->Activate();
-	//		if (idx % 2)
-	//		{
-	//			float x = bounds.right + 42 * 0.5;
-	//			float endX = bounds.left - 42 * 0.5;
-	//			Vector3 pos = { x, 0, 1 };
-	//			Vector3 endPos = { endX, 0, 1 };
-	//			auto c = mFullBar.GetNext();
-	//			c->Setup(7, pos, endPos);
-	//			c->Activate();
-	//		}
-	//		if (idx % 2 == 0)
-	//		{
-	//			float dist = 100;
-	//			Vector3 pos[] = { {0, bounds.top + dist, 0 }, { 0, bounds.bottom - dist, 0 } };
-	//			for (int i = 0; i < 2; i++)
-	//			{
-	//				auto c = mCircleLines.GetNext();
-	//				c->FitToWidth();
-	//				c->mTransform->SetPosition(pos[i]);
-	//				c->Show(beat[idx] + 0.848);
-	//			}
-	//		}
-	//		else
-	//		{
-	//			float dist = 100;
-	//			Vector3 pos[] = { {0, bounds.top + dist, 0 }, { 0, bounds.bottom - dist, 0 } };
-	//			for (int i = 0; i < 2; i++)
-	//			{
-	//				auto c = mCircleLines.GetNext();
-	//				c->FitToWidth();
-	//				c->mTransform->SetPosition(pos[i]);
-	//				int j = idx == 1 ? 0 : 1;
-	//				c->MultipleShow(semibeat[j]);
-	//			}
-	//		}
-	//		idx++;
-	//	}
+	void TutorialManager::Stage7()
+	{
+		double beat[] = { 56.187, 56.624, 59.651 , 60.088 };
+		
+		for(int i =0; i < 4; i++)
+		{
+			RECT bounds = SceneManager::MainCamera()->GetBoundary();
+			auto b = mBeams.GetNext();
+			b->mTransform->SetPosition({ (float)bounds.right, application.GetHeight() * 0.5f,0});
+			b->SetTimeline(mMusic, 0, beat[i], 0.35);
+			if (i % 2)
+			{
+				RECT bounds = SceneManager::MainCamera()->GetBoundary();
+				float x = bounds.right + 42 * 0.5;
+				float endX = bounds.left - 42 * 0.5;
+				for (int j = 0; j < 20; j++)
+				{
+					float y = bounds.top + 40.f * j;
+					auto c = mRoundSpikes.GetNext();
+					c->Setup(7, {x, y, 0}, {endX, y, 0});
+					c->SetTimeline(mMusic, 0, beat[i], 0);
+				}
+			}
+		}
+	}
+	void TutorialManager::Stage8()
+	{
+		double beat[] = { 70.043 , 70.480, 73.507 , 73.944 };
+		double semibeat[2][7] =
+		{
+			{71.798, 71.959, 72.12,	72.28,	72.441,	72.601,	72.762},
+			{75.262, 75.423, 75.583, 75.744, 75.905, 76.065, 76.226 }
+		};
+		double warnings[7];
+		for (int i = 0; i < 7; i++)
+			warnings[i] = semibeat[0][i] - beat[1] - 0.1;
 
 
-	//	
+		for (int i = 0; i < 4; i++)
+		{
+			RECT bounds = SceneManager::MainCamera()->GetBoundary();
+			auto b = mBeams.GetNext();
+			b->mTransform->SetPosition({ (float)bounds.right, application.GetHeight() * 0.5f,0 });
+			b->SetTimeline(mMusic, 0, beat[i], 0.35);
+			if (i % 2)
+			{
+				RECT bounds = SceneManager::MainCamera()->GetBoundary();
+				float x = bounds.right + 42 * 0.5;
+				float endX = bounds.left - 42 * 0.5;
+				for (int j = 0; j < 20; j++)
+				{
+					float y = bounds.top + 40.f * j;
+					auto c = mRoundSpikes.GetNext();
+					c->Setup(7, { x, y, 0 }, { endX, y, 0 });
+					c->SetTimeline(mMusic, 0, beat[i], 0);
+				}
+			}
+			if (i % 2 == 0)
+			{
+				float dist = 100;
+				Vector3 pos[] = { {0, bounds.top + dist, 0 }, { 0, bounds.bottom - dist, 0 } };
+				for (int i = 0; i < 2; i++)
+				{
+					auto c = mCircleLines.GetNext();
+					c->FitToWidth();
+					c->mTransform->SetPosition(pos[i]);
+					c->SetTimeline(mMusic, 0.848, beat[i] - 0.848);
+				}
+			}
+			else
+			{
+				float dist = 100;
+				Vector3 pos[] = { {0, bounds.top + dist, 0 }, { 0, bounds.bottom - dist, 0 } };
+				for (int i = 0; i < 2; i++)
+				{
+					auto c = mCircleLines.GetNext();
+					c->FitToWidth();
+					c->mTransform->SetPosition(pos[i]);
+					int j = i == 1 ? 0 : 1;
+					c->MultipleShow(mMusic, warnings,  semibeat[j]);
+				}
+			}
+		}
+	}
+	void TutorialManager::Stage9()
+	{
+		double beat[3] = { 111.611, 123.718, 125.035 };
+		Vector3 pos[6] = { {-640, 360, 0}, {640, 360, 0}, {-640, -360, 0}, {640, -360, 0}, {0, -500, 0},{0, 500, 0} };
 
-	//}
-	//void TutorialManager::Stage9(double time)
-	//{
-	//	const double beat[3] = { 111.611, 123.718, 125.035 };
-	//	const Vector3 pos[6] = { {-640, 360, 0}, {640, 360, 0}, {-640, -360, 0}, {640, -360, 0}, {0, -500, 0},{0, 500, 0} };
+		for (int i = 0; i < 6;i++)
+		{
+			auto c = mGCircles.GetNext();
+			c->mTransform->SetPosition(pos[i]);
+			c->SetTimeline(mMusic, beat[1] - beat[0], beat[1], beat[2] - beat[1]);
+		}
+	}
 
-	//	static int idx = 0;
-	//	if (idx < 3 && time >= beat[idx])
-	//	{
-	//		if (idx == 0)
-	//		{
-	//			for (int i = 0; i < 6; i++)
-	//			{
-	//				auto c = mCircles.GetNext();
-	//				c->mTransform->SetPosition(pos[i]);
-	//				c->Show(0);
-	//			}
-	//		}
-	//		else if (idx == 1)
-	//		{
-	//			for (int i = 0; i < 6; i++)
-	//			{
-	//				auto c = mCircles.GetNext();
-	//				c->ActivateWithTime(lu::math::RealRandom<double>(0, 0.432));
-	//			}
-	//		}
-	//		else if (idx == 2)
-	//		{
-	//			for (int i = 0; i < 6; i++)
-	//			{
-	//				auto c = mCircles.GetNext();
-	//				c->DeActivate();
-	//			}
-	//		}
-	//		idx++;
-	//	}
-	//	else if (idx > 2 && time < beat[2])
-	//		idx = 0;
-	//}
-	//void TutorialManager::Stage10(double time)
+	void TutorialManager::Stage10()
+	{
+		double startTime = 125.467;
+		double timePerBeat = 0.432;
+		int numberOfBeats = 63;
+		RECT bounds = SceneManager::MainCamera()->GetBoundary();
+		for (int i = 0; i < numberOfBeats; i++)
+		{
+			auto b = mBeams.GetNext();
+			b->SetRandomPosition();
+			b->SetTimeline(mMusic, 1.3, startTime + timePerBeat * i, 0.35);
+		}
+		for (int i = 0; i < numberOfBeats; i += 2)
+		{
+			float move = 180;
+			auto b = mBursts.GetNext();
+			if (i % 2 == 0)
+				b->SetUp({ 500, (float)bounds.top, 0 }, { 500, (float)bounds.top + move, 0 });
+			else
+				b->SetUp({ 500, (float)bounds.bottom, 0 }, { 500, (float)bounds.bottom - move, 0 });
+			b->SetTimeline(mMusic, 0.4, startTime + timePerBeat * i, 0);
+		}
+	}
+
+
+	//void TutorialManager::Stage10()
 	//{
-	//	static double readTime = 125.467;
-	//	static int beat = 0;
+	//	double readTime = 125.467;
+	//	double beatTime = 0.432;
+	//	int beat = 0;
+	//	while(bea)
 	//	if (readTime < 152.683 && time >= readTime)
 	//	{
 	//		{

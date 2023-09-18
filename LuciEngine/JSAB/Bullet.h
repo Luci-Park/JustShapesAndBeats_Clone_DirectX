@@ -21,6 +21,9 @@ namespace lu::JSAB
 		virtual void Initialize() override;
 		virtual void Update() override;
 		void SetTimeline(MusicController* music, double wt, double at, double ot);
+		void Warning();
+		void Activate();
+		void Outro();
 		void DeActivate();
 		void TestTime(double time);
 

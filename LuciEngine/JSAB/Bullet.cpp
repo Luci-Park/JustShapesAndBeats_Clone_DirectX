@@ -26,6 +26,21 @@ namespace lu::JSAB
 		mActivateTime = at;
 		mOutroTime = ot;
 	}
+	void Bullet::Warning()
+	{
+		mState = eState::Warning;
+		OnWarning();
+	}
+	void Bullet::Activate()
+	{
+		mState = eState::Activate;
+		OnActivate();
+	}
+	void Bullet::Outro()
+	{
+		mState = eState::Outro;
+		OnOutro();
+	}
 	void Bullet::DeActivate()
 	{
 		mState = eState::DeActivate;
@@ -80,32 +95,33 @@ namespace lu::JSAB
 		{
 			ChangeToActive(time);
 		}
-		if (mState == eState::Activate)
-			if (mOutroTime >= 0.001)
+		else if (mState == eState::Activate)
+		{
+			if (time == mActivateTime)
+				ChangeToActive(time);
+			else if (mOutroTime >= 0.001)
 				ChangeToOutro(time);
+		}
 	}
 	void Bullet::ChangeToWarning(double time)
 	{
 		if (mActivateTime - mWarningTime <= time && time < mActivateTime)
 		{
-			mState = eState::Warning;
-			OnWarning();
+			Warning();
 		}
 	}
 	void Bullet::ChangeToActive(double time)
 	{
 		if (mActivateTime<= time)
 		{
-			mState = eState::Activate;
-			OnActivate();
+			Activate();
 		}
 	}
 	void Bullet::ChangeToOutro(double time)
 	{
 		if (mActivateTime + mOutroTime<= time)
 		{
-			mState = eState::Outro;
-			OnOutro();
+			Outro();
 		}
 	}
 }

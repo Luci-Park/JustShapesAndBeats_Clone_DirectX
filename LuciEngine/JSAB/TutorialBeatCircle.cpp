@@ -106,72 +106,62 @@ namespace lu::JSAB
 
 
 #pragma region TutorialCircleLine
-	//void TutorialCircleLine::Initialize()
-	//{
-	//	Script::Initialize();
-	//	for (int i = 0; i < 7; i++)
-	//	{
-	//		auto b = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<TutorialBeatCircle>();
-	//		b->mTransform->SetLocalPosition({ -690.f + 230.f * i, 0, 0 });
-	//		mCircleLines[i] = b;
-	//	}
-	//	
-	//}
-	//void TutorialCircleLine::FitToWidth()
-	//{
-	//	const float width = 1610.f;
-	//	const float target = 1000.f;
-	//	mTransform->SetScale({ target / width, target / width, 1 });
-	//	Vector3 scale = { target / width * 300, target / width * 300, 1 };
-	//	float startPos = 0 - scale.x * 3;
-	//	for (int i = 0; i < 7; i++)
-	//	{
-	//		mCircleLines[i]->mTransform->SetLocalPosition({ startPos + scale.x * i, 0, 0 });
-	//		mCircleLines[i]->FastAnim(false);
-	//	}
-	//}
-	//void TutorialCircleLine::FitToHeight()
-	//{
-	//	const float width = 1610.f;
-	//	const float target = 800.f;
-	//	mTransform->SetScale({ target / width, target / width, 1 });
-	//	Vector3 scale = { target / width * 200, target / width * 200, 1 };
-	//	float startPos = 0 + scale.x * 3;
-	//	for (int i = 0; i < 7; i++)
-	//	{
-	//		mCircleLines[i]->mTransform->SetLocalPosition({ 0, startPos - scale.x * i, 0 });
-	//	}
-	//	mTransform->SetPosition({ RealRandom(application.GetWidth() * -0.5f + scale.x, application.GetWidth() * 0.5f - scale.x), 0, 0 });
-	//}
-	//void TutorialCircleLine::MultipleShow(const double* times)
-	//{
-	//	for (int i = 0; i < 7; i++)
-	//		mCircleLines[i]->Show(times[i]);
-	//}
-	//void TutorialCircleLine::OnShow()
-	//{
-	//	for (int i = 0; i < 7; i++)
-	//		mCircleLines[i]->Show(mActivateTime);
-	//}
-	//void TutorialCircleLine::OnActivate()
-	//{
-	//	for (int i = 0; i < 7; i++)
-	//		mCircleLines[i]->Activate();
-	//}
-	//void TutorialCircleLine::OnDeActivate()
-	//{
-	//	for (int i = 0; i < 7; i++)
-	//		mCircleLines[i]->DeActivate();
-	//}
-	//void TutorialCircleLine::WhileShowing()
-	//{
-	//}
-	//void TutorialCircleLine::WhileActive()
-	//{
-	//}
-	//void TutorialCircleLine::WhileDeActive()
-	//{
-	//}
+	void TutorialCircleLine::Initialize()
+	{
+		Script::Initialize();
+		for (int i = 0; i < 7; i++)
+		{
+			auto b = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<TutorialBeatCircle>();
+			b->mTransform->SetLocalPosition({ -690.f + 230.f * i, 0, 0 });
+			mCircleLines[i] = b;
+		}
+		
+	}
+	void TutorialCircleLine::DeActivate()
+	{
+		for (int i = 0; i < 7; i++)
+			mCircleLines[i]->DeActivate();
+	}
+	void TutorialCircleLine::FitToWidth()
+	{
+		const float width = 1610.f;
+		const float target = 1000.f;
+		mTransform->SetScale({ target / width, target / width, 1 });
+		Vector3 scale = { target / width * 300, target / width * 300, 1 };
+		float startPos = 0 - scale.x * 3;
+		for (int i = 0; i < 7; i++)
+		{
+			mCircleLines[i]->mTransform->SetLocalPosition({ startPos + scale.x * i, 0, 0 });
+			mCircleLines[i]->FastAnim(false);
+		}
+	}
+	void TutorialCircleLine::FitToHeight()
+	{
+		const float width = 1610.f;
+		const float target = 800.f;
+		mTransform->SetScale({ target / width, target / width, 1 });
+		Vector3 scale = { target / width * 200, target / width * 200, 1 };
+		float startPos = 0 + scale.x * 3;
+		for (int i = 0; i < 7; i++)
+		{
+			mCircleLines[i]->mTransform->SetLocalPosition({ 0, startPos - scale.x * i, 0 });
+		}
+		mTransform->SetPosition({ RealRandom(application.GetWidth() * -0.5f + scale.x, application.GetWidth() * 0.5f - scale.x), 0, 0 });
+	}
+	void TutorialCircleLine::SetTimeline(MusicController* music, double wt, double at)
+	{
+		for (int i = 0; i < 7; i++)
+		{
+			mCircleLines[i]->SetTimeline(music, wt, at, 0);
+		}
+	}
+	void TutorialCircleLine::MultipleShow(MusicController* music, const double* wt, const double* at)
+	{
+		for (int i = 0; i < 7; i++)
+		{
+			mCircleLines[i]->SetTimeline(music, wt[i], at[i], 0);
+		}
+	}
 #pragma endregion
 
 }

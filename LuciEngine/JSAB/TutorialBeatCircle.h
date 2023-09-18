@@ -28,27 +28,23 @@ namespace lu::JSAB
 		std::shared_ptr<Texture> mActivateSprite;
 		bool mbFastActivate;
 	};
-	/*
-	class TutorialCircleLine : public Bullet
+
+	class TutorialCircleLine : public Script
 	{
 	public:
-		TutorialCircleLine() {}
+		TutorialCircleLine(){}
 		virtual ~TutorialCircleLine() {}
-		virtual void Initialize()override;
+		virtual void Initialize() override;
 
+		void DeActivate();
 		void FitToWidth();
 		void FitToHeight();
 
-		void MultipleShow(const double* times);
-	private:
-		virtual void OnShow() override;
-		virtual void OnActivate()override;
-		virtual void OnDeActivate()override;
-		virtual void WhileShowing() override;
-		virtual void WhileActive()override;
-		virtual void WhileDeActive()override;
+		void SetTimeline(MusicController* music, double wt, double at);
+		void MultipleShow(MusicController* music, const double* wt, const double* at);
+	
 	private:
 		TutorialBeatCircle* mCircleLines[7];
-	};*/
+	};
 }
 
