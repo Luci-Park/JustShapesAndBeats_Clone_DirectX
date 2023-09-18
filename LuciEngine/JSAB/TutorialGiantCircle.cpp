@@ -40,7 +40,7 @@ namespace lu::JSAB
 	void TutorialGiantCircle::OnActivate()
 	{
 		mAnim->PlayAnimation(L"Bump", true);
-		mAnim->SetTime(RealRandom<double>(0, 0.432));
+		mAnim->SetTime(RealRandom<double>(0, 0.432 *1.5));
 	}
 	void TutorialGiantCircle::WhileActivate(double time)
 	{
@@ -62,9 +62,9 @@ namespace lu::JSAB
 	void TutorialGiantCircle::CreateAnimation()
 	{
 		auto a = mAnim->CreateAnimation(L"Disappear");
-		double duration = 0.432;
-		a->AddScaleKey(0, {740, 740, 1});
-		a->AddScaleKey(duration * 0.7, { 760, 760, 1 });
+		double duration = 0.432 * 1.5;
+		a->AddScaleKey(0, {700, 700, 1});
+		a->AddScaleKey(duration * 0.7, { 720, 720, 1 });
 		a->AddScaleKey(duration, Vector3::Zero);
 
 		a->AddInterpolationKey(0, 1);
@@ -78,11 +78,11 @@ namespace lu::JSAB
 		a = mAnim->CreateAnimation(L"Bump");
 		a->AddScaleKey(duration * 0, {40.f, 40.f, 1.f});
 		a->AddInterpolationKey(duration * 0, 0);
-		a->AddScaleKey(duration * .25, { 760, 760, 1 });
+		a->AddScaleKey(duration * .25, { 700, 700, 1 });
 		a->AddInterpolationKey(duration * .25, 1);
 		a->AddScaleKey(duration * .5, { 40.f, 40.f, 1.f });
 		a->AddInterpolationKey(duration * .5, 0);
-		a->AddScaleKey(duration * .75, { 760, 760, 1 });
+		a->AddScaleKey(duration * .75, { 700, 700, 1 });
 		a->AddInterpolationKey(duration * .75, 1);
 		a->AddScaleKey(duration, { 40.f, 40.f, 1.f });
 		a->AddInterpolationKey(duration, 0);
