@@ -45,6 +45,7 @@ namespace lu::JSAB
 	}
 	void Triangle::OnTutoBurst()
 	{
+		mPlayer->mTransform->SetPosition(Vector3(-540, 0, -5));
 		mPlayer->Release();
 		auto tuto = dynamic_cast<TutorialMusicController*>(MusicController::Instance);
 		if (tuto)

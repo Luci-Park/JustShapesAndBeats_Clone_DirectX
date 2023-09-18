@@ -26,9 +26,9 @@ namespace lu::JSAB::Tutorial
 		music = manager->AddComponent<TutorialMusicController>();
 		manager->AddComponent<TutorialManager>();
 		
-		auto c = object::Instantiate<TrianglePrefab>(Vector3(320.0f, 0.0f, 1.0001f), eLayerType::Item);
+		auto c = object::Instantiate<TrianglePrefab>(Vector3(570.0f, 0.0f, 1.0001f), eLayerType::Item);
 
-		object::Instantiate<PlayerPrefab>(eLayerType::Player);
+		object::Instantiate<PlayerPrefab>(Vector3(-540, 0, -5), eLayerType::Player);
 		Scene::Initialize(); 
 	}
 	void TutorialScene::Update()
