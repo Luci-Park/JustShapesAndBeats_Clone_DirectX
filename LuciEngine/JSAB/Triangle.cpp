@@ -9,9 +9,12 @@ namespace lu::JSAB
 	{
 		if (other->Owner()->GetLayer() == eLayerType::Player)
 		{
-			auto tuto = dynamic_cast<TutorialMusicController*>(MusicController::Instance);
-			if (tuto)
-				tuto->PlayNextPart();				
+			other->Owner()->mTransform->SetPosition(mTransform->GetPosition());
+			{
+				auto tuto = dynamic_cast<TutorialMusicController*>(MusicController::Instance);
+				if (tuto)
+					tuto->PlayNextPart();
+			}
 		}
 	}
 }

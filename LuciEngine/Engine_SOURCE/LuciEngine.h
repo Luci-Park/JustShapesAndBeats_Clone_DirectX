@@ -26,3 +26,4 @@
 #include "LMath.h"
 
 #define PI 3.141592
+#define DEBUGLOG(x) OutputDebugStringA(x)

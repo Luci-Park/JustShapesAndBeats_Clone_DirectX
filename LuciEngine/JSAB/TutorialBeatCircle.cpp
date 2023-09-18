@@ -117,6 +117,16 @@ namespace lu::JSAB
 		}
 		
 	}
+	void TutorialCircleLine::Warning()
+	{
+		for (int i = 0; i < 7; i++)
+			mCircleLines[i]->Warning();
+	}
+	void TutorialCircleLine::Activate()
+	{
+		for (int i = 0; i < 7; i++)
+			mCircleLines[i]->Activate();
+	}
 	void TutorialCircleLine::DeActivate()
 	{
 		for (int i = 0; i < 7; i++)

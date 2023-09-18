@@ -36,6 +36,8 @@ namespace lu::JSAB
 		virtual ~TutorialCircleLine() {}
 		virtual void Initialize() override;
 
+		void Warning();
+		void Activate();
 		void DeActivate();
 		void FitToWidth();
 		void FitToHeight();

@@ -260,7 +260,7 @@ namespace lu::JSAB
 		};
 		double warnings[7];
 		for (int i = 0; i < 7; i++)
-			warnings[i] = semibeat[0][i] - beat[1] - 0.5;
+			warnings[i] = semibeat[0][i] - beat[1] - 0.8;
 
 
 		for (int i = 0; i < 4; i++)
@@ -348,20 +348,20 @@ namespace lu::JSAB
 			b->SetTimeline(mMusic, 0.4, startTime + timePerBeat * i, 0);
 		}
 		{
-			double beats[8] = { 127.15, 130.6, 134, 137.45, 140.85, 144.5, 147.9 };
+			double beats[8] = { 127.15, 130.6, 134, 137.45, 140.85, 144.5, 147.9 };				
 			for (int i = 0; i < 8; i++)
 			{
 				auto c = mCircleLines.GetNext();
 				c->FitToHeight();
-				double time[8];
-				double warning[8];
+				double time[7];
+				double warning[7];
 				double step = 0.432 * 2 / 7;
-				for (int j = 0; j < 8; j++)
+				for (int j = 0; j < 7; j++)
 				{
 					time[j] = beats[i] + step * j;
-					warning[j] = time[j] - beats[i];
+					warning[j] = time[j] - beats[i] + 2;
 				}
-				c->MultipleShow(mMusic, warning, beats);
+				c->MultipleShow(mMusic, warning, time);
 			}
 		}
 		{

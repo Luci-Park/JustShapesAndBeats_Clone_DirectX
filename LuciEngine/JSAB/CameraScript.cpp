@@ -67,7 +67,7 @@ namespace lu::JSAB
 
 			a = mFlash->CreateAnimation(L"BlackFadeIn");
 			a->AddColorKey(0, { 0, 0, 0, 1 });
-			a->AddColorKey(0.5, { 0, 0, 0, 0 });
+			a->AddColorKey(0.2, { 0, 0, 0, 0 });
 		}
 		Reset();
 	}
