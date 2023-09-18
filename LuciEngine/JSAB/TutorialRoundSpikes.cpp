@@ -43,12 +43,13 @@ namespace lu::JSAB
 		mEnterEffect->PlayAnimation(L"Appear", false);
 		mAnim->PlayAnimation(L"Rotate", true);
 		mTime = 0;
+		mTransform->SetPosition(mStartPos);
 	}
 	void TutorialRoundSpikes::WhileActivate(double time)
 	{
 		if (mStartPos == mEndPos)
 		{
-			mTransform->SetPosition(mStartPos);
+			return;
 		}
 		else
 		{

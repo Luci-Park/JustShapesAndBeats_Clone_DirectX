@@ -60,7 +60,7 @@ namespace lu::JSAB
 			Vector3 endPos = { endX, posY[idicies[i]], 1 };
 			TutorialRoundSpikes* bullet = mRoundSpikes.GetNext();
 			bullet->mTransform->SetPosition(pos);
-			bullet->Setup(7, pos, endPos);
+			bullet->Setup(6, pos, endPos);
 			bullet->SetTimeline(mMusic, 0, beat[i], 0);
 		}
 	}
@@ -220,7 +220,7 @@ namespace lu::JSAB
 				Vector3 pos = { 200.f * (i ? -1 : 1), bounds.top + 40.f * j, 0 };
 				auto bullet = mRoundSpikes.GetNext();
 				bullet->Setup(0, pos, pos);
-				bullet->SetTimeline(mMusic, 0, beat[0], 0);
+				bullet->SetTimeline(mMusic, 0, beat[0] - warning[0], 0);
 			}
 		}
 	}
@@ -243,7 +243,7 @@ namespace lu::JSAB
 				{
 					float y = bounds.top + 40.f * j;
 					auto c = mRoundSpikes.GetNext();
-					c->Setup(7, {x, y, 0}, {endX, y, 0});
+					c->Setup(6, {x, y, 0}, {endX, y, 0});
 					c->SetTimeline(mMusic, 0, beat[i], 0);
 				}
 			}
@@ -277,7 +277,7 @@ namespace lu::JSAB
 				{
 					float y = bounds.top + 40.f * j;
 					auto c = mRoundSpikes.GetNext();
-					c->Setup(7, { x, y, 0 }, { endX, y, 0 });
+					c->Setup(6, { x, y, 0 }, { endX, y, 0 });
 					c->SetTimeline(mMusic, 0, beat[i], 0);
 				}
 			}
