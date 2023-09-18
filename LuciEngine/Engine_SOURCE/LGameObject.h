@@ -38,7 +38,7 @@ namespace lu
 		}
 		
 		template <typename T>
-		T* GetComponentsInChildren()
+		T* GetComponentInChildren()
 		{
 			T* component = nullptr;
 
@@ -48,7 +48,7 @@ namespace lu
 			auto children = mTransform->GetChildren();
 			for (int i = 0; i < children.size(); i++)
 			{
-				component = children[i]->Owner()->GetComponentsInChildren<T>();
+				component = children[i]->Owner()->GetComponentInChildren<T>();
 				if (component != nullptr) return component;
 			}
 			return nullptr;

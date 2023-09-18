@@ -25,6 +25,7 @@ namespace lu::JSAB
 		, mMaxHealth(4)
 		, mCurrHealth(mMaxHealth)
 		, mDashState(eDashState::Idle)
+		, mbHold(false)
 	{
 	}
 	void Player::Initialize()
@@ -218,6 +219,7 @@ namespace lu::JSAB
 	Vector3 Player::GetInputDir()
 	{
 		Vector3 moveDir = Vector3::Zero;
+		if (mbHold) return moveDir;
 		if (Input::GetKey(eKeyCode::LEFT))
 			moveDir = Vector3::Left;
 		if (Input::GetKey(eKeyCode::RIGHT))
@@ -278,6 +280,16 @@ namespace lu::JSAB
 	{
 		mDashBurst = burst;
 		mDashBurstAnim = mDashBurst->GetComponent<Animator>();
+	}
+
+	void Player::Hold()
+	{
+		mbHold = true;
+	}
+
+	void Player::Release()
+	{
+		mbHold = false;
 	}
 	
 #pragma region  ShieldScript

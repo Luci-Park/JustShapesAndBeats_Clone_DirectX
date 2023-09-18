@@ -26,10 +26,7 @@ namespace lu::JSAB::Tutorial
 		music = manager->AddComponent<TutorialMusicController>();
 		manager->AddComponent<TutorialManager>();
 		
-		auto c = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::Bullet)->AddComponent<TutorialCircleLine>();
-		c->FitToHeight();
-		c->Warning();
-		c->Owner()->AddComponent<gui::TransformWidget>();
+		auto c = object::Instantiate<TrianglePrefab>(Vector3(320.0f, 0.0f, 1.0001f), eLayerType::Item);
 
 		object::Instantiate<PlayerPrefab>(eLayerType::Player);
 		Scene::Initialize(); 
@@ -41,7 +38,7 @@ namespace lu::JSAB::Tutorial
 
 	void TutorialScene::OnEnter()
 	{
-		music->Play();
+		//music->Play();
 	}
 
 	void TutorialScene::OnExit()

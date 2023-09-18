@@ -19,6 +19,7 @@ namespace lu::JSAB
 		void BlackFlash();
 		void BlackFadeOut();
 		void BlackFadeIn();
+		void LevelTrans();
 		void Reset();
 	private:
 

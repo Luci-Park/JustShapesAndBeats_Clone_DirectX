@@ -36,6 +36,9 @@ namespace lu::JSAB
 		void SetDashOutline(GameObject* outline) { mDashOutline = outline; }
 		void SetDashBurst(GameObject* burst);
 		void SetShield(ShieldScript* shield) { mShield = shield; }
+
+		void Hold();
+		void Release();
 	private:
 		void Move();
 		void CheckBoundary();
@@ -85,6 +88,8 @@ namespace lu::JSAB
 
 		std::shared_ptr<graphics::Texture> lifeTextures[4];
 		int mMaxHealth, mCurrHealth;
+
+		bool mbHold;
 	};
 	class ShieldScript : public Script
 	{

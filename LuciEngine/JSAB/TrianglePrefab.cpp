@@ -4,6 +4,7 @@
 #include "LMeshRenderer.h"
 #include "LAnimator.h"
 #include "LCollider2D.h"
+#include "LAudioSource.h"
 #include "Triangle.h"
 namespace lu::JSAB
 {
@@ -20,13 +21,45 @@ namespace lu::JSAB
 		mTransform->SetScale({ 26, 26, 1 });
 		mTransform->SetPosition({ 50,50, 1 });
 		AddComponent<Collider2D>()->SetType(lu::enums::eColliderType::Circle)->SetSize({ 2.3, 2.3 });
+		auto t = AddComponent<Triangle>();
+		t->SetClips(Resources::Find<AudioClip>(L"SFX_HEX_LEVEL_COMPLETE_TUTO"),
+			Resources::Find<AudioClip>(L"SFX_HEX_LEVEL_COMPLETE_CHALLENGE"));
 		{
 			GameObject* triangle = object::Instantiate<GameObject>(mTransform, eLayerType::Item);
 			triangle->SetName(L"triangle");
 			MeshRenderer* mr = triangle->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(CreateTriangleMat());
-		}
 
+			auto animator = triangle->AddComponent<Animator>();
+			auto anim = animator->CreateAnimation(L"Burst");
+			double readyduration = 4.2;
+			double downDuration = 0.1;
+			float y = 100.f;
+			anim->AddLocalPositionKey(0, Vector3::Zero);
+			anim->AddLocalPositionKey(readyduration * 0.3, { 0, y * 0.8f, 0 });
+			anim->AddLocalPositionKey(readyduration, { 0, y, 0 });
+			anim->AddLocalPositionKey(readyduration + downDuration, { 0, 0, 0 });
+
+			anim->AddLocalRotationKey(0, Quaternion::Identity);
+			anim->AddLocalRotationKey(readyduration * 0.3, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI *0.9));
+			anim->AddLocalRotationKey(readyduration, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI));
+			anim->AddLocalRotationKey(readyduration + downDuration, Quaternion::Identity);
+			anim->AddFunctionKey(readyduration + downDuration, std::bind(&Triangle::OnTutoBurst, t));
+
+			anim = animator->CreateAnimation(L"Idle");
+			anim->AddLocalRotationKey(0, Quaternion::Identity)
+			anim->AddLocalRotationKey(0, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 0.8));
+			anim->AddLocalRotationKey(0.5, Quaternion::CreateFromAxisAngle(Vector3::Forward, PI *0.8));
+			anim->AddLocalRotationKey(1, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI *0.8));
+
+			animator->PlayAnimation(L"Idle", true);
+
+
+
+			//anim = animator->CreateAnimation(L"GeneralBurst");
+			//anim->AddLocalPositionKey(0, Vector3::Zero);
+			//anim->AddLocalPositionKey(readyduration * 0.5, { 0, 50, 0 });
+		}
 		{
 			GameObject* circle = object::Instantiate<GameObject>(mTransform, eLayerType::Item);
 			circle->SetName(L"tri_effect_blue");
@@ -62,7 +95,7 @@ namespace lu::JSAB
 			ani->AddRotationKey(duration, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 2));
 			anim->PlayAnimation(L"Rotate", true);
 		}
-		AddComponent<Triangle>();
+		AddComponent<AudioSource>();
 	}
 	std::shared_ptr<graphics::Material> TrianglePrefab::CreateTriangleMat()
 	{

@@ -68,6 +68,12 @@ namespace lu::JSAB
 			a = mFlash->CreateAnimation(L"BlackFadeIn");
 			a->AddColorKey(0, { 0, 0, 0, 1 });
 			a->AddColorKey(0.2, { 0, 0, 0, 0 });
+
+			a = mFlash->CreateAnimation(L"LevelFinishedFade");
+			a->AddColorKey(0, { 1, 1, 1, 0 });
+			a->AddColorKey(0.3, { 1, 1, 1, 1 });
+			a->AddColorKey(1, { 0, 0, 0, 1 });
+			a->AddColorKey(1.1, { 0, 0, 0, 0 });
 		}
 		Reset();
 	}
@@ -97,6 +103,10 @@ namespace lu::JSAB
 	void CameraEffectScript::BlackFadeIn()
 	{
 		mFlash->PlayAnimation(L"BlackFadeIn", false);
+	}
+	void CameraEffectScript::LevelTrans()
+	{
+		mFlash->PlayAnimation(L"LevelFinishedFade", false);
 	}
 	void CameraEffectScript::Reset()
 	{
