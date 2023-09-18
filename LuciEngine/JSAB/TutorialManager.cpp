@@ -19,7 +19,7 @@ namespace lu::JSAB
 		, mBeams(63)
 		, mBeatCircles(8)
 		, mGCircles(6)
-		, mCircleLines(4)
+		, mCircleLines(20)
 	{
 	}
 	void TutorialManager::Initialize()
@@ -251,6 +251,7 @@ namespace lu::JSAB
 	}
 	void TutorialManager::Stage8()
 	{
+		RECT bounds = SceneManager::MainCamera()->GetBoundary();
 		double beat[] = { 70.043 , 70.480, 73.507 , 73.944 };
 		double semibeat[2][7] =
 		{
@@ -259,12 +260,11 @@ namespace lu::JSAB
 		};
 		double warnings[7];
 		for (int i = 0; i < 7; i++)
-			warnings[i] = semibeat[0][i] - beat[1] - 0.1;
+			warnings[i] = semibeat[0][i] - beat[1] - 0.5;
 
 
 		for (int i = 0; i < 4; i++)
 		{
-			RECT bounds = SceneManager::MainCamera()->GetBoundary();
 			auto b = mBeams.GetNext();
 			b->mTransform->SetPosition({ (float)bounds.right, application.GetHeight() * 0.5f,0 });
 			b->SetTimeline(mMusic, 0, beat[i], 0.35);
@@ -281,31 +281,36 @@ namespace lu::JSAB
 					c->SetTimeline(mMusic, 0, beat[i], 0);
 				}
 			}
-			if (i % 2 == 0)
-			{
-				float dist = 100;
-				Vector3 pos[] = { {0, bounds.top + dist, 0 }, { 0, bounds.bottom - dist, 0 } };
-				for (int i = 0; i < 2; i++)
-				{
-					auto c = mCircleLines.GetNext();
-					c->FitToWidth();
-					c->mTransform->SetPosition(pos[i]);
-					c->SetTimeline(mMusic, 0.848, beat[i] - 0.848);
-				}
-			}
-			else
-			{
-				float dist = 100;
-				Vector3 pos[] = { {0, bounds.top + dist, 0 }, { 0, bounds.bottom - dist, 0 } };
-				for (int i = 0; i < 2; i++)
-				{
-					auto c = mCircleLines.GetNext();
-					c->FitToWidth();
-					c->mTransform->SetPosition(pos[i]);
-					int j = i == 1 ? 0 : 1;
-					c->MultipleShow(mMusic, warnings,  semibeat[j]);
-				}
-			}
+		}
+		float dist = 100;
+		Vector3 pos[] = { {0, bounds.top + dist, 0 }, { 0, bounds.bottom - dist, 0 } };
+		for (int i = 0; i < 2; i++)
+		{
+			auto c = mCircleLines.GetNext();
+			c->FitToWidth();
+			c->mTransform->SetPosition(pos[i]);
+			c->SetTimeline(mMusic, 0.848, beat[0] + 0.848);
+		}
+		for (int i = 0; i < 2; i++)
+		{
+			auto c = mCircleLines.GetNext();
+			c->FitToWidth();
+			c->mTransform->SetPosition(pos[i]);
+			c->SetTimeline(mMusic, 0.848, beat[2] + 0.848);
+		}
+		for (int i =0; i < 2; i++)
+		{
+			auto c = mCircleLines.GetNext();
+			c->FitToWidth();
+			c->mTransform->SetPosition(pos[i]);
+			c->MultipleShow(mMusic, warnings, semibeat[0]);
+		}
+		for (int i = 0; i < 2; i++)
+		{
+			auto c = mCircleLines.GetNext();
+			c->FitToWidth();
+			c->mTransform->SetPosition(pos[i]);
+			c->MultipleShow(mMusic, warnings, semibeat[1]);
 		}
 	}
 	void TutorialManager::Stage9()
