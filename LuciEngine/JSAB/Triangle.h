@@ -14,11 +14,14 @@ namespace lu::JSAB
 
 		void SetClips(std::shared_ptr<AudioClip> tuto, std::shared_ptr<AudioClip> level);
 		void Setup();
+		void TutorialAppear();
+		void LevelAppear();
 		void OnTutoBurst();
 		void OnLevelComplete();
 	private:
 		AudioSource* mAudio;
-		Animator* mAnim;
+		Animator* mBaseAnim;
+		Animator* mTriangleAnim;
 		std::shared_ptr<AudioClip> mTuto;
 		std::shared_ptr<AudioClip> mLevel;
 		Player* mPlayer;

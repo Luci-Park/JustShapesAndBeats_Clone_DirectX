@@ -14,8 +14,8 @@ namespace lu::JSAB
 	//5.354
 	void Triangle::OnCollisionEnter(Collider2D* other)
 	{
-		if(mAnim == nullptr)
-			mAnim = Owner()->GetComponentInChildren<Animator>();
+		if(mTriangleAnim == nullptr)
+			mTriangleAnim = Owner()->GetComponentInChildren<Animator>();
 		if (other->Owner()->GetLayer() == eLayerType::Player)
 		{
 			mPlayer = other->Owner()->GetComponent<Player>();
@@ -29,8 +29,8 @@ namespace lu::JSAB
 				mAudio->SetClip(mTuto);
 				mAudio->Play();
 				mAudio->SetPosition(diff);
-				mAnim->PlayAnimation(L"Burst", false);
-				mAnim->SetTime(diff);
+				mTriangleAnim->PlayAnimation(L"Burst", false);
+				mTriangleAnim->SetTime(diff);
 				tuto->PlayNextPart();
 			}
 		}
@@ -42,8 +42,15 @@ namespace lu::JSAB
 	}
 	void Triangle::Setup()
 	{
-		mAnim = Owner()->GetComponentInChildren<Animator>();
+		mTriangleAnim = Owner()->GetComponentInChildren<Animator>();
 		mAudio = Owner()->GetComponent<AudioSource>();
+	}
+	void Triangle::TutorialAppear()
+	{
+		Owner()->SetActive(true);
+	}
+	void Triangle::LevelAppear()
+	{
 	}
 	void Triangle::OnTutoBurst()
 	{
@@ -52,7 +59,7 @@ namespace lu::JSAB
 		auto tuto = dynamic_cast<TutorialMusicController*>(MusicController::Instance);
 		if (tuto)
 			tuto->PlayNextPart();
-		mAnim->PlayAnimation(L"Idle", true);
+		mTriangleAnim->PlayAnimation(L"Idle", true);
 		SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->LevelTrans();
 	}
 	void Triangle::OnLevelComplete()

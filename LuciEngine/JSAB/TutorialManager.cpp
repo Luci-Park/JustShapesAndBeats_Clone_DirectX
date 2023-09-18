@@ -227,7 +227,9 @@ namespace lu::JSAB
 	void TutorialManager::Stage7()
 	{
 		double beat[] = { 56.187, 56.624, 59.651 , 60.088 };
-		
+		mRoundSpikes.Reset();
+
+
 		for(int i =0; i < 4; i++)
 		{
 			RECT bounds = SceneManager::MainCamera()->GetBoundary();
