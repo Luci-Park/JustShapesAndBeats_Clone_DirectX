@@ -19,7 +19,7 @@ namespace lu::JSAB
 		, mBeams(63)
 		, mBeatCircles(8)
 		, mGCircles(6)
-		, mCircleLines(20)
+		, mCircleLines(8)
 	{
 	}
 	void TutorialManager::Initialize()
@@ -347,6 +347,20 @@ namespace lu::JSAB
 			else
 				b->SetUp({ 500, (float)bounds.bottom, 0 }, { 500, (float)bounds.bottom - move, 0 });
 			b->SetTimeline(mMusic, 0.4, startTime + timePerBeat * i, 0);
+		}
+		double beats[8] = { 127.15, 130.6, 134, 137.45, 140.85, 144.5, 147.9 };
+		double warning[8] = { 1, 1, 1, 1, 1, 1, 1, 1 };
+		for (int i = 0; i < 8; i++)
+		{
+			auto c = mCircleLines.GetNext();
+			c->FitToHeight();
+			double time[7];
+			double step = 0.432 * 1 / 7;
+			for (int j = 0; j < 7; j++)
+			{
+				time[j] = beats[i] + step * j;
+			}
+			c->MultipleShow(mMusic, warning, beats);
 		}
 	}
 
