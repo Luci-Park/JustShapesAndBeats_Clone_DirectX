@@ -14,7 +14,7 @@ extern lu::Application application;
 namespace lu::JSAB
 {
 	TutorialManager::TutorialManager()
-		: mRoundSpikes(40)
+		: mRoundSpikes(70)
 		, mBursts(32)
 		, mBeams(63)
 		, mBeatCircles(8)
@@ -270,7 +270,6 @@ namespace lu::JSAB
 			b->SetTimeline(mMusic, 0, beat[i], 0.35);
 			if (i % 2)
 			{
-				RECT bounds = SceneManager::MainCamera()->GetBoundary();
 				float x = bounds.right + 42 * 0.5;
 				float endX = bounds.left - 42 * 0.5;
 				for (int j = 0; j < 20; j++)
@@ -365,7 +364,30 @@ namespace lu::JSAB
 				c->MultipleShow(mMusic, warning, beats);
 			}
 		}
+		{
+			double beats[7] = { 129.2, 132.55, 136.1, 139.45, 142.85, 146.2, 149.75 };
+			float x = bounds.right + 42 * 0.5;
+			float endX = bounds.left - 42 * 0.5;
+			for (int i = 0; i < 7; i++)
+			{
+				for (int j = 0; j < 7; j++)
+				{
+					float y = i%2 ? bounds.bottom - 40.f * j : bounds.top + 40.f * j;
+					auto c = mRoundSpikes.GetNext();
+					c->Setup(6, { x, y, 0 }, { endX, y, 0 });
+					c->SetTimeline(mMusic, 0, beats[i], 0);
+				}
+			}
+			for (int j = 0; j < 20; j++)
+			{
+				float y = bounds.top + 40.f * j;
+				auto c = mRoundSpikes.GetNext();
+				c->Setup(8, { x, y, 0 }, { endX, y, 0 });
+				c->SetTimeline(mMusic, 0, 152.75, 0);
+			}
+		}
 	}
+}
 
 
 	//void TutorialManager::Stage10()
@@ -443,4 +465,3 @@ namespace lu::JSAB
 	//		beat++;
 	//	}
 	//}
-}
