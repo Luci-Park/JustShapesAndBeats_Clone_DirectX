@@ -31,7 +31,7 @@ namespace lu::JSAB
 	void Player::Initialize()
 	{
 		mTr = Owner()->mTransform;
-		mCr = Owner()->GetComponent<Collider2D>();
+		mCol = Owner()->GetComponent<Collider2D>();
 		mMr = Owner()->GetComponent<MeshRenderer>();
 		mImgAnim = Owner()->AddComponent<Animator>();
 		mAudio = Owner()->AddComponent<AudioSource>();
@@ -58,9 +58,10 @@ namespace lu::JSAB
 	}
 	void Player::Update()
 	{
+		CountDashTimer();
+		if (mbHold) return;
 		if (IsShieldUp())
 			mRb->AddForce(mRb->GetVelocity() * -0.1);
-		CountDashTimer();
 		Move();
 		CheckBoundary();
 	}
@@ -85,7 +86,7 @@ namespace lu::JSAB
 
 		if (mDashState != eDashState::Dashing)
 		{
-			mCr->SetState(eState::Active);
+			mCol->SetState(eState::Active);
 			mDashOutline->SetState(eState::InActive);
 			mRb->SetVelocity(moveDir * mMoveSpeed);
 			MoveRotate(GetRotation(moveDir));
@@ -98,7 +99,7 @@ namespace lu::JSAB
 				mDashState = eDashState::CoolDown;
 				mTimer = 0.0f;
 			}
-			mCr->SetState(eState::InActive);
+			mCol->SetState(eState::InActive);
 			mDashOutline->SetState(eState::Active);
 
 			mRb->SetVelocity(mDashDir * mDashSpeed);
@@ -219,7 +220,6 @@ namespace lu::JSAB
 	Vector3 Player::GetInputDir()
 	{
 		Vector3 moveDir = Vector3::Zero;
-		if (mbHold) return moveDir;
 		if (Input::GetKey(eKeyCode::LEFT))
 			moveDir = Vector3::Left;
 		if (Input::GetKey(eKeyCode::RIGHT))
@@ -285,11 +285,16 @@ namespace lu::JSAB
 	void Player::Hold()
 	{
 		mbHold = true;
+		mCol->SetActive(false);
+		mTr->SetRotation(Quaternion::Identity);
+		mTr->SetScale(mOrgScale);
+		mRb->SetVelocity(Vector3::Zero);
 	}
 
 	void Player::Release()
 	{
 		mbHold = false;
+		mCol->SetActive(true);
 	}
 	
 #pragma region  ShieldScript

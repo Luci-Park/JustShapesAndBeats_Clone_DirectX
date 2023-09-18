@@ -71,4 +71,8 @@ namespace lu::JSAB
 		if (mNextStageIdx < mCheckPoints.size() - 1)
 			mNextStageIdx++;		
 	}
+	double TutorialMusicController::GetDiff()
+	{
+		return mCheckPoints[mStageIdx].second - GetTime();
+	}
 }

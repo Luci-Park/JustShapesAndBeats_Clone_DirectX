@@ -22,7 +22,7 @@ namespace lu::JSAB
 		mTransform->SetPosition({ 50,50, 1 });
 		AddComponent<Collider2D>()->SetType(lu::enums::eColliderType::Circle)->SetSize({ 2.3, 2.3 });
 		auto t = AddComponent<Triangle>();
-		t->SetClips(Resources::Find<AudioClip>(L"SFX_HEX_LEVEL_COMPLETE_TUTO"),
+		t->SetClips(Resources::Find<AudioClip>(L"SFX_HEX_LEVEL_COMPLETE_TUTO_SILENCE"),
 			Resources::Find<AudioClip>(L"SFX_HEX_LEVEL_COMPLETE_CHALLENGE"));
 		{
 			GameObject* triangle = object::Instantiate<GameObject>(mTransform, eLayerType::Item);
@@ -32,8 +32,8 @@ namespace lu::JSAB
 
 			auto animator = triangle->AddComponent<Animator>();
 			auto anim = animator->CreateAnimation(L"Burst");
-			double readyduration = 4.2;
 			double downDuration = 0.1;
+			double readyduration = 6.928 - downDuration;
 			float y = 100.f;
 			anim->AddLocalPositionKey(0, Vector3::Zero);
 			anim->AddLocalPositionKey(readyduration * 0.3, { 0, y * 0.8f, 0 });
@@ -46,17 +46,50 @@ namespace lu::JSAB
 			anim->AddLocalRotationKey(readyduration + downDuration, Quaternion::Identity);
 			anim->AddFunctionKey(readyduration + downDuration, std::bind(&Triangle::OnTutoBurst, t));
 
-			anim = animator->CreateAnimation(L"Idle");
+			anim = animator->CreateAnimation(L"GeneralBurst");
+			anim->AddLocalPositionKey(0, Vector3::Zero);
+			anim->AddLocalPositionKey(readyduration * 0.3, { 0, y * 0.8f, 0 });
+			anim->AddLocalPositionKey(readyduration, { 0, y, 0 });
+			anim->AddLocalPositionKey(readyduration + downDuration, { 0, 0, 0 });
+
 			anim->AddLocalRotationKey(0, Quaternion::Identity);
-			anim->AddLocalRotationKey(0, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 0.8));
-			anim->AddLocalRotationKey(0.5, Quaternion::CreateFromAxisAngle(Vector3::Forward, PI *0.8));
-			anim->AddLocalRotationKey(1, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI *0.8));
+			anim->AddLocalRotationKey(readyduration * 0.3, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 0.9));
+			anim->AddLocalRotationKey(readyduration, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI));
+			anim->AddLocalRotationKey(readyduration + downDuration, Quaternion::Identity);
+			anim->AddFunctionKey(readyduration + downDuration, std::bind(&Triangle::OnLevelComplete, t));
+
+			anim = animator->CreateAnimation(L"Idle");
+			
+			float time = 0;
+			for (int i = 0; i < 3; i++)
+			{
+				anim->AddLocalRotationKey(time, Quaternion::Identity);
+				anim->AddLocalRotationKey(time += 0.2, Quaternion::CreateFromAxisAngle(Vector3::Forward, XMConvertToRadians(-35)));
+				anim->AddLocalRotationKey(time += 0.1, Quaternion::CreateFromAxisAngle(Vector3::Forward, XMConvertToRadians(-40)));
+				anim->AddLocalRotationKey(time += 0.05, Quaternion::CreateFromAxisAngle(Vector3::Forward, XMConvertToRadians(-40)));
+				anim->AddLocalRotationKey(time += 0.1, Quaternion::CreateFromAxisAngle(Vector3::Forward, XMConvertToRadians(-35)));
+				anim->AddLocalRotationKey(time += 0.2, Quaternion::Identity);
+				anim->AddLocalRotationKey(time += 0.2, Quaternion::CreateFromAxisAngle(Vector3::Forward, XMConvertToRadians(35)));
+				anim->AddLocalRotationKey(time += 0.1, Quaternion::CreateFromAxisAngle(Vector3::Forward, XMConvertToRadians(40)));
+				anim->AddLocalRotationKey(time += 0.05, Quaternion::CreateFromAxisAngle(Vector3::Forward, XMConvertToRadians(40)));
+				anim->AddLocalRotationKey(time += 0.1, Quaternion::CreateFromAxisAngle(Vector3::Forward, XMConvertToRadians(35)));
+				anim->AddLocalRotationKey(time += 0.2, Quaternion::Identity);
+			}
+			anim->AddLocalPositionKey(time, Vector3::Zero);
+			anim->AddLocalRotationKey(time, Quaternion::Identity);
+			anim->AddLocalPositionKey(time += 0.25, { 0, 150 * 0.9f, 0 });
+			anim->AddLocalPositionKey(time += 0.1, { 0, 150, 0 });
+			anim->AddLocalRotationKey(time, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI));
+			anim->AddLocalPositionKey(time += 0.05, { 0, 150, 0 });
+			anim->AddLocalPositionKey(time += 0.1, { 0, 150 * 0.9f, 0 });
+			anim->AddLocalPositionKey(time += 0.25, { 0, 0, 0 });
+			anim->AddLocalRotationKey(time, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 2));
+
 
 			animator->PlayAnimation(L"Idle", true);
 
 
 
-			//anim = animator->CreateAnimation(L"GeneralBurst");
 			//anim->AddLocalPositionKey(0, Vector3::Zero);
 			//anim->AddLocalPositionKey(readyduration * 0.5, { 0, 50, 0 });
 		}
@@ -96,6 +129,7 @@ namespace lu::JSAB
 			anim->PlayAnimation(L"Rotate", true);
 		}
 		AddComponent<AudioSource>();
+		t->Setup();
 	}
 	std::shared_ptr<graphics::Material> TrianglePrefab::CreateTriangleMat()
 	{

@@ -72,7 +72,7 @@ namespace lu::JSAB
 		Vector3 mDashDir;
 		
 		Transform* mTr;
-		Collider2D* mCr;
+		Collider2D* mCol;
 		MeshRenderer* mMr;
 		Animator* mImgAnim;
 		AudioSource* mAudio;

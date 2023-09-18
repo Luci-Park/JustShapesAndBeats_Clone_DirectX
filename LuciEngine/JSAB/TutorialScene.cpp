@@ -38,7 +38,7 @@ namespace lu::JSAB::Tutorial
 
 	void TutorialScene::OnEnter()
 	{
-		//music->Play();
+		music->Play();
 	}
 
 	void TutorialScene::OnExit()

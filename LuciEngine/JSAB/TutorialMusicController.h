@@ -16,6 +16,7 @@ namespace lu::JSAB
 		virtual void Initialize() override;
 		virtual void Update() override;
 		void PlayNextPart();
+		double GetDiff();
 	private:
 	};
 }

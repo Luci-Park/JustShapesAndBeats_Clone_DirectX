@@ -7,12 +7,6 @@
 #include "LRigidBody.h"
 namespace lu::JSAB
 {
-	void Triangle::Initialize()
-	{
-		Script::Initialize();
-		mAnim = Owner()->GetComponentInChildren<Animator>();
-		mAudio = Owner()->GetComponent<AudioSource>();
-	}
 	//1.872
 	//tuto - 4.146
 	//5.354
@@ -25,9 +19,18 @@ namespace lu::JSAB
 			mPlayer = other->Owner()->GetComponent<Player>();
 			mPlayer->Hold();
 			other->Owner()->mTransform->SetPosition(mTransform->GetPosition());
-
-			mAudio->PlayOneShot(mTuto, 1.0);
-			mAnim->PlayAnimation(L"Burst", false);
+			auto tuto = dynamic_cast<TutorialMusicController*>(MusicController::Instance);
+			if (tuto)
+			{
+				double diff = tuto->GetDiff();
+				diff = std::max(6.928 - diff, 0.0);
+				mAudio->SetClip(mTuto);
+				mAudio->Play();
+				mAudio->SetPosition(diff);
+				mAnim->PlayAnimation(L"Burst", false);
+				mAnim->SetTime(diff);
+				tuto->PlayNextPart();
+			}
 		}
 	}
 	void Triangle::SetClips(std::shared_ptr<AudioClip> tuto, std::shared_ptr<AudioClip> level)
@@ -35,14 +38,18 @@ namespace lu::JSAB
 		mTuto = tuto;
 		mLevel = level;
 	}
+	void Triangle::Setup()
+	{
+		mAnim = Owner()->GetComponentInChildren<Animator>();
+		mAudio = Owner()->GetComponent<AudioSource>();
+	}
 	void Triangle::OnTutoBurst()
 	{
 		mPlayer->Release();
-		/*
 		auto tuto = dynamic_cast<TutorialMusicController*>(MusicController::Instance);
 		if (tuto)
 			tuto->PlayNextPart();
-			*/
+		mAnim->PlayAnimation(L"Idle", true);
 	}
 	void Triangle::OnLevelComplete()
 	{

@@ -10,10 +10,10 @@ namespace lu::JSAB
 	public:
 		Triangle() {}
 		virtual ~Triangle() {}
-		virtual void Initialize() override;
 		virtual void OnCollisionEnter(Collider2D* other) override;
 
 		void SetClips(std::shared_ptr<AudioClip> tuto, std::shared_ptr<AudioClip> level);
+		void Setup();
 		void OnTutoBurst();
 		void OnLevelComplete();
 	private:
