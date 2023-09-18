@@ -47,7 +47,7 @@ namespace lu::JSAB
 			anim->AddFunctionKey(readyduration + downDuration, std::bind(&Triangle::OnTutoBurst, t));
 
 			anim = animator->CreateAnimation(L"Idle");
-			anim->AddLocalRotationKey(0, Quaternion::Identity)
+			anim->AddLocalRotationKey(0, Quaternion::Identity);
 			anim->AddLocalRotationKey(0, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 0.8));
 			anim->AddLocalRotationKey(0.5, Quaternion::CreateFromAxisAngle(Vector3::Forward, PI *0.8));
 			anim->AddLocalRotationKey(1, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI *0.8));
