@@ -5,6 +5,8 @@
 #include "TutorialMusicController.h"
 #include "LSceneManager.h"
 #include "LRigidBody.h"
+#include "LCamera.h"
+#include "CameraScript.h"
 namespace lu::JSAB
 {
 	//1.872
@@ -51,6 +53,7 @@ namespace lu::JSAB
 		if (tuto)
 			tuto->PlayNextPart();
 		mAnim->PlayAnimation(L"Idle", true);
+		SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->LevelTrans();
 	}
 	void Triangle::OnLevelComplete()
 	{

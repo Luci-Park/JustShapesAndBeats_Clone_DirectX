@@ -127,7 +127,7 @@ namespace lu::JSAB::Title
 		mButton->SetActive(false);
 		mCamera->Reset();
 		mCamera->mTransform->SetPosition({ 0, 0, -10 });
-		mText->Owner()->SetActive(false);
+		//mText->Owner()->SetActive(false);
 	}
 	void TitleScene::StartMusic()
 	{

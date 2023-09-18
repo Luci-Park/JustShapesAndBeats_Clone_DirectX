@@ -30,14 +30,14 @@ namespace lu::JSAB
 	}
 	void Player::Initialize()
 	{
-		mTr = Owner()->mTransform;
+		Script::Initialize();
 		mCol = Owner()->GetComponent<Collider2D>();
 		mMr = Owner()->GetComponent<MeshRenderer>();
 		mImgAnim = Owner()->AddComponent<Animator>();
 		mAudio = Owner()->AddComponent<AudioSource>();
 		mRb = Owner()->AddComponent<Rigidbody>();
 
-		mOrgScale = mTr->GetScale();
+		mOrgScale = mTransform->GetScale();
 		mMoveScale = { mOrgScale.x * 0.7f, mOrgScale.y * 1.3f, 1.f };
 		mDashScale = { mOrgScale.x * 0.5f, mOrgScale.y * 2.f, 1.f };
 		
@@ -80,7 +80,7 @@ namespace lu::JSAB
 			mDashState = eDashState::Dashing;
 			mTimer = 0.f;
 			mDashDir = moveDir == Vector3::Zero ? Vector3::Right : moveDir;
-			mDashBurst->mTransform->SetPosition(mTr->GetPosition());
+			mDashBurst->mTransform->SetPosition(mTransform->GetPosition());
 			mDashBurstAnim->PlayAnimation(L"Burst", false);
 		}
 
@@ -104,14 +104,14 @@ namespace lu::JSAB
 
 			mRb->SetVelocity(mDashDir * mDashSpeed);
 			MoveRotate(GetRotation(mDashDir));
-			mTr->SetScale(mDashScale);
+			mTransform->SetScale(mDashScale);
 		}
 	}
 
 	void Player::CheckBoundary()
 	{
-		Vector3 currPos = mTr->GetPosition();
-		Vector3 halfScale = mTr->GetScale() * 0.5f;
+		Vector3 currPos = mTransform->GetPosition();
+		Vector3 halfScale = mTransform->GetScale() * 0.5f;
 		RECT rect = SceneManager::MainCamera()->GetBoundary();
 		if (currPos.y < (float)rect.top + halfScale.y || currPos.y >(float)rect.bottom - halfScale.y
 			|| currPos.x < (float)rect.left + halfScale.x || currPos.x >(float)rect.right - halfScale.x)
@@ -121,7 +121,7 @@ namespace lu::JSAB
 				Vector3 newPos;
 				newPos.y = std::clamp(currPos.y, (float)rect.top + halfScale.y, (float)rect.bottom - halfScale.y);
 				newPos.x = std::clamp(currPos.x, (float)rect.left + halfScale.x, (float)rect.right - halfScale.x);
-				mTr->SetPosition(newPos);
+				mTransform->SetPosition(newPos);
 			}
 			else
 			{
@@ -144,7 +144,7 @@ namespace lu::JSAB
 		//mCurrHealth--;
 		if (mCurrHealth > 0)
 		{
-			Vector3 dir = mTr->GetPosition()- other->GetPosition();
+			Vector3 dir = mTransform->GetPosition()- other->GetPosition();
 			Vector3 force = mRb->GetVelocity();
 
 			mRb->SetVelocity(dir * 25);
@@ -168,20 +168,20 @@ namespace lu::JSAB
 		static float rotateTime = 0.05f;
 		if (rotation != targetRotation)
 		{
-			originalRotation = mTr->GetRotation();
+			originalRotation = mTransform->GetRotation();
 			targetRotation = rotation;
 			timer = 0;
-			mTr->SetRotation(Quaternion::Identity);
+			mTransform->SetRotation(Quaternion::Identity);
 			return;
 		}
 		if (timer <= rotateTime)
 		{
 			timer += Time::DeltaTime();
-			mTr->SetRotation(Quaternion::Lerp(originalRotation, targetRotation, timer / rotateTime));
+			mTransform->SetRotation(Quaternion::Lerp(originalRotation, targetRotation, timer / rotateTime));
 		}
 		else
 		{
-			mTr->SetRotation(rotation);
+			mTransform->SetRotation(rotation);
 		}
 	}
 	
@@ -193,20 +193,20 @@ namespace lu::JSAB
 		static float scaleTime = 0.15f;
 		if (scale != targetScale)
 		{
-			originalScale = mTr->GetScale();
+			originalScale = mTransform->GetScale();
 			targetScale = scale;
 			timer = 0;
-			mTr->SetScale(mOrgScale);
+			mTransform->SetScale(mOrgScale);
 			return;
 		}
 		if (timer <= scaleTime)
 		{
 			timer += Time::DeltaTime();
-			mTr->SetScale(Vector3::Lerp(originalScale, targetScale, timer / scaleTime));
+			mTransform->SetScale(Vector3::Lerp(originalScale, targetScale, timer / scaleTime));
 		}
 		else
 		{
-			mTr->SetScale(scale);
+			mTransform->SetScale(scale);
 		}
 	}
 	
@@ -286,8 +286,8 @@ namespace lu::JSAB
 	{
 		mbHold = true;
 		mCol->SetActive(false);
-		mTr->SetRotation(Quaternion::Identity);
-		mTr->SetScale(mOrgScale);
+		mTransform->SetRotation(Quaternion::Identity);
+		mTransform->SetScale(mOrgScale);
 		mRb->SetVelocity(Vector3::Zero);
 	}
 

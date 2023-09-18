@@ -71,7 +71,6 @@ namespace lu::JSAB
 		Vector3 mMoveDir;
 		Vector3 mDashDir;
 		
-		Transform* mTr;
 		Collider2D* mCol;
 		MeshRenderer* mMr;
 		Animator* mImgAnim;
