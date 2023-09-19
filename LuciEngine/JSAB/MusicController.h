@@ -20,6 +20,7 @@ namespace lu::JSAB
 		void Stop();
 		double GetTime();
 		int GetStage() { return mStageIdx; }
+		float GetPercent();
 	protected:
 		AudioSource* mAudioSource;
 		Text* mText;

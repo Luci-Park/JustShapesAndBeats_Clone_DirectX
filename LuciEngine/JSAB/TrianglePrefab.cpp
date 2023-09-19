@@ -23,6 +23,7 @@ namespace lu::JSAB
 		auto t = AddComponent<Triangle>();
 		t->SetClips(Resources::Find<AudioClip>(L"SFX_HEX_LEVEL_COMPLETE_TUTO_SILENCE"),
 			Resources::Find<AudioClip>(L"SFX_HEX_LEVEL_COMPLETE_CHALLENGE"));
+		auto rb = AddComponent<Rigidbody>();
 		{
 			GameObject* triangle = object::Instantiate<GameObject>(mTransform, eLayerType::Item);
 			triangle->SetName(L"triangle");
@@ -87,10 +88,6 @@ namespace lu::JSAB
 
 			animator->PlayAnimation(L"Idle", true);
 
-
-
-			//anim->AddLocalPositionKey(0, Vector3::Zero);
-			//anim->AddLocalPositionKey(readyduration * 0.5, { 0, 50, 0 });
 		}
 		{
 			GameObject* circle = object::Instantiate<GameObject>(mTransform, eLayerType::Item);

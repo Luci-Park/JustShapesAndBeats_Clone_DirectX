@@ -2,6 +2,7 @@
 #include "LScript.h"
 #include "LAudioSource.h"
 #include "LAnimator.h"
+#include "LRigidBody.h"
 #include "Player.h"
 namespace lu::JSAB
 {
@@ -11,7 +12,6 @@ namespace lu::JSAB
 		Triangle() {}
 		virtual ~Triangle() {}
 		virtual void OnCollisionEnter(Collider2D* other) override;
-
 		void SetClips(std::shared_ptr<AudioClip> tuto, std::shared_ptr<AudioClip> level);
 		void Setup();
 		void TutorialAppear();
@@ -20,7 +20,7 @@ namespace lu::JSAB
 		void OnLevelComplete();
 	private:
 		AudioSource* mAudio;
-		Animator* mBaseAnim;
+		Rigidbody* mRB;
 		Animator* mTriangleAnim;
 		std::shared_ptr<AudioClip> mTuto;
 		std::shared_ptr<AudioClip> mLevel;

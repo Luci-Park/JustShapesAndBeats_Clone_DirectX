@@ -15,6 +15,7 @@ namespace lu
 
 		void SetMass(float mass) { mMass = mass; }
 		void SetVelocity(Vector3 velocity) { mVelocity = velocity; }
+		void SetDrag(float drag) { mDrag = drag; }
 		void AddForce(Vector3 force);
 		void UseGravity(bool use) { mbUseGravity = use; }
 		Vector3 GetVelocity() { return mVelocity; }
@@ -24,6 +25,7 @@ namespace lu
 		Vector3 mAccelation;
 		Vector3 mVelocity;
 		Vector3 mLimitVelocity;
+		float mDrag;
 
 		bool mbUseGravity;
 	};

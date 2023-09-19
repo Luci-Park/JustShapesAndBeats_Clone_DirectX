@@ -20,7 +20,7 @@ namespace lu::JSAB
 		SceneManager::CreateScene<Tutorial::TutorialScene>(L"TutorialScene");
 		//SceneManager::CreateScene<ParticleTestScene>(L"ParticleTestScene");
 		//SceneManager::CreateScene<CameraTestScene>(L"CameraTestScene");
-		SceneManager::LoadScene(L"TitleScene");
+		SceneManager::LoadScene(L"TutorialScene");
 		//SceneManager::CreateScene<TriangleTestScene>(L"TriangleTestScene");
 		//SceneManager::CreateScene<FakeTutorialScene>(L"FakeTutorialScene");
 	}

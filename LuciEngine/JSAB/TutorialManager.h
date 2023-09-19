@@ -14,11 +14,13 @@ namespace lu::JSAB
 	class TutorialBeatCircle; 
 	class TutorialGiantCircle;
 	class TutorialCircleLine;
+	class Triangle;
 	class TutorialManager : public Script
 	{
 	public:
 		TutorialManager();
 		virtual void Initialize() override;
+		virtual void Update() override;
 		void OnStageChange(int stage);
 		void SetMusic(TutorialMusicController* music) { mMusic = music; }
 	private:
@@ -34,6 +36,8 @@ namespace lu::JSAB
 		void Stage10();
 	private:
 		TutorialMusicController* mMusic;
+		Triangle* mLevelTriangle;
+
 		BulletPool<TutorialRoundSpikes> mRoundSpikes;
 		BulletPool<TutorialBurst> mBursts;
 		BulletPool<TutorialBeam>mBeams;

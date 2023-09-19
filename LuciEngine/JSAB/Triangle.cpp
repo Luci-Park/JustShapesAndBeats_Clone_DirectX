@@ -44,10 +44,15 @@ namespace lu::JSAB
 	{
 		mTriangleAnim = Owner()->GetComponentInChildren<Animator>();
 		mAudio = Owner()->GetComponent<AudioSource>();
+		mRB = Owner()->GetComponent<Rigidbody>();
 	}
 	void Triangle::TutorialAppear()
 	{
 		Owner()->SetActive(true);
+		mTriangleAnim->PlayAnimation(L"Idle", true);
+		mTransform->SetPosition( 680, 0, -1);
+		mRB->SetVelocity(Vector3::Left * 80);
+		mRB->SetDrag(25);
 	}
 	void Triangle::LevelAppear()
 	{
@@ -58,9 +63,11 @@ namespace lu::JSAB
 		mPlayer->Release();
 		auto tuto = dynamic_cast<TutorialMusicController*>(MusicController::Instance);
 		if (tuto)
-			tuto->PlayNextPart();
-		mTriangleAnim->PlayAnimation(L"Idle", true);
-		SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->LevelTrans();
+		{
+			tuto->PlayNextPart();			
+			SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->LevelTrans();
+		}
+		Owner()->SetActive(false);
 	}
 	void Triangle::OnLevelComplete()
 	{

@@ -65,4 +65,8 @@ namespace lu::JSAB
 	{
 		return mAudioSource->GetPosition();
 	}
+	float MusicController::GetPercent()
+	{
+		return GetTime() / mCheckPoints[mStageIdx].second;
+	}
 }

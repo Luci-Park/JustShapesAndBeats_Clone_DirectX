@@ -13,6 +13,7 @@ namespace lu
 		, mVelocity(Vector3::Zero)
 		, mLimitVelocity(Vector3::Zero)
 		, mbUseGravity(false)
+		, mDrag(0)
 	{
 		mLimitVelocity.y = 2000.0f;
 	}
@@ -27,6 +28,17 @@ namespace lu
 
 	void Rigidbody::Update()
 	{
+		if (abs(mDrag) > 0)
+		{
+			Vector3 dir;
+			mVelocity.Normalize(dir);
+			Vector3 resultVel = mVelocity + dir * mDrag * -1 * Time::DeltaTime();
+			if (mVelocity.Dot(resultVel) < 0)
+				mVelocity = Vector3::Zero;
+			else
+				mVelocity = resultVel;
+		}
+	
 		Vector3 pos = Owner()->mTransform->GetPosition();
 		pos += mVelocity * Time::DeltaTime();
 		Owner()->mTransform->SetPosition(pos);

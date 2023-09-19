@@ -7,6 +7,9 @@
 
 #include "TutorialBeatCircle.h"
 #include "..\\Editor_SOURCE\\TransformWidget.h"
+#include "TrianglePrefab.h"
+#include "Triangle.h"
+
 
 #include "LCamera.h"
 #include "LObject.h"
@@ -26,8 +29,8 @@ namespace lu::JSAB::Tutorial
 		music = manager->AddComponent<TutorialMusicController>();
 		manager->AddComponent<TutorialManager>();
 		
-		auto c = object::Instantiate<TrianglePrefab>(Vector3(570.0f, 0.0f, 1.0001f), eLayerType::Item);
-
+		auto c = object::Instantiate<TrianglePrefab>(eLayerType::Item);
+		c->GetComponent<Triangle>()->TutorialAppear();
 		object::Instantiate<PlayerPrefab>(Vector3(-540, 0, -5), eLayerType::Player);
 		Scene::Initialize(); 
 	}

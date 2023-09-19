@@ -9,6 +9,8 @@
 #include "LCamera.h"
 #include "LAnimator.h"
 #include "LApplication.h"
+#include "TrianglePrefab.h"
+#include "Triangle.h"
 
 extern lu::Application application;
 namespace lu::JSAB
@@ -26,6 +28,20 @@ namespace lu::JSAB
 	{
 		mMusic = Owner()->GetComponent<TutorialMusicController>();
 		OnStageChange(0);
+		auto c = object::Instantiate<TrianglePrefab>(Vector3(570.0f, 0.0f, -1.f), eLayerType::Item);
+		mLevelTriangle = c->GetComponent<Triangle>();
+		c->SetActive(false);
+	}
+	void TutorialManager::Update()
+	{
+		if (mMusic->GetStage() < 8)
+		{
+			float percent = mMusic->GetPercent();
+			if (percent > 0.8 && !mLevelTriangle->IsActive())
+			{
+				mLevelTriangle->TutorialAppear();
+			}
+		}
 	}
 	void TutorialManager::OnStageChange(int stage)
 	{
@@ -78,8 +94,7 @@ namespace lu::JSAB
 			else
 				bullet->SetUp({ 500, (float)bounds.bottom, 0 }, { 500, (float)bounds.bottom - move, 0 });
 			bullet->SetTimeline(mMusic, warning[i], beat[i], 0);
-		}
-		
+		}		
 	}
 	
 	void TutorialManager::Stage3()
