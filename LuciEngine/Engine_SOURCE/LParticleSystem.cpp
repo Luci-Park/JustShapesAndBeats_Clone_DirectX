@@ -156,6 +156,10 @@ namespace lu
 		mParticleBuffer->clear();
 		GetMaterial()->clear();
 	}
+	void ParticleSystem::SetTexture(std::shared_ptr<Texture> tex)
+	{
+		GetMaterial()->SetTexture(tex);
+	}
 	void ParticleSystem::BindConstantBuffer()
 	{
 		ConstantBuffer* cb = renderer::constantBuffer[(UINT)eCBType::ParticleSystem];

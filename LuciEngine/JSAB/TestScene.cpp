@@ -9,6 +9,7 @@
 #include "LCollisionManager.h"
 #include "..\\Editor_SOURCE\\TransformWidget.h"
 #include "TrianglePrefab.h" 
+#include "DubwooferDropSpawner.h"
 namespace lu::JSAB
 {
 #pragma region ParticleTestScene
@@ -137,6 +138,18 @@ namespace lu::JSAB
 		
 	}
 	void TriangleTestScene::Update()
+	{
+		Scene::Update();
+	}
+#pragma endregion
+
+#pragma region BulletTest
+	void BulletTestScene::Initialize()
+	{
+		object::Instantiate<GameObject>(eLayerType::Camera)->AddComponent<GameCamera>();
+	}
+
+	void BulletTestScene::Update()
 	{
 		Scene::Update();
 	}

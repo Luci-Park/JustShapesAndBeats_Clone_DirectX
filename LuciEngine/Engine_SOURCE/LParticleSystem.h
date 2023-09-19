@@ -23,7 +23,7 @@ namespace lu
 
 		virtual void LateUpdate() override;
 		virtual void Render() override;
-
+		void SetTexture(std::shared_ptr<Texture> tex);
 		void SetLifeTime(float time) { mLifeTime = time; }
 		void SetSize(float start, float end) { mStartSize = start; mEndSize = end; }
 		void SetStartSpeed(float speed) { mStartSpeed = speed;}

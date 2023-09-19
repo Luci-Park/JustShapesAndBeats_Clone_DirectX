@@ -5,6 +5,9 @@
 #include "LAnimator.h"
 #include "LResources.h"
 #include "LRigidBody.h"
+#include "LParticleSystem.h"
+
+#include "LInput.h"
 namespace lu::JSAB
 {
 	DubwooferDropBullet::DubwooferDropBullet()
@@ -14,6 +17,7 @@ namespace lu::JSAB
 	void DubwooferDropBullet::Initialize()
 	{
 		Script::Initialize();
+		mTransform->SetScale({ 15, 15, 1 });
 		Owner()->AddComponent<Collider2D>()->SetType(eColliderType::Circle);
 		
 		auto mr = Owner()->AddComponent<MeshRenderer>();
@@ -21,11 +25,37 @@ namespace lu::JSAB
 			->SetMaterial(Resources::Load<Material>(L"DropBulletMat", L"SmallCircle"));
 
 		mAnim = Owner()->AddComponent<Animator>();
-		mAnim->
+		auto ani = mAnim->CreateAnimation(L"Drop");
+		float dur = 0.8;
+		ani->AddScaleKey(dur * 0, { 3, 27, 1 });
+		ani->AddScaleKey(dur *0.25, { 24, 6, 1 });
+		ani->AddScaleKey(dur *0.5, { 10, 20, 1 });
+		ani->AddScaleKey(dur * 0.75, { 18, 12, 1 });
+		ani->AddScaleKey(dur * 1, { 15, 15, 1 });
 
+		mRb = Owner()->AddComponent<Rigidbody>();
+		mRb->UseGravity(true);
 
+		mParticle = Owner()->AddComponent<ParticleSystem>();
+		mParticle->Duration = 3;
+		mParticle->Loop = false;
+		mParticle->RateOverTime = 10;
+		mParticle->RateOverDistance = 0;
+		mParticle->SetSize(10, 0);
+		mParticle->SetLifeTime(3);
+		mParticle->SetTexture(Resources::Find<Texture>(L"SmallCircle"));
 	}
 	void DubwooferDropBullet::Update()
 	{
+	}
+	void DubwooferDropBullet::Activate()
+	{
+		Owner()->SetActive(true);
+		mRb->SetVelocity(Vector3::Down * 350);
+		mAnim->PlayAnimation(L"Drop", false);
+	}
+	void DubwooferDropBullet::DeActivate()
+	{
+		Owner()->SetActive(false);
 	}
 }

@@ -39,7 +39,7 @@ namespace lu
 				mVelocity = resultVel;
 		}
 		if (mbUseGravity)
-			AddForce(Vector3::Up * -9.8);
+			AddForce(Vector3::Up * -980);
 
 		Vector3 pos = Owner()->mTransform->GetPosition();
 		pos += mVelocity * Time::DeltaTime();
