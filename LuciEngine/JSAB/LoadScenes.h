@@ -4,7 +4,7 @@
 #include "TitleScene.h"
 #include "TutorialScene.h"
 #include "TestScene.h"
-#include "SubstepScene.h"
+#include "DubwooferSubstepScene.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "..\\x64\\Debug\\JSAB.lib")

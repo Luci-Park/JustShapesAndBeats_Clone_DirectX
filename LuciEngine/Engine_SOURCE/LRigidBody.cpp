@@ -38,7 +38,9 @@ namespace lu
 			else
 				mVelocity = resultVel;
 		}
-	
+		if (mbUseGravity)
+			AddForce(Vector3::Up * -9.8);
+
 		Vector3 pos = Owner()->mTransform->GetPosition();
 		pos += mVelocity * Time::DeltaTime();
 		Owner()->mTransform->SetPosition(pos);

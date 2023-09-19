@@ -22,31 +22,6 @@ namespace lu::JSAB
 	}
 	void MusicController::Update()
 	{
-		if (mbIsPlaying)
-		{
-			double time = GetTime();
-			mText->text = std::to_wstring(time);
-			if (time < mEndTime)
-			{
-				if (time > mCheckPoints[mStageIdx].second)
-				{
-					if (mNextStageIdx > mStageIdx) mStageIdx = mNextStageIdx;
-					//checkpoint
-				}
-			}
-			else if (mAudioSource->GetVolume() > 0)
-			{
-				float fadeStep = mFadeTime / mFadeDuration;
-				float vol = mStartVolume * (1.0f - fadeStep);
-
-				mAudioSource->SetVolume(vol);
-				mFadeTime += Time::DeltaTime();
-			}
-			else
-			{
-				mAudioSource->Stop();
-			}
-		}
 	}
 	void MusicController::Play()
 	{

@@ -15,16 +15,16 @@
       <Filter>Contents\Player</Filter>
     </ClCompile>
     <ClCompile Include="TitleScene.cpp">
-      <Filter>Contents\Scene\Title\Scene</Filter>
+      <Filter>Contents\_SceneSpecific\Title\Scene</Filter>
     </ClCompile>
     <ClCompile Include="OpeningUIObjects.cpp">
-      <Filter>Contents\Scene\Title\UIs</Filter>
+      <Filter>Contents\_SceneSpecific\Title\UIs</Filter>
     </ClCompile>
     <ClCompile Include="TitleObject.cpp">
-      <Filter>Contents\Scene\Title\UIs</Filter>
+      <Filter>Contents\_SceneSpecific\Title\UIs</Filter>
     </ClCompile>
     <ClCompile Include="MenuButtonObject.cpp">
-      <Filter>Contents\Scene\Title\UIs</Filter>
+      <Filter>Contents\_SceneSpecific\Title\UIs</Filter>
     </ClCompile>
     <ClCompile Include="yaCameraScript.cpp">
       <Filter>EngineTesters</Filter>
@@ -51,46 +51,58 @@
       <Filter>Contents\Bullets</Filter>
     </ClCompile>
     <ClCompile Include="TutorialScene.cpp">
-      <Filter>Contents\Scene\Tutorial\Scene</Filter>
+      <Filter>Contents\_SceneSpecific\1.Tutorial\Scene</Filter>
     </ClCompile>
     <ClCompile Include="CameraScript.cpp">
       <Filter>Contents\Camera</Filter>
     </ClCompile>
     <ClCompile Include="TutorialBurst.cpp">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
+      <Filter>Contents\_SceneSpecific\1.Tutorial\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="TutorialBeatCircle.cpp">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
+      <Filter>Contents\_SceneSpecific\1.Tutorial\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="TutorialManager.cpp">
-      <Filter>Contents\Scene\Tutorial\Managers</Filter>
+      <Filter>Contents\_SceneSpecific\1.Tutorial\Managers</Filter>
     </ClCompile>
     <ClCompile Include="TutorialMusicController.cpp">
-      <Filter>Contents\Scene\Tutorial\Managers</Filter>
+      <Filter>Contents\_SceneSpecific\1.Tutorial\Managers</Filter>
     </ClCompile>
     <ClCompile Include="TutorialGiantCircle.cpp">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
+      <Filter>Contents\_SceneSpecific\1.Tutorial\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="TestScene.cpp">
-      <Filter>Contents\Scene\Test</Filter>
+      <Filter>Contents\_SceneSpecific\Test</Filter>
     </ClCompile>
     <ClCompile Include="Triangle.cpp">
       <Filter>Contents\Triangle</Filter>
     </ClCompile>
     <ClCompile Include="SplashAnimation.cpp">
-      <Filter>Contents\Scene\Title\Scene\OpeningAnimation</Filter>
-    </ClCompile>
-    <ClCompile Include="SubstepScene.cpp">
-      <Filter>Contents\Scene\Substep</Filter>
+      <Filter>Contents\_SceneSpecific\Title\Scene\OpeningAnimation</Filter>
     </ClCompile>
     <ClCompile Include="TutorialBeam.cpp">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
+      <Filter>Contents\_SceneSpecific\1.Tutorial\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="TutorialRoundSpikes.cpp">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
+      <Filter>Contents\_SceneSpecific\1.Tutorial\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="TutorialSpikeBar.cpp">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
+      <Filter>Contents\_SceneSpecific\1.Tutorial\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="DubwooferSubstepScene.cpp">
+      <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="DubwooferMusicController.cpp">
+      <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="DubwooferBeamBullet.cpp">
+      <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="DubwooferDropBullet.cpp">
+      <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="DubwooferDropSpawner.cpp">
+      <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -105,16 +117,16 @@
       <Filter>Contents\Player</Filter>
     </ClInclude>
     <ClInclude Include="TitleScene.h">
-      <Filter>Contents\Scene\Title\Scene</Filter>
+      <Filter>Contents\_SceneSpecific\Title\Scene</Filter>
     </ClInclude>
     <ClInclude Include="OpeningUIObjects.h">
-      <Filter>Contents\Scene\Title\UIs</Filter>
+      <Filter>Contents\_SceneSpecific\Title\UIs</Filter>
     </ClInclude>
     <ClInclude Include="TitleObject.h">
-      <Filter>Contents\Scene\Title\UIs</Filter>
+      <Filter>Contents\_SceneSpecific\Title\UIs</Filter>
     </ClInclude>
     <ClInclude Include="MenuButtonObject.h">
-      <Filter>Contents\Scene\Title\UIs</Filter>
+      <Filter>Contents\_SceneSpecific\Title\UIs</Filter>
     </ClInclude>
     <ClInclude Include="yaPlayerScript.h">
       <Filter>EngineTesters</Filter>
@@ -148,46 +160,58 @@
       <Filter>Contents\Bullets</Filter>
     </ClInclude>
     <ClInclude Include="TutorialScene.h">
-      <Filter>Contents\Scene\Tutorial\Scene</Filter>
+      <Filter>Contents\_SceneSpecific\1.Tutorial\Scene</Filter>
     </ClInclude>
     <ClInclude Include="CameraScript.h">
       <Filter>Contents\Camera</Filter>
     </ClInclude>
     <ClInclude Include="TutorialBurst.h">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
+      <Filter>Contents\_SceneSpecific\1.Tutorial\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="TutorialBeatCircle.h">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
+      <Filter>Contents\_SceneSpecific\1.Tutorial\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="TutorialManager.h">
-      <Filter>Contents\Scene\Tutorial\Managers</Filter>
+      <Filter>Contents\_SceneSpecific\1.Tutorial\Managers</Filter>
     </ClInclude>
     <ClInclude Include="TutorialMusicController.h">
-      <Filter>Contents\Scene\Tutorial\Managers</Filter>
+      <Filter>Contents\_SceneSpecific\1.Tutorial\Managers</Filter>
     </ClInclude>
     <ClInclude Include="TutorialGiantCircle.h">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
+      <Filter>Contents\_SceneSpecific\1.Tutorial\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="TestScene.h">
-      <Filter>Contents\Scene\Test</Filter>
+      <Filter>Contents\_SceneSpecific\Test</Filter>
     </ClInclude>
     <ClInclude Include="Triangle.h">
       <Filter>Contents\Triangle</Filter>
     </ClInclude>
     <ClInclude Include="SplashAnimation.h">
-      <Filter>Contents\Scene\Title\Scene\OpeningAnimation</Filter>
-    </ClInclude>
-    <ClInclude Include="SubstepScene.h">
-      <Filter>Contents\Scene\Substep</Filter>
+      <Filter>Contents\_SceneSpecific\Title\Scene\OpeningAnimation</Filter>
     </ClInclude>
     <ClInclude Include="TutorialBeam.h">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
+      <Filter>Contents\_SceneSpecific\1.Tutorial\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="TutorialRoundSpikes.h">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
+      <Filter>Contents\_SceneSpecific\1.Tutorial\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="TutorialSpikeBar.h">
-      <Filter>Contents\Scene\Tutorial\Bullet</Filter>
+      <Filter>Contents\_SceneSpecific\1.Tutorial\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="DubwooferSubstepScene.h">
+      <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="DubwooferMusicController.h">
+      <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="DubwooferBeamBullet.h">
+      <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="DubwooferDropBullet.h">
+      <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="DubwooferDropSpawner.h">
+      <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -197,9 +221,6 @@
     <Filter Include="Contents\Load">
       <UniqueIdentifier>{d56c7989-6404-413b-bbe8-66091196284d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Scene">
-      <UniqueIdentifier>{2ece5e94-2beb-4579-8ff7-7b56ddd12fa1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Background">
       <UniqueIdentifier>{0d4b3305-a180-4535-a185-a204a6175fcb}</UniqueIdentifier>
     </Filter>
@@ -208,15 +229,6 @@
     </Filter>
     <Filter Include="Contents\Triangle">
       <UniqueIdentifier>{96c9b033-a0f2-4da5-9b47-3a6878c8c1dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Scene\Title">
-      <UniqueIdentifier>{3a3123e0-4a96-482c-8c82-fe9d3e48f546}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Scene\Title\Scene">
-      <UniqueIdentifier>{0262d4c1-070e-4254-b141-0c1bf5498695}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Scene\Title\UIs">
-      <UniqueIdentifier>{c9d45362-4870-4773-a869-e7e077680a40}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineTesters">
       <UniqueIdentifier>{89c1cf6b-235f-4192-bec8-7e6260ac1f60}</UniqueIdentifier>
@@ -230,32 +242,56 @@
     <Filter Include="Contents\Camera">
       <UniqueIdentifier>{a63bfb69-c775-400c-aa2a-c738e4cd9c3f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Scene\Tutorial">
-      <UniqueIdentifier>{7cf01eb1-5ee9-40c9-b20b-13a6609da5f9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Scene\Tutorial\Scene">
-      <UniqueIdentifier>{e583f8ff-8653-465a-89a8-05937618ecd0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Scene\Tutorial\Bullet">
-      <UniqueIdentifier>{d75bdd1e-9a2a-4064-92d3-3e5b2fa8c43e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Scene\Tutorial\Managers">
-      <UniqueIdentifier>{f65359ed-cd0a-4232-a371-6926038e203b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Scene\Title\Scene\OpeningAnimation">
-      <UniqueIdentifier>{1f52ea33-f941-478c-a5c1-538d32bfa56f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Scene\Test">
-      <UniqueIdentifier>{de2dac49-9e17-43a8-ba0f-70c71b38782e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Scene\Substep">
-      <UniqueIdentifier>{3e5a4ef0-3b6f-4212-bdb3-e62a14c438f0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\BulletTest">
       <UniqueIdentifier>{72951c92-b49d-4206-83d7-f55d018d819b}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineTesters\NewTutorial">
       <UniqueIdentifier>{ceece7f3-f648-40e3-86f5-55aa064012f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\_SceneSpecific">
+      <UniqueIdentifier>{2ece5e94-2beb-4579-8ff7-7b56ddd12fa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\_SceneSpecific\Title">
+      <UniqueIdentifier>{3a3123e0-4a96-482c-8c82-fe9d3e48f546}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\_SceneSpecific\Title\Scene">
+      <UniqueIdentifier>{0262d4c1-070e-4254-b141-0c1bf5498695}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\_SceneSpecific\Title\Scene\OpeningAnimation">
+      <UniqueIdentifier>{1f52ea33-f941-478c-a5c1-538d32bfa56f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\_SceneSpecific\Title\UIs">
+      <UniqueIdentifier>{c9d45362-4870-4773-a869-e7e077680a40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\_SceneSpecific\Test">
+      <UniqueIdentifier>{de2dac49-9e17-43a8-ba0f-70c71b38782e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\_SceneSpecific\1.Tutorial">
+      <UniqueIdentifier>{7cf01eb1-5ee9-40c9-b20b-13a6609da5f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\_SceneSpecific\1.Tutorial\Scene">
+      <UniqueIdentifier>{e583f8ff-8653-465a-89a8-05937618ecd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\_SceneSpecific\1.Tutorial\Bullet">
+      <UniqueIdentifier>{d75bdd1e-9a2a-4064-92d3-3e5b2fa8c43e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\_SceneSpecific\1.Tutorial\Managers">
+      <UniqueIdentifier>{f65359ed-cd0a-4232-a371-6926038e203b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\_SceneSpecific\2.DubwooferSubstep">
+      <UniqueIdentifier>{3e5a4ef0-3b6f-4212-bdb3-e62a14c438f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\_SceneSpecific\2.DubwooferSubstep\Scene">
+      <UniqueIdentifier>{ab78cfe3-552b-411e-a2d6-ac1461d1fafc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\_SceneSpecific\2.DubwooferSubstep\Bullet">
+      <UniqueIdentifier>{f02df690-cc7d-4416-8f6f-743f7cdce655}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\_SceneSpecific\2.DubwooferSubstep\Manager">
+      <UniqueIdentifier>{2cc7cc2b-f867-4785-84cb-840ea0cb2246}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Bullets\Beam">
+      <UniqueIdentifier>{3bb2bb6c-b55d-42e7-81ed-ebb435a0b52a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
