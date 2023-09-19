@@ -104,6 +104,9 @@
     <ClCompile Include="DubwooferDropSpawner.cpp">
       <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="DubwooferSpikeBullet.cpp">
+      <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -211,6 +214,9 @@
       <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="DubwooferDropSpawner.h">
+      <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="DubwooferSpikeBullet.h">
       <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
