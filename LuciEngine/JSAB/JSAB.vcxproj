@@ -161,6 +161,7 @@
     <ClInclude Include="DubwooferDropSpawner.h" />
     <ClInclude Include="DubwooferMusicController.h" />
     <ClInclude Include="DubwooferSpikeBullet.h" />
+    <ClInclude Include="DubwooferSpikeDropper.h" />
     <ClInclude Include="DubwooferSubstepScene.h" />
     <ClInclude Include="MusicController.h" />
     <ClInclude Include="BulletPool.h" />
@@ -201,6 +202,7 @@
     <ClCompile Include="DubwooferDropSpawner.cpp" />
     <ClCompile Include="DubwooferMusicController.cpp" />
     <ClCompile Include="DubwooferSpikeBullet.cpp" />
+    <ClCompile Include="DubwooferSpikeDropper.cpp" />
     <ClCompile Include="DubwooferSubstepScene.cpp" />
     <ClCompile Include="MusicController.cpp" />
     <ClCompile Include="TestScene.cpp" />

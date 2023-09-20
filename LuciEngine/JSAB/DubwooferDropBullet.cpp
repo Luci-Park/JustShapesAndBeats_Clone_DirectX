@@ -23,7 +23,7 @@ namespace lu::JSAB
 		auto mr = Owner()->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))
 			->SetMaterial(Resources::Load<Material>(L"DropBulletMat", L"SmallCircle"));
-
+		mr->GetMaterial()->SetRenderingMode(eRenderingMode::CutOut);
 		mAnim = Owner()->AddComponent<Animator>();
 		auto ani = mAnim->CreateAnimation(L"Drop");
 		float dur = 0.5;

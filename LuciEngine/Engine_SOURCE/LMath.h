@@ -774,6 +774,12 @@ namespace lu::math
 
         // Constants
         static const Quaternion Identity;
+
+        static Quaternion Create2DRotationDegrees(float degrees)
+        {
+            float axis = DirectX::XMConvertToRadians(degrees);
+            return Quaternion::CreateFromAxisAngle(Vector3::Forward, axis);
+        }
     };
 
     // Binary operators
