@@ -62,25 +62,20 @@ namespace lu::JSAB
 		{
 			bool active[]{ true, true, true, true, false, false };
 			GameObject* camera = object::Instantiate<GameObject>(eLayerType::Camera);
+			camera->AddComponent<GameCamera>();
+			/*
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			for (int i = 0; i < (UINT)eLayerType::End; i++)
 			{
 				cameraComp->TurnLayerMask((eLayerType)i, active[i]);
 			}
-			script = camera->AddComponent<GameCamera>();
+			//script = camera->AddComponent<GameCamera>();
+			*/
+
 		}
 		auto a = object::Instantiate<PlayerPrefab>(eLayerType::Player);
-		auto t = object::Instantiate<GameObject>(eLayerType::UI)->AddComponent<Text>();
-		t->color = Color(48/255.f, 249/255.f, 246/255.f, 1);
-		t->text = L"Let's Go";
-		t->size = 100;
-		t->offset.x = -160;
-		t->offset.y = -50;
-		//mtransform = {-34.3, -42.5}
-		//scale = 5.4464
-		//position = -727.75793, -487,66812
-		t->Owner()->AddComponent<gui::TransformWidget>();
+
 	}
 	void CameraTestScene::Update()
 	{

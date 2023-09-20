@@ -70,6 +70,7 @@ namespace lu
 		CreateViewMatrix();
 		CreateProjectionMatrix(mType);
 		CalculateBoundary();
+		SceneManager::AddCamera(this);
 		//RegisterCameraInRenderer();
 		//Debug();
 	}

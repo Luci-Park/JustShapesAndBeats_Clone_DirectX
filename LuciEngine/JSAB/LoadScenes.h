@@ -16,12 +16,12 @@ namespace lu::JSAB
 	void InitializeScenes()
 	{
 		//SceneManager::CreateScene<PlayScene>(L"PlayScene");
-		SceneManager::CreateScene<Title::TitleScene>(L"TitleScene");
-		SceneManager::CreateScene<Tutorial::TutorialScene>(L"TutorialScene");
+		//SceneManager::CreateScene<Title::TitleScene>(L"TitleScene");
+		//SceneManager::CreateScene<Tutorial::TutorialScene>(L"TutorialScene");
 		SceneManager::CreateScene<ParticleTestScene>(L"ParticleTestScene");
-		//SceneManager::CreateScene<CameraTestScene>(L"CameraTestScene");
+		SceneManager::CreateScene<CameraTestScene>(L"CameraTestScene");
 		//SceneManager::CreateScene<TriangleTestScene>(L"TriangleTestScene");
 		SceneManager::CreateScene<BulletTestScene>(L"BulletTestScene");
-		SceneManager::LoadScene(L"TitleScene");
+		SceneManager::LoadScene(L"CameraTestScene");
 	}
 }

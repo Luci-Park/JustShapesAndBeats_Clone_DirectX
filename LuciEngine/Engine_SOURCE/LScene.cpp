@@ -32,6 +32,7 @@ namespace lu
 	}
 	void Scene::Render()
 	{
+		mainCamera = nullptr;
 		for (int i = 0; i < cameras.size(); i++)
 		{
 			if (cameras[i] == nullptr)
@@ -40,11 +41,7 @@ namespace lu
 			cameras[i]->Render();
 		}
 		mainCamera = cameras.size() > 0 ? cameras[0] : nullptr;
-
-		/*for (int i = 0; i < mLayers.size(); i++)
-		{
-			mLayers[i].Render();
-		}*/
+		cameras.clear();
 	}
 	void Scene::Destroy()
 	{
@@ -65,6 +62,7 @@ namespace lu
 	}
 	void Scene::AddCamera(Camera* camera)
 	{
+
 		cameras.push_back(camera);
 		mainCamera = cameras.size() > 0 ? cameras[0] : nullptr;
 	}

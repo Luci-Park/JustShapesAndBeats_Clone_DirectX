@@ -4,6 +4,7 @@
 namespace lu
 {
 	class Animator;
+	class Camera;
 }
 
 namespace lu::JSAB
@@ -34,11 +35,12 @@ namespace lu::JSAB
 		GameCamera(){};
 		virtual ~GameCamera(){}
 		virtual void Initialize() override;
+		virtual void Update() override;
 
 		CameraEffectScript* GetEffect() { return mEffect; }
-		
 
 	private:
+		Camera* mGameCamera;
 		CameraEffectScript* mEffect;
 	};
 }

@@ -6,6 +6,7 @@
 #include "LAnimator.h"
 #include "LTime.h"
 #include "LCamera.h"
+#include "LInput.h"
 
 extern lu::Application application;
 namespace lu::JSAB
@@ -136,6 +137,16 @@ namespace lu::JSAB
 			for (int i = 0; i < (UINT)eLayerType::End; i++)
 				c->TurnLayerMask((eLayerType)i, active[i]);
 			mEffect = g->AddComponent<CameraEffectScript>();
+			mGameCamera = c;
+		}
+	}
+
+	void GameCamera::Update()
+	{
+		if (Input::GetKeyDown(eKeyCode::C))
+		{
+			bool active = mGameCamera->IsActive();
+			mGameCamera->SetActive(!active);
 		}
 	}
 #pragma endregion
