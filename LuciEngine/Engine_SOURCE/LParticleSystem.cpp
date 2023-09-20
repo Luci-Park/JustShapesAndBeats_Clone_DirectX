@@ -125,7 +125,7 @@ namespace lu
 			if (mElapsedTime >= Bursts[i].time)
 			{
 				numberOfParticles += Bursts[i].count;
-				//Bursts[i].complete = true;
+				Bursts[i].complete = true;
 			}
 		}
 		if (numberOfParticles > 0)

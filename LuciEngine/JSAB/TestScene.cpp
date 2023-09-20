@@ -39,18 +39,18 @@ namespace lu::JSAB
 		p->Duration = 10;
 		p->MaxParticles = 1000;
 		p->Loop = true;
-		//p->Bursts.push_back({ 0, 10, false });
+		p->Bursts.push_back({ 0, 10, false });
 		p->RateOverTime = 0;
 		p->RateOverDistance = 0.5;
 
 		p->SetOffset(Vector3::Zero);
 		p->SetAngle(60, -60 );
-		p->SetLifeTime(1);
-		p->SetSize(10, 0);
+		p->SetLifeTime(5);
+		p->SetSize(20, 0);
 		p->SetTint({ 1, 1, 1, 0.5 }, { 0, 0, 1, 0.5 });
 		p->SetWorldSpace(ParticleSystem::Space::world);
 		p->SetGravity(0);
-		p->SetStartSpeed(20);
+		p->SetStartSpeed(40);
 		p->Play();
 
 	}
