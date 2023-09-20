@@ -67,6 +67,7 @@ namespace lu::JSAB::Title
 			a->AddPositionXKey(2, 0);
 			a->AddPositionXKey(2.3, 900);
 			a->AddFunctionKey(2.5, std::bind(&SceneManager::LoadScene, L"TutorialScene"));
+			t->SetActive(false);
 		}
 		Scene::Initialize();
 

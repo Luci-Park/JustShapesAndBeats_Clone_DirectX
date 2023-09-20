@@ -71,6 +71,8 @@ namespace lu
 
 		Transform* mTr;
 
+		std::vector<GameObject*> mRenderTargets;
+
 		std::bitset<(UINT)eLayerType::End> mLayerMask;
 		std::vector<GameObject*> mOpaqueGameObjects;
 		std::vector<GameObject*> mCutOutGameObjects;

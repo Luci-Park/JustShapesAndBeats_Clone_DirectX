@@ -145,6 +145,7 @@ namespace lu::JSAB
 		if (mCurrHealth > 0)
 		{
 			Vector3 dir = mTransform->GetPosition()- other->GetPosition();
+			dir.z = 0;
 			Vector3 force = mRb->GetVelocity();
 
 			mRb->SetVelocity(dir * 25);

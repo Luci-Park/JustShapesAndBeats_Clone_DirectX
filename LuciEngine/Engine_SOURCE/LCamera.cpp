@@ -16,9 +16,22 @@ namespace lu
 
 	bool CompareZSort(GameObject* a, GameObject* b)
 	{
-		if (a->GetComponent<Transform>()->GetPosition().z
-			> b->GetComponent<Transform>()->GetPosition().z)
+		if (a->mTransform->GetPosition().z
+			> b->mTransform->GetPosition().z)
 			return true;
+		if (a->mTransform->GetPosition().z == b->mTransform->GetPosition().z)
+		{
+			MeshRenderer* mrA = a->GetComponent<MeshRenderer>();
+			MeshRenderer* mrB = b->GetComponent<MeshRenderer>();
+			if (mrA && mrB)
+			{
+				return mrA->GetMaterial()->GetRenderingMode() < mrB->GetMaterial()->GetRenderingMode();
+			}
+			if (mrA)
+				return true;
+			if (mrB)
+				return false;
+		}
 		return false;
 	}
 
@@ -66,6 +79,7 @@ namespace lu
 		Projection = projection;
 
 		AlphaSortGameObjects();
+		/*
 		ZDepthSortTransparentGameObjects();
 
 		RenderOpaque();
@@ -73,7 +87,7 @@ namespace lu
 		DisableDepthStencilState();
 		RenderCutOut();
 		RenderTransparent();
-		EnableDepthStencilState();
+		EnableDepthStencilState();*/
 	}
 	bool Camera::CreateViewMatrix()
 	{
@@ -136,9 +150,29 @@ namespace lu
 			{
 				Layer& layer = scene->GetLayer((eLayerType)i);
 				const std::vector<GameObject*> gameObjs = layer.GetGameObjects();
-				CategorizeAlphaBlendGameObjects(gameObjs);
+				for (int i = 0; i < gameObjs.size(); i++)
+				{
+					auto mr = gameObjs[i]->GetComponent<MeshRenderer>();
+					if (mr && mr->IsActive())
+					{
+						mRenderTargets.push_back(gameObjs[i]);
+					}
+					else
+					{
+						auto t = gameObjs[i]->GetComponent<Text>();
+						if (t && t->IsActive())
+							mRenderTargets.push_back(gameObjs[i]);
+					}
+				}
+				//CategorizeAlphaBlendGameObjects(gameObjs);
 			}
 		}
+		std::sort(mRenderTargets.begin(), mRenderTargets.end(), CompareZSort);
+		for (int i = 0; i < mRenderTargets.size(); i++)
+		{
+			mRenderTargets[i]->Render();
+		}
+		mRenderTargets.clear();
 	}
 	void Camera::ZDepthSortTransparentGameObjects()
 	{
