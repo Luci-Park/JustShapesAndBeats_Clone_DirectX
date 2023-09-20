@@ -61,6 +61,10 @@ namespace lu::renderer
 		UINT elementCount;
 		UINT isParticleInWorldSpace;
 		Vector3 offset;
+
+		float particleStartRadius;
+		Vector3 particlepadd;
+
 	};
 
 	CBUFFER(NoiseCB, CBSLOT_NOISE)

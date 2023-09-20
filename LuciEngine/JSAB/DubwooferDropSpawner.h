@@ -4,19 +4,19 @@
 #include "BulletPool.h"
 namespace lu::JSAB
 {
-	class DubwooferDropSpawner : public Script//public Bullet
+	class DubwooferDropSpawner : public Bullet
 	{
 	public:
 		DubwooferDropSpawner();
 		virtual ~DubwooferDropSpawner(){}
-
+		//virtual void Update()override;
 	private:
 		virtual void BulletSetUp() {};
 
 		virtual void OnWarning() {};
 		virtual void WhileWarning(double time) {};
 		virtual void OnActivate();
-		virtual void WhileActivate(double time) = 0;
+		virtual void WhileActivate(double time) {};
 		virtual void OnOutro() {};
 		virtual void WhileOutro(double time) {};
 		virtual void OnDeActivate() {};

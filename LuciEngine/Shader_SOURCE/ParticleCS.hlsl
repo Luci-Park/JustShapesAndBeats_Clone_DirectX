@@ -29,17 +29,11 @@ void InitializeParticle(int id)
     float randomAngle = particleAngle1 + randomValue * (particleAngle2 - particleAngle1);
     float3 direction = float3(cos(randomAngle), sin(randomAngle), 0);
     direction = normalize(mul(WorldMatrix, float4(direction, 0.0))).xyz;
-    ParticleBuffer[id].velocity = normalize(direction) * particleStartSpeed;
-    
-    
-    float radius = randomValue * 0.5;
-    float theta = randomValue * 2 * PI;
+    direction = normalize(direction);
+    ParticleBuffer[id].velocity = direction * particleStartSpeed;
     
     float4 position = float4(particleOffset, 1);
-    position.x += radius * cos(theta);
-    position.y += radius * sin(theta);
-    position.z = 0.0f;
-    position.w = 1;
+    position += float4(particleStartRadius * direction, 0);
     position = mul(position, WorldMatrix);
     ParticleBuffer[id].position = position; //mul(float4(particleOffset, 1), WorldMatrix);
 

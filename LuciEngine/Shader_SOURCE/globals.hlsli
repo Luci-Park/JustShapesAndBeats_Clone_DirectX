@@ -45,6 +45,9 @@ cbuffer ParticleSystem : register(b3)
 	uint elementCount;    
     uint particleInWorldSpace;
     float3 particleOffset;
+    
+    float particleStartRadius;
+    float3 particlepadd;
 }
 
 cbuffer Noise : register(b4)

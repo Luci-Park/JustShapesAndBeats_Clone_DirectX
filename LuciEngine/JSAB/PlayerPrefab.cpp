@@ -35,7 +35,7 @@ namespace lu::JSAB
 			p->MaxParticles = 1000;
 			p->Loop = true;
 			p->RateOverTime = 0;
-			p->RateOverDistance = 1.2;
+			p->RateOverDistance = 1;
 
 			p->SetOffset(Vector3::Zero);
 			p->SetAngle(60, -60);
@@ -44,7 +44,7 @@ namespace lu::JSAB
 			p->SetTint({ 1, 1, 1, 0.5 }, { 0, 0, 1, 0.5 });
 			p->SetWorldSpace(ParticleSystem::Space::world);
 			p->SetGravity(0);
-			p->SetStartSpeed(20);
+			p->SetStartSpeed(40);
 			p->Play();
 		}
 

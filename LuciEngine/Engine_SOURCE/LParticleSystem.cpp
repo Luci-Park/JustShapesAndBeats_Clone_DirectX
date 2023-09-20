@@ -31,6 +31,7 @@ namespace lu
 		, mEndSize(100)
 		, mStartSpeed(20)
 		, mOffset(Vector3::Zero)
+		, mStartRadius(0)
 	{
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"PointMesh");
 		SetMesh(mesh);
@@ -57,7 +58,7 @@ namespace lu
 		mParticleBuffer->Create(sizeof(Particle), 1000, eResourceViewType::UAV, particles);
 
 		mSharedBuffer = new graphics::StructedBuffer();
-		mSharedBuffer->Create(sizeof(ParticleShared), 1, eResourceViewType::UAV, nullptr, true);
+		mSharedBuffer->Create(sizeof(ParticleShared), 2, eResourceViewType::UAV, nullptr, true);
 
 	}
 	ParticleSystem::~ParticleSystem()
@@ -130,9 +131,10 @@ namespace lu
 		}
 		if (numberOfParticles > 0)
 		{
-			ParticleShared sharedData = {};
-			sharedData.sharedActiveCount = numberOfParticles;
-			mSharedBuffer->SetData(&sharedData, 1);
+			ParticleShared sharedData[2] = {};
+			sharedData[0].sharedActiveCount = numberOfParticles;
+			sharedData[1].sharedActiveCount = numberOfParticles;
+			mSharedBuffer->SetData(&sharedData, 2);
 			lifeTimeTimer = mLifeTime;
 		}
 	}
@@ -150,6 +152,7 @@ namespace lu
 		mParticleBuffer->BindSRV(eShaderStage::GS, 14);
 		mParticleBuffer->BindSRV(eShaderStage::PS, 14);
 
+		GetMaterial()->SetTexture(mParticleTexture);
 		GetMaterial()->Binds();
 		GetMesh()->RenderInstanced(1000);
 
@@ -158,6 +161,7 @@ namespace lu
 	}
 	void ParticleSystem::SetTexture(std::shared_ptr<Texture> tex)
 	{
+		mParticleTexture = tex;
 		GetMaterial()->SetTexture(tex);
 	}
 	void ParticleSystem::BindConstantBuffer()
@@ -183,6 +187,7 @@ namespace lu
 		data.isParticleInWorldSpace = mbParticleInWorldSpace;
 		data.gravityRate = mGravityModification;
 		data.offset = mOffset;
+		data.particleStartRadius = mStartRadius;
 		cb->SetData(&data);
 		for (int i = 0; i < (int)eShaderStage::End; i++)
 			cb->Bind((eShaderStage)i);

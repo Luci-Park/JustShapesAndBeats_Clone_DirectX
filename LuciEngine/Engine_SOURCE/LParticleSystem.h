@@ -34,7 +34,7 @@ namespace lu
 		void SetGravity(float gravity) { mGravityModification = gravity; }
 		void SetWorldSpace(Space space) { mbParticleInWorldSpace = (int)space; }
 		void SetOffset(Vector3 offset) { mOffset = offset; }
-
+		void SetStartRadius(float r) { mStartRadius = r; }
 		void Play() { mIsPlaying = true; }
 		void Stop() { mIsPlaying = false; }
 	private:
@@ -51,6 +51,7 @@ namespace lu
 		graphics::StructedBuffer* mSharedBuffer;
 
 		std::shared_ptr<ParticleShader> mParticleShader;
+		std::shared_ptr<Texture>mParticleTexture;
 		
 		bool mIsPlaying;
 
@@ -69,6 +70,7 @@ namespace lu
 		float mEndSize;
 		float mStartSpeed;
 		
+		float mStartRadius;
 		float mGravityModification;
 		bool mbParticleInWorldSpace;
 	};

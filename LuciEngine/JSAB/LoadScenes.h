@@ -22,6 +22,6 @@ namespace lu::JSAB
 		SceneManager::CreateScene<CameraTestScene>(L"CameraTestScene");
 		//SceneManager::CreateScene<TriangleTestScene>(L"TriangleTestScene");
 		SceneManager::CreateScene<BulletTestScene>(L"BulletTestScene");
-		SceneManager::LoadScene(L"ParticleTestScene");
+		SceneManager::LoadScene(L"BulletTestScene");
 	}
 }

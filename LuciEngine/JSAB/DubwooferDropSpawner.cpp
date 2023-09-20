@@ -14,6 +14,12 @@ namespace lu::JSAB
 			mSpawnPos.push_back({ i, y, 0 });
 		}
 	}
+	void DubwooferDropSpawner::Update()
+	{
+		Bullet::Update();
+		if(Input::GetKeyDown(eKeyCode::SPACE))
+			Activate();
+	}
 	void DubwooferDropSpawner::OnActivate()
 	{
 		auto a = mDrops.GetNext();

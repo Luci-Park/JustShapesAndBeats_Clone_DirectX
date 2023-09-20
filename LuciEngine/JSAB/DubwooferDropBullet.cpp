@@ -26,7 +26,7 @@ namespace lu::JSAB
 
 		mAnim = Owner()->AddComponent<Animator>();
 		auto ani = mAnim->CreateAnimation(L"Drop");
-		float dur = 0.8;
+		float dur = 0.5;
 		ani->AddScaleKey(dur * 0, { 3, 27, 1 });
 		ani->AddScaleKey(dur *0.25, { 24, 6, 1 });
 		ani->AddScaleKey(dur *0.5, { 10, 20, 1 });
@@ -39,11 +39,16 @@ namespace lu::JSAB
 		mParticle = Owner()->AddComponent<ParticleSystem>();
 		mParticle->Duration = 3;
 		mParticle->Loop = false;
-		mParticle->RateOverTime = 10;
+		mParticle->RateOverTime = 0;
 		mParticle->RateOverDistance = 0;
-		mParticle->SetSize(10, 0);
-		mParticle->SetLifeTime(3);
+		mParticle->Bursts.push_back({0, 5, false});
 		mParticle->SetTexture(Resources::Find<Texture>(L"SmallCircle"));
+		mParticle->SetLifeTime(0.5);
+		mParticle->SetSize(10, 0);
+		mParticle->SetStartSpeed(50);
+		mParticle->SetStartRadius(0);
+		mParticle->SetAngle(-180 + 20, -20);
+		mParticle->SetGravity(300);
 	}
 	void DubwooferDropBullet::Update()
 	{
@@ -53,6 +58,7 @@ namespace lu::JSAB
 		Owner()->SetActive(true);
 		mRb->SetVelocity(Vector3::Down * 350);
 		mAnim->PlayAnimation(L"Drop", false);
+		mParticle->Play();
 	}
 	void DubwooferDropBullet::DeActivate()
 	{

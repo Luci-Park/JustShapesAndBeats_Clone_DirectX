@@ -35,17 +35,17 @@ namespace lu::JSAB
 		}
 		auto a = object::Instantiate<PlayerPrefab>(eLayerType::Player);
 		auto p = a->AddComponent<ParticleSystem>();
-		p->GetMaterial()->SetTexture(Resources::Find<Texture>(L"player1"));
-		p->Duration = 10;
+		p->SetTexture(Resources::Find<Texture>(L"player1"));
+		p->Duration = 5;
 		p->MaxParticles = 1000;
 		p->Loop = true;
-		p->Bursts.push_back({ 0, 10, false });
+		p->Bursts.push_back({ 0, 10, false});
 		p->RateOverTime = 0;
 		p->RateOverDistance = 0.5;
-
+		p->SetStartRadius(1);
 		p->SetOffset(Vector3::Zero);
-		p->SetAngle(60, -60 );
-		p->SetLifeTime(5);
+		p->SetAngle(-180 + 20, -20);//작은게 먼저
+		p->SetLifeTime(3);
 		p->SetSize(20, 0);
 		p->SetTint({ 1, 1, 1, 0.5 }, { 0, 0, 1, 0.5 });
 		p->SetWorldSpace(ParticleSystem::Space::world);
@@ -142,6 +142,7 @@ namespace lu::JSAB
 	void BulletTestScene::Initialize()
 	{
 		object::Instantiate<GameObject>(eLayerType::Camera)->AddComponent<GameCamera>();
+		object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<DubwooferDropSpawner>();
 	}
 
 	void BulletTestScene::Update()
