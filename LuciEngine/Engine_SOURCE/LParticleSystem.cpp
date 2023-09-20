@@ -58,7 +58,7 @@ namespace lu
 		mParticleBuffer->Create(sizeof(Particle), 1000, eResourceViewType::UAV, particles);
 
 		mSharedBuffer = new graphics::StructedBuffer();
-		mSharedBuffer->Create(sizeof(ParticleShared), 2, eResourceViewType::UAV, nullptr, true);
+		mSharedBuffer->Create(sizeof(ParticleShared), 1, eResourceViewType::UAV, nullptr, true);
 
 	}
 	ParticleSystem::~ParticleSystem()
@@ -115,10 +115,19 @@ namespace lu
 		}
 		if (RateOverDistance > 0)
 		{
+			float unit = 50;
 			Vector3 current = Owner()->mTransform->GetPosition();
+			if (current != prevPos)
+			{
+				int i = 0;
+			}
 			float delta = abs(Vector3::Distance(prevPos, current));
-			numberOfParticles += delta * RateOverDistance;
-			prevPos = current;
+			int number = RateOverDistance * delta / unit;
+			if (number >= 1)
+			{
+				numberOfParticles += RateOverDistance * delta / unit;
+				prevPos = current;
+			}
 		}
 		for (int i = 0; i < Bursts.size(); i++)
 		{
@@ -131,10 +140,9 @@ namespace lu
 		}
 		if (numberOfParticles > 0)
 		{
-			ParticleShared sharedData[2] = {};
-			sharedData[0].sharedActiveCount = numberOfParticles;
-			sharedData[1].sharedActiveCount = numberOfParticles;
-			mSharedBuffer->SetData(&sharedData, 2);
+			ParticleShared sharedData = {};
+			sharedData.sharedActiveCount = numberOfParticles;
+			mSharedBuffer->SetData(&sharedData, 1);
 			lifeTimeTimer = mLifeTime;
 		}
 	}

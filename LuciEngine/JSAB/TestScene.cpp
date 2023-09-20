@@ -59,42 +59,12 @@ namespace lu::JSAB
 #pragma region CameraTestScene
 	void CameraTestScene::Initialize()
 	{
-		{
-			bool active[]{ true, true, true, true, false, false };
-			GameObject* camera = object::Instantiate<GameObject>(eLayerType::Camera);
-			camera->AddComponent<GameCamera>();
-			/*
-			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
-			Camera* cameraComp = camera->AddComponent<Camera>();
-			for (int i = 0; i < (UINT)eLayerType::End; i++)
-			{
-				cameraComp->TurnLayerMask((eLayerType)i, active[i]);
-			}
-			//script = camera->AddComponent<GameCamera>();
-			*/
-
-		}
+		object::Instantiate<GameObject>(eLayerType::Camera)->AddComponent<GameCamera>();
 		auto a = object::Instantiate<PlayerPrefab>(eLayerType::Player);
 
 	}
 	void CameraTestScene::Update()
 	{
-		/*
-		if (Input::GetKeyDown(eKeyCode::W))
-			script->Bump(Vector3::Up);
-		if (Input::GetKeyDown(eKeyCode::A))
-			script->Bump(Vector3::Left);
-		if (Input::GetKeyDown(eKeyCode::S))
-			script->Bump(Vector3::Down);
-		if (Input::GetKeyDown(eKeyCode::D))
-			script->Bump(Vector3::Right);
-
-		if (Input::GetKeyDown(eKeyCode::E))
-			script->WhiteFlash();
-		if (Input::GetKeyDown(eKeyCode::R))
-			script->BlackFlash();
-		if (Input::GetKeyDown(eKeyCode::V))
-			script->BlackFadeOut();*/
 		Scene::Update();
 	}
 	void TriangleTestScene::Initialize()

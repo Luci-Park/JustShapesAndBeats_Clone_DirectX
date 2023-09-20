@@ -30,21 +30,21 @@ namespace lu::JSAB
 		Player* script = AddComponent<Player>();
 		{
 			auto p = AddComponent<ParticleSystem>();
-			p->GetMaterial()->SetTexture(Resources::Find<Texture>(L"player1"));
+			p->SetTexture(Resources::Find<Texture>(L"player1"));
 			p->Duration = 10;
 			p->MaxParticles = 1000;
 			p->Loop = true;
 			p->RateOverTime = 0;
-			p->RateOverDistance = 1;
+			p->RateOverDistance = 3;
 
 			p->SetOffset(Vector3::Zero);
-			p->SetAngle(60, -60);
-			p->SetLifeTime(1);
-			p->SetSize(10, 0);
+			p->SetAngle(70, -70);
+			p->SetLifeTime(0.5);
+			p->SetSize(15, 0);
 			p->SetTint({ 1, 1, 1, 0.5 }, { 0, 0, 1, 0.5 });
 			p->SetWorldSpace(ParticleSystem::Space::world);
 			p->SetGravity(0);
-			p->SetStartSpeed(40);
+			p->SetStartSpeed(10);
 			p->Play();
 		}
 

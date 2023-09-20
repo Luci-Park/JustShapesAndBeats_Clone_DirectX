@@ -21,9 +21,14 @@ void InitializeParticle(int id)
         randomValue = GaussianBlur(vUV).x;
     else
         randomValue = GaussianBlur(vUV).y;
-    //float randomValue = frac(vRandom.x + vRandom.y + vRandom.z + vRandom.w);
-    // Generate a pseudorandom value between 0 and 1 using your PRNG (assuming particleElapsedTime is the seed)
-    //float randomValue = frac(sin(vRandom.x * vRandom.y * vRandom.z * vRandom.w) * 43758.5453);
+    
+    float4 vRandom = float4
+            (
+                  GaussianBlur(vUV + float2(0.f, 0.f)).x
+                , GaussianBlur(vUV + float2(0.1f, 0.f)).x
+                , GaussianBlur(vUV + float2(0.2f, 0.f)).x
+                , GaussianBlur(vUV + float2(0.3f, 0.f)).x
+            );
 
 // Calculate a random float within the range [a, b]
     float randomAngle = particleAngle1 + randomValue * (particleAngle2 - particleAngle1);
@@ -34,6 +39,10 @@ void InitializeParticle(int id)
     
     float4 position = float4(particleOffset, 1);
     position += float4(particleStartRadius * direction, 0);
+    position.xyz = vRandom.xyz * 2.0f;
+    position.x -= 0.65f;
+    position.y -= 1.4f;
+    position.z = 0.0f;
     position = mul(position, WorldMatrix);
     ParticleBuffer[id].position = position; //mul(float4(particleOffset, 1), WorldMatrix);
 

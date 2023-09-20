@@ -45,9 +45,9 @@ namespace lu::JSAB
 		mParticle->SetTexture(Resources::Find<Texture>(L"SmallCircle"));
 		mParticle->SetLifeTime(0.5);
 		mParticle->SetSize(10, 0);
-		mParticle->SetStartSpeed(50);
+		mParticle->SetStartSpeed(0);
 		mParticle->SetStartRadius(0);
-		mParticle->SetAngle(-180 + 20, -20);
+		mParticle->SetAngle(-180, 0);
 		mParticle->SetGravity(300);
 	}
 	void DubwooferDropBullet::Update()

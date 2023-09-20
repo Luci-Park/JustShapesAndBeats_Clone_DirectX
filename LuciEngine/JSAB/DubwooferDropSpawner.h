@@ -9,7 +9,7 @@ namespace lu::JSAB
 	public:
 		DubwooferDropSpawner();
 		virtual ~DubwooferDropSpawner(){}
-		//virtual void Update()override;
+		virtual void Update()override;
 	private:
 		virtual void BulletSetUp() {};
 
