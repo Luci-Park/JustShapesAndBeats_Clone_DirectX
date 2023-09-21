@@ -94,6 +94,8 @@ namespace lu
 		}
 		for (int i = 0; i < mComponents.size(); i++)
 			mComponents[i]->SetState(state);
+		for (int i = 0; i < mScripts.size(); i++)
+			mScripts[i]->SetState(state);
 	}
 
 }

@@ -58,8 +58,6 @@ namespace lu
 	}
 	void Animator::PlayAnimation(const std::wstring& name, bool loop)
 	{
-		if (name == L"Burst")
-			DEBUGLOG("stop");
 		Animation* prevAnimation = mActiveAnimation;
 		Animation* animation = FindAnimation(name);
 		if (prevAnimation)

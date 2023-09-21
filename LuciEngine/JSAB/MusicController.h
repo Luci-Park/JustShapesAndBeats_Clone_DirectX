@@ -18,6 +18,7 @@ namespace lu::JSAB
 		virtual void Update() override;
 		void Play();
 		void Stop();
+		void Finish() { mbIsFinishing = false; }
 		double GetTime();
 		int GetStage() { return mStageIdx; }
 		float GetPercent();
@@ -32,6 +33,7 @@ namespace lu::JSAB
 		int mStageIdx;
 		int mNextStageIdx;
 		bool mbIsPlaying;
+		bool mbIsFinishing;
 	};
 }
 

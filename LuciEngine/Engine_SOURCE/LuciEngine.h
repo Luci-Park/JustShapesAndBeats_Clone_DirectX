@@ -27,4 +27,4 @@
 
 #define PI 3.141592
 #define DEBUGLOG(x) OutputDebugStringA(x)
-#define LERP(start, end, t) t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t); start + t * (end - start)
+#define LERP(start, end, t) (start + ((t > 1.0) ? 1.0 : ((t < 0.0) ? 0.0 : t)) * (end - start))

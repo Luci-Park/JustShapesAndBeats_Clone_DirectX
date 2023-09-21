@@ -20,6 +20,9 @@ namespace lu::JSAB
 		{
 			mPlayer = other->Owner()->GetComponent<Player>();
 			mPlayer->Hold();
+			mRB->SetVelocity(Vector3::Zero);
+			mTransform->SetPosition(552.243652, 0, -1);
+
 			other->Owner()->mTransform->SetPosition(mTransform->GetPosition());
 			auto tuto = dynamic_cast<TutorialMusicController*>(MusicController::Instance);
 			if (tuto)
@@ -48,11 +51,11 @@ namespace lu::JSAB
 	}
 	void Triangle::TutorialAppear()
 	{
-		Owner()->SetActive(true);
 		mTriangleAnim->PlayAnimation(L"Idle", true);
 		mTransform->SetPosition( 680, 0, -1);
 		mRB->SetVelocity(Vector3::Left * 80);
 		mRB->SetDrag(25);
+		Owner()->SetActive(true);
 	}
 	void Triangle::LevelAppear()
 	{
@@ -63,8 +66,7 @@ namespace lu::JSAB
 		mPlayer->Release();
 		auto tuto = dynamic_cast<TutorialMusicController*>(MusicController::Instance);
 		if (tuto)
-		{
-			tuto->PlayNextPart();			
+		{	
 			SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->LevelTrans();
 		}
 		Owner()->SetActive(false);

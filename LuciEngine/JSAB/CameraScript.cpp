@@ -133,7 +133,7 @@ namespace lu::JSAB
 			auto g = object::Instantiate<GameObject>(mTransform, eLayerType::Camera);
 			g->SetName(L"Main Camera");
 			auto c = g->AddComponent<Camera>();
-			bool active[] = { true, true, true, true, false, false };
+			bool active[] = { true, true, true, true, true, false, false };
 			for (int i = 0; i < (UINT)eLayerType::End; i++)
 				c->TurnLayerMask((eLayerType)i, active[i]);
 			mEffect = g->AddComponent<CameraEffectScript>();

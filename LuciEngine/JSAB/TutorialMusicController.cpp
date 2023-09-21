@@ -47,20 +47,11 @@ namespace lu::JSAB
 						mStageIdx = mNextStageIdx;
 						Owner()->GetComponent<TutorialManager>()->OnStageChange(mStageIdx);
 					}
-					mAudioSource->SetPosition(mCheckPoints[mStageIdx].first);
+					if (mStageIdx < mCheckPoints.size())
+						mAudioSource->SetPosition(mCheckPoints[mStageIdx].first);
+					else
+						Finish();
 				}
-			}
-			else if (mAudioSource->GetVolume() > 0)
-			{
-				float fadeStep = mFadeTime / mFadeDuration;
-				float vol = mStartVolume * (1.0f - fadeStep);
-				
-				mAudioSource->SetVolume(vol);
-				mFadeTime += Time::DeltaTime();
-			}
-			else
-			{
-				mAudioSource->Stop();
 			}
 		}
 		if (Input::GetKeyDown(eKeyCode::Q))

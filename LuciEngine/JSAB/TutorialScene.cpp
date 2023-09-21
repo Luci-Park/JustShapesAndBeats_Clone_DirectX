@@ -29,8 +29,6 @@ namespace lu::JSAB::Tutorial
 		music = manager->AddComponent<TutorialMusicController>();
 		manager->AddComponent<TutorialManager>();
 		
-		auto c = object::Instantiate<TrianglePrefab>(eLayerType::Item);
-		c->GetComponent<Triangle>()->TutorialAppear();
 		object::Instantiate<PlayerPrefab>(Vector3(-540, 0, -5), eLayerType::Player);
 		Scene::Initialize(); 
 	}
