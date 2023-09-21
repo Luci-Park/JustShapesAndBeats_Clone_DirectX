@@ -382,8 +382,8 @@ namespace lu
 			Vector3Key* prev = dynamic_cast<Vector3Key*>(timeline->keyframes[timeline->currIndex - 1]);
 			Vector3Key* next = dynamic_cast<Vector3Key*>(timeline->keyframes[timeline->currIndex]);
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
-			Vector3 pos = Vector3::Lerp(prev->value, next->value, t);
-			mTr->SetScale(pos);
+			Vector3 scale = Vector3::Lerp(prev->value, next->value, t);
+			mTr->SetScale(scale);
 		}
 	}
 	void Animation::AnimTrRot(Timeline* timeline)

@@ -465,6 +465,7 @@ inline Vector2 Vector2::Max(const Vector2& v1, const Vector2& v2) noexcept
 
 inline void Vector2::Lerp(const Vector2& v1, const Vector2& v2, float t, Vector2& result) noexcept
 {
+    t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);
     using namespace DirectX;
     const XMVECTOR x1 = XMLoadFloat2(&v1);
     const XMVECTOR x2 = XMLoadFloat2(&v2);
@@ -474,6 +475,7 @@ inline void Vector2::Lerp(const Vector2& v1, const Vector2& v2, float t, Vector2
 
 inline Vector2 Vector2::Lerp(const Vector2& v1, const Vector2& v2, float t) noexcept
 {
+    t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);
     using namespace DirectX;
     const XMVECTOR x1 = XMLoadFloat2(&v1);
     const XMVECTOR x2 = XMLoadFloat2(&v2);
@@ -1055,6 +1057,7 @@ inline Vector3 Vector3::Max(const Vector3& v1, const Vector3& v2) noexcept
 inline void Vector3::Lerp(const Vector3& v1, const Vector3& v2, float t, Vector3& result) noexcept
 {
     using namespace DirectX;
+    t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);
     const XMVECTOR x1 = XMLoadFloat3(&v1);
     const XMVECTOR x2 = XMLoadFloat3(&v2);
     const XMVECTOR X = XMVectorLerp(x1, x2, t);
@@ -1064,6 +1067,7 @@ inline void Vector3::Lerp(const Vector3& v1, const Vector3& v2, float t, Vector3
 inline Vector3 Vector3::Lerp(const Vector3& v1, const Vector3& v2, float t) noexcept
 {
     using namespace DirectX;
+    t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);
     const XMVECTOR x1 = XMLoadFloat3(&v1);
     const XMVECTOR x2 = XMLoadFloat3(&v2);
     const XMVECTOR X = XMVectorLerp(x1, x2, t);
@@ -1087,6 +1091,7 @@ inline void Vector3::SmoothStep(const Vector3& v1, const Vector3& v2, float t, V
 inline Vector3 Vector3::SmoothStep(const Vector3& v1, const Vector3& v2, float t) noexcept
 {
     using namespace DirectX;
+    t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);
     t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);  // Clamp value to 0 to 1
     t = t * t * (3.f - 2.f * t);
     const XMVECTOR x1 = XMLoadFloat3(&v1);
@@ -1646,6 +1651,7 @@ inline Vector4 Vector4::Max(const Vector4& v1, const Vector4& v2) noexcept
 inline void Vector4::Lerp(const Vector4& v1, const Vector4& v2, float t, Vector4& result) noexcept
 {
     using namespace DirectX;
+    t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);
     const XMVECTOR x1 = XMLoadFloat4(&v1);
     const XMVECTOR x2 = XMLoadFloat4(&v2);
     const XMVECTOR X = XMVectorLerp(x1, x2, t);
@@ -1655,6 +1661,7 @@ inline void Vector4::Lerp(const Vector4& v1, const Vector4& v2, float t, Vector4
 inline Vector4 Vector4::Lerp(const Vector4& v1, const Vector4& v2, float t) noexcept
 {
     using namespace DirectX;
+    t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);
     const XMVECTOR x1 = XMLoadFloat4(&v1);
     const XMVECTOR x2 = XMLoadFloat4(&v2);
     const XMVECTOR X = XMVectorLerp(x1, x2, t);
@@ -2737,6 +2744,7 @@ inline Matrix Matrix::CreateReflection(const Plane& plane) noexcept
 inline void Matrix::Lerp(const Matrix& M1, const Matrix& M2, float t, Matrix& result) noexcept
 {
     using namespace DirectX;
+    t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);
     XMVECTOR x1 = XMLoadFloat4(reinterpret_cast<const XMFLOAT4*>(&M1._11));
     XMVECTOR x2 = XMLoadFloat4(reinterpret_cast<const XMFLOAT4*>(&M1._21));
     XMVECTOR x3 = XMLoadFloat4(reinterpret_cast<const XMFLOAT4*>(&M1._31));
@@ -2761,6 +2769,7 @@ inline void Matrix::Lerp(const Matrix& M1, const Matrix& M2, float t, Matrix& re
 inline Matrix Matrix::Lerp(const Matrix& M1, const Matrix& M2, float t) noexcept
 {
     using namespace DirectX;
+    t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);
     XMVECTOR x1 = XMLoadFloat4(reinterpret_cast<const XMFLOAT4*>(&M1._11));
     XMVECTOR x2 = XMLoadFloat4(reinterpret_cast<const XMFLOAT4*>(&M1._21));
     XMVECTOR x3 = XMLoadFloat4(reinterpret_cast<const XMFLOAT4*>(&M1._31));
@@ -3236,6 +3245,7 @@ inline Quaternion Quaternion::CreateFromRotationMatrix(const Matrix& M) noexcept
 inline void Quaternion::Lerp(const Quaternion& q1, const Quaternion& q2, float t, Quaternion& result) noexcept
 {
     using namespace DirectX;
+    t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);
     const XMVECTOR Q0 = XMLoadFloat4(&q1);
     const XMVECTOR Q1 = XMLoadFloat4(&q2);
 
@@ -3261,6 +3271,7 @@ inline void Quaternion::Lerp(const Quaternion& q1, const Quaternion& q2, float t
 inline Quaternion Quaternion::Lerp(const Quaternion& q1, const Quaternion& q2, float t) noexcept
 {
     using namespace DirectX;
+    t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);
     const XMVECTOR Q0 = XMLoadFloat4(&q1);
     const XMVECTOR Q1 = XMLoadFloat4(&q2);
 
@@ -3288,6 +3299,7 @@ inline Quaternion Quaternion::Lerp(const Quaternion& q1, const Quaternion& q2, f
 inline void Quaternion::Slerp(const Quaternion& q1, const Quaternion& q2, float t, Quaternion& result) noexcept
 {
     using namespace DirectX;
+    t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);
     const XMVECTOR Q0 = XMLoadFloat4(&q1);
     const XMVECTOR Q1 = XMLoadFloat4(&q2);
     XMStoreFloat4(&result, XMQuaternionSlerp(Q0, Q1, t));
@@ -3296,6 +3308,7 @@ inline void Quaternion::Slerp(const Quaternion& q1, const Quaternion& q2, float 
 inline Quaternion Quaternion::Slerp(const Quaternion& q1, const Quaternion& q2, float t) noexcept
 {
     using namespace DirectX;
+    t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);
     const XMVECTOR Q0 = XMLoadFloat4(&q1);
     const XMVECTOR Q1 = XMLoadFloat4(&q2);
 
@@ -3658,6 +3671,7 @@ inline Color Color::Modulate(const Color& c1, const Color& c2) noexcept
 inline void Color::Lerp(const Color& c1, const Color& c2, float t, Color& result) noexcept
 {
     using namespace DirectX;
+    t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);
     const XMVECTOR C0 = XMLoadFloat4(&c1);
     const XMVECTOR C1 = XMLoadFloat4(&c2);
     XMStoreFloat4(&result, XMVectorLerp(C0, C1, t));
@@ -3666,6 +3680,7 @@ inline void Color::Lerp(const Color& c1, const Color& c2, float t, Color& result
 inline Color Color::Lerp(const Color& c1, const Color& c2, float t) noexcept
 {
     using namespace DirectX;
+    t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);
     const XMVECTOR C0 = XMLoadFloat4(&c1);
     const XMVECTOR C1 = XMLoadFloat4(&c2);
 
