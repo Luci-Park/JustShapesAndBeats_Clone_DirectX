@@ -21,4 +21,9 @@ namespace lu::JSAB
 
 		mTransform->SetScale(10, 300, 1);
 	}
+	void DubwooferWaterBullet::SetY(float y)
+	{
+		Vector3 currScale = mTransform->GetScale();
+		mTransform->SetScale(currScale.x, y, currScale.z);
+	}
 }

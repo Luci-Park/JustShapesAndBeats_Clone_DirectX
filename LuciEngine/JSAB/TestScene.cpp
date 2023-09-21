@@ -10,8 +10,8 @@
 #include "..\\Editor_SOURCE\\TransformWidget.h"
 #include "TrianglePrefab.h" 
 #include "DubwooferSpikeDropper.h"
-#include "DubwooferBeamBullet.h"
-#include "DubwooferWaterBullet.h"
+#include "DubwooferDropSpawner.h"
+#include "DubwooferWater.h"
 namespace lu::JSAB
 {
 #pragma region ParticleTestScene
@@ -115,8 +115,9 @@ namespace lu::JSAB
 	{
 		object::Instantiate<GameObject>(eLayerType::Camera)->AddComponent<GameCamera>();
 		auto g = object::Instantiate<GameObject>(eLayerType::Bullet);
-		g->AddComponent<DubwooferWaterBullet>();
+		g->AddComponent<DubwooferWater>();
 		g->AddComponent<gui::TransformWidget>();
+		//object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<DubwooferDropSpawner>();
 		target = nullptr;
 		//g->AddComponent<DubwooferSpikeDropper>();
 		

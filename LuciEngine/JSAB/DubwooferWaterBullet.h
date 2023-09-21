@@ -16,6 +16,8 @@ namespace lu::JSAB
 		virtual ~DubwooferWaterBullet(){}
 
 		virtual void Initialize() override;
+		void SetY(float y);
+	
 	private:
 		Animator* mAnim;
 		ParticleSystem* mPs;
