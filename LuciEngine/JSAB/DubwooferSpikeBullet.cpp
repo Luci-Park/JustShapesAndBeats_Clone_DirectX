@@ -16,7 +16,7 @@ namespace lu::JSAB
 		auto mr = Owner()->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Load<Material>(L"DWSpikeMat", L"DB_Ceiling"));
-		mr->GetMaterial()->SetRenderingMode(eRenderingMode::Transparent);
+		mr->GetMaterial()->SetRenderingMode(eRenderingMode::CutOut);
 		auto tex = mr->GetMaterial()->GetTexture();
 		mTransform->SetScale(110, 100, 1);
 		mTransform->SetRotation(Quaternion::Create2DRotationDegrees(180));

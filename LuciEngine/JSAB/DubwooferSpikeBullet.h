@@ -18,7 +18,6 @@ namespace lu::JSAB
 
 		virtual void Initialize() override;
 
-		void DeActivate() {}
 		void Reset();
 		void Activate();
 	private:

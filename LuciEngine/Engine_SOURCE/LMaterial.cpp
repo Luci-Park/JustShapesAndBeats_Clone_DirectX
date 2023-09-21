@@ -19,7 +19,9 @@ namespace lu::graphics
 	{
 		SetShader(Resources::Find<Shader>(L"SpriteShader"));
 		SetTexture(Resources::Find<Texture>(path));
-		return S_OK;
+		if(mShader && mTexture)
+			return S_OK;
+		return S_FALSE;
 	}
 	void Material::Binds()
 	{
