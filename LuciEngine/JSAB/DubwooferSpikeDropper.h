@@ -10,6 +10,7 @@ namespace lu::JSAB
 		virtual ~DubwooferSpikeDropper() {}
 
 		void Initialize();
+		void Update();
 	private:
 		std::vector<DubwooferSpikeBullet*> mSpikes;
 	};
