@@ -1,4 +1,5 @@
 #include "DubwooferWaterBullet.h"
+#include "DubwooferDropBullet.h"
 #include "LGameObject.h"
 #include "LMeshRenderer.h"
 #include "LCollider2D.h"
@@ -20,10 +21,21 @@ namespace lu::JSAB
 		mMr->GetMaterial()->SetRenderingMode(eRenderingMode::CutOut);
 
 		mTransform->SetScale(10, 300, 1);
+		Owner()->SetTag(eTagType::Bullet);
+
 	}
 	void DubwooferWaterBullet::SetY(float y)
 	{
 		Vector3 currScale = mTransform->GetScale();
 		mTransform->SetScale(currScale.x, y, currScale.z);
+	}
+	void DubwooferWaterBullet::OnCollisionEnter(Collider2D* other)
+	{
+		DubwooferDropBullet* bullet = other->Owner()->GetComponent<DubwooferDropBullet>();
+		if (bullet)
+		{
+			float diff = abs(mTransform->GetPosition().x - other->Owner()->mTransform->GetPosition().x);
+
+		}
 	}
 }

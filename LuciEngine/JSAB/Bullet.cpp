@@ -11,6 +11,7 @@ namespace lu::JSAB
 		BulletSetUp();
 		DeActivate();
 		mBulletState = eBulletState::Waiting;
+		Owner()->SetTag(eTagType::Bullet);
 	}
 	void Bullet::Update()
 	{

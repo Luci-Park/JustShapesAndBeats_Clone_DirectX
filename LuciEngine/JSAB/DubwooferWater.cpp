@@ -16,9 +16,10 @@ namespace lu::JSAB
 		float startx = -fullwidth * 0.5;
 		for (int i = 0; i < waternumber; i++)
 		{
-			auto c = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<DubwooferWaterBullet>();
+			auto c = object::Instantiate<GameObject>(mTransform, eLayerType::BulletInteractor)->AddComponent<DubwooferWaterBullet>();
 			mWater.push_back(c);
 			c->mTransform->SetLocalPosition(startx + width * 0.5 + width * i, 0, 0);
+			c->SetParent(this);
 		}
 		mTime = 0;
 	}

@@ -13,6 +13,7 @@ namespace lu::JSAB
 		Script::Initialize();
 		float width = 60.f;
 
+		Owner()->SetTag(eTagType::Bullet);
 		auto mr = Owner()->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Load<Material>(L"DWSpikeMat", L"DB_Ceiling"));

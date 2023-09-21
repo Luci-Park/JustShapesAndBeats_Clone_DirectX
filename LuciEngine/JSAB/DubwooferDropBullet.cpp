@@ -18,6 +18,7 @@ namespace lu::JSAB
 	{
 		Script::Initialize();
 		mTransform->SetScale({ 15, 15, 1 });
+		Owner()->SetTag(eTagType::Bullet);
 		Owner()->AddComponent<Collider2D>()->SetType(eColliderType::Circle);
 		
 		auto mr = Owner()->AddComponent<MeshRenderer>();

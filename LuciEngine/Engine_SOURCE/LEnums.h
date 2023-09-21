@@ -23,13 +23,20 @@ namespace lu::enums
 	{
 		Player,
 		Bullet,
+		BulletInteractor,
 		Item,
 		UI,
 		System,
 		Camera,
 		End 
 	};
-
+	enum class eTagType
+	{
+		Player,
+		Bullet,
+		Item,
+		None
+	};
 	enum class eResourceType
 	{
 		Texture,
