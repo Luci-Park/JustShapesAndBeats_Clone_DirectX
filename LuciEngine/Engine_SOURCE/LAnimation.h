@@ -14,7 +14,9 @@ namespace lu
 		enum class eAnimationType
 		{
 			TrPosX, TrPosY, TrPosZ, TrPosition, 
-			TrScale, TrRotation, TrLocalPosition, TrLocalScale, TrLocalRotation,
+			TrScale, TrRotation, 
+			TrLocalPosX, TrLocalPosY, TrLocalPosZ,	TrLocalPosition,
+			TrLocalScale, TrLocalRotation,
 			CdCenter, CdSize, CdActive,
 			MrTexture, MrAlpha, MrColor, MrInterpolation, MrTint, MrActive,
 			ScFunc,
@@ -41,6 +43,10 @@ namespace lu
 
 		void AddScaleKey(double timestamp, Vector3 vector3);
 		void AddRotationKey(double timestamp, Quaternion quaternion);
+
+		void AddLocalPositionXKey(double timestamp, float x);
+		void AddLocalPositionYKey(double timestamp, float y);
+		void AddLocalPositionZKey(double timestamp, float z);
 		void AddLocalPositionKey(double timestamp, Vector3 vector3);
 		void AddLocalScaleKey(double timestamp, Vector3 vector3);
 		void AddLocalRotationKey(double timestamp, Quaternion quaternion);
@@ -64,6 +70,9 @@ namespace lu
 
 		void AnimTrScale(Timeline* timeline);
 		void AnimTrRot(Timeline* timeline);
+		void AnimTrLocPosX(Timeline* timeline);
+		void AnimTrLocPosY(Timeline* timeline);
+		void AnimTrLocPosZ(Timeline* timeline);
 		void AnimTrLocPos(Timeline* timeline);
 		void AnimTrLocScale(Timeline* timeline);
 		void AnimTrLocRot(Timeline* timeline);

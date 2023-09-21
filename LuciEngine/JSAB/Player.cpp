@@ -55,6 +55,8 @@ namespace lu::JSAB
 
 		mHitSounds[0] = Resources::Load<AudioClip>(L"PlayerHit1", L"..\\..\\Assets\\AudioClips\\Player\\SFX_HIT_1.wav");
 		mHitSounds[1] = Resources::Load<AudioClip>(L"PlayerHit2", L"..\\..\\Assets\\AudioClips\\Player\\SFX_HIT_2.wav");
+
+		Owner()->SetTag(eTagType::Player);
 	}
 	void Player::Update()
 	{
@@ -67,7 +69,7 @@ namespace lu::JSAB
 	}
 	void Player::OnCollisionEnter(Collider2D* other)
 	{
-		if (other->Owner()->GetLayer() == eLayerType::Bullet && !mShield->Owner()->IsActive())
+		if (other->Owner()->GetTag() == eTagType::Bullet && !mShield->Owner()->IsActive())
 			OnDamage(other->Owner()->mTransform);
 	}
 

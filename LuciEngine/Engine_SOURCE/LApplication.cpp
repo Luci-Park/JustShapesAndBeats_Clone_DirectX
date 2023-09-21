@@ -95,10 +95,10 @@ namespace lu
 			graphicDevice = std::make_unique<lu::graphics::GraphicDevice_Dx11>();
 			lu::graphics::GetDevice() = graphicDevice.get();
 		}
-
+		float startY = 900;
 		RECT rt = { 0, 0, (LONG)width , (LONG)height };
 		AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, false);
-		SetWindowPos(mHwnd, nullptr, 0, 0, rt.right - rt.left, rt.bottom - rt.top, 0);
+		SetWindowPos(mHwnd, nullptr, 0, startY, rt.right - rt.left, rt.bottom - rt.top, 0);
 		ShowWindow(mHwnd, true);
 		UpdateWindow(mHwnd);
 	}

@@ -83,6 +83,10 @@ namespace lu
 		void SetName(const std::wstring& name) { mName = name; }
 		std::wstring& GetName() { return mName; }
 		eLayerType GetLayer() { return mLayer; }
+
+		eTagType GetTag() { return mTag; }
+		void SetTag(eTagType tag) { mTag = tag; }
+
 	public:
 		Transform* mTransform;
 	private:
@@ -91,6 +95,7 @@ namespace lu
 
 		std::wstring mName;
 		eLayerType mLayer;
+		eTagType mTag;
 	};
 }
 

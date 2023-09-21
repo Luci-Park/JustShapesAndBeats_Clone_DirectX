@@ -5,8 +5,6 @@ namespace lu
 {
 	class Animator;
 	class Rigidbody;
-	class ParticleSystem;
-	class MeshRenderer;
 	class Collider2D;
 }
 
@@ -20,8 +18,13 @@ namespace lu::JSAB
 
 		virtual void Initialize() override;
 
-		void DeActivate() {}
+		void Reset();
+		void Activate();
 	private:
+		Animator* mBaseAnim;
+		Animator* mHoleAnim;
+		Rigidbody* mRb;
+
 	};
 }
 

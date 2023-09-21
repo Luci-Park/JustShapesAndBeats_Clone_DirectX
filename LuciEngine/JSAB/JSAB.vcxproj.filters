@@ -110,6 +110,12 @@
     <ClCompile Include="DubwooferSpikeDropper.cpp">
       <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="DubwooferWaterBullet.cpp">
+      <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="DubwooferWater.cpp">
+      <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -223,6 +229,12 @@
       <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="DubwooferSpikeDropper.h">
+      <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="DubwooferWaterBullet.h">
+      <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="DubwooferWater.h">
       <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
     </ClInclude>
   </ItemGroup>

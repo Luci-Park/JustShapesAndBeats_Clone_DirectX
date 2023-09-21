@@ -7,7 +7,6 @@ namespace lu::JSAB
 	public:
 		DubwooferBeamBullet():mSize(20){}
 		virtual ~DubwooferBeamBullet(){}
-		void SetRandom();
 		void SetSize(float size) { mSize = size; }
 	private:
 		virtual void BulletSetUp()override;
@@ -26,6 +25,7 @@ namespace lu::JSAB
 		MeshRenderer* mMr;
 		Collider2D* mCol;
 		Animator* mAnim;
+		GameObject* mShadow;
 		float mSize;
 	};
 }

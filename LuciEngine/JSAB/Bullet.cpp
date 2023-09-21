@@ -10,7 +10,8 @@ namespace lu::JSAB
 		mBounds = SceneManager::MainCamera()->GetBoundary();
 		BulletSetUp();
 		DeActivate();
-		mState = eState::Waiting;
+		mBulletState = eBulletState::Waiting;
+		Owner()->SetTag(eTagType::Bullet);
 	}
 	void Bullet::Update()
 	{
@@ -28,22 +29,22 @@ namespace lu::JSAB
 	}
 	void Bullet::Warning()
 	{
-		mState = eState::Warning;
+		mBulletState = eBulletState::Warning;
 		OnWarning();
 	}
 	void Bullet::Activate()
 	{
-		mState = eState::Activate;
+		mBulletState = eBulletState::Activate;
 		OnActivate();
 	}
 	void Bullet::Outro()
 	{
-		mState = eState::Outro;
+		mBulletState = eBulletState::Outro;
 		OnOutro();
 	}
 	void Bullet::DeActivate()
 	{
-		mState = eState::DeActivate;
+		mBulletState = eBulletState::DeActivate;
 		OnDeActivate();
 	}
 	void Bullet::TestTime(double time)
@@ -53,19 +54,19 @@ namespace lu::JSAB
 	void Bullet::TimeCheck(double time)
 	{
 		CheckState(time);
-		switch (mState)
+		switch (mBulletState)
 		{
-		case eState::DeActivate:
+		case eBulletState::DeActivate:
 			return;
-		case eState::Warning:
+		case eBulletState::Warning:
 			mWarningProcess = 1 - (mActivateTime - time) / mWarningTime;
 			WhileWarning(time);
 			break;
-		case eState::Activate:
+		case eBulletState::Activate:
 			mActivateProcess = 1 - (time - mActivateTime) / mOutroTime;
 			WhileActivate(time);
 			break;
-		case eState::Outro:
+		case eBulletState::Outro:
 			WhileOutro(time);
 			break;
 		}
@@ -82,20 +83,20 @@ namespace lu::JSAB
 	}
 	void Bullet::CheckState(double time)
 	{
-		if (mState == eState::DeActivate && time <= mActivateTime)
-			mState = eState::Waiting;
-		if (mState == eState::Waiting)
+		if (mBulletState == eBulletState::DeActivate && time <= mActivateTime)
+			mBulletState = eBulletState::Waiting;
+		if (mBulletState == eBulletState::Waiting)
 		{
 			if (mWarningTime >= 0.001)
 				ChangeToWarning(time);
 			else
 				ChangeToActive(time);
 		}
-		else if (mState == eState::Warning)
+		else if (mBulletState == eBulletState::Warning)
 		{
 			ChangeToActive(time);
 		}
-		else if (mState == eState::Activate)
+		else if (mBulletState == eBulletState::Activate)
 		{
 			if (time == mActivateTime)
 				ChangeToActive(time);

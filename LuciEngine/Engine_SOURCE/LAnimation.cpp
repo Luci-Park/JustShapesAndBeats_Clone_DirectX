@@ -114,6 +114,27 @@ namespace lu
 		key->value = quaternion;
 		timeline->keyframes.push_back(key);
 	}
+	void Animation::AddLocalPositionXKey(double timestamp, float x)
+	{
+		Timeline* timeline = GetTimlineOfType(eAnimationType::TrLocalPosX);
+		if (timestamp > mDuration)
+			mDuration = timestamp;
+		timeline->AddFloatKey(timestamp, x);
+	}
+	void Animation::AddLocalPositionYKey(double timestamp, float y)
+	{
+		Timeline* timeline = GetTimlineOfType(eAnimationType::TrLocalPosY);
+		if (timestamp > mDuration)
+			mDuration = timestamp;
+		timeline->AddFloatKey(timestamp, y);
+	}
+	void Animation::AddLocalPositionZKey(double timestamp, float z)
+	{
+		Timeline* timeline = GetTimlineOfType(eAnimationType::TrLocalPosZ);
+		if (timestamp > mDuration)
+			mDuration = timestamp;
+		timeline->AddFloatKey(timestamp, z);
+	}
 	void Animation::AddLocalPositionKey(double timestamp, Vector3 vector3)
 	{
 		Timeline* timeline = GetTimlineOfType(eAnimationType::TrLocalPosition);
@@ -410,6 +431,94 @@ namespace lu
 			mTr->SetRotation(rot);
 		}
 	}
+	
+	void Animation::AnimTrLocPosX(Timeline* timeline)
+	{
+		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime) timeline->currIndex++;
+		Vector3 pos = mTr->GetLocalPosition();
+		if (timeline->IsComplete())
+		{
+			FloatKey* keyframe = dynamic_cast<FloatKey*>(timeline->keyframes.back());
+			pos.x = keyframe->value;
+			mTr->SetLocalPosition(pos);
+			return;
+		}
+		if (timeline->currIndex == 0)
+		{
+			FloatKey* keyframe = dynamic_cast<FloatKey*>(timeline->keyframes[0]);
+			if (mTime >= keyframe->timestamp)
+			{
+				pos.x = keyframe->value;
+				mTr->SetLocalPosition(pos);
+			}
+		}
+		else
+		{
+			FloatKey* prev = dynamic_cast<FloatKey*>(timeline->keyframes[timeline->currIndex - 1]);
+			FloatKey* next = dynamic_cast<FloatKey*>(timeline->keyframes[timeline->currIndex]);
+			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
+			pos.x = prev->value + t * (next->value - prev->value);
+			mTr->SetLocalPosition(pos);
+		}
+	}
+	void Animation::AnimTrLocPosY(Timeline* timeline)
+	{
+		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime) timeline->currIndex++;
+		Vector3 pos = mTr->GetLocalPosition();
+		if (timeline->IsComplete())
+		{
+			FloatKey* keyframe = dynamic_cast<FloatKey*>(timeline->keyframes.back());
+			pos.y = keyframe->value;
+			mTr->SetLocalPosition(pos);
+			return;
+		}
+		if (timeline->currIndex == 0)
+		{
+			FloatKey* keyframe = dynamic_cast<FloatKey*>(timeline->keyframes[0]);
+			if (mTime >= keyframe->timestamp)
+			{
+				pos.y = keyframe->value;
+				mTr->SetLocalPosition(pos);
+			}
+		}
+		else
+		{
+			FloatKey* prev = dynamic_cast<FloatKey*>(timeline->keyframes[timeline->currIndex - 1]);
+			FloatKey* next = dynamic_cast<FloatKey*>(timeline->keyframes[timeline->currIndex]);
+			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
+			pos.y = prev->value + t * (next->value - prev->value);
+			mTr->SetLocalPosition(pos);
+		}
+	}
+	void Animation::AnimTrLocPosZ(Timeline* timeline)
+	{
+		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime) timeline->currIndex++;
+		Vector3 pos = mTr->GetLocalPosition();
+		if (timeline->IsComplete())
+		{
+			FloatKey* keyframe = dynamic_cast<FloatKey*>(timeline->keyframes.back());
+			pos.z = keyframe->value;
+			mTr->SetLocalPosition(pos);
+			return;
+		}
+		if (timeline->currIndex == 0)
+		{
+			FloatKey* keyframe = dynamic_cast<FloatKey*>(timeline->keyframes[0]);
+			if (mTime >= keyframe->timestamp)
+			{
+				pos.z = keyframe->value;
+				mTr->SetLocalPosition(pos);
+			}
+		}
+		else
+		{
+			FloatKey* prev = dynamic_cast<FloatKey*>(timeline->keyframes[timeline->currIndex - 1]);
+			FloatKey* next = dynamic_cast<FloatKey*>(timeline->keyframes[timeline->currIndex]);
+			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
+			pos.z = prev->value + t * (next->value - prev->value);
+			mTr->SetLocalPosition(pos);
+		}
+	}
 	void Animation::AnimTrLocPos(Timeline* timeline)
 	{
 		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime) timeline->currIndex++;
@@ -687,6 +796,11 @@ namespace lu
 		mAnimFunctions[(UINT)eAnimationType::TrPosition] = ([this](Timeline* timeline) { this->AnimTrPos(timeline); });
 		mAnimFunctions[(UINT)eAnimationType::TrScale] = ([this](Timeline* timeline) { this->AnimTrScale(timeline); });
 		mAnimFunctions[(UINT)eAnimationType::TrRotation] = ([this](Timeline* timeline) { this->AnimTrRot(timeline); });
+
+		mAnimFunctions[(UINT)eAnimationType::TrLocalPosX] = ([this](Timeline* timeline) { this->AnimTrLocPosX(timeline); });
+		mAnimFunctions[(UINT)eAnimationType::TrLocalPosY] = ([this](Timeline* timeline) { this->AnimTrLocPosY(timeline); });
+		mAnimFunctions[(UINT)eAnimationType::TrLocalPosZ] = ([this](Timeline* timeline) { this->AnimTrLocPosZ(timeline); });
+
 		mAnimFunctions[(UINT)eAnimationType::TrLocalPosition] = ([this](Timeline* timeline) { this->AnimTrLocPos(timeline); });
 		mAnimFunctions[(UINT)eAnimationType::TrLocalScale] = ([this](Timeline* timeline) { this->AnimTrLocScale(timeline); });
 		mAnimFunctions[(UINT)eAnimationType::TrLocalRotation] = ([this](Timeline* timeline) { this->AnimTrLocRot(timeline); });

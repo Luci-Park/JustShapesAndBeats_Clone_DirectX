@@ -1,7 +1,7 @@
 #include "DubwooferSpikeDropper.h"
 #include "LObject.h"
 #include "LApplication.h"
-
+#include "LInput.h"
 extern lu::Application application;
 
 namespace lu::JSAB
@@ -21,6 +21,13 @@ namespace lu::JSAB
 			auto c = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<DubwooferSpikeBullet>();
 			mSpikes.push_back(c);
 			c->mTransform->SetLocalPosition(startx + width *0.5 + width * i, 0, -0.01 * i);
+		}
+	}
+	void DubwooferSpikeDropper::Update()
+	{
+		if (Input::GetKeyDown(eKeyCode::SPACE))
+		{
+			mSpikes[7]->Activate();
 		}
 	}
 }
