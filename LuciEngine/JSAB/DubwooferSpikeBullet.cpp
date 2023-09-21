@@ -21,7 +21,7 @@ namespace lu::JSAB
 		mTransform->SetScale(110, 100, 1);
 		mTransform->SetRotation(Quaternion::Create2DRotationDegrees(180));
 
-		Owner()->AddComponent<Collider2D>()->SetSize({ 0.5f, 0.8f });
+		Owner()->AddComponent<Collider2D>();
 		mBaseAnim = Owner()->AddComponent<Animator>();
 		mRb = Owner()->AddComponent<Rigidbody>();
 
@@ -43,9 +43,11 @@ namespace lu::JSAB
 		
 		ani = mBaseAnim->CreateAnimation(L"Fall");
 		duration = 0.5;
+		ani->AddLocalPositionYKey(0, 0);
+		ani->AddLocalPositionXKey(0, 0);
 		ani->AddRotationKey(0, Quaternion::Create2DRotationDegrees(180));
 		ani->AddRotationKey(0.1, Quaternion::Create2DRotationDegrees(180 - 30));
-		
+		ani->AddLocalPositionYKey(0.1, -10);
 
 	}
 	void DubwooferSpikeBullet::Reset()
