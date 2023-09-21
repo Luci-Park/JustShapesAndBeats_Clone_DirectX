@@ -15,12 +15,13 @@ namespace lu::JSAB
 	class Bullet : public Script
 	{
 	public:
-		enum class eState { Waiting, Warning, Activate, Outro, DeActivate};
+		enum class eBulletState { Waiting, Warning, Activate, Outro, DeActivate};
 		Bullet() {};
 		virtual ~Bullet() {};
 		virtual void Initialize() override;
 		virtual void Update() override;
 		void SetTimeline(MusicController* music, double wt, double at, double ot);
+		eBulletState GetBulletState() { return mBulletState; }
 		void Warning();
 		void Activate();
 		void Outro();
@@ -48,7 +49,7 @@ namespace lu::JSAB
 		void ChangeToOutro(double time);
 	protected:
 		CameraEffectScript* mCamera;
-		eState mState;
+		eBulletState mBulletState;
 		MusicController* mMusic;
 		RECT mBounds;
 		double mWarningTime;

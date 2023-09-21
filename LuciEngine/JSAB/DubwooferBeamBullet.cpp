@@ -10,41 +10,39 @@ namespace lu::JSAB
 	{
 		Vector3 baseScale = { 200, (float)application.GetHeight() * 2, 1 };
 		Owner()->SetName(L"Enemy Beam");
-		mTransform->SetPosition(Vector3::Up * (float)application.GetHeight() * 0.5);
+		mTransform->SetPosition(0, (float)application.GetHeight() * 0.5, 2);
 		mTransform->SetScale(baseScale.x, baseScale.y * 0.5, baseScale.z);
 
 		mCol = Owner()->AddComponent<Collider2D>();
 
 		mMr = Owner()->AddComponent<MeshRenderer>();
 		mMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(Resources::Load<Material>(L"EnemyBeamMat", L"verticlebar"));
+		mMr->GetMaterial()->SetRenderingMode(eRenderingMode::Opaque);
 		mMr->SetColor(Color::white)->UseColor(false);
 
 		mShadow = object::Instantiate<GameObject>(eLayerType::Bullet);
 		mShadow->mTransform->SetScale(baseScale);
+		mShadow->mTransform->SetPosition(0, 0, 2.1);
 		
 		auto mr = mShadow->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(Resources::Load<Material>(L"EnemyShadowMat", L"verticlebar"));
+		mr->GetMaterial()->SetRenderingMode(eRenderingMode::Transparent);
 		mr->GetMaterial()->SetTint({ 1, 1, 1, 0.5 });
-		
 
 		mAnim = Owner()->AddComponent<Animator>();
 		CreateOnBeatAnimation();
 	}
 	void DubwooferBeamBullet::OnWarning()
 	{
+		mShadow->SetActive(true);
 		mMr->SetActive(true);
+		mAnim->PlayAnimation(L"Warning", false);
 	}
 	void DubwooferBeamBullet::WhileWarning(double time)
 	{
-		float size = LERP(0, mSize, mWarningProcess);
-		Color tint = Color::Lerp({ 0, 0, 0, 0 }, { 1, 1, 1, 0.8 }, mWarningProcess);
-		Vector3 scale = mTransform->GetScale();
-		scale.x = size;
-		mTransform->SetScale(scale);
 	}
 	void DubwooferBeamBullet::OnActivate()
 	{
-		mAnim->SetActive(true);
 		mAnim->PlayAnimation(L"Activate", false);
 	}
 	void DubwooferBeamBullet::WhileActivate(double time)
@@ -52,7 +50,7 @@ namespace lu::JSAB
 	}
 	void DubwooferBeamBullet::OnOutro()
 	{
-		mAnim->SetActive(true);
+		mShadow->SetActive(false);
 		mAnim->PlayAnimation(L"Outro", false);
 	}
 	void DubwooferBeamBullet::WhileOutro(double time)
@@ -60,19 +58,28 @@ namespace lu::JSAB
 	}
 	void DubwooferBeamBullet::OnDeActivate()
 	{
-		//mMr->SetActive(false);
-		//mCol->SetActive(false);
-		//mAnim->SetActive(false);
-		//mShadow->SetActive(false);
+		mMr->SetActive(false);
 	}
 	void DubwooferBeamBullet::CreateOnBeatAnimation()
 	{
-		Vector3 baseScale = { 20, (float)application.GetWidth() * 2, 1 };
+		Vector3 baseScale = { 200, (float)application.GetHeight() * 2, 1 };
+		
+		auto Anim = mShadow->AddComponent<Animator>();
+		auto warning = Anim->CreateAnimation(L"Warning");
+		warning->AddTintKey(0, { 1, 1, 1, 0.5 });
+		warning->AddTintKey(0.3, { 1, 1, 1, 0 });
+		warning->AddTintKey(0.6, { 1, 1, 1, 0.5 });
+		Anim->PlayAnimation(L"Warning", true);
 
-		Animation* ani = mAnim->CreateAnimation(L"Activate");
+		Animation* ani = mAnim->CreateAnimation(L"Warning");
+		ani->AddScaleKey(0, { 200, 0, 1 });
+		ani->AddScaleKey(2, { 200, 200, 1 });
+		
+		ani = mAnim->CreateAnimation(L"Activate");
+
 		float flashDur = 0.05;
 		ani->AddColliderActiveKey(0, true);
-		ani->AddScaleKey(0, { 20, 0, 1 });
+		ani->AddScaleKey(0, { 200, 200, 1 });
 		ani->AddInterpolationKey(0, 1);
 		ani->AddTintKey(0, Color::white);
 
@@ -80,17 +87,16 @@ namespace lu::JSAB
 		ani->AddTintKey(flashDur, Color::white);
 		ani->AddInterpolationKey(flashDur, 1);
 		ani->AddInterpolationKey(flashDur, 0);
-		//ani->AddFunctionKey(flashDur, std::bind(&BeamBullet::CameraShake, this));
+		ani->AddFunctionKey(flashDur, std::bind(&DubwooferBeamBullet::CameraShake, this));
 		
 		float disappearDur = 0.1;
 		ani = mAnim->CreateAnimation(L"Outro");
 		ani->AddScaleKey(0, baseScale);
-		ani->AddScaleKey(disappearDur, { 0, (float)application.GetWidth() * 2, 1 });
+		ani->AddScaleKey(disappearDur, { 200, 0, 1 });
 		ani->AddFunctionKey(disappearDur, std::bind(&Bullet::DeActivate, this));
 	}
 	void DubwooferBeamBullet::CameraShake()
 	{
-		/*
 		Quaternion rot = mTransform->GetRotation();
 		if (rot == Quaternion::Identity)
 			SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->Bump(Vector3::Down);
@@ -100,6 +106,5 @@ namespace lu::JSAB
 			SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->Bump(Vector3::Left);
 		else if (rot == Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 0.5))
 			SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->Bump(Vector3::Right);
-			*/
 	}
 }

@@ -32,6 +32,7 @@ namespace lu::JSAB
 		virtual void Initialize()override;
 		virtual void Update() override;
 	};
+	class Bullet;
 	class BulletTestScene : public Scene
 	{
 	public:
@@ -39,5 +40,7 @@ namespace lu::JSAB
 		~BulletTestScene() {};
 		virtual void Initialize() override;
 		virtual void Update() override;
+	private:
+		Bullet* target;
 	};
 }

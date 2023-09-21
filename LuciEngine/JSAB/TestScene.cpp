@@ -114,7 +114,7 @@ namespace lu::JSAB
 	{
 		object::Instantiate<GameObject>(eLayerType::Camera)->AddComponent<GameCamera>();
 		auto c = object::Instantiate<GameObject>(eLayerType::Bullet);
-		auto b = c->AddComponent<DubwooferBeamBullet>();
+		target = c->AddComponent<DubwooferBeamBullet>();
 		/*
 		c->AddComponent<DubwooferSpikeDropper>();
 		c->AddComponent<gui::TransformWidget>();
@@ -123,6 +123,27 @@ namespace lu::JSAB
 
 	void BulletTestScene::Update()
 	{
+		if (Input::GetKeyDown(eKeyCode::SPACE))
+		{
+			if (target != nullptr)
+			{
+				switch (target->GetBulletState())
+				{
+				case lu::JSAB::Bullet::eBulletState::Waiting:
+					target->Warning();
+					break;
+				case lu::JSAB::Bullet::eBulletState::Warning:
+					target->Activate();
+					break;
+				case lu::JSAB::Bullet::eBulletState::Activate:
+					target->Outro();
+					break;
+				case lu::JSAB::Bullet::eBulletState::Outro:
+					target->DeActivate();
+					break;
+				}
+			}
+		}
 		Scene::Update();
 	}
 #pragma endregion
