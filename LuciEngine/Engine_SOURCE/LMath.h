@@ -780,6 +780,10 @@ namespace lu::math
             float axis = DirectX::XMConvertToRadians(degrees);
             return Quaternion::CreateFromAxisAngle(Vector3::Forward, axis);
         }
+        static Quaternion Create2DRotationRadian(float radian)
+        {
+            return Quaternion::CreateFromAxisAngle(Vector3::Forward, radian);
+        }
     };
 
     // Binary operators

@@ -12,7 +12,8 @@ namespace lu::JSAB
 	{
 		Script::Initialize();
 
-		mTransform->SetScale(100, 100, 1);
+		Vector3 scale = { 100, 100, 1 };
+		mTransform->SetScale(scale);
 		mTransform->SetRotation(Quaternion::Create2DRotationDegrees(180));
 
 		auto g = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
@@ -27,14 +28,17 @@ namespace lu::JSAB
 		mr->GetMaterial()->SetRenderingMode(eRenderingMode::Transparent);
 		mr->SetColor(Color::white);
 
-		float px = 25 * -1.5f;
-		float py = 25 * 1.5f;
+		float px = scale.x * 0.5;
+		float py = scale.y * 0.5;
+		float theta = XMConvertToRadians(160);
+
 		auto ani = mSpikeAnim->CreateAnimation(L"Fall");
-		float duration = 0.2;
+		float duration = 0.2;	
 		ani->AddRotationKey(0, Quaternion::Create2DRotationDegrees(180));
-		ani->AddRotationKey(duration, Quaternion::Create2DRotationDegrees(180 - 20));
+		ani->AddRotationKey(duration, Quaternion::Create2DRotationRadian(theta));
 		ani->AddLocalPositionKey(0, Vector3::Zero);
-		ani->AddLocalPositionKey(duration, { -9.43f, -9.67f, 0 });
+		//ani->AddLocalPositionKey(duration, { -9.43f, -9.67f, 0 });
+		ani->AddLocalPositionKey(duration, {cosf(theta) * px + sinf(theta) * py, sinf(theta) * px + cosf(theta) * py + 20, 0});
 		ani->AddInterpolationKey(0, 0);
 		ani->AddInterpolationKey(duration* 0.25, 1);
 		ani->AddInterpolationKey(duration* 0.5, 0);
