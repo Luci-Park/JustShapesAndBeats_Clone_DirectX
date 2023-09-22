@@ -19,8 +19,10 @@ namespace lu::JSAB
 		auto g = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
 		g->SetTag(eTagType::Bullet);
 		g->AddComponent<Collider2D>();
-		mSpikeAnim = g->AddComponent<Animator>();
+
 		mRb = g->AddComponent<Rigidbody>();
+		mRb->SetMass(100);
+		mRb->UseGravity(false);
 
 		auto mr = g->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -32,6 +34,7 @@ namespace lu::JSAB
 		float py = scale.y * 0.5;
 		float theta = XMConvertToRadians(160);
 
+		mSpikeAnim = g->AddComponent<Animator>();
 		auto ani = mSpikeAnim->CreateAnimation(L"Fall");
 		float duration = 0.2;	
 		ani->AddRotationKey(0, Quaternion::Create2DRotationDegrees(180));
@@ -45,12 +48,20 @@ namespace lu::JSAB
 		ani->AddInterpolationKey(duration* 0.75, 1);
 		ani->AddInterpolationKey(duration* 1, 0);
 
+		ani = mSpikeAnim->CreateAnimation(L"OnImpact");
+		duration = 0.1;
+		ani->AddLocalPositionKey(0, { 0, 0, 0 });
+		ani->AddLocalPositionKey(duration * 0.5, { 0, -10, 0 });
+		ani->AddLocalPositionKey(duration, { 0, -10, 0 });
 	}
 	void DubwooferSpikeBullet::Reset()
 	{ 
+		mRb->UseGravity(false);
 	}
 	void DubwooferSpikeBullet::Activate()
 	{
+		mRb->UseGravity(true);
+		mRb->SetVelocity(Vector3::Zero);
 		mSpikeAnim->PlayAnimation(L"Fall", false);
 	}
 }

@@ -38,8 +38,7 @@ namespace lu
 			else
 				mVelocity = resultVel;
 		}
-		if (mbUseGravity)
-			AddForce(Vector3::Up * -980);
+		AddForce(Vector3::Up * -98 * mbUseGravity);
 
 		Vector3 pos = Owner()->mTransform->GetPosition();
 		pos += mVelocity * Time::DeltaTime();
@@ -56,6 +55,6 @@ namespace lu
 	}
 	void Rigidbody::AddForce(Vector3 force)
 	{
-		mVelocity += force * Time::DeltaTime();
+		mVelocity += force * Time::DeltaTime() * mMass;
 	}
 }

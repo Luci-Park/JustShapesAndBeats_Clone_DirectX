@@ -35,7 +35,7 @@ namespace lu::JSAB
 		ani->AddScaleKey(dur * 1, { 15, 15, 1 });
 
 		mRb = Owner()->AddComponent<Rigidbody>();
-		mRb->UseGravity(true);
+		mRb->UseGravity(false);
 
 		mParticle = Owner()->AddComponent<ParticleSystem>();
 		mParticle->Duration = 3;
@@ -58,6 +58,7 @@ namespace lu::JSAB
 	{
 		Owner()->SetActive(true);
 		mRb->SetVelocity(Vector3::Down * 350);
+		mRb->UseGravity(true);
 		mAnim->PlayAnimation(L"Drop", false);
 		mParticle->Play();
 	}
