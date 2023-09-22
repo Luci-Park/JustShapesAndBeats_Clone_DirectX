@@ -8,10 +8,10 @@ namespace lu::JSAB
 		Script::Initialize();
 		mCamera = SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect();
 		mBounds = SceneManager::MainCamera()->GetBoundary();
+		Owner()->SetTag(eTagType::Bullet);
+		mBulletState = eBulletState::Waiting;
 		BulletSetUp();
 		DeActivate();
-		mBulletState = eBulletState::Waiting;
-		Owner()->SetTag(eTagType::Bullet);
 	}
 	void Bullet::Update()
 	{

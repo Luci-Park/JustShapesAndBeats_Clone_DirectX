@@ -17,12 +17,11 @@ namespace lu::JSAB
 		virtual ~DubwooferSpikeBullet() {}
 
 		virtual void Initialize() override;
-
+		//virtual void Update() override;
 		void Reset();
 		void Activate();
 	private:
-		Animator* mBaseAnim;
-		Animator* mHoleAnim;
+		Animator* mSpikeAnim;
 		Rigidbody* mRb;
 
 	};

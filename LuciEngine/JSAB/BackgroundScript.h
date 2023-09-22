@@ -12,7 +12,7 @@ namespace lu::JSAB
 	class BackgroundScript : public Script
 	{
 	public:
-		enum class Backgrounds {
+		enum class eBackgrounds {
 			TITLE,
 			TITLEGREEN,
 			BLACK,
@@ -35,7 +35,7 @@ namespace lu::JSAB
 		virtual ~BackgroundScript();
 
 		virtual void Initialize() override;
-		void SetBackground(Backgrounds type);
+		void SetBackground(eBackgrounds type);
 		void SetBackground(int type);
 	private:
 		MeshRenderer* mMeshRenderer;

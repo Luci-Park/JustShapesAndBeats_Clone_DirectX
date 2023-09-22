@@ -16,8 +16,8 @@ namespace lu::JSAB
 	{
 	public:
 		enum class eBulletState { Waiting, Warning, Activate, Outro, DeActivate};
-		Bullet() {};
-		virtual ~Bullet() {};
+		Bullet() {}
+		virtual ~Bullet() {}
 		virtual void Initialize() override;
 		virtual void Update() override;
 		void SetTimeline(MusicController* music, double wt, double at, double ot);

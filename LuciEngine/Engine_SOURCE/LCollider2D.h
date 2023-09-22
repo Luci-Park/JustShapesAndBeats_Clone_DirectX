@@ -22,7 +22,7 @@ namespace lu
 
 		Collider2D* SetType(eColliderType type) { mType = type; return this; }
 		Collider2D* SetSize(Vector2 size) { mSize = size; return this; }
-		Collider2D* SetCenter(Vector2 size) { mCenter = size; return this; }
+		Collider2D* SetCenter(Vector2 center) { mCenter = center; return this; }
 
 		UINT GetColliderID() { return mColliderID; }
 

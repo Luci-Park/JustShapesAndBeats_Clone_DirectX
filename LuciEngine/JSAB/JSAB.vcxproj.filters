@@ -116,6 +116,9 @@
     <ClCompile Include="DubwooferWater.cpp">
       <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="CheckPoint.cpp">
+      <Filter>Contents\CheckPoint</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -237,6 +240,9 @@
     <ClInclude Include="DubwooferWater.h">
       <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="CheckPoint.h">
+      <Filter>Contents\CheckPoint</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -265,9 +271,6 @@
     </Filter>
     <Filter Include="Contents\Camera">
       <UniqueIdentifier>{a63bfb69-c775-400c-aa2a-c738e4cd9c3f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\BulletTest">
-      <UniqueIdentifier>{72951c92-b49d-4206-83d7-f55d018d819b}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineTesters\NewTutorial">
       <UniqueIdentifier>{ceece7f3-f648-40e3-86f5-55aa064012f3}</UniqueIdentifier>
@@ -314,8 +317,8 @@
     <Filter Include="Contents\_SceneSpecific\2.DubwooferSubstep\Manager">
       <UniqueIdentifier>{2cc7cc2b-f867-4785-84cb-840ea0cb2246}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Bullets\Beam">
-      <UniqueIdentifier>{3bb2bb6c-b55d-42e7-81ed-ebb435a0b52a}</UniqueIdentifier>
+    <Filter Include="Contents\CheckPoint">
+      <UniqueIdentifier>{90870a1c-7926-4e66-8c70-3a8f36fd2a61}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

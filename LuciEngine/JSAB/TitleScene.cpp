@@ -80,7 +80,7 @@ namespace lu::JSAB::Title
 			{
 				mbgm->SetClip(mAudios[1]);
 				mbgm->Play(true);
-				mbgs->SetBackground(BackgroundScript::Backgrounds::TITLEGREEN);
+				mbgs->SetBackground(BackgroundScript::eBackgrounds::TITLEGREEN);
 				mTitle->OnBeat();
 			}
 			if (mbgm->GetClip() == mAudios[1])
@@ -121,7 +121,7 @@ namespace lu::JSAB::Title
 	void TitleScene::OnEnter()
 	{
 		mbIsInMenu = false;
-		mbgs->SetBackground(BackgroundScript::Backgrounds::TITLE);
+		mbgs->SetBackground(BackgroundScript::eBackgrounds::TITLE);
 		mbgm->SetClip(mAudios[0]);
 		mbgm->Play(false);
 		mTitle->OnAppear();

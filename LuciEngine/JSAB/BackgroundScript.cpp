@@ -57,15 +57,15 @@ namespace lu::JSAB
 		mTransform->SetScale(Vector3(application.GetWidth(), application.GetHeight(), 1));
 
 	}
-	void BackgroundScript::SetBackground(Backgrounds type)
+	void BackgroundScript::SetBackground(eBackgrounds type)
 	{
-		if (type >= Backgrounds::END)
-			type = Backgrounds::BLACK;
+		if (type >= eBackgrounds::END)
+			type = eBackgrounds::BLACK;
 		mMeshRenderer->GetMaterial()->SetTexture(_backgrounds[(int)type]);
 	}
 	void BackgroundScript::SetBackground(int type)
 	{
-		if (type < 0 || type >= (int)Backgrounds::END)
+		if (type < 0 || type >= (int)eBackgrounds::END)
 			type = 0;
 		mMeshRenderer->GetMaterial()->SetTexture(_backgrounds[type]);
 	}

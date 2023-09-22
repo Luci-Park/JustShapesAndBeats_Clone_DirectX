@@ -1,4 +1,5 @@
 #include "DubwooferSpikeDropper.h"
+#include "..\\Editor_SOURCE\\TransformWidget.h"
 #include "LObject.h"
 #include "LApplication.h"
 #include "LInput.h"
@@ -13,7 +14,9 @@ namespace lu::JSAB
 	{
 		Script::Initialize();
 		mTransform->SetPosition(0, 312.1346, 0);
-		float width = 85;
+		float x = 100;
+		float offset = -15;
+		float width = x + offset;
 		float fullWidth = width * 16;
 		float startx = -fullWidth * 0.5;
 		for (int i = 0; i < 16; i++)
@@ -22,6 +25,7 @@ namespace lu::JSAB
 			mSpikes.push_back(c);
 			c->mTransform->SetLocalPosition(startx + width *0.5 + width * i, 0, -0.01 * i);
 		}
+		mSpikes[7]->Owner()->AddComponent<gui::TransformWidget>();
 	}
 	void DubwooferSpikeDropper::Update()
 	{

@@ -7,6 +7,7 @@ namespace lu
 }
 namespace lu::JSAB
 {
+	class BackgroundScript;
 	class TutorialMusicController;
 	class TutorialRoundSpikes;
 	class TutorialBurst;
@@ -44,6 +45,8 @@ namespace lu::JSAB
 		BulletPool<TutorialCircleLine> mCircleLines;
 		BulletPool<TutorialBeatCircle> mBeatCircles;
 		BulletPool<TutorialGiantCircle> mGCircles;
+
+		BackgroundScript* mBackground;
 	};
 }
 

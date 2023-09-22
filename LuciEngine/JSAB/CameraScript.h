@@ -9,6 +9,7 @@ namespace lu
 
 namespace lu::JSAB
 {
+	class BackgroundScript;
 	class CameraEffectScript : public Script
 	{
 	public:
@@ -38,10 +39,12 @@ namespace lu::JSAB
 		virtual void Update() override;
 
 		CameraEffectScript* GetEffect() { return mEffect; }
+		BackgroundScript* GetBackground() { return mBackground; }
 
 	private:
 		Camera* mGameCamera;
 		CameraEffectScript* mEffect;
+		BackgroundScript* mBackground;
 	};
 }
 

@@ -5,6 +5,7 @@
 #include "TutorialBeam.h"
 #include "TutorialBeatCircle.h"
 #include "TutorialGiantCircle.h"
+#include "BackgroundScript.h"
 #include "LObject.h"
 #include "LCamera.h"
 #include "LAnimator.h"
@@ -27,10 +28,14 @@ namespace lu::JSAB
 	void TutorialManager::Initialize()
 	{
 		mMusic = Owner()->GetComponent<TutorialMusicController>();
-		OnStageChange(0);
+
 		auto c = object::Instantiate<TrianglePrefab>(Vector3(570.0f, 0.0f, -1.f), eLayerType::Item);
 		mLevelTriangle = c->GetComponent<Triangle>();
 		c->SetActive(false);
+		
+		mBackground = SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetBackground();
+		
+		OnStageChange(0);
 	}
 	void TutorialManager::Update()
 	{
@@ -45,16 +50,49 @@ namespace lu::JSAB
 	}
 	void TutorialManager::OnStageChange(int stage)
 	{
-		if (stage == 0) Stage1();
-		if (stage == 1) Stage2();
-		if (stage == 2) Stage3();
-		if (stage == 3) Stage4();
-		if (stage == 4) Stage5();
-		if (stage == 5) Stage6();
-		if (stage == 6) Stage7();
-		if (stage == 7) Stage8();
+		if (stage == 0)
+		{
+			mBackground->SetBackground(BackgroundScript::eBackgrounds::BLACK);
+			Stage1();
+		}
+		if (stage == 1)
+		{
+			mBackground->SetBackground(BackgroundScript::eBackgrounds::DARKBLUE);
+			Stage2();
+		}
+		if (stage == 2)
+		{
+			mBackground->SetBackground(BackgroundScript::eBackgrounds::PURPLE);
+			Stage3();
+		}
+		if (stage == 3)
+		{
+			mBackground->SetBackground(BackgroundScript::eBackgrounds::TURQUOISE);
+			Stage4();
+		}
+		if (stage == 4)
+		{
+			mBackground->SetBackground(BackgroundScript::eBackgrounds::GREY);
+			Stage5();
+		}
+		if (stage == 5)
+		{
+			mBackground->SetBackground(BackgroundScript::eBackgrounds::PINK);
+			Stage6();
+		}
+		if (stage == 6)
+		{
+			mBackground->SetBackground(BackgroundScript::eBackgrounds::BLACK);
+			Stage7();
+		}
+		if (stage == 7)
+		{
+			mBackground->SetBackground(BackgroundScript::eBackgrounds::PURPLE);
+			Stage8();
+		}
 		if (stage == 8)
 		{
+			mBackground->SetBackground(BackgroundScript::eBackgrounds::PURPLE);
 			Stage9();
 			Stage10();
 		}

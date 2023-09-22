@@ -154,6 +154,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BackgroundScript.h" />
+    <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="DubwooferBeamBullet.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CameraScript.h" />
@@ -197,6 +198,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BackgroundScript.cpp" />
+    <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="DubwooferBeamBullet.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CameraScript.cpp" />

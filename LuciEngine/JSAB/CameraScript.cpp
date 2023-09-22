@@ -1,5 +1,6 @@
 #include "CameraScript.h"
 #include "GeneralEffects.h"
+#include "BackgroundScript.h"
 #include "LObject.h"
 #include "LMeshRenderer.h"
 #include "LApplication.h"
@@ -133,11 +134,17 @@ namespace lu::JSAB
 			auto g = object::Instantiate<GameObject>(mTransform, eLayerType::Camera);
 			g->SetName(L"Main Camera");
 			auto c = g->AddComponent<Camera>();
-			bool active[] = { true, true, true, true, true, false, false };
+			bool active[] = { true, true, true, true, false, false, false };
 			for (int i = 0; i < (UINT)eLayerType::End; i++)
 				c->TurnLayerMask((eLayerType)i, active[i]);
 			mEffect = g->AddComponent<CameraEffectScript>();
 			mGameCamera = c;
+		}
+		{
+			auto g = object::Instantiate<GameObject>(mTransform, eLayerType::UI);
+			g->SetName(L"Background");
+			mBackground = g->AddComponent<BackgroundScript>();
+			g->mTransform->SetLocalPosition(0, 0, 20);
 		}
 	}
 
