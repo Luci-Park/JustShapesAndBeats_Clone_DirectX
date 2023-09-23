@@ -11,6 +11,7 @@ namespace lu::JSAB
 	void DubwooferSpikeBullet::Initialize()
 	{
 		Script::Initialize();
+		Owner()->SetName(L"SpikeBulletParent");
 
 		Vector3 scale = { 100, 100, 1 };
 		mTransform->SetScale(scale);
@@ -19,6 +20,7 @@ namespace lu::JSAB
 		auto g = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
 		g->SetTag(eTagType::Bullet);
 		g->AddComponent<Collider2D>();
+		g->SetName(L"SpikeBullet");
 
 		mRb = g->AddComponent<Rigidbody>();
 		mRb->SetMass(100);
@@ -49,7 +51,7 @@ namespace lu::JSAB
 		ani->AddInterpolationKey(duration* 1, 0);
 		ani->AddFunctionKey(0.55, std::bind(&Rigidbody::UseGravity, mRb, true));
 		ani->AddFunctionKey(0.55, std::bind(&Rigidbody::SetVelocity, mRb, Vector3::Zero));
-		ani->AddFunctionKey(0.55 * 2, std::bind(&DubwooferSpikeBullet::Reset, this));
+		ani->AddFunctionKey(0.55 * 3, std::bind(&DubwooferSpikeBullet::Reset, this));
 
 		ani = mSpikeAnim->CreateAnimation(L"Shake");
 		duration = 0.1;
@@ -66,8 +68,10 @@ namespace lu::JSAB
 	}
 	void DubwooferSpikeBullet::Reset()
 	{ 
+		
 		mRb->UseGravity(false);
 		mRb->SetVelocity(Vector3::Zero);
+		mRb->Owner()->mTransform->SetRotation(Quaternion::Create2DRotationDegrees(180));
 		mSpikeAnim->PlayAnimation(L"Reset", false);
 	}
 	void DubwooferSpikeBullet::Activate()
