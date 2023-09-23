@@ -1,5 +1,5 @@
 #include "DubwooferWaterBullet.h"
-#include "DubwooferDropBullet.h"
+#include "DubwooferWater.h"
 #include "LGameObject.h"
 #include "LMeshRenderer.h"
 #include "LCollider2D.h"
@@ -31,11 +31,7 @@ namespace lu::JSAB
 	}
 	void DubwooferWaterBullet::OnCollisionEnter(Collider2D* other)
 	{
-		DubwooferDropBullet* bullet = other->Owner()->GetComponent<DubwooferDropBullet>();
-		if (bullet)
-		{
-			float diff = abs(mTransform->GetPosition().x - other->Owner()->mTransform->GetPosition().x);
-
-		}
+		if (other->Owner()->GetLayer() == eLayerType::Bullet)
+			mBody->OnImpact(mIdx, other->Owner()->mTransform);
 	}
 }

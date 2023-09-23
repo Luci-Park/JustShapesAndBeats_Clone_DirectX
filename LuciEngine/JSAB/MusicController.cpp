@@ -1,4 +1,5 @@
 #include "MusicController.h"
+#include "LResources.h"
 #include "LAudioSource.h"
 #include "LGameObject.h"
 #include "LTime.h"
@@ -14,6 +15,11 @@ namespace lu::JSAB
 		, mbIsFinishing(false)
 	{
 	}
+	void MusicController::SetClip(std::wstring clip)
+	{
+		mAudioSource->SetClip(Resources::Find<AudioClip>(clip));
+		mStartVolume = mAudioSource->GetVolume();
+	}
 	void MusicController::Initialize()
 	{
 		mAudioSource = Owner()->AddComponent<AudioSource>();
@@ -23,6 +29,7 @@ namespace lu::JSAB
 	}
 	void MusicController::Update()
 	{
+		mText->text = mAudioSource->GetPosition();
 		if (mbIsFinishing)
 		{
 			if (mAudioSource->GetVolume() > 0)

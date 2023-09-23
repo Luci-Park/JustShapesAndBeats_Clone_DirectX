@@ -25,13 +25,8 @@ namespace lu::JSAB
 			mSpikes.push_back(c);
 			c->mTransform->SetLocalPosition(startx + width *0.5 + width * i, 0, -0.01 * i);
 		}
-		mSpikes[7]->Owner()->AddComponent<gui::TransformWidget>();
 	}
 	void DubwooferSpikeDropper::Update()
 	{
-		if (Input::GetKeyDown(eKeyCode::SPACE))
-		{
-			mSpikes[7]->Activate();
-		}
 	}
 }

@@ -1,10 +1,6 @@
 #pragma once
 #include "LScript.h"
 #include "BulletPool.h"
-namespace lu
-{
-	class Animator;
-}
 namespace lu::JSAB
 {
 	class BackgroundScript;

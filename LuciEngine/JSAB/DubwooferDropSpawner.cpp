@@ -6,7 +6,7 @@ extern lu::Application application;
 namespace lu::JSAB
 {
 	DubwooferDropSpawner::DubwooferDropSpawner()
-		: mDrops(10)
+		: mDrops(20)
 	{
 		float y = application.GetHeight() * 0.5;
 		for (float i = application.GetWidth() * -0.5 + 50; i <= application.GetWidth() * 0.5 - 50; i += 20)
@@ -17,8 +17,6 @@ namespace lu::JSAB
 	void DubwooferDropSpawner::Update()
 	{
 		Bullet::Update();
-		if(Input::GetKeyDown(eKeyCode::SPACE))
-			Activate();
 	}
 	void DubwooferDropSpawner::OnActivate()
 	{

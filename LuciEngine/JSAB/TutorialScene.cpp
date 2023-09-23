@@ -1,21 +1,12 @@
 #include "TutorialScene.h"
 #include "PlayerPrefab.h"
 #include "CameraScript.h"
-#include "TrianglePrefab.h"
 #include "TutorialMusicController.h"
 #include "TutorialManager.h"
 
-#include "TutorialBeatCircle.h"
-#include "..\\Editor_SOURCE\\TransformWidget.h"
-#include "TrianglePrefab.h"
-#include "Triangle.h"
-
-
 #include "LCamera.h"
 #include "LObject.h"
-#include "LInput.h"
 #include "LCollisionManager.h"
-#include "LFontWrapper.h"
 namespace lu::JSAB::Tutorial
 {
 	void TutorialScene::Initialize()

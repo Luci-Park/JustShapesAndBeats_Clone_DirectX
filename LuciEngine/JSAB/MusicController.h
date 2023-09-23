@@ -1,5 +1,5 @@
 #pragma once
-#include "LScript.h"
+#include "..\\Engine_SOURCE\LScript.h"
 
 namespace lu
 {
@@ -14,6 +14,7 @@ namespace lu::JSAB
 		static MusicController* Instance;
 		MusicController();
 		~MusicController(){}
+		void SetClip(std::wstring clip);
 		virtual void Initialize() override;
 		virtual void Update() override;
 		void Play();

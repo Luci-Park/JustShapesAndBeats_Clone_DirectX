@@ -119,6 +119,9 @@
     <ClCompile Include="CheckPoint.cpp">
       <Filter>Contents\CheckPoint</Filter>
     </ClCompile>
+    <ClCompile Include="DubwooferManager.cpp">
+      <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -242,6 +245,9 @@
     </ClInclude>
     <ClInclude Include="CheckPoint.h">
       <Filter>Contents\CheckPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="DubwooferManager.h">
+      <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

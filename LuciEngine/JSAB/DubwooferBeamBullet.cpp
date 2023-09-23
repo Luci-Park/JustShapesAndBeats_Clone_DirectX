@@ -59,6 +59,7 @@ namespace lu::JSAB
 	void DubwooferBeamBullet::OnDeActivate()
 	{
 		mMr->SetActive(false);
+		mShadow->SetActive(false);
 	}
 	void DubwooferBeamBullet::CreateOnBeatAnimation()
 	{

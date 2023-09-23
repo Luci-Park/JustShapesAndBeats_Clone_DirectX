@@ -1,6 +1,5 @@
 #include "TutorialMusicController.h"
 #include "LGameObject.h"
-#include "LResources.h"
 #include "LAudioSource.h"
 #include "LTime.h"
 #include "LFontWrapper.h"
@@ -28,8 +27,7 @@ namespace lu::JSAB
 	void TutorialMusicController::Initialize()
 	{
 		MusicController::Initialize();
-		mAudioSource->SetClip(Resources::Find<AudioClip>(L"mus_corrupted"));
-		mStartVolume = mAudioSource->GetVolume();
+		SetClip(L"mus_corrupted");
 	}
 	
 	void TutorialMusicController::Update()

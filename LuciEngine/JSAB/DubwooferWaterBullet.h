@@ -19,15 +19,17 @@ namespace lu::JSAB
 		virtual void OnCollisionEnter(Collider2D* other) override;
 
 		void SetY(float y);
-		void SetParent(DubwooferWater* p) { mParent = p; }
+		void SetWaterBody(DubwooferWater* p, int idx) { mBody = p; mIdx = idx; }
+
 	private:
-		DubwooferWater* mParent;
+		DubwooferWater* mBody;
 
 		Animator* mAnim;
 		ParticleSystem* mPs;
 		MeshRenderer* mMr;
 		Collider2D* mCol;
 		bool mbInAction;
+		int mIdx;
 		
 	};
 }
