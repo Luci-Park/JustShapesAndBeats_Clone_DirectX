@@ -64,10 +64,12 @@ namespace lu::JSAB
 			WhileWarning(time);
 			break;
 		case eBulletState::Activate:
-			mActivateProcess = 1 - (time - mActivateTime) / mOutroTime;
+			if(mOutroProcess > 0)
+				mActivateProcess = 1 - (time - mActivateTime) / mOutroTime;
 			WhileActivate(time);
 			break;
 		case eBulletState::Outro:
+			mOutroProcess = time - mActivateTime - mOutroTime;
 			WhileOutro(time);
 			break;
 		}

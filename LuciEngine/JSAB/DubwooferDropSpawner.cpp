@@ -8,7 +8,7 @@ namespace lu::JSAB
 	DubwooferDropSpawner::DubwooferDropSpawner()
 		: mDrops(20)
 	{
-		float y = application.GetHeight() * 0.5;
+		float y = application.GetHeight() * 0.5 - 5;
 		for (float i = application.GetWidth() * -0.5 + 50; i <= application.GetWidth() * 0.5 - 50; i += 20)
 		{
 			mSpawnPos.push_back({ i, y, 0 });

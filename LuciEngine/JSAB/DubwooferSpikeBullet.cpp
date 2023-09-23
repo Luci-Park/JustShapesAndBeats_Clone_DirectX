@@ -40,28 +40,42 @@ namespace lu::JSAB
 		ani->AddRotationKey(0, Quaternion::Create2DRotationDegrees(180));
 		ani->AddRotationKey(duration, Quaternion::Create2DRotationRadian(theta));
 		ani->AddLocalPositionKey(0, Vector3::Zero);
-		//ani->AddLocalPositionKey(duration, { -9.43f, -9.67f, 0 });
+
 		ani->AddLocalPositionKey(duration, {cosf(theta) * px + sinf(theta) * py, sinf(theta) * px + cosf(theta) * py + 20, 0});
 		ani->AddInterpolationKey(0, 0);
 		ani->AddInterpolationKey(duration* 0.25, 1);
 		ani->AddInterpolationKey(duration* 0.5, 0);
 		ani->AddInterpolationKey(duration* 0.75, 1);
 		ani->AddInterpolationKey(duration* 1, 0);
+		ani->AddFunctionKey(0.55, std::bind(&Rigidbody::UseGravity, mRb, true));
+		ani->AddFunctionKey(0.55, std::bind(&Rigidbody::SetVelocity, mRb, Vector3::Zero));
+		ani->AddFunctionKey(0.55 * 2, std::bind(&DubwooferSpikeBullet::Reset, this));
 
-		ani = mSpikeAnim->CreateAnimation(L"OnImpact");
+		ani = mSpikeAnim->CreateAnimation(L"Shake");
 		duration = 0.1;
 		ani->AddLocalPositionKey(0, { 0, 0, 0 });
-		ani->AddLocalPositionKey(duration * 0.5, { 0, -10, 0 });
-		ani->AddLocalPositionKey(duration, { 0, -10, 0 });
+		ani->AddLocalPositionKey(duration * 0.25, { -10, 0, 0 });
+		ani->AddLocalPositionKey(duration *0.5, { 8, 0, 0 });
+		ani->AddLocalPositionKey(duration *0.75, { -3, 0, 0 });
+		ani->AddLocalPositionKey(duration, { 0, 0, 0 });
+
+		ani = mSpikeAnim->CreateAnimation(L"Reset");
+		duration = 0.3;
+		ani->AddLocalPositionKey(0, { 0, 60, 0 });
+		ani->AddLocalPositionKey(duration, { 0, 0, 0 });
 	}
 	void DubwooferSpikeBullet::Reset()
 	{ 
 		mRb->UseGravity(false);
+		mRb->SetVelocity(Vector3::Zero);
+		mSpikeAnim->PlayAnimation(L"Reset", false);
 	}
 	void DubwooferSpikeBullet::Activate()
 	{
-		mRb->UseGravity(true);
-		mRb->SetVelocity(Vector3::Zero);
 		mSpikeAnim->PlayAnimation(L"Fall", false);
+	}
+	void DubwooferSpikeBullet::Shake()
+	{
+		mSpikeAnim->PlayAnimation(L"Shake", false);
 	}
 }
