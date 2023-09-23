@@ -32,7 +32,7 @@ namespace lu::JSAB
 	void TutorialBeam::BulletSetUp()
 	{
 		Vector3 baseScale = { 20, (float)application.GetWidth() * 2, 1 };
-		Owner()->SetName(L"BeatBar");
+		Owner()->SetName(L"Tutorial Enemy Beam");
 		mTransform->SetPosition(Vector3::Up * (float)application.GetHeight() * 0.5);
 		mTransform->SetScale(baseScale);
 

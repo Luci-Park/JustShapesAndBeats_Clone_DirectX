@@ -18,7 +18,7 @@ namespace lu::JSAB
 	{
 		Script::Initialize();
 		mTransform->SetScale({ 15, 15, 1 });
-		mTransform->SetPosition({ 0, 0, -20 });
+
 		Owner()->SetTag(eTagType::Bullet);
 		Owner()->AddComponent<Collider2D>()->SetType(eColliderType::Circle);
 		
@@ -43,7 +43,7 @@ namespace lu::JSAB
 		mParticle->Loop = false;
 		mParticle->RateOverTime = 0;
 		mParticle->RateOverDistance = 0;
-		mParticle->Bursts.push_back({0, 5, false});
+		mParticle->Bursts.push_back({0, 3, false});
 		mParticle->SetTexture(Resources::Find<Texture>(L"SmallCircle"));
 		mParticle->SetLifeTime(0.5);
 		mParticle->SetSize(10, 0);
@@ -54,6 +54,8 @@ namespace lu::JSAB
 	}
 	void DubwooferDropBullet::Update()
 	{
+		if (mTransform->GetPosition().y < -400)
+			DeActivate();
 	}
 	void DubwooferDropBullet::Activate()
 	{

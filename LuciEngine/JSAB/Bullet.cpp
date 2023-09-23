@@ -16,7 +16,8 @@ namespace lu::JSAB
 	void Bullet::Update()
 	{
 		mBounds = SceneManager::MainCamera()->GetBoundary();
-		if (mMusic == nullptr) return;
+		if (mMusic == nullptr) 
+			return;
 		double time = mMusic->GetTime();
 		TimeCheck(time);
 	}

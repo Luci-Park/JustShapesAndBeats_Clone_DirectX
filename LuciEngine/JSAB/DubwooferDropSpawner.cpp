@@ -13,6 +13,7 @@ namespace lu::JSAB
 		{
 			mSpawnPos.push_back({ i, y, 0 });
 		}
+		mDrops.Reset();
 	}
 	void DubwooferDropSpawner::Update()
 	{

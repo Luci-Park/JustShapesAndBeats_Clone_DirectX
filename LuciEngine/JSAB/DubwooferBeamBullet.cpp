@@ -9,7 +9,7 @@ namespace lu::JSAB
 	void DubwooferBeamBullet::BulletSetUp()
 	{
 		Vector3 baseScale = { 200, (float)application.GetHeight() * 2, 1 };
-		Owner()->SetName(L"Enemy Beam");
+		Owner()->SetName(L"Dubwoofer Enemy Beam");
 		mTransform->SetPosition(0, (float)application.GetHeight() * 0.5, 2);
 		mTransform->SetScale(baseScale.x, baseScale.y * 0.5, baseScale.z);
 
@@ -43,6 +43,7 @@ namespace lu::JSAB
 	}
 	void DubwooferBeamBullet::OnActivate()
 	{
+		mCol->SetActive(true);
 		mAnim->PlayAnimation(L"Activate", false);
 	}
 	void DubwooferBeamBullet::WhileActivate(double time)
@@ -58,6 +59,7 @@ namespace lu::JSAB
 	}
 	void DubwooferBeamBullet::OnDeActivate()
 	{
+		mCol->SetActive(false);
 		mMr->SetActive(false);
 		mShadow->SetActive(false);
 	}
