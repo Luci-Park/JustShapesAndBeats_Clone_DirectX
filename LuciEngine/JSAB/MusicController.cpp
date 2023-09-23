@@ -1,6 +1,5 @@
 #include "MusicController.h"
 #include "LResources.h"
-#include "LAudioSource.h"
 #include "LGameObject.h"
 #include "LTime.h"
 #include "LText.h"
@@ -29,20 +28,25 @@ namespace lu::JSAB
 	}
 	void MusicController::Update()
 	{
-		mText->text = mAudioSource->GetPosition();
-		if (mbIsFinishing)
+		if (mbIsPlaying)
 		{
-			if (mAudioSource->GetVolume() > 0)
+			if (GetTime() >= mCheckPoints[mStageIdx].second)
+				mStageIdx++;
+			mText->text = mAudioSource->GetPosition();
+			if (mbIsFinishing)
 			{
-				float fadeStep = mFadeTime / mFadeDuration;
-				float vol = mStartVolume * (1.0f - fadeStep);
+				if (mAudioSource->GetVolume() > 0)
+				{
+					float fadeStep = mFadeTime / mFadeDuration;
+					float vol = mStartVolume * (1.0f - fadeStep);
 
-				mAudioSource->SetVolume(vol);
-				mFadeTime += Time::DeltaTime();
-			}
-			else
-			{
-				mAudioSource->Stop();
+					mAudioSource->SetVolume(vol);
+					mFadeTime += Time::DeltaTime();
+				}
+				else
+				{
+					mAudioSource->Stop();
+				}
 			}
 		}
 	}

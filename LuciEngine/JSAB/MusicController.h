@@ -1,9 +1,8 @@
 #pragma once
 #include "..\\Engine_SOURCE\LScript.h"
-
+#include "..\\Engine_SOURCE\LAudioSource.h"
 namespace lu
 {
-	class AudioSource;
 	class Text;
 }
 namespace lu::JSAB

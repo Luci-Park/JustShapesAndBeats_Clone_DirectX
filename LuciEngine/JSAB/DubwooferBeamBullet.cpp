@@ -40,6 +40,7 @@ namespace lu::JSAB
 	}
 	void DubwooferBeamBullet::WhileWarning(double time)
 	{
+		mShadow->mTransform->SetPosition(mTransform->GetPosition());
 	}
 	void DubwooferBeamBullet::OnActivate()
 	{

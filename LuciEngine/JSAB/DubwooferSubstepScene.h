@@ -1,6 +1,6 @@
 #pragma once
 #include "..\Engine_SOURCE\LScene.h"
-#include "MusicController.h"
+#include "DubwooferMusicController.h"
 namespace lu::JSAB
 {
 	class DubwooferSubstepScene : public Scene
@@ -13,7 +13,7 @@ namespace lu::JSAB
 		virtual void OnExit() override;
 
 	private:
-		MusicController* mMusic;
+		DubwooferMusicController* mMusic;
 	};
 }
 

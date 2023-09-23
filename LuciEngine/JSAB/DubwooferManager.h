@@ -19,6 +19,8 @@ namespace lu::JSAB
 	private:
 		void Drops(double time);
 		void Spikes(double time);
+		void BigBar(double time);
+		void SmallBar(double time);
 	private:
 		DubwooferDropSpawner* mDrops;
 		DubwooferSpikeDropper* mSpikes;

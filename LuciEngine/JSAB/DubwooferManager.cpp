@@ -24,6 +24,8 @@ namespace lu::JSAB
 		double time = mMusic->GetTime();
 		Drops(time);
 		Spikes(time);
+		BigBar(time);
+		SmallBar(time);
 	}
 	void DubwooferManager::Drops(double time)
 	{
@@ -58,5 +60,23 @@ namespace lu::JSAB
 			mSpikes->DropSpike();
 			beatIdx++;
 		}
+	}
+	void DubwooferManager::BigBar(double time)
+	{
+		static float beat[][3] = { {2.013, 60.2, 0.5},{2.119, 61.85, 0.5}, {2.119, 63.5, 0.5} };
+		static float x[] = { 0, 350, -350};
+		static int idx = 0;
+		if (idx < 3 && time > beat[idx][1] - beat[idx][0] - 0.5)
+		{
+			auto bar = mThickBeams.GetNext();
+			Vector3 pos = bar->mTransform->GetPosition();
+			pos.x = x[idx];
+			bar->mTransform->SetPosition(pos);
+			bar->SetTimeline(mMusic, beat[idx][0], beat[idx][1], beat[idx][2]);
+			idx++;
+		}
+	}
+	void DubwooferManager::SmallBar(double time)
+	{
 	}
 }

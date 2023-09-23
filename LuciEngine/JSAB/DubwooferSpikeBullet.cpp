@@ -80,6 +80,7 @@ namespace lu::JSAB
 	}
 	void DubwooferSpikeBullet::Shake()
 	{
-		mSpikeAnim->PlayAnimation(L"Shake", false);
+		if(!mSpikeAnim->IsPlaying())
+			mSpikeAnim->PlayAnimation(L"Shake", false);
 	}
 }

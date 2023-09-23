@@ -18,10 +18,10 @@ namespace lu::JSAB
 
 		GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
 		manager->SetName(L"DubwooferManager");
-		mMusic = manager->AddComponent<MusicController>();
+		mMusic = manager->AddComponent<DubwooferMusicController>();
 		manager->AddComponent<DubwooferManager>();
 
-		mMusic->SetClip(L"mus_dubwoofer_substep");
+		
 		object::Instantiate<PlayerPrefab>(Vector3(-540, 0, -5), eLayerType::Player);
 	}
 	void DubwooferSubstepScene::Update()
