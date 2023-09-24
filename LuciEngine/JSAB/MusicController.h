@@ -26,7 +26,6 @@ namespace lu::JSAB
 		AudioSource* mAudioSource;
 		Text* mText;
 		std::vector<std::pair<double, double>> mCheckPoints;
-		double mEndTime;
 		float mFadeDuration;
 		float mFadeTime;
 		float mStartVolume;

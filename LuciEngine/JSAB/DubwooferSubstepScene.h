@@ -1,6 +1,7 @@
 #pragma once
 #include "..\Engine_SOURCE\LScene.h"
 #include "DubwooferMusicController.h"
+#include "BackgroundScript.h"
 namespace lu::JSAB
 {
 	class DubwooferSubstepScene : public Scene
@@ -14,6 +15,7 @@ namespace lu::JSAB
 
 	private:
 		DubwooferMusicController* mMusic;
+		BackgroundScript* mBackground;
 	};
 }
 

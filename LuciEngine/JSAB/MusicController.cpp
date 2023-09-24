@@ -9,7 +9,7 @@ namespace lu::JSAB
 	MusicController::MusicController()
 		: mStageIdx(0)
 		, mNextStageIdx(0)
-		, mFadeDuration(2)
+		, mFadeDuration(3)
 		, mFadeTime(0)
 		, mbIsFinishing(false)
 	{

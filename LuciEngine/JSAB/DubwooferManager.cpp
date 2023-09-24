@@ -3,9 +3,11 @@
 #include "DubwooferSpikeDropper.h"
 #include "DubwooferBeamBullet.h"
 #include "TutorialBeam.h"
+#include "CheckPoint.h"
 #include "MusicController.h"
 #include "LObject.h"
 #include "LApplication.h"
+#include "LCamera.h"
 
 extern lu::Application application;
 namespace lu::JSAB
@@ -20,6 +22,8 @@ namespace lu::JSAB
 		mDrops = object::Instantiate<GameObject>(eLayerType::System)->AddComponent<DubwooferDropSpawner>();
 		mSpikes = object::Instantiate<GameObject>(eLayerType::System)->AddComponent<DubwooferSpikeDropper>();
 		mMusic = Owner()->GetComponent<MusicController>();
+		mCheckPoint = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<CheckPoint>();
+		mCheckPoint->SetBackground(SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetBackground());
 	}
 	void DubwooferManager::Update()
 	{
@@ -28,6 +32,7 @@ namespace lu::JSAB
 		Spikes(time);
 		BigBar(time);
 		SmallBar(time);
+		CheckPoints(time);
 	}
 	void DubwooferManager::Drops(double time)
 	{
@@ -514,6 +519,27 @@ namespace lu::JSAB
 				idx++;
 			}
 
+		}
+	}
+	void DubwooferManager::CheckPoints(double time)
+	{
+		static double beat[] = { 27.75, 54.25, 92.4, 131.15, 159.95 };
+		static BackgroundScript::eBackgrounds types[] = {
+			BackgroundScript::eBackgrounds::PINK,
+			BackgroundScript::eBackgrounds::PURPLE,
+			BackgroundScript::eBackgrounds::BLACK,
+			BackgroundScript::eBackgrounds::DARKBLUE,
+			BackgroundScript::eBackgrounds::BLACK
+		};
+		static int idx = 0;
+		if (time >= beat[idx] - 5.5)
+		{
+			mCheckPoint->Owner()->SetActive(true);
+			mCheckPoint->SetTimeline(mMusic, 5, beat[idx], 0);
+			mCheckPoint->SetBackgroundType(types[idx]);
+			if (idx == 4)
+				mCheckPoint->SetIsFinal(true);
+			idx++;
 		}
 	}
 }

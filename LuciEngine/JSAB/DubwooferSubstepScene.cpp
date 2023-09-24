@@ -14,7 +14,8 @@ namespace lu::JSAB
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::BulletInteractor, true);
 		CollisionManager::SetLayer(eLayerType::Bullet, eLayerType::BulletInteractor, true);
 
-		object::Instantiate<GameObject>(eLayerType::Camera)->AddComponent<GameCamera>();
+		auto c =object::Instantiate<GameObject>(eLayerType::Camera)->AddComponent<GameCamera>();
+		mBackground = c->GetBackground();
 
 		GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
 		manager->SetName(L"DubwooferManager");
@@ -31,6 +32,7 @@ namespace lu::JSAB
 	void DubwooferSubstepScene::OnEnter()
 	{
 		mMusic->Play();
+		mBackground->SetBackground(BackgroundScript::eBackgrounds::BLACK);
 	}
 	void DubwooferSubstepScene::OnExit()
 	{

@@ -8,6 +8,7 @@ namespace lu::JSAB
 	class DubwooferBeamBullet;
 	class TutorialBeam;
 	class MusicController;
+	class CheckPoint;
 	class DubwooferManager : public Script
 	{
 	public:
@@ -21,7 +22,9 @@ namespace lu::JSAB
 		void Spikes(double time);
 		void BigBar(double time);
 		void SmallBar(double time);
+		void CheckPoints(double time);
 	private:
+		CheckPoint* mCheckPoint;
 		DubwooferDropSpawner* mDrops;
 		DubwooferSpikeDropper* mSpikes;
 		BulletPool<DubwooferBeamBullet> mThickBeams;

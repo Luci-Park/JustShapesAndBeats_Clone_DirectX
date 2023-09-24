@@ -11,7 +11,6 @@ namespace lu::JSAB
             std::make_pair(92.4, 131.15),
             std::make_pair(131.15, 159.95),
         };
-        mEndTime = mCheckPoints[4].second;
 	}
 
 	void DubwooferMusicController::Initialize()
@@ -28,6 +27,8 @@ namespace lu::JSAB
 			mAudioSource->SetPosition(120);
 		}
 		MusicController::Update();
+		if (GetTime() >= 159.95)
+			Finish();
 	}
 
 }

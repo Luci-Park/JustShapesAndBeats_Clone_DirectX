@@ -20,7 +20,6 @@ namespace lu::JSAB
             std::make_pair(70.043, 76.971),
             std::make_pair(111.611, 160.107)
         };
-		mEndTime = mCheckPoints[8].second;
 	}
 
 	void TutorialMusicController::Initialize()
@@ -35,7 +34,7 @@ namespace lu::JSAB
 		{
 			double time = mAudioSource->GetPosition();
 			mText->text = std::to_wstring(time);
-			if (time < mEndTime)
+			if (time < mCheckPoints[8].second)
 			{
 				if (time > mCheckPoints[mStageIdx].second)
 				{
