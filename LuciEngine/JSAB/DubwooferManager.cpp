@@ -58,11 +58,11 @@ namespace lu::JSAB
 		}
 
 		static float beat[] = { 27.15, 28.797, 30.443, 32.09, 33.737, 35.383, 37.03, 38.677, 40.323, 41.97
-			, 43.617, 45.263, 46.91, 48.557, 50.203, 51.85, 128.35, 130, 131.9, 131.6, 133.25, 134.9, 136.5
+			, 43.617, 45.263, 46.91, 48.557, 50.203, 51.85, 128.35, 130, 131.6, 133.25, 134.9, 136.5
 			, 138.15, 139.8, 141.4, 143.05, 144.7, 146.35, 147.95, 149.6, 151.25, 152.85
 		};
-		static int beatIdx = 16;
-		if (beatIdx < 33 && time > beat[beatIdx])
+		static int beatIdx = 0;
+		if (beatIdx < 32 && time > beat[beatIdx])
 		{
 			mSpikes->DropSpike();
 			beatIdx++;
@@ -178,7 +178,6 @@ namespace lu::JSAB
 			if (time >= 118)
 			{
 				float beat[] = { 120.7, 122.55, 124.1 };
-				float y = application.GetHeight() * 0.5;
 				float x = application.GetWidth() * -0.5 + 100;
 				for (int i = 0; i < 3; i++, x+= 300)
 				{
@@ -188,6 +187,14 @@ namespace lu::JSAB
 					bar->mTransform->SetPosition(pos);
 					bar->SetTimeline(mMusic, 2, beat[i], 1);
 				}
+				x = application.GetWidth() * 0.5;
+				float y = 60 - 5 - 80 * 0.5;
+				auto bar = mThickBeams.GetNext();
+				Vector3 pos = { x, y, 0 };
+				bar->mTransform->SetPosition(pos);
+				bar->mTransform->SetRotation(Quaternion::Create2DRotationRadian(PI * -0.5));
+				bar->SetTimeline(mMusic, 1.5, 126.55, 0.5);
+				bar->SetSize(80);
 				flag++;
 			}
 		}
@@ -299,6 +306,7 @@ namespace lu::JSAB
 					bar->SetTimeline(mMusic, 2, beat[i%2], 0.5);
 					beat[i % 2] += 0.29;
 					x[i % 2] += 40 * sign[i % 2];
+					bar->SetShake(false);
 				}
 				flag++;
 			}
@@ -320,6 +328,7 @@ namespace lu::JSAB
 						bar->mTransform->SetRotation(Quaternion::Identity);
 						bar->SetTimeline(mMusic, 1.5, beat, 0.5);
 						bar->SetSize(10);
+						bar->SetShake(false);
 					}
 				}
 			}
@@ -337,6 +346,7 @@ namespace lu::JSAB
 						bar->mTransform->SetRotation(Quaternion::Identity);
 						bar->SetTimeline(mMusic, 1.5, beat, 0.5);
 						bar->SetSize(10);
+						bar->SetShake(false);
 					}
 				}
 			}
@@ -358,6 +368,7 @@ namespace lu::JSAB
 						bar->mTransform->SetRotation(Quaternion::Identity);
 						bar->SetTimeline(mMusic, 1.5, beat, 0.5);
 						bar->SetSize(10);
+						bar->SetShake(false);
 					}
 				}
 			}
@@ -375,6 +386,7 @@ namespace lu::JSAB
 						bar->mTransform->SetRotation(Quaternion::Identity);
 						bar->SetTimeline(mMusic, 1.5, beat, 0.5);
 						bar->SetSize(10);
+						bar->SetShake(false);
 					}
 				}
 			}
@@ -396,6 +408,7 @@ namespace lu::JSAB
 						bar->mTransform->SetRotation(Quaternion::Identity);
 						bar->SetTimeline(mMusic, 1.5, beat, 0.5);
 						bar->SetSize(10);
+						bar->SetShake(false);
 					}
 				}
 			}
@@ -413,6 +426,7 @@ namespace lu::JSAB
 						bar->mTransform->SetRotation(Quaternion::Identity);
 						bar->SetTimeline(mMusic, 1.5, beat, 0.5);
 						bar->SetSize(10);
+						bar->SetShake(false);
 					}
 				}
 			}
@@ -432,6 +446,7 @@ namespace lu::JSAB
 				bar->mTransform->SetRotation(Quaternion::Identity);
 				bar->SetTimeline(mMusic, outro[i], beat[i], 0.5);
 				bar->SetSize(20);
+				bar->SetShake(true);
 			}
 			flag++;
 		}
@@ -450,8 +465,55 @@ namespace lu::JSAB
 				bar->mTransform->SetRotation(Quaternion::Create2DRotationRadian(PI* rot[i % 2]));
 				bar->SetTimeline(mMusic, 2, beat, 0.35);
 				bar->SetSize(20);
+				bar->SetShake(true);
 			}
 			flag++;
+		}
+		//462 ~
+		else if (flag == 10)
+		{
+			static float beat[] = { 126.55, 126.75, 127.2, 127.3, 127.75, 128.05, 128.15, 128.45, 128.65, 129, 129.25
+				, 129.55, 129.8, 130.1, 130.35, 130.5, 130.65, 130.95, 131.2, 131.45, 132.15, 132.3, 132.6, 132.85, 133.05
+				, 133.4, 133.75, 133.9, 134.35, 134.6, 134.75, 135, 135.35, 135.55, 135.85, 136.15, 136.4, 136.75, 136.95
+				, 137.15, 137.25, 137.55, 137.8, 138.1, 138.5, 138.8, 138.9, 139.2, 139.5, 139.75, 140.05, 140.3, 140.55, 140.85
+				, 141.1, 142.75, 142.9, 143.05, 143.2, 143.35, 143.5, 143.65, 143.8, 143.95, 144.1, 144.25, 144.4, 144.55, 144.7
+				, 144.85, 145, 145.15, 145.3, 145.45, 145.6, 146.35, 146.6, 146.95, 147.2, 147.5, 147.75, 148, 148.3, 148.4
+				, 148.75, 148.85, 149.15, 149.25, 149.4, 149.55, 149.7, 149.85, 150, 150.15, 150.3, 150.45, 150.6, 150.75, 150.75
+				, 150.9, 150.9, 151.05, 151.2, 151.35, 151.5, 151.65, 151.8, 151.95, 152.1, 152.25, 152.4
+			};
+			static int idx = 0;
+			static float prevx = 0;
+			static float y = application.GetHeight() * 0.5;
+
+			while (idx < 111 && time >= beat[idx] - 2)
+			{
+				auto bar = mThinBeams.GetNext();
+				bar->SetSize(10);
+				bar->SetShake(false);
+				bar->mTransform->SetRotation(Quaternion::Identity);
+				float x;
+				if (54 <= idx && idx < 64)
+					x = application.GetWidth() * 0.5 - 50 * (idx - 54);
+				else if(64 <= idx && idx < 74)
+					x = application.GetWidth() * -0.5 + 50 * (idx - 64);
+				else if (91 <= idx && idx < 101)
+					x = application.GetWidth() * 0.5 - 50 * (idx - 91);
+				else if (101 <= idx && idx < 111)
+					x = application.GetWidth() * -0.5 + 50 * (idx - 101);
+				else
+				{
+					do
+					{
+						x = IntRandom(application.GetWidth() * -0.5 + 20, application.GetWidth() * 0.5 - 20);
+					} while (abs(x - prevx) < 20);
+				}
+				Vector3 pos(x, y, 0);
+				bar->mTransform->SetPosition(pos);
+				bar->SetTimeline(mMusic, 1.5, beat[idx], 0.5);
+				prevx = x;
+				idx++;
+			}
+
 		}
 	}
 }

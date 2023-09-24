@@ -6,10 +6,17 @@
 extern lu::Application application;
 namespace lu::JSAB
 {
+	void DubwooferBeamBullet::SetSize(float x)
+	{
+		mSize = x;
+		Vector3 scale = mTransform->GetScale();
+		scale.x = x;
+		mTransform->SetScale(scale);
+	}
 	void DubwooferBeamBullet::BulletSetUp()
 	{
 		mSize = 200;
-		Vector3 baseScale = { mSize, (float)application.GetHeight() * 2, 1 };
+		Vector3 baseScale = { mSize, (float)application.GetWidth() * 2, 1 };
 		Owner()->SetName(L"Dubwoofer Enemy Beam");
 		mTransform->SetPosition(0, (float)application.GetHeight() * 0.5, 2);
 		mTransform->SetScale(baseScale.x, baseScale.y * 0.5, baseScale.z);
@@ -35,12 +42,17 @@ namespace lu::JSAB
 	}
 	void DubwooferBeamBullet::OnWarning()
 	{
+		Vector3 scale = mTransform->GetScale();
+		scale.x = mSize;
+		mTransform->SetScale(scale);
+
 		mShadow->mTransform->SetPosition(mTransform->GetPosition());
-		Vector3 scale = mShadow->mTransform->GetScale();
+		scale = mShadow->mTransform->GetScale();
 		scale.x = mSize;
 		mShadow->mTransform->SetScale(scale);
 		mShadow->mTransform->SetRotation(mTransform->GetRotation());
 		mShadow->SetActive(true);
+
 		mMr->SetActive(true);
 		mAnim->PlayAnimation(L"Warning", false);
 	}
@@ -72,7 +84,7 @@ namespace lu::JSAB
 	}
 	void DubwooferBeamBullet::CreateOnBeatAnimation()
 	{
-		Vector3 baseScale = { 200, (float)application.GetHeight() * 2, 1 };
+		Vector3 baseScale = { 200, (float)application.GetWidth() * 2, 1 };
 		
 		auto Anim = mShadow->AddComponent<Animator>();
 		auto warning = Anim->CreateAnimation(L"Warning");
@@ -82,8 +94,8 @@ namespace lu::JSAB
 		Anim->PlayAnimation(L"Warning", true);
 
 		Animation* ani = mAnim->CreateAnimation(L"Warning");
-		ani->AddScaleKey(0, { 200, 0, 1 });
-		ani->AddScaleKey(2, { 200, 200, 1 });
+		ani->AddTrScaleYKey(0, 0);
+		ani->AddTrScaleYKey(2, 200);
 		
 		ani = mAnim->CreateAnimation(L"Activate");
 
@@ -101,8 +113,8 @@ namespace lu::JSAB
 		
 		float disappearDur = 0.1;
 		ani = mAnim->CreateAnimation(L"Outro");
-		ani->AddScaleKey(0, baseScale);
-		ani->AddScaleKey(disappearDur, { 200, 0, 1 });
+		ani->AddTrScaleYKey(0, baseScale.y);
+		ani->AddTrScaleYKey(disappearDur, 0);
 		ani->AddFunctionKey(disappearDur, std::bind(&Bullet::DeActivate, this));
 	}
 	void DubwooferBeamBullet::CameraShake()

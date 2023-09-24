@@ -9,6 +9,7 @@ namespace lu::JSAB
 		virtual ~TutorialBeam(){}
 		void SetRandomPosition();
 		void SetSize(float x);
+		void SetShake(bool shake) { mShake = shake; }
 	private:
 		virtual void BulletSetUp()override;
 
@@ -33,6 +34,7 @@ namespace lu::JSAB
 
 		double mTargetTime;
 		float mXSize;
+		bool mShake;
 	};
 }
 

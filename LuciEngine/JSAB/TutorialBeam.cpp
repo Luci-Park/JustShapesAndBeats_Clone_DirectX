@@ -51,13 +51,13 @@ namespace lu::JSAB
 		mMr->SetColor(Color::white)->UseColor(false);
 
 		mAnim = Owner()->AddComponent<Animator>();
+		mShake = true;
 		CreateOnBeatAnimation();
 	}
 	void TutorialBeam::OnWarning()
 	{
 		mMr->SetActive(true);
 		mAnim->SetActive(true);
-		//mAnim->PlayAnimation(L"Warning", false);
 	}
 	void TutorialBeam::WhileWarning(double time)
 	{
@@ -75,6 +75,8 @@ namespace lu::JSAB
 		mAnim->SetActive(true);
 		mCol->SetActive(true);
 		mAnim->PlayAnimation(L"Activate", false);
+		if (mShake)
+			Beat();
 	}
 	void TutorialBeam::WhileActivate(double time)
 	{
@@ -112,8 +114,6 @@ namespace lu::JSAB
 		ani->AddTintKey(flashDuration, Color::white);
 		ani->AddInterpolationKey(flashDuration, 1);
 		ani->AddInterpolationKey(flashDuration, 0);
-
-		ani->AddFunctionKey(flashDuration, std::bind(&TutorialBeam::Beat, this));
 
 		ani = mAnim->CreateAnimation(L"Outro");
 		ani->AddScaleKey(0, baseScale);

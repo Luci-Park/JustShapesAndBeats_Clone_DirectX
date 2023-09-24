@@ -7,7 +7,7 @@ namespace lu::JSAB
 	public:
 		DubwooferBeamBullet():mSize(20){}
 		virtual ~DubwooferBeamBullet(){}
-		void SetSize(float size) { mSize = size; }
+		void SetSize(float x);
 	private:
 		virtual void BulletSetUp()override;
 		virtual void OnWarning()override;
