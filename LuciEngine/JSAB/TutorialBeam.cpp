@@ -29,8 +29,16 @@ namespace lu::JSAB
 		mTransform->SetPosition(pos);
 		mTransform->SetRotation(rot);
 	}
+	void TutorialBeam::SetSize(float x)
+	{
+		mXSize = x;
+		Vector3 scale = mTransform->GetScale();
+		scale.x = x;
+		mTransform->SetScale(scale);
+	}
 	void TutorialBeam::BulletSetUp()
 	{
+		mXSize = 20;
 		Vector3 baseScale = { 20, (float)application.GetWidth() * 2, 1 };
 		Owner()->SetName(L"Tutorial Enemy Beam");
 		mTransform->SetPosition(Vector3::Up * (float)application.GetHeight() * 0.5);
@@ -53,7 +61,7 @@ namespace lu::JSAB
 	}
 	void TutorialBeam::WhileWarning(double time)
 	{
-		float size = LERP(0, 20, mWarningProcess);
+		float size = LERP(0, mXSize, mWarningProcess);
 		Vector3 scale = mTransform->GetScale();
 		scale.x = size;
 		mTransform->SetScale(scale);
@@ -96,11 +104,11 @@ namespace lu::JSAB
 
 		ani = mAnim->CreateAnimation(L"Activate");
 		ani->AddColliderActiveKey(0, true);
-		ani->AddScaleKey(0, { 20, 0, 1 });
+		ani->AddTrScaleYKey(0, 0);
 		ani->AddInterpolationKey(0, 1);
 		ani->AddTintKey(0, Color::white);
 
-		ani->AddScaleKey(flashDuration, baseScale);
+		ani->AddTrScaleYKey(flashDuration, baseScale.y);
 		ani->AddTintKey(flashDuration, Color::white);
 		ani->AddInterpolationKey(flashDuration, 1);
 		ani->AddInterpolationKey(flashDuration, 0);

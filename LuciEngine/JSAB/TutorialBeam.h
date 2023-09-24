@@ -8,6 +8,7 @@ namespace lu::JSAB
 		TutorialBeam(){}
 		virtual ~TutorialBeam(){}
 		void SetRandomPosition();
+		void SetSize(float x);
 	private:
 		virtual void BulletSetUp()override;
 
@@ -31,6 +32,7 @@ namespace lu::JSAB
 		const double disappearDuration = 0.1;
 
 		double mTargetTime;
+		float mXSize;
 	};
 }
 

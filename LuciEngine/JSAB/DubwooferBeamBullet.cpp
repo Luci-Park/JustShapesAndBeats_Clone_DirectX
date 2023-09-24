@@ -8,7 +8,8 @@ namespace lu::JSAB
 {
 	void DubwooferBeamBullet::BulletSetUp()
 	{
-		Vector3 baseScale = { 200, (float)application.GetHeight() * 2, 1 };
+		mSize = 200;
+		Vector3 baseScale = { mSize, (float)application.GetHeight() * 2, 1 };
 		Owner()->SetName(L"Dubwoofer Enemy Beam");
 		mTransform->SetPosition(0, (float)application.GetHeight() * 0.5, 2);
 		mTransform->SetScale(baseScale.x, baseScale.y * 0.5, baseScale.z);
@@ -34,6 +35,11 @@ namespace lu::JSAB
 	}
 	void DubwooferBeamBullet::OnWarning()
 	{
+		mShadow->mTransform->SetPosition(mTransform->GetPosition());
+		Vector3 scale = mShadow->mTransform->GetScale();
+		scale.x = mSize;
+		mShadow->mTransform->SetScale(scale);
+		mShadow->mTransform->SetRotation(mTransform->GetRotation());
 		mShadow->SetActive(true);
 		mMr->SetActive(true);
 		mAnim->PlayAnimation(L"Warning", false);

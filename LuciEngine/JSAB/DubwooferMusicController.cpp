@@ -25,7 +25,7 @@ namespace lu::JSAB
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
 			mStageIdx = 2;
-			mAudioSource->SetPosition(mCheckPoints[mStageIdx].first);
+			mAudioSource->SetPosition(98);
 		}
 		MusicController::Update();
 	}

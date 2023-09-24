@@ -94,6 +94,13 @@ namespace lu
 		key->value = vector3;
 		timeline->keyframes.push_back(key);
 	}
+	void Animation::AddTrScaleYKey(double timestamp, float y)
+	{
+		Timeline* timeline = GetTimlineOfType(eAnimationType::TrScaleY);
+		if (timestamp > mDuration)
+			mDuration = timestamp;
+		timeline->AddFloatKey(timestamp, y);
+	}
 	void Animation::AddScaleKey(double timestamp, Vector3 vector3)
 	{
 		Timeline* timeline = GetTimlineOfType(eAnimationType::TrScale);
@@ -381,6 +388,35 @@ namespace lu
 			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
 			Vector3 pos = Vector3::Lerp(prev->value, next->value, t);
 			mTr->SetPosition(pos);
+		}
+	}
+	void Animation::AnimTrScaleY(Timeline* timeline)
+	{
+		if (timeline->keyframes[timeline->currIndex]->timestamp < mTime) timeline->currIndex++;
+		Vector3 scale = mTr->GetScale();
+		if (timeline->IsComplete())
+		{
+			FloatKey* keyframe = dynamic_cast<FloatKey*>(timeline->keyframes.back());
+			scale.y = keyframe->value;
+			mTr->SetScale(scale);
+			return;
+		}
+		if (timeline->currIndex == 0)
+		{
+			FloatKey* keyframe = dynamic_cast<FloatKey*>(timeline->keyframes[0]);
+			if (mTime >= keyframe->timestamp)
+			{
+				scale.y = keyframe->value;
+				mTr->SetScale(scale);
+			}
+		}
+		else
+		{
+			FloatKey* prev = dynamic_cast<FloatKey*>(timeline->keyframes[timeline->currIndex - 1]);
+			FloatKey* next = dynamic_cast<FloatKey*>(timeline->keyframes[timeline->currIndex]);
+			float t = (mTime - prev->timestamp) / (next->timestamp - prev->timestamp);
+			scale.y = prev->value + t * (next->value - prev->value);
+			mTr->SetScale(scale);
 		}
 	}
 	void Animation::AnimTrScale(Timeline* timeline)
@@ -792,8 +828,9 @@ namespace lu
 		mAnimFunctions[(UINT)eAnimationType::TrPosX] = ([this](Timeline* timeline) { this->AnimTrPosX(timeline); });
 		mAnimFunctions[(UINT)eAnimationType::TrPosY] = ([this](Timeline* timeline) { this->AnimTrPosY(timeline); });
 		mAnimFunctions[(UINT)eAnimationType::TrPosZ] = ([this](Timeline* timeline) { this->AnimTrPosZ(timeline); });
-
 		mAnimFunctions[(UINT)eAnimationType::TrPosition] = ([this](Timeline* timeline) { this->AnimTrPos(timeline); });
+
+		mAnimFunctions[(UINT)eAnimationType::TrScaleY] = ([this](Timeline* timeline) { this->AnimTrScaleY(timeline); });
 		mAnimFunctions[(UINT)eAnimationType::TrScale] = ([this](Timeline* timeline) { this->AnimTrScale(timeline); });
 		mAnimFunctions[(UINT)eAnimationType::TrRotation] = ([this](Timeline* timeline) { this->AnimTrRot(timeline); });
 
