@@ -135,6 +135,61 @@ namespace lu::JSAB
 				flag++;
 			}
 		}
+		//363, 393, 394
+		else if (flag == 4)
+		{
+			if (time >= 102)
+			{
+				float beat[][3] = { {2.000, 105.1, 1},{2, 107.5, 1}, {2, 107.5, 1}, {2, 114.2, 1} };
+				float y = application.GetHeight() * 0.5;
+				float x[] = { 0, 500, -500, 0 };
+				for (int i = 0; i < 4; i++)
+				{
+					auto bar = mThickBeams.GetNext();
+					Vector3 pos = bar->mTransform->GetPosition();
+					pos.x = x[i];
+					bar->mTransform->SetPosition(pos);
+					bar->SetTimeline(mMusic, beat[i][0], beat[i][1], beat[i][2]);
+				}
+				flag++;
+			}
+		}
+		else if (flag == 5)
+		{
+			if (time >= 115)
+			{
+				float beat[][3] = { {2.000, 117.4, 1},{2, 117.4, 1} };
+				float y = application.GetHeight() * 0.5;
+				float x[] = { 500, -500};
+				for (int i = 0; i < 2; i++)
+				{
+					auto bar = mThickBeams.GetNext();
+					Vector3 pos = bar->mTransform->GetPosition();
+					pos.x = x[i];
+					bar->mTransform->SetPosition(pos);
+					bar->SetTimeline(mMusic, beat[i][0], beat[i][1], beat[i][2]);
+				}
+				flag++;
+			}
+		}
+		else if (flag == 6)
+		{
+			if (time >= 118)
+			{
+				float beat[] = { 120.7, 122.55, 124.1 };
+				float y = application.GetHeight() * 0.5;
+				float x = application.GetWidth() * -0.5 + 100;
+				for (int i = 0; i < 3; i++, x+= 300)
+				{
+					auto bar = mThickBeams.GetNext();
+					Vector3 pos = bar->mTransform->GetPosition();
+					pos.x = x;
+					bar->mTransform->SetPosition(pos);
+					bar->SetTimeline(mMusic, 2, beat[i], 1);
+				}
+				flag++;
+			}
+		}
 	}
 	void DubwooferManager::SmallBar(double time)
 	{
@@ -283,6 +338,117 @@ namespace lu::JSAB
 						bar->SetSize(10);
 					}
 				}
+			}
+			flag++;
+		}
+		else if (flag == 6 && time >= 102)
+		{
+			{
+				float y = application.GetHeight() * 0.5;
+				float beat = 104.12;
+				float x = -200;
+				for (int i = 0; i < 21; i++, beat += 0.02, x -= 25)
+				{
+					for (int j = 0; j < 2; j++)
+					{
+						auto bar = mThinBeams.GetNext();
+						Vector3 pos = { x , y, 0 };
+						bar->mTransform->SetPosition(pos);
+						bar->mTransform->SetRotation(Quaternion::Identity);
+						bar->SetTimeline(mMusic, 1.5, beat, 0.5);
+						bar->SetSize(10);
+					}
+				}
+			}
+			{
+				float y = application.GetHeight() * 0.5;
+				float beat = 104.48;
+				float x = 200;
+				for (int i = 0; i < 21; i++, beat += 0.02, x += 25)
+				{
+					for (int j = 0; j < 2; j++)
+					{
+						auto bar = mThinBeams.GetNext();
+						Vector3 pos = { x , y, 0 };
+						bar->mTransform->SetPosition(pos);
+						bar->mTransform->SetRotation(Quaternion::Identity);
+						bar->SetTimeline(mMusic, 1.5, beat, 0.5);
+						bar->SetSize(10);
+					}
+				}
+			}
+			flag++;
+		}
+		else if (flag == 7 && time >= 110)
+		{
+			{
+				float y = application.GetHeight() * 0.5;
+				float beat = 111.35;
+				float x = application.GetWidth() * -0.5;
+				for (int i = 0; i < 22; i++, beat += 0.02, x += 25)
+				{
+					for (int j = 0; j < 2; j++)
+					{
+						auto bar = mThinBeams.GetNext();
+						Vector3 pos = { x , y, 0 };
+						bar->mTransform->SetPosition(pos);
+						bar->mTransform->SetRotation(Quaternion::Identity);
+						bar->SetTimeline(mMusic, 1.5, beat, 0.5);
+						bar->SetSize(10);
+					}
+				}
+			}
+			{
+				float y = application.GetHeight() * 0.5;
+				float beat = 111.85;
+				float x = application.GetWidth() * 0.5;
+				for (int i = 0; i < 22; i++, beat += 0.02, x -= 25)
+				{
+					for (int j = 0; j < 2; j++)
+					{
+						auto bar = mThinBeams.GetNext();
+						Vector3 pos = { x , y, 0 };
+						bar->mTransform->SetPosition(pos);
+						bar->mTransform->SetRotation(Quaternion::Identity);
+						bar->SetTimeline(mMusic, 1.5, beat, 0.5);
+						bar->SetSize(10);
+					}
+				}
+			}
+			flag++;
+		}
+		else if (flag == 8 && time >= 112)
+		{
+			float y = application.GetHeight() * 0.5;
+			float outro[] = { 1.793, 1.5, 1.345, 1.093 };
+			float beat[] = { 114, 113.75, 113.6, 113.35 };
+			float x[] = { -450, 450, -300, 300 };
+			for (int i = 0; i < 4; i++)
+			{
+				auto bar = mThinBeams.GetNext();
+				Vector3 pos = { x[i] , y, 0 };
+				bar->mTransform->SetPosition(pos);
+				bar->mTransform->SetRotation(Quaternion::Identity);
+				bar->SetTimeline(mMusic, outro[i], beat[i], 0.5);
+				bar->SetSize(20);
+			}
+			flag++;
+		}
+		//450 ~ 461
+		else if (flag == 9 && time >= 120)
+		{
+			float rot[2] = { 0.5, -0.5};
+			float x = application.GetWidth();
+			float y = application.GetHeight() * 0.5;
+			float beat = 124.75;
+			for (int i = 0; i < 12; i++, y -= 25, beat += 0.15)
+			{
+				auto bar = mThinBeams.GetNext();
+				Vector3 pos = { x * rot[i % 2] * -1 , y, 0};
+				bar->mTransform->SetPosition(pos);
+				bar->mTransform->SetRotation(Quaternion::Create2DRotationRadian(PI* rot[i % 2]));
+				bar->SetTimeline(mMusic, 2, beat, 0.35);
+				bar->SetSize(20);
 			}
 			flag++;
 		}

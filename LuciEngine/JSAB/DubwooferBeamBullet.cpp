@@ -89,11 +89,11 @@ namespace lu::JSAB
 
 		float flashDur = 0.05;
 		ani->AddColliderActiveKey(0, true);
-		ani->AddScaleKey(0, { 200, 200, 1 });
+		ani->AddTrScaleYKey(0, 0);
 		ani->AddInterpolationKey(0, 1);
 		ani->AddTintKey(0, Color::white);
 
-		ani->AddScaleKey(flashDur, baseScale);
+		ani->AddTrScaleYKey(flashDur, baseScale.y);
 		ani->AddTintKey(flashDur, Color::white);
 		ani->AddInterpolationKey(flashDur, 1);
 		ani->AddInterpolationKey(flashDur, 0);
