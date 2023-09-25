@@ -1,5 +1,6 @@
 #include "TutorialScene.h"
 #include "PlayerPrefab.h"
+#include "PlayerPieces.h"
 #include "CameraScript.h"
 #include "TutorialMusicController.h"
 #include "TutorialManager.h"
@@ -20,7 +21,9 @@ namespace lu::JSAB::Tutorial
 		music = manager->AddComponent<TutorialMusicController>();
 		manager->AddComponent<TutorialManager>();
 		
-		object::Instantiate<PlayerPrefab>(Vector3(-540, 0, -5), eLayerType::Player);
+		mPlayer = object::Instantiate<PlayerPrefab>(Vector3(0, 0, -5), eLayerType::Player);
+		mPlayer->SetActive(false);
+		mOpening = object::Instantiate<GameObject>(eLayerType::Camera)->AddComponent<PlayerPieces>();
 		Scene::Initialize(); 
 	}
 	void TutorialScene::Update()
@@ -30,11 +33,16 @@ namespace lu::JSAB::Tutorial
 
 	void TutorialScene::OnEnter()
 	{
-		music->Play();
+		mOpening->Activate(std::bind(&TutorialScene::OnActivate, this));
 	}
 
 	void TutorialScene::OnExit()
 	{
 		music->Stop();
+	}
+	void TutorialScene::OnActivate()
+	{
+		mainCamera->Owner()->GetComponent<GameCamera>()->GetEffect()->LevelTrans();
+		mPlayer->SetActive(true);
 	}
 }

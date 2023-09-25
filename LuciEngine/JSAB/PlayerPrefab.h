@@ -21,17 +21,5 @@ namespace lu::JSAB
 		std::shared_ptr<graphics::Material> CreateShieldGaugeMat();
 		std::shared_ptr<graphics::Material> CreateShieldMat();
 	};
-
-	class Pieces : public GameObject
-	{
-	public:
-		Pieces(eLayerType layer) : GameObject(layer){}
-		virtual ~Pieces(){}
-
-		virtual void Initialize() override;
-
-	private:
-		GameObject* CreateLight(Vector3 pos, float rotation);
-	};
 }
 

@@ -122,6 +122,9 @@
     <ClCompile Include="DubwooferManager.cpp">
       <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerPieces.cpp">
+      <Filter>Contents\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -248,6 +251,9 @@
     </ClInclude>
     <ClInclude Include="DubwooferManager.h">
       <Filter>Contents\_SceneSpecific\2.DubwooferSubstep\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerPieces.h">
+      <Filter>Contents\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

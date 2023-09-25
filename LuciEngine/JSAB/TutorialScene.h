@@ -4,6 +4,7 @@
 namespace lu::JSAB
 {
 	class TutorialMusicController;
+	class PlayerPieces;
 }
 
 namespace lu::JSAB::Tutorial
@@ -20,8 +21,12 @@ namespace lu::JSAB::Tutorial
 		virtual void OnEnter() override;
 		virtual void OnExit() override;
 
+		void OnActivate();
+
 	private:
 		TutorialMusicController* music;
+		PlayerPieces* mOpening;
+		GameObject* mPlayer;
 	};
 }
 
