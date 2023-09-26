@@ -19,7 +19,7 @@ namespace lu::JSAB
 		virtual void Initialize() override;
 		virtual void Update() override;
 		void OnStageChange(int stage);
-		void SetMusic(TutorialMusicController* music) { mMusic = music; }
+		void SetTriangle(InGameTriangle* triangle) { mLevelTriangle = triangle; }
 	private:
 		void Stage1();
 		void Stage2();

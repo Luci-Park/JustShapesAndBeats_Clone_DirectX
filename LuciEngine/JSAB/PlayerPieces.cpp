@@ -37,8 +37,8 @@ namespace lu::JSAB
 
 		mAnim = Owner()->AddComponent<Animator>();
 		auto ani = mAnim->CreateAnimation(L"Opening");
-		ani->AddFunctionKey(5, std::bind(&PlayerPieces::Start, this));
-		ani->AddFunctionKey(5 + appearEnd + 1.6, std::bind(&PlayerPieces::Finish, this));
+		ani->AddFunctionKey(3, std::bind(&PlayerPieces::Start, this));
+		ani->AddFunctionKey(3 + appearEnd + 1.6, std::bind(&PlayerPieces::Finish, this));
 		for (int i = 1; i <= 8; i++)
 		{
 			GameObject* piece = object::Instantiate<GameObject>(eLayerType::Player);
@@ -51,7 +51,7 @@ namespace lu::JSAB
 			mr->SetColor(Color::white);
 			mr->UseColor(true);
 			Vector3 scale = Vector3(10, mr->GetMaterial()->GetTexture()->GetRatioHeight(10), 1);
-			piece->mTransform->SetScale(scale);
+			piece->mTransform->SetScale(Vector3::Zero);
 			piece->mTransform->SetPosition(pos[i - 1] * point);
 
 			mPieces[i - 1] = piece->AddComponent<Animator>();
@@ -82,7 +82,7 @@ namespace lu::JSAB
 			mr->GetMaterial()->SetTint(Color::clear);
 
 			Vector3 scale = Vector3(mr->GetMaterial()->GetTexture()->GetRatioWidth(1300), 1300, 1);			
-			light->mTransform->SetScale(Vector3::Zero);
+			light->mTransform->SetScale(scale);
 
 			Vector3 position = pos[i - 1] * point;
 			position.z = 1;

@@ -8,8 +8,10 @@
 #include "LResources.h"
 #include "TutorialMusicController.h"
 #include "LSceneManager.h"
+#include "TutorialScene.h"
 #include "CameraScript.h"
 #include "LCamera.h"
+#include "Triangle.h"
 namespace lu::JSAB
 {
 #pragma region StrategyBase
@@ -25,9 +27,14 @@ namespace lu::JSAB
 	{
 		mRB = owner->GetComponent<Rigidbody>();
 		mTransform = owner->mTransform;
-		AudioSource* mAudio = owner->GetComponent<AudioSource>();
+		mAudio = owner->GetComponent<AudioSource>();
 		mTriangleAnim = triangleAnim;
 		mClip = Resources::Find<AudioClip>(L"SFX_HEX_LEVEL_COMPLETE_TUTO_SILENCE");
+		auto scene = dynamic_cast<lu::JSAB::Tutorial::TutorialScene*>(SceneManager::GetActiveScene());
+		if (scene)
+		{
+			mMusic = scene->GetMusic();
+		}
 	}
 	void TutorialStrategy::OnAppear()
 	{
@@ -68,9 +75,14 @@ namespace lu::JSAB
 	{
 		mRB = owner->GetComponent<Rigidbody>();
 		mTransform = owner->mTransform;
-		AudioSource* mAudio = owner->GetComponent<AudioSource>();
+		mAudio = owner->GetComponent<AudioSource>();
 		mTriangleAnim = triangleAnim;
 		mClip = Resources::Find<AudioClip>(L"SFX_HEX_LEVEL_COMPLETE_TUTO");
+		auto scene = dynamic_cast<lu::JSAB::Tutorial::TutorialScene*>(SceneManager::GetActiveScene());
+		if (scene)
+		{
+			mMusic = scene->GetMusic();
+		}
 	}
 	void TutorialStartStrategy::OnAppear()
 	{
@@ -97,6 +109,7 @@ namespace lu::JSAB
 		mPlayer->Release();
 		SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->LevelTrans();
 		mMusic->Play();
+		mOwner->GetComponent<InGameTriangle>()->SetStrategy(eTriangleStrategyType::Tutorial);
 	}
 #pragma endregion
 #pragma region LevelFinStrategy

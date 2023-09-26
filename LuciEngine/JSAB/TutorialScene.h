@@ -23,10 +23,12 @@ namespace lu::JSAB::Tutorial
 		virtual void OnExit() override;
 
 		void OnActivate();
+
+		TutorialMusicController* GetMusic() { return mMusic; }
 		
 
 	private:
-		TutorialMusicController* music;
+		TutorialMusicController* mMusic;
 		InGameTriangle* mTriangle;
 		PlayerPieces* mOpening;
 		GameObject* mPlayer;

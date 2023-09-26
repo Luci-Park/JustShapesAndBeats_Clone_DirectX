@@ -35,7 +35,7 @@ namespace lu::JSAB
 	}
 	void TutorialManager::Update()
 	{
-		if (mMusic->GetStage() < 8)
+		if (mMusic->IsPlaying() && mMusic->GetStage() < 8)
 		{
 			float percent = mMusic->GetPercent();
 			if (percent > 0.8 && !mLevelTriangle->IsActive())
