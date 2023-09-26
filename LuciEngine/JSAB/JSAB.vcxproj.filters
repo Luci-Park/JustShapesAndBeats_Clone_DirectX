@@ -125,6 +125,9 @@
     <ClCompile Include="PlayerPieces.cpp">
       <Filter>Contents\Player</Filter>
     </ClCompile>
+    <ClCompile Include="TriangleStrategy.cpp">
+      <Filter>Contents\Triangle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -254,6 +257,9 @@
     </ClInclude>
     <ClInclude Include="PlayerPieces.h">
       <Filter>Contents\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="TriangleStrategy.h">
+      <Filter>Contents\Triangle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

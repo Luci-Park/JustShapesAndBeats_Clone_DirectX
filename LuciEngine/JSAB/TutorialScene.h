@@ -5,6 +5,7 @@ namespace lu::JSAB
 {
 	class TutorialMusicController;
 	class PlayerPieces;
+	class InGameTriangle;
 }
 
 namespace lu::JSAB::Tutorial
@@ -22,11 +23,15 @@ namespace lu::JSAB::Tutorial
 		virtual void OnExit() override;
 
 		void OnActivate();
+		
 
 	private:
 		TutorialMusicController* music;
+		InGameTriangle* mTriangle;
 		PlayerPieces* mOpening;
 		GameObject* mPlayer;
+		double mTime;
+		bool mTriFlag;
 	};
 }
 

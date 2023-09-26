@@ -1,30 +1,23 @@
 #pragma once
 #include "LScript.h"
-#include "LAudioSource.h"
-#include "LAnimator.h"
-#include "LRigidBody.h"
 #include "Player.h"
+#include "TriangleStrategy.h"
 namespace lu::JSAB
 {
-	class Triangle : public Script
+	class InGameTriangle : public Script
 	{
 	public:
-		Triangle() {}
-		virtual ~Triangle() {}
+		InGameTriangle() {}
+		virtual ~InGameTriangle();
+		virtual void Initialize() override;
 		virtual void OnCollisionEnter(Collider2D* other) override;
-		void SetClips(std::shared_ptr<AudioClip> tuto, std::shared_ptr<AudioClip> level);
-		void Setup();
-		void TutorialAppear();
-		void LevelAppear();
-		void OnTutoBurst();
-		void OnLevelComplete();
+		void SetStrategy(TriangleStrategy::eTriangleStrategyType strategy) { mCurrStrategy = strategy; }
+		void Appear();
+		void Burst();
 	private:
-		AudioSource* mAudio;
-		Rigidbody* mRB;
 		Animator* mTriangleAnim;
-		std::shared_ptr<AudioClip> mTuto;
-		std::shared_ptr<AudioClip> mLevel;
-		Player* mPlayer;
+		TriangleStrategy* mStrategy[(UINT)TriangleStrategy::eTriangleStrategyType::End];
+		TriangleStrategy::eTriangleStrategyType mCurrStrategy;
 	};
 }
 

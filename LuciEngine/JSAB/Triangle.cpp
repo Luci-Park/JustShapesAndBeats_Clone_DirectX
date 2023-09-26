@@ -7,71 +7,45 @@
 #include "LRigidBody.h"
 #include "LCamera.h"
 #include "CameraScript.h"
+#include "LAnimator.h"
 namespace lu::JSAB
 {
-	//1.872
-	//tuto - 4.146
-	//5.354
-	void Triangle::OnCollisionEnter(Collider2D* other)
+	InGameTriangle::~InGameTriangle()
 	{
-		if(mTriangleAnim == nullptr)
-			mTriangleAnim = Owner()->GetComponentInChildren<Animator>();
-		if (other->Owner()->GetLayer() == eLayerType::Player)
+		for (int i = 0; i < (UINT)TriangleStrategy::eTriangleStrategyType::End; i++)
 		{
-			mPlayer = other->Owner()->GetComponent<Player>();
-			mPlayer->Hold();
-			mRB->SetVelocity(Vector3::Zero);
-			mTransform->SetPosition(552.243652, 0, -1);
-
-			other->Owner()->mTransform->SetPosition(mTransform->GetPosition());
-			auto tuto = dynamic_cast<TutorialMusicController*>(MusicController::Instance);
-			if (tuto)
+			if (mStrategy[i] != nullptr)
 			{
-				double diff = tuto->GetDiff();
-				diff = std::max(6.928 - diff, 0.0);
-				mAudio->SetClip(mTuto);
-				mAudio->Play();
-				mAudio->SetPosition(diff);
-				mTriangleAnim->PlayAnimation(L"Burst", false);
-				mTriangleAnim->SetTime(diff);
-				tuto->PlayNextPart();
+				delete mStrategy[i];
+				mStrategy[i] = nullptr;
 			}
 		}
 	}
-	void Triangle::SetClips(std::shared_ptr<AudioClip> tuto, std::shared_ptr<AudioClip> level)
-	{
-		mTuto = tuto;
-		mLevel = level;
-	}
-	void Triangle::Setup()
+	void InGameTriangle::Initialize()
 	{
 		mTriangleAnim = Owner()->GetComponentInChildren<Animator>();
-		mAudio = Owner()->GetComponent<AudioSource>();
-		mRB = Owner()->GetComponent<Rigidbody>();
+		mStrategy[(UINT)TriangleStrategy::eTriangleStrategyType::Tutorial] = new TutorialStrategy(Owner(), mTriangleAnim);
+		mStrategy[(UINT)TriangleStrategy::eTriangleStrategyType::PrevTutorial] = new TutorialStartStrategy(Owner(), mTriangleAnim);
+		mCurrStrategy = TriangleStrategy::eTriangleStrategyType::Tutorial;
+
 	}
-	void Triangle::TutorialAppear()
+	void InGameTriangle::OnCollisionEnter(Collider2D* other)
+	{
+		if (other->Owner()->GetLayer() == eLayerType::Player)
+		{
+			auto player = other->Owner()->GetComponent<Player>();
+			mStrategy[(UINT)mCurrStrategy]->OnCollisionEnter(player);
+		}
+	}
+	void InGameTriangle::Appear()
 	{
 		mTriangleAnim->PlayAnimation(L"Idle", true);
-		mTransform->SetPosition( 680, 0, -1);
-		mRB->SetVelocity(Vector3::Left * 80);
-		mRB->SetDrag(25);
+		mStrategy[(UINT)mCurrStrategy]->OnAppear();
 		Owner()->SetActive(true);
 	}
-	void Triangle::LevelAppear()
+	void InGameTriangle::Burst()
 	{
-	}
-	void Triangle::OnTutoBurst()
-	{
-		mPlayer->mTransform->SetPosition(Vector3(-540, 0, -5));
-		mPlayer->Release();
-		auto tuto = dynamic_cast<TutorialMusicController*>(MusicController::Instance);
-		if (tuto)
-		{	
-			SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->LevelTrans();
-		}
+		mStrategy[(UINT)mCurrStrategy]->OnBurst();
 		Owner()->SetActive(false);
-	}
-	void Triangle::OnLevelComplete()
-	{
 	}
 }

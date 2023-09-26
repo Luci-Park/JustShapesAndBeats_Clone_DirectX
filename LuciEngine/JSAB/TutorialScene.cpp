@@ -4,10 +4,13 @@
 #include "CameraScript.h"
 #include "TutorialMusicController.h"
 #include "TutorialManager.h"
+#include "Triangle.h"
+#include "TrianglePrefab.h"
 
 #include "LCamera.h"
 #include "LObject.h"
 #include "LCollisionManager.h"
+#include "LTime.h"
 namespace lu::JSAB::Tutorial
 {
 	void TutorialScene::Initialize()
@@ -23,17 +26,27 @@ namespace lu::JSAB::Tutorial
 		
 		mPlayer = object::Instantiate<PlayerPrefab>(Vector3(0, 0, -5), eLayerType::Player);
 		mPlayer->SetActive(false);
-		mOpening = object::Instantiate<GameObject>(eLayerType::Camera)->AddComponent<PlayerPieces>();
+		mOpening = object::Instantiate<GameObject>(eLayerType::System)->AddComponent<PlayerPieces>();
+		mTriangle = object::Instantiate<TrianglePrefab>(eLayerType::Item)->GetComponent<InGameTriangle>();
+		mTriangle->Owner()->SetActive(false);
 		Scene::Initialize(); 
 	}
 	void TutorialScene::Update()
 	{
+		mTime += Time::DeltaTime();
+		if (mTime >= 10 && !mTriFlag)
+		{
+			mTriangle->Appear();
+			mTriFlag = true;
+		}
 		Scene::Update();
 	}
 
 	void TutorialScene::OnEnter()
 	{
 		mOpening->Activate(std::bind(&TutorialScene::OnActivate, this));
+		mTriangle->SetStrategy(TriangleStrategy::eTriangleStrategyType::PrevTutorial);
+		mTime = -1000;
 	}
 
 	void TutorialScene::OnExit()
@@ -44,5 +57,7 @@ namespace lu::JSAB::Tutorial
 	{
 		mainCamera->Owner()->GetComponent<GameCamera>()->GetEffect()->LevelTrans();
 		mPlayer->SetActive(true);
+		mTime = 0;
+		mTriFlag = false;
 	}
 }

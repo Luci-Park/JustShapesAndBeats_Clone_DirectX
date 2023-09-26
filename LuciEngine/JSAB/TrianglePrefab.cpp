@@ -20,10 +20,8 @@ namespace lu::JSAB
 		SetName(L"CheckPointTriangle");
 		mTransform->SetScale({ 26, 26, 1 });
 		AddComponent<Collider2D>()->SetType(lu::enums::eColliderType::Circle)->SetSize({ 2.3, 2.3 });
-		auto t = AddComponent<Triangle>();
-		t->SetClips(Resources::Find<AudioClip>(L"SFX_HEX_LEVEL_COMPLETE_TUTO_SILENCE"),
-			Resources::Find<AudioClip>(L"SFX_HEX_LEVEL_COMPLETE_CHALLENGE"));
 		auto rb = AddComponent<Rigidbody>();
+		AddComponent<AudioSource>();
 		{
 			GameObject* triangle = object::Instantiate<GameObject>(mTransform, eLayerType::Item);
 			triangle->SetName(L"triangle");
@@ -31,6 +29,9 @@ namespace lu::JSAB
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(CreateTriangleMat());
 
 			auto animator = triangle->AddComponent<Animator>();
+	
+			auto t = AddComponent<InGameTriangle>();
+
 			auto anim = animator->CreateAnimation(L"Burst");
 			double downDuration = 0.1;
 			double readyduration = 6.928 - downDuration;
@@ -44,19 +45,7 @@ namespace lu::JSAB
 			anim->AddLocalRotationKey(readyduration * 0.3, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI *0.9));
 			anim->AddLocalRotationKey(readyduration, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI));
 			anim->AddLocalRotationKey(readyduration + downDuration, Quaternion::Identity);
-			anim->AddFunctionKey(readyduration + downDuration, std::bind(&Triangle::OnTutoBurst, t));
-
-			anim = animator->CreateAnimation(L"GeneralBurst");
-			anim->AddLocalPositionKey(0, Vector3::Zero);
-			anim->AddLocalPositionKey(readyduration * 0.3, { 0, y * 0.8f, 0 });
-			anim->AddLocalPositionKey(readyduration, { 0, y, 0 });
-			anim->AddLocalPositionKey(readyduration + downDuration, { 0, 0, 0 });
-
-			anim->AddLocalRotationKey(0, Quaternion::Identity);
-			anim->AddLocalRotationKey(readyduration * 0.3, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 0.9));
-			anim->AddLocalRotationKey(readyduration, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI));
-			anim->AddLocalRotationKey(readyduration + downDuration, Quaternion::Identity);
-			anim->AddFunctionKey(readyduration + downDuration, std::bind(&Triangle::OnLevelComplete, t));
+			anim->AddFunctionKey(readyduration + downDuration, std::bind(&InGameTriangle::Burst, t));
 
 			anim = animator->CreateAnimation(L"Idle");
 			
@@ -124,8 +113,6 @@ namespace lu::JSAB
 			ani->AddRotationKey(duration, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 2));
 			anim->PlayAnimation(L"Rotate", true);
 		}
-		AddComponent<AudioSource>();
-		t->Setup();
 	}
 	std::shared_ptr<graphics::Material> TrianglePrefab::CreateTriangleMat()
 	{

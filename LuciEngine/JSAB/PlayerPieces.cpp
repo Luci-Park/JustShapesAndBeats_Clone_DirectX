@@ -37,8 +37,8 @@ namespace lu::JSAB
 
 		mAnim = Owner()->AddComponent<Animator>();
 		auto ani = mAnim->CreateAnimation(L"Opening");
-		ani->AddFunctionKey(2, std::bind(&PlayerPieces::Start, this));
-		ani->AddFunctionKey(2 + appearEnd + 1.6, std::bind(&PlayerPieces::Finish, this));
+		ani->AddFunctionKey(5, std::bind(&PlayerPieces::Start, this));
+		ani->AddFunctionKey(5 + appearEnd + 1.6, std::bind(&PlayerPieces::Finish, this));
 		for (int i = 1; i <= 8; i++)
 		{
 			GameObject* piece = object::Instantiate<GameObject>(eLayerType::Player);

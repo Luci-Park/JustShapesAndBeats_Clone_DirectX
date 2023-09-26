@@ -29,10 +29,6 @@ namespace lu::JSAB
 	{
 		mMusic = Owner()->GetComponent<TutorialMusicController>();
 
-		auto c = object::Instantiate<TrianglePrefab>(Vector3(570.0f, 0.0f, -1.f), eLayerType::Item);
-		mLevelTriangle = c->GetComponent<Triangle>();
-		c->SetActive(false);
-		
 		mBackground = SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetBackground();
 		
 		OnStageChange(0);
@@ -44,7 +40,7 @@ namespace lu::JSAB
 			float percent = mMusic->GetPercent();
 			if (percent > 0.8 && !mLevelTriangle->IsActive())
 			{
-				mLevelTriangle->TutorialAppear();
+				mLevelTriangle->Appear();
 			}
 		}
 	}

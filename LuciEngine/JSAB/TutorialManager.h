@@ -11,7 +11,7 @@ namespace lu::JSAB
 	class TutorialBeatCircle; 
 	class TutorialGiantCircle;
 	class TutorialCircleLine;
-	class Triangle;
+	class InGameTriangle;
 	class TutorialManager : public Script
 	{
 	public:
@@ -33,7 +33,7 @@ namespace lu::JSAB
 		void Stage10();
 	private:
 		TutorialMusicController* mMusic;
-		Triangle* mLevelTriangle;
+		InGameTriangle* mLevelTriangle;
 
 		BulletPool<TutorialRoundSpikes> mRoundSpikes;
 		BulletPool<TutorialBurst> mBursts;
