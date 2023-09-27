@@ -1,5 +1,5 @@
 #pragma once
-#include "LScript.h"
+#include "MusicManager.h"
 #include "BulletPool.h"
 namespace lu::JSAB
 {
@@ -9,7 +9,7 @@ namespace lu::JSAB
 	class TutorialBeam;
 	class MusicController;
 	class CheckPoint;
-	class DubwooferManager : public Script
+	class DubwooferManager : public MusicManager
 	{
 	public:
 		DubwooferManager();
@@ -17,6 +17,7 @@ namespace lu::JSAB
 
 		virtual void Initialize() override;
 		virtual void Update() override;
+		virtual void OnMusicEnd() override;
 	private:
 		void Drops(double time);
 		void Spikes(double time);
@@ -30,6 +31,12 @@ namespace lu::JSAB
 		BulletPool<DubwooferBeamBullet> mThickBeams;
 		BulletPool<TutorialBeam> mThinBeams;
 		MusicController* mMusic;
+		int mDropFlag;
+		int mSpikeFlag;
+		int mSpikeAppearFlag;
+		int mBigBarFlag;
+		int mSmallBarFlag;
+		int mCheckPointFlag;
 	};
 }
 

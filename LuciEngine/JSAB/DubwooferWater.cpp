@@ -26,8 +26,9 @@ namespace lu::JSAB
 		Ripple ripple;
 		ripple.origin = Vector3::Zero;
 		ripple.startTime = 0;
-		ripple.waveLength = 1;
-		ripple.amplitude = 60;
+		ripple.waveLength = 10;
+		ripple.amplitude = 10;
+		ripple.period = 0.5;
 		mRipples.push_back(ripple);
 	}
 	void DubwooferWater::Update()
@@ -44,14 +45,8 @@ namespace lu::JSAB
 			for (auto it = mRipples.begin(); it != mRipples.end();)
 			{ 
 				Ripple ripple = *it;
-				float distanceToRipple = abs(mWater[i]->mTransform->GetPosition().x - ripple.origin.x);
-
-				// Calculate the phase of the ripple based on time and distance
-				float phase = (mTime - ripple.startTime - i * 1/*ripple.speed*/) * (2 * PI / ripple.waveLength);
-
-				// Calculate the vertical displacement for the dynamic ripple using a sine wave equation
-				rippleHeight += ripple.amplitude * sinf(phase);
-
+				float distanceToRipple = abs(mWater[i]->mTransform->GetPosition().x - ripple.origin.x); 
+				rippleHeight += ripple.amplitude * sin(distanceToRipple - ripple.waveLength / ripple.period);
 				it++;
 			}
 

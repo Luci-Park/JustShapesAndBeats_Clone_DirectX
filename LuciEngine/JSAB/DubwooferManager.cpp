@@ -24,15 +24,30 @@ namespace lu::JSAB
 		mMusic = Owner()->GetComponent<MusicController>();
 		mCheckPoint = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<CheckPoint>();
 		mCheckPoint->SetBackground(SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetBackground());
+		mDropFlag = 0;
+		mSpikeFlag = 0;
+		mBigBarFlag = 0;
+		mSmallBarFlag = 0;
+		mCheckPointFlag = 0;
+		mNextScene = L"TitleScene";
 	}
 	void DubwooferManager::Update()
 	{
-		double time = mMusic->GetTime();
-		Drops(time);
-		Spikes(time);
-		BigBar(time);
-		SmallBar(time);
-		CheckPoints(time);
+		if (mMusic->IsPlaying())
+		{
+			double time = mMusic->GetTime();
+			Drops(time);
+			Spikes(time);
+			BigBar(time);
+			SmallBar(time);
+			CheckPoints(time);
+		}
+	}
+	void DubwooferManager::OnMusicEnd()
+	{
+		mThickBeams.Reset();
+		mThinBeams.Reset();
+		mSpikes->DeActivate();
 	}
 	void DubwooferManager::Drops(double time)
 	{
@@ -45,40 +60,35 @@ namespace lu::JSAB
 			, 94.4, 94.85, 95.15, 95.25, 95.55, 95.85, 96.1, 96.4, 96.65, 96.95, 97.2, 97.45, 97.6, 97.75, 98, 98.3, 98.55, 99
 			, 99.25, 99.4, 99.7, 99.95, 100.25
 		};
-		static int idx = 0;
-		while (idx < 129 && time >= beat[idx])
+		while (mDropFlag < 129 && time >= beat[mDropFlag])
 		{
 			mDrops->Activate();
-			idx++;
+			mDropFlag++;
 		}
 	}
 	void DubwooferManager::Spikes(double time)
 	{
 		static float appear[2][3] = { {9.533, 27.250, 27.114}, {.679, 126.550, 33.616} };
-		static int appearIdx = 0;
-		if (appearIdx < 2 && time > appear[appearIdx][1] - appear[appearIdx][0] - 1)
+		if (mSpikeAppearFlag < 2 && time > appear[mSpikeAppearFlag][1] - appear[mSpikeAppearFlag][0] - 1)
 		{
-			mSpikes->SetTimeline(mMusic, appear[appearIdx][0], appear[appearIdx][1], appear[appearIdx][2]);
-			appearIdx++;
+			mSpikes->SetTimeline(mMusic, appear[mSpikeAppearFlag][0], appear[mSpikeAppearFlag][1], appear[mSpikeAppearFlag][2]);
+			mSpikeAppearFlag++;
 		}
 
 		static float beat[] = { 27.15, 28.797, 30.443, 32.09, 33.737, 35.383, 37.03, 38.677, 40.323, 41.97
 			, 43.617, 45.263, 46.91, 48.557, 50.203, 51.85, 128.35, 130, 131.6, 133.25, 134.9, 136.5
 			, 138.15, 139.8, 141.4, 143.05, 144.7, 146.35, 147.95, 149.6, 151.25, 152.85
 		};
-		static int beatIdx = 0;
-		if (beatIdx < 32 && time > beat[beatIdx])
+		if (mSpikeFlag < 32 && time > beat[mSpikeFlag])
 		{
 			mSpikes->DropSpike();
-			beatIdx++;
+			mSpikeFlag++;
 		}
 	}
 	void DubwooferManager::BigBar(double time)
 	{
-		static int flag = 0;
-
 		//109 ~ 111
-		if (flag == 0)
+		if (mBigBarFlag == 0)
 		{
 			if (time >= 60.2 - 2.013 - 0.5)
 			{
@@ -92,11 +102,11 @@ namespace lu::JSAB
 					bar->mTransform->SetPosition(pos);
 					bar->SetTimeline(mMusic, beat[i][0], beat[i][1], beat[i][2]);
 				}
-				flag++;
+				mBigBarFlag++;
 			}
 		}
 		//125, 130, 131, 148
-		else if (flag == 1)
+		else if (mBigBarFlag == 1)
 		{
 			float beat[][3] = { {2.119, 66.95, 0.5},{2.119, 68.55, 0.5}, {2.119, 70.25, 0.5}, {2.119, 74.4, 0.5} };
 			float x[] = { -450, 330, 0, 0 };
@@ -110,11 +120,11 @@ namespace lu::JSAB
 					bar->mTransform->SetPosition(pos);
 					bar->SetTimeline(mMusic, beat[i][0], beat[i][1], beat[i][2]);
 				}
-				flag++;
+				mBigBarFlag++;
 			}
 		}
 		//184
-		else if (flag == 2)
+		else if (mBigBarFlag == 2)
 		{
 			if (time >= 80)
 			{
@@ -124,11 +134,11 @@ namespace lu::JSAB
 				Vector3 pos = { x, y, 0 };
 				bar->mTransform->SetPosition(pos);
 				bar->SetTimeline(mMusic, 2.119, 86.9, 0.5);
-				flag++;
+				mBigBarFlag++;
 			}
 		}
 		//220
-		else if (flag == 3)
+		else if (mBigBarFlag == 3)
 		{
 			if (time >= 95)
 			{
@@ -138,11 +148,11 @@ namespace lu::JSAB
 				Vector3 pos = { x, y, 0 };
 				bar->mTransform->SetPosition(pos);
 				bar->SetTimeline(mMusic, 2.119, 100.1, 1);
-				flag++;
+				mBigBarFlag++;
 			}
 		}
 		//363, 393, 394
-		else if (flag == 4)
+		else if (mBigBarFlag == 4)
 		{
 			if (time >= 102)
 			{
@@ -157,10 +167,10 @@ namespace lu::JSAB
 					bar->mTransform->SetPosition(pos);
 					bar->SetTimeline(mMusic, beat[i][0], beat[i][1], beat[i][2]);
 				}
-				flag++;
+				mBigBarFlag++;
 			}
 		}
-		else if (flag == 5)
+		else if (mBigBarFlag == 5)
 		{
 			if (time >= 115)
 			{
@@ -175,10 +185,10 @@ namespace lu::JSAB
 					bar->mTransform->SetPosition(pos);
 					bar->SetTimeline(mMusic, beat[i][0], beat[i][1], beat[i][2]);
 				}
-				flag++;
+				mBigBarFlag++;
 			}
 		}
-		else if (flag == 6)
+		else if (mBigBarFlag == 6)
 		{
 			if (time >= 118)
 			{
@@ -200,15 +210,14 @@ namespace lu::JSAB
 				bar->mTransform->SetRotation(Quaternion::Create2DRotationRadian(PI * -0.5));
 				bar->SetTimeline(mMusic, 1.5, 126.55, 0.5);
 				bar->SetSize(80);
-				flag++;
+				mBigBarFlag++;
 			}
 		}
 	}
 	void DubwooferManager::SmallBar(double time)
 	{
-		static int flag = 0;
 		//112 ~ 128
-		if (flag == 0) 
+		if (mSmallBarFlag == 0)
 		{
 			if (time >= 65.031 - 2)
 			{
@@ -223,11 +232,11 @@ namespace lu::JSAB
 					bar->mTransform->SetRotation(Quaternion::Identity);
 					bar->SetTimeline(mMusic, 1.5, beat, 0.5);
 				}
-				flag++;
+				mSmallBarFlag++;
 			}
 		}
 		//131 ~ 147
-		else if (flag == 1)
+		else if (mSmallBarFlag == 1)
 		{
 			float beat = 71.78;
 			float y = application.GetHeight() * 0.5;
@@ -248,11 +257,11 @@ namespace lu::JSAB
 						x = x * -1 + diff;
 
 				}
-				flag++;
+				mSmallBarFlag++;
 			}
 		}
 		//149 ~ 158
-		else if (flag == 2)
+		else if (mSmallBarFlag == 2)
 		{
 			float beat[2] = { 75.946, 76.446 };
 			float y = application.GetHeight() * 0.5;
@@ -269,11 +278,11 @@ namespace lu::JSAB
 					bar->SetTimeline(mMusic, 1.5, beat[i%2], 0.5);
 					beat[i % 2] += 0.01;					
 				}
-				flag++;
+				mSmallBarFlag++;
 			}
 		}
 		//159 ~ 164
-		else if (flag == 3)
+		else if (mSmallBarFlag == 3)
 		{
 			float beat[5] = { 77.8, 77.95, 78.2, 78.5, 78.5 };
 			if (time >= beat[0] - 3)
@@ -290,11 +299,11 @@ namespace lu::JSAB
 					bar->mTransform->SetRotation(Quaternion::Create2DRotationRadian(PI * rot[i]));
 					bar->SetTimeline(mMusic, 2, beat[i], outro[i]);
 				}
-				flag++;
+				mSmallBarFlag++;
 			}
 		}
 		//166 ~ 183
-		else if (flag == 4)
+		else if (mSmallBarFlag == 4)
 		{
 			float beat[2] = { 80.996,83.396 };
 			if (time >= beat[0] - 2)
@@ -313,11 +322,11 @@ namespace lu::JSAB
 					x[i % 2] += 40 * sign[i % 2];
 					bar->SetShake(false);
 				}
-				flag++;
+				mSmallBarFlag++;
 			}
 		}
 		//230 ~ 313
-		else if (flag == 5 && time >= 100)
+		else if (mSmallBarFlag == 5 && time >= 100)
 		{
 			{
 				float y = application.GetHeight() * 0.5;
@@ -355,9 +364,9 @@ namespace lu::JSAB
 					}
 				}
 			}
-			flag++;
+			mSmallBarFlag++;
 		}
-		else if (flag == 6 && time >= 102)
+		else if (mSmallBarFlag == 6 && time >= 102)
 		{
 			{
 				float y = application.GetHeight() * 0.5;
@@ -395,9 +404,9 @@ namespace lu::JSAB
 					}
 				}
 			}
-			flag++;
+			mSmallBarFlag++;
 		}
-		else if (flag == 7 && time >= 110)
+		else if (mSmallBarFlag == 7 && time >= 110)
 		{
 			{
 				float y = application.GetHeight() * 0.5;
@@ -435,9 +444,9 @@ namespace lu::JSAB
 					}
 				}
 			}
-			flag++;
+			mSmallBarFlag++;
 		}
-		else if (flag == 8 && time >= 112)
+		else if (mSmallBarFlag == 8 && time >= 112)
 		{
 			float y = application.GetHeight() * 0.5;
 			float outro[] = { 1.793, 1.5, 1.345, 1.093 };
@@ -453,10 +462,10 @@ namespace lu::JSAB
 				bar->SetSize(20);
 				bar->SetShake(true);
 			}
-			flag++;
+			mSmallBarFlag++;
 		}
 		//450 ~ 461
-		else if (flag == 9 && time >= 120)
+		else if (mSmallBarFlag == 9 && time >= 120)
 		{
 			float rot[2] = { 0.5, -0.5};
 			float x = application.GetWidth();
@@ -472,10 +481,10 @@ namespace lu::JSAB
 				bar->SetSize(20);
 				bar->SetShake(true);
 			}
-			flag++;
+			mSmallBarFlag++;
 		}
 		//462 ~
-		else if (flag == 10)
+		else if (mSmallBarFlag == 10)
 		{
 			static float beat[] = { 126.55, 126.75, 127.2, 127.3, 127.75, 128.05, 128.15, 128.45, 128.65, 129, 129.25
 				, 129.55, 129.8, 130.1, 130.35, 130.5, 130.65, 130.95, 131.2, 131.45, 132.15, 132.3, 132.6, 132.85, 133.05
@@ -518,7 +527,8 @@ namespace lu::JSAB
 				prevx = x;
 				idx++;
 			}
-
+			if (idx >= 111 && time < beat[110])
+				idx = 0;
 		}
 	}
 	void DubwooferManager::CheckPoints(double time)
@@ -531,15 +541,14 @@ namespace lu::JSAB
 			BackgroundScript::eBackgrounds::DARKBLUE,
 			BackgroundScript::eBackgrounds::BLACK
 		};
-		static int idx = 0;
-		if (time >= beat[idx] - 5.5)
+		if (time >= beat[mCheckPointFlag] - 5.5)
 		{
 			mCheckPoint->Owner()->SetActive(true);
-			mCheckPoint->SetTimeline(mMusic, 5, beat[idx], 0);
-			mCheckPoint->SetBackgroundType(types[idx]);
-			if (idx == 4)
+			mCheckPoint->SetTimeline(mMusic, 5, beat[mCheckPointFlag], 0);
+			mCheckPoint->SetBackgroundType(types[mCheckPointFlag]);
+			if (mCheckPointFlag == 4)
 				mCheckPoint->SetIsFinal(true);
-			idx++;
+			mCheckPointFlag++;
 		}
 	}
 }

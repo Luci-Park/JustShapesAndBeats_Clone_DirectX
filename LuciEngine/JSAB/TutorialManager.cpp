@@ -32,6 +32,7 @@ namespace lu::JSAB
 		mBackground = SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetBackground();
 		
 		OnStageChange(0);
+		mNextScene = L"TitleScene"; 
 	}
 	void TutorialManager::Update()
 	{
@@ -43,6 +44,16 @@ namespace lu::JSAB
 				mLevelTriangle->Appear();
 			}
 		}
+	}
+	void TutorialManager::OnMusicEnd()
+	{
+		mRoundSpikes.Reset();
+		mBeams.Reset();
+		mBursts.Reset();
+		mCircleLines.Reset();
+		mBeatCircles.Reset();
+		mGCircles.Reset();
+		
 	}
 	void TutorialManager::OnStageChange(int stage)
 	{
@@ -150,8 +161,8 @@ namespace lu::JSAB
 		}
 		{
 			double beat[] =	{ 14.850, 15.500, 16.583, 17.235, 17.450, 18.313, 18.959, 20.242, 20.697, 21.025 };
-			const float y = application.GetHeight() * 0.5;
-			const float x[] = { -60, - 20, 20, 60, 100, 140, 180, 220, 260, 300	};
+			float y = application.GetHeight() * 0.5;
+			float x[] = { -60, - 20, 20, 60, 100, 140, 180, 220, 260, 300	};
 
 			for(int i =0; i < 10; i++)
 			{

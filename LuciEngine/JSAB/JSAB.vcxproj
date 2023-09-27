@@ -169,6 +169,7 @@
     <ClInclude Include="DubwooferWaterBullet.h" />
     <ClInclude Include="MusicController.h" />
     <ClInclude Include="BulletPool.h" />
+    <ClInclude Include="MusicManager.h" />
     <ClInclude Include="PlayerPieces.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="SplashAnimation.h" />
@@ -215,6 +216,7 @@
     <ClCompile Include="DubwooferWater.cpp" />
     <ClCompile Include="DubwooferWaterBullet.cpp" />
     <ClCompile Include="MusicController.cpp" />
+    <ClCompile Include="MusicManager.cpp" />
     <ClCompile Include="PlayerPieces.cpp" />
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="SplashAnimation.cpp" />

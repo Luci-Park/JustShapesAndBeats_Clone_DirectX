@@ -11,8 +11,9 @@ namespace lu::JSAB
 			Vector3 origin;
 			float startTime;
 			float duration;
-			float waveLength;
 			float amplitude;
+			float waveLength;
+			float period;
 		};
 		DubwooferWater(){}
 		virtual ~DubwooferWater(){}

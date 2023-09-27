@@ -65,4 +65,9 @@ namespace lu::JSAB
 			DeActivate();
 	}
 
+	void DubwooferSpikeDropper::OnDeActivate()
+	{
+		mTransform->SetPosition(mWaitPos);
+	}
+
 }

@@ -1,5 +1,5 @@
 #pragma once
-#include "LScript.h"
+#include "MusicManager.h"
 #include "BulletPool.h"
 namespace lu::JSAB
 {
@@ -12,12 +12,13 @@ namespace lu::JSAB
 	class TutorialGiantCircle;
 	class TutorialCircleLine;
 	class InGameTriangle;
-	class TutorialManager : public Script
+	class TutorialManager : public MusicManager
 	{
 	public:
 		TutorialManager();
 		virtual void Initialize() override;
 		virtual void Update() override;
+		virtual void OnMusicEnd()override;
 		void OnStageChange(int stage);
 		void SetTriangle(InGameTriangle* triangle) { mLevelTriangle = triangle; }
 	private:

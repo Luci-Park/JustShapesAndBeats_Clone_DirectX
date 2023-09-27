@@ -18,7 +18,7 @@ namespace lu::JSAB
 		virtual void WhileActivate(double time)override {}
 		virtual void OnOutro()override {}
 		virtual void WhileOutro(double time);
-		virtual void OnDeActivate()override{}
+		virtual void OnDeActivate()override;
 	private:
 		std::vector<DubwooferSpikeBullet*> mSpikes;
 		Vector3 mWaitPos;
