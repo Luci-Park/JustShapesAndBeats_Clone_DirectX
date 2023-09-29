@@ -58,7 +58,7 @@ namespace lu::JSAB::Tutorial
 	}
 	void TutorialScene::OnActivate()
 	{
-		mainCamera->Owner()->GetComponent<GameCamera>()->GetEffect()->LevelTrans();
+		mainCamera->Owner()->GetComponent<GameCamera>()->GetEffect()->WhiteFadeIn();
 		mPlayer->SetActive(true);
 		mTime = 0;
 		mTriFlag = false;

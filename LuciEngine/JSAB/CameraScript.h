@@ -22,6 +22,7 @@ namespace lu::JSAB
 		void BlackFadeOut();
 		void BlackFadeIn();
 		void LevelTrans();
+		void WhiteFadeIn();
 		void Reset();
 	private:
 

@@ -62,7 +62,7 @@ namespace lu::JSAB
 	{
 		mPlayer->mTransform->SetPosition(Vector3(-540, 0, -5));
 		mPlayer->Release();
-		SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->LevelTrans();
+		SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->WhiteFadeIn();
 	}
 #pragma endregion
 

@@ -74,41 +74,59 @@ namespace lu::JSAB
 		}
 		if (stage == 1)
 		{
+			mRoundSpikes.Reset();
 			mBackground->SetBackground(BackgroundScript::eBackgrounds::DARKBLUE);
 			Stage2();
 		}
 		if (stage == 2)
 		{
+			mBursts.Reset();
 			mBackground->SetBackground(BackgroundScript::eBackgrounds::PURPLE);
 			Stage3();
 		}
 		if (stage == 3)
 		{
+			mBursts.Reset();
+			mBeams.Reset();
 			mBackground->SetBackground(BackgroundScript::eBackgrounds::TURQUOISE);
 			Stage4();
 		}
 		if (stage == 4)
 		{
+			mBursts.Reset();
+			mBeams.Reset();
 			mBackground->SetBackground(BackgroundScript::eBackgrounds::GREY);
 			Stage5();
 		}
 		if (stage == 5)
 		{
+			mBursts.Reset();
+			mBeams.Reset();
+			mBeatCircles.Reset();
 			mBackground->SetBackground(BackgroundScript::eBackgrounds::PINK);
 			Stage6();
 		}
 		if (stage == 6)
 		{
+			mBursts.Reset();
+			mBeams.Reset();
+			mRoundSpikes.Reset();
 			mBackground->SetBackground(BackgroundScript::eBackgrounds::BLACK);
 			Stage7();
 		}
 		if (stage == 7)
 		{
+			mBursts.Reset();
+			mBeams.Reset();
+			mRoundSpikes.Reset();
 			mBackground->SetBackground(BackgroundScript::eBackgrounds::PURPLE);
 			Stage8();
 		}
 		if (stage == 8)
 		{
+			mBeams.Reset();
+			mRoundSpikes.Reset();
+			mCircleLines.Reset();
 			mBackground->SetBackground(BackgroundScript::eBackgrounds::PURPLE);
 			Stage9();
 			Stage10();
@@ -297,8 +315,6 @@ namespace lu::JSAB
 	void TutorialManager::Stage7()
 	{
 		double beat[] = { 56.187, 56.624, 59.651 , 60.088 };
-		mRoundSpikes.Reset();
-
 
 		for(int i =0; i < 4; i++)
 		{
@@ -409,14 +425,15 @@ namespace lu::JSAB
 			b->SetRandomPosition();
 			b->SetTimeline(mMusic, 1.3, startTime + timePerBeat * i, 0.35);
 		}
-		for (int i = 0; i < numberOfBeats; i += 2)
+		for (int i = 0, j = 0; i < numberOfBeats; i += 2, j++)
 		{
 			float move = 180;
 			auto b = mBursts.GetNext();
-			if (i % 2 == 0)
+			if (j % 2 == 0)
 				b->SetUp({ 500, (float)bounds.top, 0 }, { 500, (float)bounds.top + move, 0 });
 			else
 				b->SetUp({ 500, (float)bounds.bottom, 0 }, { 500, (float)bounds.bottom - move, 0 });
+
 			b->SetTimeline(mMusic, 0.4, startTime + timePerBeat * i, 0);
 		}
 		{
