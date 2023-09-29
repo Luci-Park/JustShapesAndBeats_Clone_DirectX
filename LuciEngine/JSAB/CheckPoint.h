@@ -3,6 +3,7 @@
 #include "BackgroundScript.h"
 namespace lu::JSAB
 {
+	class MusicManager;
 	class CheckPoint : public Bullet
 	{
 	public:
@@ -12,6 +13,7 @@ namespace lu::JSAB
 		virtual void OnCollisionEnter(Collider2D* other) override;
 		void SetBackgroundType(BackgroundScript::eBackgrounds type) { mChange = type; }
 		void SetBackground(BackgroundScript* background) { mBackground = background; }
+		void SetManager(MusicManager* manager) { mManager = manager; }
 		void SetIsFinal(bool final) { mIsFinal = final; }
 	protected:
 		virtual void BulletSetUp() override;
@@ -33,6 +35,7 @@ namespace lu::JSAB
 		Vector3 mStartPos, mEndPos;
 		BackgroundScript* mBackground;
 		BackgroundScript::eBackgrounds mChange;
+		MusicManager* mManager;
 	};
 }
 

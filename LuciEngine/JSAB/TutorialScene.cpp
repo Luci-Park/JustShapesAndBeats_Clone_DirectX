@@ -22,7 +22,7 @@ namespace lu::JSAB::Tutorial
 		GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
 		manager->SetName(L"TutorialManager");
 		mMusic = manager->AddComponent<TutorialMusicController>();
-		auto ma = manager->AddComponent<TutorialManager>();
+		mManager = manager->AddComponent<TutorialManager>();
 		
 		mPlayer = object::Instantiate<PlayerPrefab>(Vector3(0, 0, -5), eLayerType::Player);
 		mPlayer->SetActive(false);
@@ -30,7 +30,7 @@ namespace lu::JSAB::Tutorial
 		mTriangle = object::Instantiate<TrianglePrefab>(eLayerType::Item)->GetComponent<InGameTriangle>();
 		mTriangle->Owner()->SetActive(false);
 
-		ma->SetTriangle(mTriangle);
+		mManager->SetTriangle(mTriangle);
 		Scene::Initialize(); 
 	}
 	void TutorialScene::Update()
@@ -49,6 +49,7 @@ namespace lu::JSAB::Tutorial
 		mOpening->Activate(std::bind(&TutorialScene::OnActivate, this));
 		mTriangle->SetStrategy(TriangleStrategy::eTriangleStrategyType::PrevTutorial);
 		mTime = -1000;
+		MusicManager::Instance = mManager;
 	}
 
 	void TutorialScene::OnExit()

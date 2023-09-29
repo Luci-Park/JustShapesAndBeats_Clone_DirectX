@@ -4,6 +4,7 @@
 namespace lu::JSAB
 {
 	class TutorialMusicController;
+	class TutorialManager;
 	class PlayerPieces;
 	class InGameTriangle;
 }
@@ -29,6 +30,7 @@ namespace lu::JSAB::Tutorial
 
 	private:
 		TutorialMusicController* mMusic;
+		TutorialManager* mManager;
 		InGameTriangle* mTriangle;
 		PlayerPieces* mOpening;
 		GameObject* mPlayer;

@@ -12,6 +12,7 @@
 #include "LApplication.h"
 #include "TrianglePrefab.h"
 #include "Triangle.h"
+#include "CheckPoint.h"
 
 extern lu::Application application;
 namespace lu::JSAB
@@ -28,11 +29,14 @@ namespace lu::JSAB
 	void TutorialManager::Initialize()
 	{
 		mMusic = Owner()->GetComponent<TutorialMusicController>();
-
 		mBackground = SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetBackground();
-		
-		OnStageChange(0);
-		mNextScene = L"TitleScene"; 
+		mNextScene = L"TitleScene";
+		mCheckPoint = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<CheckPoint>();
+		mCheckPoint->SetManager(this);
+		mCheckPoint->SetIsFinal(false);
+		mCheckPoint->SetTimeline(mMusic, 0, 164.800, 5);
+		mCheckPoint->SetBackground(mBackground);
+		mCheckPoint->SetBackgroundType(BackgroundScript::eBackgrounds::BLACK);
 	}
 	void TutorialManager::Update()
 	{
@@ -45,6 +49,12 @@ namespace lu::JSAB
 			}
 		}
 	}
+	void TutorialManager::Play()
+	{
+		MusicManager::Play();
+		mMusic->Play();
+		OnStageChange(0);
+	}
 	void TutorialManager::OnMusicEnd()
 	{
 		mRoundSpikes.Reset();
@@ -53,7 +63,7 @@ namespace lu::JSAB
 		mCircleLines.Reset();
 		mBeatCircles.Reset();
 		mGCircles.Reset();
-		
+		mMusic->Finish();
 	}
 	void TutorialManager::OnStageChange(int stage)
 	{
@@ -450,80 +460,3 @@ namespace lu::JSAB
 		}
 	}
 }
-
-
-	//void TutorialManager::Stage10()
-	//{
-	//	double readTime = 125.467;
-	//	double beatTime = 0.432;
-	//	int beat = 0;
-	//	while(bea)
-	//	if (readTime < 152.683 && time >= readTime)
-	//	{
-	//		{
-	//			static int showNum = 0;
-	//			for (showNum; showNum < 4; showNum++)
-	//			{
-	//				auto b = mBeatBars.GetNext();
-	//				double showTime = readTime + showNum * 0.432;
-	//				if (showTime <= 152.683)
-	//				{
-	//					b->SetRandomPosition();
-	//					b->Show(showTime);
-	//				}
-	//			}
-	//			showNum--;
-	//		}
-	//		if(beat % 2 ==0)
-	//		{
-	//			static int idx = 0;
-	//			auto bullet = mBurstBullets.GetNext();
-	//			bullet->IsEven(idx % 2 == 0);
-	//			bullet->Activate();
-	//			idx++;
-	//		}
-	//		{
-	//			const int beats[] = { 5, 13, 21, 29, 36, 41, 49, 57 };
-	//			static int idx = 0;
-	//			//5 8 8 8 8 7 7 7 
-
-	//			if ((beat + 3 ) == beats[idx])
-	//			{
-	//				auto c = mCircleLines.GetNext();
-	//				c->FitToHeight();
-	//				double time[7];
-	//				double step = 0.432 * 1 / 7;
-	//				for (int i = 0; i < 7; i++)
-	//				{
-	//					time[i] = readTime + 0.432 * 2 + step * i;
-	//				}
-	//				c->MultipleShow(time);
-	//				idx++;
-	//			}
-	//		}  
-	//		{
-	//			const int beats[] = { 10, 17, 26, 33, 40, 48, 56 };
-	//			static int idx = 0;
-	//			if (beat == beats[idx])
-	//			{
-	//				auto r = SceneManager::MainCamera()->GetBoundary();
-	//				Vector3 pos[2] = { {r.right - 20.f, -462, 1}, {r.right - 20.f, 501,1} };
-	//				auto c = mFullBar.GetNext();
-	//				c->Setup(7, pos[idx%2], { r.left + 40.f, pos[idx % 2].y, 1 });
-	//				c->Activate();
-	//				idx++;
-	//			}
-	//		}
-	//		readTime += 0.432;
-	//		beat++;
-	//	}
-	//	if (beat == 64)
-	//	{
-	//		auto r = SceneManager::MainCamera()->GetBoundary();
-	//		auto c = mFullBar.GetNext();
-	//		c->Setup(9 , { r.right - 20.f, 0, 0 }, { r.left - 40.f, 0, 0 });
-	//		c->Activate();
-	//		readTime += 0.432;
-	//		beat++;
-	//	}
-	//}

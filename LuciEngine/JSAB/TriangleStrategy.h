@@ -12,6 +12,7 @@ namespace lu::JSAB
 {
 	class Player;
 	class TutorialMusicController;
+	class TutorialManager;
 	class TriangleStrategy
 	{
 	public:
@@ -49,6 +50,24 @@ namespace lu::JSAB
 	public:
 		TutorialStartStrategy(GameObject* owner, Animator* triangleAnim);
 		virtual ~TutorialStartStrategy() {}
+		virtual void OnAppear() override;
+		virtual void OnCollisionEnter(Player* player) override;
+		virtual void OnBurst() override;
+	private:
+		AudioSource* mAudio;
+		Rigidbody* mRB;
+		Transform* mTransform;
+		Animator* mTriangleAnim;
+		std::shared_ptr<AudioClip> mClip;
+		Player* mPlayer;
+		TutorialManager* mManager;
+	};
+
+	class LevelFinishStrategy : public TriangleStrategy
+	{
+	public:
+		LevelFinishStrategy(GameObject* owner, Animator* triangleAnim);
+		virtual ~LevelFinishStrategy() {}
 		virtual void OnAppear() override;
 		virtual void OnCollisionEnter(Player* player) override;
 		virtual void OnBurst() override;

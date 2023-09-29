@@ -6,11 +6,13 @@
 #include "LAudioSource.h"
 #include "LAnimator.h"
 #include "LResources.h"
-#include "TutorialMusicController.h"
 #include "LSceneManager.h"
 #include "TutorialScene.h"
 #include "CameraScript.h"
 #include "LCamera.h"
+#include "TutorialMusicController.h"
+#include "TutorialManager.h"
+#include "MusicManager.h"
 #include "Triangle.h"
 namespace lu::JSAB
 {
@@ -30,11 +32,6 @@ namespace lu::JSAB
 		mAudio = owner->GetComponent<AudioSource>();
 		mTriangleAnim = triangleAnim;
 		mClip = Resources::Find<AudioClip>(L"SFX_HEX_LEVEL_COMPLETE_TUTO_SILENCE");
-		auto scene = dynamic_cast<lu::JSAB::Tutorial::TutorialScene*>(SceneManager::GetActiveScene());
-		if (scene)
-		{
-			mMusic = scene->GetMusic();
-		}
 	}
 	void TutorialStrategy::OnAppear()
 	{
@@ -45,6 +42,7 @@ namespace lu::JSAB
 	}
 	void TutorialStrategy::OnCollisionEnter(Player* player)
 	{
+		mMusic = dynamic_cast<TutorialMusicController*>(MusicController::Instance);
 		mPlayer = player;
 		player->Hold();
 		mRB->SetVelocity(Vector3::Zero);
@@ -56,7 +54,7 @@ namespace lu::JSAB
 		mAudio->SetClip(mClip);
 		mAudio->Play();
 		mAudio->SetPosition(diff);
-		mTriangleAnim->PlayAnimation(L"Burst", false);
+		mTriangleAnim->PlayAnimation(L"TutorialBurst", false);
 		mTriangleAnim->SetTime(diff);
 		mMusic->PlayNextPart();
 	}
@@ -77,12 +75,7 @@ namespace lu::JSAB
 		mTransform = owner->mTransform;
 		mAudio = owner->GetComponent<AudioSource>();
 		mTriangleAnim = triangleAnim;
-		mClip = Resources::Find<AudioClip>(L"SFX_HEX_LEVEL_COMPLETE_TUTO");
-		auto scene = dynamic_cast<lu::JSAB::Tutorial::TutorialScene*>(SceneManager::GetActiveScene());
-		if (scene)
-		{
-			mMusic = scene->GetMusic();
-		}
+		mClip = Resources::Find<AudioClip>(L"SFX_HEX_LEVEL_COMPLETE_TUTO");		
 	}
 	void TutorialStartStrategy::OnAppear()
 	{
@@ -101,18 +94,31 @@ namespace lu::JSAB
 		player->mTransform->SetPosition(pos);
 		mAudio->SetClip(mClip);
 		mAudio->Play();
-		mTriangleAnim->PlayAnimation(L"Burst", false);
+		mTriangleAnim->PlayAnimation(L"PrevTutoralBurst", false);
 	}
 	void TutorialStartStrategy::OnBurst()
 	{
 		mPlayer->mTransform->SetPosition(Vector3(-540, 0, -5));
 		mPlayer->Release();
 		SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->LevelTrans();
-		mMusic->Play();
+		mManager = dynamic_cast<TutorialManager*>(MusicManager::Instance);
+		mManager->Play();
 		mOwner->GetComponent<InGameTriangle>()->SetStrategy(eTriangleStrategyType::Tutorial);
 	}
 #pragma endregion
 #pragma region LevelFinStrategy
-
+	LevelFinishStrategy::LevelFinishStrategy(GameObject* owner, Animator* triangleAnim)
+		:TriangleStrategy(owner)
+	{
+	}
+	void LevelFinishStrategy::OnAppear()
+	{
+	}
+	void LevelFinishStrategy::OnCollisionEnter(Player* player)
+	{
+	}
+	void LevelFinishStrategy::OnBurst()
+	{
+	}
 #pragma endregion
 }

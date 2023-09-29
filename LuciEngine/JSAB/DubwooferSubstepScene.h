@@ -1,6 +1,6 @@
 #pragma once
 #include "..\Engine_SOURCE\LScene.h"
-#include "DubwooferMusicController.h"
+#include "DubwooferManager.h"
 #include "BackgroundScript.h"
 namespace lu::JSAB
 {
@@ -14,7 +14,7 @@ namespace lu::JSAB
 		virtual void OnExit() override;
 
 	private:
-		DubwooferMusicController* mMusic;
+		DubwooferManager* mMusic;
 		BackgroundScript* mBackground;
 	};
 }

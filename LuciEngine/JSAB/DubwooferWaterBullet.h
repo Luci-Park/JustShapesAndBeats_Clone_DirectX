@@ -32,5 +32,19 @@ namespace lu::JSAB
 		int mIdx;
 		
 	};
+
+	class DubwooferSpikeWave : public Script
+	{
+	public:
+		DubwooferSpikeWave() {}
+		virtual ~DubwooferSpikeWave(){}
+
+		virtual void Initialize() override;
+		virtual void Update() override;
+
+	private:
+		bool mbWave;
+		double mStartTime;
+	};
 }
 

@@ -45,8 +45,6 @@ namespace lu::JSAB
 					}
 					if (mStageIdx < mCheckPoints.size())
 						mAudioSource->SetPosition(mCheckPoints[mStageIdx].first);
-					else
-						Finish();
 				}
 			}
 		}

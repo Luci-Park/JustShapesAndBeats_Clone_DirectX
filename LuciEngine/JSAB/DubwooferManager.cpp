@@ -14,7 +14,7 @@ namespace lu::JSAB
 {
 	DubwooferManager::DubwooferManager()
 		: mThickBeams(4)
-		, mThinBeams(200)
+		, mThinBeams(250)
 	{
 	}
 	void DubwooferManager::Initialize()
@@ -24,6 +24,7 @@ namespace lu::JSAB
 		mMusic = Owner()->GetComponent<MusicController>();
 		mCheckPoint = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<CheckPoint>();
 		mCheckPoint->SetBackground(SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetBackground());
+		mCheckPoint->SetManager(this);
 		mDropFlag = 0;
 		mSpikeFlag = 0;
 		mBigBarFlag = 0;
@@ -35,7 +36,7 @@ namespace lu::JSAB
 	{
 		if (mMusic->IsPlaying())
 		{
-			double time = mMusic->GetTime();
+		 	double time = mMusic->GetTime();
 			Drops(time);
 			Spikes(time);
 			BigBar(time);
@@ -43,11 +44,23 @@ namespace lu::JSAB
 			CheckPoints(time);
 		}
 	}
+	void DubwooferManager::Play()
+	{
+		MusicManager::Play();
+		mDropFlag = 0;
+		mSpikeFlag = 0;
+		mBigBarFlag = 0;
+		mSmallBarFlag = 0;
+		mCheckPointFlag = 0;
+		mCheckPoint->SetIsFinal(false);
+		mMusic->Play();
+	}
 	void DubwooferManager::OnMusicEnd()
 	{
 		mThickBeams.Reset();
 		mThinBeams.Reset();
 		mSpikes->DeActivate();
+		mMusic->Finish();
 	}
 	void DubwooferManager::Drops(double time)
 	{

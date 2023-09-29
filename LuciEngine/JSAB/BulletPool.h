@@ -1,6 +1,6 @@
 #pragma once
-#include "LObject.h"
-#include "LGameObject.h"
+#include "..\\Engine_SOURCE\\LObject.h"
+#include "..\\Engine_SOURCE\\LGameObject.h"
 
 namespace lu::JSAB
 {

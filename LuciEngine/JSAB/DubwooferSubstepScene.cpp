@@ -5,6 +5,7 @@
 #include "PlayerPrefab.h"
 #include "CameraScript.h"
 #include "DubwooferManager.h"
+#include "DubwooferMusicController.h"
 namespace lu::JSAB
 {
 	void DubwooferSubstepScene::Initialize()
@@ -19,8 +20,8 @@ namespace lu::JSAB
 
 		GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
 		manager->SetName(L"DubwooferManager");
-		mMusic = manager->AddComponent<DubwooferMusicController>();
-		manager->AddComponent<DubwooferManager>();
+		manager->AddComponent<DubwooferMusicController>();
+		mMusic = manager->AddComponent<DubwooferManager>();
 
 		
 		object::Instantiate<PlayerPrefab>(Vector3(-540, 0, -5), eLayerType::Player);
@@ -36,6 +37,5 @@ namespace lu::JSAB
 	}
 	void DubwooferSubstepScene::OnExit()
 	{
-		mMusic->Stop();
 	}
 }

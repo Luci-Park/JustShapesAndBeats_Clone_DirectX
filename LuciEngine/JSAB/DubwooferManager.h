@@ -17,6 +17,7 @@ namespace lu::JSAB
 
 		virtual void Initialize() override;
 		virtual void Update() override;
+		virtual void Play() override;
 		virtual void OnMusicEnd() override;
 	private:
 		void Drops(double time);

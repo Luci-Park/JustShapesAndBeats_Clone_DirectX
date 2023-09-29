@@ -115,7 +115,7 @@ namespace lu::JSAB
 	{
 		object::Instantiate<GameObject>(eLayerType::Camera)->AddComponent<GameCamera>();
 		auto g = object::Instantiate<GameObject>(eLayerType::Bullet);
-		g->AddComponent<DubwooferWater>();
+		g->AddComponent<DubwooferSpikeWave>();
 		//g->AddComponent<gui::TransformWidget>();
 		//object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<DubwooferDropSpawner>();
 		target = nullptr;

@@ -1,6 +1,6 @@
 #include "CheckPoint.h"
 #include "LApplication.h"
-
+#include "MusicManager.h"
 extern lu::Application application;
 namespace lu::JSAB
 {
@@ -11,6 +11,8 @@ namespace lu::JSAB
 			mAudio->Play();
 			DeActivate();
 			mBackground->SetBackground(mChange);
+			if (mIsFinal)
+				mManager->OnMusicEnd();
 		}
 	}
 	void CheckPoint::BulletSetUp()

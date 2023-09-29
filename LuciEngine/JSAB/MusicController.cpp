@@ -45,7 +45,7 @@ namespace lu::JSAB
 				}
 				else
 				{
-					mAudioSource->Stop();
+					Stop();
 				}
 			}
 		}

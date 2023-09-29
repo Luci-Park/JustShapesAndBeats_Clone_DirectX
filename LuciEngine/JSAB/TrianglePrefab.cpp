@@ -32,7 +32,7 @@ namespace lu::JSAB
 	
 			auto t = AddComponent<InGameTriangle>();
 
-			auto anim = animator->CreateAnimation(L"Burst");
+			auto anim = animator->CreateAnimation(L"TutorialBurst");
 			double downDuration = 0.1;
 			double readyduration = 6.928 - downDuration;
 			float y = 100.f;
@@ -47,6 +47,18 @@ namespace lu::JSAB
 			anim->AddLocalRotationKey(readyduration + downDuration, Quaternion::Identity);
 			anim->AddFunctionKey(readyduration + downDuration, std::bind(&InGameTriangle::Burst, t));
 
+			anim = animator->CreateAnimation(L"PrevTutoralBurst");
+			readyduration = 4 - downDuration;
+			anim->AddLocalPositionKey(0, Vector3::Zero);
+			anim->AddLocalPositionKey(readyduration * 0.3, { 0, y * 0.8f, 0 });
+			anim->AddLocalPositionKey(readyduration, { 0, y, 0 });
+			anim->AddLocalPositionKey(readyduration + downDuration, { 0, 0, 0 });
+
+			anim->AddLocalRotationKey(0, Quaternion::Identity);
+			anim->AddLocalRotationKey(readyduration * 0.3, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI * 0.9));
+			anim->AddLocalRotationKey(readyduration, Quaternion::CreateFromAxisAngle(Vector3::Forward, -PI));
+			anim->AddLocalRotationKey(readyduration + downDuration, Quaternion::Identity);
+			anim->AddFunctionKey(readyduration + downDuration, std::bind(&InGameTriangle::Burst, t));
 			anim = animator->CreateAnimation(L"Idle");
 			
 			float time = 0;

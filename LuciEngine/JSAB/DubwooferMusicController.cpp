@@ -27,8 +27,6 @@ namespace lu::JSAB
 			mAudioSource->SetPosition(120);
 		}
 		MusicController::Update();
-		if (GetTime() >= 159.95)
-			Finish();
 	}
 
 }

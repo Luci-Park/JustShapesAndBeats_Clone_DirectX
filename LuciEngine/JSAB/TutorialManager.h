@@ -12,12 +12,14 @@ namespace lu::JSAB
 	class TutorialGiantCircle;
 	class TutorialCircleLine;
 	class InGameTriangle;
+	class CheckPoint;
 	class TutorialManager : public MusicManager
 	{
 	public:
 		TutorialManager();
 		virtual void Initialize() override;
 		virtual void Update() override;
+		virtual void Play() override;
 		virtual void OnMusicEnd()override;
 		void OnStageChange(int stage);
 		void SetTriangle(InGameTriangle* triangle) { mLevelTriangle = triangle; }
@@ -33,6 +35,7 @@ namespace lu::JSAB
 		void Stage9();
 		void Stage10();
 	private:
+		CheckPoint* mCheckPoint;
 		TutorialMusicController* mMusic;
 		InGameTriangle* mLevelTriangle;
 
