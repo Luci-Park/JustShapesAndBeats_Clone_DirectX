@@ -30,12 +30,12 @@ namespace lu::JSAB
 	{
 		mMusic = Owner()->GetComponent<TutorialMusicController>();
 		mBackground = SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetBackground();
-		mNextScene = L"TitleScene";
+		mNextScene = L"DubwooferSubstepScene";
 		mCheckPoint = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<CheckPoint>();
+		mCheckPoint->SetBackground(SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetBackground());
 		mCheckPoint->SetManager(this);
-		mCheckPoint->SetIsFinal(false);
-		mCheckPoint->SetTimeline(mMusic, 0, 164.800, 5);
-		mCheckPoint->SetBackground(mBackground);
+		mCheckPoint->SetIsFinal(true);
+		mCheckPoint->SetTimeline(mMusic, 5, 164.800, 0);
 		mCheckPoint->SetBackgroundType(BackgroundScript::eBackgrounds::BLACK);
 	}
 	void TutorialManager::Update()
@@ -47,6 +47,10 @@ namespace lu::JSAB
 			{
 				mLevelTriangle->Appear();
 			}
+		}
+		if (mMusic->IsPlaying() && mMusic->GetTime() >= 164.800 - 5)
+		{
+			mCheckPoint->Update();
 		}
 	}
 	void TutorialManager::Play()
@@ -419,6 +423,7 @@ namespace lu::JSAB
 		double timePerBeat = 0.432;
 		int numberOfBeats = 63;
 		RECT bounds = SceneManager::MainCamera()->GetBoundary();
+
 		for (int i = 0; i < numberOfBeats; i++)
 		{
 			auto b = mBeams.GetNext();

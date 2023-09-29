@@ -556,7 +556,6 @@ namespace lu::JSAB
 		};
 		if (time >= beat[mCheckPointFlag] - 5.5)
 		{
-			mCheckPoint->Owner()->SetActive(true);
 			mCheckPoint->SetTimeline(mMusic, 5, beat[mCheckPointFlag], 0);
 			mCheckPoint->SetBackgroundType(types[mCheckPointFlag]);
 			if (mCheckPointFlag == 4)

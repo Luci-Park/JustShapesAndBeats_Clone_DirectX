@@ -47,6 +47,21 @@ namespace lu::JSAB
 						mAudioSource->SetPosition(mCheckPoints[mStageIdx].first);
 				}
 			}
+			if (mbIsFinishing)
+			{
+				if (mAudioSource->GetVolume() > 0)
+				{
+					float fadeStep = mFadeTime / mFadeDuration;
+					float vol = mStartVolume * (1.0f - fadeStep);
+
+					mAudioSource->SetVolume(vol);
+					mFadeTime += Time::DeltaTime();
+				}
+				else
+				{
+					Stop();
+				}
+			}
 		}
 		if (Input::GetKeyDown(eKeyCode::Q))
 			PlayNextPart();

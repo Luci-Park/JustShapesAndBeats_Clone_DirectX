@@ -52,6 +52,7 @@ namespace lu::JSAB
 	void CheckPoint::OnDeActivate()
 	{
 		mTransform->SetPosition(mStartPos);
-		Owner()->SetActive(false);
+		mMr->SetActive(false);
+		mCol->SetActive(false);
 	}
 }
