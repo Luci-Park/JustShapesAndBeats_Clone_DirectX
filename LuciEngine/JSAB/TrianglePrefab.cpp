@@ -47,7 +47,7 @@ namespace lu::JSAB
 			anim->AddLocalRotationKey(readyduration + downDuration, Quaternion::Identity);
 			anim->AddFunctionKey(readyduration + downDuration, std::bind(&InGameTriangle::Burst, t));
 
-			anim = animator->CreateAnimation(L"PrevTutoralBurst");
+			anim = animator->CreateAnimation(L"Burst");
 			readyduration = 4 - downDuration;
 			anim->AddLocalPositionKey(0, Vector3::Zero);
 			anim->AddLocalPositionKey(readyduration * 0.3, { 0, y * 0.8f, 0 });

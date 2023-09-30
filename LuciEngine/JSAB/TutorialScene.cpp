@@ -30,7 +30,6 @@ namespace lu::JSAB::Tutorial
 		mTriangle = object::Instantiate<TrianglePrefab>(eLayerType::Item)->GetComponent<InGameTriangle>();
 		mTriangle->Owner()->SetActive(false);
 
-		mManager->SetTriangle(mTriangle);
 		Scene::Initialize(); 
 	}
 	void TutorialScene::Update()

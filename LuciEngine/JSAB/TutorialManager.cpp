@@ -25,12 +25,14 @@ namespace lu::JSAB
 		, mGCircles(6)
 		, mCircleLines(8)
 	{
+		mTriangleAppearTime = 5;
 	}
 	void TutorialManager::Initialize()
 	{
 		mMusic = Owner()->GetComponent<TutorialMusicController>();
 		mBackground = SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetBackground();
 		mNextScene = L"DubwooferSubstepScene";
+
 		mCheckPoint = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<CheckPoint>();
 		mCheckPoint->SetBackground(SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetBackground());
 		mCheckPoint->SetManager(this);
@@ -40,17 +42,17 @@ namespace lu::JSAB
 	}
 	void TutorialManager::Update()
 	{
-		if (mMusic->IsPlaying() && mMusic->GetStage() < 8)
+		if (mMusic->IsPlaying())
 		{
-			float percent = mMusic->GetPercent();
-			if (percent > 0.8 && !mLevelTriangle->IsActive())
+			if (mMusic->GetStage() < 8)
 			{
-				mLevelTriangle->Appear();
+				float percent = mMusic->GetPercent();
+				if (percent > 0.8 && !mLevelTriangle->IsActive())
+				{
+					mLevelTriangle->SetStrategy(TriangleStrategy::eTriangleStrategyType::Tutorial);
+					mLevelTriangle->Appear();
+				}
 			}
-		}
-		if (mMusic->IsPlaying() && mMusic->GetTime() >= 164.800 - 5)
-		{
-			mCheckPoint->Update();
 		}
 	}
 	void TutorialManager::Play()
@@ -68,6 +70,7 @@ namespace lu::JSAB
 		mBeatCircles.Reset();
 		mGCircles.Reset();
 		mMusic->Finish();
+		mbFin = true;
 	}
 	void TutorialManager::OnStageChange(int stage)
 	{

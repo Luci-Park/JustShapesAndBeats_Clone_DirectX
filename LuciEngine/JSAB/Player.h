@@ -1,5 +1,5 @@
 #pragma once
-#include <LScript.h>
+#include "..\\Engine_SOURCE\\LScript.h"
 namespace lu::graphics
 {
 	class Texture;

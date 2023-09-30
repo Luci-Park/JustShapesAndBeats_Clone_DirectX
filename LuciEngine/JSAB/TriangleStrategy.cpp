@@ -17,20 +17,20 @@
 namespace lu::JSAB
 {
 #pragma region StrategyBase
-	TriangleStrategy::TriangleStrategy(GameObject* owner)
+	TriangleStrategy::TriangleStrategy(GameObject* owner, Animator* triangleAnim)
 	{
+		mRB = owner->GetComponent<Rigidbody>();
+		mTransform = owner->mTransform;
+		mAudio = owner->GetComponent<AudioSource>();
+		mTriangleAnim = triangleAnim;
 		mOwner = owner;
 	}
 #pragma endregion
 
 #pragma region TutorialStrategy
 	TutorialStrategy::TutorialStrategy(GameObject* owner, Animator* triangleAnim)
-		:TriangleStrategy(owner)
+		:TriangleStrategy(owner, triangleAnim)
 	{
-		mRB = owner->GetComponent<Rigidbody>();
-		mTransform = owner->mTransform;
-		mAudio = owner->GetComponent<AudioSource>();
-		mTriangleAnim = triangleAnim;
 		mClip = Resources::Find<AudioClip>(L"SFX_HEX_LEVEL_COMPLETE_TUTO_SILENCE");
 	}
 	void TutorialStrategy::OnAppear()
@@ -69,13 +69,9 @@ namespace lu::JSAB
 #pragma region TutorialPrevStrategy
 
 	TutorialStartStrategy::TutorialStartStrategy(GameObject* owner, Animator* triangleAnim)
-		:TriangleStrategy(owner)
+		:TriangleStrategy(owner, triangleAnim)
 	{
-		mRB = owner->GetComponent<Rigidbody>();
-		mTransform = owner->mTransform;
-		mAudio = owner->GetComponent<AudioSource>();
-		mTriangleAnim = triangleAnim;
-		mClip = Resources::Find<AudioClip>(L"SFX_HEX_LEVEL_COMPLETE_TUTO");		
+		mClip = Resources::Find<AudioClip>(L"SFX_HEX_LEVEL_COMPLETE_TUTO");
 	}
 	void TutorialStartStrategy::OnAppear()
 	{
@@ -94,7 +90,7 @@ namespace lu::JSAB
 		player->mTransform->SetPosition(pos);
 		mAudio->SetClip(mClip);
 		mAudio->Play();
-		mTriangleAnim->PlayAnimation(L"PrevTutoralBurst", false);
+		mTriangleAnim->PlayAnimation(L"Burst", false);
 	}
 	void TutorialStartStrategy::OnBurst()
 	{
@@ -108,17 +104,36 @@ namespace lu::JSAB
 #pragma endregion
 #pragma region LevelFinStrategy
 	LevelFinishStrategy::LevelFinishStrategy(GameObject* owner, Animator* triangleAnim)
-		:TriangleStrategy(owner)
+		:TriangleStrategy(owner, triangleAnim)
 	{
+		mClip = Resources::Find<AudioClip>(L"SFX_HEX_LEVEL_COMPLETE_CHALLENGE");
 	}
 	void LevelFinishStrategy::OnAppear()
 	{
+		mTriangleAnim->PlayAnimation(L"Idle", true);
+		mTransform->SetPosition(680, 0, -1);
+		mRB->SetVelocity(Vector3::Left * 80);
+		mRB->SetDrag(25);
 	}
 	void LevelFinishStrategy::OnCollisionEnter(Player* player)
 	{
+		mPlayer = player;
+		player->Hold();
+		mRB->SetVelocity(Vector3::Zero);
+		Vector3 pos = { 552.243652, 0, -1 };
+		mTransform->SetPosition(pos);
+		player->mTransform->SetPosition(pos);
+		mAudio->SetClip(mClip);
+		mAudio->Play();
+		mTriangleAnim->PlayAnimation(L"Burst", false);
 	}
 	void LevelFinishStrategy::OnBurst()
 	{
+		mPlayer->mTransform->SetPosition(Vector3(-540, 0, -5));
+		mPlayer->Release();
+		SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->LevelTrans();
+		mManager = dynamic_cast<TutorialManager*>(MusicManager::Instance);
+		mManager->OnLevelEnd();
 	}
 #pragma endregion
 }

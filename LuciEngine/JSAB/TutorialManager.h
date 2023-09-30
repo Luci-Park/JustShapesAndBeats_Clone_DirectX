@@ -22,7 +22,6 @@ namespace lu::JSAB
 		virtual void Play() override;
 		virtual void OnMusicEnd()override;
 		void OnStageChange(int stage);
-		void SetTriangle(InGameTriangle* triangle) { mLevelTriangle = triangle; }
 	private:
 		void Stage1();
 		void Stage2();
@@ -37,7 +36,6 @@ namespace lu::JSAB
 	private:
 		CheckPoint* mCheckPoint;
 		TutorialMusicController* mMusic;
-		InGameTriangle* mLevelTriangle;
 
 		BulletPool<TutorialRoundSpikes> mRoundSpikes;
 		BulletPool<TutorialBurst> mBursts;

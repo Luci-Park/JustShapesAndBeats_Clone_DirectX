@@ -17,7 +17,7 @@ namespace lu::JSAB
 	{
 	public:
 		enum class eTriangleStrategyType{PrevTutorial, Tutorial, LevelFinish, End};
-		TriangleStrategy(GameObject* owner);
+		TriangleStrategy(GameObject* owner, Animator* triangleAnim);
 		virtual ~TriangleStrategy(){}
 		virtual void OnAppear() = 0;
 		virtual void OnCollisionEnter(Player* player) = 0;
@@ -25,6 +25,11 @@ namespace lu::JSAB
 	
 	protected:
 		GameObject* mOwner;
+		AudioSource* mAudio;
+		Rigidbody* mRB;
+		Transform* mTransform;
+		Animator* mTriangleAnim;
+		Player* mPlayer;
 	};
 
 	class TutorialStrategy : public TriangleStrategy
@@ -36,12 +41,7 @@ namespace lu::JSAB
 		virtual void OnCollisionEnter(Player* player) override;
 		virtual void OnBurst() override;
 	private:
-		AudioSource* mAudio;
-		Rigidbody* mRB;
-		Transform* mTransform;
-		Animator* mTriangleAnim;
 		std::shared_ptr<AudioClip> mClip;
-		Player* mPlayer;
 		TutorialMusicController* mMusic;
 	};
 
@@ -54,12 +54,7 @@ namespace lu::JSAB
 		virtual void OnCollisionEnter(Player* player) override;
 		virtual void OnBurst() override;
 	private:
-		AudioSource* mAudio;
-		Rigidbody* mRB;
-		Transform* mTransform;
-		Animator* mTriangleAnim;
 		std::shared_ptr<AudioClip> mClip;
-		Player* mPlayer;
 		TutorialManager* mManager;
 	};
 
@@ -72,13 +67,8 @@ namespace lu::JSAB
 		virtual void OnCollisionEnter(Player* player) override;
 		virtual void OnBurst() override;
 	private:
-		AudioSource* mAudio;
-		Rigidbody* mRB;
-		Transform* mTransform;
-		Animator* mTriangleAnim;
 		std::shared_ptr<AudioClip> mClip;
-		Player* mPlayer;
-		TutorialMusicController* mMusic;
+		TutorialManager* mManager;
 	};
 }
 

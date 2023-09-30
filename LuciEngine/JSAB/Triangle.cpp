@@ -26,6 +26,8 @@ namespace lu::JSAB
 		mTriangleAnim = Owner()->GetComponentInChildren<Animator>();
 		mStrategy[(UINT)TriangleStrategy::eTriangleStrategyType::Tutorial] = new TutorialStrategy(Owner(), mTriangleAnim);
 		mStrategy[(UINT)TriangleStrategy::eTriangleStrategyType::PrevTutorial] = new TutorialStartStrategy(Owner(), mTriangleAnim);
+		mStrategy[(UINT)TriangleStrategy::eTriangleStrategyType::LevelFinish] = new LevelFinishStrategy(Owner(), mTriangleAnim);
+
 		mCurrStrategy = TriangleStrategy::eTriangleStrategyType::Tutorial;
 
 	}
