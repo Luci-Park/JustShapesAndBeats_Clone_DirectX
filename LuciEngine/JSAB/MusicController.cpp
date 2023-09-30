@@ -57,6 +57,7 @@ namespace lu::JSAB
 		mAudioSource->Play();
 		Instance = this;
 		mbIsFinishing = false;
+		mStartVolume = 1;
 	}
 	void MusicController::Stop()
 	{

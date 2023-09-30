@@ -21,14 +21,16 @@ namespace lu::JSAB
 			{
 				mLevelTriangle->SetStrategy(TriangleStrategy::eTriangleStrategyType::LevelFinish);
 				mLevelTriangle->Appear();
+				mbFin = false;
 			}
 		}
 	}
 	void MusicManager::Play()
 	{
 		Instance = this;
-		mTriangleAppearTime = 10.f;
+		mTriangleAppearTime = 7.f;
 		mLevelEndCounter = 0;
+		mbFin = false;
 	}
 	void MusicManager::OnLevelEnd()
 	{

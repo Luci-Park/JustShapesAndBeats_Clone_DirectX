@@ -16,7 +16,7 @@ namespace lu::JSAB
 	void Bullet::Update()
 	{
 		mBounds = SceneManager::MainCamera()->GetBoundary();
-		if (mMusic == nullptr) 
+		if (mMusic == nullptr || !mMusic->IsPlaying()) 
 			return;
 		double time = mMusic->GetTime();
 		TimeCheck(time);
@@ -27,6 +27,8 @@ namespace lu::JSAB
 		mWarningTime = wt;
 		mActivateTime = at;
 		mOutroTime = ot;
+		if (at < 0.2)
+			int i = 0;
 	}
 	void Bullet::Warning()
 	{

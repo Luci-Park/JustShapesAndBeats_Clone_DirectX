@@ -54,6 +54,7 @@ namespace lu::JSAB
 				}
 			}
 		}
+		MusicManager::Update();
 	}
 	void TutorialManager::Play()
 	{

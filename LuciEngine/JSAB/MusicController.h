@@ -22,7 +22,7 @@ namespace lu::JSAB
 		double GetTime();
 		int GetStage() { return mStageIdx; }
 		float GetPercent();
-		bool IsPlaying() { return mbIsPlaying; }
+		bool IsPlaying() { return mbIsPlaying && !mbIsFinishing; }
 	protected:
 		AudioSource* mAudioSource;
 		Text* mText;
