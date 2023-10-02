@@ -44,7 +44,8 @@ namespace lu::JSAB
 
 		void SetTimeline(MusicController* music, double wt, double at);
 		void MultipleShow(MusicController* music, const double* wt, const double* at);
-	
+
+		bool IsDeActivatable();
 	private:
 		TutorialBeatCircle* mCircleLines[7];
 	};

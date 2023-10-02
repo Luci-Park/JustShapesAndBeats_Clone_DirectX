@@ -172,6 +172,13 @@ namespace lu::JSAB
 			mCircleLines[i]->SetTimeline(music, wt[i], at[i], 0);
 		}
 	}
+	bool TutorialCircleLine::IsDeActivatable()
+	{
+		for(int i =0; i < 7; i++)
+			if(!mCircleLines[i]->IsDeActivatable())
+				return false;
+		return true;
+	}
 #pragma endregion
 
 }

@@ -15,6 +15,8 @@ namespace lu::JSAB
 	}
 	void Bullet::Update()
 	{
+		if (mActivateTime > 158)
+			int i = 0;
 		if (mMusic == nullptr || !mMusic->IsPlaying()) 
 			return;
 		mBounds = SceneManager::MainCamera()->GetBoundary();
@@ -51,6 +53,14 @@ namespace lu::JSAB
 	void Bullet::TestTime(double time)
 	{
 		TimeCheck(time);
+	}
+	bool Bullet::IsDeActivatable()
+	{
+		if(mBulletState == eBulletState::Warning && mWarningProcess < 1
+			|| mBulletState == eBulletState::Activate && mOutroTime > 0
+			|| mBulletState == eBulletState::Outro)
+			return false;
+		return true;
 	}
 	void Bullet::TimeCheck(double time)
 	{
@@ -114,7 +124,7 @@ namespace lu::JSAB
 			Warning();
 		}
 	}
-	void Bullet::ChangeToActive(double time)
+	void Bullet::ChangeToActive(double time) 
 	{
 		if (mActivateTime<= time)
 		{

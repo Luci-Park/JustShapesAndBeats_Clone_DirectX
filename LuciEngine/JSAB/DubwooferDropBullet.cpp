@@ -69,4 +69,8 @@ namespace lu::JSAB
 	{
 		Owner()->SetActive(false);
 	}
+	bool DubwooferDropBullet::IsDeActivatable()
+	{
+		return true;
+	}
 }

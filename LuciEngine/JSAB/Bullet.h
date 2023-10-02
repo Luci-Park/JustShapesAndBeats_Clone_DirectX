@@ -27,6 +27,7 @@ namespace lu::JSAB
 		void Outro();
 		void DeActivate();
 		void TestTime(double time);
+		bool IsDeActivatable();
 
 	protected:
 		void TimeCheck(double time);

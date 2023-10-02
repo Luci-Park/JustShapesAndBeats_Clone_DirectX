@@ -22,6 +22,7 @@ namespace lu::JSAB
 
 		void Activate();
 		void DeActivate();
+		bool IsDeActivatable();
 	private:
 		Animator* mAnim;
 		Rigidbody* mRb;

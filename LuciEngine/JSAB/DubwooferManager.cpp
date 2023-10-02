@@ -14,7 +14,7 @@ namespace lu::JSAB
 {
 	DubwooferManager::DubwooferManager()
 		: mThickBeams(4)
-		, mThinBeams(150)
+		, mThinBeams(500)
 	{
 	}
 	void DubwooferManager::Initialize()
@@ -510,10 +510,10 @@ namespace lu::JSAB
 				, 148.75, 148.85, 149.15, 149.25, 149.4, 149.55, 149.7, 149.85, 150, 150.15, 150.3, 150.45, 150.6, 150.75, 150.75
 				, 150.9, 150.9, 151.05, 151.2, 151.35, 151.5, 151.65, 151.8, 151.95, 152.1, 152.25, 152.4
 			};
-			static int idx = 0;
 			static float prevx = 0;
 			static float y = application.GetHeight() * 0.5;
 
+			int idx = mSmallBarFlag - 10;
 			while (idx < 111 && time >= beat[idx] - 2)
 			{
 				auto bar = mThinBeams.GetNext();
@@ -556,7 +556,7 @@ namespace lu::JSAB
 			BackgroundScript::eBackgrounds::DARKBLUE,
 			BackgroundScript::eBackgrounds::BLACK
 		};
-		if (time >= beat[mCheckPointFlag] - 5.5)
+		if (mCheckPointFlag <5 && time >= beat[mCheckPointFlag] - 5.5)
 		{
 			mCheckPoint->SetTimeline(mMusic, 5, beat[mCheckPointFlag], 0);
 			mCheckPoint->SetBackgroundType(types[mCheckPointFlag]);

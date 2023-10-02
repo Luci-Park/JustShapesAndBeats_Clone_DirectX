@@ -23,8 +23,8 @@ namespace lu::JSAB
 	{
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
-			mStageIdx = 2;
-			mAudioSource->SetPosition(120);
+			mStageIdx = 3;
+			mAudioSource->SetPosition(145);
 		}
 		MusicController::Update();
 	}
