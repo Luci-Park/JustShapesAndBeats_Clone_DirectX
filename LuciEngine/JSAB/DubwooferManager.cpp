@@ -14,7 +14,7 @@ namespace lu::JSAB
 {
 	DubwooferManager::DubwooferManager()
 		: mThickBeams(4)
-		, mThinBeams(250)
+		, mThinBeams(150)
 	{
 	}
 	void DubwooferManager::Initialize()
@@ -43,6 +43,7 @@ namespace lu::JSAB
 			SmallBar(time);
 			CheckPoints(time);
 		}
+		MusicManager::Update();
 	}
 	void DubwooferManager::Play()
 	{
@@ -61,6 +62,7 @@ namespace lu::JSAB
 		mThinBeams.Reset();
 		mSpikes->DeActivate();
 		mMusic->Finish();
+		mbFin = true;
 	}
 	void DubwooferManager::Drops(double time)
 	{

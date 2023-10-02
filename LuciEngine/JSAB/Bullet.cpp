@@ -27,8 +27,6 @@ namespace lu::JSAB
 		mWarningTime = wt;
 		mActivateTime = at;
 		mOutroTime = ot;
-		if (at < 0.2)
-			int i = 0;
 	}
 	void Bullet::Warning()
 	{
@@ -88,7 +86,7 @@ namespace lu::JSAB
 	}
 	void Bullet::CheckState(double time)
 	{
-		if (mBulletState == eBulletState::DeActivate && time <= mActivateTime)
+		if (mBulletState == eBulletState::DeActivate && time <= mActivateTime - mWarningTime)
 			mBulletState = eBulletState::Waiting;
 		if (mBulletState == eBulletState::Waiting)
 		{

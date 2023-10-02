@@ -12,6 +12,7 @@ namespace lu::JSAB
 		, mFadeDuration(3)
 		, mFadeTime(0)
 		, mbIsFinishing(false)
+		, mStartVolume(1)
 	{
 	}
 	void MusicController::SetClip(std::wstring clip)
@@ -30,7 +31,7 @@ namespace lu::JSAB
 	{
 		if (mbIsPlaying)
 		{
-			if (GetTime() >= mCheckPoints[mStageIdx].second)
+			if (mStageIdx < mCheckPoints.size() && GetTime() >= mCheckPoints[mStageIdx].second)
 				mStageIdx++;
 			mText->text = mAudioSource->GetPosition();
 			if (mbIsFinishing)
@@ -57,14 +58,12 @@ namespace lu::JSAB
 		mAudioSource->Play();
 		Instance = this;
 		mbIsFinishing = false;
-		mStartVolume = 1;
 	}
 	void MusicController::Stop()
 	{
 		mbIsPlaying = false;
 		mAudioSource->Stop();
 		Instance = nullptr;
-		mbIsFinishing = false;
 	}
 	double MusicController::GetTime()
 	{
