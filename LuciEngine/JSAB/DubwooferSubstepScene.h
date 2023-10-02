@@ -14,7 +14,7 @@ namespace lu::JSAB
 		virtual void OnExit() override;
 
 	private:
-		DubwooferManager* mMusic;
+		DubwooferManager* mManager;
 		BackgroundScript* mBackground;
 	};
 }

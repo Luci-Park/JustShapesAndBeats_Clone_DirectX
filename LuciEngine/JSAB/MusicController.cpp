@@ -18,7 +18,6 @@ namespace lu::JSAB
 	void MusicController::SetClip(std::wstring clip)
 	{
 		mAudioSource->SetClip(Resources::Find<AudioClip>(clip));
-		mStartVolume = mAudioSource->GetVolume();
 	}
 	void MusicController::Initialize()
 	{
