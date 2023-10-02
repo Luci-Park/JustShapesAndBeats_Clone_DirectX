@@ -17,7 +17,7 @@ namespace lu::JSAB
 	{
 		//SceneManager::CreateScene<PlayScene>(L"PlayScene");
 		SceneManager::CreateScene<Title::TitleScene>(L"TitleScene");
-		//SceneManager::CreateScene<Tutorial::TutorialScene>(L"TutorialScene");
+		SceneManager::CreateScene<Tutorial::TutorialScene>(L"TutorialScene");
 		SceneManager::CreateScene<DubwooferSubstepScene>(L"DubwooferSubstepScene");
 		SceneManager::CreateScene<ParticleTestScene>(L"ParticleTestScene");
 		SceneManager::CreateScene<CameraTestScene>(L"CameraTestScene");

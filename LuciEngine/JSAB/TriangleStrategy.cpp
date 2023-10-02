@@ -132,8 +132,11 @@ namespace lu::JSAB
 		mPlayer->mTransform->SetPosition(Vector3(-540, 0, -5));
 		mPlayer->Release();
 		SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect()->LevelTrans();
+		MusicManager::Instance->OnLevelEnd();
+		/*
 		mManager = dynamic_cast<TutorialManager*>(MusicManager::Instance);
 		mManager->OnLevelEnd();
+		*/
 	}
 #pragma endregion
 }
