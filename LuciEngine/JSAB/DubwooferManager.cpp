@@ -309,9 +309,11 @@ namespace lu::JSAB
 				for (int i = 0; i < 5; i++, y -= ystep)
 				{
 					auto bar = mThinBeams.GetNext();
-					Vector3 pos = { application.GetWidth() * rot[i] * -1, y, 0};
+					float r = rot[i];
+					float x = application.GetWidth() * r * -1;
+					Vector3 pos = { x, y, 0};
 					bar->mTransform->SetPosition(pos);
-					bar->mTransform->SetRotation(Quaternion::Create2DRotationRadian(PI * rot[i]));
+					bar->mTransform->SetRotation(Quaternion::Create2DRotationRadian(PI * r));
 					bar->SetTimeline(mMusic, 2, beat[i], outro[i]);
 				}
 				mSmallBarFlag++;
