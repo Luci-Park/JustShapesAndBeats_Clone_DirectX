@@ -499,7 +499,7 @@ namespace lu::JSAB
 			mSmallBarFlag++;
 		}
 		//462 ~
-		else if (mSmallBarFlag == 10)
+		else if (mSmallBarFlag >= 10)
 		{
 			static float beat[] = { 126.55, 126.75, 127.2, 127.3, 127.75, 128.05, 128.15, 128.45, 128.65, 129, 129.25
 				, 129.55, 129.8, 130.1, 130.35, 130.5, 130.65, 130.95, 131.2, 131.45, 132.15, 132.3, 132.6, 132.85, 133.05
@@ -542,8 +542,7 @@ namespace lu::JSAB
 				prevx = x;
 				idx++;
 			}
-			if (idx >= 111 && time < beat[110])
-				idx = 0;
+			mSmallBarFlag = idx + 10;
 		}
 	}
 	void DubwooferManager::CheckPoints(double time)
