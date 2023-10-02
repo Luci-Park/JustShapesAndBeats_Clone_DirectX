@@ -31,7 +31,6 @@ namespace lu::JSAB
 		DubwooferSpikeDropper* mSpikes;
 		BulletPool<DubwooferBeamBullet> mThickBeams;
 		BulletPool<TutorialBeam> mThinBeams;
-		MusicController* mMusic;
 		int mDropFlag;
 		int mSpikeFlag;
 		int mSpikeAppearFlag;

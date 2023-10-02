@@ -175,6 +175,9 @@
     <ClInclude Include="SplashAnimation.h" />
     <ClInclude Include="TriangleStrategy.h" />
     <ClInclude Include="Triangle.h" />
+    <ClInclude Include="TryThisManager.h" />
+    <ClInclude Include="TryThisMusicController.h" />
+    <ClInclude Include="TryThisScene.h" />
     <ClInclude Include="TutorialBeam.h" />
     <ClInclude Include="TutorialBeatCircle.h" />
     <ClInclude Include="TutorialBurst.h" />
@@ -222,6 +225,9 @@
     <ClCompile Include="SplashAnimation.cpp" />
     <ClCompile Include="TriangleStrategy.cpp" />
     <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="TryThisManager.cpp" />
+    <ClCompile Include="TryThisMusicController.cpp" />
+    <ClCompile Include="TryThisScene.cpp" />
     <ClCompile Include="TutorialBeam.cpp" />
     <ClCompile Include="TutorialBeatCircle.cpp" />
     <ClCompile Include="TutorialBurst.cpp" />

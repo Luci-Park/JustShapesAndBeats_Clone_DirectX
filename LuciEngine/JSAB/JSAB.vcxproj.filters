@@ -131,6 +131,15 @@
     <ClCompile Include="MusicManager.cpp">
       <Filter>Contents\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="TryThisScene.cpp">
+      <Filter>Contents\_SceneSpecific\3. Try This\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TryThisMusicController.cpp">
+      <Filter>Contents\_SceneSpecific\3. Try This\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TryThisManager.cpp">
+      <Filter>Contents\_SceneSpecific\3. Try This\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -267,6 +276,15 @@
     <ClInclude Include="MusicManager.h">
       <Filter>Contents\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="TryThisScene.h">
+      <Filter>Contents\_SceneSpecific\3. Try This\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TryThisMusicController.h">
+      <Filter>Contents\_SceneSpecific\3. Try This\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TryThisManager.h">
+      <Filter>Contents\_SceneSpecific\3. Try This\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -343,6 +361,18 @@
     </Filter>
     <Filter Include="Contents\CheckPoint">
       <UniqueIdentifier>{90870a1c-7926-4e66-8c70-3a8f36fd2a61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\_SceneSpecific\3. Try This">
+      <UniqueIdentifier>{22c4e708-c6ab-416a-a4a3-f62efba0fc7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\_SceneSpecific\3. Try This\Bullet">
+      <UniqueIdentifier>{3a964b1f-0532-4b52-a2db-e647e34b019b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\_SceneSpecific\3. Try This\Manager">
+      <UniqueIdentifier>{4ba83810-3d4e-46da-b155-c0fa72ac645b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\_SceneSpecific\3. Try This\Scene">
+      <UniqueIdentifier>{57d86d26-549e-4c1e-9426-39577298fdb5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
