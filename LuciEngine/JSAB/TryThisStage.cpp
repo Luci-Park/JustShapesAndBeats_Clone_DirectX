@@ -5,6 +5,7 @@
 #include "LCollider2D.h"
 #include "LResources.h"
 #include "LObject.h"
+#include "LTime.h"
 #include "..\\Editor_SOURCE\\TransformWidget.h"
 namespace lu::JSAB
 {
@@ -23,7 +24,7 @@ namespace lu::JSAB
 
 		auto mAnim = Owner()->AddComponent<Animator>();
 		auto ani = mAnim->CreateAnimation(L"Idle");
-		float duration = 0.345 * 6 ;
+		float duration = 0.345 * 5 ;
 		for (int i = 1; i <= 36; i++)
 		{
 			ani->AddTextureKey(duration * (i - 1) / 36, Resources::Find<Texture>(L"TT_Alarm_" + std::to_wstring(i)));
@@ -88,24 +89,230 @@ namespace lu::JSAB
 	}
 #pragma endregion
 
+#pragma region Cog
+	void TryThisCog::Initialize()
+	{
+		Script::Initialize();
+		auto mMr = Owner()->AddComponent<MeshRenderer>();
+		auto mat = Resources::Load<Material>(L"CogMat", L"TT_CogwCenter");
+		mat->SetRenderingMode(eRenderingMode::CutOut);
+		mMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(mat);
+		mTransform->SetScale(230, 230, 1);
+
+		auto mCol = Owner()->AddComponent<Collider2D>(); 
+		mCol->SetType(eColliderType::Circle);
+	}
+	void TryThisCog::Update()
+	{
+		Quaternion speed = Quaternion::CreateFromAxisAngle(Vector3::Forward, mRotateSpeed * Time::DeltaTime());
+		Quaternion rotation = mTransform->GetRotation();
+		mTransform->SetRotation(rotation * speed); 
+	}
+	void TryThisCog::RotateClockwise()
+	{
+		mRotateSpeed = 0.4 * -1;
+	}
+	void TryThisCog::RotateCounterClockwise()
+	{
+		mRotateSpeed = 0.4 * 1;
+	}
+
+
+	void TryThisSmallCog::Initialize()
+	{
+		Script::Initialize();
+		auto mMr = Owner()->AddComponent<MeshRenderer>();
+		auto mat = Resources::Load<Material>(L"SmallCogMat", L"TT_Cog");
+		mat->SetRenderingMode(eRenderingMode::CutOut);
+		mMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(mat);
+		mTransform->SetScale(230, 230, 1);
+
+		auto mCol = Owner()->AddComponent<Collider2D>();
+		mCol->SetType(eColliderType::Circle);
+	}
+	void TryThisSmallCog::Update()
+	{
+		Quaternion speed = Quaternion::CreateFromAxisAngle(Vector3::Forward, mRotateSpeed * Time::DeltaTime());
+		Quaternion rotation = mTransform->GetRotation();
+		mTransform->SetRotation(rotation * speed);
+	}
+	void TryThisSmallCog::RotateClockwise()
+	{
+		mRotateSpeed = 0.4 * -1;
+	}
+	void TryThisSmallCog::RotateCounterClockwise()
+	{
+		mRotateSpeed = 0.4 * 1;
+	}
+#pragma endregion
+
+#pragma region Box
+	void TryThisBox::Initialize()
+	{
+		Script::Initialize();
+		auto mMr = Owner()->AddComponent<MeshRenderer>();
+		auto mat = Resources::Load<Material>(L"TTBoxMat", L"TT_Square");
+		mat->SetRenderingMode(eRenderingMode::CutOut);
+		mMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(mat);
+		auto mCol = Owner()->AddComponent<Collider2D>();
+	}
+#pragma endregion
+
 #pragma region Main Stage
 	void TryThisStage::Initialize()
 	{
-		auto b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisAlarm>();
-		b->Owner()->AddComponent<gui::TransformWidget>();
-		b->mTransform->SetPosition(-378.12823, 238.92798, 1);
+		{
+			auto b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisAlarm>();
+			b->mTransform->SetPosition(-378.12823, 238.92798, 1);
 
-		b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisAlarm>();
-		b->Owner()->AddComponent<gui::TransformWidget>();
-		b->mTransform->SetPosition(378.12823, 238.92798, 1);
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisAlarm>();
+			b->mTransform->SetPosition(378.12823, 238.92798, 1);
+		}
+		{
+			auto c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisConcrete>();
+			c->SetWithXScale(173, 11);
+			c->mTransform->SetPosition(251.39134, 299.66867, 0.1);
 
-		auto c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisConcrete>();
-		c->SetWithXScale(173, 11);
-		c->mTransform->SetPosition(251.39134, 299.66867, 0);
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisConcrete>();
+			c->SetWithXScale(173, 8);
+			c->mTransform->SetPosition(15.540734, -299.66867, 0.1);
+		}
+		{
+			auto c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisCog>();
+			c->mTransform->SetPosition(683.698, -391.1525, -0.1);
+			c->RotateClockwise();
 
-		c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisConcrete>();
-		c->SetWithXScale(173, 8);
-		c->mTransform->SetPosition(15.540734, -299.66867, 0);
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisCog>();
+			c->mTransform->SetPosition(862.18964, -271.06842, -0.1);
+			c->RotateCounterClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisCog>();
+			c->mTransform->SetPosition(1040.68128, -391.1525, -0.1);
+			c->RotateClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisCog>();
+			c->mTransform->SetPosition(1219.17292, -271.06842, -0.1);
+			c->RotateCounterClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisCog>();
+			c->mTransform->SetPosition(1397.66456, -391.1525, -0.1);
+			c->RotateClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisCog>();
+			c->mTransform->SetPosition(1576.1562, -271.06842, -0.1);
+			c->RotateCounterClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisCog>();
+			c->mTransform->SetPosition(1754.64784, -391.1525, -0.1);
+			c->RotateClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisCog>();
+			c->mTransform->SetPosition(1933.13948, -271.06842, -0.1);
+			c->RotateCounterClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisCog>();
+			c->mTransform->SetPosition(2144.605, -226.85527, -0.1);
+			c->RotateClockwise();
+		}
+		{
+			auto c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisCog>();
+			c->mTransform->SetPosition(683.698 +100, 391.1525, -0.1);
+			c->RotateClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisCog>();
+			c->mTransform->SetPosition(862.18964 + 100, 271.06842, -0.1);
+			c->RotateCounterClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisCog>();
+			c->mTransform->SetPosition(1040.68128 + 100, 391.1525, -0.1);
+			c->RotateClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisCog>();
+			c->mTransform->SetPosition(1219.17292 + 100, 271.06842, -0.1);
+			c->RotateCounterClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisCog>();
+			c->mTransform->SetPosition(1397.66456 + 100, 391.1525, -0.1);
+			c->RotateClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisCog>();
+			c->mTransform->SetPosition(1576.1562 + 100, 271.06842, -0.1);
+			c->RotateCounterClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisCog>();
+			c->mTransform->SetPosition(1754.64784 + 100, 391.1525, -0.1);
+			c->RotateClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisCog>();
+			c->mTransform->SetPosition(1896.6936, 179.13712, -0.1);
+			c->RotateCounterClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisCog>();
+			c->mTransform->SetPosition(2116.4617, 220.25175, -0.1);
+			c->RotateClockwise();
+		}
+
+		{
+			auto c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSmallCog>();
+			c->mTransform->SetPosition(2600.2168, -156.3647, -0.1);
+			c->RotateClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSmallCog>();
+			c->mTransform->SetPosition(2431.9104, 159.90042, -0.1);
+			c->RotateCounterClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSmallCog>();
+			c->mTransform->SetPosition(2732.457, 244.14793, -0.1);
+			c->RotateCounterClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSmallCog>();
+			c->mTransform->SetPosition(2940.5437, 205.99867, -0.1);
+			c->RotateClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSmallCog>();
+			c->mTransform->SetPosition(2811.3777, -250.6197, -0.1);
+			c->RotateClockwise();
+			//c->Owner()->AddComponent<gui::TransformWidget>();
+		}
+		{
+			auto b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(460, 230, 1);
+			b->mTransform->SetPosition(2441.9324, -253.68369, -0.2);
+
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(460, 230, 1);
+			b->mTransform->SetPosition(2441.9324, 253.68369, -0.2);
+
+
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(40, 720, 1);
+			b->mTransform->SetPosition(2691.589, 0, -0.2);
+
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(40, 720, 1);
+			b->mTransform->SetPosition(2944.4692, 0, -0.2);
+
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(250, 200, 1);
+			b->mTransform->SetPosition(2809.3938, -328.86993, -0.2);
+
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(270.4656, 40, 1);
+			b->mTransform->SetPosition(3099.162, 53.087395, -0.2);
+
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(40, 332.4656, 1);
+			b->mTransform->SetPosition(3111.978, 238.7123, -0.2);
+
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(270.4656, 40, 1);
+			b->mTransform->SetPosition(3099.162, 53.087395, -0.2);
+
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(40, 720, 1);
+			b->mTransform->SetPosition(3254.183, -286.51807, -0.2);
+			b->Owner()->AddComponent<gui::TransformWidget>();
+		}
 	}
 #pragma endregion
 }

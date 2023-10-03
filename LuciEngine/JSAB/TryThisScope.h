@@ -8,7 +8,6 @@ namespace lu::JSAB
 	public:
 		TryThisScope(){}
 		virtual ~TryThisScope(){}
-		void Bump();
 
 	private:
 		virtual void BulletSetUp() override;
@@ -23,7 +22,6 @@ namespace lu::JSAB
 	private:
 		Transform* mHole;
 		MeshRenderer* mMr;
-		Animator* mAnim;
 		Animator* mHoleAnim;
 		float mRotateSpeed;
 	};

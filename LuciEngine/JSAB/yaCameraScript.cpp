@@ -10,36 +10,26 @@ namespace lu
 	{
 		Transform* tr = Owner()->GetComponent<Transform>();
 		Vector3 pos = tr->GetPosition();
-
+		float speed = 100.0f;
 
 		if (Input::GetKey(eKeyCode::UP))
 		{
-			pos.y += 50.0f * Time::DeltaTime();
+			pos.y += speed * Time::DeltaTime();
 			tr->SetPosition(pos);
 		}
 		else if (Input::GetKey(eKeyCode::DOWN))
 		{
-			pos.y -= 50.0f * Time::DeltaTime();
+			pos.y -= speed * Time::DeltaTime();
 			tr->SetPosition(pos);
 		}
 		else if (Input::GetKey(eKeyCode::LEFT))
 		{
-			pos.x -= 50.0f * Time::DeltaTime();
+			pos.x -= speed * Time::DeltaTime();
 			tr->SetPosition(pos);
 		}
 		else if (Input::GetKey(eKeyCode::RIGHT))
 		{
-			pos.x += 50.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
-		}
-		else if (Input::GetKey(eKeyCode::Q))
-		{
-			pos.y -= 5.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
-		}
-		else if (Input::GetKey(eKeyCode::E))
-		{
-			pos.y += 5.0f * Time::DeltaTime();
+			pos.x += speed * Time::DeltaTime();
 			tr->SetPosition(pos);
 		}
 	}

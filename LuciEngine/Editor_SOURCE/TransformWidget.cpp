@@ -9,7 +9,7 @@ namespace gui
 	TransformWidget::TransformWidget()
 		: fMoveSpeed(100.0f)
 		, fRotateSpeed(PI/180 * 10)
-		, fScaleSpeed(100.0f)
+		, fScaleSpeed(500.0f)
 	{
 	}
 	TransformWidget::~TransformWidget()
@@ -55,13 +55,13 @@ namespace gui
 			rotation.z -= fRotateSpeed * lu::Time::DeltaTime();
 		}
 
-		if (lu::Input::GetKeyDown(lu::eKeyCode::R))
+		if (lu::Input::GetKey(lu::eKeyCode::R))
 		{
 			scale.x -= fScaleSpeed * lu::Time::DeltaTime();
 			scale.y -= fScaleSpeed * lu::Time::DeltaTime();
 		}
 
-		if (lu::Input::GetKeyDown(lu::eKeyCode::F))
+		if (lu::Input::GetKey(lu::eKeyCode::F))
 		{
 			scale.x += fScaleSpeed * lu::Time::DeltaTime();
 			scale.y += fScaleSpeed * lu::Time::DeltaTime();

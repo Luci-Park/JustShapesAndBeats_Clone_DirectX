@@ -2,10 +2,6 @@
 #include "LTime.h"
 namespace lu::JSAB
 {
-	void TryThisScope::Bump()
-	{
-		mAnim->PlayAnimation(L"Bump", false);
-	}
 	void TryThisScope::BulletSetUp()
 	{
 		mTransform->SetScale(2000, 2000, 1);
@@ -23,14 +19,8 @@ namespace lu::JSAB
 		mr->GetMaterial()->SetRenderingMode(eRenderingMode::CutOut);
 		mr->SetColor(Color::black)->UseColor(true);
 
-		mAnim = Owner()->AddComponent<Animator>();
-		auto ani = mAnim->CreateAnimation(L"Bump");
-		ani->AddPositionYKey(0, 0);
-		ani->AddPositionYKey(0.1, 10);
-		ani->AddPositionYKey(0.2, 0);
-
 		mHoleAnim = mHole->Owner()->AddComponent<Animator>();
-		ani = mHoleAnim->CreateAnimation(L"Shrink");
+		auto ani = mHoleAnim->CreateAnimation(L"Shrink");
 		ani->AddLocalScaleKey(0, { 1, 1, 1 });
 		ani->AddLocalScaleKey(5, { 0, 0, 1 });
 	}

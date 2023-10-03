@@ -30,6 +30,43 @@ namespace lu::JSAB
 
 	};
 
+	class TryThisCog : public Script
+	{
+	public:
+		TryThisCog() {}
+		virtual ~TryThisCog() {}
+
+		virtual void Initialize();
+		virtual void Update();
+		void RotateClockwise();
+		void RotateCounterClockwise();
+	private:
+		float mRotateSpeed;
+	};
+
+	class TryThisSmallCog : public Script
+	{
+	public:
+		TryThisSmallCog() {}
+		virtual ~TryThisSmallCog() {}
+
+		virtual void Initialize();
+		virtual void Update();
+		void RotateClockwise();
+		void RotateCounterClockwise();
+	private:
+		float mRotateSpeed;
+	};
+
+	class TryThisBox : public Script
+	{
+	public:
+		TryThisBox() {}
+		virtual ~TryThisBox(){}
+
+		virtual void Initialize();
+	};
+
 	class TryThisStage : public Script
 	{
 	public:

@@ -117,6 +117,7 @@ namespace lu::JSAB
 	{
 		auto c = object::Instantiate<GameObject>(eLayerType::Camera)->AddComponent<GameCamera>();
 		c->Owner()->AddComponent<yaCamera>();
+		c->mTransform->SetPosition(2700, 0, -10);
 		auto g = object::Instantiate<GameObject>(eLayerType::Bullet);
 		g->AddComponent<TryThisStage>();
 		target = nullptr;

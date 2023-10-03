@@ -41,7 +41,6 @@ namespace lu::JSAB
 
 		if (mbScopeFlag < 23 && time >= beat[mbScopeFlag])
 		{
-			mScope->Bump();
 			mbScopeFlag++;
 		}
 	}
