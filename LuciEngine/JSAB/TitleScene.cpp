@@ -18,6 +18,8 @@
 namespace lu::JSAB::Title
 {
 	TitleScene::TitleScene()
+		: mbIsInMenu(false)
+		, mbTitleEntered(false)
 	{
 	}
 	TitleScene::~TitleScene()
@@ -66,7 +68,7 @@ namespace lu::JSAB::Title
 			a->AddPositionKey(0.25, { -34.3, -42.5, -9.5 });
 			a->AddPositionXKey(2, 0);
 			a->AddPositionXKey(2.3, 900);
-			a->AddFunctionKey(2.5, std::bind(&SceneManager::LoadScene, L"TutorialScene"));
+			a->AddFunctionKey(2.5, std::bind(&SceneManager::LoadScene, L"TitleScene"));
 			t->SetActive(false);
 		}
 		Scene::Initialize();
@@ -82,6 +84,7 @@ namespace lu::JSAB::Title
 				mbgm->Play(true);
 				mbgs->SetBackground(BackgroundScript::eBackgrounds::TITLEGREEN);
 				mTitle->OnBeat();
+				mbTitleEntered = true;
 			}
 			if (mbgm->GetClip() == mAudios[1])
 			{
@@ -120,6 +123,20 @@ namespace lu::JSAB::Title
 	}
 	void TitleScene::OnEnter()
 	{
+		if (!mbTitleEntered)
+		{
+			ShowTitle();
+		}
+		else
+		{
+			ShowMenu();
+		}
+	}
+	void TitleScene::StartMusic()
+	{
+	}
+	void TitleScene::ShowTitle()
+	{
 		mbIsInMenu = false;
 		mbgs->SetBackground(BackgroundScript::eBackgrounds::TITLE);
 		mbgm->SetClip(mAudios[0]);
@@ -128,10 +145,16 @@ namespace lu::JSAB::Title
 		mButton->SetActive(false);
 		mCamera->Reset();
 		mCamera->mTransform->SetPosition({ 0, 0, -10 });
-		//mText->Owner()->SetActive(false);
 	}
-	void TitleScene::StartMusic()
+	void TitleScene::ShowMenu()
 	{
+		mbgm->SetClip(mAudios[1]);
+		mbgm->Play(true);
+		mbgs->SetBackground(BackgroundScript::eBackgrounds::TITLEGREEN);
+		mTitle->OnBeat();
+		mTitle->mTransform->SetPosition(Vector3(-281, 0, 0));
+		mbIsInMenu = true;
+		mButton->SetActive(true);
 	}
 	void TitleScene::OnExit()
 	{

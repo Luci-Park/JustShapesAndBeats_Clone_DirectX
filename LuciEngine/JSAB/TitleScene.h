@@ -31,14 +31,18 @@ namespace lu::JSAB::Title
 		virtual void OnExit() override;
 		void StartMusic();
 	private:
+		void ShowTitle();
+		void ShowMenu();
+	private:
 		BackgroundScript* mbgs;
 		TitleObject* mTitle;
 		AudioSource* mbgm;
 		MenuButtonObject* mButton;
 		CameraEffectScript* mCamera;
 		Animator* mText;
-		bool mbIsInMenu;
 		std::shared_ptr<AudioClip> mAudios[3];
+		bool mbIsInMenu;
+		bool mbTitleEntered;
 	};
 }
 

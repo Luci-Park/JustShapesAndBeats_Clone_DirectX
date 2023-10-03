@@ -198,7 +198,7 @@ namespace lu
 		mTransformMatrix = scale * rotation * position;
 
 		if (mParent != nullptr && mParent != this)
-			mTransformMatrix *= mParent->GetMatrix();
+			mTransformMatrix = mParent->GetMatrix() * mTransformMatrix;
 
 		mTransformMatrix.Decompose(mScale, mRotation, mPosition);
 		mUp = Vector3::TransformNormal(Vector3::Up, rotation);
