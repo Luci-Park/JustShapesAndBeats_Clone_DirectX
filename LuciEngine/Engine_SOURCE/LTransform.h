@@ -32,9 +32,9 @@ namespace lu
 		void SetLocalRotation(float x, float y, float z);
 		void SetLocalScale(float x, float y, float z);
 
-		Vector3 GetPosition() { CalculateWorldPosition(); return mPosition; }
-		Quaternion GetRotation() { CalculateWorldRotation(); return mRotation; }
-		Vector3 GetScale() { CalculateWorldScale(); return mScale; }
+		Vector3 GetPosition() { return mPosition; }
+		Quaternion GetRotation() { return mRotation; }
+		Vector3 GetScale() { return mScale; }
 
 		Vector3 GetLocalPosition() { return mLocalPosition; }
 		Quaternion GetLocalRotation() { return mLocalRotation; }
@@ -52,7 +52,7 @@ namespace lu
 
 		void RemoveChildren(Transform* child);
 
-		Matrix& GetMatrix() { return world; }
+		Matrix& GetMatrix() { return mTransformMatrix; }
 	private:
 		void CalculateWorldPosition();
 		void CalculateWorldRotation();
@@ -76,7 +76,7 @@ namespace lu
 		Vector3 mForward;
 		Vector3 mRight;
 
-		Matrix world;
+		Matrix mTransformMatrix;
 		Transform* mParent;
 		std::vector<Transform*> mChildren;
 	};

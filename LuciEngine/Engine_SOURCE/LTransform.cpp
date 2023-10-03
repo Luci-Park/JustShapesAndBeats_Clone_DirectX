@@ -37,7 +37,7 @@ namespace lu
 	void Transform::BindConstantBuffer()
 	{
 		renderer::TransformCB trCB = {};
-		trCB.world = world;
+		trCB.world = mTransformMatrix;
 		trCB.view = Camera::GetGpuViewMatrix();
 		trCB.projection = Camera::GetGpuProjectionMatrix();
 
@@ -76,17 +76,14 @@ namespace lu
 	void Transform::SetLocalPosition(Vector3 position)
 	{
 		mLocalPosition = position;
-		CalculateWorldPosition();
 	}
 	void Transform::SetLocalRotation(Quaternion rotation)
 	{
 		mLocalRotation = rotation;
-		CalculateWorldRotation();
 	}
 	void Transform::SetLocalScale(Vector3 scale)
 	{
 		mLocalScale = scale;
-		CalculateWorldScale();
 	}
 	void Transform::SetLocalPosition(float x, float y, float z)
 	{
@@ -189,20 +186,21 @@ namespace lu
 
 	void Transform::UpdateMatrix()
 	{
-		world = Matrix::Identity;
-		CalculateWorldPosition();
-		CalculateWorldRotation();
-		CalculateWorldScale();
+		mTransformMatrix = Matrix::Identity;
 
-		Matrix scale = Matrix::CreateScale(mScale);
+		Matrix scale = Matrix::CreateScale(mLocalScale);
 
-		Matrix rotation = Matrix::CreateFromQuaternion(mRotation);
+		Matrix rotation = Matrix::CreateFromQuaternion(mLocalRotation);
 
 		Matrix position;
-		position.Translation(mPosition);
+		position.Translation(mLocalPosition);
 
-		world = scale * rotation * position;
+		mTransformMatrix = scale * rotation * position;
 
+		if (mParent != nullptr && mParent != this)
+			mTransformMatrix *= mParent->GetMatrix();
+
+		mTransformMatrix.Decompose(mScale, mRotation, mPosition);
 		mUp = Vector3::TransformNormal(Vector3::Up, rotation);
 		mForward = Vector3::TransformNormal(Vector3::Forward, rotation);
 		mRight = Vector3::TransformNormal(Vector3::Right, rotation);

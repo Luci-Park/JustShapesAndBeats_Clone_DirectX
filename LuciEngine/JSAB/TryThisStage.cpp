@@ -87,10 +87,6 @@ namespace lu::JSAB
 			c->mTransform->SetLocalPosition(startX + x * 0.5 + x * i, 0, 0);
 		}
 	}
-
-	void TryThisMidConcrete::Initialize()
-	{
-	}
 #pragma endregion
 
 #pragma region Cog
