@@ -123,6 +123,8 @@ namespace lu::JSAB::Title
 	}
 	void TitleScene::OnEnter()
 	{
+		mCamera->Reset();
+		mCamera->mTransform->SetPosition({ 0, 0, -10 });
 		if (!mbTitleEntered)
 		{
 			ShowTitle();
@@ -143,16 +145,14 @@ namespace lu::JSAB::Title
 		mbgm->Play(false);
 		mTitle->OnAppear();
 		mButton->SetActive(false);
-		mCamera->Reset();
-		mCamera->mTransform->SetPosition({ 0, 0, -10 });
 	}
 	void TitleScene::ShowMenu()
 	{
 		mbgm->SetClip(mAudios[1]);
 		mbgm->Play(true);
 		mbgs->SetBackground(BackgroundScript::eBackgrounds::TITLEGREEN);
-		mTitle->OnBeat();
-		mTitle->mTransform->SetPosition(Vector3(-281, 0, 0));
+
+		mTitle->OnMenu();
 		mbIsInMenu = true;
 		mButton->SetActive(true);
 	}

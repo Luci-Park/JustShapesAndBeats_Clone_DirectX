@@ -15,6 +15,7 @@ namespace lu::JSAB
 		void OnBeat();
 		void OnAppear();
 		void OnMove();
+		void OnMenu();
 	private:
 		Vector3 orgScale;
 		Animator* mImgAnim;

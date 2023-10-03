@@ -92,4 +92,9 @@ namespace lu::JSAB
 	{
 		mAnim->PlayAnimation(L"Move", false);
 	}
+	void TitleObject::OnMenu()
+	{
+		mImgAnim->PlayAnimation(L"Bump", true);
+		mTransform->SetPosition(Vector3(-281, 0, 0));
+	}
 }
