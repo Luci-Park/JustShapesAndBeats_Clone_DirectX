@@ -28,9 +28,10 @@ namespace lu::JSAB
 	void MusicManager::Play()
 	{
 		Instance = this;
-		mTriangleAppearTime = 7.f;
+		mTriangleAppearTime = 5.f;
 		mLevelEndCounter = 0;
 		mbFin = false;
+		mMusic->Play();
 	}
 	void MusicManager::OnLevelEnd()
 	{

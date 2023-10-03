@@ -1,13 +1,13 @@
 #pragma once
-#include "LScript.h"
+#include "..\\Engine_SOURCE\\LScript.h"
+#include "..\\Engine_SOURCE\\LGameObject.h"
+#include "..\\Engine_SOURCE\\LTransform.h"
+#include "..\\Engine_SOURCE\\LAnimator.h"
+#include "..\\Engine_SOURCE\\LMeshRenderer.h"
+#include "..\\Engine_SOURCE\\LCollider2D.h"
+#include "..\\Engine_SOURCE\\LObject.h"
+#include "..\\Engine_SOURCE\\LResources.h"
 #include "MusicController.h"
-#include "LGameObject.h"
-#include "LTransform.h"
-#include "LAnimator.h"
-#include "LMeshRenderer.h"
-#include "LCollider2D.h"
-#include "LObject.h"
-#include "LResources.h"
 #include "CameraScript.h"
 
 namespace lu::JSAB

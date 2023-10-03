@@ -15,8 +15,6 @@ namespace lu::JSAB
 	}
 	void Bullet::Update()
 	{
-		if (mActivateTime > 158)
-			int i = 0;
 		if (mMusic == nullptr || !mMusic->IsPlaying()) 
 			return;
 		mBounds = SceneManager::MainCamera()->GetBoundary();

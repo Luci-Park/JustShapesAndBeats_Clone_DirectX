@@ -59,7 +59,6 @@ namespace lu::JSAB
 	void TutorialManager::Play()
 	{
 		MusicManager::Play();
-		mMusic->Play();
 		OnStageChange(0);
 	}
 	void TutorialManager::OnMusicEnd()

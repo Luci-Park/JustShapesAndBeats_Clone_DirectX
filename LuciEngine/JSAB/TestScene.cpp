@@ -7,11 +7,13 @@
 #include "LInput.h"
 #include "LText.h"
 #include "LCollisionManager.h"
+#include "yaCameraScript.h"
 #include "..\\Editor_SOURCE\\TransformWidget.h"
 #include "TrianglePrefab.h" 
 #include "DubwooferSpikeDropper.h"
 #include "DubwooferDropSpawner.h"
 #include "DubwooferWater.h"
+#include "TryThisStage.h"
 namespace lu::JSAB
 {
 #pragma region ParticleTestScene
@@ -113,12 +115,13 @@ namespace lu::JSAB
 #pragma region BulletTest
 	void BulletTestScene::Initialize()
 	{
-		object::Instantiate<GameObject>(eLayerType::Camera)->AddComponent<GameCamera>();
+		auto c = object::Instantiate<GameObject>(eLayerType::Camera)->AddComponent<GameCamera>();
+		c->Owner()->AddComponent<yaCamera>();
 		auto g = object::Instantiate<GameObject>(eLayerType::Bullet);
-		g->AddComponent<DubwooferSpikeWave>();
+		g->AddComponent<TryThisStage>();
+		target = nullptr;
 		//g->AddComponent<gui::TransformWidget>();
 		//object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<DubwooferDropSpawner>();
-		target = nullptr;
 		//g->AddComponent<DubwooferSpikeDropper>();
 		
 	}

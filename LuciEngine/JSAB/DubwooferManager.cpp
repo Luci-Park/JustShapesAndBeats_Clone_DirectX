@@ -54,7 +54,6 @@ namespace lu::JSAB
 		mSmallBarFlag = 0;
 		mCheckPointFlag = 0;
 		mCheckPoint->SetIsFinal(false);
-		mMusic->Play();
 	}
 	void DubwooferManager::OnMusicEnd()
 	{

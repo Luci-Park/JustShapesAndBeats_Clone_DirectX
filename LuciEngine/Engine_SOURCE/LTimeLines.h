@@ -1,6 +1,6 @@
 #pragma once
 #include "LuciEngine.h"
-#include <LMath.h>
+#include "LMath.h"
 using namespace lu::math;
 namespace lu::graphics
 {
