@@ -272,7 +272,31 @@ namespace lu::JSAB
 			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSmallCog>();
 			c->mTransform->SetPosition(2811.3777, -250.6197, -0.1);
 			c->RotateClockwise();
-			//c->Owner()->AddComponent<gui::TransformWidget>();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSmallCog>();
+			c->mTransform->SetPosition(2991.4177, -340.90198, -0.1);
+			c->RotateClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSmallCog>();
+			c->mTransform->SetPosition(3217.2358, -379.2216, -0.1);
+			c->RotateCounterClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSmallCog>();
+			c->mTransform->SetPosition(3510.0347, 351.6227, -0.1);
+			c->RotateCounterClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSmallCog>();
+			c->mTransform->SetPosition(3530.8364, -384.67654, -0.1);
+			c->RotateCounterClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSmallCog>();
+			c->mTransform->SetPosition(3570.8772, -173.51685, -0.1);
+			c->RotateClockwise();
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSmallCog>();
+			c->mTransform->SetPosition(3784.0598, -217.13567, -0.1);
+			c->RotateCounterClockwise();
+			c->Owner()->AddComponent<gui::TransformWidget>();
 		}
 		{
 			auto b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
@@ -282,7 +306,6 @@ namespace lu::JSAB
 			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
 			b->mTransform->SetScale(460, 230, 1);
 			b->mTransform->SetPosition(2441.9324, 253.68369, -0.2);
-
 
 			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
 			b->mTransform->SetScale(40, 720, 1);
@@ -311,7 +334,34 @@ namespace lu::JSAB
 			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
 			b->mTransform->SetScale(40, 720, 1);
 			b->mTransform->SetPosition(3254.183, -286.51807, -0.2);
-			b->Owner()->AddComponent<gui::TransformWidget>();
+
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(271, 40, 1);
+			b->mTransform->SetPosition(3409.6912, -25.571535, -0.2);
+
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(40, 720, 1);
+			b->mTransform->SetPosition(3564.805, 0, -0.2);
+
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(520, 40, 1);
+			b->mTransform->SetPosition(3839.4453, 195.37105, -0.2);
+
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(40, 720, 1);
+			b->mTransform->SetPosition(4117.0557, 0, -0.2);
+
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(460, 230, 1);
+			b->mTransform->SetPosition(4366.8765, -253.68369, -0.2);
+
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(460, 230, 1);
+			b->mTransform->SetPosition(4366.8765, 253.68369, -0.2);
+
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(40, 720, 1);
+			b->mTransform->SetPosition(4614.5376, 0, -0.2);
 		}
 	}
 #pragma endregion
