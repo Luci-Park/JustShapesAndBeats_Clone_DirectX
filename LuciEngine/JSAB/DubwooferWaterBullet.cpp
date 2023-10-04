@@ -39,7 +39,7 @@ namespace lu::JSAB
 	}
 #pragma endregion
 #pragma region WaterEffect
-	void DubwooferSpikeWave::Initialize()
+	void DubwooferSpikeSingleWave::Initialize()
 	{
 		Script::Initialize();
 		auto mMr = Owner()->AddComponent<MeshRenderer>();
@@ -47,30 +47,63 @@ namespace lu::JSAB
 		mMr->SetMaterial(Resources::Load<Material>(L"DWWaterMat", L"DB_Water"));
 		mMr->GetMaterial()->SetRenderingMode(eRenderingMode::CutOut);
 
-		mTransform->SetScale(30, 600, 1);
-		mStartTime = 0;
+		mTransform->SetScale(40, 0, 1);
+		mTime = 0;
+		mDuration = 0.55;
+		mbWave = false;
+		Owner()->SetActive(false);
 	}
 
-	void DubwooferSpikeWave::Update()
+	void DubwooferSpikeSingleWave::Update()
 	{
-		float cycleDuration = 0.5f; // Total duration of the cycle in seconds
-
-		if (mStartTime < cycleDuration) {
-			float y = -2400 / cycleDuration * (mStartTime - cycleDuration * 0.5) * (mStartTime - cycleDuration * 0.5) + 600;
-
-			Vector3 s = mTransform->GetScale();
-			s.y = y;
-			mTransform->SetScale(s);
-
-			mStartTime += Time::DeltaTime(); // Update the timer based on the frame time
-		}
-		else
+		if (mbWave)
 		{
-			mStartTime = 0;
+			double y = 300 + 300 * sin(mTime / mDuration * 2 * PI);
+			mTransform->SetScale(mTransform->GetScale().x, y, 1);
+			mTime += Time::DeltaTime();
+			if (mTime >= mDuration)
+			{
+				mTime = 0;
+				mbWave = false;
+				Owner()->SetActive(false);
+			}
 		}
 	}
 
+	void DubwooferSpikeSingleWave::Activate()
+	{
+		mbWave = true;
+		Owner()->SetActive(true);
+	}
 #pragma endregion
 
+
+	void DubwooferSpikeWave::Initialize()
+	{
+		Script::Initialize();
+		float startx = 40 * 5 * -0.5;
+		for (int i = 0; i < 5; i++)
+		{
+			float x = startx + 40 * i;
+			mWaves[i] = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<DubwooferSpikeSingleWave>();
+			mWaves[i]->mTransform->SetLocalPosition(x, 0, 0);
+		}
+
+		mAnim = Owner()->AddComponent<Animator>();
+		auto anim = mAnim->CreateAnimation(L"Activate");
+		anim->AddFunctionKey(0, std::bind(&DubwooferSpikeSingleWave::Activate, mWaves[2]));
+		anim->AddFunctionKey(0.15, std::bind(&DubwooferSpikeSingleWave::Activate, mWaves[1]));
+		anim->AddFunctionKey(0.15, std::bind(&DubwooferSpikeSingleWave::Activate, mWaves[3]));
+		anim->AddFunctionKey(0.3, std::bind(&DubwooferSpikeSingleWave::Activate, mWaves[0]));
+		anim->AddFunctionKey(0.3, std::bind(&DubwooferSpikeSingleWave::Activate, mWaves[4]));
+		anim->AddPositionKey(1, Vector3::Zero);
+	}
+
+
+	void DubwooferSpikeWave::Activate(Vector3 pos)
+	{
+		mTransform->SetPosition(pos);
+		mAnim->PlayAnimation(L"Activate", false);
+	}
 
 }

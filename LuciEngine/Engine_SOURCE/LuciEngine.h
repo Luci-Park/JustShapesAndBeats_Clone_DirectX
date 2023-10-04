@@ -26,5 +26,5 @@
 #include "LMath.h"
 
 #define PI 3.141592
-#define DEBUGLOG(x) OutputDebugStringA(x)
+#define DEBUGLOG(x) OutputDebugStringA(x) 
 #define LERP(start, end, t) (start + ((t > 1.0) ? 1.0 : ((t < 0.0) ? 0.0 : t)) * (end - start))

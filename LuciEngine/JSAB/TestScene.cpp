@@ -117,10 +117,10 @@ namespace lu::JSAB
 	{
 		auto c = object::Instantiate<GameObject>(eLayerType::Camera)->AddComponent<GameCamera>();
 		c->Owner()->AddComponent<yaCamera>();
-		c->mTransform->SetPosition(2700, 0, -10);
+		c->mTransform->SetPosition(0, 0, -10);
 		auto g = object::Instantiate<GameObject>(eLayerType::Bullet);
-		g->AddComponent<TryThisStage>();
-		target = nullptr;
+		script = g->AddComponent<DubwooferSpikeSingleWave>();
+		bullet = nullptr;
 		//g->AddComponent<gui::TransformWidget>();
 		//object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<DubwooferDropSpawner>();
 		//g->AddComponent<DubwooferSpikeDropper>();
@@ -131,21 +131,22 @@ namespace lu::JSAB
 	{
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
-			if (target != nullptr)
+			dynamic_cast<DubwooferSpikeSingleWave*>(script)->Activate();
+			if (bullet != nullptr)
 			{
-				switch (target->GetBulletState())
+				switch (bullet->GetBulletState())
 				{
 				case lu::JSAB::Bullet::eBulletState::Waiting:
-					target->Warning();
+					bullet->Warning();
 					break;
 				case lu::JSAB::Bullet::eBulletState::Warning:
-					target->Activate();
+					bullet->Activate();
 					break;
 				case lu::JSAB::Bullet::eBulletState::Activate:
-					target->Outro();
+					bullet->Outro();
 					break;
 				case lu::JSAB::Bullet::eBulletState::Outro:
-					target->DeActivate();
+					bullet->DeActivate();
 					break;
 				}
 			}

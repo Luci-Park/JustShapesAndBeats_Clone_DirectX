@@ -33,18 +33,33 @@ namespace lu::JSAB
 		
 	};
 
+	class DubwooferSpikeSingleWave : public Script
+	{
+	public:
+		DubwooferSpikeSingleWave() {}
+		virtual ~DubwooferSpikeSingleWave(){}
+
+		virtual void Initialize() override;
+		virtual void Update() override;
+		void Activate();
+	private:
+		bool mbWave;
+		double mTime;
+		double mDuration;
+	};
+
 	class DubwooferSpikeWave : public Script
 	{
 	public:
 		DubwooferSpikeWave() {}
-		virtual ~DubwooferSpikeWave(){}
+		virtual ~DubwooferSpikeWave() {}
 
 		virtual void Initialize() override;
-		virtual void Update() override;
-
+		void Activate(Vector3 pos);
 	private:
-		bool mbWave;
-		double mStartTime;
+		DubwooferSpikeSingleWave* mWaves[5];
+		Animator* mAnim;
 	};
+
 }
 

@@ -41,6 +41,8 @@ namespace lu::JSAB
 		virtual void Initialize() override;
 		virtual void Update() override;
 	private:
-		Bullet* target;
+		Bullet* bullet;
+		Script* script;
+		
 	};
 }
