@@ -24,6 +24,7 @@ namespace lu::JSAB
 		virtual void Update() override;
 
 		void OnImpact(int idx, Transform* target);
+		void RippleTest(int idx);
 	private:
 		std::vector<DubwooferWaterBullet*> mWater;
 		std::list<Ripple> mRipples;

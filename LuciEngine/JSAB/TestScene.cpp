@@ -131,7 +131,7 @@ namespace lu::JSAB
 	{
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
-			dynamic_cast<DubwooferSpikeSingleWave*>(script)->Activate();
+			dynamic_cast<DubwooferWater*>(script)->RippleTest(0);
 			if (bullet != nullptr)
 			{
 				switch (bullet->GetBulletState())

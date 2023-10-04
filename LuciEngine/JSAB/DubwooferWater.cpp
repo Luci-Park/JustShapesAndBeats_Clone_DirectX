@@ -23,15 +23,6 @@ namespace lu::JSAB
 		}
 		mTime = 0;
 
-		Ripple ripple;
-		ripple.origin = Vector3::Zero;
-		ripple.startTime = 0;
-		ripple.waveLength = 10;//0부터 0까지
-		ripple.amplitude = 10;
-		ripple.period = 0.25;//총시간
-		ripple.waveDamp = 0.2;
-		ripple.ampDamp = 0.3;
-		mRipples.push_back(ripple);
 	}
 	void DubwooferWater::Update()
 	{
@@ -61,7 +52,7 @@ namespace lu::JSAB
 		for (auto it = mRipples.begin(); it != mRipples.end();)
 		{
 			//(*it).waveLength += -(*it).waveDamp * (*it).waveLength* Time::DeltaTime();
-			(*it).amplitude += -(*it).ampDamp * (*it).amplitude * Time::DeltaTime();
+			(*it).amplitude += -(*it).ampDamp * Time::DeltaTime();
 
 			if ((*it).waveLength <= 0 || (*it).amplitude <= 0)
 				it = mRipples.erase(it);
@@ -71,5 +62,20 @@ namespace lu::JSAB
 	}
 	void DubwooferWater::OnImpact(int idx, Transform* target)
 	{
+	}
+	void DubwooferWater::RippleTest(int idx)
+	{
+		if (idx == 0)
+		{
+			Ripple ripple;
+			ripple.origin = Vector3::Zero;
+			ripple.startTime = 0;
+			ripple.waveLength = 10;//0부터 0까지
+			ripple.amplitude = 10;
+			ripple.period = 0.25;//총시간
+			ripple.waveDamp = 0.2;
+			ripple.ampDamp = 0.3;
+			mRipples.push_back(ripple);
+		}
 	}
 }
