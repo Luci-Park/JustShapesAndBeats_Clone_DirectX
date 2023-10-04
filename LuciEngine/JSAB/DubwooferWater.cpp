@@ -26,9 +26,11 @@ namespace lu::JSAB
 		Ripple ripple;
 		ripple.origin = Vector3::Zero;
 		ripple.startTime = 0;
-		ripple.waveLength = 10;
+		ripple.waveLength = 10;//0부터 0까지
 		ripple.amplitude = 10;
-		ripple.period = 0.5;
+		ripple.period = 0.25;//총시간
+		ripple.waveDamp = 0.1;
+		ripple.ampDamp = 0.1;
 		mRipples.push_back(ripple);
 	}
 	void DubwooferWater::Update()
@@ -38,19 +40,33 @@ namespace lu::JSAB
 		float waveLength = 3;
 
 		mTime += Time::DeltaTime();
+
 		for (int i = 0; i < mWater.size(); i++)
 		{
-			float idleWaveHeight = sinf((mTime + i * 0.2) / waveLength) * amplitude;
+			float idleWaveHeight = 0;//sinf((mTime + i * 0.2) / waveLength) * amplitude;
 			float rippleHeight = 0;
 			for (auto it = mRipples.begin(); it != mRipples.end();)
 			{ 
-				Ripple ripple = *it;
-				float distanceToRipple = abs(mWater[i]->mTransform->GetPosition().x - ripple.origin.x); 
-				rippleHeight += ripple.amplitude * sin(distanceToRipple - ripple.waveLength / ripple.period);
+				Ripple ripple = *it;				
+				float pos = ripple.origin.x + ripple.waveLength / ripple.period * mTime * 2;
+				float distanceToRipple = abs(mWater[i]->mTransform->GetPosition().x - ripple.origin.x) * 2;
+				if(distanceToRipple <= pos)
+					rippleHeight += ripple.amplitude * sin(distanceToRipple - ripple.waveLength / ripple.period * mTime);
 				it++;
 			}
 
 			mWater[i]->SetY(idleWaveHeight + rippleHeight + elevation);
+		}
+
+		for (auto it = mRipples.begin(); it != mRipples.end();)
+		{
+			(*it).waveLength += -(*it).waveDamp * (*it).waveLength* Time::DeltaTime();
+			(*it).amplitude += -(*it).ampDamp * (*it).amplitude * Time::DeltaTime();
+
+			if ((*it).waveLength <= 0 || (*it).amplitude <= 0)
+				it = mRipples.erase(it);
+			else
+				it++;
 		}
 	}
 	void DubwooferWater::OnImpact(int idx, Transform* target)

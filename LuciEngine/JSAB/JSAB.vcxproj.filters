@@ -146,6 +146,9 @@
     <ClCompile Include="TryThisStage.cpp">
       <Filter>Contents\_SceneSpecific\3. Try This\Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="TryThisSpotlight.cpp">
+      <Filter>Contents\_SceneSpecific\3. Try This\Bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -295,6 +298,9 @@
       <Filter>Contents\_SceneSpecific\3. Try This\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="TryThisStage.h">
+      <Filter>Contents\_SceneSpecific\3. Try This\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="TryThisSpotlight.h">
       <Filter>Contents\_SceneSpecific\3. Try This\Bullet</Filter>
     </ClInclude>
   </ItemGroup>

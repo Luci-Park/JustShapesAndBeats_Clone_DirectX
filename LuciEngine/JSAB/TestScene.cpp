@@ -119,7 +119,7 @@ namespace lu::JSAB
 		c->Owner()->AddComponent<yaCamera>();
 		c->mTransform->SetPosition(0, 0, -10);
 		auto g = object::Instantiate<GameObject>(eLayerType::Bullet);
-		script = g->AddComponent<DubwooferSpikeSingleWave>();
+		script = g->AddComponent<DubwooferWater>();
 		bullet = nullptr;
 		//g->AddComponent<gui::TransformWidget>();
 		//object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<DubwooferDropSpawner>();

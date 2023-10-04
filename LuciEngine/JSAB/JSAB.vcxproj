@@ -179,6 +179,7 @@
     <ClInclude Include="TryThisMusicController.h" />
     <ClInclude Include="TryThisScene.h" />
     <ClInclude Include="TryThisScope.h" />
+    <ClInclude Include="TryThisSpotlight.h" />
     <ClInclude Include="TryThisStage.h" />
     <ClInclude Include="TutorialBeam.h" />
     <ClInclude Include="TutorialBeatCircle.h" />
@@ -231,6 +232,7 @@
     <ClCompile Include="TryThisMusicController.cpp" />
     <ClCompile Include="TryThisScene.cpp" />
     <ClCompile Include="TryThisScope.cpp" />
+    <ClCompile Include="TryThisSpotlight.cpp" />
     <ClCompile Include="TryThisStage.cpp" />
     <ClCompile Include="TutorialBeam.cpp" />
     <ClCompile Include="TutorialBeatCircle.cpp" />

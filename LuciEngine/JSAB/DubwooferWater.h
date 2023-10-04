@@ -14,6 +14,8 @@ namespace lu::JSAB
 			float amplitude;
 			float waveLength;
 			float period;
+			float waveDamp;
+			float ampDamp;
 		};
 		DubwooferWater(){}
 		virtual ~DubwooferWater(){}
