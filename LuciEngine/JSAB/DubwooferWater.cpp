@@ -29,8 +29,8 @@ namespace lu::JSAB
 		ripple.waveLength = 10;//0부터 0까지
 		ripple.amplitude = 10;
 		ripple.period = 0.25;//총시간
-		ripple.waveDamp = 0.1;
-		ripple.ampDamp = 0.1;
+		ripple.waveDamp = 0.2;
+		ripple.ampDamp = 0.3;
 		mRipples.push_back(ripple);
 	}
 	void DubwooferWater::Update()
@@ -48,7 +48,7 @@ namespace lu::JSAB
 			for (auto it = mRipples.begin(); it != mRipples.end();)
 			{ 
 				Ripple ripple = *it;				
-				float pos = ripple.origin.x + ripple.waveLength / ripple.period * mTime * 2;
+				float pos = ripple.origin.x + ripple.waveLength / ripple.period * mTime * 0.5;
 				float distanceToRipple = abs(mWater[i]->mTransform->GetPosition().x - ripple.origin.x) * 2;
 				if(distanceToRipple <= pos)
 					rippleHeight += ripple.amplitude * sin(distanceToRipple - ripple.waveLength / ripple.period * mTime);
@@ -60,7 +60,7 @@ namespace lu::JSAB
 
 		for (auto it = mRipples.begin(); it != mRipples.end();)
 		{
-			(*it).waveLength += -(*it).waveDamp * (*it).waveLength* Time::DeltaTime();
+			//(*it).waveLength += -(*it).waveDamp * (*it).waveLength* Time::DeltaTime();
 			(*it).amplitude += -(*it).ampDamp * (*it).amplitude * Time::DeltaTime();
 
 			if ((*it).waveLength <= 0 || (*it).amplitude <= 0)
