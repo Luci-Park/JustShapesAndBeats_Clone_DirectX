@@ -121,7 +121,7 @@ namespace lu::JSAB
 		auto g = object::Instantiate<GameObject>(eLayerType::Bullet);
 		script = g->AddComponent<DubwooferWater>();
 		bullet = nullptr;
-		//g->AddComponent<gui::TransformWidget>();
+		g->AddComponent<gui::TransformWidget>();
 		//object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<DubwooferDropSpawner>();
 		//g->AddComponent<DubwooferSpikeDropper>();
 		

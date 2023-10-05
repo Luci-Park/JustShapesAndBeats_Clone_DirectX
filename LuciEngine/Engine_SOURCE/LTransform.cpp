@@ -187,20 +187,19 @@ namespace lu
 	void Transform::UpdateMatrix()
 	{
 		mTransformMatrix = Matrix::Identity;
+		CalculateWorldPosition();
+		CalculateWorldRotation();
+		CalculateWorldScale();
 
-		Matrix scale = Matrix::CreateScale(mLocalScale);
+		Matrix scale = Matrix::CreateScale(mScale);
 
-		Matrix rotation = Matrix::CreateFromQuaternion(mLocalRotation);
+		Matrix rotation = Matrix::CreateFromQuaternion(mRotation);
 
 		Matrix position;
-		position.Translation(mLocalPosition);
+		position.Translation(mPosition);
 
 		mTransformMatrix = scale * rotation * position;
 
-		if (mParent != nullptr && mParent != this)
-			mTransformMatrix = mParent->GetMatrix() * mTransformMatrix;
-
-		mTransformMatrix.Decompose(mScale, mRotation, mPosition);
 		mUp = Vector3::TransformNormal(Vector3::Up, rotation);
 		mForward = Vector3::TransformNormal(Vector3::Forward, rotation);
 		mRight = Vector3::TransformNormal(Vector3::Right, rotation);

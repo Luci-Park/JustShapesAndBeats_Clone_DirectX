@@ -8,6 +8,7 @@ namespace lu::JSAB
 	{
 		Script::Initialize();
 		Owner()->SetName(L"WaterBody");
+		mTransform->SetPosition(0, -360, -0.1);
 		int waternumber = 107;
 		float xsize = 10;
 		float offset = 2;
@@ -20,6 +21,7 @@ namespace lu::JSAB
 			mWater.push_back(c);
 			c->mTransform->SetLocalPosition(startx + width * 0.5 + width * i, 0, 0);
 			c->SetWaterBody(this, i);
+			c->Owner()->SetName(L"Water " + std::to_wstring(i));
 		}
 		mTime = 0;
 
