@@ -175,11 +175,12 @@
     <ClInclude Include="SplashAnimation.h" />
     <ClInclude Include="TriangleStrategy.h" />
     <ClInclude Include="Triangle.h" />
+    <ClInclude Include="TryThisHole.h" />
     <ClInclude Include="TryThisManager.h" />
     <ClInclude Include="TryThisMusicController.h" />
+    <ClInclude Include="TryThisRoundSpike.h" />
     <ClInclude Include="TryThisScene.h" />
     <ClInclude Include="TryThisScope.h" />
-    <ClInclude Include="TryThisSpotlight.h" />
     <ClInclude Include="TryThisStage.h" />
     <ClInclude Include="TutorialBeam.h" />
     <ClInclude Include="TutorialBeatCircle.h" />
@@ -228,11 +229,12 @@
     <ClCompile Include="SplashAnimation.cpp" />
     <ClCompile Include="TriangleStrategy.cpp" />
     <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="TryThisHole.cpp" />
     <ClCompile Include="TryThisManager.cpp" />
     <ClCompile Include="TryThisMusicController.cpp" />
+    <ClCompile Include="TryThisRoundSpike.cpp" />
     <ClCompile Include="TryThisScene.cpp" />
     <ClCompile Include="TryThisScope.cpp" />
-    <ClCompile Include="TryThisSpotlight.cpp" />
     <ClCompile Include="TryThisStage.cpp" />
     <ClCompile Include="TutorialBeam.cpp" />
     <ClCompile Include="TutorialBeatCircle.cpp" />

@@ -36,7 +36,7 @@ namespace lu::JSAB
 
 		for (int i = 0; i < mWater.size(); i++)
 		{
-			float idleWaveHeight = 0;//sinf((mTime + i * 0.2) / waveLength) * amplitude;
+			float idleWaveHeight = cosf((mTime + i * 0.2) / waveLength) * amplitude;
 			float rippleHeight = 0;
 			for (auto it = mRipples.begin(); it != mRipples.end();)
 			{ 
@@ -44,7 +44,7 @@ namespace lu::JSAB
 				float pos = ripple.origin.x + ripple.waveLength / ripple.period * mTime * 0.5;
 				float distanceToRipple = abs(mWater[i]->mTransform->GetPosition().x - ripple.origin.x) * 2;
 				if(distanceToRipple <= pos)
-					rippleHeight += ripple.amplitude * sin(distanceToRipple - ripple.waveLength / ripple.period * mTime);
+					rippleHeight += ripple.amplitude * cosf(distanceToRipple - ripple.waveLength / ripple.period * mTime);
 				it++;
 			}
 
