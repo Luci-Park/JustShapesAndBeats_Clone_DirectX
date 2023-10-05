@@ -30,6 +30,34 @@ namespace lu::JSAB
 			ani->AddTextureKey(duration * (i - 1) / 36, Resources::Find<Texture>(L"TT_Alarm_" + std::to_wstring(i)));
 		}
 		mAnim->PlayAnimation(L"Idle", true);
+		mbMove = false;
+	}
+
+	void TryThisAlarm::Update()
+	{
+		if (mbMove)
+		{
+			float dur = 1;
+			float t = mTime / dur;
+			if (t > 1)
+			{
+				mbMove = false;
+			}
+			else
+			{
+				Vector3 pos = Vector3::Lerp(mStartPos, mEndPos, mTime / dur);
+				mTime += Time::DeltaTime();
+			}
+		}
+	}
+
+	void TryThisAlarm::MoveY(float y)
+	{
+		mStartPos = mTransform->GetPosition();
+		mEndPos = mStartPos;
+		mEndPos.y = y;
+		mbMove = true;
+		mTime = 0;
 	}
 
 #pragma endregion
@@ -101,6 +129,7 @@ namespace lu::JSAB
 
 		auto mCol = Owner()->AddComponent<Collider2D>(); 
 		mCol->SetType(eColliderType::Circle);
+
 	}
 	void TryThisCog::Update()
 	{

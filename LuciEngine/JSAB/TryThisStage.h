@@ -12,6 +12,13 @@ namespace lu::JSAB
 		virtual ~TryThisAlarm(){}
 
 		virtual void Initialize();
+		virtual void Update();
+		void MoveY(float y);
+
+	private:
+		Vector3 mStartPos, mEndPos;
+		double mTime;
+		bool mbMove;
 	};
 
 	class TryThisConcrete : public Script
