@@ -1,5 +1,10 @@
 #pragma once
-class TryThisLaserBullet
+#include "Bullet.h"
+
+namespace lu::JSAB
 {
-};
+	class TryThisLaserBullet
+	{
+	};
+}
 
