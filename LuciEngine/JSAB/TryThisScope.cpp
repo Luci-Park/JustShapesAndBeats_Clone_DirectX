@@ -5,10 +5,11 @@ namespace lu::JSAB
 	void TryThisScope::Update()
 	{
 		Bullet::Update();
+		WhileActivate(0);
 	}
 	void TryThisScope::BulletSetUp()
 	{
-		mTransform->SetScale(2000, 2000, 1);
+		mTransform->SetScale(2500, 2500, 1);
 		mRotateSpeed = -.1f;
 
 		mMr = Owner()->AddComponent<MeshRenderer>();
@@ -36,6 +37,7 @@ namespace lu::JSAB
 	}
 	void TryThisScope::OnActivate()
 	{
+		mTarget = mTransform->GetPosition();
 		mMr->SetActive(true);
 		mHole->Owner()->SetActive(true);
 		mHoleAnim->PlayAnimation(L"Shrink", false);
@@ -45,6 +47,16 @@ namespace lu::JSAB
 		Quaternion speed = Quaternion::CreateFromAxisAngle(Vector3::Forward, mRotateSpeed * Time::DeltaTime());
 		Quaternion rotation = mTransform->GetRotation();
 		mTransform->SetRotation(rotation * speed);
+
+		if (mTarget != mTransform->GetPosition())
+		{
+			float moveSpeed = 0.03;
+			mTime += Time::DeltaTime() * moveSpeed;
+			mTime = std::clamp(mTime, 0.0f, (float)PI);
+			float t = 0.5f * sinf(mTime - PI * 0.5f) + 0.5f;
+
+			mTransform->SetPosition(Vector3::Lerp(mTransform->GetPosition(), mTarget, t));
+		}
 	}
 	void TryThisScope::OnOutro()
 	{
@@ -57,6 +69,6 @@ namespace lu::JSAB
 	{
 		mHole->Owner()->SetActive(false);
 		mMr->SetActive(false);
-		mTransform->SetScale(2000, 2000, 1);
+		mTransform->SetScale(2500, 2500, 1);
 	}
 }

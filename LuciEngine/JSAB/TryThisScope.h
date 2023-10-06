@@ -9,6 +9,7 @@ namespace lu::JSAB
 		TryThisScope(){}
 		virtual ~TryThisScope(){}
 		virtual void Update() override;
+		void SetPosition(Vector3 pos) { mTarget = pos; }
 	private:
 		virtual void BulletSetUp() override;
 
@@ -24,6 +25,8 @@ namespace lu::JSAB
 		MeshRenderer* mMr;
 		Animator* mHoleAnim;
 		float mRotateSpeed;
+		Vector3 mTarget;
+		float mTime;
 	};
 }
 

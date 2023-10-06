@@ -14,7 +14,7 @@
 #include "DubwooferDropSpawner.h"
 #include "DubwooferWater.h"
 #include "TryThisStage.h"
-#include "TryThisCrystal.h"
+#include "TryThisScope.h"
 namespace lu::JSAB
 {
 #pragma region ParticleTestScene
@@ -121,9 +121,9 @@ namespace lu::JSAB
 		c->mTransform->SetPosition(0, 0, -10);
 		auto g = object::Instantiate<GameObject>(eLayerType::Bullet);
 		//script = g->AddComponent<DubwooferWater>();
-		bullet = g->AddComponent<TryThisCrystal>();
+		bullet = g->AddComponent<TryThisScope>();
 		g->AddComponent<gui::TransformWidget>();		
-		bullet->Warning();
+		bullet->Activate();
 	}
 
 	void BulletTestScene::Update()
@@ -131,7 +131,8 @@ namespace lu::JSAB
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
 			//dynamic_cast<DubwooferWater*>(script)->RippleTest(0);
-			bullet->Activate();
+			//bullet->Activate();
+			dynamic_cast<TryThisScope*>(bullet)->SetPosition({-300, 0, 0});
 		}
 		Scene::Update();
 	}
