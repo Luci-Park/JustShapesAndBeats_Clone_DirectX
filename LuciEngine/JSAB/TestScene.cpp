@@ -123,6 +123,7 @@ namespace lu::JSAB
 		//script = g->AddComponent<DubwooferWater>();
 		bullet = g->AddComponent<TryThisSpotlight>();
 		g->AddComponent<gui::TransformWidget>();		
+		bullet->Warning();
 	}
 
 	void BulletTestScene::Update()

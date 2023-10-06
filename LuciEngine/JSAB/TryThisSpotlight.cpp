@@ -4,13 +4,16 @@ namespace lu::JSAB
 {
 	void TryThisSpotlight::Update()
 	{
-		//static float time = 0;
+		static float time = 0;
 		Bullet::Update();
-		//mWarningProcess = time / 5;
-		//time += Time::DeltaTime();
-		//if (time > 1)
-		//	time = 0;
-		//WhileWarning(0);
+		mWarningProcess = time / 1;
+		time += Time::DeltaTime();
+		if (time > 1)
+			time = 0;
+		if (mBulletState == eBulletState::Warning)
+			WhileWarning(0);
+		else if (mBulletState == eBulletState::Activate)
+			WhileActivate(0);
 	}
 	void TryThisSpotlight::BulletSetUp()
 	{
@@ -52,12 +55,11 @@ namespace lu::JSAB
 		mFillMr->GetMaterial()->SetTint({ 1, 1, 1, 0.5 });
 		mFillMr->UseColor(false);
 		mMr->SetActive(true);
-		mFillTr->SetLocalScale(0.5, 0.5, 1);
 	}
 	void TryThisSpotlight::WhileWarning(double time)
 	{
-		//Vector3 scale = Vector3::Lerp({ 0, 0, 1 }, { 1, 1, 1 }, mWarningProcess);
-		//mFillTr->SetLocalScale(scale);
+		Vector3 scale = Vector3::Lerp({ 0, 0, 1 }, { 1, 1, 1 }, mWarningProcess);
+		mFillTr->SetLocalScale(scale);
 
 		Quaternion speed = Quaternion::CreateFromAxisAngle(Vector3::Forward, mRotSpeed * Time::DeltaTime());
 		Quaternion rotation = mTransform->GetRotation();
