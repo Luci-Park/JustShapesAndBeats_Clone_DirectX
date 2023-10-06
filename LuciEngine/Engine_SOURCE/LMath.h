@@ -1021,5 +1021,5 @@ namespace lu::math
         static RECT __cdecl ComputeTitleSafeArea(UINT backBufferWidth, UINT backBufferHeight) noexcept;
     };
 #include "LMath.inl"
-
+    Vector3 RandomInsideUnitCircle();
 }

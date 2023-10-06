@@ -53,6 +53,7 @@ namespace lu
 			}
 			return nullptr;
 		}
+
 		template <typename T>
 		T* AddComponent()
 		{

@@ -63,9 +63,9 @@ namespace lu::JSAB
 		Vector3 scale = Vector3::Lerp({ 0, 0, 1 }, { 1, 1, 1 }, mWarningProcess);
 		mFillTr->SetLocalScale(scale);
 
-		Quaternion speed = Quaternion::CreateFromAxisAngle(Vector3::Forward, mRotSpeed * Time::DeltaTime());
-		Quaternion rotation = mTransform->GetRotation();
-		mTransform->SetRotation(rotation * speed);
+			Quaternion speed = Quaternion::CreateFromAxisAngle(Vector3::Forward, mRotSpeed * Time::DeltaTime());
+			Quaternion rotation = mTransform->GetRotation();
+			mTransform->SetRotation(rotation * speed);
 
 		float radius = 50;
 		float moveSpeed = PI * 0.1;

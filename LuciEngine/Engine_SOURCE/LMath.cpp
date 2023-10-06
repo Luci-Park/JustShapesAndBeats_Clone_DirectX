@@ -276,4 +276,17 @@ namespace lu::math
 		// Generate and return a random value
 		return dist(gen);
 	}
+	Vector3 RandomInsideUnitCircle()
+	{
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_real_distribution<float> dis(-1.0, 1.0);
+
+		float x, y;
+		do {
+			x = dis(gen);
+			y = dis(gen);
+		} while (x * x + y * y > 1.0);
+		return { x, y, 0 };
+	}
 }
