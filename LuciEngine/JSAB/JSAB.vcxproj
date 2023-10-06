@@ -175,6 +175,7 @@
     <ClInclude Include="SplashAnimation.h" />
     <ClInclude Include="TriangleStrategy.h" />
     <ClInclude Include="Triangle.h" />
+    <ClInclude Include="TryThisCrystal.h" />
     <ClInclude Include="TryThisSpotlight.h" />
     <ClInclude Include="TryThisLaserBullet.h" />
     <ClInclude Include="TryThisManager.h" />
@@ -230,6 +231,7 @@
     <ClCompile Include="SplashAnimation.cpp" />
     <ClCompile Include="TriangleStrategy.cpp" />
     <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="TryThisCrystal.cpp" />
     <ClCompile Include="TryThisSpotlight.cpp" />
     <ClCompile Include="TryThisLaserBullet.cpp" />
     <ClCompile Include="TryThisManager.cpp" />

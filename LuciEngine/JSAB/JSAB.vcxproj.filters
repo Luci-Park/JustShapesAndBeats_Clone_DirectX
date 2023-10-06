@@ -155,6 +155,9 @@
     <ClCompile Include="TryThisRoundSpike.cpp">
       <Filter>Contents\_SceneSpecific\3. Try This\Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="TryThisCrystal.cpp">
+      <Filter>Contents\_SceneSpecific\3. Try This\Bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -313,6 +316,9 @@
       <Filter>Contents\_SceneSpecific\3. Try This\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="TryThisRoundSpike.h">
+      <Filter>Contents\_SceneSpecific\3. Try This\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="TryThisCrystal.h">
       <Filter>Contents\_SceneSpecific\3. Try This\Bullet</Filter>
     </ClInclude>
   </ItemGroup>

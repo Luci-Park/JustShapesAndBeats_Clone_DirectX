@@ -14,7 +14,7 @@
 #include "DubwooferDropSpawner.h"
 #include "DubwooferWater.h"
 #include "TryThisStage.h"
-#include "TryThisLaserBullet.h"
+#include "TryThisCrystal.h"
 namespace lu::JSAB
 {
 #pragma region ParticleTestScene
@@ -121,7 +121,7 @@ namespace lu::JSAB
 		c->mTransform->SetPosition(0, 0, -10);
 		auto g = object::Instantiate<GameObject>(eLayerType::Bullet);
 		//script = g->AddComponent<DubwooferWater>();
-		bullet = g->AddComponent<TryThisLaserBullet>();
+		bullet = g->AddComponent<TryThisCrystal>();
 		g->AddComponent<gui::TransformWidget>();		
 		bullet->Warning();
 	}
