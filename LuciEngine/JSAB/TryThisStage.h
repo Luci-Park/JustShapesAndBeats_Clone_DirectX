@@ -34,7 +34,17 @@ namespace lu::JSAB
 		std::shared_ptr<graphics::Texture> mBaseTexture;
 		std::shared_ptr<Mesh> mBaseMesh;
 		std::shared_ptr<Material> mBaseMat;
+	};
 
+	class SmallConcrete : public Script
+	{
+	public:
+		SmallConcrete() {}
+		virtual ~SmallConcrete() {}
+		virtual void Initialize() override;
+		void SetScale(float width);
+	private:
+		std::shared_ptr<Texture> mTex;
 	};
 
 	class TryThisCog : public Script

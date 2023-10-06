@@ -120,10 +120,10 @@ namespace lu::JSAB
 		c->Owner()->AddComponent<yaCamera>();
 		c->mTransform->SetPosition(0, 0, -10);
 		auto g = object::Instantiate<GameObject>(eLayerType::Bullet);
-		//script = g->AddComponent<DubwooferWater>();
-		bullet = g->AddComponent<TryThisScope>();
-		g->AddComponent<gui::TransformWidget>();		
-		bullet->Activate();
+		script = g->AddComponent<TryThisStage>();
+		//bullet = g->AddComponent<TryThisStage>();
+		//g->AddComponent<gui::TransformWidget>();		
+		//bullet->Activate();
 	}
 
 	void BulletTestScene::Update()
@@ -132,7 +132,7 @@ namespace lu::JSAB
 		{
 			//dynamic_cast<DubwooferWater*>(script)->RippleTest(0);
 			//bullet->Activate();
-			dynamic_cast<TryThisScope*>(bullet)->SetPosition({-300, 0, 0});
+			//dynamic_cast<TryThisScope*>(bullet)->SetPosition({-300, 0, 0});
 		}
 		Scene::Update();
 	}

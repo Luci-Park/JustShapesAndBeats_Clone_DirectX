@@ -115,6 +115,25 @@ namespace lu::JSAB
 			c->mTransform->SetLocalPosition(startX + x * 0.5 + x * i, 0, 0);
 		}
 	}
+
+	void SmallConcrete::Initialize()
+	{
+		Script::Initialize();
+		auto mMr = Owner()->AddComponent<MeshRenderer>();
+		auto mat = Resources::Load<Material>(L"TT_MidConcreteMat", L"TT_MidConcrete");
+		mat->SetRenderingMode(eRenderingMode::CutOut);
+		mMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(mat);
+		mTex = mat->GetTexture();
+
+		Owner()->AddComponent<Collider2D>();
+	}
+	void SmallConcrete::SetScale(float height)
+	{
+		Vector3 scale = Vector3::One;
+		scale.y = height;
+		scale.x = mTex->GetRatioWidth(height);
+		mTransform->SetScale(scale);
+	}
 #pragma endregion
 
 #pragma region Cog
@@ -206,6 +225,43 @@ namespace lu::JSAB
 			c->SetWithXScale(173, 8);
 			c->mTransform->SetPosition(15.540734, -299.66867, 0.1);
 		}
+		{
+			auto c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<SmallConcrete>();
+			c->mTransform->SetPosition(843.27734, -255.55699, 0);
+			c->mTransform->SetRotation(Quaternion::Create2DRotationRadian(-0.96418345));
+			c->SetScale(120);
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<SmallConcrete>();
+			c->mTransform->SetPosition(1229.2201, -255.55699, 0);
+			c->mTransform->SetRotation(Quaternion::Create2DRotationRadian(0.96418345));
+			c->SetScale(120);
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<SmallConcrete>();
+			c->mTransform->SetPosition(1582.6373, -198.6486, 0);
+			c->mTransform->SetRotation(Quaternion::Create2DRotationRadian(1.2140691));
+			c->SetScale(47);
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<SmallConcrete>();
+			c->mTransform->SetPosition(1707.9832, 162.35658, 0);
+			c->mTransform->SetRotation(Quaternion::Create2DRotationRadian(1.2140691));
+			c->SetScale(47);
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<SmallConcrete>();
+			c->mTransform->SetPosition(2114.8176, 357.08084, 0);
+			c->mTransform->SetRotation(Quaternion::Create2DRotationRadian(0.38196132));
+			c->SetScale(100);
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<SmallConcrete>();
+			c->mTransform->SetPosition(3419.9263, -199.32034, 0);
+			c->mTransform->SetRotation(Quaternion::Create2DRotationRadian(0.9037276));
+			c->SetScale(90);
+
+			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<SmallConcrete>();
+			c->mTransform->SetPosition(3847.6663, 286.44406, 0);
+			c->mTransform->SetRotation(Quaternion::Create2DRotationRadian(-0.13085163));
+			c->SetScale(130);
+		}
+
 		{
 			auto c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisCog>();
 			c->mTransform->SetPosition(683.698, -391.1525, -0.1);
@@ -325,7 +381,6 @@ namespace lu::JSAB
 			c = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSmallCog>();
 			c->mTransform->SetPosition(3784.0598, -217.13567, -0.1);
 			c->RotateCounterClockwise();
-			c->Owner()->AddComponent<gui::TransformWidget>();
 		}
 		{
 			auto b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
@@ -391,6 +446,29 @@ namespace lu::JSAB
 			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
 			b->mTransform->SetScale(40, 720, 1);
 			b->mTransform->SetPosition(4614.5376, 0, -0.2);
+
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(520, 40, 1);
+			b->mTransform->SetPosition(3845.6409, -341.3028, -0.2);
+		}
+		{
+			auto b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(200, 1000, 1);
+			b->mTransform->SetPosition(4534.5376, 0, -0.2);
+
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(200, 1000, 1);
+			b->mTransform->SetPosition(5934.5376, 0, -0.2);
+			b->Owner()->AddComponent<gui::TransformWidget>();
+
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(2000, 200, 1);
+			b->mTransform->SetPosition(5244.5376, 400, -0.2);
+
+			b = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisBox>();
+			b->mTransform->SetScale(2000, 200, 1);
+			b->mTransform->SetPosition(5244.5376, -400, -0.2);
+
 		}
 	}
 #pragma endregion
