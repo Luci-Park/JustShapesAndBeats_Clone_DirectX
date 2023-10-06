@@ -43,9 +43,11 @@ namespace lu::JSAB
 		float duration = 0.1;
 		ani->AddLocalScaleKey(0, { 0, 0, 1 });
 		ani->AddLocalScaleKey(duration * 0.8, { 1.3, 1.3, 1 });
-		ani->AddLocalScaleKey(duration, { 1.1, 1.1, 1.1 });
+		ani->AddLocalScaleKey(duration, { 1.2, 1.2, 1.2 });
 		
 		RotateClockWise();
+		SetStartAngle(0);
+		SetCenter(Vector3::Zero);
 	}
 	void TryThisSpotlight::OnWarning()
 	{
@@ -64,6 +66,14 @@ namespace lu::JSAB
 		Quaternion speed = Quaternion::CreateFromAxisAngle(Vector3::Forward, mRotSpeed * Time::DeltaTime());
 		Quaternion rotation = mTransform->GetRotation();
 		mTransform->SetRotation(rotation * speed);
+
+		float radius = 50;
+		float moveSpeed = PI * 0.1;
+		mAngle += moveSpeed * Time::DeltaTime();
+		Vector3 pos = { cosf(mAngle) * radius, sinf(mAngle) * radius, mTransform->GetPosition().z };
+		pos.x += mMoveCenter.x;
+		pos.y += mMoveCenter.y;
+		mTransform->SetPosition(pos);
 	}
 	void TryThisSpotlight::OnActivate()
 	{

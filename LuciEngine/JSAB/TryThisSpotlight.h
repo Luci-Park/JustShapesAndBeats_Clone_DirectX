@@ -9,9 +9,10 @@ namespace lu::JSAB
 		virtual ~TryThisSpotlight() {}
 
 		virtual void Update() override;
-		void RotateClockWise() { mRotSpeed = -0.8; }
-		void RotateCounterClockWise() { mRotSpeed = 0.8; }
-
+		void RotateClockWise() { mRotSpeed = -1; }
+		void RotateCounterClockWise() { mRotSpeed = 1; }
+		void SetCenter(Vector3 pos) { mMoveCenter = pos; }
+		void SetStartAngle(float radian) { mAngle = radian; }
 	private:
 		virtual void BulletSetUp()override;
 		virtual void OnWarning()override;
@@ -30,7 +31,8 @@ namespace lu::JSAB
 		Collider2D* mFillCol;
 
 		float mRotSpeed;
-
+		float mAngle;
+		Vector3 mMoveCenter;
 	};
 }
 
