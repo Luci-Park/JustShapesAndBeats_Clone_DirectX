@@ -2,6 +2,10 @@
 #include "LTime.h"
 namespace lu::JSAB
 {
+	void TryThisScope::Update()
+	{
+		Bullet::Update();
+	}
 	void TryThisScope::BulletSetUp()
 	{
 		mTransform->SetScale(2000, 2000, 1);

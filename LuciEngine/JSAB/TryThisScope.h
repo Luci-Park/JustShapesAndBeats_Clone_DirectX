@@ -8,7 +8,7 @@ namespace lu::JSAB
 	public:
 		TryThisScope(){}
 		virtual ~TryThisScope(){}
-
+		virtual void Update() override;
 	private:
 		virtual void BulletSetUp() override;
 

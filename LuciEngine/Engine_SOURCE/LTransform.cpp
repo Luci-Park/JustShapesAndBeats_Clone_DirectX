@@ -76,14 +76,17 @@ namespace lu
 	void Transform::SetLocalPosition(Vector3 position)
 	{
 		mLocalPosition = position;
+		CalculateWorldPosition();
 	}
 	void Transform::SetLocalRotation(Quaternion rotation)
 	{
 		mLocalRotation = rotation;
+		CalculateWorldRotation();
 	}
 	void Transform::SetLocalScale(Vector3 scale)
 	{
 		mLocalScale = scale;
+		CalculateWorldScale();
 	}
 	void Transform::SetLocalPosition(float x, float y, float z)
 	{

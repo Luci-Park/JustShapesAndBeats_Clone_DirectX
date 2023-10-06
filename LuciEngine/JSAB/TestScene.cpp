@@ -14,6 +14,7 @@
 #include "DubwooferDropSpawner.h"
 #include "DubwooferWater.h"
 #include "TryThisStage.h"
+#include "TryThisSpotlight.h"
 namespace lu::JSAB
 {
 #pragma region ParticleTestScene
@@ -119,37 +120,17 @@ namespace lu::JSAB
 		c->Owner()->AddComponent<yaCamera>();
 		c->mTransform->SetPosition(0, 0, -10);
 		auto g = object::Instantiate<GameObject>(eLayerType::Bullet);
-		script = g->AddComponent<DubwooferWater>();
-		bullet = nullptr;
-		g->AddComponent<gui::TransformWidget>();
-		//object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<DubwooferDropSpawner>();
-		//g->AddComponent<DubwooferSpikeDropper>();
-		
+		//script = g->AddComponent<DubwooferWater>();
+		bullet = g->AddComponent<TryThisSpotlight>();
+		g->AddComponent<gui::TransformWidget>();		
 	}
 
 	void BulletTestScene::Update()
 	{
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
-			dynamic_cast<DubwooferWater*>(script)->RippleTest(0);
-			if (bullet != nullptr)
-			{
-				switch (bullet->GetBulletState())
-				{
-				case lu::JSAB::Bullet::eBulletState::Waiting:
-					bullet->Warning();
-					break;
-				case lu::JSAB::Bullet::eBulletState::Warning:
-					bullet->Activate();
-					break;
-				case lu::JSAB::Bullet::eBulletState::Activate:
-					bullet->Outro();
-					break;
-				case lu::JSAB::Bullet::eBulletState::Outro:
-					bullet->DeActivate();
-					break;
-				}
-			}
+			//dynamic_cast<DubwooferWater*>(script)->RippleTest(0);
+			bullet->Activate();
 		}
 		Scene::Update();
 	}
