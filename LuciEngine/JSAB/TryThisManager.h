@@ -2,6 +2,12 @@
 #include "MusicManager.h"
 #include "BulletPool.h"
 #include "TryThisScope.h"
+#include "TryThisStage.h"
+#include "TryThisCrystal.h"
+#include "TryThisLaserBullet.h"
+#include "TryThisRoundSpike.h"
+#include "TryThisScope.h"
+#include "TryThisSpotlight.h"
 namespace lu::JSAB
 {
 	class CheckPoint;
@@ -17,7 +23,7 @@ namespace lu::JSAB
 		virtual void OnMusicEnd() override;
 
 	private:
-		void Scope(double time);
+		void CameraTest(float time);
 	private:
 		CheckPoint* mCheckPoint;
 		TryThisScope* mScope;

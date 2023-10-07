@@ -17,7 +17,7 @@ namespace lu::JSAB
 	}
 	void TryThisSpotlight::BulletSetUp()
 	{
-		mTransform->SetScale(230, 230, 1);
+		mTransform->SetScale(280, 280, 1);
 
 		auto mesh = Resources::Find<Mesh>(L"RectMesh");
 		auto mat = Resources::Load<Material>(L"circle_bullet_prep", L"circle_bullet_prep");
@@ -67,8 +67,9 @@ namespace lu::JSAB
 			Quaternion rotation = mTransform->GetRotation();
 			mTransform->SetRotation(rotation * speed);
 
-		float radius = 50;
-		float moveSpeed = PI * 0.1;
+		float radius = 200;
+		float moveSpeed = 
+			PI * 0.1;
 		mAngle += moveSpeed * Time::DeltaTime();
 		Vector3 pos = { cosf(mAngle) * radius, sinf(mAngle) * radius, mTransform->GetPosition().z };
 		pos.x += mMoveCenter.x;

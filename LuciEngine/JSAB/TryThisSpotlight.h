@@ -12,7 +12,8 @@ namespace lu::JSAB
 		void RotateClockWise() { mRotSpeed = -1; }
 		void RotateCounterClockWise() { mRotSpeed = 1; }
 		void SetCenter(Vector3 pos) { mMoveCenter = pos; }
-		void SetStartAngle(float radian) { mAngle = radian; }
+		void SetStartAngle(float degrees) { mAngle = XMConvertToRadians(degrees); }
+		void Flash(bool flash) { mbFlashWhite = flash; }
 	private:
 		virtual void BulletSetUp()override;
 		virtual void OnWarning()override;
@@ -33,6 +34,7 @@ namespace lu::JSAB
 		float mRotSpeed;
 		float mAngle;
 		Vector3 mMoveCenter;
+		bool mbFlashWhite;
 	};
 }
 

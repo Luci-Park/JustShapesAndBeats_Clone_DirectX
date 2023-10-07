@@ -37,9 +37,11 @@ namespace lu::JSAB
 		virtual void Initialize() override;
 		void SetBackground(eBackgrounds type);
 		void SetBackground(int type);
+		void SetRandomBackground();
 	private:
 		MeshRenderer* mMeshRenderer;
 		Animator* mImgAnim;
+		int mCurrBack;
 	};
 }
 

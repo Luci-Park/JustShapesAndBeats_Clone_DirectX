@@ -8,6 +8,7 @@ namespace lu::JSAB
 	{
 		Script::Initialize();
 		Owner()->SetName(L"LaserBase");
+		Owner()->SetTag(eTagType::Bullet);
 		mMr = Owner()->AddComponent<MeshRenderer>();
 		mMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mMr->SetMaterial(Resources::Load<Material>(L"TTBaseMat", L"TT_Square"));
@@ -45,6 +46,7 @@ namespace lu::JSAB
 	{
 		Script::Initialize();
 		Owner()->SetName(L"Laser");
+		Owner()->SetTag(eTagType::Bullet);
 		mMr = Owner()->AddComponent<MeshRenderer>();
 		mMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mMr->SetMaterial(Resources::Load<Material>(L"TTLaserMat", L"TT_Square"));

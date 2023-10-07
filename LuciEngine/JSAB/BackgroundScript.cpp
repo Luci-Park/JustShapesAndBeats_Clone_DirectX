@@ -62,11 +62,18 @@ namespace lu::JSAB
 		if (type >= eBackgrounds::END)
 			type = eBackgrounds::BLACK;
 		mMeshRenderer->GetMaterial()->SetTexture(_backgrounds[(int)type]);
+		mCurrBack = (int)type;
 	}
 	void BackgroundScript::SetBackground(int type)
 	{
 		if (type < 0 || type >= (int)eBackgrounds::END)
 			type = 0;
 		mMeshRenderer->GetMaterial()->SetTexture(_backgrounds[type]);
+		mCurrBack = type;
+	}
+	void BackgroundScript::SetRandomBackground()
+	{
+		++mCurrBack %= (int)eBackgrounds::END;
+		mMeshRenderer->GetMaterial()->SetTexture(_backgrounds[mCurrBack]);
 	}
 }

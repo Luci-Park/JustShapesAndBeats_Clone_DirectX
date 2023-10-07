@@ -8,11 +8,11 @@ namespace lu::JSAB
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Load<Material>(L"CaseMat", L"TT_Case"));
 		Vector3 scale;
-		scale.y = 300;
+		scale.y = 460.2674;
 		scale.z = 1;
 		scale.x = mr->GetMaterial()->GetTexture()->GetRatioWidth(scale.y);
 		mTransform->SetScale(scale);
-		
+		Owner()->AddComponent<Collider2D>();
 	}
 	void TryThisCrystal::OnWarning()
 	{

@@ -1,7 +1,7 @@
 #pragma once
 #include "..\\Engine_SOURCE\\LScript.h"
-#include <LTexture.h>
-#include <LMesh.h>
+#include "..\\Engine_SOURCE\\LTexture.h"
+#include "..\\Engine_SOURCE\\LMesh.h"
 
 namespace lu::JSAB
 {
@@ -91,6 +91,7 @@ namespace lu::JSAB
 		virtual ~TryThisStage(){}
 
 		virtual void Initialize();
+		void Activate();
 	};
 }
 
