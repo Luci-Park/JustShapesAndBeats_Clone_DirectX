@@ -489,11 +489,15 @@ namespace lu::JSAB
 			auto c = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<TryThisCrystal>();
 			c->mTransform->SetPosition(5234.5376, -76.47402, 1);
 		}
-		Owner()->SetActive(false);
+		DeActivate();
 	}
 	void TryThisStage::Activate()
 	{
 		Owner()->SetActive(true);
+	}
+	void TryThisStage::DeActivate()
+	{
+		Owner()->SetActive(false);
 	}
 #pragma endregion
 }

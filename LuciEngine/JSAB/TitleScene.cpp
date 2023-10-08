@@ -14,12 +14,14 @@
 #include "LInput.h"
 #include "LText.h"
 #include "LSceneManager.h"
+#include "..\\Editor_SOURCE\TransformWidget.h"
 
 namespace lu::JSAB::Title
 {
 	TitleScene::TitleScene()
 		: mbIsInMenu(false)
 		, mbTitleEntered(false)
+		, mButtons(3)
 	{
 	}
 	TitleScene::~TitleScene()
@@ -44,8 +46,19 @@ namespace lu::JSAB::Title
 		mbgs = object::Instantiate<GameObject>(eLayerType::UI)->AddComponent<BackgroundScript>();
 		mbgs->Owner()->SetName(L"TitleBackground");
 		mTitle = object::Instantiate<TitleObject>(eLayerType::UI);
-		mButton = object::Instantiate<MenuButtonObject>(eLayerType::UI);
-		mButton->SetActive(false);
+		float y = 170;
+		float step = 120;
+		for (int i = 0; i < 3; i++)
+		{
+			mButtons[i] = object::Instantiate<MenuButtonObject>(eLayerType::UI);
+			mButtons[i]->SetActive(false);
+			mButtons[i]->mTransform->SetPosition({ 0, y - step * i, 0 });
+			mButtons[i]->OffFocus();
+		}
+		mButtons[0]->SetScene(L"TutorialScene", L"TutorialScene", { -240, -380 });
+		mButtons[1]->SetScene(L"DubwooferSubstepScene", L"Dubwoofer", { -260, -380 + 120 * 2 });
+		mButtons[2]->SetScene(L"TryThisScene", L"Try This", { -240, -380 + 120 * 4 });
+		mBtnIdx = 0;
 
 		mbgm = object::Instantiate<GameObject>(eLayerType::System)->AddComponent<AudioSource>();
 		mbgm->Owner()->SetName(L"TitleBGM");
@@ -68,7 +81,7 @@ namespace lu::JSAB::Title
 			a->AddPositionKey(0.25, { -34.3, -42.5, -9.5 });
 			a->AddPositionXKey(2, 0);
 			a->AddPositionXKey(2.3, 900);
-			a->AddFunctionKey(2.5, std::bind(&SceneManager::LoadScene, L"TitleScene"));
+			a->AddFunctionKey(2.5, std::bind(&TitleScene::MoveToScene, this));
 			t->SetActive(false);
 		}
 		Scene::Initialize();
@@ -92,20 +105,37 @@ namespace lu::JSAB::Title
 				{
 					mTitle->OnMove();
 					mbIsInMenu = true;
-					mButton->SetActive(true);
-					mButton->GetComponent<Animator>()->PlayAnimation(L"Appear", false);
+					for (int i = 0; i < 3; i++)
+						mButtons[i]->Show();
+					mButtons[mBtnIdx]->OnFocus();
 				}
 			}
 		}
 		else
 		{
+			if (Input::GetKeyDown(eKeyCode::UP))
+			{
+				mbgm->PlayOneShot(Resources::Find<AudioClip>(L"SFX_UI_MOVE_2"), 1);
+				mButtons[mBtnIdx]->OffFocus();
+				mBtnIdx--;
+				if (mBtnIdx < 0) mBtnIdx = 2;
+				mButtons[mBtnIdx]->OnFocus();
+			}
+			else if (Input::GetKeyDown(eKeyCode::DOWN))
+			{
+				mbgm->PlayOneShot(Resources::Find<AudioClip>(L"SFX_UI_MOVE_2"), 1);
+				mButtons[mBtnIdx]->OffFocus();
+				++mBtnIdx %= mButtons.size();
+				mButtons[mBtnIdx]->OnFocus();
+			}
 			if (Input::GetKeyDown(eKeyCode::ENTER))
 			{
 				mbgm->Stop();
 				mbgm->SetClip(mAudios[2]);
 				mbgm->Play(false);
 				mbgm->PlayOneShot(Resources::Find<AudioClip>(L"SFX_HEX_CHALLENGE_RIBBON_TO_COIN"), 1);
-				mButton->GetComponent<Animator>()->PlayAnimation(L"Disappear", false);
+				for (int i = 0; i < 3; i++)
+					mButtons[i]->Hide();
 				mCamera->BlackFadeOut();
 				mText->Owner()->SetActive(true);
 				mText->PlayAnimation(L"Appear", false);
@@ -144,7 +174,8 @@ namespace lu::JSAB::Title
 		mbgm->SetClip(mAudios[0]);
 		mbgm->Play(false);
 		mTitle->OnAppear();
-		mButton->SetActive(false);
+		for (int i = 0; i < 3; i++)
+			mButtons[i]->SetActive(false);
 	}
 	void TitleScene::ShowMenu()
 	{
@@ -154,7 +185,16 @@ namespace lu::JSAB::Title
 
 		mTitle->OnMenu();
 		mbIsInMenu = true;
-		mButton->SetActive(true);
+		for (int i = 0; i < 3; i++)
+		{
+			mButtons[i]->ShowWithOutAnim();
+			mButtons[i]->OffFocus();
+		}
+		mButtons[mBtnIdx]->OnFocus();
+	}
+	void TitleScene::MoveToScene()
+	{
+		mButtons[mBtnIdx]->Activate();
 	}
 	void TitleScene::OnExit()
 	{

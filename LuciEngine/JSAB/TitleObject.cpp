@@ -13,9 +13,9 @@ namespace lu::JSAB
 		std::shared_ptr<Material> mat = Resources::Load<Material>(L"TitleMat", L"Title_Fill");
 		mat->SetRenderingMode(eRenderingMode::Transparent);
 
-		MeshRenderer* mr = img -> AddComponent<MeshRenderer>();
-		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mr->SetMaterial(mat);
+		mTitle = img -> AddComponent<MeshRenderer>();
+		mTitle->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		mTitle->SetMaterial(mat);
 		mat->SetTint({ 0.3, 0.3, 0.3, 0.3 });
 
 		Vector3 scale = mat->GetTexture()->GetSize();
@@ -96,5 +96,6 @@ namespace lu::JSAB
 	{
 		mImgAnim->PlayAnimation(L"Bump", true);
 		mTransform->SetPosition(Vector3(-281, 0, 0));
+		mTitle->GetMaterial()->SetTint(Color::white);
 	}
 }

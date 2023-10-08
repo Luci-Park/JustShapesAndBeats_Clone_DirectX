@@ -92,6 +92,7 @@ namespace lu::JSAB
 
 		virtual void Initialize();
 		void Activate();
+		void DeActivate();
 	};
 }
 

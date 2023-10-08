@@ -16,7 +16,7 @@ namespace lu::JSAB
 		CollisionManager::SetLayer(eLayerType::Bullet, eLayerType::BulletInteractor, true);
 
 		auto c = object::Instantiate<GameObject>(eLayerType::Camera)->AddComponent<GameCamera>();
-		c->Owner()->AddComponent<yaCamera>();
+		//c->Owner()->AddComponent<yaCamera>();
 		mBackground = c->GetBackground();
 
 		GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);

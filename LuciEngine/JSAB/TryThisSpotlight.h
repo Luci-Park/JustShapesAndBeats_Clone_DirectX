@@ -8,7 +8,6 @@ namespace lu::JSAB
 		TryThisSpotlight() {}
 		virtual ~TryThisSpotlight() {}
 
-		virtual void Update() override;
 		void RotateClockWise() { mRotSpeed = -1; }
 		void RotateCounterClockWise() { mRotSpeed = 1; }
 		void SetCenter(Vector3 pos) { mMoveCenter = pos; }

@@ -2,19 +2,6 @@
 #include "LTime.h"
 namespace lu::JSAB
 {
-	void TryThisSpotlight::Update()
-	{
-		static float time = 0;
-		Bullet::Update();
-		mWarningProcess = time / 1;
-		time += Time::DeltaTime();
-		if (time > 1)
-			time = 0;
-		if (mBulletState == eBulletState::Warning)
-			WhileWarning(0);
-		else if (mBulletState == eBulletState::Activate)
-			WhileActivate(0);
-	}
 	void TryThisSpotlight::BulletSetUp()
 	{
 		mTransform->SetScale(280, 280, 1);
@@ -93,8 +80,6 @@ namespace lu::JSAB
 	}
 	void TryThisSpotlight::OnDeActivate()
 	{
-		//mFillCol->SetActive(false);
-		//mFillMr->Owner()->SetActive(false);
-		//mMr->SetActive(false);
+		Owner()->SetActive(false);
 	}
 }

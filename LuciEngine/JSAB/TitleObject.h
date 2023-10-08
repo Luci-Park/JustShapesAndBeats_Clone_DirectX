@@ -3,6 +3,7 @@
 namespace lu
 {
 	class Animator;
+	class MeshRenderer;
 }
 namespace lu::JSAB
 {
@@ -21,6 +22,7 @@ namespace lu::JSAB
 		Animator* mImgAnim;
 		Animator* mAnim;
 		Animator* mLight;
+		MeshRenderer* mTitle;
 		bool beat;
 	};
 }

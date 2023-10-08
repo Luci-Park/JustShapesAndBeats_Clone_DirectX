@@ -31,7 +31,7 @@ namespace lu::JSAB
 	{
 		mMusic = Owner()->GetComponent<TutorialMusicController>();
 		mBackground = SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetBackground();
-		mNextScene = L"DubwooferSubstepScene";
+		mNextScene = L"TitleScene";
 
 		mCheckPoint = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<CheckPoint>();
 		mCheckPoint->SetBackground(SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetBackground());

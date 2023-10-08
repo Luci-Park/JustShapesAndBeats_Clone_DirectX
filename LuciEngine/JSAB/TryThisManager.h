@@ -8,6 +8,7 @@
 #include "TryThisRoundSpike.h"
 #include "TryThisScope.h"
 #include "TryThisSpotlight.h"
+//#include "CameraScript.h"
 namespace lu::JSAB
 {
 	class CheckPoint;
@@ -23,13 +24,17 @@ namespace lu::JSAB
 		virtual void OnMusicEnd() override;
 
 	private:
-		void CameraTest(float time);
+		void Scope(float time);
+		void Camera(float time);
+		void ActivateStage();
 	private:
+		CameraEffectScript* mEffect;
 		CheckPoint* mCheckPoint;
 		TryThisScope* mScope;
+		TryThisStage* mStage;
+		std::vector<TryThisSpotlight*>mLights;
 
-		int mbScopeFlag;
-
+		int mbScopeFlag, mbCameraFlag;
 	};
 }
 

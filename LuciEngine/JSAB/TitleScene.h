@@ -33,11 +33,13 @@ namespace lu::JSAB::Title
 	private:
 		void ShowTitle();
 		void ShowMenu();
+		void MoveToScene();
 	private:
 		BackgroundScript* mbgs;
 		TitleObject* mTitle;
 		AudioSource* mbgm;
-		MenuButtonObject* mButton;
+		std::vector<MenuButtonObject*> mButtons;
+		int mBtnIdx;
 		CameraEffectScript* mCamera;
 		Animator* mText;
 		std::shared_ptr<AudioClip> mAudios[3];
