@@ -24,7 +24,6 @@ namespace lu
 		void SetActive(bool active);
 	protected:
 		eState mState;
-	private:
 		UINT64 mColliderID;
 	};
 }

@@ -17,7 +17,7 @@ namespace lu::JSAB
 		{
 			auto tag = object::Instantiate<GameObject>(mTransform, eLayerType::UI);
 			tag->SetName(L"Button Base");
-			auto mat = Resources::Load<Material>(L"ButtonTagMag", L"Menu_Tag_Story_OnPoint");
+			auto mat = Resources::Load<Material>(L"ButtonTagMat" + std::to_wstring(mColliderID), L"Menu_Tag_Story_OnPoint");
 			mTag = tag->AddComponent<MeshRenderer>();
 			mTag->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mTag->SetMaterial(mat);
@@ -30,7 +30,7 @@ namespace lu::JSAB
 
 			auto tag = object::Instantiate<GameObject>(mTransform, eLayerType::UI);
 			tag->SetName(L"Button SideTag");
-			auto mat = Resources::Load<Material>(L"ButtonSideTagMag", L"Menu_SideTag_Story_OnPoint");
+			auto mat = Resources::Load<Material>(L"ButtonSideTagMag" + std::to_wstring(mColliderID), L"Menu_SideTag_Story_OnPoint");
 			mSideTag = tag->AddComponent<MeshRenderer>();
 			mSideTag->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mSideTag->SetMaterial(mat);
