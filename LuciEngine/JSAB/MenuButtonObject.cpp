@@ -44,19 +44,13 @@ namespace lu::JSAB
 		mAnim = AddComponent<Animator>();
 		auto a = mAnim->CreateAnimation(L"Appear");
 		a->AddScaleKey(0, {0, 1, 1});
-		a->AddPositionKey(0, { -200, 0, 0 });
 		a->AddScaleKey(0.2, { 1.3, 1, 1 });
-		a->AddPositionKey(0.3, { 20, 0, 0 });
 		a->AddScaleKey(0.5, Vector3::One);
-		a->AddPositionKey(0.7, { 0, 0, 0 });
 
 		a = mAnim->CreateAnimation(L"Disappear");
 		a->AddScaleKey(0, { 1, 1, 1 });
-		a->AddPositionKey(0, { 0, 0, 0 });
 		a->AddScaleKey(0.2, { 1.3, 1, 1 });
-		a->AddPositionKey(0.3, { 20, 0, 0 });
 		a->AddScaleKey(0.5, {0, 1, 1});
-		a->AddPositionKey(0.7, { -200, 0, 0 });
 		a->AddFunctionKey(0.7, std::bind(&GameObject::SetActive, this, false));
 
 		mOnPointSideTag = Resources::Find<Texture>(L"Menu_SideTag_Story_OnPoint");
@@ -87,6 +81,7 @@ namespace lu::JSAB
 		pos.x = 480;
 		mTransform->SetPosition(pos);
 		mText->color = Color::white;
+		mAnim->PlayAnimation(L"Appear", false);
 	}
 	void MenuButtonObject::OffFocus()
 	{
