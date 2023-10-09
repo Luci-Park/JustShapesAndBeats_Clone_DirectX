@@ -45,7 +45,7 @@ namespace lu::JSAB
 		virtual void Update() override;
 		void RotateClockWise() { mRotSpeed = -0.1; }
 		void RotateCounterClockWise() { mRotSpeed = 0.1; }
-		void Shake() { mOrgPos = mTransform->GetPosition();  mbShake = true; }
+		void Shake();
 	private:
 		virtual void BulletSetUp()override;
 		virtual void OnWarning()override;

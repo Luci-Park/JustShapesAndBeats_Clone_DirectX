@@ -7,6 +7,7 @@
 namespace lu::JSAB
 {
 	TryThisManager::TryThisManager()
+		: mLasers(6)
 	{
 	}
 	void TryThisManager::Initialize()
@@ -54,19 +55,19 @@ namespace lu::JSAB
 			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
 			light->SetCenter({ 2621.489, 140.8391, 0 });
 			light->RotateCounterClockWise();
-			light->SetStartAngle(290);
+			light->SetStartAngle(20);
 			mLights.push_back(light);
 
 			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
 			light->SetCenter({ 3122.3633, 74.33054, 0 });
 			light->RotateClockWise();
-			light->SetStartAngle(-100);
+			light->SetStartAngle(270);
 			mLights.push_back(light);
 
 			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
 			light->SetCenter({ 3837.9368, 80.56461, 0 });
 			light->RotateClockWise();
-			light->SetStartAngle(15);
+			light->SetStartAngle(60);
 			mLights.push_back(light);
 		}
 		/*
@@ -121,12 +122,13 @@ namespace lu::JSAB
 		CameraMove(time);
 		CameraBump(time);
 		Light(time);
+		Laser(time);
 		MusicManager::Update();
 	}
 	void TryThisManager::Play()
 	{
 		mStage->DeActivate();
-		mScopeFlag = 0;
+		mLaserFlag = 0;
 		mCameraFlag = 0;
 		mLightFlag = 0;
 		Vector3 pos = SceneManager::MainCamera()->Owner()->mTransform->GetPosition();
@@ -200,10 +202,14 @@ namespace lu::JSAB
 	void TryThisManager::Light(double time)
 	{
 		static double beat[] = {
-			13.45, 13.6, 13.75, 13.9, 16.25, 16.6, 18.9, 19.05, 19.2, 19.35, 24.5, 24.65, 24.8, 24.95, 27.35, 27.65, 29.85, 30, 30.15, 30.3, 33.2, 
-			35.5, 35.65, 35.8, 35.95, 38.5, 38.8, 40.95, 41.133, 41.317, 41.5, 44.3, 44.6, 47.1, 47.4, 49.9, 50.2, 52.65, 52.95, 54.1, 54.4
+			13.45, 13.6, 13.75, 13.9, 16.25, 16.6, 18.9, 19.05, 19.2, 19.35, 
+			24.5, 24.65, 24.8, 24.95, 27.35, 27.65, 29.85, 30, 30.15, 30.3,
+			33.2, 35.5, 35.65, 35.8, 35.95, 38.5, 38.8, 40.95, 41.133, 41.317, 
+			41.5, 44.3, 44.6, 47.1, 47.4, 49.9, 50.2, 52.65, 52.95, 54.1, 54.4
 		};
-		static double warning[] = {	2, 2, 0, 0, 2, 0, 2, 2, 0, 0, 2, 2, 0, 0, 2, 2, 2, 2, 0, 0, 2, 2, 2, 0, 0, 2, 0, 2, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 1, 0 };
+		static double warning[] = {	2, 2, 0, 0, 2, 0, 2, 2, 0, 0
+			, 2, 2, 0, 0, 2, 0, 2, 2, 0, 0
+			, 2, 2, 2, 0, 0, 2, 0, 2, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 1, 0 };
 		static double outro[] = {
 			0.162, 0.150, 0.499, 0.346, 0.619, 0.526, 0.162, 0.150, 1.576, 1.433, 0.162, 0.15, 0.499, 0.346, 0.499, 0.597, 0.162, 0.15, 0.499, 0.346, 0.597, 0.162
 			, 0.15, 0.499, 0.346, 0.499, 0.597, 0.162, 0.15, 0.499, 0.346, 0.499, 0.597, 0.499, 0.597, 0.499, 0.597, 0.499, 0.597, 0.499, 0.597
@@ -216,9 +222,11 @@ namespace lu::JSAB
 		};
 		if (mLightFlag < 41 && time >= beat[mLightFlag] - warning[mLightFlag] - 0.1)
 		{
-			if(mLightFlag >= 27)
-				for(int i =0; i < 7; i++)
+			if (mLightFlag >= 27)
+			{
+				for (int i = 0; i < 7; i++)
 					mLights[i]->SetTimeline(mMusic, warning[mLightFlag], beat[mLightFlag], outro[mLightFlag]);
+			}
 			else
 			{
 				for (int i = 0; i < idxs[mLightFlag].size(); i++)
@@ -231,6 +239,27 @@ namespace lu::JSAB
 				}
 			}
 			mLightFlag++;
+		}
+	}
+	void TryThisManager::Laser(double time)
+	{
+		static double beat[] = { 30.450 };
+		static double warning[] = { 1.500 };
+		static double outro[] = { 2.578 };
+		static Vector3 pos[] = {
+			{921.45526, 0, 0}
+		};
+		static bool clockwise[] = { true };
+		if (mLaserFlag < 1 && time >= beat[mLaserFlag] - warning[mLaserFlag] - 0.1)
+		{
+			auto b = mLasers.GetNext();
+			b->SetTimeline(mMusic, warning[mLaserFlag], beat[mLaserFlag], outro[mLaserFlag]);
+			b->mTransform->SetPosition(pos[mLaserFlag]);
+			if (clockwise[mLaserFlag])
+				b->RotateClockWise();
+			else
+				b->RotateCounterClockWise();
+			mLaserFlag++;
 		}
 	}
 	void TryThisManager::ActivateStage()

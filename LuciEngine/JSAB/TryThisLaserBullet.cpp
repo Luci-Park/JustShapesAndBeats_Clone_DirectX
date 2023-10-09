@@ -100,6 +100,11 @@ namespace lu::JSAB
 		//mRotSpeed = -0.05;
 		//WhileActivate(0);
 	}
+	void TryThisLaserBullet::Shake()
+	{
+		mOrgPos = mTransform->GetPosition();  
+		mbShake = true;
+	}
 	void TryThisLaserBullet::BulletSetUp()
 	{
 		Owner()->SetName(L"LaserBullet");
@@ -116,19 +121,19 @@ namespace lu::JSAB
 		mBase->mTransform->SetPosition(0, 0, -0.1);
 		mLaser1->mTransform->SetRotation(Quaternion::Create2DRotationDegrees(45));
 		mLaser2->mTransform->SetRotation(Quaternion::Create2DRotationDegrees(135));
-		mBase->SetActive(false);
-		mLaser1->SetActive(false);
-		mLaser2->SetActive(false);
+		mBase->Owner()->SetActive(false);
+		mLaser1->Owner()->SetActive(false);
+		mLaser2->Owner()->SetActive(false);
 
-		mbShake = true;
+		mbShake = false;
 	}
 	void TryThisLaserBullet::OnWarning()
 	{
 		mTransform->SetScale(1, 1, 1);
 
-		mBase->SetActive(true);
-		mLaser1->SetActive(true);
-		mLaser2->SetActive(true);
+		mBase->Owner()->SetActive(true);
+		mLaser1->Owner()->SetActive(true);
+		mLaser2->Owner()->SetActive(true);
 
 		mBase->Ready();
 		mLaser1->Ready();
@@ -150,6 +155,7 @@ namespace lu::JSAB
 		mBase->Activate();
 		mLaser1->Activate();
 		mLaser2->Activate();
+		Shake();
 	}
 	void TryThisLaserBullet::WhileActivate(double time)
 	{
@@ -177,6 +183,9 @@ namespace lu::JSAB
 	}
 	void TryThisLaserBullet::OnDeActivate()
 	{
+		mBase->Owner()->SetActive(false);
+		mLaser1->Owner()->SetActive(false);
+		mLaser2->Owner()->SetActive(false);
 	}
 #pragma endregion
 }
