@@ -100,8 +100,8 @@ namespace lu::JSAB
 	}
 	void TryThisSpotlight::WhileOutro(double time)
 	{
-		if(mFillTr->GetLocalScale().x < 0.3)
-			Move();
+		//if(mFillTr->GetLocalScale().x < 0.3)
+		//	Move();
 		Rotate();
 	}
 	void TryThisSpotlight::OnDeActivate()

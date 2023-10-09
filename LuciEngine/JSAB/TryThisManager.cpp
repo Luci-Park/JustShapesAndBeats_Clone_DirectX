@@ -49,19 +49,19 @@ namespace lu::JSAB
 			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
 			light->SetCenter({ 1931.6791, -14.669791, 0 });
 			light->RotateCounterClockWise();
-			light->SetStartAngle(800);
+			light->SetStartAngle(270);
 			mLights.push_back(light);
 
 			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
 			light->SetCenter({ 2621.489, 140.8391, 0 });
 			light->RotateCounterClockWise();
-			light->SetStartAngle(20);
+			light->SetStartAngle(60);
 			mLights.push_back(light);
 
 			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
 			light->SetCenter({ 3122.3633, 74.33054, 0 });
 			light->RotateClockWise();
-			light->SetStartAngle(270);
+			light->SetStartAngle(0);
 			mLights.push_back(light);
 
 			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
@@ -250,10 +250,10 @@ namespace lu::JSAB
 			{921.45526, 0, 0}
 		};
 		static bool clockwise[] = { true };
-		if (mLaserFlag < 1 && time >= beat[mLaserFlag] - warning[mLaserFlag] - 0.1)
+		if (mLaserFlag < 1 && time >= beat[mLaserFlag] - warning[mLaserFlag] - 0.5)
 		{
 			auto b = mLasers.GetNext();
-			b->SetTimeline(mMusic, warning[mLaserFlag], beat[mLaserFlag], outro[mLaserFlag]);
+			b->SetTimeline(mMusic, warning[mLaserFlag], beat[mLaserFlag]- 0.4, outro[mLaserFlag]);
 			b->mTransform->SetPosition(pos[mLaserFlag]);
 			if (clockwise[mLaserFlag])
 				b->RotateClockWise();
