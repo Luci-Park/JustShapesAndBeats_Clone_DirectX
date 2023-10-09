@@ -7,7 +7,7 @@ namespace lu::JSAB
 	public:
 		TryThisSpotlight() {}
 		virtual ~TryThisSpotlight() {}
-
+		virtual void Update();
 		void RotateClockWise() { mRotSpeed = -1; }
 		void RotateCounterClockWise() { mRotSpeed = 1; }
 		void SetCenter(Vector3 pos);

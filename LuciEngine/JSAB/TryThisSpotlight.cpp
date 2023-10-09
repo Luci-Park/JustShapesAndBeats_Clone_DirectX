@@ -2,6 +2,19 @@
 #include "LTime.h"
 namespace lu::JSAB
 {
+	void TryThisSpotlight::Update()
+	{
+		Bullet::Update();
+		if (mBulletState != eBulletState::Activate)
+		{
+			Move();
+			Rotate();
+			if (mBulletState == eBulletState::DeActivate)
+			{
+				mFillTr->SetLocalScale({ 0, 0, 1 });
+			}
+		}
+	}
 	void TryThisSpotlight::SetCenter(Vector3 pos)
 	{
 		mMoveCenter = pos;
@@ -68,8 +81,8 @@ namespace lu::JSAB
 		Vector3 scale = Vector3::Lerp({ 0, 0, 1 }, { 1, 1, 1 }, mWarningProcess);
 		mFillTr->SetLocalScale(scale);
 
-		Move();
-		Rotate();
+		//Move();
+		//Rotate();
 	}
 	void TryThisSpotlight::OnActivate()
 	{
@@ -86,8 +99,8 @@ namespace lu::JSAB
 	}
 	void TryThisSpotlight::WhileOutro(double time)
 	{
-		Move();
-		Rotate();
+		//Move();
+		//Rotate();
 	}
 	void TryThisSpotlight::OnDeActivate()
 	{
