@@ -27,7 +27,8 @@ namespace lu::JSAB
 		mWarningTime = wt;
 		mActivateTime = at;
 		mOutroTime = ot;
-		mBulletState = eBulletState::Waiting;
+		if(mBulletState != eBulletState::Outro)
+			mBulletState = eBulletState::Waiting;
 	}
 	void Bullet::Warning()
 	{

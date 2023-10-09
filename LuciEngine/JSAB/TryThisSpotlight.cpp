@@ -62,6 +62,7 @@ namespace lu::JSAB
 
 		ani->AddLocalScaleKey(0, { 1.2, 1.2, 1 });
 		ani->AddLocalScaleKey(duration, { 0, 0, 1 });
+		ani->AddFunctionKey(duration, std::bind( & Bullet::DeActivate, this));
 		
 		RotateClockWise();
 		SetStartAngle(0);
@@ -99,12 +100,13 @@ namespace lu::JSAB
 	}
 	void TryThisSpotlight::WhileOutro(double time)
 	{
-		//Move();
+		if(mFillTr->GetLocalScale().x < 0.3)
+			Move();
 		Rotate();
 	}
 	void TryThisSpotlight::OnDeActivate()
 	{
-		Owner()->SetActive(false);
+		//Owner()->SetActive(false);
 	}
 	void TryThisSpotlight::Move()
 	{

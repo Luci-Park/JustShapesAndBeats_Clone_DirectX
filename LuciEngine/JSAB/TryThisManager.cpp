@@ -30,13 +30,13 @@ namespace lu::JSAB
 			auto light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
 			light->SetCenter({ -264.864, 0, 0 });
 			light->RotateClockWise();
-			light->SetStartAngle(210);
+			light->SetStartAngle(-130);
 			mLights.push_back(light);
 
 			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
 			light->SetCenter({ 264.864, 0, 0 });
 			light->RotateCounterClockWise();
-			light->SetStartAngle(-30);
+			light->SetStartAngle(90);
 			mLights.push_back(light);
 
 			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
@@ -48,7 +48,7 @@ namespace lu::JSAB
 			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
 			light->SetCenter({ 1931.6791, -14.669791, 0 });
 			light->RotateCounterClockWise();
-			light->SetStartAngle(90);
+			light->SetStartAngle(800);
 			mLights.push_back(light);
 
 			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
@@ -133,6 +133,10 @@ namespace lu::JSAB
 		pos.x = 0;
 		pos.y = 0;
 		SceneManager::MainCamera()->Owner()->mTransform->SetPosition(pos);
+		for (int i = 0; i < 7; i++)
+		{
+			mLights[i]->Owner()->SetActive(false);
+		}
 
 		MusicManager::Play();
 	}
@@ -184,11 +188,11 @@ namespace lu::JSAB
 		if (mCameraFlag < 116 && time >= beat[mCameraFlag])
 		{
 			mEffect->Bump(dir[dirIdx[mCameraFlag]]);
-			if (mCameraFlag == 3)
-				mScope->SetPosition(Vector3::Left * 300);
-			else if (mCameraFlag == 7)
-				mScope->SetPosition(Vector3::Left * 150);
-			else if (mCameraFlag == 24)
+			//if (mCameraFlag == 3)
+			//	mScope->SetPosition(Vector3::Left * 300);
+			//else if (mCameraFlag == 7)
+				mScope->SetPosition(Vector3::Right * 0);
+			if (mCameraFlag == 24)
 				ActivateStage();
 			mCameraFlag++;
 		}
@@ -210,7 +214,7 @@ namespace lu::JSAB
 			{0}, {1}, {0}, {1}, {0,1}, {0,1}, {0}, {1}, {0}, {1},
 			{0, 1}, {0, 1}, {0, 1}, {0, 1}
 		};
-		if (mLightFlag < 41 && time >= beat[mLightFlag] - warning[mLightFlag] - 0.05)
+		if (mLightFlag < 41 && time >= beat[mLightFlag] - warning[mLightFlag] - 0.1)
 		{
 			if(mLightFlag >= 27)
 				for(int i =0; i < 7; i++)
