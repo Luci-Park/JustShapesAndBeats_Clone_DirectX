@@ -24,7 +24,8 @@ namespace lu::JSAB
 		virtual void OnMusicEnd() override;
 
 	private:
-		void Camera(double time);
+		void CameraMove(double time);
+		void CameraBump(double time);
 		void Light(double time);
 		void ActivateStage();
 	private:
