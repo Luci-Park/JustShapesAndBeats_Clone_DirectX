@@ -10,8 +10,8 @@ namespace lu::JSAB
 
 		void RotateClockWise() { mRotSpeed = -1; }
 		void RotateCounterClockWise() { mRotSpeed = 1; }
-		void SetCenter(Vector3 pos) { mMoveCenter = pos; }
-		void SetStartAngle(float degrees) { mAngle = XMConvertToRadians(degrees); }
+		void SetCenter(Vector3 pos);
+		void SetStartAngle(float degrees);
 		void Flash(bool flash) { mbFlashWhite = flash; }
 	private:
 		virtual void BulletSetUp()override;
@@ -22,6 +22,9 @@ namespace lu::JSAB
 		virtual void OnOutro()override;
 		virtual void WhileOutro(double time)override;
 		virtual void OnDeActivate()override;
+
+		void Move();
+		void Rotate();
 	private:
 		MeshRenderer* mMr;
 		

@@ -2,6 +2,16 @@
 #include "LTime.h"
 namespace lu::JSAB
 {
+	void TryThisSpotlight::SetCenter(Vector3 pos)
+	{
+		mMoveCenter = pos;
+		Move();
+	}
+	void TryThisSpotlight::SetStartAngle(float degrees)
+	{
+		mAngle = XMConvertToRadians(degrees);
+		Move();
+	}
 	void TryThisSpotlight::BulletSetUp()
 	{
 		mTransform->SetScale(280, 280, 1);
@@ -13,6 +23,8 @@ namespace lu::JSAB
 		mat->SetRenderingMode(eRenderingMode::CutOut);
 
 		auto fill = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
+		fill->SetTag(eTagType::Bullet);
+
 		mFillTr = fill->mTransform;
 		mFillTr->SetLocalPosition(0, 0, -0.1);
 		mFillMr = fill->AddComponent<MeshRenderer>();
@@ -31,6 +43,12 @@ namespace lu::JSAB
 		ani->AddLocalScaleKey(0, { 0, 0, 1 });
 		ani->AddLocalScaleKey(duration * 0.8, { 1.3, 1.3, 1 });
 		ani->AddLocalScaleKey(duration, { 1.2, 1.2, 1.2 });
+
+		ani = mFillAnim->CreateAnimation(L"Outro");
+		duration = 0.1;
+
+		ani->AddLocalScaleKey(0, { 1.2, 1.2, 1 });
+		ani->AddLocalScaleKey(duration, { 0, 0, 1 });
 		
 		RotateClockWise();
 		SetStartAngle(0);
@@ -50,18 +68,8 @@ namespace lu::JSAB
 		Vector3 scale = Vector3::Lerp({ 0, 0, 1 }, { 1, 1, 1 }, mWarningProcess);
 		mFillTr->SetLocalScale(scale);
 
-			Quaternion speed = Quaternion::CreateFromAxisAngle(Vector3::Forward, mRotSpeed * Time::DeltaTime());
-			Quaternion rotation = mTransform->GetRotation();
-			mTransform->SetRotation(rotation * speed);
-
-		float radius = 200;
-		float moveSpeed = 
-			PI * 0.1;
-		mAngle += moveSpeed * Time::DeltaTime();
-		Vector3 pos = { cosf(mAngle) * radius, sinf(mAngle) * radius, mTransform->GetPosition().z };
-		pos.x += mMoveCenter.x;
-		pos.y += mMoveCenter.y;
-		mTransform->SetPosition(pos);
+		Move();
+		Rotate();
 	}
 	void TryThisSpotlight::OnActivate()
 	{
@@ -74,12 +82,32 @@ namespace lu::JSAB
 	}
 	void TryThisSpotlight::OnOutro()
 	{
+		mFillAnim->PlayAnimation(L"Outro", false);
 	}
 	void TryThisSpotlight::WhileOutro(double time)
 	{
+		Move();
+		Rotate();
 	}
 	void TryThisSpotlight::OnDeActivate()
 	{
 		Owner()->SetActive(false);
+	}
+	void TryThisSpotlight::Move()
+	{
+		float radius = 200;
+		float moveSpeed =
+			PI * 0.1;
+		mAngle += moveSpeed * Time::DeltaTime();
+		Vector3 pos = { cosf(mAngle) * radius, sinf(mAngle) * radius, mTransform->GetPosition().z };
+		pos.x += mMoveCenter.x;
+		pos.y += mMoveCenter.y;
+		mTransform->SetPosition(pos);
+	}
+	void TryThisSpotlight::Rotate()
+	{
+		Quaternion speed = Quaternion::CreateFromAxisAngle(Vector3::Forward, mRotSpeed * Time::DeltaTime());
+		Quaternion rotation = mTransform->GetRotation();
+		mTransform->SetRotation(rotation * speed);
 	}
 }

@@ -23,55 +23,50 @@ namespace lu::JSAB
 		mScope->SetTimeline(mMusic, 0, .850, 11.3 - .850);
 
 		mStage = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisStage>();
-		for (int i = 0; i < 4; i++)
 		{
 			auto light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
-			mLights.push_back(light);
-		}
-		/*
-		{
-			auto light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
-			light->Warning();
 			light->SetCenter({ -264.864, 0, 0 });
 			light->RotateClockWise();
 			light->SetStartAngle(210);
+			mLights.push_back(light);
 
 			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
-			light->Warning();
 			light->SetCenter({ 264.864, 0, 0 });
 			light->RotateCounterClockWise();
 			light->SetStartAngle(-30);
+			mLights.push_back(light);
 
 			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
-			light->Warning();
 			light->SetCenter({ 1190.2592, -9.408161, 0 });
 			light->RotateClockWise();
 			light->SetStartAngle(210);
+			mLights.push_back(light);
 
 			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
-			light->Warning();
 			light->SetCenter({ 1931.6791, -14.669791, 0 });
 			light->RotateCounterClockWise();
 			light->SetStartAngle(90);
+			mLights.push_back(light);
 
 			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
-			light->Warning();
 			light->SetCenter({ 2621.489, 140.8391, 0 });
 			light->RotateCounterClockWise();
 			light->SetStartAngle(290);
+			mLights.push_back(light);
 
 			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
-			light->Warning();
 			light->SetCenter({ 3122.3633, 74.33054, 0 });
 			light->RotateClockWise();
 			light->SetStartAngle(-100);
+			mLights.push_back(light);
 
 			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
-			light->Warning();
 			light->SetCenter({ 3837.9368, 80.56461, 0 });
 			light->RotateClockWise();
 			light->SetStartAngle(15);
+			mLights.push_back(light);
 		}
+		/*
 		{
 			auto light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
 			light->Warning();
@@ -121,13 +116,15 @@ namespace lu::JSAB
 	{
 		double time = mMusic->GetTime();
 		Camera(time);
+		Light(time);
 		MusicManager::Update();
 	}
 	void TryThisManager::Play()
 	{
 		mStage->DeActivate();
-		mbScopeFlag = 0;
-		mbCameraFlag = 0;
+		mScopeFlag = 0;
+		mCameraFlag = 0;
+		mLightFlag = 0;
 		MusicManager::Play();
 	}
 	void TryThisManager::OnMusicEnd()
@@ -135,10 +132,7 @@ namespace lu::JSAB
 		mMusic->Finish();
 		mbFin = true;
 	}
-	void TryThisManager::Scope(float time)
-	{
-	}
-	void TryThisManager::Camera(float time)
+	void TryThisManager::Camera(double time)
 	{
 		static double beat[] = {2.95, 3.425, 3.9, 5.55, 6.075, 6.6, 8.4, 8.572, 8.744, 8.916, 9.088, 9.259, 9.431, 9.603, 9.775, 9.947, 10.119
 		,10.291, 10.463, 10.634, 10.806, 10.978, 11.15, 11.2, 11.3 
@@ -146,30 +140,39 @@ namespace lu::JSAB
 		static Vector3 dir[] = {Vector3::Up, Vector3::Down, Vector3::Left, Vector3::Right};
 		static int dirIdx[] = { 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 0 };
 
-		if (mbCameraFlag < 25 && time >= beat[mbCameraFlag])
+		if (mCameraFlag < 25 && time >= beat[mCameraFlag])
 		{
-			mEffect->Bump(dir[dirIdx[mbCameraFlag]]);
-			if (mbCameraFlag == 3)
+			mEffect->Bump(dir[dirIdx[mCameraFlag]]);
+			if (mCameraFlag == 3)
 				mScope->SetPosition(Vector3::Left * 300);
-			else if (mbCameraFlag == 7)
+			else if (mCameraFlag == 7)
 				mScope->SetPosition(Vector3::Right * 0);
-			else if (mbCameraFlag == 24)
+			else if (mCameraFlag == 24)
 				ActivateStage();
-			mbCameraFlag++;
+			mCameraFlag++;
+		}
+	}
+	void TryThisManager::Light(double time)
+	{
+		static double beat[] = {
+			13.45, 13.6, 13.75, 13.9, 16.25, 16.6, 18.9, 19.05, 19.2, 19.35
+		};
+		static double warning[] = {
+			2, 2, 0, 0, 2, 0, 2, 2, 0, 0
+		};
+		static double outro[] = {
+			0.162, 0.150, 0.499, 0.346, 0.619, 0.526, 0.162, 0.150, 1.576, 1.433
+		};
+		if (mLightFlag < 10 && time >= beat[mLightFlag] - warning[mLightFlag] - 0.2)
+		{
+			mLights[mLightFlag % 2]->SetTimeline(mMusic, warning[mLightFlag], beat[mLightFlag], outro[mLightFlag]);
+			mLightFlag++;
 		}
 	}
 	void TryThisManager::ActivateStage()
 	{
 		mStage->Activate();
-		mLights[0]->Owner()->SetActive(true);
-		mLights[0]->SetTimeline(mMusic, 2, 13.45, .162);
-		mLights[0]->SetCenter({ -264.864, 0, 0 });
-		mLights[0]->RotateClockWise();
-		mLights[0]->SetStartAngle(210);
-		mLights[1]->Owner()->SetActive(true);
-		mLights[1]->SetTimeline(mMusic, 2, 13.6, .150);
-		mLights[1]->Warning();
-		mLights[1]->SetCenter({ 264.864, 0, 0 });
-		mLights[1]->RotateCounterClockWise();
+		for (int i = 0; i < 7; i++)
+			mLights[i]->Owner()->SetActive(true);
 	}
 }

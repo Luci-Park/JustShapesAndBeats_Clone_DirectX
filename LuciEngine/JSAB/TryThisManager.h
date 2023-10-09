@@ -24,8 +24,8 @@ namespace lu::JSAB
 		virtual void OnMusicEnd() override;
 
 	private:
-		void Scope(float time);
-		void Camera(float time);
+		void Camera(double time);
+		void Light(double time);
 		void ActivateStage();
 	private:
 		CameraEffectScript* mEffect;
@@ -34,7 +34,7 @@ namespace lu::JSAB
 		TryThisStage* mStage;
 		std::vector<TryThisSpotlight*>mLights;
 
-		int mbScopeFlag, mbCameraFlag;
+		int mScopeFlag, mCameraFlag, mLightFlag;
 	};
 }
 
