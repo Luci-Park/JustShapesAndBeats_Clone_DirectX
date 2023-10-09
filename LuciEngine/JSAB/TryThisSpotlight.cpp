@@ -5,7 +5,7 @@ namespace lu::JSAB
 	void TryThisSpotlight::Update()
 	{
 		Bullet::Update();
-		if (mBulletState != eBulletState::Activate)
+		if (mBulletState != eBulletState::Activate && mBulletState != eBulletState::Outro)
 		{
 			Move();
 			Rotate();
@@ -100,7 +100,7 @@ namespace lu::JSAB
 	void TryThisSpotlight::WhileOutro(double time)
 	{
 		//Move();
-		//Rotate();
+		Rotate();
 	}
 	void TryThisSpotlight::OnDeActivate()
 	{

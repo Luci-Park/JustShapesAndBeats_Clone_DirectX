@@ -205,14 +205,26 @@ namespace lu::JSAB
 			, 0.15, 0.499, 0.346, 0.499, 0.597, 0.162, 0.15, 0.499, 0.346, 0.499, 0.597, 0.499, 0.597, 0.499, 0.597, 0.499, 0.597, 0.499, 0.597
 		};
 		static std::vector<std::vector<int>> idxs = {
-			 {0}, {1}, {0}, {1}, {0, 1},  {0, 1}, {0}, {1}, {0}, {1}
-			 , {1, 2}, {0, 3}, {1, 2}
+			{1}, {0}, {1}, {0}, {0,1}, {0,1}, {1}, {0}, {1}, {0},
+			{1}, {0}, {1}, {0}, {0,1}, {0,1}, {1 , 0},
+			{0}, {1}, {0}, {1}, {0,1}, {0,1}, {0}, {1}, {0}, {1},
+			{0, 1}, {0, 1}, {0, 1}, {0, 1}
 		};
-		if (mLightFlag < 10 && time >= beat[mLightFlag] - warning[mLightFlag] - 0.2)
+		if (mLightFlag < 41 && time >= beat[mLightFlag] - warning[mLightFlag] - 0.05)
 		{
-			for (int i = 0; i < idxs[mLightFlag].size(); i++)
+			if(mLightFlag >= 27)
+				for(int i =0; i < 7; i++)
+					mLights[i]->SetTimeline(mMusic, warning[mLightFlag], beat[mLightFlag], outro[mLightFlag]);
+			else
 			{
-				mLights[idxs[mLightFlag][i]]->SetTimeline(mMusic, warning[mLightFlag], beat[mLightFlag], outro[mLightFlag]);
+				for (int i = 0; i < idxs[mLightFlag].size(); i++)
+				{
+					for (int j = 0; j < 7; j++)
+					{
+						if (j % 2 == idxs[mLightFlag][i])
+							mLights[j]->SetTimeline(mMusic, warning[mLightFlag], beat[mLightFlag], outro[mLightFlag]);
+					}
+				}
 			}
 			mLightFlag++;
 		}
