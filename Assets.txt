@@ -67,3 +67,8 @@ TryThis Camera Pos(room)
 Try This Light origin
 1) -264.864, 0, 0
 2) 264.864, 0, 0
+
+1) 4877.4736, 88.571686 -> clockwise
+2) 5583.5884, 68.90629 -> counterclockwise
+3) 5082.0723, -150.68938 -> counterclockwise
+4) 5461.9165, -178.0044 -> clockwise

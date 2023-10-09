@@ -28,6 +28,7 @@ namespace lu::JSAB
 		void CameraBump(double time);
 		void Light(double time);
 		void Laser(double time);
+		void RoundSpikes(double time);
 		void ActivateStage();
 	private:
 		CameraEffectScript* mEffect;
@@ -35,6 +36,7 @@ namespace lu::JSAB
 		TryThisScope* mScope;
 		TryThisStage* mStage;
 		std::vector<TryThisSpotlight*>mLights;
+		std::vector<TryThisSpotlight*>mStage2Lights;
 		BulletPool<TryThisLaserBullet> mLasers;
 
 		int mLaserFlag, mCameraFlag, mLightFlag;

@@ -16,68 +16,88 @@ namespace lu::JSAB
 		mMusic = Owner()->GetComponent<MusicController>();
 		mEffect = SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetEffect();
 
-		SceneManager::MainCamera()->Owner()->AddComponent<gui::TransformWidget>();
+		//SceneManager::MainCamera()->Owner()->AddComponent<gui::TransformWidget>();
 
 		mCheckPoint = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<CheckPoint>();
 		mCheckPoint->SetBackground(SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetBackground());
 		mCheckPoint->SetManager(this);
 
-		mScope = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisScope>();
+		mScope = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisScope>();
 		mScope->SetTimeline(mMusic, 0, .850, 11.3 - .850);
 
 		mStage = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisStage>();
 		mStage->Activate();
 		{
-			auto light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
+			auto light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
 			light->SetCenter({ -264.864, 0, 0 });
 			light->RotateClockWise();
 			light->SetStartAngle(-130);
 			mLights.push_back(light);
 
-			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
+			light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
 			light->SetCenter({ 264.864, 0, 0 });
 			light->RotateCounterClockWise();
 			light->SetStartAngle(90);
 			mLights.push_back(light);
 
-			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
+			light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
 			light->SetCenter({ 1190.2592, -9.408161, 0 });
 			light->RotateClockWise();
 			light->SetStartAngle(210);
 			mLights.push_back(light);
 
-			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
+			light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
 			light->SetCenter({ 1931.6791, -14.669791, 0 });
 			light->RotateCounterClockWise();
 			light->SetStartAngle(270);
 			mLights.push_back(light);
 
-			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
+			light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
 			light->SetCenter({ 2621.489, 140.8391, 0 });
 			light->RotateCounterClockWise();
 			light->SetStartAngle(60);
 			mLights.push_back(light);
 
-			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
+			light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
 			light->SetCenter({ 3122.3633, 74.33054, 0 });
 			light->RotateClockWise();
 			light->SetStartAngle(0);
 			mLights.push_back(light);
 
-			light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
+			light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
 			light->SetCenter({ 3837.9368, 80.56461, 0 });
 			light->RotateClockWise();
 			light->SetStartAngle(60);
 			mLights.push_back(light);
 		}
-		/*
 		{
-			auto light = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<TryThisSpotlight>();
-			light->Warning();
-			light->SetCenter({ 3837.9368, 80.56461, 0 });
+			SceneManager::MainCamera()->Owner()->mTransform->SetPosition({ 5234.5376, 0, -10 });
+
+			auto light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
+			light->SetCenter({ 4877.4736, 88.571686, 0 });
 			light->RotateClockWise();
-			light->SetStartAngle(15);
+			light->SetStartAngle(270);
+			mLights.push_back(light);
+
+			light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
+			light->SetCenter({ 5583.5884, 68.90629, 0 });
+			light->RotateCounterClockWise();
+			light->SetStartAngle(190);
+			mLights.push_back(light);
+
+			light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
+			light->SetCenter({ 5082.0723, -150.68938, 0 });
+			light->RotateCounterClockWise();
+			light->SetStartAngle(90);
+			mLights.push_back(light);
+
+			light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
+			light->SetCenter({ 5461.9165, -178.0044, 0 });
+			light->RotateCounterClockWise();
+			light->SetStartAngle(10);
+			mLights.push_back(light);
 		}
+		/*
 		{
 			auto laser = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisLaserBullet>();
 			laser->mTransform->SetPosition(921.45526, 0, 0);
@@ -243,24 +263,47 @@ namespace lu::JSAB
 	}
 	void TryThisManager::Laser(double time)
 	{
-		static double beat[] = { 30.450 };
-		static double warning[] = { 1.500 };
-		static double outro[] = { 2.578 };
+		static double beat[] = { 30.450, 74.6, 74.6, 85.95, 86.85, 91.15, 91.8, 92.55, 93.25, 96.75, 97.4, 98.15, 98.85, 102.05, 102.7, 103.45, 104.15 };
+		static double warning[] = { 1.500, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
+		static double outro[] = { 2.578, 2.4, 2.4, 1, 1.654, 1, 1.654, 1, 1.654, 1, 1.654, 1, 1.654, 1, 1.654, 1, 1.654 };
 		static Vector3 pos[] = {
-			{921.45526, 0, 0}
+			{921.45526, 0, 0},
+			{5234.5376 - 300, 50, 0},
+			{5234.5376 + 300, 50, 0},
+
+			{5234.5376 - 300, 50, 0},
+			{5234.5376 + 300, 50, 0},
+
+			{5234.5376 - 300, 250, 0},
+			{5234.5376 + 300, 250, 0},
+			{5234.5376 - 300, -250, 0},
+			{5234.5376 + 300, -250, 0},
+
+			{5234.5376 - 300, 250, 0},
+			{5234.5376 + 300, 250, 0},
+			{5234.5376 - 300, -250, 0},
+			{5234.5376 + 300, -250, 0},
+
+			{5234.5376 - 300, 250, 0},
+			{5234.5376 + 300, 250, 0},
+			{5234.5376 - 300, -250, 0},
+			{5234.5376 + 300, -250, 0}
 		};
-		static bool clockwise[] = { true };
-		if (mLaserFlag < 1 && time >= beat[mLaserFlag] - warning[mLaserFlag] - 0.5)
+		static bool clockwise[] = { true , true, false, };
+		if (mLaserFlag < 17 && time >= beat[mLaserFlag] - warning[mLaserFlag] - 0.5)
 		{
 			auto b = mLasers.GetNext();
 			b->SetTimeline(mMusic, warning[mLaserFlag], beat[mLaserFlag]- 0.4, outro[mLaserFlag]);
 			b->mTransform->SetPosition(pos[mLaserFlag]);
-			if (clockwise[mLaserFlag])
-				b->RotateClockWise();
-			else
+			if (mLaserFlag == 2)
 				b->RotateCounterClockWise();
+			else
+				b->RotateClockWise();
 			mLaserFlag++;
 		}
+	}
+	void TryThisManager::RoundSpikes(double time)
+	{
 	}
 	void TryThisManager::ActivateStage()
 	{

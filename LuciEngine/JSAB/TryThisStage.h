@@ -91,6 +91,8 @@ namespace lu::JSAB
 		virtual ~TryThisStage(){}
 
 		virtual void Initialize();
+		void Reset();
+		void RoomEnter();
 		void Activate();
 		void DeActivate();
 	};

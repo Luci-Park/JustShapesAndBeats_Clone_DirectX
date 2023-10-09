@@ -491,6 +491,12 @@ namespace lu::JSAB
 		}
 		DeActivate();
 	}
+	void TryThisStage::Reset()
+	{
+	}
+	void TryThisStage::RoomEnter()
+	{
+	}
 	void TryThisStage::Activate()
 	{
 		Owner()->SetActive(true);
