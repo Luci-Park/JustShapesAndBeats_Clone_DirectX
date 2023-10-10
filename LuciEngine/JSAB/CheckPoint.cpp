@@ -1,7 +1,6 @@
 #include "CheckPoint.h"
 #include "LApplication.h"
 #include "MusicManager.h"
-extern lu::Application application;
 namespace lu::JSAB
 {
 	void CheckPoint::OnCollisionEnter(Collider2D* other)
@@ -24,8 +23,9 @@ namespace lu::JSAB
 			->SetMaterial(Resources::Load<Material>(L"CheckPointMat", L"CheckPointLine"));
 		mMr->GetMaterial()->SetRenderingMode(eRenderingMode::CutOut);
 
-		float x = mMr->GetMaterial()->GetTexture()->GetRatioWidth(application.GetHeight());
-		
+		float x = mMr->GetMaterial()->GetTexture()->GetRatioWidth(720);
+		mTransform->SetScale(x, 720, 1);
+
 		mCol = Owner()->AddComponent<Collider2D>();
 
 		mAudio = Owner()->AddComponent<AudioSource>();
@@ -36,18 +36,20 @@ namespace lu::JSAB
 	{
 		mMr->SetActive(true);
 		mCol->SetActive(true);
-		mTransform->SetPosition({ (float)mBounds.right, 0, 0});
+		mTransform->SetPosition({ (float)mBounds.right, 0, -3});
 	}
 	void CheckPoint::WhileWarning(double time)
 	{
-		Vector3 pos = Vector3::Lerp({ (float)mBounds.right, 0, 0 }, { (float)mBounds.left, 0, 0 }, mWarningProcess);
+		if (mWarningProcess > 0.5)
+			int i = 0;
+		Vector3 pos = Vector3::Lerp({ (float)mBounds.right, 0, -3 }, { (float)mBounds.left, 0, -3 }, mWarningProcess);
 		mTransform->SetPosition(pos);
 		if (pos.x == (float)mBounds.left)
 			DeActivate();
 	}
 	void CheckPoint::OnDeActivate()
 	{
-		mTransform->SetPosition({ (float)mBounds.right, 0, 0 });
+		mTransform->SetPosition({ (float)mBounds.right, 0, -3 });
 		mMr->SetActive(false);
 		mCol->SetActive(false);
 	}
