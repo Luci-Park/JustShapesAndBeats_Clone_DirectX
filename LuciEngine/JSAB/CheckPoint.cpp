@@ -25,10 +25,6 @@ namespace lu::JSAB
 		mMr->GetMaterial()->SetRenderingMode(eRenderingMode::CutOut);
 
 		float x = mMr->GetMaterial()->GetTexture()->GetRatioWidth(application.GetHeight());
-		mTransform->SetScale(x, application.GetHeight(), 0);
-
-		mStartPos = { application.GetWidth() * 0.5f + x, 0, -3 };
-		mEndPos = { application.GetWidth() * -0.5f - x, 0, -3 };
 		
 		mCol = Owner()->AddComponent<Collider2D>();
 
@@ -40,18 +36,18 @@ namespace lu::JSAB
 	{
 		mMr->SetActive(true);
 		mCol->SetActive(true);
-		mTransform->SetPosition(mStartPos);
+		mTransform->SetPosition({ (float)mBounds.right, 0, 0});
 	}
 	void CheckPoint::WhileWarning(double time)
 	{
-		Vector3 pos = Vector3::Lerp(mStartPos, mEndPos, mWarningProcess);
+		Vector3 pos = Vector3::Lerp({ (float)mBounds.right, 0, 0 }, { (float)mBounds.left, 0, 0 }, mWarningProcess);
 		mTransform->SetPosition(pos);
-		if (pos == mEndPos)
+		if (pos.x == (float)mBounds.left)
 			DeActivate();
 	}
 	void CheckPoint::OnDeActivate()
 	{
-		mTransform->SetPosition(mStartPos);
+		mTransform->SetPosition({ (float)mBounds.right, 0, 0 });
 		mMr->SetActive(false);
 		mCol->SetActive(false);
 	}

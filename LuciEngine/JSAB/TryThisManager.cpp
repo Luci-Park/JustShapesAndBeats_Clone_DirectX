@@ -55,10 +55,11 @@ namespace lu::JSAB
 		mStage->DeActivate();
 		mLaserFlag = 0;
 		mCameraFlag = 0;
-		mLightFlag = 41;
+		mLightFlag = 0;
 		mStageFlag = 0;
 		mSpikeFlag = 0;
 		mCheckPointFlag = 0;
+		mCheckPoint->SetIsFinal(false);
 		Vector3 pos = SceneManager::MainCamera()->Owner()->mTransform->GetPosition();
 		pos.x = 0;
 		pos.y = 0;

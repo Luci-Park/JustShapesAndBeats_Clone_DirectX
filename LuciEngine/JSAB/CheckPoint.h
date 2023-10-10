@@ -32,7 +32,6 @@ namespace lu::JSAB
 		MeshRenderer* mMr;
 		Collider2D* mCol;
 		AudioSource* mAudio;
-		Vector3 mStartPos, mEndPos;
 		BackgroundScript* mBackground;
 		BackgroundScript::eBackgrounds mChange;
 		MusicManager* mManager;
