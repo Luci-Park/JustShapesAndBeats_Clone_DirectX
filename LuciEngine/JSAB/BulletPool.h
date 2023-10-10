@@ -22,10 +22,7 @@ namespace lu::JSAB
 
 		T* GetNext()
 		{
-			do
-			{
-				_idx = (_idx + 1) % _objects.size();
-			} while (!_objects[_idx]->IsDeActivatable());
+			_idx = (_idx + 1) % _objects.size();
 			T* obj = _objects[_idx];			
 			obj->DeActivate();
 			return obj;

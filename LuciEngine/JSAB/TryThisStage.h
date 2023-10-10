@@ -2,7 +2,7 @@
 #include "..\\Engine_SOURCE\\LScript.h"
 #include "..\\Engine_SOURCE\\LTexture.h"
 #include "..\\Engine_SOURCE\\LMesh.h"
-
+#include "TryThisCrystal.h"
 namespace lu::JSAB
 {
 	class TryThisAlarm : public Script

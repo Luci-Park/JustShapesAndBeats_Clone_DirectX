@@ -2,14 +2,21 @@
 #include "LTime.h"
 namespace lu::JSAB
 {
+	void TryThisRoundSpike::Update()
+	{
+		Bullet::Update();
+		if (mBulletState == eBulletState::Activate)
+			WhileActivate(0);
+	}
 	void TryThisRoundSpike::Setup(Vector3 dir, bool clockwise)
 	{
-		mMoveSpeed = 0.4;
+		mMoveSpeed =150;
 		mMoveDir = dir;
+		auto speed = 3;
 		if (clockwise)
-			mRotateSpeed = -0.4;
+			mRotateSpeed = -speed;
 		else
-			mRotateSpeed = 0.4;
+			mRotateSpeed = speed;
 	}
 	void TryThisRoundSpike::BulletSetUp()
 	{
@@ -43,7 +50,7 @@ namespace lu::JSAB
 		Quaternion rotation = mTransform->GetRotation();
 		mTransform->SetRotation(rotation * speed);
 
-		Vector3 movePos = mMoveSpeed * mMoveDir * Time::DeltaTime();
+		Vector3 movePos = mMoveDir * mMoveSpeed * Time::DeltaTime();
 		mTransform->SetPosition(mTransform->GetPosition() + movePos);
 
 		Rectangle bBound = { (long)mTransform->GetPosition().x,(long)mTransform->GetPosition().y, (long)mTransform->GetScale().x, (long)mTransform->GetScale().y };

@@ -37,9 +37,12 @@ namespace lu::JSAB
 
 		float mRotSpeed;
 		float mAngle;
+		float mScaleSpeed;
 		Vector3 mMoveCenter;
 		bool mbFlashWhite;
 		double mFlashTime;
+
+		double mIncreaseTime;
 	};
 }
 

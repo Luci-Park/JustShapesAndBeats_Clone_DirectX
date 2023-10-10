@@ -5,6 +5,7 @@ namespace lu::JSAB
 	void TryThisCrystal::Initialize()
 	{
 		Script::Initialize();
+		Owner()->SetTag(eTagType::Bullet);
 		auto mr = Owner()->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Load<Material>(L"CaseMat", L"TT_Case"));

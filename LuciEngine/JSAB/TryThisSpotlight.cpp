@@ -11,7 +11,10 @@ namespace lu::JSAB
 			Rotate();
 			if (mBulletState == eBulletState::DeActivate)
 			{
-				mFillTr->SetLocalScale({ 0, 0, 1 });
+				mFillCol->SetActive(false);
+				mIncreaseTime += Time::DeltaTime();
+				Vector3 s = Vector3::Lerp({ 0, 0, 1 }, { 1, 1, 1 }, mIncreaseTime / 2.0);
+				mFillTr->SetLocalScale(s);
 			}
 		}
 	}
@@ -27,6 +30,8 @@ namespace lu::JSAB
 	}
 	void TryThisSpotlight::FadeIn()
 	{
+		Owner()->SetActive(true);
+		mFillCol->SetActive(false);
 		mAnim->PlayAnimation(L"FadeIn", false);
 	}
 	void TryThisSpotlight::BulletSetUp()
@@ -60,7 +65,7 @@ namespace lu::JSAB
 		mFillMr->SetMesh(mesh)->SetMaterial(mat);
 		mFillMr->SetColor(Color::white);
 
-		auto ani = mFillAnim->CreateAnimation(L"Activate");
+		ani = mFillAnim->CreateAnimation(L"Activate");
 		float duration = 0.1;
 		ani->AddLocalScaleKey(0, { 0, 0, 1 });
 		ani->AddLocalScaleKey(duration * 0.8, { 1.3, 1.3, 1 });
@@ -71,7 +76,7 @@ namespace lu::JSAB
 
 		ani->AddLocalScaleKey(0, { 1.2, 1.2, 1 });
 		ani->AddLocalScaleKey(duration, { 0, 0, 1 });
-		ani->AddFunctionKey(duration, std::bind( & Bullet::DeActivate, this));
+		ani->AddFunctionKey(duration, std::bind(&Bullet::DeActivate, this));
 		
 		RotateClockWise();
 		SetStartAngle(0);
@@ -132,7 +137,12 @@ namespace lu::JSAB
 	}
 	void TryThisSpotlight::OnDeActivate()
 	{
-		//Owner()->SetActive(false);
+		mFillCol->SetActive(false);
+		mFillAnim->StopAnimation();
+		mFillMr->SetActive(true);
+		mFillMr->GetMaterial()->SetTint({ 1, 1, 1, 0.5 });
+		mFillMr->UseColor(false);
+		mIncreaseTime = 0;
 	}
 	void TryThisSpotlight::Move()
 	{

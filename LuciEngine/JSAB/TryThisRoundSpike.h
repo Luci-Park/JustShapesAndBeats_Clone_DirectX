@@ -7,7 +7,7 @@ namespace lu::JSAB
 	public:
 		TryThisRoundSpike(){}
 		virtual ~TryThisRoundSpike(){}
-
+		virtual void Update()override;
 		void Setup(Vector3 dir, bool clockwise);
 	private:
 		virtual void BulletSetUp()override;

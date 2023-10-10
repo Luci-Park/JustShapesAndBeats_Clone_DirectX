@@ -46,6 +46,7 @@ namespace lu::JSAB
 		void RotateClockWise() { mRotSpeed = -0.1; }
 		void RotateCounterClockWise() { mRotSpeed = 0.1; }
 		void Shake();
+		void SetOrg(Vector3 pos) { mOrgPos = pos; }
 	private:
 		virtual void BulletSetUp()override;
 		virtual void OnWarning()override;

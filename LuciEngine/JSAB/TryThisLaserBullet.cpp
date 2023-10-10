@@ -66,12 +66,12 @@ namespace lu::JSAB
 		anim->AddLocalScaleKey(0, { 20, 2000, 1 });
 		anim->AddLocalScaleKey(0.3, { 20, 2000, 1 });
 		anim->AddLocalScaleKey(0.3, { 20, 0, 1 });
-		anim->AddLocalScaleKey(0.5, { 20, 2000, 1 });
+		anim->AddLocalScaleKey(0.5, { 40, 2000, 1 });
 
 		anim = mAnim->CreateAnimation(L"DeActivate");
 		anim->AddTintKey(0, { 1, 1, 1, 1 });
 		anim->AddTintKey(0.3, { 1, 1, 1,  0});
-		anim->AddLocalScaleKey(0, { 20, 2000, 1 });
+		anim->AddLocalScaleKey(0, { 40, 2000, 1 });
 		anim->AddLocalScaleKey(0.3, { 20, 0, 1 });
 	}
 	void TryThisLaserPart::SetAlpha(float alpha)
@@ -102,7 +102,6 @@ namespace lu::JSAB
 	}
 	void TryThisLaserBullet::Shake()
 	{
-		mOrgPos = mTransform->GetPosition();  
 		mbShake = true;
 	}
 	void TryThisLaserBullet::BulletSetUp()
@@ -119,8 +118,8 @@ namespace lu::JSAB
 		mLaser1 = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<TryThisLaserPart>();
 		mLaser2 = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<TryThisLaserPart>();
 		mBase->mTransform->SetPosition(0, 0, -0.1);
-		mLaser1->mTransform->SetRotation(Quaternion::Create2DRotationDegrees(45));
-		mLaser2->mTransform->SetRotation(Quaternion::Create2DRotationDegrees(135));
+		mLaser1->mTransform->SetRotation(Quaternion::Create2DRotationDegrees(0));
+		mLaser2->mTransform->SetRotation(Quaternion::Create2DRotationDegrees(90));
 		mBase->Owner()->SetActive(false);
 		mLaser1->Owner()->SetActive(false);
 		mLaser2->Owner()->SetActive(false);

@@ -27,8 +27,23 @@ namespace lu::JSAB
 		mWarningTime = wt;
 		mActivateTime = at;
 		mOutroTime = ot;
-		if(mBulletState != eBulletState::Outro)
-			mBulletState = eBulletState::Waiting;
+		/*
+		if (mBulletState == eBulletState::Activate && mOutroTime > 0)
+		{
+			float progress = mMusic->GetTime() - mActivateTime;
+			mWarningTime -= mOutroTime - progress;
+			if (mWarningTime < 0)
+			{
+				mWarningTime = 0;
+				mBulletState = eBulletState::Warning;
+				mWarningProcess = 1;
+			}
+		}
+		else
+		{
+		}
+		*/
+		mBulletState = eBulletState::Waiting;
 	}
 	void Bullet::Warning()
 	{

@@ -7,7 +7,6 @@
 #include "LObject.h"
 #include "LTime.h"
 #include "..\\Editor_SOURCE\\TransformWidget.h"
-#include "TryThisCrystal.h"
 namespace lu::JSAB
 {
 #pragma region Alarm
@@ -507,8 +506,8 @@ namespace lu::JSAB
 	}
 	void TryThisStage::Activate()
 	{
-		Reset();
 		Owner()->SetActive(true);
+		Reset();
 	}
 	void TryThisStage::DeActivate()
 	{
