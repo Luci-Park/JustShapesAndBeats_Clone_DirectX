@@ -155,6 +155,7 @@ namespace lu::JSAB
 		mLightFlag = 0;
 		mStageFlag = 0;
 		mSpikeFlag = 0;
+		mCheckPointFlag = 0;
 		Vector3 pos = SceneManager::MainCamera()->Owner()->mTransform->GetPosition();
 		pos.x = 0;
 		pos.y = 0;
@@ -227,14 +228,18 @@ namespace lu::JSAB
 			13.45, 13.6, 13.75, 13.9, 16.25, 16.6, 18.9, 19.05, 19.2, 19.35, 
 			24.5, 24.65, 24.8, 24.95, 27.35, 27.65, 29.85, 30, 30.15, 30.3,
 			33.2, 35.5, 35.65, 35.8, 35.95, 38.5, 38.8, 40.95, 41.133, 41.317, 
-			41.5, 44.3, 44.6, 47.1, 47.4, 49.9, 50.2, 52.65, 52.95, 54.1, 54.4
+			41.5, 44.3, 44.6, 47.1, 47.4, 49.9, 50.2, 52.65, 52.95, 54.1, 54.4,
+
+
 		};
-		static double warning[] = {	2, 2, 0, 0, 2, 0, 2, 2, 0, 0
-			, 2, 2, 0, 0, 2, 0, 2, 2, 0, 0
-			, 2, 2, 2, 0, 0, 2, 0, 2, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 1, 0 };
+		static double warning[] = {	2, 2, 0, 0, 2, 0, 2, 2, 0, 0, 2, 2, 0, 0, 2, 0, 2, 2, 0, 0, 2, 2, 2, 0, 0, 2, 0, 2, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 1, 0 
+		
+		};
 		static double outro[] = {
 			0.162, 0.150, 0.499, 0.346, 0.619, 0.526, 0.162, 0.150, 1.576, 1.433, 0.162, 0.15, 0.499, 0.346, 0.499, 0.597, 0.162, 0.15, 0.499, 0.346, 0.597, 0.162
 			, 0.15, 0.499, 0.346, 0.499, 0.597, 0.162, 0.15, 0.499, 0.346, 0.499, 0.597, 0.499, 0.597, 0.499, 0.597, 0.499, 0.597, 0.499, 0.597
+
+
 		};
 		static std::vector<std::vector<int>> idxs = {
 			{1}, {0}, {1}, {0}, {0,1}, {0,1}, {1}, {0}, {1}, {0},
@@ -242,6 +247,7 @@ namespace lu::JSAB
 			{0}, {1}, {0}, {1}, {0,1}, {0,1}, {0}, {1}, {0}, {1},
 			{0, 1}, {0, 1}, {0, 1}, {0, 1}
 		};
+
 		if (mLightFlag < 41 && time >= beat[mLightFlag] - warning[mLightFlag] - 0.1)
 		{
 			if (mLightFlag >= 27)
@@ -249,7 +255,7 @@ namespace lu::JSAB
 				for (int i = 0; i < 7; i++)
 					mLights[i]->SetTimeline(mMusic, warning[mLightFlag], beat[mLightFlag], outro[mLightFlag]);
 			}
-			else
+			else if(mLightFlag < 41)
 			{
 				for (int i = 0; i < idxs[mLightFlag].size(); i++)
 				{
@@ -260,6 +266,10 @@ namespace lu::JSAB
 					}
 				}
 			}
+		else
+		{
+
+		}
 			mLightFlag++;
 		}
 	}
@@ -307,14 +317,52 @@ namespace lu::JSAB
 	void TryThisManager::RoundSpikes(double time)
 	{
 		static double beat[] = {
-			66.7, 67.4, 67.9, 68.2, 68.4, 69.7, 69.9, 70.05, 70.2, 70.3, 70.7, 71, 71.2, 72.55, 72.75, 72.9, 73.3, 73.65, 73.8, 73.95, 74.1, 74.25, 74.45
-			, 78, 78.25, 78.4, 78.7, 79.1, 79.3, 79.45, 80.7, 80.85, 81.05, 81.2, 81.35, 81.75, 82, 82.2, 83.6, 83.8, 83.9, 84.35, 84.65, 84.8, 85, 85.1
-			, 85.35, 88.55, 89.35, 89.8, 90.25, 90.55, 93.8, 94.3, 94.8, 94.9, 95.1, 95.3, 96, 99.45, 100.05, 100.75, 101.15, 101.35, 101.5, 101.9, 105.85
-			, 106, 106.15, 106.3, 107 };
-		static float spawnX[] = {};
+			66.7, 67.4, 67.9, 68.2, 68.4
+			, 69.7, 69.9, 70.05, 70.2, 70.3, 70.7, 71, 71.2
+			, 72.55, 72.75, 72.9, 73.3, 73.65, 73.8, 73.95, 74.1, 74.25, 74.45
+			, 78, 78.25, 78.4, 78.7, 79.1, 79.3, 79.45
+			, 80.7, 80.85, 81.05, 81.2, 81.35, 81.75, 82, 82.2
+			, 83.6, 83.8, 83.9, 84.35, 84.65, 84.8, 85, 85.1
+			, 85.35, 88.55, 89.35, 89.8, 90.25, 90.55
+			
+			, 93.8, 94.3, 94.8, 94.9, 95.1, 95.3
+			, 96, 99.45, 100.05, 100.75, 101.15, 101.35, 101.5, 101.9
+			, 105.85, 106, 106.15, 106.3, 107 };
+		static bool spawnRight[] = {
+			true, true, true, true, true
+			, false, false, false, false, false, false, false, false
+			, true, true, true, true, true, true, true, true, true, true
+			, false, false, false, false, false, false, false
+			, true, true, true, true, true, true, true, true
+			, false, false, false, false, false, false, false, false
+			, true, true, true, true, true, true
+			, false, false, false, false, false, false
+			, true, true, true, true, true, true, true, true
+			, false, false, false, false, false };
+		static float prevY = 0;
 		if (mSpikeFlag < 71 && time >= beat[mSpikeFlag])
 		{
-
+			auto b = mSpikes.GetNext();
+			float y;
+			do
+			{
+				y = RealRandom<float>(-300 + 30, 300 - 30);
+			} while (abs(prevY - y) < 10);
+			prevY = y;
+			if (spawnRight[mSpikeFlag])
+			{
+				Vector3 pos = { 5934.5376 - 100, y, 0 };
+				b->mTransform->SetPosition(pos);
+				b->Setup(Vector3::Left, true);
+			}
+			else
+			{
+				Vector3 pos = { 4534.5376 + 100, y, 0 }; 
+				b->mTransform->SetPosition(pos);
+				b->Setup(Vector3::Right, false);
+			}
+			b->Activate();
+			mSpikeFlag++;
 		}
 	}
 	void TryThisManager::Stage(double time)
@@ -326,6 +374,22 @@ namespace lu::JSAB
 				mStage->Activate();
 			else
 				mStage->RoomEnter();
+		}
+	}
+	void TryThisManager::CheckPoints(double time)
+	{
+		static double beat[] = { 63.950, 116.009 };
+		static BackgroundScript::eBackgrounds types[] = {
+			BackgroundScript::eBackgrounds::BLACK,
+			BackgroundScript::eBackgrounds::BLACK
+		};
+		if (mCheckPointFlag < 2 && time >= beat[mCheckPointFlag] - 5.5)
+		{
+			mCheckPoint->SetTimeline(mMusic, 5, beat[mCheckPointFlag], 0);
+			mCheckPoint->SetBackgroundType(types[mCheckPointFlag]);
+			if (mCheckPointFlag == 1)
+				mCheckPoint->SetIsFinal(true);
+			mCheckPointFlag++;
 		}
 	}
 	void TryThisManager::ActivateStage()

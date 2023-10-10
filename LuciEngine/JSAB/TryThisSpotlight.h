@@ -13,6 +13,7 @@ namespace lu::JSAB
 		void SetCenter(Vector3 pos);
 		void SetStartAngle(float degrees);
 		void Flash(bool flash) { mbFlashWhite = flash; }
+		void FadeIn();
 	private:
 		virtual void BulletSetUp()override;
 		virtual void OnWarning()override;
@@ -27,6 +28,7 @@ namespace lu::JSAB
 		void Rotate();
 	private:
 		MeshRenderer* mMr;
+		Animator* mAnim;
 		
 		MeshRenderer* mFillMr;
 		Transform* mFillTr;

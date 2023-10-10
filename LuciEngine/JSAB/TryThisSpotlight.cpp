@@ -25,6 +25,10 @@ namespace lu::JSAB
 		mAngle = XMConvertToRadians(degrees);
 		Move();
 	}
+	void TryThisSpotlight::FadeIn()
+	{
+		mAnim->PlayAnimation(L"FadeIn", false);
+	}
 	void TryThisSpotlight::BulletSetUp()
 	{
 		mTransform->SetScale(280, 280, 1);
@@ -35,6 +39,11 @@ namespace lu::JSAB
 		mMr->SetMesh(mesh)->SetMaterial(mat);
 		mat->SetRenderingMode(eRenderingMode::CutOut);
 
+		mAnim = Owner()->AddComponent<Animator>();
+		auto ani = mAnim->CreateAnimation(L"FadeIn");
+		ani->AddTintKey(0, { 1, 1, 1, 0 });
+		ani->AddTintKey(1.750, { 1, 1, 1, 1 });
+		
 		auto fill = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
 		fill->SetTag(eTagType::Bullet);
 
