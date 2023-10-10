@@ -31,6 +31,11 @@ namespace lu::JSAB
 		for (int i = 0; i < 11; i++)
 		{
 			mLights.push_back(object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>());
+			mLights[i]->mTransform->SetPosition({ 0, 0, -1 });
+			if (i >= 7)
+				mLights[i]->Flash(true);
+			else
+				mLights[i]->Flash(false);
 		}
 	}
 	void TryThisManager::Update()
@@ -38,7 +43,7 @@ namespace lu::JSAB
 		double time = mMusic->GetTime();
 		CameraMove(time);
 		CameraBump(time);
-		//Light(time);
+		Light(time);
 		Laser(time);
 		RoundSpikes(time);
 		Stage(time);
@@ -50,7 +55,7 @@ namespace lu::JSAB
 		mStage->DeActivate();
 		mLaserFlag = 0;
 		mCameraFlag = 0;
-		mLightFlag = 0;
+		mLightFlag = 41;
 		mStageFlag = 0;
 		mSpikeFlag = 0;
 		mCheckPointFlag = 0;
@@ -173,7 +178,7 @@ namespace lu::JSAB
 				}
 				else
 				{
-					if (idxs[idx] == 0)
+					if (idxs[idx])
 					{
 						auto l = mLights[idxs[idx] + 6];
 						l->SetTimeline(mMusic, 0, beat[idx], outro[idx]);

@@ -12,8 +12,6 @@ namespace lu::JSAB
 	}
 	void TryThisMusicController::Update()
 	{
-		if (Input::GetKeyDown(eKeyCode::SPACE))
-			mAudioSource->SetPosition(56.600);
 		MusicController::Update();
 	}
 }

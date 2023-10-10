@@ -12,9 +12,16 @@ namespace lu::JSAB
 			if (mBulletState == eBulletState::DeActivate)
 			{
 				mFillCol->SetActive(false);
-				mIncreaseTime += Time::DeltaTime();
-				Vector3 s = Vector3::Lerp({ 0, 0, 1 }, { 1, 1, 1 }, mIncreaseTime / 2.0);
-				mFillTr->SetLocalScale(s);
+				if (mMusic && mActivateTime - mMusic->GetTime() <= 2)
+				{
+					mIncreaseTime += Time::DeltaTime();
+					Vector3 s = Vector3::Lerp({ 0, 0, 1 }, { 1, 1, 1 }, mIncreaseTime / 2.0);
+					mFillTr->SetLocalScale(s);
+				}
+				else
+				{
+					mFillTr->SetLocalScale({0, 0, 1});
+				}
 			}
 		}
 	}
