@@ -507,11 +507,11 @@ namespace lu::JSAB
 	}
 	void TryThisStage::Activate()
 	{
+		Reset();
 		Owner()->SetActive(true);
 	}
 	void TryThisStage::DeActivate()
 	{
-		Reset();
 		Owner()->SetActive(false);
 	}
 #pragma endregion

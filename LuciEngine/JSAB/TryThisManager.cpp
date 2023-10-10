@@ -71,33 +71,6 @@ namespace lu::JSAB
 			light->SetStartAngle(60);
 			mLights.push_back(light);
 		}
-		{
-			SceneManager::MainCamera()->Owner()->mTransform->SetPosition({ 5234.5376, 0, -10 });
-
-			auto light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
-			light->SetCenter({ 4877.4736, 88.571686, 0 });
-			light->RotateClockWise();
-			light->SetStartAngle(270);
-			mLights.push_back(light);
-
-			light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
-			light->SetCenter({ 5583.5884, 68.90629, 0 });
-			light->RotateCounterClockWise();
-			light->SetStartAngle(190);
-			mLights.push_back(light);
-
-			light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
-			light->SetCenter({ 5082.0723, -150.68938, 0 });
-			light->RotateCounterClockWise();
-			light->SetStartAngle(90);
-			mLights.push_back(light);
-
-			light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
-			light->SetCenter({ 5461.9165, -178.0044, 0 });
-			light->RotateCounterClockWise();
-			light->SetStartAngle(10);
-			mLights.push_back(light);
-		}
 		/*
 		{
 			auto laser = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisLaserBullet>();
@@ -224,53 +197,92 @@ namespace lu::JSAB
 	}
 	void TryThisManager::Light(double time)
 	{
-		static double beat[] = {
-			13.45, 13.6, 13.75, 13.9, 16.25, 16.6, 18.9, 19.05, 19.2, 19.35, 
-			24.5, 24.65, 24.8, 24.95, 27.35, 27.65, 29.85, 30, 30.15, 30.3,
-			33.2, 35.5, 35.65, 35.8, 35.95, 38.5, 38.8, 40.95, 41.133, 41.317, 
-			41.5, 44.3, 44.6, 47.1, 47.4, 49.9, 50.2, 52.65, 52.95, 54.1, 54.4,
-
-
-		};
-		static double warning[] = {	2, 2, 0, 0, 2, 0, 2, 2, 0, 0, 2, 2, 0, 0, 2, 0, 2, 2, 0, 0, 2, 2, 2, 0, 0, 2, 0, 2, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 1, 0 
-		
-		};
-		static double outro[] = {
-			0.162, 0.150, 0.499, 0.346, 0.619, 0.526, 0.162, 0.150, 1.576, 1.433, 0.162, 0.15, 0.499, 0.346, 0.499, 0.597, 0.162, 0.15, 0.499, 0.346, 0.597, 0.162
-			, 0.15, 0.499, 0.346, 0.499, 0.597, 0.162, 0.15, 0.499, 0.346, 0.499, 0.597, 0.499, 0.597, 0.499, 0.597, 0.499, 0.597, 0.499, 0.597
-
-
-		};
-		static std::vector<std::vector<int>> idxs = {
-			{1}, {0}, {1}, {0}, {0,1}, {0,1}, {1}, {0}, {1}, {0},
-			{1}, {0}, {1}, {0}, {0,1}, {0,1}, {1 , 0},
-			{0}, {1}, {0}, {1}, {0,1}, {0,1}, {0}, {1}, {0}, {1},
-			{0, 1}, {0, 1}, {0, 1}, {0, 1}
-		};
-
-		if (mLightFlag < 41 && time >= beat[mLightFlag] - warning[mLightFlag] - 0.1)
 		{
-			if (mLightFlag >= 27)
+			static double beat[] = {
+				13.45, 13.6, 13.75, 13.9, 16.25, 16.6, 18.9, 19.05, 19.2, 19.35,
+				24.5, 24.65, 24.8, 24.95, 27.35, 27.65, 29.85, 30, 30.15, 30.3,
+				33.2, 35.5, 35.65, 35.8, 35.95, 38.5, 38.8, 40.95, 41.133, 41.317,
+				41.5, 44.3, 44.6, 47.1, 47.4, 49.9, 50.2, 52.65, 52.95, 54.1, 54.4
+			};
+			static double warning[] = { 2, 2, 0, 0, 2, 0, 2, 2, 0, 0, 2, 2, 0, 0, 2, 0, 2, 2, 0, 0, 2, 2, 2, 0, 0, 2, 0, 2, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 1, 0 };
+			static double outro[] = {
+				0.162, 0.150, 0.499, 0.346, 0.619, 0.526, 0.162, 0.150, 1.576, 1.433, 0.162, 0.15, 0.499, 0.346, 0.499, 0.597, 0.162, 0.15, 0.499, 0.346, 0.597, 0.162
+				, 0.15, 0.499, 0.346, 0.499, 0.597, 0.162, 0.15, 0.499, 0.346, 0.499, 0.597, 0.499, 0.597, 0.499, 0.597, 0.499, 0.597, 0.499, 0.597 
+			};
+			static std::vector<std::vector<int>> idxs = {
+				{1}, {0}, {1}, {0}, {0,1}, {0,1}, {1}, {0}, {1}, {0},
+				{1}, {0}, {1}, {0}, {0,1}, {0,1}, {1 , 0},
+				{0}, {1}, {0}, {1}, {0,1}, {0,1}, {0}, {1}, {0}, {1},
+				{0, 1}, {0, 1}, {0, 1}, {0, 1}
+			};
+
+			if (mLightFlag < 41 && time >= beat[mLightFlag] - warning[mLightFlag] - 0.1)
 			{
-				for (int i = 0; i < 7; i++)
-					mLights[i]->SetTimeline(mMusic, warning[mLightFlag], beat[mLightFlag], outro[mLightFlag]);
-			}
-			else if(mLightFlag < 41)
-			{
-				for (int i = 0; i < idxs[mLightFlag].size(); i++)
+				if (mLightFlag >= 27)
 				{
-					for (int j = 0; j < 7; j++)
+					for (int i = 0; i < 7; i++)
+						mLights[i]->SetTimeline(mMusic, warning[mLightFlag], beat[mLightFlag], outro[mLightFlag]);
+				}
+				else if (mLightFlag < 41)
+				{
+					for (int i = 0; i < idxs[mLightFlag].size(); i++)
 					{
-						if (j % 2 == idxs[mLightFlag][i])
-							mLights[j]->SetTimeline(mMusic, warning[mLightFlag], beat[mLightFlag], outro[mLightFlag]);
+						for (int j = 0; j < 7; j++)
+						{
+							if (j % 2 == idxs[mLightFlag][i])
+								mLights[j]->SetTimeline(mMusic, warning[mLightFlag], beat[mLightFlag], outro[mLightFlag]);
+						}
 					}
 				}
+				mLightFlag++;
 			}
-		else
-		{
-
 		}
-			mLightFlag++;
+		{
+			static double warning[] = {
+			0, 0, 0, 0, 1.536, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 
+			};
+			static double beat[] = {64.1, 64.1, 64.15, 64.15, 66.05, 66.5, 68.5, 68.65, 68.85, 69.05, 71.55, 71.85, 74.15, 74.3, 74.5, 74.7, 77.45, 79.45, 79.6, 79.8, 80, 82.5, 82.8, 85.1, 85.25, 85.45, 85.65, 88.55, 93.9, 99.5, 104.85 };
+			static double outro[] = { 1.75, 1.75, 1.75, 1.75, 0.597, 0, 0.162, 0.15, 0.499, 0.346, 0.212, 0.597, 0.162, 0.15, 0.499, 0.346, 0.597, 0.162, 0.15, 0.499, 0.346, 0.212, 0.597, 0.162, 0.15, 0.499, 0.346, 0.597, 0.597, 0.597, 0.597 };
+			static int idxs[] = {4, 3, 1, 2, 0, 0, 1, 2, 3, 4, 1, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 1, 0, 1, 2, 3, 4, 0, 0, 0, 0};
+			static bool rotate[] = { true, false, false, true };
+			static int angle[] = { 270, 190, 90, 10 };
+			static Vector3 pos[] = {
+				{ 4877.4736, 88.571686, 0 },
+				{ 5583.5884, 68.90629, 0 },
+				{ 5082.0723, -150.68938, 0 },
+				{ 5461.9165, -178.0044, 0 }
+			};
+			int idx = mLightFlag - 41;
+			if (idx < 31 && time >= beat[idx] - warning[idx] - 0.1)
+			{
+				if (idx < 4)
+				{
+					auto l = mLights[idxs[idx]];
+					if (rotate[idx])
+						l->RotateClockWise();
+					else
+						l->RotateCounterClockWise();
+					l->SetCenter(pos[idx]);
+					l->SetStartAngle(angle[idx]);
+				}
+				else
+				{
+					if (idxs[idx] == 0)
+					{
+						auto l = mLights[idxs[idx]];
+						l->SetTimeline(mMusic, warning[idx], beat[idx], outro[idx]);
+					}
+					else
+					{
+						for (int i = 1; i <= 4; i++)
+						{
+							auto l = mLights[i];
+							l->SetTimeline(mMusic, warning[idx], beat[idx], outro[idx]);
+						}
+					}
+				}
+				mLightFlag++;
+			}
 		}
 	}
 	void TryThisManager::Laser(double time)
@@ -367,13 +379,15 @@ namespace lu::JSAB
 	}
 	void TryThisManager::Stage(double time)
 	{
-		static double beat[] = { 11.3, 56.150 };
+		static double beat[] = { 11.3, 56.150, 107.550 };
 		if (mStageFlag < 2 && time >= beat[mStageFlag])
 		{
 			if (mStageFlag == 0)
 				mStage->Activate();
-			else
+			else if (mStageFlag == 1)
 				mStage->RoomEnter();
+			else if (mStageFlag == 2)
+				mStage->DeActivate();
 		}
 	}
 	void TryThisManager::CheckPoints(double time)

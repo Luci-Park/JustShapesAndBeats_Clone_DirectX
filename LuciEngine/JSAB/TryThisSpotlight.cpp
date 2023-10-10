@@ -99,9 +99,26 @@ namespace lu::JSAB
 		mFillMr->GetMaterial()->SetTint({ 1, 1, 1, 1 });
 		mFillAnim->PlayAnimation(L"Activate", false);
 		mFillCol->SetActive(true);
+		mFlashTime = 0;
 	}
 	void TryThisSpotlight::WhileActivate(double time)
 	{
+		if (mbFlashWhite)
+		{
+			mFlashTime = Time::DeltaTime();
+			if (mFlashTime < 0.1)
+			{
+				mFillMr->SetInterpolation(mFlashTime / 0.1);
+			}
+			else if (mFlashTime < 0.2)
+			{
+				mFillMr->SetInterpolation(1 - (mFlashTime - 0.1) / 0.1);
+			}
+			else if (mFlashTime >= 0.2)
+			{
+				mFlashTime = 0;
+			}
+		}
 	}
 	void TryThisSpotlight::OnOutro()
 	{

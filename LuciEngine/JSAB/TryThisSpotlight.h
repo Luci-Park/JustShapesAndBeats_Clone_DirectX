@@ -39,6 +39,7 @@ namespace lu::JSAB
 		float mAngle;
 		Vector3 mMoveCenter;
 		bool mbFlashWhite;
+		double mFlashTime;
 	};
 }
 
