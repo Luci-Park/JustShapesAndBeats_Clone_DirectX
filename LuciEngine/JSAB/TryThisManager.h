@@ -29,6 +29,7 @@ namespace lu::JSAB
 		void Light(double time);
 		void Laser(double time);
 		void RoundSpikes(double time);
+		void Stage(double time);
 		void ActivateStage();
 	private:
 		CameraEffectScript* mEffect;
@@ -38,8 +39,9 @@ namespace lu::JSAB
 		std::vector<TryThisSpotlight*>mLights;
 		std::vector<TryThisSpotlight*>mStage2Lights;
 		BulletPool<TryThisLaserBullet> mLasers;
+		BulletPool<TryThisRoundSpike> mSpikes;
 
-		int mLaserFlag, mCameraFlag, mLightFlag;
+		int mLaserFlag, mCameraFlag, mLightFlag, mStageFlag, mSpikeFlag;
 	};
 }
 

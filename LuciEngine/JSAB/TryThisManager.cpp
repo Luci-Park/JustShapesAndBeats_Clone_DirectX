@@ -8,6 +8,7 @@ namespace lu::JSAB
 {
 	TryThisManager::TryThisManager()
 		: mLasers(6)
+		, mSpikes(30)
 	{
 	}
 	void TryThisManager::Initialize()
@@ -143,6 +144,7 @@ namespace lu::JSAB
 		CameraBump(time);
 		Light(time);
 		Laser(time);
+		Stage(time);
 		MusicManager::Update();
 	}
 	void TryThisManager::Play()
@@ -151,6 +153,8 @@ namespace lu::JSAB
 		mLaserFlag = 0;
 		mCameraFlag = 0;
 		mLightFlag = 0;
+		mStageFlag = 0;
+		mSpikeFlag = 0;
 		Vector3 pos = SceneManager::MainCamera()->Owner()->mTransform->GetPosition();
 		pos.x = 0;
 		pos.y = 0;
@@ -213,9 +217,7 @@ namespace lu::JSAB
 			//if (mCameraFlag == 3)
 			//	mScope->SetPosition(Vector3::Left * 300);
 			//else if (mCameraFlag == 7)
-				mScope->SetPosition(Vector3::Right * 0);
-			if (mCameraFlag == 24)
-				ActivateStage();
+			//	mScope->SetPosition(Vector3::Right * 0);
 			mCameraFlag++;
 		}
 	}
@@ -304,6 +306,27 @@ namespace lu::JSAB
 	}
 	void TryThisManager::RoundSpikes(double time)
 	{
+		static double beat[] = {
+			66.7, 67.4, 67.9, 68.2, 68.4, 69.7, 69.9, 70.05, 70.2, 70.3, 70.7, 71, 71.2, 72.55, 72.75, 72.9, 73.3, 73.65, 73.8, 73.95, 74.1, 74.25, 74.45
+			, 78, 78.25, 78.4, 78.7, 79.1, 79.3, 79.45, 80.7, 80.85, 81.05, 81.2, 81.35, 81.75, 82, 82.2, 83.6, 83.8, 83.9, 84.35, 84.65, 84.8, 85, 85.1
+			, 85.35, 88.55, 89.35, 89.8, 90.25, 90.55, 93.8, 94.3, 94.8, 94.9, 95.1, 95.3, 96, 99.45, 100.05, 100.75, 101.15, 101.35, 101.5, 101.9, 105.85
+			, 106, 106.15, 106.3, 107 };
+		static float spawnX[] = {};
+		if (mSpikeFlag < 71 && time >= beat[mSpikeFlag])
+		{
+
+		}
+	}
+	void TryThisManager::Stage(double time)
+	{
+		static double beat[] = { 11.3, 56.150 };
+		if (mStageFlag < 2 && time >= beat[mStageFlag])
+		{
+			if (mStageFlag == 0)
+				mStage->Activate();
+			else
+				mStage->RoomEnter();
+		}
 	}
 	void TryThisManager::ActivateStage()
 	{

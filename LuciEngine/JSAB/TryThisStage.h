@@ -95,6 +95,12 @@ namespace lu::JSAB
 		void RoomEnter();
 		void Activate();
 		void DeActivate();
+
+	private:
+		TryThisAlarm* mAlarm1;
+		TryThisAlarm* mAlarm2;
+		TryThisBox* mWall;
+		TryThisCrystal* mCase;
 	};
 }
 

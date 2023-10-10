@@ -462,11 +462,11 @@ namespace lu::JSAB
 			b->mTransform->SetPosition(3845.6409, -341.3028, -0.2);
 		}
 		{
-			auto b = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<TryThisBox>();
-			b->mTransform->SetScale(200, 1000, 1);
-			b->mTransform->SetPosition(4534.5376, 0, -0.2);
+			mWall = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<TryThisBox>();
+			mWall->mTransform->SetScale(200, 1000, 1);
+			mWall->mTransform->SetPosition(4534.5376, 0, -0.2);
 
-			b = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<TryThisBox>();
+			auto b = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<TryThisBox>();
 			b->mTransform->SetScale(200, 1000, 1);
 			b->mTransform->SetPosition(5934.5376, 0, -0.2);
 
@@ -480,22 +480,30 @@ namespace lu::JSAB
 
 		}
 		{
-			auto b = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<TryThisAlarm>();
-			b->mTransform->SetPosition(-378.12823 + 5234.5376, 238.92798, 1);
+			mAlarm1 = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<TryThisAlarm>();
+			mAlarm1->mTransform->SetPosition(-378.12823 + 5234.5376, 238.92798, 1);
 
-			b = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<TryThisAlarm>();
-			b->mTransform->SetPosition(378.12823 + 5234.5376, 238.92798, 1);
+			mAlarm2 = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<TryThisAlarm>();
+			mAlarm2->mTransform->SetPosition(378.12823 + 5234.5376, 238.92798, 1);
 
-			auto c = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<TryThisCrystal>();
-			c->mTransform->SetPosition(5234.5376, -76.47402, 1);
+			mCase = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet)->AddComponent<TryThisCrystal>();
+			mCase->mTransform->SetPosition(5234.5376, -76.47402, 1);
 		}
 		DeActivate();
 	}
 	void TryThisStage::Reset()
 	{
+		mWall->Owner()->SetActive(false);
+		mAlarm1->mTransform->SetPosition(-378.12823 + 5234.5376, 238.92798, 1);
+		mAlarm2->mTransform->SetPosition(378.12823 + 5234.5376, 238.92798, 1);
+		mCase->mTransform->SetPosition(5234.5376, -76.47402, 1);
 	}
 	void TryThisStage::RoomEnter()
 	{
+		mWall->Owner()->SetActive(true);
+		mAlarm1->MoveY(238.92798);
+		mAlarm2->MoveY(238.92798);
+		mCase->Activate();
 	}
 	void TryThisStage::Activate()
 	{
@@ -503,6 +511,7 @@ namespace lu::JSAB
 	}
 	void TryThisStage::DeActivate()
 	{
+		Reset();
 		Owner()->SetActive(false);
 	}
 #pragma endregion

@@ -2,8 +2,9 @@
 #include "LTime.h"
 namespace lu::JSAB
 {
-	void TryThisCrystal::BulletSetUp()
+	void TryThisCrystal::Initialize()
 	{
+		Script::Initialize();
 		auto mr = Owner()->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Load<Material>(L"CaseMat", L"TT_Case"));
@@ -14,32 +15,21 @@ namespace lu::JSAB
 		mTransform->SetScale(scale);
 		Owner()->AddComponent<Collider2D>();
 	}
-	void TryThisCrystal::OnWarning()
+	void TryThisCrystal::Update()
 	{
+		if (mbMove)
+		{
+			Vector3 pos = mTransform->GetPosition();
+			pos.x = RealRandom<float>(-1.0, 1.0) * 2;
+			pos.y -= 10 * Time::DeltaTime();
+
+			mTransform->SetPosition(pos);
+			if (pos.y < (-360 - 0.5 * mTransform->GetScale().y))
+				mbMove = false;
+		}
 	}
-	void TryThisCrystal::WhileWarning(double time)
+	void TryThisCrystal::Activate()
 	{
-	}
-	void TryThisCrystal::OnActivate()
-	{
-	}
-	void TryThisCrystal::WhileActivate(double time)
-	{
-		Vector3 pos = mTransform->GetPosition();
-		pos.x = RealRandom<float>(-1.0, 1.0) * 2;
-		pos.y -= 10 * Time::DeltaTime();
-		
-		mTransform->SetPosition(pos);
-		if (pos.y < (- 360 - 0.5 * mTransform->GetScale().y))
-			DeActivate();
-	}
-	void TryThisCrystal::OnOutro()
-	{
-	}
-	void TryThisCrystal::WhileOutro(double time)
-	{
-	}
-	void TryThisCrystal::OnDeActivate()
-	{
+		mbMove = true;
 	}
 }
