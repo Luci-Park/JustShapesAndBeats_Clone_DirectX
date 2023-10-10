@@ -32,6 +32,7 @@ namespace lu::JSAB
 		void Stage(double time);
 		void CheckPoints(double time);
 		void ActivateStage();
+		void SpotlightReset();
 	private:
 		CheckPoint* mCheckPoint;
 		CameraEffectScript* mEffect;

@@ -28,87 +28,10 @@ namespace lu::JSAB
 
 		mStage = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisStage>();
 		mStage->Activate();
+		for (int i = 0; i < 11; i++)
 		{
-			auto light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
-			light->SetCenter({ -264.864, 0, 0 });
-			light->RotateClockWise();
-			light->SetStartAngle(-130);
-			mLights.push_back(light);
-
-			light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
-			light->SetCenter({ 264.864, 0, 0 });
-			light->RotateCounterClockWise();
-			light->SetStartAngle(90);
-			mLights.push_back(light);
-
-			light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
-			light->SetCenter({ 1190.2592, -9.408161, 0 });
-			light->RotateClockWise();
-			light->SetStartAngle(210);
-			mLights.push_back(light);
-
-			light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
-			light->SetCenter({ 1931.6791, -14.669791, 0 });
-			light->RotateCounterClockWise();
-			light->SetStartAngle(270);
-			mLights.push_back(light);
-
-			light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
-			light->SetCenter({ 2621.489, 140.8391, 0 });
-			light->RotateCounterClockWise();
-			light->SetStartAngle(60);
-			mLights.push_back(light);
-
-			light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
-			light->SetCenter({ 3122.3633, 74.33054, 0 });
-			light->RotateClockWise();
-			light->SetStartAngle(0);
-			mLights.push_back(light);
-
-			light = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>();
-			light->SetCenter({ 3837.9368, 80.56461, 0 });
-			light->RotateClockWise();
-			light->SetStartAngle(60);
-			mLights.push_back(light);
+			mLights.push_back(object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisSpotlight>());
 		}
-		/*
-		{
-			auto laser = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisLaserBullet>();
-			laser->mTransform->SetPosition(921.45526, 0, 0);
-			laser->Activate();
-			laser->RotateClockWise();
-
-			laser = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisLaserBullet>();
-			laser->mTransform->SetPosition(5234.5376 + 300, 50, 0);
-			laser->Activate();
-			laser->RotateClockWise();
-
-			laser = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisLaserBullet>();
-			laser->mTransform->SetPosition(5234.5376 - 300, 50, 0);
-			laser->Activate();
-			laser->RotateClockWise();
-
-			laser = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisLaserBullet>();
-			laser->mTransform->SetPosition(5234.5376-300, -250, 0);
-			laser->Activate();
-			laser->RotateClockWise();
-
-			laser = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisLaserBullet>();
-			laser->mTransform->SetPosition(5234.5376 + 300, -250, 0);
-			laser->Activate();
-			laser->RotateClockWise();
-
-			laser = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisLaserBullet>();
-			laser->mTransform->SetPosition(5234.5376 - 300, 250, 0);
-			laser->Activate();
-			laser->RotateClockWise();
-
-			laser = object::Instantiate<GameObject>(eLayerType::Bullet)->AddComponent<TryThisLaserBullet>();
-			laser->mTransform->SetPosition(5234.5376 + 300, 250, 0);
-			laser->Activate();
-			laser->RotateClockWise();
-		}
-		*/
 	}
 	void TryThisManager::Update()
 	{
@@ -133,15 +56,18 @@ namespace lu::JSAB
 		pos.x = 0;
 		pos.y = 0;
 		SceneManager::MainCamera()->Owner()->mTransform->SetPosition(pos);
-		for (int i = 0; i < 7; i++)
+		for (int i = 0; i < 11; i++)
 		{
 			mLights[i]->Owner()->SetActive(false);
 		}
+		SpotlightReset();
 
 		MusicManager::Play();
 	}
 	void TryThisManager::OnMusicEnd()
 	{
+		for (int i = 0; i < mLights.size(); i++)
+			mLights[i]->Owner()->SetActive(false);
 		mMusic->Finish();
 		mbFin = true;
 	}
@@ -244,39 +170,27 @@ namespace lu::JSAB
 			static double beat[] = {64.1, 64.1, 64.15, 64.15, 66.05, 66.5, 68.5, 68.65, 68.85, 69.05, 71.55, 71.85, 74.15, 74.3, 74.5, 74.7, 77.45, 79.45, 79.6, 79.8, 80, 82.5, 82.8, 85.1, 85.25, 85.45, 85.65, 88.55, 93.9, 99.5, 104.85 };
 			static double outro[] = { 1.75, 1.75, 1.75, 1.75, 0.597, 0, 0.162, 0.15, 0.499, 0.346, 0.212, 0.597, 0.162, 0.15, 0.499, 0.346, 0.597, 0.162, 0.15, 0.499, 0.346, 0.212, 0.597, 0.162, 0.15, 0.499, 0.346, 0.597, 0.597, 0.597, 0.597 };
 			static int idxs[] = {4, 3, 1, 2, 0, 0, 1, 2, 3, 4, 1, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 1, 0, 1, 2, 3, 4, 0, 0, 0, 0};
-			static bool rotate[] = { true, false, false, true };
-			static int angle[] = { 270, 190, 90, 10 };
-			static Vector3 pos[] = {
-				{ 4877.4736, 88.571686, 0 },
-				{ 5583.5884, 68.90629, 0 },
-				{ 5082.0723, -150.68938, 0 },
-				{ 5461.9165, -178.0044, 0 }
-			};
 			int idx = mLightFlag - 41;
 			if (idx < 31 && time >= beat[idx] - warning[idx] - 0.1)
 			{
 				if (idx < 4)
 				{
-					auto l = mLights[idxs[idx]];
-					if (rotate[idx])
-						l->RotateClockWise();
-					else
-						l->RotateCounterClockWise();
-					l->SetCenter(pos[idx]);
-					l->SetStartAngle(angle[idx]);
+					auto l = mLights[idxs[idx] + 6];
+					l->Flash(true);
+					l->FadeIn();
 				}
 				else
 				{
 					if (idxs[idx] == 0)
 					{
-						auto l = mLights[idxs[idx]];
+						auto l = mLights[idxs[idx] + 6];
 						l->SetTimeline(mMusic, warning[idx], beat[idx], outro[idx]);
 					}
 					else
 					{
 						for (int i = 1; i <= 4; i++)
 						{
-							auto l = mLights[i];
+							auto l = mLights[i + 6];
 							l->SetTimeline(mMusic, warning[idx], beat[idx], outro[idx]);
 						}
 					}
@@ -409,7 +323,34 @@ namespace lu::JSAB
 	void TryThisManager::ActivateStage()
 	{
 		mStage->Activate();
-		for (int i = 0; i < 7; i++)
+		for (int i = 0; i < 11; i++)
 			mLights[i]->Owner()->SetActive(true);
+	}
+	void TryThisManager::SpotlightReset()
+	{
+		static Vector3 centers[] = { 
+			{ -264.864, 0, 0 }
+			, { 264.864, 0, 0 }
+			, { 1190.2592, -9.408161, 0 }
+			, { 1931.6791, -14.669791, 0 }
+			, { 2621.489, 140.8391, 0 }
+			, { 3122.3633, 74.33054, 0 }
+			, { 3837.9368, 80.56461, 0 }
+			, { 4877.4736, 88.571686, 0 }
+			, { 5583.5884, 68.90629, 0 }
+			, { 5082.0723, -150.68938, 0 }
+			, { 5461.9165, -178.0044, 0 }
+		};
+		static bool rotates[] = {true, false, true, false, false, true, true, true, false, false, false};
+		static float angles[] = {-130, 90, 210, 270, 60, 0, 60, 270, 190, 90, 10};
+		for (int i = 0; i < mLights.size(); i++)
+		{
+			mLights[i]->SetCenter(centers[i]);
+			mLights[i]->SetStartAngle(angles[i]);
+			if (rotates[i])
+				mLights[i]->RotateClockWise();
+			else
+				mLights[i]->RotateCounterClockWise();
+		}
 	}
 }
