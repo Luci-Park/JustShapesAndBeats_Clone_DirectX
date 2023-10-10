@@ -11,7 +11,7 @@ namespace lu::JSAB
 		Owner()->SetTag(eTagType::Bullet);
 		mMr = Owner()->AddComponent<MeshRenderer>();
 		mMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mMr->SetMaterial(Resources::Load<Material>(L"TTBaseMat", L"TT_Square"));
+		mMr->SetMaterial(Resources::Load<Material>(L"TTBaseMat" + std::to_wstring(GetID()), L"TT_Square"));
 		mMr->SetColor(Color::white);
 
 		mAnim = Owner()->AddComponent<Animator>();
@@ -29,6 +29,7 @@ namespace lu::JSAB
 	void TryThisLaserBase::Ready()
 	{
 		mTransform->SetScale(80, 80, 1);
+		mAnim->StopAnimation();
 	}
 	void TryThisLaserBase::SetAlpha(float alpha)
 	{
@@ -49,7 +50,7 @@ namespace lu::JSAB
 		Owner()->SetTag(eTagType::Bullet);
 		mMr = Owner()->AddComponent<MeshRenderer>();
 		mMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mMr->SetMaterial(Resources::Load<Material>(L"TTLaserMat", L"TT_Square"));
+		mMr->SetMaterial(Resources::Load<Material>(L"TTLaserMat" + std::to_wstring(GetID()), L"TT_Square"));
 		mMr->SetColor(Color::white);
 
 		mCol = Owner()->AddComponent<Collider2D>();
@@ -82,6 +83,7 @@ namespace lu::JSAB
 	{
 		mTransform->SetScale(20, 2000, 1);
 		mCol->SetActive(false);
+		mAnim->StopAnimation();
 	}
 	void TryThisLaserPart::Activate()
 	{
@@ -137,6 +139,8 @@ namespace lu::JSAB
 		mBase->Ready();
 		mLaser1->Ready();
 		mLaser2->Ready();
+
+
 	}
 	void TryThisLaserBullet::WhileWarning(double time)
 	{

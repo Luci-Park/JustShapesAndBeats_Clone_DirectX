@@ -223,7 +223,7 @@ namespace lu::JSAB
 		if (mLaserFlag < 17 && time >= beat[mLaserFlag] - warning[mLaserFlag] - 0.5)
 		{
 			auto b = mLasers.GetNext();
-			b->SetTimeline(mMusic, warning[mLaserFlag], beat[mLaserFlag]- 0.4, outro[mLaserFlag]);
+			b->SetTimeline(mMusic, warning[mLaserFlag], beat[mLaserFlag] - 0.4, outro[mLaserFlag]);
 			b->mTransform->SetPosition(pos[mLaserFlag]);
 			b->SetOrg(pos[mLaserFlag]);
 			if (mLaserFlag == 2 || mLaserFlag == 0)
@@ -241,9 +241,9 @@ namespace lu::JSAB
 			, 72.55, 72.75, 72.9, 73.3, 73.65, 73.8, 73.95, 74.1, 74.25, 74.45
 			, 78, 78.25, 78.4, 78.7, 79.1, 79.3, 79.45
 			, 80.7, 80.85, 81.05, 81.2, 81.35, 81.75, 82, 82.2
-			, 83.6, 83.8, 83.9, 84.35, 84.65, 84.8, 85, 85.1
-			, 85.35, 88.55, 89.35, 89.8, 90.25, 90.55
+			, 83.6, 83.8, 83.9, 84.35, 84.65, 84.8, 85, 85.1, 85.35
 			
+			, 88.55, 89.35, 89.8, 90.25, 90.55
 			, 93.8, 94.3, 94.8, 94.9, 95.1, 95.3
 			, 96, 99.45, 100.05, 100.75, 101.15, 101.35, 101.5, 101.9
 			, 105.85, 106, 106.15, 106.3, 107 };
@@ -253,8 +253,9 @@ namespace lu::JSAB
 			, true, true, true, true, true, true, true, true, true, true
 			, false, false, false, false, false, false, false
 			, true, true, true, true, true, true, true, true
-			, false, false, false, false, false, false, false, false
-			, true, true, true, true, true, true
+			, false, false, false, false, false, false, false, false, false
+
+			, true, true, true, true, true
 			, false, false, false, false, false, false
 			, true, true, true, true, true, true, true, true
 			, false, false, false, false, false };
@@ -270,7 +271,7 @@ namespace lu::JSAB
 			prevY = y;
 			if (spawnRight[mSpikeFlag])
 			{
-				Vector3 pos = { 5934.5376 - 150, y, 0 };
+				Vector3 pos = { 5934.5376 - 105, y, 0 };
 				b->mTransform->SetPosition(pos);
 				b->Setup(Vector3::Left, true);
 			}

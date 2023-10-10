@@ -60,7 +60,7 @@ namespace lu::JSAB
 		mFillCol = fill->AddComponent<Collider2D>();
 		mFillCol->SetType(eColliderType::Circle);
 
-		mat = Resources::Load<Material>(L"SpotlightFill", L"circle_bullet"); 
+		mat = Resources::Load<Material>(L"SpotlightFill" + std::to_wstring(GetID()), L"circle_bullet");
 		mat->SetRenderingMode(eRenderingMode::Transparent);
 		mFillMr->SetMesh(mesh)->SetMaterial(mat);
 		mFillMr->SetColor(Color::white);

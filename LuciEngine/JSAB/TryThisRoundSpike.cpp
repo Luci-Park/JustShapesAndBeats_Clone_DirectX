@@ -10,9 +10,9 @@ namespace lu::JSAB
 	}
 	void TryThisRoundSpike::Setup(Vector3 dir, bool clockwise)
 	{
-		mMoveSpeed =150;
+		mMoveSpeed =100;
 		mMoveDir = dir;
-		auto speed = 3;
+		auto speed = 2;
 		if (clockwise)
 			mRotateSpeed = -speed;
 		else

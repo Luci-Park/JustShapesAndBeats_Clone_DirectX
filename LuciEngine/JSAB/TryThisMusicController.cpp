@@ -1,5 +1,5 @@
 #include "TryThisMusicController.h"
-
+#include "LInput.h"
 namespace lu::JSAB
 {
 	TryThisMusicController::TryThisMusicController()
@@ -12,6 +12,8 @@ namespace lu::JSAB
 	}
 	void TryThisMusicController::Update()
 	{
+		if (Input::GetKeyDown(eKeyCode::SPACE))
+			mAudioSource->SetPosition(56.600);
 		MusicController::Update();
 	}
 }
