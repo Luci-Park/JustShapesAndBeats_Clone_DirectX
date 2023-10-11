@@ -18,7 +18,7 @@ namespace lu::JSAB
 
 		auto c =object::Instantiate<GameObject>(eLayerType::Camera)->AddComponent<GameCamera>();
 		mBackground = c->GetBackground();
-		c->Owner()->AddComponent<yaCamera>();
+		//c->Owner()->AddComponent<yaCamera>();
 
 		GameObject* manager = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::System);
 		manager->SetName(L"DubwooferManager");
