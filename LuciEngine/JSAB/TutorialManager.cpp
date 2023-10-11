@@ -29,7 +29,8 @@ namespace lu::JSAB
 	}
 	void TutorialManager::Initialize()
 	{
-		mMusic = Owner()->GetComponent<TutorialMusicController>();
+		mTutorialMusic = Owner()->GetComponent<TutorialMusicController>();
+		mMusic = mTutorialMusic;
 		mBackground = SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetBackground();
 		mNextScene = L"TitleScene";
 
@@ -42,11 +43,11 @@ namespace lu::JSAB
 	}
 	void TutorialManager::Update()
 	{
-		if (mMusic->IsPlaying())
+		if (mTutorialMusic->IsPlaying())
 		{
-			if (mMusic->GetStage() < 8)
+			if (mTutorialMusic->GetStage() < 8)
 			{
-				float percent = mMusic->GetPercent();
+				float percent = mTutorialMusic->GetPercent();
 				if (percent > 0.8 && !mLevelTriangle->IsActive())
 				{
 					mLevelTriangle->SetStrategy(TriangleStrategy::eTriangleStrategyType::Tutorial);

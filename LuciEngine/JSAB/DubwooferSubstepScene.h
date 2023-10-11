@@ -16,6 +16,7 @@ namespace lu::JSAB
 	private:
 		DubwooferManager* mManager;
 		BackgroundScript* mBackground;
+		GameObject* mPlayer;
 	};
 }
 

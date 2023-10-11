@@ -11,6 +11,7 @@ namespace lu::JSAB
 		mLevelTriangle = object::Instantiate<TrianglePrefab>(eLayerType::Item)->GetComponent<InGameTriangle>();
 		mLevelTriangle->Owner()->SetActive(false);
 		mbFin = false;
+		mbWaitForLoadScene = false;
 	}
 	void MusicManager::Update()
 	{
@@ -24,6 +25,18 @@ namespace lu::JSAB
 				mbFin = false;
 			}
 		}
+		else if (mbWaitForLoadScene)
+		{
+			mLevelEndCounter += Time::DeltaTime();
+			if(mLevelEndCounter >= 3.5)
+			{
+				SceneManager::LoadScene(mNextScene);
+				Instance = nullptr;
+				mbWaitForLoadScene = false;
+				mLevelEndCounter = 0;
+			}
+
+		}
 	}
 	void MusicManager::Play()
 	{
@@ -36,7 +49,7 @@ namespace lu::JSAB
 	}
 	void MusicManager::OnLevelEnd()
 	{
-		SceneManager::LoadScene(mNextScene);
-		Instance = nullptr;
+		mbWaitForLoadScene = true;
+		mLevelEndCounter = 0;
 	}
 }

@@ -32,6 +32,8 @@ namespace lu::JSAB
 	}
 	void TryThisScene::OnEnter()
 	{
+		mPlayer->SetActive(true);
+		mPlayer->mTransform->SetPosition(Vector3(-540, 0, -5));
 		mManager->Play();
 		mBackground->SetBackground(BackgroundScript::eBackgrounds::BLACK);
 	}

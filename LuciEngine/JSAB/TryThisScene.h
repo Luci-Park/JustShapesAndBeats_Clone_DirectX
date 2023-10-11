@@ -17,6 +17,7 @@ namespace lu::JSAB
 	private:
 		TryThisManager* mManager;
 		BackgroundScript* mBackground;
+		GameObject* mPlayer;
 	};
 }
 

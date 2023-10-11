@@ -24,7 +24,7 @@ namespace lu::JSAB
 		mManager = manager->AddComponent<DubwooferManager>();
 
 		
-		object::Instantiate<PlayerPrefab>(Vector3(-540, 0, -5), eLayerType::Player);
+		mPlayer = object::Instantiate<PlayerPrefab>(Vector3(-540, 0, -5), eLayerType::Player);
 	}
 	void DubwooferSubstepScene::Update()
 	{
@@ -32,6 +32,8 @@ namespace lu::JSAB
 	}
 	void DubwooferSubstepScene::OnEnter()
 	{
+		mPlayer->SetActive(true);
+		mPlayer->mTransform->SetPosition(Vector3(-540, 0, -5));
 		mManager->Play();
 		mBackground->SetBackground(BackgroundScript::eBackgrounds::BLACK);
 	}

@@ -24,5 +24,6 @@ namespace lu::JSAB
 		double mLevelEndCounter;
 		double mTriangleAppearTime;
 		bool mbFin;
+		bool mbWaitForLoadScene;
 	};
 } 
