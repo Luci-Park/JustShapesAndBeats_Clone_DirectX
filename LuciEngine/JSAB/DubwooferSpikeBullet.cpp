@@ -12,21 +12,22 @@ namespace lu::JSAB
 	{
 		Script::Initialize();
 		Owner()->SetName(L"SpikeBulletParent");
+		Owner()->SetTag(eTagType::Bullet);
 
 		Vector3 scale = { 100, 100, 1 };
 		mTransform->SetScale(scale);
 		mTransform->SetRotation(Quaternion::Create2DRotationDegrees(180));
 
-		auto g = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
-		g->SetTag(eTagType::Bullet);
-		g->AddComponent<Collider2D>();
-		g->SetName(L"SpikeBullet");
+		mSpike = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
+		mSpike->SetTag(eTagType::Bullet);
+		mSpike->AddComponent<Collider2D>();
+		mSpike->SetName(L"SpikeBullet");
 
-		mRb = g->AddComponent<Rigidbody>();
+		mRb = mSpike->AddComponent<Rigidbody>();
 		mRb->SetMass(100);
 		mRb->UseGravity(false);
 
-		auto mr = g->AddComponent<MeshRenderer>();
+		auto mr = mSpike->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Load<Material>(L"DWSpikeMat", L"DB_Ceiling"));
 		mr->GetMaterial()->SetRenderingMode(eRenderingMode::Transparent);
@@ -36,7 +37,7 @@ namespace lu::JSAB
 		float py = scale.y * 0.5;
 		float theta = XMConvertToRadians(160);
 
-		mSpikeAnim = g->AddComponent<Animator>();
+		mSpikeAnim = mSpike->AddComponent<Animator>();
 		auto ani = mSpikeAnim->CreateAnimation(L"Fall");
 		float duration = 0.2;	
 		ani->AddRotationKey(0, Quaternion::Create2DRotationDegrees(180));
@@ -65,10 +66,11 @@ namespace lu::JSAB
 		duration = 0.3;
 		ani->AddLocalPositionKey(0, { 0, 60, 0 });
 		ani->AddLocalPositionKey(duration, { 0, 0, 0 });
+
+		mSpike->mTransform->SetLocalPosition(Vector3::Zero);
 	}
 	void DubwooferSpikeBullet::Reset()
-	{ 
-		
+	{ 		
 		mRb->UseGravity(false);
 		mRb->SetVelocity(Vector3::Zero);
 		mRb->Owner()->mTransform->SetRotation(Quaternion::Create2DRotationDegrees(180));

@@ -79,10 +79,6 @@ namespace lu
 	}
 	void Transform::SetLocalPosition(Vector3 position)
 	{
-		if ((Owner()->GetName() == L"LaserBullet"
-			|| Owner()->GetName() == L"Laser"
-			|| Owner()->GetName() == L"LaserBase"))
-			int i = 0;
 		mLocalPosition = position;
 		CalculateWorldPosition();
 	}

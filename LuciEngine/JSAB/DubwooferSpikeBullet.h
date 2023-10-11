@@ -23,6 +23,7 @@ namespace lu::JSAB
 	private:
 		Animator* mSpikeAnim;
 		Rigidbody* mRb;
+		GameObject* mSpike;
 
 	};
 }
