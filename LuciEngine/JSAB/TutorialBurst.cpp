@@ -18,6 +18,7 @@ namespace lu::JSAB
 
 		{
 			GameObject* fourSide = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
+			fourSide->SetTag(eTagType::Bullet);
 			fourSide->mTransform->SetLocalScale({ 42, 42, 1 });
 			fourSide->SetName(L"burstBullet");
 			MeshRenderer* mr = fourSide->AddComponent<MeshRenderer>();
@@ -41,6 +42,7 @@ namespace lu::JSAB
 		for (int i = 0; i < 8; i++)
 		{
 			GameObject* burst = object::Instantiate<GameObject>(mTransform, eLayerType::Bullet);
+			burst->SetTag(eTagType::Bullet);
 			MeshRenderer* mr = burst->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"))->SetMaterial(GetGeneralMaterial(L"SmallCircle"));
 			burst->mTransform->SetScale({ 10, 10, 1 });

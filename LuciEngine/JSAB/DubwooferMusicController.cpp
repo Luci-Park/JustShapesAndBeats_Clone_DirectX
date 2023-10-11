@@ -21,11 +21,11 @@ namespace lu::JSAB
 
 	void DubwooferMusicController::Update()
 	{
-		if (Input::GetKeyDown(eKeyCode::SPACE))
-		{
-			mStageIdx = 3;
-			mAudioSource->SetPosition(145);
-		}
+		//if (Input::GetKeyDown(eKeyCode::SPACE))
+		//{
+		//	mStageIdx = 3;
+		//	mAudioSource->SetPosition(145);
+		//}
 		MusicController::Update();
 	}
 

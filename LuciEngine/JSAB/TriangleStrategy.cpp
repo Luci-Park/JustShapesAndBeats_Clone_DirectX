@@ -111,7 +111,7 @@ namespace lu::JSAB
 	void LevelFinishStrategy::OnAppear()
 	{
 		mTriangleAnim->PlayAnimation(L"Idle", true);
-		mTransform->SetPosition(680, 0, -1);
+		mTransform->SetPosition((float)(SceneManager::MainCamera()->GetBoundary().right + 40.f), 0, -1);
 		mRB->SetVelocity(Vector3::Left * 80);
 		mRB->SetDrag(25);
 	}
@@ -120,7 +120,7 @@ namespace lu::JSAB
 		mPlayer = player;
 		player->Hold();
 		mRB->SetVelocity(Vector3::Zero);
-		Vector3 pos = { 552.243652, 0, -1 };
+		Vector3 pos = { (float)(SceneManager::MainCamera()->GetBoundary().right + (-640 + 552.243652)), 0, -1 };
 		mTransform->SetPosition(pos);
 		player->mTransform->SetPosition(pos);
 		mAudio->SetClip(mClip);

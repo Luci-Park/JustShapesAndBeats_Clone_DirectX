@@ -41,9 +41,9 @@ namespace lu::JSAB
 	}
 	void InGameTriangle::Appear()
 	{
+		Owner()->SetActive(true);
 		mTriangleAnim->PlayAnimation(L"Idle", true);
 		mStrategy[(UINT)mCurrStrategy]->OnAppear();
-		Owner()->SetActive(true);
 	}
 	void InGameTriangle::Burst()
 	{

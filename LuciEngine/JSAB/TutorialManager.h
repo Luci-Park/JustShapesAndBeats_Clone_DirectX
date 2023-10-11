@@ -35,7 +35,6 @@ namespace lu::JSAB
 		void Stage10();
 	private:
 		CheckPoint* mCheckPoint;
-		TutorialMusicController* mMusic;
 
 		BulletPool<TutorialRoundSpikes> mRoundSpikes;
 		BulletPool<TutorialBurst> mBursts;
