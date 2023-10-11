@@ -70,6 +70,6 @@ namespace lu::JSAB
 	}
 	float MusicController::GetPercent()
 	{
-		return GetTime() / mCheckPoints[mStageIdx].second;
+		return (GetTime() - mCheckPoints[mStageIdx].first) / (mCheckPoints[mStageIdx].second - mCheckPoints[mStageIdx].first);
 	}
 }

@@ -24,7 +24,7 @@ namespace lu::JSAB
 		manager->AddComponent<TryThisMusicController>();
 		mManager = manager->AddComponent<TryThisManager>();
 
-		object::Instantiate<PlayerPrefab>(Vector3(-540, 0, -5), eLayerType::Player);
+		mPlayer = object::Instantiate<PlayerPrefab>(Vector3(-540, 0, -5), eLayerType::Player);
 	}
 	void TryThisScene::Update()
 	{
