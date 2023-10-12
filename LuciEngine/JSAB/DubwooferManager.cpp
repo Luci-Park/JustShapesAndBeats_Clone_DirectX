@@ -22,7 +22,7 @@ namespace lu::JSAB
 	{
 		mDrops = object::Instantiate<GameObject>(eLayerType::System)->AddComponent<DubwooferDropSpawner>();
 		mSpikes = object::Instantiate<GameObject>(eLayerType::System)->AddComponent<DubwooferSpikeDropper>();
-		mWater = object::Instantiate<GameObject>(eLayerType::System)->AddComponent<DubwooferWater>();
+		//mWater = object::Instantiate<GameObject>(eLayerType::System)->AddComponent<DubwooferWater>();
 		mMusic = Owner()->GetComponent<MusicController>();
 		mCheckPoint = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<CheckPoint>();
 		mCheckPoint->SetBackground(SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetBackground());
@@ -34,7 +34,7 @@ namespace lu::JSAB
 		if (mMusic->IsPlaying())
 		{
 		 	double time = mMusic->GetTime();
-			Water(time);
+			//Water(time);
 			Drops(time);
 			Spikes(time);
 			BigBar(time);
@@ -51,8 +51,8 @@ namespace lu::JSAB
 		mSmallBarFlag = 0;
 		mCheckPointFlag = 0;
 		mCheckPoint->SetIsFinal(false);
-		mWater->Owner()->SetActive(true);
-		mWater->mTransform->SetPosition(0, -720, -1);
+		//mWater->Owner()->SetActive(true);
+		//mWater->mTransform->SetPosition(0, -720, -1);
 		MusicManager::Play();
 	}
 	void DubwooferManager::OnMusicEnd()
@@ -60,7 +60,7 @@ namespace lu::JSAB
 		mThickBeams.Reset();
 		mThinBeams.Reset();
 		mSpikes->DeActivate();
-		mWater->Owner()->SetActive(false);
+		//mWater->Owner()->SetActive(false);
 		mMusic->Finish();
 		mbFin = true;
 	}

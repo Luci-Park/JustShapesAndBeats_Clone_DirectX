@@ -121,16 +121,14 @@ namespace lu::JSAB
 		c->mTransform->SetPosition(0, 0, -10);
 		auto g = object::Instantiate<GameObject>(eLayerType::Bullet);
 		script = g->AddComponent<DubwooferWater>();
-		//auto b = g->AddComponent<DubwooferSpikeDropper>();
-		//g->AddComponent<gui::TransformWidget>();		
-		//bullet->Activate();
+		g->mTransform->SetPosition(0, -360, 0);
 	}
 
 	void BulletTestScene::Update()
 	{
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
-			//dynamic_cast<DubwooferWater*>(script)->RippleTest(0);
+			dynamic_cast<DubwooferWater*>(script)->RippleTest(0);
 			//bullet->mTransform->SetPosition({ 0, 0, 0 });
 			//bullet->Activate();
 			//dynamic_cast<TryThisScope*>(bullet)->SetPosition({-300, 0, 0});

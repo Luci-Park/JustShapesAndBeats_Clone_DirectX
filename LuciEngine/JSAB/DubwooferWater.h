@@ -8,17 +8,14 @@ namespace lu::JSAB
 	public:
 		struct Ripple
 		{
-			Vector3 origin;
+			float origin;
 			float startTime;
-			float duration;
 			float amplitude;
 			float waveLength;
 			float period;
-			float waveDamp;
-			float ampDamp;
 		};
-		DubwooferWater(){}
-		virtual ~DubwooferWater(){}
+		DubwooferWater() {}
+		virtual ~DubwooferWater() {}
 
 		virtual void Initialize() override;
 		virtual void Update() override;

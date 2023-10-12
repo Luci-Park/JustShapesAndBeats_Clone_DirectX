@@ -37,6 +37,20 @@ namespace lu::JSAB
 		{
 			float idleWaveHeight = cosf((mTime + i * 0.2) / waveLength) * amplitude;
 			float rippleHeight = 0;
+			for (auto it = mRipples.begin(); it != mRipples.end();)
+			{
+				Ripple ripple = *it;
+				float pos = ripple.origin + ripple.waveLength / ripple.period * mTime;
+				float distanceFromImpact = fabs(mWater[i]->mTransform->GetPosition().x - ripple.origin);
+				if (distanceFromImpact <= pos)
+				{
+					float height = ripple.amplitude * cosf(distanceFromImpact - ripple.waveLength / ripple.period * mTime);
+					if (height > 0)
+						rippleHeight += height;
+				}
+				it++;
+			}
+
 			mWater[i]->SetY(idleWaveHeight + rippleHeight + elevation);
 		}
 	}
@@ -48,13 +62,11 @@ namespace lu::JSAB
 		if (idx == 0)
 		{
 			Ripple ripple;
-			ripple.origin = Vector3::Zero;
-			ripple.startTime = 0;
-			ripple.waveLength = 10;//0부터 0까지
-			ripple.amplitude = 10;
-			ripple.period = 0.25;//총시간
-			ripple.waveDamp = 0.2;
-			ripple.ampDamp = 0.3;
+			ripple.origin = 0;
+			ripple.startTime = mTime;
+			ripple.waveLength = 500;
+			ripple.amplitude = 200;
+			ripple.period = 3;
 			mRipples.push_back(ripple);
 		}
 	}
