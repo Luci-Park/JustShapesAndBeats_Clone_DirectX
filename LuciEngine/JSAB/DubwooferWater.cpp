@@ -8,7 +8,6 @@ namespace lu::JSAB
 	{
 		Script::Initialize();
 		Owner()->SetName(L"WaterBody");
-		mTransform->SetPosition(0, -360, -0.1);
 		int waternumber = 107;
 		float xsize = 10;
 		float offset = 2;
@@ -38,28 +37,7 @@ namespace lu::JSAB
 		{
 			float idleWaveHeight = cosf((mTime + i * 0.2) / waveLength) * amplitude;
 			float rippleHeight = 0;
-			for (auto it = mRipples.begin(); it != mRipples.end();)
-			{ 
-				Ripple ripple = *it;				
-				float pos = ripple.origin.x + ripple.waveLength / ripple.period * mTime * 0.5;
-				float distanceToRipple = abs(mWater[i]->mTransform->GetPosition().x - ripple.origin.x) * 2;
-				if(distanceToRipple <= pos)
-					rippleHeight += ripple.amplitude * cosf(distanceToRipple - ripple.waveLength / ripple.period * mTime);
-				it++;
-			}
-
 			mWater[i]->SetY(idleWaveHeight + rippleHeight + elevation);
-		}
-
-		for (auto it = mRipples.begin(); it != mRipples.end();)
-		{
-			//(*it).waveLength += -(*it).waveDamp * (*it).waveLength* Time::DeltaTime();
-			(*it).amplitude += -(*it).ampDamp * Time::DeltaTime();
-
-			if ((*it).waveLength <= 0 || (*it).amplitude <= 0)
-				it = mRipples.erase(it);
-			else
-				it++;
 		}
 	}
 	void DubwooferWater::OnImpact(int idx, Transform* target)

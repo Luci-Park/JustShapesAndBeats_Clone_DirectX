@@ -120,8 +120,8 @@ namespace lu::JSAB
 		c->Owner()->AddComponent<yaCamera>();
 		c->mTransform->SetPosition(0, 0, -10);
 		auto g = object::Instantiate<GameObject>(eLayerType::Bullet);
-		//script = g->AddComponent<TryThisStage>();
-		auto b = g->AddComponent<DubwooferSpikeDropper>();
+		script = g->AddComponent<DubwooferWater>();
+		//auto b = g->AddComponent<DubwooferSpikeDropper>();
 		//g->AddComponent<gui::TransformWidget>();		
 		//bullet->Activate();
 	}

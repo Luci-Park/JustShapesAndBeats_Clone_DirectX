@@ -9,6 +9,7 @@ namespace lu::JSAB
 	class TutorialBeam;
 	class MusicController;
 	class CheckPoint;
+	class DubwooferWater;
 	class DubwooferManager : public MusicManager
 	{
 	public:
@@ -25,10 +26,12 @@ namespace lu::JSAB
 		void BigBar(double time);
 		void SmallBar(double time);
 		void CheckPoints(double time);
+		void Water(double time);
 	private:
 		CheckPoint* mCheckPoint;
 		DubwooferDropSpawner* mDrops;
 		DubwooferSpikeDropper* mSpikes;
+		DubwooferWater* mWater;
 		BulletPool<DubwooferBeamBullet> mThickBeams;
 		BulletPool<TutorialBeam> mThinBeams;
 		int mDropFlag;

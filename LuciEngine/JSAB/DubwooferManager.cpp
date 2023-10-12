@@ -2,6 +2,7 @@
 #include "DubwooferDropSpawner.h"
 #include "DubwooferSpikeDropper.h"
 #include "DubwooferBeamBullet.h"
+#include "DubwooferWater.h"
 #include "TutorialBeam.h"
 #include "CheckPoint.h"
 #include "MusicController.h"
@@ -21,15 +22,11 @@ namespace lu::JSAB
 	{
 		mDrops = object::Instantiate<GameObject>(eLayerType::System)->AddComponent<DubwooferDropSpawner>();
 		mSpikes = object::Instantiate<GameObject>(eLayerType::System)->AddComponent<DubwooferSpikeDropper>();
+		mWater = object::Instantiate<GameObject>(eLayerType::System)->AddComponent<DubwooferWater>();
 		mMusic = Owner()->GetComponent<MusicController>();
 		mCheckPoint = object::Instantiate<GameObject>(eLayerType::Item)->AddComponent<CheckPoint>();
 		mCheckPoint->SetBackground(SceneManager::MainCamera()->Owner()->GetComponent<GameCamera>()->GetBackground());
 		mCheckPoint->SetManager(this);
-		mDropFlag = 0;
-		mSpikeFlag = 0;
-		mBigBarFlag = 0;
-		mSmallBarFlag = 0;
-		mCheckPointFlag = 0;
 		mNextScene = L"TitleScene";
 	}
 	void DubwooferManager::Update()
@@ -37,6 +34,7 @@ namespace lu::JSAB
 		if (mMusic->IsPlaying())
 		{
 		 	double time = mMusic->GetTime();
+			Water(time);
 			Drops(time);
 			Spikes(time);
 			BigBar(time);
@@ -47,19 +45,22 @@ namespace lu::JSAB
 	}
 	void DubwooferManager::Play()
 	{
-		MusicManager::Play();
 		mDropFlag = 0;
 		mSpikeFlag = 0;
 		mBigBarFlag = 0;
 		mSmallBarFlag = 0;
 		mCheckPointFlag = 0;
 		mCheckPoint->SetIsFinal(false);
+		mWater->Owner()->SetActive(true);
+		mWater->mTransform->SetPosition(0, -720, -1);
+		MusicManager::Play();
 	}
 	void DubwooferManager::OnMusicEnd()
 	{
 		mThickBeams.Reset();
 		mThinBeams.Reset();
 		mSpikes->DeActivate();
+		mWater->Owner()->SetActive(false);
 		mMusic->Finish();
 		mbFin = true;
 	}
@@ -563,6 +564,18 @@ namespace lu::JSAB
 			if (mCheckPointFlag == 4)
 				mCheckPoint->SetIsFinal(true);
 			mCheckPointFlag++;
+		}
+	}
+	void DubwooferManager::Water(double time)
+	{
+		if (time < 0.743)
+			mWater->mTransform->SetPosition(0, -720, -1);
+		else if (time > 27.4)
+			mWater->mTransform->SetPosition(0, -360, -1);
+		else
+		{
+			float t = (time - 0.473) / (27.4 - 0.473);
+			mWater->mTransform->SetPosition(0, LERP(-720, -360, t), -1);
 		}
 	}
 }
