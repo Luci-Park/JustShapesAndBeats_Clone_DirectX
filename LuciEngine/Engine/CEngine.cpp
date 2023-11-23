@@ -21,16 +21,24 @@ int CEngine::init(HWND _hWnd, UINT _iWidth, UINT _iHeight)
 	ShowWindow(m_hWnd, true);
 
 	//Device 초기화
+	// 
+	//Managers 초기화
 
-	return 0;
+	return S_OK;
 }
 
 void CEngine::progress()
 {
+	//engine, object update
+	tick();
+	//render
+	render();
+	//LateUpdate
 }
 
 void CEngine::tick()
 {
+	//
 }
 
 void CEngine::render()

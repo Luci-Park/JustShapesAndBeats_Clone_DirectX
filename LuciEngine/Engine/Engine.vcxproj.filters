@@ -19,6 +19,15 @@
     <Filter Include="Source\01. Engine">
       <UniqueIdentifier>{e1672082-1eaa-4dda-9bd7-06a645d774f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\02. Device">
+      <UniqueIdentifier>{e2b21744-fe34-4e73-8b77-8b13393f2294}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\02. Device\ConstBuffer">
+      <UniqueIdentifier>{f05c71df-a1b8-40ae-8839-17e04596b9b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\02. Device\StructuredBuffer">
+      <UniqueIdentifier>{1409353b-b64c-457b-8a60-ad3617cbbd98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -51,6 +60,9 @@
     <ClInclude Include="CEngine.h">
       <Filter>Source\01. Engine</Filter>
     </ClInclude>
+    <ClInclude Include="CDevice.h">
+      <Filter>Source\02. Device</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -67,6 +79,9 @@
     </ClCompile>
     <ClCompile Include="CEngine.cpp">
       <Filter>Source\01. Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="CDevice.cpp">
+      <Filter>Source\02. Device</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
