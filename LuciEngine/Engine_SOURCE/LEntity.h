@@ -23,7 +23,7 @@ namespace lu
 		bool IsActive() { return mState == Entity::eState::Active; }
 		void SetActive(bool active);
 	protected:
-		eState mState;
-		UINT64 mColliderID;
+		eState	mState;
+		UINT64	mColliderID;
 	};
 }
